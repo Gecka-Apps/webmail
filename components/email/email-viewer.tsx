@@ -24,6 +24,8 @@ import { hasFullBleedCanvas } from "@/lib/email-full-bleed";
 import { stripBidiControls } from "@/lib/bidi";
 import { withBasePath } from "@/lib/browser-navigation";
 import { buildContactsPath } from "@/lib/deep-links";
+import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { useConfig } from "@/hooks/use-config";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { Avatar } from "@/components/ui/avatar";
@@ -1330,6 +1332,7 @@ export function EmailViewer({
   // policy or trust says, and nothing offers to load it.
   const remoteBlockedByOrg = useNoThirdPartyTraffic();
   const tThirdParty = useTranslations('third_party');
+  const { remoteContentProxyEnabled } = useConfig();
   const messageSpacing = useSettingsStore((state) => state.messageSpacing);
   const plainTextFont = useSettingsStore((state) => state.plainTextFont);
   const mailAttachmentAction = useSettingsStore((state) => state.mailAttachmentAction);
@@ -2716,8 +2719,13 @@ export function EmailViewer({
 
         // Sanitize (no dark mode color transforms - emails render true-to-life
         // in the iframe) and enforce the external-content policy.
+        // With the remote-content proxy on, allowed images are fetched by the
+        // server (/api/remote-content) rather than by the browser, and the
+        // iframe CSP below only opens 'self'.
         const { html: cleanHtml, blockedExternalContent } =
-          sanitizeEmailBodyForIframe(htmlContent, shouldBlockExternal);
+          sanitizeEmailBodyForIframe(htmlContent, shouldBlockExternal, {
+            proxyUrl: remoteContentProxyEnabled ? (url) => withBasePath(remoteContentProxyPath(url)) : undefined,
+          });
 
         // Update blocked content state
         if (blockedExternalContent && !hasBlockedContent) {
@@ -2781,7 +2789,7 @@ export function EmailViewer({
     // intentionally trigger a fresh srcDoc - `shouldBlockExternal` carries that
     // change in, and re-reads the trust selectors on the way.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [email, shouldBlockExternal, cidBlobUrls, t]);
+  }, [email, shouldBlockExternal, remoteContentProxyEnabled, cidBlobUrls, t]);
 
   // Override email content with S/MIME decrypted content when available
   const decodedEmailContent = useMemo(() => {
@@ -2796,7 +2804,9 @@ export function EmailViewer({
     // banner, and the strict iframe CSP via `externalBlocked` (#797).
     const renderHtml = (html: string) => {
       const { html: cleanHtml, blockedExternalContent } =
-        sanitizeEmailBodyForIframe(html, shouldBlockExternal);
+        sanitizeEmailBodyForIframe(html, shouldBlockExternal, {
+          proxyUrl: remoteContentProxyEnabled ? (url) => withBasePath(remoteContentProxyPath(url)) : undefined,
+        });
       if (blockedExternalContent && !hasBlockedContent) {
         setHasBlockedContent(true);
       }
@@ -2831,7 +2841,7 @@ export function EmailViewer({
     // `hasBlockedContent` is only read to avoid a redundant setState; including
     // it would re-run the whole sanitize pass the moment the banner appears.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cidBlobUrls, emailContent, shouldBlockExternal, pluginRenderedHtml, pluginRenderedText, tnefHtml, tnefText, embeddedEmailHtml, embeddedEmailText, t]);
+  }, [cidBlobUrls, emailContent, shouldBlockExternal, remoteContentProxyEnabled, pluginRenderedHtml, pluginRenderedText, tnefHtml, tnefText, embeddedEmailHtml, embeddedEmailText, t]);
 
   // HTML mail as plain text: Settings > Accessibility for every message, or
   // the reader's per-message switch. The message's own text/plain part when
@@ -3242,7 +3252,11 @@ export function EmailViewer({
     // Defense-in-depth CSP inside srcDoc (see emailIframeCsp). When the user
     // loads/trusts the sender the srcDoc is rebuilt (see emailContent) with
     // the permissive variant so real images, web fonts and media load.
-    const iframeCsp = emailIframeCsp(effectiveEmailContent.externalBlocked, appFontSources ? appFontSources.split(' ') : []);
+    const iframeCsp = emailIframeCsp(
+      effectiveEmailContent.externalBlocked,
+      appFontSources ? appFontSources.split(' ') : [],
+      remoteContentProxyEnabled ? "'self'" : undefined,
+    );
 
     return `<!DOCTYPE html>
 <html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} data-reading="${reading.frameKey}" class="${recolorDark ? DARK_PENDING_CLASS : ''}" style="color-scheme: ${colorScheme};"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -3299,7 +3313,7 @@ export function EmailViewer({
   ${wordHtmlCSS}
   ${darkModeCSS}
 </style></head><body dir="auto">${resolveColorSchemeMedia(effectiveEmailContent.html, recolorDark)}<style>html,body{height:auto!important;min-height:0!important;max-height:none!important}body{overflow-y:hidden!important}</style>${reading.frameCss ? `<style>${reading.frameCss}</style>` : ''}</body></html>`;
-  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, recolorDark, emailHasNativeDarkMode, messageSpacing, bodyLanguage, reading.frameKey, reading.frameCss, appFontSources]);
+  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, recolorDark, emailHasNativeDarkMode, messageSpacing, bodyLanguage, reading.frameKey, reading.frameCss, appFontSources, remoteContentProxyEnabled]);
 
   // Unblocking external content is handled by rebuilding the iframe srcDoc:
   // toggling allowExternalContent (both "Load images" and "Trust sender" set
@@ -3729,7 +3743,7 @@ export function EmailViewer({
     // inherited one.
     printWindow.document.write(`<!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="${emailIframeCsp(effectiveEmailContent.externalBlocked)}">
+<meta http-equiv="Content-Security-Policy" content="${emailIframeCsp(effectiveEmailContent.externalBlocked, [], remoteContentProxyEnabled ? "'self'" : undefined)}">
 <meta name="referrer" content="no-referrer">
 <title>${escapeHtml(subjectText)}</title>
 <style>
