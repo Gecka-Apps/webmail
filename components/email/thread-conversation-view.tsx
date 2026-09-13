@@ -3,7 +3,10 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import DOMPurify from "dompurify";
 import { Email, ThreadGroup } from "@/lib/jmap/types";
-import { EMAIL_SANITIZE_CONFIG, blockExternalResourcesOnNode, collapseBlockedImageContainers, emailIframeCsp, plainTextToSafeHtml, restrictDataUriResourcesOnNode, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
+import { EMAIL_SANITIZE_CONFIG, blockExternalResourcesOnNode, collapseBlockedImageContainers, emailIframeCsp, plainTextToSafeHtml, proxyExternalResourcesOnNode, restrictDataUriResourcesOnNode, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
+import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { withBasePath } from "@/lib/browser-navigation";
+import { useConfig } from "@/hooks/use-config";
 import { getRenderableHtmlBody } from "@/lib/email-body-selection";
 import { collectReferencedCids, isEmbeddedInBody } from "@/lib/attachment-visibility";
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
@@ -240,6 +243,7 @@ function EmailCard({
 }: EmailCardProps) {
   const t = useTranslations();
   const resolvedTheme = useThemeStore((state) => state.resolvedTheme);
+  const { remoteContentProxyEnabled } = useConfig();
   const density = useSettingsStore((state) => state.density);
   const mailAttachmentAction = useSettingsStore((state) => state.mailAttachmentAction);
   const wopiStatus = useWopiStatus(true);
@@ -359,6 +363,12 @@ function EmailCard({
           // Re-apply the data:-URI allowlist DOMPurify skips on media tags.
           restrictDataUriResourcesOnNode(node);
 
+          if (allowExternal && remoteContentProxyEnabled) {
+            // Allowed images go through the app's own route, the iframe CSP
+            // only opens img-src to it.
+            proxyExternalResourcesOnNode(node, (url) => withBasePath(remoteContentProxyPath(url)));
+          }
+
           // The desktop viewer's blocker: srcset, <source>, poster,
           // background attributes and escaped url()s as well as img src.
           if (!allowExternal && blockExternalResourcesOnNode(node)) {
@@ -430,7 +440,7 @@ function EmailCard({
   // `hasBlockedContent` is only read to skip a redundant setState; as a
   // dependency it would re-run the sanitizer once the banner shows.
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [email, allowExternal, resolvedTheme, emailAlwaysLightMode, cidBlobUrls, t]);
+  }, [email, allowExternal, remoteContentProxyEnabled, resolvedTheme, emailAlwaysLightMode, cidBlobUrls, t]);
 
   // Parts the body embeds via cid: stay out of the attachment row while the
   // user hides inline images - the desktop viewer's rule, shared through
@@ -451,7 +461,7 @@ function EmailCard({
     if (!emailContent.isHtml || !emailContent.html) return '';
     // Strict while external content is blocked: the network-level backstop
     // for whatever the DOM walk above cannot see.
-    const csp = emailIframeCsp(!allowExternal);
+    const csp = emailIframeCsp(!allowExternal, remoteContentProxyEnabled ? "'self'" : undefined);
     return `<!DOCTYPE html><html><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -483,7 +493,7 @@ function EmailCard({
   td, th { word-break: break-word; padding: 0.5rem; }
   pre { white-space: pre-wrap; word-wrap: break-word; }
 </style></head><body dir="auto">${emailContent.html}</body></html>`;
-  }, [emailContent.isHtml, emailContent.html, allowExternal]);
+  }, [emailContent.isHtml, emailContent.html, allowExternal, remoteContentProxyEnabled]);
 
   const handleIframeLoad = useCallback(() => {
     const iframe = iframeRef.current;
