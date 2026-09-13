@@ -7,6 +7,7 @@ import {
   cacheControlFor,
   consumeBudget,
   fetchRemoteImage,
+  fetchThroughProxy,
   protectiveHeaders,
 } from '@/lib/remote-content';
 import { logger } from '@/lib/logger';
@@ -24,6 +25,9 @@ import { logger } from '@/lib/logger';
  * requests are same-origin and carry the session cookie: only logged-in
  * users get anything, without a token in the URL. Off, the route answers
  * 404 as if it did not exist.
+ *
+ * With REMOTE_CONTENT_PROXY_URL and _KEY set, the fetch is handed to that
+ * proxy; what the browser gets is decided here in both cases.
  */
 
 const TRANSPARENT_GIF = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
@@ -67,7 +71,11 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     if (v) conditional[name] = v;
   }
 
-  const outcome = await fetchRemoteImage(url, conditional);
+  const proxyUrl = configManager.get<string>('remoteContentProxyUrl', '');
+  const proxyKey = configManager.get<string>('remoteContentProxyKey', '');
+  const outcome = proxyUrl && proxyKey
+    ? await fetchThroughProxy(url, { url: proxyUrl, key: proxyKey }, conditional)
+    : await fetchRemoteImage(url, conditional);
 
   if (outcome.kind === 'not-modified') {
     return new NextResponse(null, {
