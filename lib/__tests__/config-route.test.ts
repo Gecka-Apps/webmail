@@ -89,6 +89,8 @@ describe('config API route', () => {
     expect(config.loginImprintUrl).toBe('');
     expect(config.loginPrivacyPolicyUrl).toBe('');
     expect(config.loginWebsiteUrl).toBe('');
+    expect(config.loginNotice).toBe('');
+    expect(config.loginNoticeUrl).toBe('');
     expect(config.faviconUrl).toBe('/branding/Bulwark_Favicon.svg');
     expect(config.appLogoLightUrl).toBe('');
     expect(config.appLogoDarkUrl).toBe('');
@@ -128,6 +130,8 @@ describe('config API route', () => {
     vi.stubEnv('LOGIN_IMPRINT_URL', 'https://acme.com/imprint');
     vi.stubEnv('LOGIN_PRIVACY_POLICY_URL', 'https://acme.com/privacy');
     vi.stubEnv('LOGIN_WEBSITE_URL', 'https://acme.com');
+    vi.stubEnv('LOGIN_NOTICE', 'Looking for the old webmail?');
+    vi.stubEnv('LOGIN_NOTICE_URL', 'https://old.acme.com');
 
     const config = await getConfig();
 
@@ -135,6 +139,8 @@ describe('config API route', () => {
     expect(config.loginImprintUrl).toBe('https://acme.com/imprint');
     expect(config.loginPrivacyPolicyUrl).toBe('https://acme.com/privacy');
     expect(config.loginWebsiteUrl).toBe('https://acme.com');
+    expect(config.loginNotice).toBe('Looking for the old webmail?');
+    expect(config.loginNoticeUrl).toBe('https://old.acme.com');
   });
 
   it('should handle partial login customization', async () => {
