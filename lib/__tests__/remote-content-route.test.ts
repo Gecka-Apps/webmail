@@ -53,6 +53,11 @@ vi.mock('@/lib/security/url-guard', () => ({
   fetchPublicUrl: (...args: unknown[]) => fetchPublicUrl(...args),
 }));
 
+const undiciFetch = vi.fn();
+vi.mock('undici', () => ({
+  fetch: (...args: unknown[]) => undiciFetch(...args),
+}));
+
 const PNG = Buffer.from('89504e470d0a1a0a0000000d49484452', 'hex');
 const GIF = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
 
@@ -191,5 +196,49 @@ describe('GET /api/remote-content/[b64]', () => {
     const res = await call('https://cdn.example/over.png');
     expect(res.status).toBe(429);
     expect(res.headers.get('retry-after')).toBe('60');
+  });
+
+  describe('delegation to a dedicated proxy', () => {
+    beforeEach(() => {
+      configValues.remoteContentProxyUrl = 'https://rcp.example/';
+      configValues.remoteContentProxyKey = 'k3y';
+      undiciFetch.mockImplementation(async () => upstream(PNG, { headers: { 'content-type': 'image/png', etag: '"p"' } }));
+    });
+
+    it('asks the proxy for the encoded URL with the key, and never the origin', async () => {
+      const { encodeRemoteContentUrl } = await import('@/lib/remote-content-url');
+      const res = await call('https://cdn.example/a.png', { 'if-none-match': '"p"' });
+      expect(res.status).toBe(200);
+      expect(res.headers.get('content-type')).toBe('image/png');
+      expect(res.headers.get('etag')).toBe('"p"');
+      expect(fetchPublicUrl).not.toHaveBeenCalled();
+      const [target, init] = undiciFetch.mock.calls[0] as [string, { headers: Record<string, string> }];
+      expect(target).toBe(`https://rcp.example/i/${encodeRemoteContentUrl('https://cdn.example/a.png')}`);
+      expect(init.headers.Authorization).toBe('Bearer k3y');
+      expect(init.headers['if-none-match']).toBe('"p"');
+    });
+
+    it('still decides from the bytes what the browser gets', async () => {
+      undiciFetch.mockResolvedValue(upstream('<svg/>', { headers: { 'content-type': 'image/svg+xml' } }));
+      const res = await call('https://cdn.example/a.svg');
+      expect(res.body()).toEqual(GIF);
+      expect(res.headers.get('content-security-policy')).toBe("default-src 'none'; sandbox");
+    });
+
+    it("treats the proxy's 400 as blocked and its other failures as transient", async () => {
+      undiciFetch.mockResolvedValue(upstream('refused', { status: 400 }));
+      expect((await call('http://10.0.0.1/a.png')).headers.get('cache-control')).toBe('private, max-age=3600');
+      undiciFetch.mockResolvedValue(upstream('down', { status: 502 }));
+      expect((await call('https://cdn.example/b.png')).headers.get('cache-control')).toBe('private, max-age=300');
+      undiciFetch.mockRejectedValue(new Error('ECONNREFUSED'));
+      expect((await call('https://cdn.example/c.png')).body()).toEqual(GIF);
+    });
+
+    it('fetches itself when only one of URL and key is set', async () => {
+      configValues.remoteContentProxyKey = '';
+      await call('https://cdn.example/a.png');
+      expect(undiciFetch).not.toHaveBeenCalled();
+      expect(fetchPublicUrl).toHaveBeenCalledTimes(1);
+    });
   });
 });

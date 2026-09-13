@@ -10,7 +10,9 @@
  * iframe drops <link> and its CSP allows no @import), fonts or media.
  */
 
+import { fetch as undiciFetch } from 'undici';
 import { DisallowedUrlError, fetchPublicUrl, type PublicFetchResponse } from '@/lib/security/url-guard';
+import { encodeRemoteContentUrl } from '@/lib/remote-content-url';
 
 /** Largest body the proxy relays. */
 export const MAX_BYTES = 10 * 1024 * 1024;
@@ -128,6 +130,65 @@ export async function fetchRemoteImage(url: string, conditional: Record<string, 
     }
     if (!response) return { kind: 'error', reason: 'redirect' };
     if (response.status === 304) return { kind: 'not-modified', headers: pickHeaders(response, CACHE_HEADERS) };
+    if (!response.ok) return { kind: 'error', reason: 'status' };
+
+    const bytes = await readCapped(response);
+    if (!bytes) return { kind: 'error', reason: 'too-large' };
+    const image = classifyImage(bytes);
+    if (!image) return { kind: 'error', reason: 'type' };
+    return {
+      kind: 'ok',
+      status: 200,
+      contentType: image.contentType,
+      body: image.body,
+      headers: pickHeaders(response, CACHE_HEADERS),
+    };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/** A dedicated proxy the route hands the fetch to, when the operator has one. */
+export interface DelegateProxy {
+  /** Base URL; the resource is requested at `<url>/i/<base64url>`. */
+  url: string;
+  /** Sent as `Authorization: Bearer`; never leaves the server. */
+  key: string;
+}
+
+/**
+ * Same contract as {@link fetchRemoteImage}, the fetch done by a dedicated
+ * proxy: it applies its own egress rules and cache, this side still decides
+ * from the bytes what the browser gets. The proxy's address is operator
+ * configuration, not user input, so it is not run through the public-URL
+ * guard: a proxy on a private network is the usual case.
+ */
+export async function fetchThroughProxy(
+  url: string,
+  proxy: DelegateProxy,
+  conditional: Record<string, string>,
+): Promise<FetchOutcome> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  try {
+    let response: PublicFetchResponse;
+    try {
+      response = await undiciFetch(`${proxy.url.replace(/\/+$/, '')}/i/${encodeRemoteContentUrl(url)}`, {
+        signal: controller.signal,
+        redirect: 'manual',
+        headers: {
+          Accept: 'image/*,*/*;q=0.5',
+          'User-Agent': USER_AGENT,
+          Authorization: `Bearer ${proxy.key}`,
+          ...conditional,
+        },
+      });
+    } catch {
+      return { kind: 'error', reason: 'unreachable' };
+    }
+    if (response.status === 304) return { kind: 'not-modified', headers: pickHeaders(response, CACHE_HEADERS) };
+    // The proxy answers 400 for a URL it refuses, which is not coming back.
+    if (response.status === 400) return { kind: 'error', reason: 'blocked' };
     if (!response.ok) return { kind: 'error', reason: 'status' };
 
     const bytes = await readCapped(response);
