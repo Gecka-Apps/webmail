@@ -210,6 +210,28 @@ export function PolicyTab() {
     setMessage(null);
   }
 
+  // The default a user starts from until they pick a value themselves. An
+  // empty string clears it and the built-in default applies again.
+  function setDefault(settingKey: string, raw: string, type: string) {
+    setPolicy(prev => {
+      const defaults = { ...(prev.defaults ?? {}) };
+      if (raw === '') {
+        delete defaults[settingKey];
+      } else if (type === 'boolean') {
+        defaults[settingKey] = raw === 'true';
+      } else if (type === 'number') {
+        const n = Number(raw);
+        if (!Number.isFinite(n)) return prev;
+        defaults[settingKey] = n;
+      } else {
+        defaults[settingKey] = raw;
+      }
+      return { ...prev, defaults };
+    });
+    setDirty(true);
+    setMessage(null);
+  }
+
   function toggleHidden(settingKey: string) {
     setPolicy(prev => {
       const existing = prev.restrictions[settingKey] || {};
@@ -589,10 +611,35 @@ export function PolicyTab() {
           <div className="divide-y divide-border">
             {RESTRICTABLE_SETTINGS.filter(s => s.category === category).map(setting => {
               const restriction = policy.restrictions[setting.key] || {};
+              const current = policy.defaults?.[setting.key];
+              const defaultValue = current === undefined || current === null ? '' : String(current);
               return (
                 <div key={setting.key} className="px-4 py-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
                   <span className="text-sm text-foreground">{setting.label}</span>
                   <div className="flex items-center gap-3 shrink-0">
+                    <label className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                      Default
+                      {setting.type === 'number' ? (
+                        <input
+                          type="number"
+                          value={defaultValue}
+                          placeholder="built-in"
+                          onChange={(e) => setDefault(setting.key, e.target.value, setting.type)}
+                          className="w-20 rounded border-input bg-background px-1.5 py-0.5 text-xs text-foreground"
+                        />
+                      ) : (
+                        <select
+                          value={defaultValue}
+                          onChange={(e) => setDefault(setting.key, e.target.value, setting.type)}
+                          className="rounded border-input bg-background px-1.5 py-0.5 text-xs text-foreground"
+                        >
+                          <option value="">built-in</option>
+                          {setting.type === 'boolean'
+                            ? [<option key="true" value="true">on</option>, <option key="false" value="false">off</option>]
+                            : (setting.allowedValues ?? []).map((v) => <option key={v} value={v}>{v}</option>)}
+                        </select>
+                      )}
+                    </label>
                     <label className="flex items-center gap-1.5 text-xs text-muted-foreground cursor-pointer">
                       <input type="checkbox" checked={!!restriction.locked} onChange={() => toggleLocked(setting.key)}
                         className="rounded border-input" />
