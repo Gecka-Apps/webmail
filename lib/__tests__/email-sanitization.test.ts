@@ -28,7 +28,7 @@ import {
   proxyExternalStyleSheetCss,
   TRANSPARENT_BLOCKED_PIXEL,
 } from '../email-sanitization';
-import { remoteContentProxyPath, encodeRemoteContentUrl, decodeRemoteContentUrl } from '../remote-content-url';
+import { remoteContentImgSource, remoteContentProxyPath, encodeRemoteContentUrl, decodeRemoteContentUrl } from '../remote-content-url';
 
 describe('email-sanitization', () => {
   describe('sanitizeEmailHtml', () => {
@@ -1075,6 +1075,13 @@ describe('remote-content-url', () => {
     expect(decodeRemoteContentUrl(encodeRemoteContentUrl('file:///etc/passwd'))).toBeNull();
     expect(decodeRemoteContentUrl(encodeRemoteContentUrl('just text'))).toBeNull();
     expect(decodeRemoteContentUrl('A'.repeat(20_000))).toBeNull();
+  });
+
+  it("names the app origin with its scheme as the iframe img-src, never 'self'", () => {
+    // jsdom's location is the test URL, an explicit http origin.
+    const source = remoteContentImgSource();
+    expect(source).toBe(window.location.origin);
+    expect(source).toMatch(/^https?:\/\//);
   });
 });
 

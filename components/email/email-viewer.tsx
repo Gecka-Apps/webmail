@@ -10,7 +10,7 @@ import { collectReferencedCids, isEmbeddedInBody } from "@/lib/attachment-visibi
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { fitEmailBodyWidth } from "@/lib/email-fit-width";
 import { withBasePath } from "@/lib/browser-navigation";
-import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { remoteContentImgSource, remoteContentProxyPath } from "@/lib/remote-content-url";
 import { useConfig } from "@/hooks/use-config";
 import { buildContactsPath, buildMailPath } from "@/lib/deep-links";
 import { useCopyLink } from "@/hooks/use-copy-link";
@@ -2297,14 +2297,14 @@ export function EmailViewer({
     // blob: URLs, so they survive the strict variant.
     //
     // With the remote-content proxy on, the permissive variant only opens
-    // img-src to 'self': external images were rewritten to the app's own
-    // route by the sanitizer, and anything it missed must not reach the
-    // origin from the browser. Fonts and media stay closed, the route does
+    // img-src to the app's own origin: external images were rewritten to
+    // its route by the sanitizer, and anything it missed must not reach the
+    // sender from the browser. Fonts and media stay closed, the route does
     // not serve them.
     const iframeCsp = effectiveEmailContent.externalBlocked
       ? "default-src 'none'; img-src data: blob:; style-src 'unsafe-inline'; font-src data:; media-src data: blob:; base-uri 'none'; form-action 'none'; frame-src 'none'"
       : remoteContentProxyEnabled
-        ? "default-src 'none'; img-src data: blob: 'self'; style-src 'unsafe-inline'; font-src data:; media-src data: blob:; base-uri 'none'; form-action 'none'; frame-src 'none'"
+        ? `default-src 'none'; img-src data: blob: ${remoteContentImgSource()}; style-src 'unsafe-inline'; font-src data:; media-src data: blob:; base-uri 'none'; form-action 'none'; frame-src 'none'`
         : "default-src 'none'; img-src data: blob: http: https:; style-src 'unsafe-inline'; font-src data: http: https:; media-src data: blob: http: https:; base-uri 'none'; form-action 'none'; frame-src 'none'";
 
     return `<!DOCTYPE html>
