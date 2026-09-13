@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - dev
+      - gecka
     paths:
       - "Dockerfile"
       - ".dockerignore"
@@ -27,13 +28,19 @@ jobs:
     outputs:
       image_name: ${{ steps.set.outputs.image_name }}
     steps:
+      # ghcr.io only takes lowercase names and github.repository keeps the
+      # owner's casing (Gecka-Apps/webmail). The gecka branch is this fork's
+      # deployment line and publishes under the bare repository name.
       - name: Set image name
         id: set
         run: |
+          repo="${GITHUB_REPOSITORY,,}"
           if [ "${{ github.ref_name }}" = "main" ]; then
-            echo "image_name=ghcr.io/${{ github.repository }}-beta" >> $GITHUB_OUTPUT
+            echo "image_name=ghcr.io/${repo}-beta" >> $GITHUB_OUTPUT
+          elif [ "${{ github.ref_name }}" = "gecka" ]; then
+            echo "image_name=ghcr.io/${repo}" >> $GITHUB_OUTPUT
           else
-            echo "image_name=ghcr.io/${{ github.repository }}-${{ github.ref_name }}" >> $GITHUB_OUTPUT
+            echo "image_name=ghcr.io/${repo}-${{ github.ref_name }}" >> $GITHUB_OUTPUT
           fi
 
   build:
