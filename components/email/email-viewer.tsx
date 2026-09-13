@@ -10,7 +10,7 @@ import { collectReferencedCids, isEmbeddedInBody } from "@/lib/attachment-visibi
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { fitEmailBodyWidth } from "@/lib/email-fit-width";
 import { withBasePath } from "@/lib/browser-navigation";
-import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { remoteContentImgSource, remoteContentProxyPath } from "@/lib/remote-content-url";
 import { useConfig } from "@/hooks/use-config";
 import { buildContactsPath, buildMailPath } from "@/lib/deep-links";
 import { useCopyLink } from "@/hooks/use-copy-link";
@@ -2321,7 +2321,7 @@ export function EmailViewer({
     // the permissive variant so real images, web fonts and media load.
     const iframeCsp = emailIframeCsp(
       effectiveEmailContent.externalBlocked,
-      remoteContentProxyEnabled ? "'self'" : undefined,
+      remoteContentProxyEnabled ? remoteContentImgSource() : undefined,
     );
 
     return `<!DOCTYPE html>
@@ -2779,7 +2779,7 @@ export function EmailViewer({
     // inherited one.
     printWindow.document.write(`<!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="${emailIframeCsp(effectiveEmailContent.externalBlocked, remoteContentProxyEnabled ? "'self'" : undefined)}">
+<meta http-equiv="Content-Security-Policy" content="${emailIframeCsp(effectiveEmailContent.externalBlocked, remoteContentProxyEnabled ? remoteContentImgSource() : undefined)}">
 <meta name="referrer" content="no-referrer">
 <title>${escapeHtml(subjectText)}</title>
 <style>
