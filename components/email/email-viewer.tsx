@@ -24,7 +24,7 @@ import { hasFullBleedCanvas } from "@/lib/email-full-bleed";
 import { stripBidiControls } from "@/lib/bidi";
 import { withBasePath } from "@/lib/browser-navigation";
 import { buildContactsPath } from "@/lib/deep-links";
-import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { remoteContentImgSource, remoteContentProxyPath } from "@/lib/remote-content-url";
 import { useConfig } from "@/hooks/use-config";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
@@ -3255,7 +3255,7 @@ export function EmailViewer({
     const iframeCsp = emailIframeCsp(
       effectiveEmailContent.externalBlocked,
       appFontSources ? appFontSources.split(' ') : [],
-      remoteContentProxyEnabled ? "'self'" : undefined,
+      remoteContentProxyEnabled ? remoteContentImgSource() : undefined,
     );
 
     return `<!DOCTYPE html>
@@ -3743,7 +3743,7 @@ export function EmailViewer({
     // inherited one.
     printWindow.document.write(`<!DOCTYPE html>
 <html><head><meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="${emailIframeCsp(effectiveEmailContent.externalBlocked, [], remoteContentProxyEnabled ? "'self'" : undefined)}">
+<meta http-equiv="Content-Security-Policy" content="${emailIframeCsp(effectiveEmailContent.externalBlocked, [], remoteContentProxyEnabled ? remoteContentImgSource() : undefined)}">
 <meta name="referrer" content="no-referrer">
 <title>${escapeHtml(subjectText)}</title>
 <style>
