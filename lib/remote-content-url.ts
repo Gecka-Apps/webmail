@@ -70,3 +70,19 @@ export function remoteContentProxyPath(url: string, basePath = ''): string {
   const absolute = url.startsWith('//') ? `https:${url}` : url;
   return `${basePath.replace(/\/+$/, '')}${REMOTE_CONTENT_ROUTE}${encodeRemoteContentUrl(absolute)}`;
 }
+
+/**
+ * CSP source expression that lets the render iframe load images from the
+ * proxy route, i.e. from the app's own origin.
+ *
+ * Not `'self'`: the iframe is a srcdoc document, and Firefox evaluates
+ * source expressions there against the document URL's scheme, `about:`,
+ * rather than the inherited origin (bugzilla 1803475), so `'self'` and a
+ * schemeless host never match and every proxied image is blocked. An
+ * explicit scheme and host matches in every browser. Falls back to `'self'`
+ * where there is no window, which only happens while rendering on the
+ * server, before any iframe exists.
+ */
+export function remoteContentImgSource(): string {
+  return typeof window === 'undefined' ? "'self'" : window.location.origin;
+}

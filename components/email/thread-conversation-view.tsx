@@ -4,7 +4,7 @@ import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import DOMPurify from "dompurify";
 import { Email, ThreadGroup } from "@/lib/jmap/types";
 import { EMAIL_SANITIZE_CONFIG, collapseBlockedImageContainers, plainTextToSafeHtml, proxyExternalResourcesOnNode, restrictDataUriResourcesOnNode, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
-import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { remoteContentImgSource, remoteContentProxyPath } from "@/lib/remote-content-url";
 import { withBasePath } from "@/lib/browser-navigation";
 import { useConfig } from "@/hooks/use-config";
 import { getRenderableHtmlBody } from "@/lib/email-body-selection";
@@ -464,11 +464,11 @@ function EmailCard({
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const emailIframeSrcDoc = useMemo(() => {
     if (!emailContent.isHtml || !emailContent.html) return '';
-    // With the remote-content proxy on, img-src only opens to 'self': the
-    // sanitizer rewrote allowed images to the app's own route, and nothing
-    // the browser loads may reach the origin. Fonts and media stay closed.
+    // With the remote-content proxy on, img-src only opens to the app's own
+    // origin: the sanitizer rewrote allowed images to its route, and nothing
+    // the browser loads may reach the sender. Fonts and media stay closed.
     const csp = remoteContentProxyEnabled
-      ? "default-src 'none'; img-src data: blob: 'self'; style-src 'unsafe-inline'; font-src data:; media-src data: blob:; base-uri 'none'; form-action 'none'; frame-src 'none'"
+      ? `default-src 'none'; img-src data: blob: ${remoteContentImgSource()}; style-src 'unsafe-inline'; font-src data:; media-src data: blob:; base-uri 'none'; form-action 'none'; frame-src 'none'`
       : "default-src 'none'; img-src data: blob: http: https:; style-src 'unsafe-inline'; font-src data: http: https:; media-src data: blob: http: https:; base-uri 'none'; form-action 'none'; frame-src 'none'";
     return `<!DOCTYPE html><html><head>
 <meta charset="utf-8">
