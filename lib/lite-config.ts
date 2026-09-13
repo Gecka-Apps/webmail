@@ -87,6 +87,8 @@ export function applyLiteConfig(raw: unknown, defaults?: { jmapServerUrl?: strin
     loginShowTokenLogin: bool(input.loginShowTokenLogin, false),
     loginShowRememberMe: bool(input.loginShowRememberMe, false),
     loginShowVersion: bool(input.loginShowVersion, true),
+    loginNotice: str(input.loginNotice, ''),
+    loginNoticeUrl: str(input.loginNoticeUrl, ''),
     demoMode: bool(input.demoMode, false),
     allowCustomJmapEndpoint: bool(input.allowCustomJmapEndpoint, jmapServerUrl === '' && jmapServers.length === 0),
     jmapServers,

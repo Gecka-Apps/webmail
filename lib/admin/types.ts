@@ -248,6 +248,8 @@ export const CONFIG_ENV_MAP: Record<string, { envVar: string; fileEnvVar?: strin
   // Operators of a modified build point it at their fork; the About card then
   // links there instead of the upstream repository (#1161). Empty = upstream.
   sourceCodeUrl: { envVar: 'SOURCE_CODE_URL', type: 'url', defaultValue: '' },
+  loginNotice: { envVar: 'LOGIN_NOTICE', type: 'string', defaultValue: '' },
+  loginNoticeUrl: { envVar: 'LOGIN_NOTICE_URL', type: 'url', defaultValue: '' },
   // Login header customization. The logo box is otherwise a fixed 64×64
   // (w-16/h-16), which fits a wide wordmark to ~13px tall; set a max height
   // and/or width (any CSS length, e.g. "230px" or "3rem") to size it. The
