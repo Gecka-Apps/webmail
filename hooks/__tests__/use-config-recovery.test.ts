@@ -4,11 +4,15 @@ import { createConfig } from '@/lib/__tests__/fixtures/config';
 
 const mocks = vi.hoisted(() => ({
   apiFetch: vi.fn<(url: string, init?: RequestInit) => Promise<Response>>(),
-  fetchPolicy: vi.fn(),
+  fetchPolicy: vi.fn<() => Promise<void>>(),
+  applyPolicyDefaults: vi.fn(),
 }));
 vi.mock('@/lib/browser-navigation', () => ({ apiFetch: mocks.apiFetch }));
 vi.mock('@/stores/policy-store', () => ({
-  usePolicyStore: { getState: () => ({ fetchPolicy: mocks.fetchPolicy }) },
+  usePolicyStore: { getState: () => ({ fetchPolicy: mocks.fetchPolicy, policy: { defaults: {} } }) },
+}));
+vi.mock('@/stores/settings-store', () => ({
+  useSettingsStore: { getState: () => ({ applyPolicyDefaults: mocks.applyPolicyDefaults }) },
 }));
 
 const config = createConfig();
@@ -21,6 +25,7 @@ beforeEach(() => {
   vi.resetModules();
   vi.clearAllMocks();
   mocks.apiFetch.mockReset();
+  mocks.fetchPolicy.mockResolvedValue(undefined);
   vi.stubEnv('NEXT_PUBLIC_BULWARK_LITE', '0');
   vi.useFakeTimers();
 });
