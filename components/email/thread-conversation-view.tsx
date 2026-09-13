@@ -3,7 +3,10 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import DOMPurify from "dompurify";
 import { Email, ThreadGroup } from "@/lib/jmap/types";
-import { EMAIL_SANITIZE_CONFIG, collapseBlockedImageContainers, plainTextToSafeHtml, restrictDataUriResourcesOnNode, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
+import { EMAIL_SANITIZE_CONFIG, collapseBlockedImageContainers, plainTextToSafeHtml, proxyExternalResourcesOnNode, restrictDataUriResourcesOnNode, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
+import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { withBasePath } from "@/lib/browser-navigation";
+import { useConfig } from "@/hooks/use-config";
 import { getRenderableHtmlBody } from "@/lib/email-body-selection";
 import { collectReferencedCids, isEmbeddedInBody } from "@/lib/attachment-visibility";
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
@@ -238,6 +241,7 @@ function EmailCard({
 }: EmailCardProps) {
   const t = useTranslations();
   const resolvedTheme = useThemeStore((state) => state.resolvedTheme);
+  const { remoteContentProxyEnabled } = useConfig();
   const density = useSettingsStore((state) => state.density);
   const mailAttachmentAction = useSettingsStore((state) => state.mailAttachmentAction);
   const hideInlineImageAttachments = useSettingsStore((state) => state.hideInlineImageAttachments);
@@ -355,6 +359,12 @@ function EmailCard({
           // Re-apply the data:-URI allowlist DOMPurify skips on media tags.
           restrictDataUriResourcesOnNode(node);
 
+          if (allowExternal && remoteContentProxyEnabled) {
+            // Allowed images go through the app's own route, the CSP below
+            // only opens 'self'.
+            proxyExternalResourcesOnNode(node, (url) => withBasePath(remoteContentProxyPath(url)));
+          }
+
           if (!allowExternal) {
             if (node.tagName === 'IMG') {
               const src = node.getAttribute('src');
@@ -437,7 +447,7 @@ function EmailCard({
     }
 
     return { html: "", isHtml: false };
-  }, [email, allowExternal, resolvedTheme, emailAlwaysLightMode, cidBlobUrls, t]);
+  }, [email, allowExternal, remoteContentProxyEnabled, resolvedTheme, emailAlwaysLightMode, cidBlobUrls, t]);
 
   // Parts the body embeds via cid: stay out of the attachment row while the
   // user hides inline images - the desktop viewer's rule, shared through
@@ -456,7 +466,12 @@ function EmailCard({
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const emailIframeSrcDoc = useMemo(() => {
     if (!emailContent.isHtml || !emailContent.html) return '';
-    const csp = "default-src 'none'; img-src data: blob: http: https:; style-src 'unsafe-inline'; font-src data: http: https:; media-src data: blob: http: https:; base-uri 'none'; form-action 'none'; frame-src 'none'";
+    // With the remote-content proxy on, img-src only opens to 'self': the
+    // sanitizer rewrote allowed images to the app's own route, and nothing
+    // the browser loads may reach the origin. Fonts and media stay closed.
+    const csp = remoteContentProxyEnabled
+      ? "default-src 'none'; img-src data: blob: 'self'; style-src 'unsafe-inline'; font-src data:; media-src data: blob:; base-uri 'none'; form-action 'none'; frame-src 'none'"
+      : "default-src 'none'; img-src data: blob: http: https:; style-src 'unsafe-inline'; font-src data: http: https:; media-src data: blob: http: https:; base-uri 'none'; form-action 'none'; frame-src 'none'";
     return `<!DOCTYPE html><html><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -487,7 +502,7 @@ function EmailCard({
   td, th { word-break: break-word; padding: 0.5rem; }
   pre { white-space: pre-wrap; word-wrap: break-word; }
 </style></head><body dir="auto">${emailContent.html}</body></html>`;
-  }, [emailContent.isHtml, emailContent.html]);
+  }, [emailContent.isHtml, emailContent.html, remoteContentProxyEnabled]);
 
   const handleIframeLoad = useCallback(() => {
     const iframe = iframeRef.current;

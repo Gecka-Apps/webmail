@@ -77,6 +77,18 @@ export function sanitizeEmailHtmlForIframe(html: string): string {
   return sanitizeWithDataUriGuard(html, EMAIL_IFRAME_SANITIZE_CONFIG);
 }
 
+/** Options of {@link sanitizeEmailBodyForIframe}. */
+export interface IframeBodySanitizeOptions {
+  /**
+   * Turns an external resource URL into the URL the iframe should load
+   * instead, typically the app's own remote-content route. When set and the
+   * policy allows external content, every image reference is rewritten
+   * through it and media elements lose their remote sources, so the caller
+   * can keep the iframe CSP at `'self'`. Ignored while `blockExternal` is on.
+   */
+  proxyUrl?: (url: string) => string;
+}
+
 /** Outcome of {@link sanitizeEmailBodyForIframe}. */
 export interface IframeBodySanitizeResult {
   /** Sanitized HTML, ready for the iframe srcDoc. */
@@ -108,7 +120,9 @@ export interface IframeBodySanitizeResult {
 export function sanitizeEmailBodyForIframe(
   html: string,
   blockExternal: boolean,
+  options: IframeBodySanitizeOptions = {},
 ): IframeBodySanitizeResult {
+  const proxyUrl = blockExternal ? undefined : options.proxyUrl;
   const config = blockExternal
     ? {
         ...EMAIL_IFRAME_SANITIZE_CONFIG,
@@ -127,6 +141,8 @@ export function sanitizeEmailBodyForIframe(
       if (blockExternalResourcesOnNode(node)) {
         blockedExternalContent = true;
       }
+    } else if (proxyUrl) {
+      proxyExternalResourcesOnNode(node, proxyUrl);
     }
     // http(s) links open in a new tab; other schemes keep their default.
     applyNewTabToAnchor(node);
@@ -627,6 +643,123 @@ export function blockExternalResourcesOnNode(node: Element): boolean {
   }
 
   return blocked;
+}
+
+/** Rewrite every external `url(...)` in a CSS string through `proxyUrl`. */
+export function proxyExternalCssUrls(css: string, proxyUrl: (url: string) => string): string {
+  return css.replace(CSS_URL_PATTERN, (full, _q, inner: string) => {
+    const decoded = decodeCssEscapes(inner);
+    return isExternalResourceUrl(decoded) ? `url("${proxyUrl(decoded.trim())}")` : full;
+  });
+}
+
+/**
+ * Rewrite a `<style>` block so its external `url(...)` go through `proxyUrl`
+ * and its remote `@import` are dropped. Escapes are decoded on the whole
+ * block first, as in `stripExternalStyleSheetCss`, so an escaped `url(`
+ * keyword is caught too. Returns the original text when nothing external is
+ * present.
+ */
+export function proxyExternalStyleSheetCss(css: string, proxyUrl: (url: string) => string): string {
+  if (!css) return css;
+  const decoded = decodeCssEscapes(css);
+  if (!/url\(|@import/i.test(decoded)) return css;
+  // An @import of a remote sheet cannot be proxied (the route serves images
+  // only) and the iframe CSP would refuse it anyway: drop it.
+  let result = decoded.replace(/@import\s+url\(\s*(['"]?)\s*(?:https?:)?\/\/[^)]*\1\s*\)[^;]*;?/gi, '');
+  result = result.replace(/@import\s+(['"])\s*(?:https?:)?\/\/[^'"]*\1[^;]*;?/gi, '');
+  result = proxyExternalCssUrls(result, proxyUrl);
+  return result === decoded ? css : result;
+}
+
+/**
+ * Rewrite every external image reference on a sanitized element through
+ * `proxyUrl` (the app's remote-content route), the allow-mode counterpart of
+ * `blockExternalResourcesOnNode`. Covers the same vectors: `<img src>` with
+ * whitespace tricks, `srcset` on `<img>` and `<picture><source>`, the legacy
+ * `background` attribute, inline `style` url() with CSS escapes, and `<style>`
+ * block CSS.
+ *
+ * Media is not proxied: the route serves images only and the iframe CSP
+ * keeps `media-src` closed, so `<video>`/`<audio>` remote sources and
+ * posters are removed rather than left to fail at the network level.
+ *
+ * @returns true if anything on the node was rewritten or removed.
+ */
+export function proxyExternalResourcesOnNode(node: Element, proxyUrl: (url: string) => string): boolean {
+  let changed = false;
+  const tag = node.tagName;
+
+  if (tag === 'IMG') {
+    const src = node.getAttribute('src');
+    if (isExternalResourceUrl(src)) {
+      // eslint-disable-next-line no-control-regex
+      node.setAttribute('src', proxyUrl(src!.replace(/[\u0000-\u0020]+/g, '')));
+      changed = true;
+    }
+  }
+
+  if (tag === 'IMG' || (tag === 'SOURCE' && node.parentElement?.tagName === 'PICTURE')) {
+    const srcset = node.getAttribute('srcset');
+    if (srcset && srcsetHasExternalUrl(srcset)) {
+      node.setAttribute('srcset', proxySrcset(srcset, proxyUrl));
+      changed = true;
+    }
+  }
+
+  // <source> under <video>/<audio>, and the media elements themselves.
+  if (tag === 'SOURCE' && node.parentElement?.tagName !== 'PICTURE') {
+    for (const attr of ['src', 'srcset']) {
+      if (isExternalResourceUrl(node.getAttribute(attr))) {
+        node.removeAttribute(attr);
+        changed = true;
+      }
+    }
+  }
+  if (tag === 'VIDEO' || tag === 'AUDIO') {
+    for (const attr of ['src', 'poster']) {
+      if (isExternalResourceUrl(node.getAttribute(attr))) {
+        node.removeAttribute(attr);
+        changed = true;
+      }
+    }
+  }
+
+  const bgAttr = node.getAttribute('background');
+  if (isExternalResourceUrl(bgAttr)) {
+    node.setAttribute('background', proxyUrl(bgAttr!.trim()));
+    changed = true;
+  }
+
+  const styleAttr = node.getAttribute('style');
+  if (styleAttr && styleHasExternalUrl(styleAttr)) {
+    node.setAttribute('style', proxyExternalCssUrls(styleAttr, proxyUrl));
+    changed = true;
+  }
+
+  if (tag === 'STYLE') {
+    const css = node.textContent || '';
+    const rewritten = proxyExternalStyleSheetCss(css, proxyUrl);
+    if (rewritten !== css) {
+      node.textContent = rewritten;
+      changed = true;
+    }
+  }
+
+  return changed;
+}
+
+/** Route every external candidate of a srcset through `proxyUrl`, keeping descriptors. */
+function proxySrcset(srcset: string, proxyUrl: (url: string) => string): string {
+  return srcset
+    .split(',')
+    .map((candidate) => {
+      const parts = candidate.trim().split(/\s+/);
+      const url = parts[0] ?? '';
+      if (!isExternalResourceUrl(url)) return candidate.trim();
+      return [proxyUrl(url), ...parts.slice(1)].join(' ');
+    })
+    .join(', ');
 }
 
 /**

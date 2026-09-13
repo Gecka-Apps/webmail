@@ -27,7 +27,7 @@ vi.mock('@/lib/logger', () => ({
 const MANAGED_ENV = [
   'APP_NAME', 'NEXT_PUBLIC_APP_NAME', 'JMAP_SERVER_URL', 'NEXT_PUBLIC_JMAP_SERVER_URL',
   'OAUTH_ENABLED', 'OAUTH_CLIENT_ID', 'OAUTH_ISSUER_URL', 'SESSION_SECRET',
-  'SESSION_SECRET_FILE', 'SETTINGS_SYNC_ENABLED', 'STALWART_FEATURES', 'DEV_MOCK_JMAP',
+  'SESSION_SECRET_FILE', 'SETTINGS_SYNC_ENABLED', 'STALWART_FEATURES', 'REMOTE_CONTENT_PROXY', 'DEV_MOCK_JMAP',
   'FAVICON_URL', 'APP_LOGO_LIGHT_URL', 'APP_LOGO_DARK_URL', 'LOGIN_COMPANY_NAME',
   'LOGIN_IMPRINT_URL', 'LOGIN_PRIVACY_POLICY_URL', 'LOGIN_WEBSITE_URL', 'DOMAIN_BRANDING',
 ] as const;
@@ -191,6 +191,13 @@ describe('config API route', () => {
     const config = await getConfig();
 
     expect(config.stalwartFeaturesEnabled).toBe(false);
+  });
+
+  it('reports the remote content proxy off unless REMOTE_CONTENT_PROXY is true', async () => {
+    expect((await getConfig()).remoteContentProxyEnabled).toBe(false);
+
+    vi.stubEnv('REMOTE_CONTENT_PROXY', 'true');
+    expect((await getConfig()).remoteContentProxyEnabled).toBe(true);
   });
 
   it('should return custom favicon and app logo URLs', async () => {
