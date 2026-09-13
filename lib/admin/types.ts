@@ -200,6 +200,11 @@ export const CONFIG_ENV_MAP: Record<string, { envVar: string; fileEnvVar?: strin
   // user's behalf instead of by the browser, so senders only ever see the
   // server. Off, external content loads from the browser.
   remoteContentProxyEnabled: { envVar: 'REMOTE_CONTENT_PROXY', type: 'boolean', defaultValue: false },
+  // Hand the fetch to a dedicated proxy (GET <url>/i/<base64url> with a
+  // Bearer key) instead of doing it here: shared cache and one egress point
+  // for every mail client of the operator. Empty = the route fetches itself.
+  remoteContentProxyUrl: { envVar: 'REMOTE_CONTENT_PROXY_URL', type: 'url', defaultValue: '' },
+  remoteContentProxyKey: { envVar: 'REMOTE_CONTENT_PROXY_KEY', fileEnvVar: 'REMOTE_CONTENT_PROXY_KEY_FILE', type: 'string', defaultValue: '' },
   demoMode: { envVar: 'DEMO_MODE', type: 'boolean', defaultValue: false },
   devMode: { envVar: 'DEV_MOCK_JMAP', type: 'boolean', defaultValue: false },
   faviconUrl: { envVar: 'FAVICON_URL', type: 'url', defaultValue: '/branding/Bulwark_Favicon.svg' },
@@ -281,7 +286,7 @@ export const CONFIG_ENV_MAP: Record<string, { envVar: string; fileEnvVar?: strin
 };
 
 /** Keys that should never be exposed to the client config endpoint */
-export const SENSITIVE_CONFIG_KEYS = new Set(['oauthClientSecret', 'sessionSecret']);
+export const SENSITIVE_CONFIG_KEYS = new Set(['oauthClientSecret', 'sessionSecret', 'remoteContentProxyKey']);
 
 /** Admin session cookie name */
 export const ADMIN_SESSION_COOKIE = 'admin_session';
