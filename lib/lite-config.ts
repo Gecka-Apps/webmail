@@ -37,6 +37,8 @@ export const LITE_CONFIG_KEYS = [
   'loginShowSubtitle',
   'loginShowTotp',
   'loginShowVersion',
+  'loginNotice',
+  'loginNoticeUrl',
   'embeddedMode',
   'parentOrigin',
 ] as const;
@@ -121,6 +123,8 @@ export function applyLiteConfig(raw: unknown, defaults?: { jmapServerUrl?: strin
     loginShowSubtitle: bool(input.loginShowSubtitle, true),
     loginShowTotp: bool(input.loginShowTotp, true),
     loginShowVersion: bool(input.loginShowVersion, true),
+    loginNotice: str(input.loginNotice, ''),
+    loginNoticeUrl: str(input.loginNoticeUrl, ''),
     demoMode: bool(input.demoMode, false),
     allowCustomJmapEndpoint: bool(input.allowCustomJmapEndpoint, jmapServerUrl === '' && jmapServers.length === 0),
     jmapServers,
