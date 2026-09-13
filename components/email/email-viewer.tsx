@@ -10,6 +10,8 @@ import { collectReferencedCids, isEmbeddedInBody } from "@/lib/attachment-visibi
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { fitEmailBodyWidth } from "@/lib/email-fit-width";
 import { withBasePath } from "@/lib/browser-navigation";
+import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { useConfig } from "@/hooks/use-config";
 import { buildContactsPath, buildMailPath } from "@/lib/deep-links";
 import { useCopyLink } from "@/hooks/use-copy-link";
 import { Button } from "@/components/ui/button";
@@ -674,6 +676,7 @@ export function EmailViewer({
   const copyLink = useCopyLink();
   const tWelcome = useTranslations('welcome');
   const externalContentPolicy = useSettingsStore((state) => state.externalContentPolicy);
+  const { remoteContentProxyEnabled } = useConfig();
   const messageSpacing = useSettingsStore((state) => state.messageSpacing);
   const plainTextFont = useSettingsStore((state) => state.plainTextFont);
   const mailAttachmentAction = useSettingsStore((state) => state.mailAttachmentAction);
@@ -1757,8 +1760,13 @@ export function EmailViewer({
 
         // Sanitize (no dark mode color transforms - emails render true-to-life
         // in the iframe) and enforce the external-content policy.
+        // With the remote-content proxy on, allowed images are fetched by the
+        // server (/api/remote-content) rather than by the browser, and the
+        // iframe CSP below only opens 'self'.
         const { html: cleanHtml, blockedExternalContent } =
-          sanitizeEmailBodyForIframe(htmlContent, shouldBlockExternal);
+          sanitizeEmailBodyForIframe(htmlContent, shouldBlockExternal, {
+            proxyUrl: remoteContentProxyEnabled ? (url) => withBasePath(remoteContentProxyPath(url)) : undefined,
+          });
 
         // Update blocked content state
         if (blockedExternalContent && !hasBlockedContent) {
@@ -1822,7 +1830,7 @@ export function EmailViewer({
     // intentionally trigger a fresh srcDoc - `shouldBlockExternal` carries that
     // change in, and re-reads the trust selectors on the way.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [email, shouldBlockExternal, cidBlobUrls, t]);
+  }, [email, shouldBlockExternal, remoteContentProxyEnabled, cidBlobUrls, t]);
 
   // Override email content with S/MIME decrypted content when available
   const effectiveEmailContent = useMemo(() => {
@@ -2264,9 +2272,17 @@ export function EmailViewer({
     // srcDoc is rebuilt (see emailContent) with the permissive variant so real
     // images, web fonts and media load. cid:/inline images are pre-rewritten to
     // blob: URLs, so they survive the strict variant.
+    //
+    // With the remote-content proxy on, the permissive variant only opens
+    // img-src to 'self': external images were rewritten to the app's own
+    // route by the sanitizer, and anything it missed must not reach the
+    // origin from the browser. Fonts and media stay closed, the route does
+    // not serve them.
     const iframeCsp = effectiveEmailContent.externalBlocked
       ? "default-src 'none'; img-src data: blob:; style-src 'unsafe-inline'; font-src data:; media-src data: blob:; base-uri 'none'; form-action 'none'; frame-src 'none'"
-      : "default-src 'none'; img-src data: blob: http: https:; style-src 'unsafe-inline'; font-src data: http: https:; media-src data: blob: http: https:; base-uri 'none'; form-action 'none'; frame-src 'none'";
+      : remoteContentProxyEnabled
+        ? "default-src 'none'; img-src data: blob: 'self'; style-src 'unsafe-inline'; font-src data:; media-src data: blob:; base-uri 'none'; form-action 'none'; frame-src 'none'"
+        : "default-src 'none'; img-src data: blob: http: https:; style-src 'unsafe-inline'; font-src data: http: https:; media-src data: blob: http: https:; base-uri 'none'; form-action 'none'; frame-src 'none'";
 
     return `<!DOCTYPE html>
 <html style="color-scheme: ${colorScheme};"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -2313,7 +2329,7 @@ export function EmailViewer({
   ${wordHtmlCSS}
   ${darkModeCSS}
 </style></head><body dir="auto">${effectiveEmailContent.html}<style>html,body{height:auto!important;min-height:0!important;max-height:none!important}</style></body></html>`;
-  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, isDark, emailHasNativeDarkMode, messageSpacing]);
+  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, remoteContentProxyEnabled, isDark, emailHasNativeDarkMode, messageSpacing]);
 
   // Unblocking external content is handled by rebuilding the iframe srcDoc:
   // toggling allowExternalContent (both "Load images" and "Trust sender" set

@@ -67,6 +67,7 @@ export async function GET(request: NextRequest) {
       settingsSyncEnabled: configManager.get<boolean>('settingsSyncEnabled', false) && hasSessionSecret(),
       stalwartFeaturesEnabled,
       stalwartJmapPassthroughEnabled,
+      remoteContentProxyEnabled: configManager.get<boolean>('remoteContentProxyEnabled', false),
       devMode: configManager.get<boolean>('devMode', false),
       faviconUrl: branded<string>('faviconUrl', '/branding/Bulwark_Favicon.svg'),
       appLogoLightUrl: branded<string>('appLogoLightUrl', ''),

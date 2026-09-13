@@ -196,6 +196,10 @@ export const CONFIG_ENV_MAP: Record<string, { envVar: string; fileEnvVar?: strin
   // flag above so operators can keep the client features but block the
   // credential-bearing passthrough entirely (#904).
   stalwartJmapPassthroughEnabled: { envVar: 'STALWART_JMAP_PASSTHROUGH_ENABLED', type: 'boolean', defaultValue: true },
+  // Remote images in message bodies are fetched by /api/remote-content on the
+  // user's behalf instead of by the browser, so senders only ever see the
+  // server. Off, external content loads from the browser.
+  remoteContentProxyEnabled: { envVar: 'REMOTE_CONTENT_PROXY', type: 'boolean', defaultValue: false },
   demoMode: { envVar: 'DEMO_MODE', type: 'boolean', defaultValue: false },
   devMode: { envVar: 'DEV_MOCK_JMAP', type: 'boolean', defaultValue: false },
   faviconUrl: { envVar: 'FAVICON_URL', type: 'url', defaultValue: '/branding/Bulwark_Favicon.svg' },

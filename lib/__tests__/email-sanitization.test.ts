@@ -23,8 +23,11 @@ import {
   restrictDataUriResourcesOnNode,
   sanitizeEmailHtmlForIframe,
   sanitizeEmailBodyForIframe,
+  proxyExternalResourcesOnNode,
+  proxyExternalStyleSheetCss,
   TRANSPARENT_BLOCKED_PIXEL,
 } from '../email-sanitization';
+import { remoteContentProxyPath, encodeRemoteContentUrl, decodeRemoteContentUrl } from '../remote-content-url';
 
 describe('email-sanitization', () => {
   describe('sanitizeEmailHtml', () => {
@@ -965,5 +968,111 @@ describe('email-sanitization', () => {
       expect(sanitizeEmailHtml('<img src="https://cdn.example/a.png">'))
         .toContain('https://cdn.example/a.png');
     });
+
+    describe('remote-content proxy rewrite', () => {
+      const proxy = (url: string) => remoteContentProxyPath(url);
+      const enc = (url: string) => `/api/remote-content/${encodeRemoteContentUrl(url)}`;
+
+      it('routes allowed external images through the proxy path', () => {
+        const result = sanitizeEmailBodyForIframe(
+          '<img src="https://cdn.example/a.png"><img src="  //cdn.example/b.png">',
+          false,
+          { proxyUrl: proxy },
+        );
+        expect(result.blockedExternalContent).toBe(false);
+        const imgs = parseHtmlSafely(result.html).querySelectorAll('img');
+        expect(imgs[0].getAttribute('src')).toBe(enc('https://cdn.example/a.png'));
+        // Protocol-relative is pinned to https before encoding.
+        expect(imgs[1].getAttribute('src')).toBe(enc('https://cdn.example/b.png'));
+        expect(result.html).not.toContain('cdn.example');
+      });
+
+      it('does nothing while blocking is on', () => {
+        const result = sanitizeEmailBodyForIframe('<img src="https://t.example/p.gif">', true, { proxyUrl: proxy });
+        expect(result.blockedExternalContent).toBe(true);
+        expect(result.html).not.toContain('/api/remote-content/');
+        expect(parseHtmlSafely(result.html).querySelector('img')!.getAttribute('src')).toBe(TRANSPARENT_BLOCKED_PIXEL);
+      });
+
+      it('leaves inline and local images untouched', () => {
+        const html = '<img src="blob:https://app.example/x"><img src="data:image/png;base64,iVBORw0KGgo="><img src="/local.png">';
+        const result = sanitizeEmailBodyForIframe(html, false, { proxyUrl: proxy });
+        expect(result.html).not.toContain('/api/remote-content/');
+        expect(result.html).toContain('blob:https://app.example/x');
+        expect(result.html).toContain('data:image/png');
+      });
+
+      it('covers srcset, background, inline style and <style> blocks', () => {
+        const html = [
+          '<img srcset="https://t.example/a.png 1x, https://t.example/b.png 2x">',
+          '<picture><source srcset="https://t.example/c.webp" type="image/webp"><img src="https://t.example/c.png"></picture>',
+          '<table><tr><td background="https://t.example/bg.gif">x</td></tr></table>',
+          '<div style="background:url(\'https://t.example/bg.png\')"></div>',
+          '<style>body{background:url(https://t.example/s.png)} @import url(https://t.example/x.css); .a{background:url(\\68ttps://t.example/e.png)}</style>',
+        ].join('');
+        const result = sanitizeEmailBodyForIframe(html, false, { proxyUrl: proxy });
+        const doc = parseHtmlSafely(result.html);
+        expect(doc.querySelector('img')!.getAttribute('srcset')).toBe(
+          `${enc('https://t.example/a.png')} 1x, ${enc('https://t.example/b.png')} 2x`,
+        );
+        expect(doc.querySelector('picture source')!.getAttribute('srcset')).toBe(enc('https://t.example/c.webp'));
+        expect(doc.querySelector('td')!.getAttribute('background')).toBe(enc('https://t.example/bg.gif'));
+        expect(doc.querySelector('div')!.getAttribute('style')).toContain(enc('https://t.example/bg.png'));
+        const css = doc.querySelector('style')!.textContent!;
+        expect(css).toContain(enc('https://t.example/s.png'));
+        // The escaped url is decoded, then proxied like any other.
+        expect(css).toContain(enc('https://t.example/e.png'));
+        expect(css).not.toContain('@import');
+        expect(result.html).not.toContain('t.example');
+      });
+
+      it('strips media sources instead of proxying them', () => {
+        const html = '<video poster="https://t.example/p.jpg" src="https://t.example/v.mp4"><source src="https://t.example/v.webm"></video>';
+        const result = sanitizeEmailBodyForIframe(html, false, { proxyUrl: proxy });
+        const video = parseHtmlSafely(result.html).querySelector('video')!;
+        expect(video.hasAttribute('poster')).toBe(false);
+        expect(video.hasAttribute('src')).toBe(false);
+        expect(video.querySelector('source')!.hasAttribute('src')).toBe(false);
+        expect(result.html).not.toContain('t.example');
+      });
+
+      it('rewrites on a bare node too (thread view hook)', () => {
+        const img = document.createElement('img');
+        img.setAttribute('src', 'https://t.example/a.png');
+        expect(proxyExternalResourcesOnNode(img, proxy)).toBe(true);
+        expect(img.getAttribute('src')).toBe(enc('https://t.example/a.png'));
+        const plain = document.createElement('p');
+        expect(proxyExternalResourcesOnNode(plain, proxy)).toBe(false);
+      });
+
+      it('returns the stylesheet untouched when nothing is external', () => {
+        const css = 'p{color:red} .a{background:url(data:image/png;base64,AA==)}';
+        expect(proxyExternalStyleSheetCss(css, proxy)).toBe(css);
+      });
+    });
+  });
+});
+
+describe('remote-content-url', () => {
+  it('round-trips a URL as unpadded base64url', () => {
+    const url = 'https://cdn.example/path/à ?a=1&b=2';
+    const encoded = encodeRemoteContentUrl(url);
+    expect(encoded).toMatch(/^[A-Za-z0-9_-]+$/);
+    expect(decodeRemoteContentUrl(encoded)).toBe(url);
+  });
+
+  it('pins protocol-relative URLs to https and prefixes the base path', () => {
+    expect(remoteContentProxyPath('//cdn.example/a.png', '/webmail')).toBe(
+      `/webmail/api/remote-content/${encodeRemoteContentUrl('https://cdn.example/a.png')}`,
+    );
+  });
+
+  it('refuses malformed input and non-http schemes', () => {
+    expect(decodeRemoteContentUrl('')).toBeNull();
+    expect(decodeRemoteContentUrl('not base64!')).toBeNull();
+    expect(decodeRemoteContentUrl(encodeRemoteContentUrl('javascript:alert(1)'))).toBeNull();
+    expect(decodeRemoteContentUrl(encodeRemoteContentUrl('file:///etc/passwd'))).toBeNull();
+    expect(decodeRemoteContentUrl(encodeRemoteContentUrl('just text'))).toBeNull();
+    expect(decodeRemoteContentUrl('A'.repeat(20_000))).toBeNull();
   });
 });
