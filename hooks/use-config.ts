@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { usePolicyStore } from '@/stores/policy-store';
+import { useSettingsStore } from '@/stores/settings-store';
 import { apiFetch } from '@/lib/browser-navigation';
 import type { PublicJmapServerEntry } from '@/lib/admin/jmap-servers';
 
@@ -71,8 +72,11 @@ export async function fetchConfig(): Promise<ConfigData> {
     })
     .then((data) => {
       configCache = data;
-      // Fetch admin policy alongside config (non-blocking)
-      usePolicyStore.getState().fetchPolicy();
+      // Fetch admin policy alongside config (non-blocking). Once it is in,
+      // its defaults fill the settings the user never chose.
+      usePolicyStore.getState().fetchPolicy().then(() => {
+        useSettingsStore.getState().applyPolicyDefaults(usePolicyStore.getState().policy.defaults ?? {});
+      });
       return data;
     })
     .finally(() => {
