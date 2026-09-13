@@ -4,7 +4,7 @@ import React, { useState, useEffect, useLayoutEffect, useMemo, useRef, useCallba
 import DOMPurify from "dompurify";
 import { Email, ThreadGroup } from "@/lib/jmap/types";
 import { EMAIL_SANITIZE_CONFIG, blockExternalResourcesOnNode, collapseBlockedImageContainers, emailIframeCsp, plainTextToSafeHtml, proxyExternalResourcesOnNode, restrictDataUriResourcesOnNode, sanitizeEmailBodyForIframe, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
-import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { remoteContentImgSource, remoteContentProxyPath } from "@/lib/remote-content-url";
 import { withBasePath } from "@/lib/browser-navigation";
 import { useConfig } from "@/hooks/use-config";
 import { emailDisplayDate } from "@/lib/email-date";
@@ -738,7 +738,7 @@ export function ConversationEmailBody({
     if (!emailContent.isHtml || !emailContent.html) return '';
     // Strict while external content is blocked: the network-level backstop
     // for whatever the DOM walk above cannot see.
-    const csp = emailIframeCsp(!allowExternal, remoteContentProxyEnabled ? "'self'" : undefined);
+    const csp = emailIframeCsp(!allowExternal, remoteContentProxyEnabled ? remoteContentImgSource() : undefined);
     // Colours are rewritten after load (applyEmailDarkMode in handleIframeLoad).
     return `<!DOCTYPE html><html class="${isDark ? DARK_PENDING_CLASS : ''}"><head>
 <meta charset="utf-8">
