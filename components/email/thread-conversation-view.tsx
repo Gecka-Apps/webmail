@@ -7,7 +7,7 @@ import { EMAIL_SANITIZE_CONFIG, TRANSPARENT_BLOCKED_PIXEL, blockExternalResource
 import { resolveExternalLink } from "@/lib/plugin-hook-result";
 import { stripBidiControls } from "@/lib/bidi";
 import { requestInternalMailto } from "@/lib/protocol-handlers/mailto";
-import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { remoteContentImgSource, remoteContentProxyPath } from "@/lib/remote-content-url";
 import { withBasePath } from "@/lib/browser-navigation";
 import { useConfig } from "@/hooks/use-config";
 import { emailDisplayDate } from "@/lib/email-date";
@@ -786,7 +786,7 @@ export function ConversationEmailBody({
     const csp = emailIframeCsp(
       !allowExternal,
       appFontSources ? appFontSources.split(' ') : [],
-      remoteContentProxyEnabled ? "'self'" : undefined,
+      remoteContentProxyEnabled ? remoteContentImgSource() : undefined,
     );
     // Colours are rewritten after load (applyEmailDarkMode in handleIframeLoad).
     return `<!DOCTYPE html><html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} data-reading="${reading.frameKey}" class="${isDark ? DARK_PENDING_CLASS : ''}"><head>
