@@ -3,10 +3,13 @@
 import React, { useState, useEffect, useLayoutEffect, useMemo, useRef, useCallback } from "react";
 import DOMPurify from "dompurify";
 import { Email, ThreadGroup } from "@/lib/jmap/types";
-import { EMAIL_SANITIZE_CONFIG, TRANSPARENT_BLOCKED_PIXEL, blockExternalResourcesOnNode, collapseBlockedImageContainers, emailIframeCsp, isOpenableLinkHref, plainTextToSafeHtml, restrictDataUriResourcesOnNode, sanitizeEmailBodyForIframe, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
+import { EMAIL_SANITIZE_CONFIG, TRANSPARENT_BLOCKED_PIXEL, blockExternalResourcesOnNode, collapseBlockedImageContainers, emailIframeCsp, isOpenableLinkHref, plainTextToSafeHtml, proxyExternalResourcesOnNode, restrictDataUriResourcesOnNode, sanitizeEmailBodyForIframe, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
 import { resolveExternalLink } from "@/lib/plugin-hook-result";
 import { stripBidiControls } from "@/lib/bidi";
 import { requestInternalMailto } from "@/lib/protocol-handlers/mailto";
+import { remoteContentProxyPath } from "@/lib/remote-content-url";
+import { withBasePath } from "@/lib/browser-navigation";
+import { useConfig } from "@/hooks/use-config";
 import { emailDisplayDate } from "@/lib/email-date";
 import { getRenderableHtmlBody } from "@/lib/email-body-selection";
 import { findVerificationCode, verificationCodeBodyText } from "@/lib/verification-code";
@@ -539,6 +542,7 @@ export function ConversationEmailBody({
   const remoteBlockedByOrg = useNoThirdPartyTraffic();
   const t = useTranslations();
   const resolvedTheme = useThemeStore((state) => state.resolvedTheme);
+  const { remoteContentProxyEnabled } = useConfig();
   const mailAttachmentAction = useSettingsStore((state) => state.mailAttachmentAction);
   const wopiStatus = useWopiStatus(true);
   const hideInlineImageAttachments = useSettingsStore((state) => state.hideInlineImageAttachments);
@@ -636,7 +640,9 @@ export function ConversationEmailBody({
     // blocking, like any other mail body (#797).
     if (pluginBody.html) {
       const withCids = rewriteCidReferences(pluginBody.html, { ...cidBlobUrls, ...pluginBody.cidUrls }, TRANSPARENT_BLOCKED_PIXEL);
-      const { html, blockedExternalContent } = sanitizeEmailBodyForIframe(withCids, !allowExternal);
+      const { html, blockedExternalContent } = sanitizeEmailBodyForIframe(withCids, !allowExternal, {
+        proxyUrl: remoteContentProxyEnabled ? (url) => withBasePath(remoteContentProxyPath(url)) : undefined,
+      });
       if (blockedExternalContent) {
         if (!hasBlockedContent) setHasBlockedContent(true);
         return { html: collapseBlockedImageContainers(html), isHtml: true };
@@ -671,6 +677,12 @@ export function ConversationEmailBody({
         DOMPurify.addHook('afterSanitizeAttributes', (node) => {
           // Re-apply the data:-URI allowlist DOMPurify skips on media tags.
           restrictDataUriResourcesOnNode(node);
+
+          if (allowExternal && remoteContentProxyEnabled) {
+            // Allowed images go through the app's own route, the iframe CSP
+            // only opens img-src to it.
+            proxyExternalResourcesOnNode(node, (url) => withBasePath(remoteContentProxyPath(url)));
+          }
 
           // The desktop viewer's blocker: srcset, <source>, poster,
           // background attributes and escaped url()s as well as img src.
@@ -724,7 +736,7 @@ export function ConversationEmailBody({
   // `hasBlockedContent` is only read to skip a redundant setState; as a
   // dependency it would re-run the sanitizer once the banner shows.
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [email, allowExternal, cidBlobUrls, pluginBody, t]);
+  }, [email, allowExternal, remoteContentProxyEnabled, cidBlobUrls, pluginBody, t]);
 
   // "Show mail as plain text" (Settings > Accessibility): the message's own
   // text/plain part, or a readable conversion of the HTML.
@@ -771,7 +783,11 @@ export function ConversationEmailBody({
     if (!emailContent.isHtml || !emailContent.html) return '';
     // Strict while external content is blocked: the network-level backstop
     // for whatever the DOM walk above cannot see.
-    const csp = emailIframeCsp(!allowExternal, appFontSources ? appFontSources.split(' ') : []);
+    const csp = emailIframeCsp(
+      !allowExternal,
+      appFontSources ? appFontSources.split(' ') : [],
+      remoteContentProxyEnabled ? "'self'" : undefined,
+    );
     // Colours are rewritten after load (applyEmailDarkMode in handleIframeLoad).
     return `<!DOCTYPE html><html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} data-reading="${reading.frameKey}" class="${isDark ? DARK_PENDING_CLASS : ''}"><head>
 <meta charset="utf-8">
@@ -805,7 +821,7 @@ export function ConversationEmailBody({
   pre { white-space: pre-wrap; word-wrap: break-word; }
   ${isDark ? emailDarkModeCss() : ''}
 </style></head><body dir="auto">${emailContent.html}${reading.frameCss ? `<style>${reading.frameCss}</style>` : ''}</body></html>`;
-  }, [emailContent.isHtml, emailContent.html, allowExternal, isDark, bodyLanguage, reading.frameKey, reading.frameCss, appFontSources]);
+  }, [emailContent.isHtml, emailContent.html, allowExternal, isDark, bodyLanguage, reading.frameKey, reading.frameCss, appFontSources, remoteContentProxyEnabled]);
   useLayoutEffect(() => { setHtmlBodyEl(null); }, [emailIframeSrcDoc]);
   // One object per body: React writes innerHTML again whenever this object
   // changes, dropping whatever was mounted in the body.
