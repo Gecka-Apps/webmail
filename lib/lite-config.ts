@@ -54,6 +54,7 @@ export const LITE_FORCED_FLAGS = {
   settingsSyncEnabled: false,
   stalwartFeaturesEnabled: false,
   stalwartJmapPassthroughEnabled: false,
+  remoteContentProxyEnabled: false,
   devMode: false,
 } as const satisfies Partial<ConfigData>;
 

@@ -101,6 +101,20 @@ APP_NAME=My Webmail
 | Branding, logos, per-domain branding | [Customization](https://bulwarkmail.org/docs/guides/customization) |
 | Anonymous telemetry (off by default) | [Anonymous usage stats](https://bulwarkmail.org/docs/features/telemetry) |
 
+### Remote content proxy
+
+```env
+REMOTE_CONTENT_PROXY=true
+```
+
+With `REMOTE_CONTENT_PROXY=true`, the remote images of a message are fetched by the server through `/api/remote-content/<encoded url>` and served from the webmail's own origin: the sender sees a request from your server, without the reader's IP address, browser or per-device opening time. The user's external-content policy (ask / block / allow, trusted senders) still decides whether images load at all; the proxy only changes where they load from. The route needs a logged-in session, goes through the same egress guard as the calendar and favicon fetchers (no private addresses, DNS rebinding checked), serves raster images only, checked by their bytes, caps them at 10 MB, and keeps a per-user request budget.
+
+Limitations, compared to the allow mode without the proxy:
+
+- **Remote fonts and media do not load.** Without the proxy, allowing external content opens the render iframe to remote web fonts and to `<video>` / `<audio>` sources. With it, the iframe CSP keeps `font-src` and `media-src` closed and the sanitizer drops those sources, so nothing reaches a sender from the browser. Inline (`data:`) fonts and media are unaffected.
+- **Remote SVG is refused.** An SVG is a document, not a picture, and the production image ships no DOM to sanitize it server-side; the route answers a transparent pixel for it. Gmail does not render SVG in mail either. Inline `data:` SVG follows the sanitizer's usual rules.
+- **Images the origin refuses or that exceed 10 MB** show as a transparent pixel, not as a broken image.
+
 ## Documentation
 
 All documentation is at [bulwarkmail.org/docs](https://bulwarkmail.org/docs):

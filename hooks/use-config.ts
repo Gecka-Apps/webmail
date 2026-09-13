@@ -19,6 +19,7 @@ export interface ConfigData {
   settingsSyncEnabled: boolean;
   stalwartFeaturesEnabled: boolean;
   stalwartJmapPassthroughEnabled: boolean;
+  remoteContentProxyEnabled: boolean;
   devMode: boolean;
   faviconUrl: string;
   appLogoLightUrl: string;
@@ -133,6 +134,7 @@ export function useConfig(): AppConfig {
     settingsSyncEnabled: configCache?.settingsSyncEnabled || false,
     stalwartFeaturesEnabled: configCache?.stalwartFeaturesEnabled ?? true,
     stalwartJmapPassthroughEnabled: configCache?.stalwartJmapPassthroughEnabled ?? true,
+    remoteContentProxyEnabled: configCache?.remoteContentProxyEnabled ?? false,
     devMode: configCache?.devMode || false,
     faviconUrl: configCache?.faviconUrl || '/branding/Bulwark_Favicon.svg',
     appLogoLightUrl: configCache?.appLogoLightUrl || '',
@@ -175,6 +177,7 @@ export function useConfig(): AppConfig {
         settingsSyncEnabled: configCache.settingsSyncEnabled,
         stalwartFeaturesEnabled: configCache.stalwartFeaturesEnabled,
         stalwartJmapPassthroughEnabled: configCache.stalwartJmapPassthroughEnabled,
+        remoteContentProxyEnabled: configCache.remoteContentProxyEnabled,
         devMode: configCache.devMode,
         faviconUrl: configCache.faviconUrl,
         appLogoLightUrl: configCache.appLogoLightUrl,
@@ -218,6 +221,7 @@ export function useConfig(): AppConfig {
           settingsSyncEnabled: data.settingsSyncEnabled,
           stalwartFeaturesEnabled: data.stalwartFeaturesEnabled,
           stalwartJmapPassthroughEnabled: data.stalwartJmapPassthroughEnabled,
+          remoteContentProxyEnabled: data.remoteContentProxyEnabled ?? false,
           devMode: data.devMode,
           faviconUrl: data.faviconUrl,
           appLogoLightUrl: data.appLogoLightUrl,
