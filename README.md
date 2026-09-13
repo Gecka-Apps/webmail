@@ -313,6 +313,8 @@ Limitations, compared to the allow mode without the proxy:
 - **Remote SVG is refused.** An SVG is a document, not a picture, and the production image ships no DOM to sanitize it server-side; the route answers a transparent pixel for it. Gmail does not render SVG in mail either. Inline `data:` SVG follows the sanitizer's usual rules.
 - **Images the origin refuses or that exceed 10 MB** show as a transparent pixel, not as a broken image.
 
+`REMOTE_CONTENT_PROXY_URL` and `REMOTE_CONTENT_PROXY_KEY` (or `_KEY_FILE`) hand the fetch to a dedicated remote content proxy, requested as `<url>/i/<base64url of the image URL>` with the key as a Bearer token: one shared cache and one egress point when several mail clients sit behind the same proxy. The key never leaves the server, and what the browser gets is still decided by the webmail from the bytes.
+
 </details>
 
 <details>
