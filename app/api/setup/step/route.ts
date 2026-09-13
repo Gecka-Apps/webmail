@@ -41,6 +41,8 @@ const STEP_KEYS: Record<string, string[]> = {
     'loginImprintUrl',
     'loginPrivacyPolicyUrl',
     'loginWebsiteUrl',
+    'loginNotice',
+    'loginNoticeUrl',
   ],
 };
 

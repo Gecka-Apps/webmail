@@ -31,6 +31,8 @@ export interface ConfigData {
   loginImprintUrl: string;
   loginPrivacyPolicyUrl: string;
   loginWebsiteUrl: string;
+  loginNotice: string;
+  loginNoticeUrl: string;
   loginLogoMaxHeight: string;
   loginLogoMaxWidth: string;
   loginShowHeading: boolean;
@@ -149,6 +151,8 @@ export function useConfig(): AppConfig {
     loginImprintUrl: configCache?.loginImprintUrl || '',
     loginPrivacyPolicyUrl: configCache?.loginPrivacyPolicyUrl || '',
     loginWebsiteUrl: configCache?.loginWebsiteUrl || '',
+    loginNotice: configCache?.loginNotice || '',
+    loginNoticeUrl: configCache?.loginNoticeUrl || '',
     loginLogoMaxHeight: configCache?.loginLogoMaxHeight || '',
     loginLogoMaxWidth: configCache?.loginLogoMaxWidth || '',
     loginShowHeading: configCache?.loginShowHeading ?? true,
@@ -192,6 +196,8 @@ export function useConfig(): AppConfig {
         loginImprintUrl: configCache.loginImprintUrl,
         loginPrivacyPolicyUrl: configCache.loginPrivacyPolicyUrl,
         loginWebsiteUrl: configCache.loginWebsiteUrl,
+        loginNotice: configCache.loginNotice,
+        loginNoticeUrl: configCache.loginNoticeUrl,
         loginLogoMaxHeight: configCache.loginLogoMaxHeight,
         loginLogoMaxWidth: configCache.loginLogoMaxWidth,
         loginShowHeading: configCache.loginShowHeading,
@@ -236,6 +242,8 @@ export function useConfig(): AppConfig {
           loginImprintUrl: data.loginImprintUrl,
           loginPrivacyPolicyUrl: data.loginPrivacyPolicyUrl,
           loginWebsiteUrl: data.loginWebsiteUrl,
+          loginNotice: data.loginNotice,
+          loginNoticeUrl: data.loginNoticeUrl,
           loginLogoMaxHeight: data.loginLogoMaxHeight,
           loginLogoMaxWidth: data.loginLogoMaxWidth,
           loginShowHeading: data.loginShowHeading,
