@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { useThemeStore } from './theme-store';
 import { useLocaleStore } from './locale-store';
+import { usePolicyStore } from './policy-store';
 import type { EmailTemplate } from '@/lib/template-types';
 import type { NotificationSoundChoice } from '@/lib/notification-sound';
 import { apiFetch } from '@/lib/browser-navigation';
@@ -502,11 +503,17 @@ interface SettingsState {
   debugCategories: Record<DebugCategory, boolean>;
   settingsSyncDisabled: boolean;
 
+  // Keys the user set through updateSetting, ever. A policy default only
+  // fills in the others: an explicit choice, even one equal to the built-in
+  // value, is never overridden by the admin's default.
+  chosenSettings: string[];
+
   // Actions
   updateSetting: <K extends keyof SettingsState>(
     key: K,
     value: SettingsState[K]
   ) => void;
+  applyPolicyDefaults: (defaults: Record<string, unknown>) => void;
   resetToDefaults: () => void;
   exportSettings: () => string;
   importSettings: (json: string, opts?: { serverAccountId?: string }) => boolean;
@@ -744,7 +751,15 @@ const DEFAULT_SETTINGS = {
     push: true,
   } as Record<DebugCategory, boolean>,
   settingsSyncDisabled: false,
+  chosenSettings: [] as string[],
 };
+
+// Visual settings take effect on the document root, not only in state.
+function applyVisualSetting(key: string, value: unknown) {
+  if (key === 'fontSize') applyFontSize(value as FontSize);
+  if (key === 'density') applyDensity(value as Density);
+  if (key === 'animationsEnabled') applyAnimations(value as boolean);
+}
 
 export const useSettingsStore = create<SettingsState>()(
   persist(
@@ -752,21 +767,21 @@ export const useSettingsStore = create<SettingsState>()(
       ...DEFAULT_SETTINGS,
 
       updateSetting: (key, value) => {
-        set({ [key]: value });
+        const chosen = get().chosenSettings;
+        set({
+          [key]: value,
+          ...(chosen.includes(key) ? {} : { chosenSettings: [...chosen, key] }),
+        });
+        applyVisualSetting(key, value);
+      },
 
-        // Apply font size to document root
-        if (key === 'fontSize') {
-          applyFontSize(value as FontSize);
-        }
-
-        // Apply density to document root
-        if (key === 'density') {
-          applyDensity(value as Density);
-        }
-
-        // Apply animations to document root
-        if (key === 'animationsEnabled') {
-          applyAnimations(value as boolean);
+      applyPolicyDefaults: (defaults) => {
+        const chosen = get().chosenSettings;
+        for (const [key, value] of Object.entries(defaults)) {
+          if (!(key in DEFAULT_SETTINGS) || key === 'chosenSettings' || chosen.includes(key)) continue;
+          if (value === undefined || value === null) continue;
+          set({ [key]: value });
+          applyVisualSetting(key, value);
         }
       },
 
@@ -880,6 +895,7 @@ export const useSettingsStore = create<SettingsState>()(
           debugMode: state.debugMode,
           debugCategories: state.debugCategories,
           settingsSyncDisabled: state.settingsSyncDisabled,
+          chosenSettings: state.chosenSettings,
           // Cross-store settings
           theme: useThemeStore.getState().theme,
           locale: useLocaleStore.getState().locale,
@@ -944,6 +960,9 @@ export const useSettingsStore = create<SettingsState>()(
               if (key === 'messageListOrderScope' && settings[key] !== 'inbox' && settings[key] !== 'all') {
                 return;
               }
+              if (key === 'chosenSettings' && !Array.isArray(settings[key])) {
+                return;
+              }
               if (DEVICE_LOCAL_SETTING_KEYS.has(key)) {
                 return;
               }
@@ -968,6 +987,10 @@ export const useSettingsStore = create<SettingsState>()(
               set({ [key]: settings[key] });
             }
           });
+
+          // A blob from another device may carry built-in values for keys the
+          // user never touched there; the admin defaults win over those.
+          get().applyPolicyDefaults(usePolicyStore.getState().policy.defaults ?? {});
 
           // Apply visual settings
           applyFontSize(get().fontSize);
