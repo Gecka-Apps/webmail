@@ -29,6 +29,8 @@ const TEXT_FIELDS = [
   { key: 'loginImprintUrl', label: 'Imprint URL' },
   { key: 'loginPrivacyPolicyUrl', label: 'Privacy Policy URL' },
   { key: 'loginWebsiteUrl', label: 'Company Website URL' },
+  { key: 'loginNotice', label: 'Login Notice (text under the form)' },
+  { key: 'loginNoticeUrl', label: 'Login Notice URL (turns the notice into a link)' },
 ] as const;
 
 const PWA_IMAGE_FIELDS = [
