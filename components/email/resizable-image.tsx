@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Node, mergeAttributes } from "@tiptap/core";
 import { NodeViewWrapper, ReactNodeViewRenderer } from "@tiptap/react";
 import type { NodeViewProps } from "@tiptap/react";
+import { SIGNATURE_EMBED_CLASS } from "@/lib/signature-inline-images";
 
 function ResizableImageView({ node, updateAttributes, selected }: NodeViewProps) {
   const imgRef = useRef<HTMLImageElement>(null);
@@ -127,6 +128,13 @@ export const ResizableImage = Node.create({
           return null;
         },
         renderHTML: (attrs) => (attrs.cid ? { "data-cid": attrs.cid } : {}),
+      },
+      // Signature image marked for embedding at send time: an unlocked
+      // signature goes through this node, and the class would be lost with it.
+      embed: {
+        default: false,
+        parseHTML: (el) => el.classList.contains(SIGNATURE_EMBED_CLASS),
+        renderHTML: (attrs) => (attrs.embed ? { class: SIGNATURE_EMBED_CLASS } : {}),
       },
     };
   },
