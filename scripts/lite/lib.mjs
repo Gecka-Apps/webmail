@@ -114,6 +114,8 @@ export const LITE_API_STRING_ALLOWLIST = [
   "/api/webdav",
   // Sender favicons - disabled in Lite (initials fallback).
   "/api/favicon",
+  // Signature image embedding - lib/signature-image-fetch.ts rejects in Lite, images stay links.
+  "/api/inline-image",
   // Web push relay paths (relative to the *relay* origin, not this host).
   "/api/push/vapid-public-key",
   "/api/push/register",

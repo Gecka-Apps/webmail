@@ -43,6 +43,8 @@ import { TemplatePicker } from "@/components/templates/template-picker";
 import { TemplateForm } from "@/components/templates/template-form";
 import type { EmailTemplate } from "@/lib/template-types";
 import { appendPlainTextSignature, getPlainTextSignature, plainTextBodyHasSignature, plainTextBodyWithoutSignature } from "@/lib/signature-utils";
+import { embedSignatureImages, type EmbeddedImagePart } from "@/lib/signature-inline-images";
+import { SIGNATURE_IMAGE_EMBEDDING, signatureImageResolver } from "@/lib/signature-image-fetch";
 import { findComposeIdentityId, findDraftIdentityId, findReplyIdentityId, resolveReplyFrom } from "@/lib/reply-identity";
 import { buildReplyRecipients, isSelfSent } from "@/lib/reply-recipients";
 import { computeReplyThreadingHeaders, type ReplyThreadingHeaders } from "@/lib/email-threading";
@@ -2344,13 +2346,35 @@ export function EmailComposer({
       : (signatureAlreadyInBody ? htmlToPlainText(body) : appendPlainTextSignature(htmlToPlainText(body), signatureIdentity, signatureOpts));
 
     const rewritten = plainTextMode ? null : rewriteInlineImages(body);
-    const finalHtmlBody = plainTextMode
-      ? undefined
-      : `<div>${rewritten!.html}</div>${buildSignatureHtml()}`;
-    const inlineAttachments = rewritten?.attachments ?? [];
+    let htmlBodyPart = rewritten?.html ?? '';
+    let htmlSignaturePart = plainTextMode ? '' : buildSignatureHtml();
+    const inlineAttachments: EmbeddedImagePart[] = rewritten?.attachments ?? [];
 
     try {
       const effectiveDelayedUntil = await resolveDelayedUntil(delayedUntil);
+
+      // Signature images marked for embedding become cid: parts. One that
+      // cannot be fetched goes out as a remote link; outside the Lite build,
+      // which has no fetcher, the user is told.
+      const signatureImageClient = composerClientRef.current ?? client;
+      if (!plainTextMode && signatureImageClient) {
+        const resolveImage = signatureImageResolver(signatureImageClient);
+        const [inBody, appended] = await Promise.all([
+          embedSignatureImages(htmlBodyPart, resolveImage, { scope: 'body' }),
+          embedSignatureImages(htmlSignaturePart, resolveImage, { scope: 'signature' }),
+        ]);
+        htmlBodyPart = inBody.html;
+        htmlSignaturePart = appended.html;
+        inlineAttachments.push(...inBody.attachments, ...appended.attachments);
+        const failed = [...inBody.failed, ...appended.failed];
+        if (failed.length > 0 && SIGNATURE_IMAGE_EMBEDDING) {
+          toast.warning(t('signature_images_not_embedded', { count: failed.length }), failed.join('\n'));
+        }
+      }
+      const finalHtmlBody = plainTextMode
+        ? undefined
+        : `<div>${htmlBodyPart}</div>${htmlSignaturePart}`;
+
       // Let plugins veto the send (external-mail warning, mistyped-domain
       // guards, etc.). Returning false from any handler aborts before either
       // the S/MIME or standard JMAP path runs.
