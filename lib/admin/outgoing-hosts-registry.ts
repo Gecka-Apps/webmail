@@ -169,6 +169,7 @@ export const NON_REQUEST_HOSTS: readonly { host: string; files: readonly string[
 export const BUILT_URL_FILES: readonly { file: string; why: string }[] = [
   { file: 'app/(main)/admin/_pages/marketplace-detail.tsx', why: "link to an extension's source host, from the directory's answer" },
   { file: 'app/(main)/setup/page.tsx', why: "the instance's own origin, and scheme checks of the admin-entered server URL" },
+  { file: 'app/api/inline-image/route.ts', why: "scheme check of a signature image URL and of each redirect, the user's own content like an iCal feed" },
   { file: 'app/api/plugin-secrets/route.ts', why: "scheme check of a credential's server URL" },
   { file: 'components/calendar/ical-subscription-modal.tsx', why: "webcal:// rewritten to https:// for a feed the user enters" },
   { file: 'components/email/rich-text-editor.tsx', why: "adds the scheme to a link address the user types in the editor" },

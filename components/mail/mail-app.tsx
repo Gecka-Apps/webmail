@@ -120,6 +120,8 @@ import { WopiEditor } from "@/components/files/wopi-editor";
 import { useWopiStatus, canWopiOpen } from "@/hooks/use-wopi-status";
 import { isFilePreviewable } from "@/lib/file-preview";
 import { prepareQuickReply } from "@/lib/outgoing/quick-reply";
+import { embedSignatureImages, type EmbeddedImagePart } from "@/lib/signature-inline-images";
+import { SIGNATURE_IMAGE_EMBEDDING, signatureImageResolver } from "@/lib/signature-image-fetch";
 import { computeReplyThreadingHeaders } from "@/lib/email-threading";
 import { EML_IMPORT_ACCEPT, expandImportableEmails } from "@/lib/eml-import";
 import { resolveComposeAccountEmail } from "@/lib/reply-identity";
@@ -4019,7 +4021,8 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
       identityId: sendingIdentity?.id,
     });
     if (!prepared) return false;
-    const { html: finalHtmlBody, text: finalBody } = prepared;
+    const finalBody = prepared.text;
+    let finalHtmlBody = prepared.html;
 
     const originalEmailId = selectedEmail.id;
     const originalSource = emailWriteSource(selectedEmail, client);
@@ -4035,6 +4038,19 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
         if (!confirmed) return false;
       } else {
         delayedUntil = new Date(Date.now() + sendDelaySeconds * 1000).toISOString();
+      }
+    }
+
+    // The typed text is escaped, so every image in the HTML body comes from a
+    // signature or a finaliser: marked ones become cid: parts, as in the full
+    // composer.
+    let signatureImageParts: EmbeddedImagePart[] = [];
+    if (finalHtmlBody) {
+      const embedded = await embedSignatureImages(finalHtmlBody, signatureImageResolver(client), { scope: 'signature' });
+      finalHtmlBody = embedded.html;
+      signatureImageParts = embedded.attachments;
+      if (embedded.failed.length > 0 && SIGNATURE_IMAGE_EMBEDDING) {
+        toast.warning(t('email_composer.signature_images_not_embedded', { count: embedded.failed.length }), embedded.failed.join('\n'));
       }
     }
 
@@ -4057,7 +4073,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
       undefined,
       headerFromName,
       finalHtmlBody,
-      undefined,
+      signatureImageParts.length > 0 ? signatureImageParts : undefined,
       threading?.inReplyTo,
       threading?.references,
       delayedUntil,

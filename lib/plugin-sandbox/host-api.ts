@@ -472,6 +472,7 @@ const PLUGIN_POST_DENIED_ROUTES = new Set([
   'calendar-agenda',
   'dev-jmap',
   'fetch-ical',
+  'inline-image',
   'plugin-approval-status',
   // Another plugin's connected accounts and admin keys: the proxy injects
   // the credential named in the query string, whichever plugin asks.
