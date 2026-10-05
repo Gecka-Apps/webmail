@@ -611,6 +611,7 @@
     "upload_progress": "מעלה את{uploaded}/{total}",
     "upload_cancel": "בטל העלאה",
     "upload_failed": "העלאת{filename}נכשלה",
+    "signature_images_not_embedded": "{count, plural, one {לא ניתן היה להטמיע תמונת חתימה והיא נשלחה כקישור} other {לא ניתן היה להטמיע # תמונות חתימה והן נשלחו כקישורים}}",
     "attachment_too_large": "\"{name}\" גדול ממה שהשרת מאפשר ({max} לקובץ)",
     "attachments_total_too_large": "הקבצים המצורפים יחרגו ממגבלת השרת של {max} להודעה",
     "drop_files": "שחרר קבצים לצירוף",
@@ -2407,7 +2408,10 @@
       "creating": "יוצר...",
       "updating": "מעדכן...",
       "signature_byte_counter": "{bytes} / {max} בתים",
-      "signature_byte_limit_reached": "הגבול של השרת הושג"
+      "signature_byte_limit_reached": "הגבול של השרת הושג",
+      "embed_images_label": "הטמעת תמונות בהודעות שנשלחות",
+      "embed_images_hint": "תמונות ה-https של החתימה מורדות ומצורפות לכל הודעה שנשלחת מדואר הרשת, כך שהן מוצגות גם כשהנמען חוסם תוכן חיצוני.",
+      "embed_images_too_long": "הסימון לא נכנס במגבלת הגודל של השרת. יש לקצר את החתימה."
     },
     "sub_address": {
       "button_tooltip": "השתמש בכתובת משנה",

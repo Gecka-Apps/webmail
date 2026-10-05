@@ -14,6 +14,8 @@ import {
 import { serializeEditorContent } from '../quoted-html';
 import { sanitizeSignatureHtml } from '@/lib/email-sanitization';
 import { styledBlockAttributes } from '../styled-block-attributes';
+import { ResizableImage } from '../resizable-image';
+import { SIGNATURE_EMBED_CLASS } from '@/lib/signature-inline-images';
 
 // The exact paragraph the composer runs (rich-text-editor.tsx builds
 // StyledParagraph from the same styledBlockAttributes), so marker-survival
@@ -303,6 +305,28 @@ Der Inhalt dieser E-Mail ist vertraulich.
       expect((out.match(/<br/g) || []).length).toBe(7);
       expect(out).toContain('font-size: 9pt');
       expect(out).toContain('Jane Doe');
+    } finally {
+      editor.destroy();
+    }
+  });
+});
+
+describe('unlockSignatureBlock keeps the image embedding marker', () => {
+  // The composer's image node, without its React node view.
+  const Image = ResizableImage.extend({ addNodeView: () => null });
+
+  it('carries the class through the unlock to the serialized body', () => {
+    const img = `<img src="https://www.example.com/logo.png" class="${SIGNATURE_EMBED_CLASS}">`;
+    const editor = new Editor({
+      element: document.createElement('div'),
+      extensions: [StarterKit.configure({ paragraph: false }), ComposerParagraph, SignatureBlock, Image],
+      content: bracketed(sanitizeSignatureHtml(`<p>Jane ${img}</p>`)),
+    });
+    try {
+      expect(unlockSignatureBlock(editor, findSignaturePos(editor))).toBe(true);
+      const out = serializeEditorContent(editor);
+      expect(out).not.toContain(SIGNATURE_BLOCK_MARKER);
+      expect(out).toMatch(new RegExp(`<img[^>]*class="${SIGNATURE_EMBED_CLASS}"`));
     } finally {
       editor.destroy();
     }
