@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import type { Identity, EmailAddress } from '@/lib/jmap/types';
 import { sanitizeSignatureHtml, sanitizeSignatureHtmlForDisplay } from '@/lib/email-sanitization';
+import { setSignatureImageEmbedding, signatureImageEmbedding } from '@/lib/signature-inline-images';
+import { SIGNATURE_IMAGE_EMBEDDING } from '@/lib/signature-image-fetch';
 import { getEmailValidationError, validateEmailList } from '@/lib/validation';
 import { getPlainTextSignature } from '@/lib/signature-utils';
 import { useOrgSignatureSetup } from '@/hooks/use-org-signature';
@@ -78,6 +80,21 @@ export function IdentityForm({ identity, onSave, onCancel, onDirtyChange }: Iden
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [embedTooLong, setEmbedTooLong] = useState(false);
+
+  const imageEmbedding = signatureImageEmbedding(formData.htmlSignature ?? '');
+
+  // The marker lives in the signature itself, the only place Stalwart keeps
+  // per-identity data, so toggling rewrites the HTML the textarea shows.
+  const toggleImageEmbedding = (enabled: boolean) => {
+    const next = setSignatureImageEmbedding(formData.htmlSignature ?? '', enabled);
+    if (utf8ByteLength(next) > SIGNATURE_MAX_BYTES) {
+      setEmbedTooLong(true);
+      return;
+    }
+    setEmbedTooLong(false);
+    setFormData({ ...formData, htmlSignature: next });
+  };
 
   // The admin's `signature` restriction: locked shows the signature this
   // address sends with, read-only; hidden shows no signature editor.
@@ -335,7 +352,10 @@ export function IdentityForm({ identity, onSave, onCancel, onDirtyChange }: Iden
         <textarea
           id="identity-html-sig"
           value={formData.htmlSignature ?? ''}
-          onChange={(e) => setFormData({ ...formData, htmlSignature: truncateToUtf8Bytes(e.target.value, SIGNATURE_MAX_BYTES) })}
+          onChange={(e) => {
+            setEmbedTooLong(false);
+            setFormData({ ...formData, htmlSignature: truncateToUtf8Bytes(e.target.value, SIGNATURE_MAX_BYTES) });
+          }}
           rows={5}
           disabled={isSubmitting}
           aria-label={t('html_signature_label')}
@@ -343,6 +363,29 @@ export function IdentityForm({ identity, onSave, onCancel, onDirtyChange }: Iden
           className="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground font-mono transition-all duration-200 placeholder:text-muted-foreground hover:border-muted-foreground focus-visible:outline-hidden focus-visible:border-ring disabled:cursor-not-allowed disabled:opacity-50"
         />
         <SignatureByteCounter id="identity-html-sig-counter" value={formData.htmlSignature || ''} />
+        {SIGNATURE_IMAGE_EMBEDDING && imageEmbedding.images > 0 && (
+          <div className="mt-2">
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-foreground">
+              <input
+                type="checkbox"
+                checked={imageEmbedding.embedded}
+                onChange={(e) => toggleImageEmbedding(e.target.checked)}
+                disabled={isSubmitting}
+                aria-describedby="identity-embed-images-hint"
+                className="rounded border-border text-primary focus:ring-ring"
+              />
+              {t('embed_images_label')}
+            </label>
+            <p id="identity-embed-images-hint" className="text-xs text-muted-foreground mt-1">
+              {t('embed_images_hint')}
+            </p>
+            {embedTooLong && (
+              <p className="text-xs text-destructive mt-1" role="alert">
+                {t('embed_images_too_long')}
+              </p>
+            )}
+          </div>
+        )}
         {formData.htmlSignature && (
           <div className="mt-2 p-2 border rounded bg-muted">
             <div className="text-xs text-muted-foreground mb-1">{tDisplay('preview')}</div>

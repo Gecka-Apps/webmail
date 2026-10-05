@@ -24,6 +24,7 @@ describe('routes no plugin may POST to', () => {
     '/api/plugin-secrets',
     '/api/calendar-agenda',
     '/api/fetch-ical',
+    '/api/inline-image',
     '/api/translate',
     '/api/account-archive',
     '/api/%70lugin-proxy',

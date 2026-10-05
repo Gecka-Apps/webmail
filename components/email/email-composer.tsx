@@ -110,6 +110,8 @@ import type { EmailTemplate } from "@/lib/template-types";
 import { appendPlainTextSignature, getPlainTextSignature, plainTextBodyHasSignature, plainTextBodyWithoutSignature } from "@/lib/signature-utils";
 import { wantsSignatureSeparator } from "@/lib/signature-delimiter";
 import { finalizeOutgoing, runPreSendChecks, type OutgoingContext } from "@/lib/outgoing/send-pipeline";
+import { embedSignatureImages, type EmbeddedImagePart } from "@/lib/signature-inline-images";
+import { SIGNATURE_IMAGE_EMBEDDING, signatureImageResolver } from "@/lib/signature-image-fetch";
 import { findComposeIdentityId, findDraftIdentityId, findReplyIdentityId, resolveReplyFrom } from "@/lib/reply-identity";
 import { buildReplyRecipients, isSelfSent, ownReplyAddresses } from "@/lib/reply-recipients";
 import { computeReplyThreadingHeaders, type ReplyThreadingHeaders } from "@/lib/email-threading";
@@ -3489,19 +3491,41 @@ export function EmailComposer({
 
     const rewritten = plainTextMode ? null : rewriteInlineImages(body);
     const composeStyleCss = composeTextStyleCss(composeStyle);
-    // What the send-pipeline finalisers add (organisation signature) goes in
-    // here, on the send only: drafts never get it. The `last` stage (the
-    // disclaimer) runs on what goes out once plugins had their say, below.
-    const { html: finalHtmlBody, text: finalBody } = finalizeOutgoing({
-      html: plainTextMode ? undefined : `${composeStyleCss ? `<div style="${composeStyleCss}">` : '<div>'}${rewritten!.html}</div>${buildSignatureHtml()}`,
-      text: builtTextBody,
-    }, outgoingContext);
     const lastStage = (html: string | undefined, text: string) =>
       finalizeOutgoing({ html: html || undefined, text }, outgoingContext, 'last');
-    const inlineAttachments = rewritten?.attachments ?? [];
+    let htmlBodyPart = rewritten?.html ?? '';
+    let htmlSignaturePart = plainTextMode ? '' : buildSignatureHtml();
+    const inlineAttachments: EmbeddedImagePart[] = rewritten?.attachments ?? [];
 
     try {
       const effectiveDelayedUntil = await resolveDelayedUntil(delayedUntil);
+
+      // Signature images marked for embedding become cid: parts. One that
+      // cannot be fetched goes out as a remote link; outside the Lite build,
+      // which has no fetcher, the user is told.
+      const signatureImageClient = composerClientRef.current ?? client;
+      if (!plainTextMode && signatureImageClient) {
+        const resolveImage = signatureImageResolver(signatureImageClient);
+        const [inBody, appended] = await Promise.all([
+          embedSignatureImages(htmlBodyPart, resolveImage, { scope: 'body' }),
+          embedSignatureImages(htmlSignaturePart, resolveImage, { scope: 'signature' }),
+        ]);
+        htmlBodyPart = inBody.html;
+        htmlSignaturePart = appended.html;
+        inlineAttachments.push(...inBody.attachments, ...appended.attachments);
+        const failed = [...inBody.failed, ...appended.failed];
+        if (failed.length > 0 && SIGNATURE_IMAGE_EMBEDDING) {
+          toast.warning(t('signature_images_not_embedded', { count: failed.length }), failed.join('\n'));
+        }
+      }
+      // What the send-pipeline finalisers add (organisation signature) goes in
+      // here, on the send only: drafts never get it. The `last` stage (the
+      // disclaimer) runs on what goes out once plugins had their say, below.
+      const { html: finalHtmlBody, text: finalBody } = finalizeOutgoing({
+        html: plainTextMode ? undefined : `${composeStyleCss ? `<div style="${composeStyleCss}">` : '<div>'}${htmlBodyPart}</div>${htmlSignaturePart}`,
+        text: builtTextBody,
+      }, outgoingContext);
+
       // Let plugins veto the send (external-mail warning, mistyped-domain
       // guards, etc.). Returning false from any handler aborts before either
       // the S/MIME or standard JMAP path runs.
