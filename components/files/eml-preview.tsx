@@ -8,6 +8,7 @@ import { stripBidiControls } from "@/lib/bidi";
 import { isFilePreviewable } from "@/lib/file-preview";
 import { useSettingsStore } from "@/stores/settings-store";
 import { useNoThirdPartyTraffic } from "@/hooks/use-third-party-mode";
+import { useConfig } from "@/hooks/use-config";
 
 // A parsed message/rfc822 (.eml), as produced by postal-mime. Only the fields
 // this preview renders are typed.
@@ -43,11 +44,14 @@ function escapeHtml(s: string): string {
 // DOMPurify AND rendered in a fully-locked sandbox iframe (sandbox="" - no
 // scripts, no same-origin), so a script-bearing .eml can never execute in our
 // origin. Remote content is blocked unless the user allows it everywhere:
-// there is no per-message "load" here. Parsing happens in the caller
-// (FilePreviewModal); this is pure presentation. An attachment the preview
-// can show - often another message: a certified-mail (PEC) envelope wraps the
-// original, and a forwarded PEC wraps that envelope - opens through
-// onOpenAttachment, with download beside it.
+// there is no per-message "load" here. With the remote-content proxy on it
+// stays blocked: the sandboxed frame has an opaque origin, so its requests
+// to /api/remote-content carry no session cookie and fail the route's
+// same-origin CORP. Parsing happens in the caller (FilePreviewModal); this
+// is pure presentation. An attachment the preview can show - often another
+// message: a certified-mail (PEC) envelope wraps the original, and a
+// forwarded PEC wraps that envelope - opens through onOpenAttachment, with
+// download beside it.
 export function EmlPreview({ message, onOpenAttachment }: {
   message: ParsedEml;
   onOpenAttachment?: (attachment: EmlAttachment) => void;
@@ -55,7 +59,8 @@ export function EmlPreview({ message, onOpenAttachment }: {
   const t = useTranslations("email_viewer");
   // Always blocked with no third-party traffic (#903).
   const remoteBlockedByOrg = useNoThirdPartyTraffic();
-  const blockRemote = useSettingsStore((state) => state.externalContentPolicy) !== "allow" || remoteBlockedByOrg;
+  const { remoteContentProxyEnabled } = useConfig();
+  const blockRemote = useSettingsStore((state) => state.externalContentPolicy) !== "allow" || remoteBlockedByOrg || remoteContentProxyEnabled;
   const tFiles = useTranslations("files");
 
   // dir="auto" on a wrapper we control lets the first strong character pick
