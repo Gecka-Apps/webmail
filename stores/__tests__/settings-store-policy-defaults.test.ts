@@ -178,3 +178,23 @@ describe('settings stored before #1248', () => {
     expect([...migrated.explicitSettings].sort()).toEqual(['density', 'showSharedMailAccounts']);
   });
 });
+
+describe('settings stored by the Gecka fork', () => {
+  it('takes chosenSettings as the user\'s choices on migration', () => {
+    // A policy default the fork applied differs from the build default
+    // without being a choice; the build default picked by hand is one.
+    const migrated = migrateSettings(
+      { externalContentPolicy: 'allow', density: 'regular', chosenSettings: ['density', 'notASetting'], preferredIdentityIds: {} },
+      7,
+    );
+    expect(migrated.explicitSettings).toEqual(['density']);
+  });
+
+  it('takes chosenSettings from a server copy', async () => {
+    loadPolicy({ defaults: { externalContentPolicy: 'allow' } });
+    serverFiles['a@example.com'] = { externalContentPolicy: 'ask', chosenSettings: ['externalContentPolicy'] };
+    await signIn('a@example.com');
+    expect(settings().externalContentPolicy).toBe('ask');
+    expect(settings().explicitSettings).toEqual(['externalContentPolicy']);
+  });
+});
