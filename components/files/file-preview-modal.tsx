@@ -13,6 +13,7 @@ import { FilePreviewPluginSection } from "@/components/files/file-preview-plugin
 import { canOpenUrlInNewWindow } from "@/lib/standalone-display";
 import { emailIframeCsp, sanitizeEmailBodyForIframe } from "@/lib/email-sanitization";
 import { useSettingsStore } from "@/stores/settings-store";
+import { useConfig } from "@/hooks/use-config";
 import type { FileResourceView } from "@/lib/plugin-types";
 
 /**
@@ -161,7 +162,10 @@ export function FilePreviewModal({ name, onClose, onDownload, getFileContent, fi
   // open-in-new-tab fallback use.
   const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
   const [htmlDoc, setHtmlDoc] = useState<string | null>(null);
-  const blockRemote = useSettingsStore((state) => state.externalContentPolicy) !== "allow";
+  // The remote-content proxy cannot serve the sandboxed frame (see EmlPreview),
+  // so with it on, remote content stays blocked rather than loading directly.
+  const { remoteContentProxyEnabled } = useConfig();
+  const blockRemote = useSettingsStore((state) => state.externalContentPolicy) !== "allow" || remoteContentProxyEnabled;
 
   // Decide whether to render the PDF in a plain <iframe> (desktop) or with the
   // pdf.js canvas viewer (mobile). navigator.pdfViewerEnabled is the standard

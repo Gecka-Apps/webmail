@@ -5,6 +5,9 @@ vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
 }));
 
+const config = vi.hoisted(() => ({ remoteContentProxyEnabled: false }));
+vi.mock('@/hooks/use-config', () => ({ useConfig: () => config }));
+
 import { EmlPreview } from '../eml-preview';
 import { useSettingsStore } from '@/stores/settings-store';
 
@@ -23,6 +26,7 @@ function srcdoc(): string {
 
 afterEach(() => {
   useSettingsStore.setState({ externalContentPolicy: 'ask' });
+  config.remoteContentProxyEnabled = false;
 });
 
 describe('EmlPreview remote content', () => {
@@ -37,5 +41,13 @@ describe('EmlPreview remote content', () => {
   it('loads them when the user allows remote content everywhere', () => {
     useSettingsStore.setState({ externalContentPolicy: 'allow' });
     expect(srcdoc()).toContain('src="https://t.example/pixel.gif"');
+  });
+
+  it('keeps them blocked with the remote-content proxy on, which cannot serve the sandboxed frame', () => {
+    useSettingsStore.setState({ externalContentPolicy: 'allow' });
+    config.remoteContentProxyEnabled = true;
+    const doc = srcdoc();
+    expect(doc).not.toMatch(/\s(src|srcset)="https:\/\/t\.example/);
+    expect(/Content-Security-Policy" content="([^"]*)"/.exec(doc)?.[1]).toContain("img-src data: blob:;");
   });
 });

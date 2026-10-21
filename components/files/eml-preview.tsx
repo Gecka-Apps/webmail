@@ -5,6 +5,7 @@ import { Paperclip, Download } from "@/components/icons";
 import { emailIframeCsp, sanitizeEmailBodyForIframe } from "@/lib/email-sanitization";
 import { getEffectiveTimeZone } from "@/lib/timezone";
 import { useSettingsStore } from "@/stores/settings-store";
+import { useConfig } from "@/hooks/use-config";
 
 // A parsed message/rfc822 (.eml), as produced by postal-mime. Only the fields
 // this preview renders are typed.
@@ -38,11 +39,15 @@ function escapeHtml(s: string): string {
 // DOMPurify AND rendered in a fully-locked sandbox iframe (sandbox="" - no
 // scripts, no same-origin), so a script-bearing .eml can never execute in our
 // origin. Remote content is blocked unless the user allows it everywhere:
-// there is no per-message "load" here. Parsing happens in the caller
-// (FilePreviewModal); this is pure presentation.
+// there is no per-message "load" here. With the remote-content proxy on it
+// stays blocked: the sandboxed frame has an opaque origin, so its requests
+// to /api/remote-content carry no session cookie and fail the route's
+// same-origin CORP. Parsing happens in the caller (FilePreviewModal); this
+// is pure presentation.
 export function EmlPreview({ message }: { message: ParsedEml }) {
   const t = useTranslations("email_viewer");
-  const blockRemote = useSettingsStore((state) => state.externalContentPolicy) !== "allow";
+  const { remoteContentProxyEnabled } = useConfig();
+  const blockRemote = useSettingsStore((state) => state.externalContentPolicy) !== "allow" || remoteContentProxyEnabled;
 
   // dir="auto" on a wrapper we control lets the first strong character pick
   // the direction, matching the main viewer.
