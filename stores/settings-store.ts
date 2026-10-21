@@ -1043,8 +1043,17 @@ function isAllowedPolicyValue(key: string, value: unknown, restriction?: Setting
  * There, a value that differs from the build default can only have come from
  * the user, so it counts as their choice. One that matches it is taken as
  * never chosen and picks up the operator's default.
+ *
+ * The Gecka fork's builds recorded those choices as `chosenSettings`. That
+ * list is taken as it is: a value differing from the build default may be a
+ * policy default those builds wrote into the state.
  */
 export function legacyExplicitSettings(source: Record<string, unknown>): string[] {
+  if (Array.isArray(source.chosenSettings)) {
+    return source.chosenSettings.filter(
+      (key): key is string => typeof key === 'string' && isPolicySettingKey(key),
+    );
+  }
   return Object.keys(source).filter(
     (key) => isPolicySettingKey(key) && source[key] !== builtInDefault(key),
   );
