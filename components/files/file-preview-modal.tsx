@@ -16,6 +16,7 @@ import { stripBidiControls } from "@/lib/bidi";
 import { emailIframeCsp, sanitizeEmailBodyForIframe } from "@/lib/email-sanitization";
 import { useSettingsStore } from "@/stores/settings-store";
 import { useCloseOnBack } from "@/hooks/use-close-on-back";
+import { useConfig } from "@/hooks/use-config";
 import type { FileResourceView } from "@/lib/plugin-types";
 import { useNoThirdPartyTraffic } from "@/hooks/use-third-party-mode";
 
@@ -163,9 +164,12 @@ export function FilePreviewModal({ name, onClose, onDownload, getFileContent, fi
   // open-in-new-tab fallback use.
   const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
   const [htmlDoc, setHtmlDoc] = useState<string | null>(null);
-  // Always blocked with no third-party traffic (#903).
+  // Always blocked with no third-party traffic (#903). The remote-content
+  // proxy cannot serve the sandboxed frame (see EmlPreview), so with it on,
+  // remote content stays blocked rather than loading directly.
   const remoteBlockedByOrg = useNoThirdPartyTraffic();
-  const blockRemote = useSettingsStore((state) => state.externalContentPolicy) !== "allow" || remoteBlockedByOrg;
+  const { remoteContentProxyEnabled } = useConfig();
+  const blockRemote = useSettingsStore((state) => state.externalContentPolicy) !== "allow" || remoteBlockedByOrg || remoteContentProxyEnabled;
   // An attachment of the previewed .eml, shown in a preview of its own in
   // place of this one. It holds a Back entry of its own, so Escape and Back
   // close it first and come back here.
