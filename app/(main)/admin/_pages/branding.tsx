@@ -44,6 +44,8 @@ const TEXT_FIELDS = [
   { key: 'loginPrivacyPolicyUrl', label: 'Privacy policy URL' },
   { key: 'loginWebsiteUrl', label: 'Company website URL' },
   { key: 'loginUsernamePlaceholder', label: 'Login email placeholder', placeholder: 'user@company.example' },
+  { key: 'loginNotice', label: 'Login notice (text under the form)' },
+  { key: 'loginNoticeUrl', label: 'Login notice URL (turns the notice into a link)' },
 ] as const;
 
 // Accessibility and help links (OP-01): the app shows them on the login

@@ -200,7 +200,7 @@ function LoginPageContent() {
   usePrefetchMailView(!isMobileHandoff);
   const { login, loginWithToken, loginDemo, isLoading, error, clearError, isAuthenticated } = useAuthStore();
   const { theme, setTheme, initializeTheme } = useThemeStore(useShallow((s) => ({ theme: s.theme, setTheme: s.setTheme, initializeTheme: s.initializeTheme })));
-  const { appName, jmapServerUrl: configuredServerUrl, oauthEnabled, oauthOnly, oauthClientId: globalOauthClientId, oauthIssuerUrl: globalOauthIssuerUrl, oauthScopes, rememberMeEnabled, devMode, demoMode, loginLogoLightUrl, loginLogoDarkUrl, loginCompanyName, loginImprintUrl, loginPrivacyPolicyUrl, loginWebsiteUrl, loginUsernamePlaceholder, loginLogoMaxHeight, loginLogoMaxWidth, loginShowHeading, loginShowSubtitle, loginShowTotp, loginShowTokenLogin, loginShowRememberMe, loginShowVersion, isLoading: configLoading, error: configError, autoSsoEnabled, embeddedMode: _embeddedMode, allowCustomJmapEndpoint, jmapServers, jmapServerAutoPickByDomain } = useConfig();
+  const { appName, jmapServerUrl: configuredServerUrl, oauthEnabled, oauthOnly, oauthClientId: globalOauthClientId, oauthIssuerUrl: globalOauthIssuerUrl, oauthScopes, rememberMeEnabled, devMode, demoMode, loginLogoLightUrl, loginLogoDarkUrl, loginCompanyName, loginImprintUrl, loginPrivacyPolicyUrl, loginWebsiteUrl, loginUsernamePlaceholder, loginNotice, loginNoticeUrl, loginLogoMaxHeight, loginLogoMaxWidth, loginShowHeading, loginShowSubtitle, loginShowTotp, loginShowTokenLogin, loginShowRememberMe, loginShowVersion, isLoading: configLoading, error: configError, autoSsoEnabled, embeddedMode: _embeddedMode, allowCustomJmapEndpoint, jmapServers, jmapServerAutoPickByDomain } = useConfig();
   const resolvedTheme = useThemeStore((s) => s.resolvedTheme);
   const colorModeLocked = usePolicyStore((s) => s.getColorModePolicy().locked);
 
@@ -1818,6 +1818,20 @@ function LoginPageContent() {
 
         {/* Company name & links - below card */}
         <div className="mt-6 flex flex-col items-center gap-2">
+          {loginNotice && (
+            loginNoticeUrl ? (
+              <a
+                href={loginNoticeUrl}
+                className="text-center text-sm text-muted-foreground hover:text-foreground underline underline-offset-4 transition-colors"
+              >
+                {loginNotice}
+              </a>
+            ) : (
+              <p className="text-center text-sm text-muted-foreground">
+                {loginNotice}
+              </p>
+            )
+          )}
           {loginCompanyName && (
             <p className="text-center text-xs text-muted-foreground font-medium">
               {loginCompanyName}

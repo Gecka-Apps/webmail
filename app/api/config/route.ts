@@ -81,6 +81,8 @@ export async function GET(request: NextRequest) {
       loginPrivacyPolicyUrl: branded<string>('loginPrivacyPolicyUrl', ''),
       loginWebsiteUrl: branded<string>('loginWebsiteUrl', ''),
       loginUsernamePlaceholder: branded<string>('loginUsernamePlaceholder', ''),
+      loginNotice: branded<string>('loginNotice', ''),
+      loginNoticeUrl: branded<string>('loginNoticeUrl', ''),
       loginLogoMaxHeight: configManager.get<string>('loginLogoMaxHeight', ''),
       loginLogoMaxWidth: configManager.get<string>('loginLogoMaxWidth', ''),
       loginShowHeading: configManager.get<boolean>('loginShowHeading', true),
