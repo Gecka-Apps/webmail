@@ -122,7 +122,7 @@ describe('toasts and open menus', () => {
     useToastStore.setState({ toasts: [] });
     phone = true;
     vi.spyOn(window, 'matchMedia').mockImplementation((query: string) => ({
-      matches: query === '(max-width: 639px)' ? phone : false,
+      matches: query === '(width < 40rem)' ? phone : false,
       media: query, onchange: null,
       addEventListener: () => {}, removeEventListener: () => {}, addListener: () => {}, removeListener: () => {},
       dispatchEvent: () => false,

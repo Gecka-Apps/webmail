@@ -7,7 +7,7 @@ import { X, CheckCircle, AlertCircle, Info, AlertTriangle, Loader2 } from "@/com
 import { cn } from "@/lib/utils";
 import { TOUCH_HIT_AREA } from "@/components/ui/button";
 import { useContextMenuOpen } from "@/components/ui/context-menu";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { useMediaQuery, narrowerThan } from "@/hooks/use-media-query";
 
 export type ToastType = "success" | "error" | "info" | "warning";
 
@@ -361,7 +361,7 @@ export function ToastContainer({ toasts, onClose }: { toasts: Toast[]; onClose: 
   // last items. While a menu is open they step aside, and their countdown
   // waits, so an Undo is still there when the menu closes.
   const menuOpen = useContextMenuOpen();
-  const phone = useMediaQuery("(max-width: 639px)");
+  const phone = useMediaQuery(narrowerThan(640));
   const held = menuOpen && phone;
   const containerRef = useRef<HTMLDivElement>(null);
   // Where the focus was before the shortcut moved it into a toast.

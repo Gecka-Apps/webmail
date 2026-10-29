@@ -139,6 +139,37 @@
   scroll-padding-block: 4rem;
 }
 
+/* ---------- Large text in narrow panes (WCAG 1.4.4, 1.4.10) ----------
+ *
+ * The folder list and the settings navigation keep their width in px while
+ * the text grows with the text size setting, so at 200% their labels were
+ * cut to a few letters ("Inb..."). Both are size containers; once one is
+ * narrower than 14rem of the current text size (224px at 100%, so never at
+ * the default width), labels wrap instead of being cut. Anywhere else, a
+ * cut label shows in full while its button, link, menu item, tab or tree
+ * item has the keyboard focus (not list rows, whose height must not jump).
+ */
+nav:is([data-tour="sidebar"], [data-tour="settings-tabs"]) {
+  container: a11y-nav / inline-size;
+}
+@container a11y-nav (width < 14rem) {
+  .truncate {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+}
+:is(button, a[href], [role="menuitem"], [role="tab"], [role="treeitem"]):focus-visible:is(.truncate),
+:is(button, a[href], [role="menuitem"], [role="tab"], [role="treeitem"]):focus-visible .truncate {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
 /* ---------- More contrast (WCAG 1.4.6 as a setting) ---------- */
 
 @media (prefers-contrast: more) {

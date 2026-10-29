@@ -222,7 +222,7 @@ describe('ContactsApp', () => {
 
   it('has a create button on the phone, as Mail and Files do', () => {
     const matchMedia = window.matchMedia;
-    window.matchMedia = ((query: string) => ({ ...matchMedia(query), matches: query.includes('max-width') })) as typeof window.matchMedia;
+    window.matchMedia = ((query: string) => ({ ...matchMedia(query), matches: query.includes('width <') })) as typeof window.matchMedia;
     try {
       renderContacts();
       fireEvent.click(screen.getByRole('button', { name: 'create_new' }));
@@ -253,7 +253,7 @@ describe('ContactsApp', () => {
 
   it('puts New group and Import in the phone header menu', () => {
     const matchMedia = window.matchMedia;
-    window.matchMedia = ((query: string) => ({ ...matchMedia(query), matches: query.includes('max-width') })) as typeof window.matchMedia;
+    window.matchMedia = ((query: string) => ({ ...matchMedia(query), matches: query.includes('width <') })) as typeof window.matchMedia;
     try {
       renderContacts();
       fireEvent.click(screen.getByRole('button', { name: 'more' }));

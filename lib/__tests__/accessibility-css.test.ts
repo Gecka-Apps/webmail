@@ -160,3 +160,20 @@ describe('large targets', () => {
     for (const s of selectorsOf('min-height: 44px;')) expect(s.startsWith(':root[data-large-targets="on"]')).toBe(true);
   });
 });
+
+describe('large text in narrow panes', () => {
+  it('lets labels in the folder list and settings navigation wrap once the pane is narrow for the text', () => {
+    expect(selectorsOf('container: a11y-nav / inline-size;')).toEqual(['nav:is([data-tour="sidebar"], [data-tour="settings-tabs"])']);
+    expect(css).toMatch(/@container a11y-nav \(width < 14rem\) \{\s*\.truncate \{[^}]*white-space: normal;/);
+  });
+
+  it('shows a cut label in full while its control has the keyboard focus', () => {
+    const wrap = selectorsOf('hyphens: auto;\n}').map((s) => s.replace(':focus-visible', ''));
+    const label = el('<button><span class="truncate">Notifications</span></button>').querySelector('.truncate')!;
+    document.body.append(label.parentElement!);
+    expect(wrap.some((s) => label.matches(s))).toBe(true);
+    const rowLabel = el('<div role="option"><span class="truncate">Subject</span></div>').querySelector('.truncate')!;
+    document.body.append(rowLabel.parentElement!);
+    expect(wrap.some((s) => rowLabel.matches(s))).toBe(false);
+  });
+});

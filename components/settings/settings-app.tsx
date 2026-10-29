@@ -98,7 +98,7 @@ import {
   archiveActionSearchPaths,
 } from '@/lib/settings-search';
 import { useAccountStore } from '@/stores/account-store';
-import { useMediaQuery } from '@/hooks/use-media-query';
+import { useMediaQuery, atLeast } from '@/hooks/use-media-query';
 import { useLiteLinkSegments } from '@/hooks/use-lite-link-segments';
 import { useDocumentTitle } from '@/hooks/use-document-title';
 import { MvTopBar } from "@/components/layout/mv-top-bar";
@@ -536,7 +536,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
     if (typeof window === 'undefined') return;
     if (!mobileShowContent) return;
     // The first hydration pass reports a phone layout on every screen.
-    if (!isEmbedded && window.matchMedia('(min-width: 1024px)').matches) return;
+    if (!isEmbedded && window.matchMedia(atLeast(1024)).matches) return;
 
     // A page opened straight from a link has no list below it yet: turn the
     // entry it arrived on into the list, then push the page on top. Inside
