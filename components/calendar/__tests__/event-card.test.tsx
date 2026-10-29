@@ -120,6 +120,17 @@ describe('EventCard colour settings', () => {
     useSettingsStore.setState({ showColorNames: false, colorBlindPalette: false });
   });
 
+  it.each(['chip', 'span', 'block'] as const)('shows the calendar name on the %s with "Show names next to colours"', (variant) => {
+    useSettingsStore.setState({ showColorNames: true });
+    render(<EventCard event={makeOccurrence('a', 'accepted')} calendar={calendar} variant={variant} currentUserEmails={me} />);
+    expect(screen.getByText('Work')).toBeInTheDocument();
+  });
+
+  it('shows only the colour without it', () => {
+    render(<EventCard event={makeOccurrence('a', 'accepted')} calendar={calendar} variant="block" currentUserEmails={me} />);
+    expect(screen.queryByText('Work')).not.toBeInTheDocument();
+  });
+
   it("draws the event in the colour-blind-safe colour and keeps the calendar's own", () => {
     useSettingsStore.setState({ colorBlindPalette: true });
     render(<EventCard event={makeOccurrence('a', 'accepted')} calendar={calendar} variant="block" currentUserEmails={me} />);

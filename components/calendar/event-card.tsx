@@ -124,9 +124,13 @@ export function EventCard({ event, calendar, variant, onClick, onMouseEnter, onM
   const timeFormat = useSettingsStore((state) => state.timeFormat);
   const showTimeInMonthView = useSettingsStore((state) => state.showTimeInMonthView);
   const tinted = useSettingsStore((state) => state.calendarTintedEvents);
+  // "Show names next to colours": the calendar's name on the event, so the
+  // colour is not the only way to tell Work from Personal (WCAG 1.4.1).
+  const showColorNames = useSettingsStore((state) => state.showColorNames);
   const timeFmt = timeFormat === "12h" ? "h:mm a" : "HH:mm";
 
   const calendarName = calendar?.name || "";
+  const visibleCalendarName = showColorNames && calendarName ? calendarName : null;
   const durationMinutes = parseDuration(event.duration);
   const endTime = getEventEndDate(event);
   const safeFormat = (d: Date, fmt: string) => {
@@ -218,6 +222,9 @@ export function EventCard({ event, calendar, variant, onClick, onMouseEnter, onM
         {/* The whole width, aligned to the title's own start: a short English
             title in Arabic sat at the right, a cut one filled to the left. */}
         <span dir="auto" className={cn("flex-1 min-w-0 truncate text-start", isInactive && "line-through")}>{event.title || t("events.no_title")}</span>
+        {visibleCalendarName && (
+          <span data-calendar-name dir="auto" className="ms-1 min-w-0 max-w-[45%] shrink truncate font-normal opacity-85">{visibleCalendarName}</span>
+        )}
       </button>
     );
   }
@@ -249,6 +256,9 @@ export function EventCard({ event, calendar, variant, onClick, onMouseEnter, onM
             <span className="flex-shrink-0 font-normal opacity-85">{format(startDate, timeFmt)}</span>
           )}
           <span dir="auto" className={cn("flex-1 min-w-0 truncate text-start font-medium", isInactive && "line-through")}>{event.title || t("events.no_title")}</span>
+          {visibleCalendarName && (
+            <span data-calendar-name dir="auto" className="min-w-0 max-w-[45%] shrink truncate font-normal opacity-85">{visibleCalendarName}</span>
+          )}
         </div>
       </button>
     );
@@ -301,6 +311,9 @@ export function EventCard({ event, calendar, variant, onClick, onMouseEnter, onM
           {/* Start before end in a right-to-left layout too. */}
           <bdi dir="ltr">{timeString}</bdi>
         </div>
+      )}
+      {visibleCalendarName && (
+        <div data-calendar-name dir="auto" className="opacity-85 text-[10.5px] truncate">{visibleCalendarName}</div>
       )}
       {getParticipantCount(event) > 0 && (
         <div
