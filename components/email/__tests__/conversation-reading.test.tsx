@@ -70,3 +70,12 @@ describe('conversation controls name their target', () => {
     expect(screen.getByRole('button', { name: /^email_viewer\.(download|preview)_named \{"name":"report\.pdf"\}$/ })).toBeInTheDocument();
   });
 });
+
+describe('conversation message text size', () => {
+  it('plain text follows the mail text size instead of a fixed 13px', () => {
+    useSettingsStore.setState({ mailTextScale: 2 } as never);
+    show([mail('a', { htmlBody: [], textBody: [{ partId: '1', type: 'text/plain' }], bodyValues: { '1': { value: 'just text' } } })]);
+    const body = screen.getByText('just text').closest('[data-plugin-source="email-body"]') as HTMLElement;
+    expect(body.style.fontSize).toMatch(/0\.8125rem \* 2|1\.625rem/);
+  });
+});

@@ -16,6 +16,8 @@ import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidRefere
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { fitEmailBodyWidth } from "@/lib/email-fit-width";
 import { mailLanguage } from "@/lib/mail-language";
+import { applyMailTextSize } from "@/lib/mail-reading";
+import { useMailReading } from "@/hooks/use-mail-reading";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailDarkModeCss } from "@/lib/email-dark-mode";
 import { useThemeStore } from "@/stores/theme-store";
 import { useShallow } from "zustand/react/shallow";
@@ -566,6 +568,7 @@ export function ConversationEmailBody({
   const emailAlwaysLightMode = useSettingsStore((state) => state.emailAlwaysLightMode);
   const isDark = resolvedTheme === 'dark' && !emailAlwaysLightMode;
   const plainTextFont = useSettingsStore((state) => state.plainTextFont);
+  const reading = useMailReading();
   const showVerificationCodes = useSettingsStore((state) => state.showVerificationCodes);
   const verificationCode = useMemo(
     () => (showVerificationCodes ? findVerificationCode(email.subject, verificationCodeBodyText(email)) : null),
@@ -771,7 +774,7 @@ export function ConversationEmailBody({
     // for whatever the DOM walk above cannot see.
     const csp = emailIframeCsp(!allowExternal);
     // Colours are rewritten after load (applyEmailDarkMode in handleIframeLoad).
-    return `<!DOCTYPE html><html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} class="${isDark ? DARK_PENDING_CLASS : ''}"><head>
+    return `<!DOCTYPE html><html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} data-reading="${reading.frameKey}" class="${isDark ? DARK_PENDING_CLASS : ''}"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="${csp}">
@@ -782,7 +785,7 @@ export function ConversationEmailBody({
      on a phone fitEmailBodyWidth() shrinks it to the screen first, so the pan is
      only left for content too wide to stay legible when scaled. */
   html { overflow: hidden; }
-  body { overflow-x: auto; overflow-y: hidden; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 1.6; color: #1a1a1a; background: #ffffff; word-wrap: break-word; overflow-wrap: break-word; }
+  body { overflow-x: auto; overflow-y: hidden; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 0.875rem; line-height: 1.6; color: #1a1a1a; background: #ffffff; word-wrap: break-word; overflow-wrap: break-word; }
   /* Only force the cap on images that set no width of their own: an
      !important 100% also overrides a sender's inline max-width, and an
      image sized by max-width + max-height + width:100% then grows to
@@ -803,7 +806,7 @@ export function ConversationEmailBody({
   pre { white-space: pre-wrap; word-wrap: break-word; }
   ${isDark ? emailDarkModeCss() : ''}
 </style></head><body dir="auto">${emailContent.html}</body></html>`;
-  }, [emailContent.isHtml, emailContent.html, allowExternal, isDark, bodyLanguage]);
+  }, [emailContent.isHtml, emailContent.html, allowExternal, isDark, bodyLanguage, reading.frameKey]);
   useLayoutEffect(() => { setHtmlBodyEl(null); }, [emailIframeSrcDoc]);
   // One object per body: React writes innerHTML again whenever this object
   // changes, dropping whatever was mounted in the body.
@@ -824,6 +827,8 @@ export function ConversationEmailBody({
         show: t('email_viewer.show_quoted_text'),
         hide: t('email_viewer.hide_quoted_text'),
       });
+      // Text size and minimum size, before the first resize.
+      applyMailTextSize(doc, { factor: reading.textFactor, minPx: reading.minFontSize });
       if (isDark) applyEmailDarkMode(doc, { remoteContentAllowed: allowExternal });
       const resize = () => {
         // Fit desktop-width mail to the screen before measuring: the transform
@@ -868,7 +873,7 @@ export function ConversationEmailBody({
     } catch {
       // contentDocument may be inaccessible under stricter sandboxes; ignore.
     }
-  }, [t, isDark, allowExternal, email.id, selectionMenu.openRef]);
+  }, [t, isDark, allowExternal, email.id, selectionMenu.openRef, reading.textFactor, reading.minFontSize]);
 
   return (
     <div className={className}>
@@ -941,7 +946,7 @@ export function ConversationEmailBody({
               "[&_table]:border-collapse [&_td]:p-2 [&_th]:p-2",
               "[&_img]:max-w-full [&_img]:h-auto"
             )}
-            style={{ whiteSpace: 'pre-wrap', ...(plainTextFont === 'mono' && { fontFamily: 'ui-monospace, "SF Mono", Consolas, monospace' }), fontSize: '13px' }}
+            style={{ whiteSpace: 'pre-wrap', ...(plainTextFont === 'mono' && { fontFamily: 'ui-monospace, "SF Mono", Consolas, monospace' }), fontSize: reading.plainFontSize(13) }}
             data-plugin-source="email-body"
             data-email-id={email.id}
             onContextMenu={(e) => selectionMenu.onElementContextMenu(e, email.id)}

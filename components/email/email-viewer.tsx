@@ -7,6 +7,8 @@ import { EML_IMPORT_ACCEPT, expandImportableEmails } from "@/lib/eml-import";
 import { TRANSPARENT_BLOCKED_PIXEL, applyNewTabToAnchor, emailIframeCsp, escapeHtml, isExternalResourceUrl, isOpenableLinkHref, plainTextToSafeHtml, sanitizeEmailBodyForIframe, sanitizeEmailHtml, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
 import { getRenderableHtmlBody } from "@/lib/email-body-selection";
 import { mailLanguage } from "@/lib/mail-language";
+import { applyMailTextSize } from "@/lib/mail-reading";
+import { useMailReading } from "@/hooks/use-mail-reading";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailColorScheme, emailDarkModeCss, emailHasNativeDarkMode as htmlHasNativeDarkMode, resolveColorSchemeMedia } from "@/lib/email-dark-mode";
@@ -3149,6 +3151,12 @@ export function EmailViewer({
   }, [effectiveEmailContent.html, effectiveEmailContent.isHtml]);
 
   const emailAlwaysLightMode = useSettingsStore((state) => state.emailAlwaysLightMode);
+  // Text size, minimum size and the other reading settings for the body. A
+  // ref for the iframe setup, which runs from observers wired once per
+  // document; the srcDoc changes with frameKey, so a new setting rebuilds it.
+  const reading = useMailReading();
+  const readingRef = useRef(reading);
+  readingRef.current = reading;
   const [emailViewDarkOverride, setEmailViewDarkOverride] = useState<boolean | null>(null);
   const isDark = emailViewDarkOverride !== null
     ? emailViewDarkOverride
@@ -3204,7 +3212,7 @@ export function EmailViewer({
     const iframeCsp = emailIframeCsp(effectiveEmailContent.externalBlocked);
 
     return `<!DOCTYPE html>
-<html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} class="${isDark ? DARK_PENDING_CLASS : ''}" style="color-scheme: ${colorScheme};"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} data-reading="${reading.frameKey}" class="${isDark ? DARK_PENDING_CLASS : ''}" style="color-scheme: ${colorScheme};"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="${iframeCsp}">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="x-dns-prefetch-control" content="off">
@@ -3231,7 +3239,7 @@ export function EmailViewer({
      verification email rendered as a logo-only 150px strip). Neutralise the
      full-height trick on any element so the body grows to its content. */
   [style*="height:100%"], [style*="height: 100%"] { height: auto !important; }
-  body { margin: 0; padding: ${bodyPadding}; overflow-x: auto; overflow-y: hidden; height: auto !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 1.6; color: #1a1a1a; background: #ffffff; word-wrap: break-word; overflow-wrap: break-word; }
+  body { margin: 0; padding: ${bodyPadding}; overflow-x: auto; overflow-y: hidden; height: auto !important; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 0.875rem; line-height: 1.6; color: #1a1a1a; background: #ffffff; word-wrap: break-word; overflow-wrap: break-word; }
   @media (max-width: 640px) { body { padding-left: ${mobileBodyPaddingX}; padding-right: ${mobileBodyPaddingX}; } }
   /* Only force the cap on images that set no width of their own: an
      !important 100% also overrides a sender's inline max-width, and an
@@ -3256,7 +3264,7 @@ export function EmailViewer({
   ${wordHtmlCSS}
   ${darkModeCSS}
 </style></head><body dir="auto">${resolveColorSchemeMedia(effectiveEmailContent.html, isDark)}<style>html,body{height:auto!important;min-height:0!important;max-height:none!important}</style></body></html>`;
-  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, isDark, emailHasNativeDarkMode, messageSpacing, bodyLanguage]);
+  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, isDark, emailHasNativeDarkMode, messageSpacing, bodyLanguage, reading.frameKey]);
 
   // Unblocking external content is handled by rebuilding the iframe srcDoc:
   // toggling allowExternalContent (both "Load images" and "Trust sender" set
@@ -3388,6 +3396,10 @@ export function EmailViewer({
           show: t('show_quoted_text'),
           hide: t('hide_quoted_text'),
         });
+
+        // Text size and minimum size (Settings > Accessibility), before the
+        // height wiring so the first measurement is already at the new size.
+        applyMailTextSize(doc, { factor: readingRef.current.textFactor, minPx: readingRef.current.minFontSize });
 
         // Before the height wiring and after the quote toggle exists, so the
         // toggle is converted too. Reads the mail's computed colours and
@@ -6189,7 +6201,7 @@ export function EmailViewer({
                 dangerouslySetInnerHTML={plainBodyHtml}
                 style={{
                   ...(plainTextFont === 'mono' && { fontFamily: 'ui-monospace, "SF Mono", Consolas, monospace' }),
-                  fontSize: '14px',
+                  fontSize: reading.plainFontSize(14),
                   lineHeight: '1.6',
                   wordBreak: 'break-word',
                   whiteSpace: 'pre-wrap',

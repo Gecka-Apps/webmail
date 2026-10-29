@@ -105,3 +105,26 @@ describe('attachment actions', () => {
     expect(screen.getAllByRole('button', { name: 'download_named {"name":"report.pdf"}' }).length).toBeGreaterThan(0);
   });
 });
+
+describe('message text size', () => {
+  it('plain text follows the mail text size and its minimum instead of a fixed 14px', async () => {
+    useSettingsStore.setState({ mailTextScale: 1.5, mailMinFontSize: 16 } as never);
+    await show(message({ text: 'Plain words here' }));
+    const body = screen.getByText('Plain words here').closest('.email-content-text') as HTMLElement;
+    // jsdom folds the calc().
+    expect(body.style.fontSize).toMatch(/^max\(.*(0\.875rem \* 1\.5|1\.3125rem).*, 16px\)$/);
+  });
+
+  it('plain text follows the app text size by default', async () => {
+    useSettingsStore.setState({ fontSize: 'xx-large' } as never);
+    await show(message({ text: 'Plain words here' }));
+    const body = screen.getByText('Plain words here').closest('.email-content-text') as HTMLElement;
+    expect(body.style.fontSize).toBe('0.875rem');
+  });
+
+  it('rebuilds the HTML frame for a new size', async () => {
+    useSettingsStore.setState({ fontSize: 'xx-large' } as never);
+    const { container } = await show(message({ html: '<p>Some <b>formatted</b> text</p>' }));
+    expect(container.querySelector('iframe')!.getAttribute('srcdoc')).toContain('data-reading="1.5/0"');
+  });
+});
