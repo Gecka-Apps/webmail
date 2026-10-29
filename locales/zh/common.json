@@ -994,7 +994,26 @@
       "font_size": "字号",
       "font_size_default": "默认",
       "background_color": "背景颜色",
-      "remove_background_color": "移除背景颜色"
+      "remove_background_color": "移除背景颜色",
+      "table_size": "{rows} × {cols} 表格",
+      "colors": {
+        "black": "黑色",
+        "dark_gray": "深灰色",
+        "gray": "灰色",
+        "dark_red": "深红色",
+        "orange": "橙色",
+        "yellow": "黄色",
+        "green": "绿色",
+        "blue": "蓝色",
+        "purple": "紫色",
+        "dark_pink": "深粉色",
+        "brown": "棕色",
+        "red": "红色",
+        "light_orange": "浅橙色",
+        "light_green": "浅绿色",
+        "light_blue": "浅蓝色",
+        "pink": "粉色"
+      }
     },
     "send_filing_warning": "已发送，但发送后的清理失败，可能会残留旧草稿。",
     "pop_out": "在单独窗口中打开回复",

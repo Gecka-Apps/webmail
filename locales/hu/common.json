@@ -994,7 +994,26 @@
       "font_size": "Betűméret",
       "font_size_default": "Alapértelmezett",
       "background_color": "Háttérszín",
-      "remove_background_color": "Háttérszín eltávolítása"
+      "remove_background_color": "Háttérszín eltávolítása",
+      "table_size": "{rows} × {cols} méretű táblázat",
+      "colors": {
+        "black": "Fekete",
+        "dark_gray": "Sötétszürke",
+        "gray": "Szürke",
+        "dark_red": "Sötétvörös",
+        "orange": "Narancs",
+        "yellow": "Sárga",
+        "green": "Zöld",
+        "blue": "Kék",
+        "purple": "Lila",
+        "dark_pink": "Sötét rózsaszín",
+        "brown": "Barna",
+        "red": "Piros",
+        "light_orange": "Világos narancs",
+        "light_green": "Világoszöld",
+        "light_blue": "Világoskék",
+        "pink": "Rózsaszín"
+      }
     },
     "send_filing_warning": "Elküldve - de az utólagos rendrakás nem sikerült, egy elavult piszkozat megmaradhat.",
     "pop_out": "Válasz megnyitása külön ablakban",

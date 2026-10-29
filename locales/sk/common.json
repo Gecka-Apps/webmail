@@ -994,7 +994,26 @@
       "font_size": "Veľkosť písma",
       "font_size_default": "Predvolené",
       "background_color": "Farba pozadia",
-      "remove_background_color": "Odstrániť farbu pozadia"
+      "remove_background_color": "Odstrániť farbu pozadia",
+      "table_size": "Tabuľka {rows} × {cols}",
+      "colors": {
+        "black": "Čierna",
+        "dark_gray": "Tmavosivá",
+        "gray": "Sivá",
+        "dark_red": "Tmavočervená",
+        "orange": "Oranžová",
+        "yellow": "Žltá",
+        "green": "Zelená",
+        "blue": "Modrá",
+        "purple": "Fialová",
+        "dark_pink": "Tmavoružová",
+        "brown": "Hnedá",
+        "red": "Červená",
+        "light_orange": "Svetlooranžová",
+        "light_green": "Svetlozelená",
+        "light_blue": "Svetlomodrá",
+        "pink": "Ružová"
+      }
     },
     "send_filing_warning": "Odoslané - ale následné upratovanie zlyhalo, môže zostať zastaraný koncept.",
     "pop_out": "Otvoriť odpoveď v okne",

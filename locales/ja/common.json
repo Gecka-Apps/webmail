@@ -994,7 +994,26 @@
       "font_size": "文字サイズ",
       "font_size_default": "デフォルト",
       "background_color": "背景色",
-      "remove_background_color": "背景色を削除"
+      "remove_background_color": "背景色を削除",
+      "table_size": "{rows} × {cols} の表",
+      "colors": {
+        "black": "黒",
+        "dark_gray": "濃い灰色",
+        "gray": "灰色",
+        "dark_red": "濃い赤",
+        "orange": "オレンジ",
+        "yellow": "黄",
+        "green": "緑",
+        "blue": "青",
+        "purple": "紫",
+        "dark_pink": "濃いピンク",
+        "brown": "茶",
+        "red": "赤",
+        "light_orange": "明るいオレンジ",
+        "light_green": "明るい緑",
+        "light_blue": "水色",
+        "pink": "ピンク"
+      }
     },
     "send_filing_warning": "送信されましたが、送信後の整理に失敗しました。古い下書きが残る場合があります。",
     "pop_out": "返信を別ウィンドウで開く",

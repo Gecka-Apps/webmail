@@ -996,7 +996,26 @@
       "font_size": "Font size",
       "font_size_default": "Default",
       "background_color": "Background color",
-      "remove_background_color": "Remove background color"
+      "remove_background_color": "Remove background color",
+      "table_size": "{rows} by {cols} table",
+      "colors": {
+        "black": "Black",
+        "dark_gray": "Dark gray",
+        "gray": "Gray",
+        "dark_red": "Dark red",
+        "orange": "Orange",
+        "yellow": "Yellow",
+        "green": "Green",
+        "blue": "Blue",
+        "purple": "Purple",
+        "dark_pink": "Dark pink",
+        "brown": "Brown",
+        "red": "Red",
+        "light_orange": "Light orange",
+        "light_green": "Light green",
+        "light_blue": "Light blue",
+        "pink": "Pink"
+      }
     },
     "send_filing_warning": "Sent - but the post-send cleanup failed, a stale draft may remain.",
     "pop_out": "Pop out reply",

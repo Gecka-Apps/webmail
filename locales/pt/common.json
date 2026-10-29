@@ -994,7 +994,26 @@
       "font_size": "Tamanho da fonte",
       "font_size_default": "Padrão",
       "background_color": "Cor de fundo",
-      "remove_background_color": "Remover cor de fundo"
+      "remove_background_color": "Remover cor de fundo",
+      "table_size": "Tabela de {rows} × {cols}",
+      "colors": {
+        "black": "Preto",
+        "dark_gray": "Cinza-escuro",
+        "gray": "Cinza",
+        "dark_red": "Vermelho-escuro",
+        "orange": "Laranja",
+        "yellow": "Amarelo",
+        "green": "Verde",
+        "blue": "Azul",
+        "purple": "Roxo",
+        "dark_pink": "Rosa-escuro",
+        "brown": "Marrom",
+        "red": "Vermelho",
+        "light_orange": "Laranja-claro",
+        "light_green": "Verde-claro",
+        "light_blue": "Azul-claro",
+        "pink": "Rosa"
+      }
     },
     "send_filing_warning": "Enviado - mas a limpeza posterior falhou, um rascunho antigo pode permanecer.",
     "pop_out": "Abrir a resposta numa janela",

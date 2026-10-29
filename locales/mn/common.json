@@ -994,7 +994,26 @@
       "font_size": "Фонтын хэмжээ",
       "font_size_default": "Үндсэн",
       "background_color": "Дэвсгэр өнгө",
-      "remove_background_color": "Дэвсгэр өнгийг арилгах"
+      "remove_background_color": "Дэвсгэр өнгийг арилгах",
+      "table_size": "{rows} × {cols} хүснэгт",
+      "colors": {
+        "black": "Хар",
+        "dark_gray": "Бараан саарал",
+        "gray": "Саарал",
+        "dark_red": "Бараан улаан",
+        "orange": "Улбар шар",
+        "yellow": "Шар",
+        "green": "Ногоон",
+        "blue": "Цэнхэр",
+        "purple": "Нил ягаан",
+        "dark_pink": "Бараан ягаан",
+        "brown": "Хүрэн",
+        "red": "Улаан",
+        "light_orange": "Цайвар улбар шар",
+        "light_green": "Цайвар ногоон",
+        "light_blue": "Цайвар цэнхэр",
+        "pink": "Ягаан"
+      }
     },
     "send_filing_warning": "Илгээсэн - гэхдээ илгээсний дараах цэвэрлэгээ амжилтгүй болсон тул хуучирсан ноорог үлдэж болзошгүй.",
     "pop_out": "Хариуг тусдаа цонхонд нээх",

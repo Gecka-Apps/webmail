@@ -994,7 +994,26 @@
       "font_size": "Lettergrootte",
       "font_size_default": "Standaard",
       "background_color": "Achtergrondkleur",
-      "remove_background_color": "Achtergrondkleur verwijderen"
+      "remove_background_color": "Achtergrondkleur verwijderen",
+      "table_size": "Tabel van {rows} × {cols}",
+      "colors": {
+        "black": "Zwart",
+        "dark_gray": "Donkergrijs",
+        "gray": "Grijs",
+        "dark_red": "Donkerrood",
+        "orange": "Oranje",
+        "yellow": "Geel",
+        "green": "Groen",
+        "blue": "Blauw",
+        "purple": "Paars",
+        "dark_pink": "Donkerroze",
+        "brown": "Bruin",
+        "red": "Rood",
+        "light_orange": "Lichtoranje",
+        "light_green": "Lichtgroen",
+        "light_blue": "Lichtblauw",
+        "pink": "Roze"
+      }
     },
     "send_filing_warning": "Verzonden - maar het opruimen daarna is mislukt, mogelijk blijft een oud concept staan.",
     "pop_out": "Antwoord in een apart venster openen",

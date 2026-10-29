@@ -994,7 +994,26 @@
       "font_size": "Mida de la lletra",
       "font_size_default": "Per defecte",
       "background_color": "Color de fons",
-      "remove_background_color": "Elimina el color de fons"
+      "remove_background_color": "Elimina el color de fons",
+      "table_size": "Taula de {rows} × {cols}",
+      "colors": {
+        "black": "Negre",
+        "dark_gray": "Gris fosc",
+        "gray": "Gris",
+        "dark_red": "Vermell fosc",
+        "orange": "Taronja",
+        "yellow": "Groc",
+        "green": "Verd",
+        "blue": "Blau",
+        "purple": "Morat",
+        "dark_pink": "Rosa fosc",
+        "brown": "Marró",
+        "red": "Vermell",
+        "light_orange": "Taronja clar",
+        "light_green": "Verd clar",
+        "light_blue": "Blau clar",
+        "pink": "Rosa"
+      }
     },
     "send_filing_warning": "Enviat, però la neteja posterior a l'enviament ha fallat; és possible que quedi un esborrany obsolet.",
     "pop_out": "Obre la resposta en una finestra",

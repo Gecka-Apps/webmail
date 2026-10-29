@@ -994,7 +994,26 @@
       "font_size": "Dimensione carattere",
       "font_size_default": "Predefinita",
       "background_color": "Colore di sfondo",
-      "remove_background_color": "Rimuovi colore di sfondo"
+      "remove_background_color": "Rimuovi colore di sfondo",
+      "table_size": "Tabella {rows} × {cols}",
+      "colors": {
+        "black": "Nero",
+        "dark_gray": "Grigio scuro",
+        "gray": "Grigio",
+        "dark_red": "Rosso scuro",
+        "orange": "Arancione",
+        "yellow": "Giallo",
+        "green": "Verde",
+        "blue": "Blu",
+        "purple": "Viola",
+        "dark_pink": "Rosa scuro",
+        "brown": "Marrone",
+        "red": "Rosso",
+        "light_orange": "Arancione chiaro",
+        "light_green": "Verde chiaro",
+        "light_blue": "Azzurro",
+        "pink": "Rosa"
+      }
     },
     "send_filing_warning": "Inviato - ma la pulizia successiva non è riuscita, potrebbe restare una bozza obsoleta.",
     "pop_out": "Apri la risposta in una finestra",

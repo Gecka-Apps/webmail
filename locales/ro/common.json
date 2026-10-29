@@ -994,7 +994,26 @@
       "font_size": "Dimensiune font",
       "font_size_default": "Implicit",
       "background_color": "Culoarea fundalului",
-      "remove_background_color": "Elimină culoarea fundalului"
+      "remove_background_color": "Elimină culoarea fundalului",
+      "table_size": "Tabel {rows} × {cols}",
+      "colors": {
+        "black": "Negru",
+        "dark_gray": "Gri închis",
+        "gray": "Gri",
+        "dark_red": "Roșu închis",
+        "orange": "Portocaliu",
+        "yellow": "Galben",
+        "green": "Verde",
+        "blue": "Albastru",
+        "purple": "Mov",
+        "dark_pink": "Roz închis",
+        "brown": "Maro",
+        "red": "Roșu",
+        "light_orange": "Portocaliu deschis",
+        "light_green": "Verde deschis",
+        "light_blue": "Albastru deschis",
+        "pink": "Roz"
+      }
     },
     "send_filing_warning": "Trimis - dar curățarea ulterioară a eșuat, poate rămâne o ciornă veche.",
     "pop_out": "Deschide răspunsul într-o fereastră",

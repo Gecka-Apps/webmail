@@ -994,7 +994,26 @@
       "font_size": "글자 크기",
       "font_size_default": "기본값",
       "background_color": "배경색",
-      "remove_background_color": "배경색 제거"
+      "remove_background_color": "배경색 제거",
+      "table_size": "{rows} × {cols} 표",
+      "colors": {
+        "black": "검정",
+        "dark_gray": "진한 회색",
+        "gray": "회색",
+        "dark_red": "진한 빨강",
+        "orange": "주황",
+        "yellow": "노랑",
+        "green": "초록",
+        "blue": "파랑",
+        "purple": "보라",
+        "dark_pink": "진한 분홍",
+        "brown": "갈색",
+        "red": "빨강",
+        "light_orange": "연한 주황",
+        "light_green": "연한 초록",
+        "light_blue": "하늘색",
+        "pink": "분홍"
+      }
     },
     "send_filing_warning": "보냈지만 전송 후 정리에 실패했습니다. 오래된 임시 보관 메일이 남아 있을 수 있습니다.",
     "pop_out": "답장을 별도 창에서 열기",

@@ -994,7 +994,26 @@
       "font_size": "Rozmiar czcionki",
       "font_size_default": "Domyślny",
       "background_color": "Kolor tła",
-      "remove_background_color": "Usuń kolor tła"
+      "remove_background_color": "Usuń kolor tła",
+      "table_size": "Tabela {rows} × {cols}",
+      "colors": {
+        "black": "Czarny",
+        "dark_gray": "Ciemnoszary",
+        "gray": "Szary",
+        "dark_red": "Ciemnoczerwony",
+        "orange": "Pomarańczowy",
+        "yellow": "Żółty",
+        "green": "Zielony",
+        "blue": "Niebieski",
+        "purple": "Fioletowy",
+        "dark_pink": "Ciemnoróżowy",
+        "brown": "Brązowy",
+        "red": "Czerwony",
+        "light_orange": "Jasnopomarańczowy",
+        "light_green": "Jasnozielony",
+        "light_blue": "Jasnoniebieski",
+        "pink": "Różowy"
+      }
     },
     "send_filing_warning": "Wysłano - ale późniejsze porządkowanie nie powiodło się, może pozostać nieaktualna wersja robocza.",
     "pop_out": "Otwórz odpowiedź w oknie",

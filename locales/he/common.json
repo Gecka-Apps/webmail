@@ -959,7 +959,26 @@
       "font_size": "גודל גופן",
       "font_size_default": "ברירת מחדל",
       "background_color": "צבע רקע",
-      "remove_background_color": "הסר צבע רקע"
+      "remove_background_color": "הסר צבע רקע",
+      "table_size": "טבלה {rows} × {cols}",
+      "colors": {
+        "black": "שחור",
+        "dark_gray": "אפור כהה",
+        "gray": "אפור",
+        "dark_red": "אדום כהה",
+        "orange": "כתום",
+        "yellow": "צהוב",
+        "green": "ירוק",
+        "blue": "כחול",
+        "purple": "סגול",
+        "dark_pink": "ורוד כהה",
+        "brown": "חום",
+        "red": "אדום",
+        "light_orange": "כתום בהיר",
+        "light_green": "ירוק בהיר",
+        "light_blue": "כחול בהיר",
+        "pink": "ורוד"
+      }
     },
     "send_filing_warning": "נשלח - אך הניקוי שלאחר השליחה נכשל, ייתכן שתישאר טיוטה ישנה.",
     "pop_out": "פתיחת התשובה בחלון נפרד",

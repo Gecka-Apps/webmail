@@ -994,7 +994,26 @@
       "font_size": "حجم الخط",
       "font_size_default": "افتراضي",
       "background_color": "لون الخلفية",
-      "remove_background_color": "إزالة لون الخلفية"
+      "remove_background_color": "إزالة لون الخلفية",
+      "table_size": "جدول {rows} × {cols}",
+      "colors": {
+        "black": "أسود",
+        "dark_gray": "رمادي داكن",
+        "gray": "رمادي",
+        "dark_red": "أحمر داكن",
+        "orange": "برتقالي",
+        "yellow": "أصفر",
+        "green": "أخضر",
+        "blue": "أزرق",
+        "purple": "بنفسجي",
+        "dark_pink": "وردي داكن",
+        "brown": "بني",
+        "red": "أحمر",
+        "light_orange": "برتقالي فاتح",
+        "light_green": "أخضر فاتح",
+        "light_blue": "أزرق فاتح",
+        "pink": "وردي"
+      }
     },
     "send_filing_warning": "تم الإرسال - لكن التنظيف بعد الإرسال فشل، وقد تبقى مسودة قديمة.",
     "pop_out": "فتح الرد في نافذة منفصلة",

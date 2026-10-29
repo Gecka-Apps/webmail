@@ -994,7 +994,26 @@
       "font_size": "Schriftgröße",
       "font_size_default": "Standard",
       "background_color": "Hintergrundfarbe",
-      "remove_background_color": "Hintergrundfarbe entfernen"
+      "remove_background_color": "Hintergrundfarbe entfernen",
+      "table_size": "Tabelle mit {rows} × {cols} Zellen",
+      "colors": {
+        "black": "Schwarz",
+        "dark_gray": "Dunkelgrau",
+        "gray": "Grau",
+        "dark_red": "Dunkelrot",
+        "orange": "Orange",
+        "yellow": "Gelb",
+        "green": "Grün",
+        "blue": "Blau",
+        "purple": "Lila",
+        "dark_pink": "Dunkelrosa",
+        "brown": "Braun",
+        "red": "Rot",
+        "light_orange": "Hellorange",
+        "light_green": "Hellgrün",
+        "light_blue": "Hellblau",
+        "pink": "Rosa"
+      }
     },
     "send_filing_warning": "Gesendet - aber das Aufräumen danach schlug fehl, evtl. bleibt ein alter Entwurf sichtbar.",
     "pop_out": "Antwort in eigenem Fenster öffnen",

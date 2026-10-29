@@ -994,7 +994,26 @@
       "font_size": "Tamaño de fuente",
       "font_size_default": "Predeterminado",
       "background_color": "Color de fondo",
-      "remove_background_color": "Quitar color de fondo"
+      "remove_background_color": "Quitar color de fondo",
+      "table_size": "Tabla de {rows} × {cols}",
+      "colors": {
+        "black": "Negro",
+        "dark_gray": "Gris oscuro",
+        "gray": "Gris",
+        "dark_red": "Rojo oscuro",
+        "orange": "Naranja",
+        "yellow": "Amarillo",
+        "green": "Verde",
+        "blue": "Azul",
+        "purple": "Morado",
+        "dark_pink": "Rosa oscuro",
+        "brown": "Marrón",
+        "red": "Rojo",
+        "light_orange": "Naranja claro",
+        "light_green": "Verde claro",
+        "light_blue": "Azul claro",
+        "pink": "Rosa"
+      }
     },
     "send_filing_warning": "Enviado - pero la limpieza posterior falló, puede quedar un borrador obsoleto.",
     "pop_out": "Abrir la respuesta en una ventana",

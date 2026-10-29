@@ -994,7 +994,26 @@
       "font_size": "اندازه فونت",
       "font_size_default": "پیش‌فرض",
       "background_color": "رنگ پس‌زمینه",
-      "remove_background_color": "حذف رنگ پس‌زمینه"
+      "remove_background_color": "حذف رنگ پس‌زمینه",
+      "table_size": "جدول {rows} × {cols}",
+      "colors": {
+        "black": "سیاه",
+        "dark_gray": "خاکستری تیره",
+        "gray": "خاکستری",
+        "dark_red": "قرمز تیره",
+        "orange": "نارنجی",
+        "yellow": "زرد",
+        "green": "سبز",
+        "blue": "آبی",
+        "purple": "بنفش",
+        "dark_pink": "صورتی تیره",
+        "brown": "قهوه‌ای",
+        "red": "قرمز",
+        "light_orange": "نارنجی روشن",
+        "light_green": "سبز روشن",
+        "light_blue": "آبی روشن",
+        "pink": "صورتی"
+      }
     },
     "send_filing_warning": "ارسال شد - اما پاک‌سازی پس از ارسال ناموفق بود، ممکن است پیش‌نویس قدیمی باقی بماند.",
     "pop_out": "باز کردن پاسخ در پنجره جدا",

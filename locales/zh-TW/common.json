@@ -994,7 +994,26 @@
       "font_size": "字型大小",
       "font_size_default": "預設",
       "background_color": "背景顏色",
-      "remove_background_color": "移除背景顏色"
+      "remove_background_color": "移除背景顏色",
+      "table_size": "{rows} × {cols} 表格",
+      "colors": {
+        "black": "黑色",
+        "dark_gray": "深灰色",
+        "gray": "灰色",
+        "dark_red": "深紅色",
+        "orange": "橘色",
+        "yellow": "黃色",
+        "green": "綠色",
+        "blue": "藍色",
+        "purple": "紫色",
+        "dark_pink": "深粉紅色",
+        "brown": "棕色",
+        "red": "紅色",
+        "light_orange": "淺橘色",
+        "light_green": "淺綠色",
+        "light_blue": "淺藍色",
+        "pink": "粉紅色"
+      }
     },
     "send_filing_warning": "郵件已傳送，但寄送後清理失敗，可能仍保留舊草稿。",
     "pop_out": "在獨立視窗中開啟回覆",

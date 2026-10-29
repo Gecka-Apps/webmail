@@ -994,7 +994,26 @@
       "font_size": "Skriftstørrelse",
       "font_size_default": "Standard",
       "background_color": "Bakgrunnsfarge",
-      "remove_background_color": "Fjern bakgrunnsfarge"
+      "remove_background_color": "Fjern bakgrunnsfarge",
+      "table_size": "Tabell med {rows} × {cols}",
+      "colors": {
+        "black": "Svart",
+        "dark_gray": "Mørkegrå",
+        "gray": "Grå",
+        "dark_red": "Mørkerød",
+        "orange": "Oransje",
+        "yellow": "Gul",
+        "green": "Grønn",
+        "blue": "Blå",
+        "purple": "Lilla",
+        "dark_pink": "Mørk rosa",
+        "brown": "Brun",
+        "red": "Rød",
+        "light_orange": "Lys oransje",
+        "light_green": "Lysegrønn",
+        "light_blue": "Lyseblå",
+        "pink": "Rosa"
+      }
     },
     "send_filing_warning": "Meldingen ble sendt, men oppryddingen etterpå mislyktes. Et gammelt utkast kan bli liggende.",
     "pop_out": "Åpne svaret i et eget vindu",

@@ -1233,7 +1233,26 @@
       "font_size": "ขนาดตัวอักษร",
       "font_size_default": "ค่าเริ่มต้น",
       "background_color": "สีพื้นหลังข้อความ",
-      "remove_background_color": "ล้างสีพื้นหลัง"
+      "remove_background_color": "ล้างสีพื้นหลัง",
+      "table_size": "ตาราง {rows} × {cols}",
+      "colors": {
+        "black": "ดำ",
+        "dark_gray": "เทาเข้ม",
+        "gray": "เทา",
+        "dark_red": "แดงเข้ม",
+        "orange": "ส้ม",
+        "yellow": "เหลือง",
+        "green": "เขียว",
+        "blue": "น้ำเงิน",
+        "purple": "ม่วง",
+        "dark_pink": "ชมพูเข้ม",
+        "brown": "น้ำตาล",
+        "red": "แดง",
+        "light_orange": "ส้มอ่อน",
+        "light_green": "เขียวอ่อน",
+        "light_blue": "ฟ้า",
+        "pink": "ชมพู"
+      }
     },
     "send_filing_warning": "ส่งแล้ว - แต่การล้างข้อมูลหลังการส่งล้มเหลว อาจมีข้อความร่างค้างอยู่",
     "pop_out": "เปิดการตอบกลับในหน้าต่างใหม่",

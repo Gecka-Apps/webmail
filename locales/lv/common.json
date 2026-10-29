@@ -994,7 +994,26 @@
       "font_size": "Fonta izmērs",
       "font_size_default": "Noklusējums",
       "background_color": "Fona krāsa",
-      "remove_background_color": "Noņemt fona krāsu"
+      "remove_background_color": "Noņemt fona krāsu",
+      "table_size": "Tabula {rows} × {cols}",
+      "colors": {
+        "black": "Melna",
+        "dark_gray": "Tumši pelēka",
+        "gray": "Pelēka",
+        "dark_red": "Tumši sarkana",
+        "orange": "Oranža",
+        "yellow": "Dzeltena",
+        "green": "Zaļa",
+        "blue": "Zila",
+        "purple": "Violeta",
+        "dark_pink": "Tumši rozā",
+        "brown": "Brūna",
+        "red": "Sarkana",
+        "light_orange": "Gaiši oranža",
+        "light_green": "Gaiši zaļa",
+        "light_blue": "Gaiši zila",
+        "pink": "Rozā"
+      }
     },
     "send_filing_warning": "Nosūtīts - bet pēcapstrāde neizdevās, var palikt novecojis melnraksts.",
     "pop_out": "Atvērt atbildi atsevišķā logā",

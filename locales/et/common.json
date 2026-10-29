@@ -994,7 +994,26 @@
       "font_size": "Fondi suurus",
       "font_size_default": "Vaikimisi",
       "background_color": "Taustavärv",
-      "remove_background_color": "Eemalda taustavärv"
+      "remove_background_color": "Eemalda taustavärv",
+      "table_size": "Tabel {rows} × {cols}",
+      "colors": {
+        "black": "Must",
+        "dark_gray": "Tumehall",
+        "gray": "Hall",
+        "dark_red": "Tumepunane",
+        "orange": "Oranž",
+        "yellow": "Kollane",
+        "green": "Roheline",
+        "blue": "Sinine",
+        "purple": "Lilla",
+        "dark_pink": "Tumeroosa",
+        "brown": "Pruun",
+        "red": "Punane",
+        "light_orange": "Heleoranž",
+        "light_green": "Heleroheline",
+        "light_blue": "Helesinine",
+        "pink": "Roosa"
+      }
     },
     "send_filing_warning": "Saadetud - kuid saatmisjärgne koristus ebaõnnestus, mustand võib alles jääda.",
     "pop_out": "Ava vastus eraldi aknas",

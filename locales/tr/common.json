@@ -994,7 +994,26 @@
       "font_size": "Yazı boyutu",
       "font_size_default": "Varsayılan",
       "background_color": "Arka plan rengi",
-      "remove_background_color": "Arka plan rengini kaldır"
+      "remove_background_color": "Arka plan rengini kaldır",
+      "table_size": "{rows} × {cols} tablo",
+      "colors": {
+        "black": "Siyah",
+        "dark_gray": "Koyu gri",
+        "gray": "Gri",
+        "dark_red": "Koyu kırmızı",
+        "orange": "Turuncu",
+        "yellow": "Sarı",
+        "green": "Yeşil",
+        "blue": "Mavi",
+        "purple": "Mor",
+        "dark_pink": "Koyu pembe",
+        "brown": "Kahverengi",
+        "red": "Kırmızı",
+        "light_orange": "Açık turuncu",
+        "light_green": "Açık yeşil",
+        "light_blue": "Açık mavi",
+        "pink": "Pembe"
+      }
     },
     "send_filing_warning": "Gönderildi - ancak sonrasındaki temizleme başarısız oldu, eski bir taslak kalabilir.",
     "pop_out": "Yanıtı ayrı pencerede aç",
