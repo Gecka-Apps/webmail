@@ -257,6 +257,13 @@ export function NavigationRail({
   useEffect(() => { startUpdatePolling(); }, [startUpdatePolling]);
   const updateImportant = updateSeverity === 'security' || updateSeverity === 'deprecated';
   const tShell = useTranslations("shell");
+  // Settings > Accessibility: the unread count as a number, as a dot, or not
+  // at all. A dot keeps the count in the link's name; hidden drops it too.
+  const unreadCountStyle = useSettingsStore((s) => s.unreadCountStyle);
+  const badgeShown = (item: NavItem) => item.badge != null && item.badge > 0 && unreadCountStyle !== 'hidden';
+  // "Mail, 3 unread": the badge itself is hidden from screen readers.
+  const itemName = (item: NavItem) =>
+    badgeShown(item) ? tShell("name_unread", { name: t(item.labelKey), count: item.badge ?? 0 }) : t(item.labelKey);
   // Said with the admin entry; its dot alone is not announced.
   const updateLabel = hasUpdate ? tShell(updateImportant ? "update_important" : "update_available") : null;
 
@@ -397,17 +404,20 @@ export function NavigationRail({
                   : "text-muted-foreground hover:text-foreground"
               )}
               aria-current={isActive ? "page" : undefined}
+              aria-label={itemName(item)}
             >
               <div className={cn(
                 "relative",
                 mountainView && isActive && "min-w-14 rounded-full bg-primary/15 px-4 py-[3px]"
               )}>
                 <Icon className="w-5 h-5" />
-                {item.badge != null && item.badge > 0 && (
+                {badgeShown(item) && (unreadCountStyle === 'dot' ? (
+                  <span aria-hidden="true" data-testid="rail-unread-dot" className="absolute -top-0.5 -end-1 w-2.5 h-2.5 rounded-full bg-red-500" />
+                ) : (
                   <span aria-hidden="true" className="absolute -top-1.5 -end-2.5 flex items-center justify-center min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-red-500 text-white px-1">
-                    {item.badge > 99 ? "99+" : item.badge}
+                    {item.badge! > 99 ? "99+" : item.badge}
                   </span>
-                )}
+                ))}
                 {isActive && !mountainView && (
                   <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-primary" />
                 )}
@@ -612,20 +622,25 @@ export function NavigationRail({
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               )}
               aria-current={isActive ? "page" : undefined}
-              aria-label={t(item.labelKey)}
+              aria-label={itemName(item)}
               title={collapsed ? t(item.labelKey) : undefined}
               style={collapsed ? undefined : { paddingBlock: 'var(--density-sidebar-py)' }}
             >
               <Icon className={cn("w-[18px] h-[18px] flex-shrink-0", isActive && "text-primary")} />
               {!collapsed && <span className="truncate">{t(item.labelKey)}</span>}
-              {item.badge != null && item.badge > 0 && (
+              {badgeShown(item) && (unreadCountStyle === 'dot' ? (
+                <span aria-hidden="true" data-testid="rail-unread-dot" className={cn(
+                  "absolute w-2.5 h-2.5 rounded-full bg-red-500",
+                  collapsed ? "top-1 end-1" : "end-2.5"
+                )} />
+              ) : (
                 <span aria-hidden="true" className={cn(
                   "absolute flex items-center justify-center min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-red-500 text-white px-1",
                   collapsed ? "-top-0.5 -end-0.5" : "end-1.5"
                 )}>
-                  {item.badge > 99 ? "99+" : item.badge}
+                  {item.badge! > 99 ? "99+" : item.badge}
                 </span>
-              )}
+              ))}
             </Link>
           );
         })}
