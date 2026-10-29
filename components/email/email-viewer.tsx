@@ -6215,6 +6215,7 @@ export function EmailViewer({
                 style={{
                   ...(plainTextFont === 'mono' && { fontFamily: 'ui-monospace, "SF Mono", Consolas, monospace' }),
                   fontSize: reading.plainFontSize(14),
+                  ...(reading.comfortableWidth && { maxWidth: '80ch' }),
                   lineHeight: '1.6',
                   wordBreak: 'break-word',
                   whiteSpace: 'pre-wrap',

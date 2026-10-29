@@ -33,6 +33,8 @@ export interface MailReading {
   reduceMotion: boolean;
   /** The sender's fonts, sizes and colours give way to the app's. */
   overrideStyles: boolean;
+  /** Reading width "comfortable": lines of about 80 characters. */
+  comfortableWidth: boolean;
   /** Font size for a plain-text body of `basePx` at 100 %. */
   plainFontSize: (basePx: number) => string;
   /** CSS appended to the mail document for the settings above; may be empty. */
@@ -70,6 +72,7 @@ export function useMailReading(): MailReading {
     wordSpacing: state.wordSpacing,
     paragraphSpacing: state.paragraphSpacing,
     underlineLinks: state.underlineLinks,
+    readingWidth: state.readingWidth,
   })));
   // The theme's colours are read from the page, so a theme change re-reads them.
   const theme = useThemeStore((state) => `${state.resolvedTheme}/${state.activeThemeId ?? ''}`);
@@ -97,14 +100,16 @@ export function useMailReading(): MailReading {
       const family = appFontFamilyName(s.appFont);
       if (family && typeof document !== 'undefined') fontFaces = collectFontFaces(document, family);
     }
+    const comfortableWidth = s.readingWidth === 'comfortable';
     return {
       textFactor,
       minFontSize,
+      comfortableWidth,
       forcedColors,
       reduceMotion,
       overrideStyles,
       plainFontSize: (basePx: number) => plainBodyFontSize(basePx, s.mailTextScale, s.fontSize, minFontSize),
-      frameCss: mailFrameCss({ reduceMotion, underlineLinks: s.underlineLinks, override, fontFaceCss: fontFaces.css }),
+      frameCss: mailFrameCss({ reduceMotion, underlineLinks: s.underlineLinks, comfortableWidth, override, fontFaceCss: fontFaces.css }),
       fontSources: fontFaces.sources,
       frameKey: `${textFactor}/${minFontSize}${overrideStyles ? '/o' : ''}`,
     };

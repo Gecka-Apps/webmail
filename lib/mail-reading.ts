@@ -168,6 +168,8 @@ export type MailOverride = MailOverrideTheme & MailSpacing & { textFactor: numbe
 export interface MailFrameCssOptions {
   reduceMotion: boolean;
   underlineLinks?: boolean;
+  /** Keep lines to about 80 characters. */
+  comfortableWidth?: boolean;
   /** Replace the sender's fonts, sizes and colours; null leaves them. */
   override?: MailOverride | null;
   /** @font-face rules the override font needs inside the mail document. */
@@ -224,6 +226,7 @@ export function mailFrameCss(options: MailFrameCssOptions): string {
   if (options.fontFaceCss) parts.push(options.fontFaceCss);
   if (options.reduceMotion) parts.push(MAIL_REDUCED_MOTION_CSS);
   if (options.underlineLinks) parts.push('a[href]{text-decoration-line:underline!important}');
+  if (options.comfortableWidth) parts.push('body{max-width:80ch!important}');
   if (options.override) parts.push(mailOverrideCss(options.override));
   return parts.join('\n');
 }
