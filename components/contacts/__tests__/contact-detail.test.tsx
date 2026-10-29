@@ -45,6 +45,14 @@ describe('ContactDetail', () => {
     expect(link.closest('a')).toHaveAttribute('href', 'mailto:alice@example.com');
   });
 
+  it('shows the copy and compose buttons on keyboard focus and touch, not only on hover', () => {
+    render(<ContactDetail contact={contact} onEdit={vi.fn()} onDelete={vi.fn()} />);
+    const copy = screen.getByRole('button', { name: 'detail.copy_email' });
+    const actions = copy.closest('[data-row-actions]') as HTMLElement;
+    expect(actions.className).toContain('group-focus-within:opacity-100');
+    expect(actions.className).toContain('pointer-coarse:opacity-100');
+  });
+
   it('displays phone numbers', () => {
     render(<ContactDetail contact={contact} onEdit={vi.fn()} onDelete={vi.fn()} />);
     expect(screen.getByText('+33612345678')).toBeInTheDocument();

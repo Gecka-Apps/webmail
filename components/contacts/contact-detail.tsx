@@ -517,8 +517,10 @@ function FieldRow({ icon: Icon, label, children }: { icon: React.ComponentType<{
 }
 
 function RowActions({ children }: { children: React.ReactNode }) {
+  // Shown on hover, while the keyboard is in the row and always on touch
+  // screens, which have no hover (WCAG 2.1.1, 2.4.7).
   return (
-    <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+    <div data-row-actions className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-coarse:opacity-100 transition-opacity">
       {children}
     </div>
   );
