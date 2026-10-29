@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { applyMailTextSize, mailFrameCss, mailOverrideActive, mailOverrideCss, mailTextFactor, plainBodyFontSize, resolveSystemToggle, scaledTextSize } from '@/lib/mail-reading';
+import { computeFitScale } from '@/lib/email-fit-width';
+import { applyMailTextSize, mailFitOptions, mailFrameCss, mailOverrideActive, mailOverrideCss, mailTextFactor, plainBodyFontSize, resolveSystemToggle, scaledTextSize } from '@/lib/mail-reading';
 
 describe('mailTextFactor', () => {
   it('follows the app text size when the mail size is 0', () => {
@@ -151,5 +152,18 @@ describe('applyMailTextSize with the override stylesheet', () => {
     const p = doc.querySelector('p')!;
     expect(p.style.getPropertyValue('font-size')).toBe('9px');
     expect(p.style.getPropertyValue('text-align')).toBe('start');
+  });
+});
+
+describe('mailFitOptions', () => {
+  it('fits only on phones by default', () => {
+    expect(computeFitScale(1200, 800, mailFitOptions(false, false))).toBe(1);
+    expect(mailFitOptions(false, false).enabled).toBe(false);
+    expect(mailFitOptions(true, false).enabled).toBe(true);
+  });
+  it('fits a wide mail into a desktop pane with "Fit wide mail" on', () => {
+    const options = mailFitOptions(false, true);
+    expect(options.enabled).toBe(true);
+    expect(computeFitScale(1200, 800, options)).toBeCloseTo(2 / 3);
   });
 });

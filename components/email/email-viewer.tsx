@@ -7,12 +7,12 @@ import { EML_IMPORT_ACCEPT, expandImportableEmails } from "@/lib/eml-import";
 import { TRANSPARENT_BLOCKED_PIXEL, applyNewTabToAnchor, emailIframeCsp, escapeHtml, isExternalResourceUrl, isOpenableLinkHref, plainTextToSafeHtml, sanitizeEmailBodyForIframe, sanitizeEmailHtml, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
 import { getRenderableHtmlBody } from "@/lib/email-body-selection";
 import { mailLanguage } from "@/lib/mail-language";
-import { applyMailTextSize } from "@/lib/mail-reading";
+import { applyMailTextSize, mailFitOptions } from "@/lib/mail-reading";
 import { useMailReading } from "@/hooks/use-mail-reading";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailColorScheme, emailDarkModeCss, emailHasNativeDarkMode as htmlHasNativeDarkMode, resolveColorSchemeMedia } from "@/lib/email-dark-mode";
-import { fitEmailBodyWidth } from "@/lib/email-fit-width";
+import { fitEmailBodyWidth, type FitOptions } from "@/lib/email-fit-width";
 import { hasFullBleedCanvas } from "@/lib/email-full-bleed";
 import { stripBidiControls } from "@/lib/bidi";
 import { withBasePath } from "@/lib/browser-navigation";
@@ -3141,8 +3141,8 @@ export function EmailViewer({
   // legible at 1:1 and scrolls. Held in a ref because the measurement runs from
   // observers wired up once per document - a plain closure would keep fitting
   // (or not) across a rotation or a pane resize that crossed the breakpoint.
-  const fitBodyToWidthRef = useRef(isMobile);
-  fitBodyToWidthRef.current = isMobile;
+  // Settings > Accessibility > "Fit wide mail" does it on any screen.
+  const fitBodyToWidthRef = useRef<FitOptions>({ enabled: isMobile });
 
   // Detect if the email HTML has native dark mode support
   const emailHasNativeDarkMode = useMemo(() => {
@@ -3157,6 +3157,7 @@ export function EmailViewer({
   const reading = useMailReading();
   const readingRef = useRef(reading);
   readingRef.current = reading;
+  fitBodyToWidthRef.current = mailFitOptions(isMobile, reading.fitWidth);
   const [emailViewDarkOverride, setEmailViewDarkOverride] = useState<boolean | null>(null);
   const isDark = emailViewDarkOverride !== null
     ? emailViewDarkOverride
@@ -3442,7 +3443,7 @@ export function EmailViewer({
           // Shrink desktop-width mail to fit a phone screen first: it changes
           // the layout height, and the transform doesn't shrink the measured
           // (layout) height, so the iframe box has to be scaled by hand.
-          const scale = fitEmailBodyWidth(doc, { enabled: fitBodyToWidthRef.current });
+          const scale = fitEmailBodyWidth(doc, fitBodyToWidthRef.current);
           const height = Math.ceil(
             Math.max(doc.documentElement.scrollHeight, doc.body.scrollHeight) * scale
           );

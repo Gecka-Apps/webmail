@@ -35,6 +35,8 @@ export interface MailReading {
   overrideStyles: boolean;
   /** Reading width "comfortable": lines of about 80 characters. */
   comfortableWidth: boolean;
+  /** Scale mail wider than the pane down to fit, on any screen. */
+  fitWidth: boolean;
   /** Font size for a plain-text body of `basePx` at 100 %. */
   plainFontSize: (basePx: number) => string;
   /** CSS appended to the mail document for the settings above; may be empty. */
@@ -73,6 +75,7 @@ export function useMailReading(): MailReading {
     paragraphSpacing: state.paragraphSpacing,
     underlineLinks: state.underlineLinks,
     readingWidth: state.readingWidth,
+    mailFitWidth: state.mailFitWidth,
   })));
   // The theme's colours are read from the page, so a theme change re-reads them.
   const theme = useThemeStore((state) => `${state.resolvedTheme}/${state.activeThemeId ?? ''}`);
@@ -105,13 +108,14 @@ export function useMailReading(): MailReading {
       textFactor,
       minFontSize,
       comfortableWidth,
+      fitWidth: s.mailFitWidth,
       forcedColors,
       reduceMotion,
       overrideStyles,
       plainFontSize: (basePx: number) => plainBodyFontSize(basePx, s.mailTextScale, s.fontSize, minFontSize),
       frameCss: mailFrameCss({ reduceMotion, underlineLinks: s.underlineLinks, comfortableWidth, override, fontFaceCss: fontFaces.css }),
       fontSources: fontFaces.sources,
-      frameKey: `${textFactor}/${minFontSize}${overrideStyles ? '/o' : ''}`,
+      frameKey: `${textFactor}/${minFontSize}${overrideStyles ? '/o' : ''}${s.mailFitWidth ? '/f' : ''}`,
     };
     // `theme` only marks that the page's colours changed.
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -16,7 +16,7 @@ import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidRefere
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { fitEmailBodyWidth } from "@/lib/email-fit-width";
 import { mailLanguage } from "@/lib/mail-language";
-import { applyMailTextSize } from "@/lib/mail-reading";
+import { applyMailTextSize, mailFitOptions } from "@/lib/mail-reading";
 import { useMailReading } from "@/hooks/use-mail-reading";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailDarkModeCss } from "@/lib/email-dark-mode";
 import { useThemeStore } from "@/stores/theme-store";
@@ -841,7 +841,8 @@ export function ConversationEmailBody({
       const resize = () => {
         // Fit desktop-width mail to the screen before measuring: the transform
         // leaves the layout height untouched, so scale the box by hand.
-        const scale = fitEmailBodyWidth(doc);
+        // Phones always; any screen with "Fit wide mail" on.
+        const scale = fitEmailBodyWidth(doc, reading.fitWidth ? mailFitOptions(true, true) : {});
         const height = Math.max(doc.documentElement.scrollHeight, doc.body.scrollHeight);
         iframe.style.height = Math.ceil(height * scale) + 'px';
       };
@@ -881,7 +882,7 @@ export function ConversationEmailBody({
     } catch {
       // contentDocument may be inaccessible under stricter sandboxes; ignore.
     }
-  }, [t, isDark, allowExternal, email.id, selectionMenu.openRef, reading.textFactor, reading.minFontSize, reading.overrideStyles]);
+  }, [t, isDark, allowExternal, email.id, selectionMenu.openRef, reading.textFactor, reading.minFontSize, reading.overrideStyles, reading.fitWidth]);
 
   return (
     <div className={className}>

@@ -280,3 +280,11 @@ export function collectFontFaces(doc: Document, family: string): { css: string; 
   }
   return { css: css.join('\n'), sources: [...sources] };
 }
+
+/**
+ * Scale-to-fit options for a message body: on a phone always (the reader's
+ * old behaviour), on any screen with "Fit wide mail" on.
+ */
+export function mailFitOptions(isMobile: boolean, fitWidth: boolean): { enabled: boolean; viewportMax?: number } {
+  return fitWidth ? { enabled: true, viewportMax: Infinity } : { enabled: isMobile };
+}
