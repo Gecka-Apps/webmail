@@ -15,6 +15,12 @@ vi.mock('next-intl', () => ({
 
 import { CalendarMonthView } from '../calendar-month-view';
 
+/** Which day of its week (0-6) the cell holding `el` is. */
+function dayColumn(el: HTMLElement): number {
+  const cell = el.closest('[role="gridcell"]')!;
+  return Array.from(cell.closest('[role="row"]')!.querySelectorAll('[role="gridcell"]')).indexOf(cell);
+}
+
 const calendars = [{ id: 'cal-1', name: 'Work', color: '#123456' }] as unknown as Calendar[];
 const birthday = {
   id: 'e1', uid: 'u1', title: 'Birthday', start: '2026-10-07T00:00:00', duration: 'P1D', showWithoutTime: true,
@@ -42,8 +48,10 @@ describe('CalendarMonthView in a right-to-left language', () => {
   it('places event chips from the start edge, so they follow the mirrored grid', () => {
     renderMonth();
     const chip = screen.getByRole('button', { name: /Birthday/ }).parentElement as HTMLElement;
-    // Wednesday is the third column of a week starting on Monday.
-    expect(chip.style.insetInlineStart).toMatch(/^calc\(28\.57\d*% \+ 1px\)$/);
+    // Wednesday is the third column of a week starting on Monday; the chip
+    // sits in that day's cell, placed from its start edge.
+    expect(dayColumn(chip)).toBe(2);
+    expect(chip.style.insetInlineStart).toBe('1px');
     expect(chip.style.left).toBe('');
   });
 

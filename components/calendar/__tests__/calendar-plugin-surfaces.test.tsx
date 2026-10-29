@@ -205,14 +205,14 @@ describe('calendar-day-header and mini-calendar-marks', () => {
     const labels = document.querySelectorAll('[data-plugin-surface="calendar-day-header"]');
     expect(labels).toHaveLength(1);
     expect(labels[0]).toHaveTextContent('Feast day');
-    expect(labels[0].closest('[role="gridcell"]')?.getAttribute('aria-label')).toMatch(/9/);
+    expect(labels[0].closest('[role="gridcell"]')?.querySelector('[data-day-button]')?.getAttribute('aria-label')).toMatch(/9/);
     unmount();
 
     render(<CalendarMonthView {...month} isMobile />);
     const dots = [...document.querySelectorAll<HTMLElement>('[data-plugin-surface="calendar-day-header"]')];
     expect(dots).toHaveLength(2);
     for (const dot of dots) expect(dot).toHaveAttribute('data-compact');
-    expect(dots[0].closest('[role="gridcell"]')?.getAttribute('aria-label')).toMatch(/9/);
+    expect(dots[0].closest('[role="gridcell"]')?.querySelector('[data-day-button]')?.getAttribute('aria-label')).toMatch(/9/);
     expect(dots[0].title).toBe('Feast day (Holidays)');
     expect(dots[1].title).toBe('Dot only (Holidays)');
   });

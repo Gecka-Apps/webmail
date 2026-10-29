@@ -302,6 +302,14 @@ export function CalendarDayView({
   // the tab order, or Tab walked into them and scrolled the strip.
   const isInView = useCallback((key: string) => key === visibleKey, [visibleKey]);
 
+  const hasAllDayRow = useMemo(
+    () => days.some((day) => {
+      const key = format(day, "yyyy-MM-dd");
+      return (eventsByDay.get(key)?.allDay.length ?? 0) > 0 || (tasksByDay.get(key)?.length ?? 0) > 0;
+    }),
+    [days, eventsByDay, tasksByDay],
+  );
+
   const { slotProps } = useTimeGridFocus({
     rootRef,
     headerRef,
@@ -339,121 +347,148 @@ export function CalendarDayView({
         <div ref={startSentinelRef} data-testid="day-start-sentinel" className="absolute inset-y-0 start-0 w-px pointer-events-none" />
         <div ref={endSentinelRef} data-testid="day-end-sentinel" className="absolute inset-y-0 end-0 w-px pointer-events-none" />
 
-        <div ref={headerRef} className="sticky top-0 z-50 flex border-b border-border bg-background">
-          <div className={cn(gutterClass, "flex items-end justify-center pb-1")}>
-            {canToggleHours && (
-              <AllHoursToggle
-                showAllHours={showAllHours}
-                configured={configuredHours}
-                timeFormat={timeFormat}
-                onToggle={toggleAllHours}
-              />
-            )}
-          </div>
-          <div className="grid" style={columnsStyle}>
-            {days.map((day) => {
-              const key = format(day, "yyyy-MM-dd");
-              const today = isDisplayToday(day);
-              const allDayEvents = eventsByDay.get(key)?.allDay ?? [];
-              const dayTasks = tasksByDay.get(key) ?? [];
-              return (
-                <div
-                  key={key}
-                  data-day={key}
-                  className={cn(
-                    "min-w-0 border-e border-border last:border-e-0",
-                    // Other days take no height of their own: they fill the
-                    // row the day in view sets, clipped while swiping past.
-                    key !== visibleKey && "h-0 min-h-full overflow-hidden",
-                  )}
-                >
+        {/* The grid (SR-14): a header row with the day as column header, an
+            all-day row and an hours row, each with one cell per day, so the
+            events are read under their date. */}
+        <div ref={headerRef} className="sticky top-0 z-50 border-b border-border bg-background">
+          <div className="flex" role="row">
+            <div role="gridcell" className={cn(gutterClass, "flex items-end justify-center pb-1")}>
+              {canToggleHours && (
+                <AllHoursToggle
+                  showAllHours={showAllHours}
+                  configured={configuredHours}
+                  timeFormat={timeFormat}
+                  onToggle={toggleAllHours}
+                />
+              )}
+            </div>
+            <div className="grid" style={columnsStyle}>
+              {days.map((day) => {
+                const key = format(day, "yyyy-MM-dd");
+                const today = isDisplayToday(day);
+                return (
                   <div
-                    className={cn("flex flex-col items-start gap-0.5 px-3 pt-2 pb-1.5", isMobile && "px-2")}
-                    role="columnheader"
-                    aria-label={intlFormatter.dateTime(day, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
+                    key={key}
+                    data-day={key}
+                    className={cn(
+                      "min-w-0 border-e border-border last:border-e-0",
+                      // Other days take no height of their own: they fill the
+                      // row the day in view sets, clipped while swiping past.
+                      key !== visibleKey && "h-0 min-h-full overflow-hidden",
+                    )}
                   >
-                    <div className={cn(
-                      "w-10 text-center text-[11px] font-medium first-letter:uppercase",
-                      today ? "text-primary" : "text-muted-foreground",
-                    )}>
-                      {intlFormatter.dateTime(day, { weekday: "short" })}
-                    </div>
                     <div
-                      aria-current={today ? "date" : undefined}
-                      className={cn(
-                        "inline-flex items-center justify-center w-10 h-10 rounded-full text-xl",
-                        today ? "bg-primary text-primary-foreground font-semibold" : "text-foreground",
-                      )}
+                      className={cn("flex flex-col items-start gap-0.5 px-3 pt-2 pb-1.5", isMobile && "px-2")}
+                      role="columnheader"
+                      aria-label={intlFormatter.dateTime(day, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
                     >
-                      {format(day, "d")}
+                      <div className={cn(
+                        "w-10 text-center text-[11px] font-medium first-letter:uppercase",
+                        today ? "text-primary" : "text-muted-foreground",
+                      )}>
+                        {intlFormatter.dateTime(day, { weekday: "short" })}
+                      </div>
+                      <div
+                        aria-current={today ? "date" : undefined}
+                        className={cn(
+                          "inline-flex items-center justify-center w-10 h-10 rounded-full text-xl",
+                          today ? "bg-primary text-primary-foreground font-semibold" : "text-foreground",
+                        )}
+                      >
+                        {format(day, "d")}
+                      </div>
+                      <PluginDayLabel surface="calendar-day-header" date={key} className="w-full" />
                     </div>
-                    <PluginDayLabel surface="calendar-day-header" date={key} className="w-full" />
                   </div>
+                );
+              })}
+            </div>
+          </div>
 
-                  {(allDayEvents.length > 0 || dayTasks.length > 0) && (
+          {hasAllDayRow && (
+            <div className="flex" role="row">
+              <div role="gridcell" className={gutterClass} />
+              <div className="grid" style={columnsStyle}>
+                {days.map((day) => {
+                  const key = format(day, "yyyy-MM-dd");
+                  const allDayEvents = eventsByDay.get(key)?.allDay ?? [];
+                  const dayTasks = tasksByDay.get(key) ?? [];
+                  return (
                     <div
-                      className="px-4 py-2 border-t border-border"
-                      onContextMenu={onContextMenuEmpty ? (e) => {
-                        if ((e.target as HTMLElement).closest("[data-calendar-event],button")) return;
-                        onContextMenuEmpty(e, day, undefined, true);
-                      } : undefined}
-                    >
-                      {allDayEvents.length > 0 && (
-                        <>
-                          <div className="text-[10px] text-muted-foreground mb-1">{t("events.all_day")}</div>
-                          <div className="space-y-1">
-                            {allDayEvents.map((ev) => {
-                              const calId = getPrimaryCalendarId(ev);
-                              return (
-                                <EventCard
-                                  key={ev.id}
-                                  event={ev}
-                            isSelected={ev.id === selectedEventId}
-                                  calendar={calId ? calendarMap.get(calId) : undefined}
-                                  variant="chip"
-                                  onClick={(rect) => onSelectEvent(ev, rect)}
-                                  onMouseEnter={(rect) => onHoverEvent?.(ev, rect)}
-                                  onMouseLeave={onHoverLeave}
-                                  onContextMenu={onContextMenuEvent}
-                                  currentUserEmails={currentUserEmails}
-                                  tabbable={key === visibleKey}
-                                />
-                              );
-                            })}
-                          </div>
-                        </>
+                      key={key}
+                      role="gridcell"
+                      data-all-day={key}
+                      className={cn(
+                        "min-w-0 border-e border-border last:border-e-0",
+                        key !== visibleKey && "h-0 min-h-full overflow-hidden",
                       )}
-                      {dayTasks.length > 0 && (
-                        <>
-                          <div className={cn("text-[10px] text-muted-foreground mb-1", allDayEvents.length > 0 && "mt-2")}>{t("tasks.label")}</div>
-                          <div className="space-y-0.5">
-                            {/* The same chip as the month and week grids. */}
-                            {dayTasks.map((task) => (
-                              <div key={task.id} className={isMobile ? undefined : "h-5"}>
-                                <CalendarTaskChip
-                                  task={task}
-                                  calendar={calendars.find((c) => task.calendarIds[c.id])}
-                                  onToggleComplete={onToggleTaskComplete}
-                                  onSelect={onSelectTask}
-                                  touch={isMobile}
-                                  tabbable={key === visibleKey}
-                                />
+                    >
+                      {(allDayEvents.length > 0 || dayTasks.length > 0) && (
+                        <div
+                          className="px-4 py-2 border-t border-border"
+                          onContextMenu={onContextMenuEmpty ? (e) => {
+                            if ((e.target as HTMLElement).closest("[data-calendar-event],button")) return;
+                            onContextMenuEmpty(e, day, undefined, true);
+                          } : undefined}
+                        >
+                          {allDayEvents.length > 0 && (
+                            <>
+                              <div className="text-[10px] text-muted-foreground mb-1">{t("events.all_day")}</div>
+                              <div className="space-y-1">
+                                {allDayEvents.map((ev) => {
+                                  const calId = getPrimaryCalendarId(ev);
+                                  return (
+                                    <EventCard
+                                      key={ev.id}
+                                      event={ev}
+                                      isSelected={ev.id === selectedEventId}
+                                      calendar={calId ? calendarMap.get(calId) : undefined}
+                                      variant="chip"
+                                      onClick={(rect) => onSelectEvent(ev, rect)}
+                                      onMouseEnter={(rect) => onHoverEvent?.(ev, rect)}
+                                      onMouseLeave={onHoverLeave}
+                                      onContextMenu={onContextMenuEvent}
+                                      currentUserEmails={currentUserEmails}
+                                      tabbable={key === visibleKey}
+                                    />
+                                  );
+                                })}
                               </div>
-                            ))}
-                          </div>
-                        </>
+                            </>
+                          )}
+                          {dayTasks.length > 0 && (
+                            <>
+                              <div className={cn("text-[10px] text-muted-foreground mb-1", allDayEvents.length > 0 && "mt-2")}>{t("tasks.label")}</div>
+                              <div className="space-y-0.5">
+                                {/* The same chip as the month and week grids. */}
+                                {dayTasks.map((task) => (
+                                  <div key={task.id} className={isMobile ? undefined : "h-5"}>
+                                    <CalendarTaskChip
+                                      task={task}
+                                      calendar={calendars.find((c) => task.calendarIds[c.id])}
+                                      onToggleComplete={onToggleTaskComplete}
+                                      onSelect={onSelectTask}
+                                      touch={isMobile}
+                                      tabbable={key === visibleKey}
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            </>
+                          )}
+                        </div>
                       )}
                     </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
         <div>
-          <div className="flex relative" style={{ height: gridHeight }}>
-            <div className={gutterClass}>
+          <div className="flex relative" style={{ height: gridHeight }} role="row">
+            <div role="gridcell" className={gutterClass}>
               {visibleHours.map((h) => (
                 <div
                   key={h}
@@ -463,7 +498,7 @@ export function CalendarDayView({
                   {/* Midnight goes unlabelled; a later first hour is labelled
                       inside its row, where the header cannot cover it. */}
                   {(h > firstHour || firstHour > 0) && (
-                    <span className={cn(
+                    <span aria-hidden="true" className={cn(
                       "absolute end-2 leading-none",
                       h > firstHour ? "top-0 -translate-y-1/2" : "top-1",
                       isMobile ? "text-[10px]" : "text-xs",
@@ -486,8 +521,7 @@ export function CalendarDayView({
                   <div
                     key={key}
                     className="relative border-s border-border"
-                    role="row"
-                    aria-label={intlFormatter.dateTime(day, { weekday: "long", month: "long", day: "numeric" })}
+                    role="gridcell"
                     onPointerDown={(e) => handleGridPointerDown(e, key, day)}
                     onPointerMove={handleGridPointerMove}
                     onPointerUp={handleGridPointerUp}
@@ -495,20 +529,6 @@ export function CalendarDayView({
                     onDragLeave={handleColumnDragLeave}
                     onDrop={(e) => handleColumnDrop(e, day)}
                   >
-                    {visibleHours.map((h) => (
-                      <div
-                        key={h}
-                        role="gridcell"
-                        aria-label={`${slotDateLabel(day)}, ${formatHour(h)}`}
-                        {...slotProps(day, h, !isMobile)}
-                        onClick={() => handleSlotClick(day, h)}
-                        onDoubleClick={() => handleSlotDoubleClick(day, h)}
-                        onContextMenu={onContextMenuEmpty ? (e) => onContextMenuEmpty(e, day, h, false) : undefined}
-                        className="relative border-b border-border/50 hover:bg-muted/30 cursor-pointer transition-colors outline-none focus-visible:after:absolute focus-visible:after:inset-0 focus-visible:after:z-[15] focus-visible:after:pointer-events-none focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-primary"
-                        style={{ height: hourHeight }}
-                      />
-                    ))}
-
                     {dayLayout && dayLayout.before > 0 && (
                       <HiddenEventsIndicator
                         count={dayLayout.before}
@@ -570,7 +590,7 @@ export function CalendarDayView({
                           <div
                             data-resize-handle
                             className="absolute top-0 inset-x-1 h-1 cursor-n-resize z-20 flex items-start justify-center opacity-0 group-hover/event:opacity-100 transition-opacity"
-                            aria-label={t("events.resize")}
+                            aria-hidden="true"
                             onPointerDown={(e) => handleResizePointerDown(ev.id, "top", startMinutes, durMin, e)}
                             onPointerMove={handleResizePointerMove}
                             onPointerUp={handleResizePointerUp}
@@ -582,7 +602,7 @@ export function CalendarDayView({
                           <div
                             data-resize-handle
                             className="absolute bottom-0 inset-x-1 h-1 cursor-s-resize z-20 flex items-end justify-center opacity-0 group-hover/event:opacity-100 transition-opacity"
-                            aria-label={t("events.resize")}
+                            aria-hidden="true"
                             onPointerDown={(e) => handleResizePointerDown(ev.id, "bottom", startMinutes, durMin, e)}
                             onPointerMove={handleResizePointerMove}
                             onPointerUp={handleResizePointerUp}
@@ -593,6 +613,21 @@ export function CalendarDayView({
                         </div>
                       );
                     })}
+
+                    {/* An empty hour: Enter or a click creates an event there. */}
+                    {visibleHours.map((h) => (
+                      <div
+                        key={h}
+                        role="button"
+                        aria-label={`${slotDateLabel(day)}, ${formatHour(h)}`}
+                        {...slotProps(day, h, !isMobile)}
+                        onClick={() => handleSlotClick(day, h)}
+                        onDoubleClick={() => handleSlotDoubleClick(day, h)}
+                        onContextMenu={onContextMenuEmpty ? (e) => onContextMenuEmpty(e, day, h, false) : undefined}
+                        className="relative border-b border-border/50 hover:bg-muted/30 cursor-pointer transition-colors outline-none focus-visible:after:absolute focus-visible:after:inset-0 focus-visible:after:z-[15] focus-visible:after:pointer-events-none focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-primary"
+                        style={{ height: hourHeight }}
+                      />
+                    ))}
 
                     {today && nowMinutes >= hours.startMinutes && nowMinutes <= hours.endMinutes && (
                       <div

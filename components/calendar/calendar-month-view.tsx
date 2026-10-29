@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useCallback, useRef, useLayoutEffect, type DragEvent } from "react";
 import { useTranslations } from "next-intl";
-import { format, parseISO, eachDayOfInterval, addDays } from "date-fns";
+import { format, parseISO, eachDayOfInterval, addDays, isSameDay } from "date-fns";
 import { cn } from "@/lib/utils";
 import { EventCard } from "./event-card";
 import { CalendarTaskChip } from "./task-chip";
@@ -115,6 +115,7 @@ export function CalendarMonthView({
     checkIsSameDay,
     formatDayNumber,
     formatFullDate,
+    formatMonthYear,
     getMonth,
     getYear,
     monthLabelKeys,
@@ -354,7 +355,7 @@ export function CalendarMonthView({
   }, [t, describeError, currentUserEmails, onMoveEvent]);
 
   return (
-    <div className="flex flex-col flex-1 overflow-hidden" role="grid" aria-label={formatFullDate(selectedDate)}>
+    <div className="flex flex-col flex-1 overflow-hidden" role="grid" aria-label={`${t("views.month")}, ${formatMonthYear(visibleMonthDate)}`}>
       <div
         ref={scrollRef}
         className="flex-1 flex flex-col overflow-y-auto [overflow-anchor:none]"
@@ -413,7 +414,6 @@ export function CalendarMonthView({
                   key={key}
                   role="gridcell"
                   aria-selected={selected}
-                  aria-label={fullDateLabel}
                   onClick={() => {
                     onSelectDate(day);
                     // On phones a tap opens the day instead.
@@ -424,7 +424,7 @@ export function CalendarMonthView({
                   onDragLeave={handleCellDragLeave}
                   onDrop={(e) => handleCellDrop(e, day)}
                   className={cn(
-                    "border-e border-border last:border-e-0 p-1 cursor-pointer transition-colors touch-manipulation",
+                    "relative border-e border-border last:border-e-0 p-1 cursor-pointer transition-colors touch-manipulation",
                     !inMonth && "bg-muted/30",
                     "hover:bg-muted/50",
                     selected && isMobile && "bg-primary/10",
@@ -468,6 +468,10 @@ export function CalendarMonthView({
                   </div>
                   {isMobile && !showChips ? (
                     <div className="flex items-center justify-center gap-0.5 flex-wrap">
+                      {/* The dots in words, for screen readers. */}
+                      {dayEvents.length > 0 && (
+                        <span className="sr-only">{dayEvents.map((ev) => ev.title || t("events.no_title")).join(", ")}</span>
+                      )}
                       {dayEvents.slice(0, 3).map((ev) => {
                         const calId = getPrimaryCalendarId(ev);
                         const cal = calId ? calendarMap.get(calId) : undefined;
@@ -504,136 +508,194 @@ export function CalendarMonthView({
                       )}
                     </div>
                   ) : null}
+                  {showChips && (
+                    <MonthCellEntries
+                      dayIndex={dayIndex}
+                      week={week}
+                      segments={segments}
+                      rowLimit={rowLimit}
+                      rowCount={rowCount}
+                      dayEventRows={dayEventRows}
+                      dayTasks={dayTasks}
+                      hidden={hiddenPerDay?.[dayIndex] ?? 0}
+                      overlayTop={overlayTop}
+                      rowHeight={rowHeight}
+                      chipHeight={chipHeight}
+                      isMobile={isMobile}
+                      calendarMap={calendarMap}
+                      pendingPreview={pendingPreview}
+                      selectedEventId={selectedEventId}
+                      currentUserEmails={currentUserEmails}
+                      canEditEvent={canEditEvent}
+                      inView={(d) => checkIsSameMonth(d, visibleMonthDate)}
+                      onSelectEvent={onSelectEvent}
+                      onHoverEvent={onHoverEvent}
+                      onHoverLeave={onHoverLeave}
+                      onContextMenuEvent={onContextMenuEvent}
+                      onToggleTaskComplete={onToggleTaskComplete}
+                      onSelectTask={onSelectTask}
+                      onShowMore={() => (onOpenDay ?? onSelectDate)(week[dayIndex])}
+                      moreLabel={t("events.more", { count: hiddenPerDay?.[dayIndex] ?? 0 })}
+                      paint={paint}
+                    />
+                  )}
                 </div>
               );
             })}
             </div>
 
-            {showChips && pendingPreview && (() => {
-              const previewDayIdx = week.findIndex(d => checkIsSameDay(d, pendingPreview.start));
-              if (previewDayIdx === -1) return null;
-              const previewRow = Math.max(rowCount, dayEventRows[previewDayIdx] + dayTasks[previewDayIdx].length);
-              const cal = calendarMap.get(pendingPreview.calendarId);
-              const color = paint(cal?.color || "#3b82f6");
-              return (
-                <div className="absolute inset-x-0 pointer-events-none" style={{ top: overlayTop }}>
-                  <div
-                    className="absolute px-0.5"
-                    style={{
-                      insetInlineStart: `calc(${(previewDayIdx / 7) * 100}% + 1px)`,
-                      width: `calc(${(1 / 7) * 100}% - 2px)`,
-                      top: previewRow * rowHeight,
-                      height: chipHeight,
-                    }}
-                  >
-                    <div
-                      data-pending-preview
-                      className={cn(
-                        "h-full rounded text-[10px] font-medium truncate border-2 border-dashed",
-                        isMobile ? "leading-[16px] px-1" : "leading-[20px] px-1.5"
-                      )}
-                      style={{ borderColor: color, color, backgroundColor: `${color}10` }}
-                    >
-                      {pendingPreview.title}
-                    </div>
-                  </div>
-                </div>
-              );
-            })()}
-
-            {showChips && segments.length > 0 && (
-              <div className="absolute inset-x-0 pointer-events-none" style={{ top: overlayTop }}>
-                {segments.filter((segment) => segment.row < rowLimit).map((segment) => {
-                  const calId = getPrimaryCalendarId(segment.event);
-                  return (
-                    <div
-                      key={`${segment.event.id}-${segment.startIndex}-${segment.row}`}
-                      className="absolute px-0.5 pointer-events-auto"
-                      style={{
-                        insetInlineStart: `calc(${(segment.startIndex / 7) * 100}% + 1px)`,
-                        width: `calc(${(segment.span / 7) * 100}% - 2px)`,
-                        top: segment.row * rowHeight,
-                        height: chipHeight,
-                      }}
-                    >
-                      <EventCard
-                        event={segment.event}
-                        isSelected={segment.event.id === selectedEventId}
-                        calendar={calId ? calendarMap.get(calId) : undefined}
-                        variant="span"
-                        continuesBefore={segment.continuesBefore}
-                        continuesAfter={segment.continuesAfter}
-                        onClick={(rect) => onSelectEvent(segment.event, rect)}
-                        onMouseEnter={(rect) => onHoverEvent?.(segment.event, rect)}
-                        onMouseLeave={onHoverLeave}
-                        onContextMenu={onContextMenuEvent}
-                        currentUserEmails={currentUserEmails}
-                        draggable={canEditEvent(segment.event)}
-                        className={isMobile ? "text-[10px] px-1" : undefined}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {showChips && dayTasks.some((dayTaskList) => dayTaskList.length > 0) && (
-              <div className="absolute inset-x-0 pointer-events-none" style={{ top: overlayTop }}>
-                {dayTasks.map((dayTaskList, dayIndex) => dayTaskList.map((task, taskIndex) => {
-                  if (dayEventRows[dayIndex] + taskIndex >= rowLimit) return null;
-                  const calId = Object.keys(task.calendarIds).find((id) => calendarMap.has(id));
-                  return (
-                    <div
-                      key={`task-${task.id}`}
-                      className="absolute px-0.5 pointer-events-auto"
-                      style={{
-                        insetInlineStart: `calc(${(dayIndex / 7) * 100}% + 1px)`,
-                        width: `calc(${(1 / 7) * 100}% - 2px)`,
-                        top: (dayEventRows[dayIndex] + taskIndex) * rowHeight,
-                        height: chipHeight,
-                      }}
-                    >
-                      <CalendarTaskChip
-                        task={task}
-                        calendar={calId ? calendarMap.get(calId) : undefined}
-                        onToggleComplete={onToggleTaskComplete}
-                        onSelect={onSelectTask}
-                      />
-                    </div>
-                  );
-                }))}
-              </div>
-            )}
-
-            {hiddenPerDay && (
-              <div className="absolute inset-x-0 pointer-events-none" style={{ top: overlayTop }}>
-                {hiddenPerDay.map((hidden, dayIndex) => hidden > 0 && (
-                  <div
-                    key={`more-${dayIndex}`}
-                    className="absolute px-0.5 pointer-events-auto"
-                    style={{
-                      insetInlineStart: `calc(${(dayIndex / 7) * 100}% + 1px)`,
-                      width: `calc(${(1 / 7) * 100}% - 2px)`,
-                      top: rowLimit * rowHeight,
-                      height: chipHeight,
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={(e) => { e.stopPropagation(); (onOpenDay ?? onSelectDate)(week[dayIndex]); }}
-                      className="w-full h-full text-start px-1.5 rounded-xs text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors truncate"
-                    >
-                      {t("events.more", { count: hidden })}
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
           );
         })}
         <div ref={bottomSentinelRef} data-testid="month-bottom-sentinel" className="h-px flex-shrink-0" />
       </div>
     </div>
+  );
+}
+
+type WeekSegment = ReturnType<typeof buildWeekSegments>[number];
+
+/**
+ * A month cell's events, tasks and "N more" link. They sit inside the
+ * day's own gridcell, so a screen reader moving through the grid reads
+ * them with the day (an event in a row but outside any cell was skipped).
+ * An event spanning several days is drawn from its first day's cell
+ * across the following ones.
+ */
+function MonthCellEntries({
+  dayIndex, week, segments, rowLimit, rowCount, dayEventRows, dayTasks, hidden, overlayTop, rowHeight, chipHeight,
+  isMobile, calendarMap, pendingPreview, selectedEventId, currentUserEmails, canEditEvent, inView,
+  onSelectEvent, onHoverEvent, onHoverLeave, onContextMenuEvent, onToggleTaskComplete, onSelectTask, onShowMore, moreLabel, paint,
+}: {
+  dayIndex: number;
+  week: Date[];
+  segments: WeekSegment[];
+  rowLimit: number;
+  rowCount: number;
+  dayEventRows: number[];
+  dayTasks: CalendarTask[][];
+  hidden: number;
+  overlayTop: number;
+  rowHeight: number;
+  chipHeight: number;
+  isMobile?: boolean;
+  calendarMap: Map<string, Calendar>;
+  pendingPreview?: PendingEventPreview | null;
+  selectedEventId?: string | null;
+  currentUserEmails?: string[];
+  canEditEvent: (event: CalendarEvent) => boolean;
+  /** Whether a day is in the month in view: only those take Tab. */
+  inView: (day: Date) => boolean;
+  onSelectEvent: (event: CalendarEvent, anchorRect: DOMRect) => void;
+  onHoverEvent?: (event: CalendarEvent, anchorRect: DOMRect) => void;
+  onHoverLeave?: () => void;
+  onContextMenuEvent?: (e: React.MouseEvent, event: CalendarEvent) => void;
+  onToggleTaskComplete?: (task: CalendarTask) => void;
+  onSelectTask?: (task: CalendarTask) => void;
+  onShowMore: () => void;
+  moreLabel: string;
+  paint: (color: string) => string;
+}) {
+  const day = week[dayIndex];
+  // Width of `span` cells from this one, with the 1px borders between them.
+  const spanWidth = (span: number) => `calc(${span * 100}% + ${span - 2}px)`;
+  const place = (row: number, span = 1): React.CSSProperties => ({
+    insetInlineStart: 1,
+    width: spanWidth(span),
+    top: overlayTop + row * rowHeight,
+    height: chipHeight,
+  });
+  // A click, double click or right-click on an entry is the entry's, not a
+  // click on the empty day (which creates an all-day event there).
+  const own = {
+    onClick: (e: React.MouseEvent) => e.stopPropagation(),
+    onDoubleClick: (e: React.MouseEvent) => e.stopPropagation(),
+    onContextMenu: (e: React.MouseEvent) => e.stopPropagation(),
+  };
+  const daySegments = segments.filter((segment) => segment.startIndex === dayIndex && segment.row < rowLimit);
+  const tasks = dayTasks[dayIndex].filter((_, taskIndex) => dayEventRows[dayIndex] + taskIndex < rowLimit);
+  const preview = pendingPreview && isSameDay(pendingPreview.start, day) ? pendingPreview : null;
+
+  return (
+    <>
+      {daySegments.map((segment) => {
+        const calId = getPrimaryCalendarId(segment.event);
+        const spanDays = week.slice(segment.startIndex, segment.startIndex + segment.span);
+        return (
+          <div
+            key={`${segment.event.id}-${segment.startIndex}-${segment.row}`}
+            className="absolute z-10 px-0.5"
+            style={place(segment.row, segment.span)}
+            {...own}
+          >
+            <EventCard
+              event={segment.event}
+              isSelected={segment.event.id === selectedEventId}
+              calendar={calId ? calendarMap.get(calId) : undefined}
+              variant="span"
+              continuesBefore={segment.continuesBefore}
+              continuesAfter={segment.continuesAfter}
+              onClick={(rect) => onSelectEvent(segment.event, rect)}
+              onMouseEnter={(rect) => onHoverEvent?.(segment.event, rect)}
+              onMouseLeave={onHoverLeave}
+              onContextMenu={onContextMenuEvent}
+              currentUserEmails={currentUserEmails}
+              draggable={canEditEvent(segment.event)}
+              tabbable={spanDays.some(inView)}
+              className={isMobile ? "text-[10px] px-1" : undefined}
+            />
+          </div>
+        );
+      })}
+      {tasks.map((task, taskIndex) => {
+        const calId = Object.keys(task.calendarIds).find((id) => calendarMap.has(id));
+        return (
+          <div
+            key={`task-${task.id}`}
+            className="absolute z-10 px-0.5"
+            style={place(dayEventRows[dayIndex] + taskIndex)}
+            {...own}
+          >
+            <CalendarTaskChip
+              task={task}
+              calendar={calId ? calendarMap.get(calId) : undefined}
+              onToggleComplete={onToggleTaskComplete}
+              onSelect={onSelectTask}
+              tabbable={inView(day)}
+            />
+          </div>
+        );
+      })}
+      {hidden > 0 && (
+        <div className="absolute z-10 px-0.5" style={place(rowLimit)} {...own}>
+          <button
+            type="button"
+            tabIndex={inView(day) ? undefined : -1}
+            onClick={onShowMore}
+            className="w-full h-full text-start px-1.5 rounded-xs text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors truncate"
+          >
+            {moreLabel}
+          </button>
+        </div>
+      )}
+      {preview && (() => {
+        const previewRow = Math.max(rowCount, dayEventRows[dayIndex] + dayTasks[dayIndex].length);
+        const color = paint(calendarMap.get(preview.calendarId)?.color || "#3b82f6");
+        return (
+          <div className="absolute z-10 px-0.5 pointer-events-none" style={place(previewRow)}>
+            <div
+              data-pending-preview
+              className={cn(
+                "h-full rounded text-[10px] font-medium truncate border-2 border-dashed",
+                isMobile ? "leading-[16px] px-1" : "leading-[20px] px-1.5"
+              )}
+              style={{ borderColor: color, color, backgroundColor: `${color}10` }}
+            >
+              {preview.title}
+            </div>
+          </div>
+        );
+      })()}
+    </>
   );
 }

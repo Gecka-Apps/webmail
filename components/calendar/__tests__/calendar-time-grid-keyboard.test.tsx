@@ -5,6 +5,9 @@ import { CalendarDayView } from '../calendar-day-view';
 import { useSettingsStore } from '@/stores/settings-store';
 import type { Calendar } from '@/lib/jmap/types';
 
+/** The empty hour slots of the time grid (buttons inside the day cells). */
+const slots = () => Array.from(document.querySelectorAll<HTMLElement>('[data-slot]'));
+
 const calendars = [{ id: 'cal-1', name: 'Work', color: '#123456' }] as unknown as Calendar[];
 const initialSettings = useSettingsStore.getState();
 
@@ -30,7 +33,7 @@ function renderWeek(overrides: Partial<WeekProps> = {}) {
 }
 
 function tabStops(): HTMLElement[] {
-  return screen.getAllByRole('gridcell').filter((cell) => cell.tabIndex === 0);
+  return slots().filter((cell) => cell.tabIndex === 0);
 }
 
 function focusedSlot(): string | null {

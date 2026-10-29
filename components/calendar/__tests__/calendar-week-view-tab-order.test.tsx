@@ -4,6 +4,9 @@ import { CalendarWeekView } from '../calendar-week-view';
 import { CalendarDayView } from '../calendar-day-view';
 import type { Calendar, CalendarEvent } from '@/lib/jmap/types';
 
+/** The empty hour slots of the time grid (buttons inside the day cells). */
+const slots = () => Array.from(document.querySelectorAll<HTMLElement>('[data-slot]'));
+
 // Tab in the week view walked into the events of the weeks loaded on
 // either side and scrolled the grid off its week.
 
@@ -65,7 +68,7 @@ describe('tab order of the week view', () => {
         onCreateAtTime={vi.fn()}
       />,
     );
-    const stops = screen.getAllByRole('gridcell').filter((cell) => cell.tabIndex === 0);
+    const stops = slots().filter((cell) => cell.tabIndex === 0);
     expect(stops).toHaveLength(1);
     expect(stops[0].getAttribute('data-slot')).toMatch(/^2026-09-07T/);
   });

@@ -33,6 +33,14 @@ import { CalendarApp } from '../calendar-app';
 import { useRegisteredCommandGroups } from '@/lib/command-registry';
 import { interceptLeave } from '@/lib/leave-guard';
 
+/** The empty hour slots of the time grid (buttons inside the day cells). */
+const slots = () => Array.from(document.querySelectorAll<HTMLElement>('[data-slot]'));
+
+/** A month view day cell, found by its date button (the cell itself has no name). */
+function monthCell(day: RegExp): HTMLElement | undefined {
+  return screen.getAllByRole('gridcell').find((c) => day.test(c.querySelector('[data-day-button]')?.getAttribute('aria-label') ?? ''));
+}
+
 // The first render loads the whole page and is slow under load.
 vi.setConfig({ testTimeout: 30000 });
 
@@ -257,7 +265,7 @@ describe('CalendarApp unsaved editor changes', () => {
     fireEvent.keyDown(document.body, { key: 'n', code: 'KeyN' });
     fireEvent.change(screen.getByPlaceholderText('form.title'), { target: { value: 'Lunch' } });
     // A single click on a slot opens the quick editor after the double-click window.
-    fireEvent.click(screen.getAllByRole('gridcell')[3]);
+    fireEvent.click(slots()[3]);
     const ask = await screen.findByRole('alertdialog', { name: 'discard.title' }, { timeout: 2000 });
     fireEvent.click(within(ask).getByRole('button', { name: 'discard.keep' }));
     await waitFor(() => expect(screen.queryByRole('alertdialog')).toBeNull());
@@ -366,7 +374,8 @@ describe('CalendarApp event search (CAL-16)', () => {
     const results = await screen.findByTestId('calendar-search-results');
     expect(within(results).getByText('Dentist')).toBeInTheDocument();
     expect(within(results).queryByText('Standup')).toBeNull();
-    expect(screen.queryByRole('grid')).toBeNull();
+    // The view's grid gives way (the mini calendar's grid stays).
+    expect(screen.queryByRole('grid', { name: 'views.week' })).toBeNull();
 
     // A result opens like an event in the grid
     fireEvent.click(within(results).getByText('Dentist'));
@@ -376,7 +385,7 @@ describe('CalendarApp event search (CAL-16)', () => {
     // Escape in the box goes back to the grid
     fireEvent.keyDown(box, { key: 'Escape' });
     await waitFor(() => expect(screen.queryByTestId('calendar-search-results')).toBeNull());
-    expect(screen.getByRole('grid')).toBeInTheDocument();
+    expect(screen.getByRole('grid', { name: 'views.week' })).toBeInTheDocument();
   });
 
   it('says so when nothing matches', async () => {
@@ -492,7 +501,7 @@ describe('CalendarApp read-only events', () => {
 });
 
 function dropOnMonthDay(day: RegExp, event: CalendarEvent) {
-  const cell = screen.getAllByRole('gridcell').find((c) => day.test(c.getAttribute('aria-label') ?? ''));
+  const cell = monthCell(day);
   if (!cell) throw new Error(`no cell ${day}`);
   const json = JSON.stringify({ type: 'calendar-event', eventId: event.id, originalStart: event.start, duration: event.duration });
   fireEvent.drop(cell, { dataTransfer: { types: ['application/x-calendar-event'], getData: () => json } });
@@ -581,7 +590,7 @@ describe('CalendarApp creating in the month view', () => {
   it('opens the quick editor for an all-day event on a single click', async () => {
     setUp([], 'month');
     renderApp();
-    const day = screen.getAllByRole('gridcell').find((c) => /October 15, 2026/.test(c.getAttribute('aria-label') ?? ''))!;
+    const day = monthCell(/October 15, 2026/)!;
     fireEvent.click(day);
     const quick = await screen.findByRole('dialog', { name: 'quick_create.aria_label' });
     expect(within(quick).getByText('events.all_day')).toBeInTheDocument();
@@ -598,7 +607,7 @@ describe('CalendarApp creating in the month view', () => {
     media.desktop = false;
     setUp([], 'month');
     renderApp();
-    const day = screen.getAllByRole('gridcell').find((c) => /October 15, 2026/.test(c.getAttribute('aria-label') ?? ''))!;
+    const day = monthCell(/October 15, 2026/)!;
     fireEvent.click(day);
     expect(screen.queryByRole('dialog', { name: 'quick_create.aria_label' })).toBeNull();
     expect(useCalendarStore.getState().viewMode).toBe('day');
@@ -758,13 +767,13 @@ describe('CalendarApp after saving', () => {
     useSettingsStore.setState({ calendarLimitHours: true, calendarDayStartHour: 8, calendarDayEndHour: 18 } as never);
     try {
       renderApp();
-      expect(screen.queryAllByRole('gridcell', { name: /01:00$/ })).toHaveLength(0);
+      expect(screen.queryAllByRole('button', { name: /01:00$/ })).toHaveLength(0);
       fireEvent.keyDown(document.body, { key: 'n', code: 'KeyN' });
       fireEvent.change(screen.getByPlaceholderText('form.title'), { target: { value: 'Night train' } });
       fireEvent.change(document.querySelector('input[type="time"]')!, { target: { value: '01:00' } });
       fireEvent.click(screen.getByRole('button', { name: 'form.save' }));
       await waitFor(() => expect(store.createEvent).toHaveBeenCalled());
-      await waitFor(() => expect(screen.getAllByRole('gridcell', { name: /01:00$/ }).length).toBeGreaterThan(0));
+      await waitFor(() => expect(screen.getAllByRole('button', { name: /01:00$/ }).length).toBeGreaterThan(0));
     } finally {
       useSettingsStore.setState({ calendarLimitHours: false } as never);
     }

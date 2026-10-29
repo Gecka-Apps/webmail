@@ -4,6 +4,12 @@ import { CalendarMonthView } from '../calendar-month-view';
 import type { CalendarEvent, Calendar, CalendarTask } from '@/lib/jmap/types';
 import { useSettingsStore } from '@/stores/settings-store';
 
+/** Which day of its week (0-6) the cell holding `el` is. */
+function dayColumn(el: HTMLElement): number {
+  const cell = el.closest('[role="gridcell"]')!;
+  return Array.from(cell.closest('[role="row"]')!.querySelectorAll('[role="gridcell"]')).indexOf(cell);
+}
+
 // #1107: with "Show tasks on calendar" on, the month view shows each task
 // on its due day, below that day's events, and lets it be completed or
 // opened in the task editor.
@@ -94,14 +100,14 @@ describe('CalendarMonthView tasks', () => {
     expect(screen.getByText('Task fri')).toBeInTheDocument();
 
     // Thursday is the fourth column of the week starting Monday 7 Sep and
-    // already has an event in row 0; Friday has no events.
-    // (jsdom rounds the calc() percentage.)
+    // already has an event in row 0; Friday has no events. Each chip sits in
+    // its day's cell, below the 30px date header.
     const thu = chipSlot('thu');
-    expect(thu.style.insetInlineStart).toMatch(/^calc\(42\.857\d*% \+ 1px\)$/);
-    expect(thu.style.top).toBe('22px');
+    expect(dayColumn(thu)).toBe(3);
+    expect(thu.style.top).toBe('52px');
     const fri = chipSlot('fri');
-    expect(fri.style.insetInlineStart).toMatch(/^calc\(57\.142\d*% \+ 1px\)$/);
-    expect(fri.style.top).toBe('0px');
+    expect(dayColumn(fri)).toBe(4);
+    expect(fri.style.top).toBe('30px');
   });
 
   it('keeps a crowded day to its row height and links to the rest', () => {
@@ -120,7 +126,7 @@ describe('CalendarMonthView tasks', () => {
     expect(document.querySelector('[data-calendar-task="b"]')).not.toBeNull();
     expect(document.querySelector('[data-calendar-task="c"]')).toBeNull();
     const more = screen.getByRole('button', { name: 'events.more' });
-    expect(more.parentElement?.style.top).toBe('66px');
+    expect(more.parentElement?.style.top).toBe(`${30 + 66}px`);
     fireEvent.click(more);
     expect(onOpenDay).toHaveBeenCalledWith(new Date(2026, 8, 10));
   });
@@ -136,7 +142,7 @@ describe('CalendarMonthView tasks', () => {
       const row = document.querySelector<HTMLElement>('[data-week="2026-09-07"]');
       // overlay offset 34 + 4, one event row and three task rows of 18px, 8 below.
       expect(row?.style.minHeight).toBe(`${34 + 4 + 4 * 18 + 8}px`);
-      expect(chipSlot('c').style.top).toBe(`${3 * 18}px`);
+      expect(chipSlot('c').style.top).toBe(`${34 + 3 * 18}px`);
     } finally {
       useSettingsStore.setState({ showTimeInMonthView: false });
     }

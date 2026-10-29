@@ -53,8 +53,9 @@ describe('day view on a phone', () => {
 
   it('sizes the all-day row by the day in view, not by a busy neighbour', () => {
     renderDay(true, []);
-    const today = document.querySelector<HTMLElement>('[data-day="2026-09-09"]')!;
-    const next = document.querySelector<HTMLElement>('[data-day="2026-09-10"]')!;
+    // The all-day row's cells, one per day under the date headers.
+    const today = document.querySelector<HTMLElement>('[data-all-day="2026-09-09"]')!;
+    const next = document.querySelector<HTMLElement>('[data-all-day="2026-09-10"]')!;
     // The day in view has nothing all-day: no empty block under its date.
     expect(within(today).queryByText(/all_day|All day/i)).toBeNull();
     expect(today).not.toHaveClass('h-0');

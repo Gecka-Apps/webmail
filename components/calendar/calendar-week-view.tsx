@@ -444,8 +444,11 @@ export function CalendarWeekView({
       <div ref={startSentinelRef} data-testid="week-start-sentinel" className="absolute inset-y-0 start-0 w-px pointer-events-none" />
       <div ref={endSentinelRef} data-testid="week-end-sentinel" className="absolute inset-y-0 end-0 w-px pointer-events-none" />
       <div ref={headerRef} className="sticky top-0 z-50 bg-background">
+      {/* The grid (SR-14): a header row with one column per day, an all-day
+          row and an hours row, each with one cell per day. The events sit in
+          their day's cell, so a screen reader reads them under the date. */}
       <div className="flex border-b border-border" role="row">
-        <div className={cn(gutterClass, "flex items-end justify-center pb-1")}>
+        <div role="gridcell" className={cn(gutterClass, "flex items-end justify-center pb-1")}>
           {canToggleHours && (
             <AllHoursToggle
               showAllHours={showAllHours}
@@ -501,8 +504,9 @@ export function CalendarWeekView({
         </div>
       </div>
       {hasAllDay && (
-        <div className="flex border-b border-border">
+        <div className="flex border-b border-border" role="row">
           <div
+            role="rowheader"
             className={cn(gutterClass, "text-[10px] text-muted-foreground p-1 text-end flex flex-col justify-between")}
             style={{ height: allDayHeight }}
           >
@@ -532,101 +536,92 @@ export function CalendarWeekView({
             className="relative grid border-s border-border overflow-hidden"
             style={{ ...columnsStyle, height: allDayHeight }}
           >
-            {days.map((day) => (
-              <div
-                key={format(day, "yyyy-MM-dd")}
-                className={cn("bg-background min-h-[28px] border-e border-border last:border-e-0", onCreateAllDay && "cursor-pointer hover:bg-muted/30")}
-                onClick={onCreateAllDay ? () => onCreateAllDay(day) : undefined}
-                onContextMenu={onContextMenuEmpty ? (e) => onContextMenuEmpty(e, day, undefined, true) : undefined}
-              />
-            ))}
-
-            <div className="absolute inset-0 pointer-events-none">
-              {allDaySegments.map((segment) => {
-                const calId = getPrimaryCalendarId(segment.event);
-                return (
-                  <div
-                    key={`${segment.event.id}-${segment.startIndex}-${segment.row}`}
-                    className="absolute px-0.5 pointer-events-auto"
-                    style={{
-                      insetInlineStart: `calc(${(segment.startIndex / colCount) * 100}% + 1px)`,
-                      width: `calc(${(segment.span / colCount) * 100}% - 2px)`,
-                      top: segment.row * 24 + 2,
-                      height: 20,
-                    }}
-                  >
-                    <EventCard
-                      event={segment.event}
-                        isSelected={segment.event.id === selectedEventId}
-                      calendar={calId ? calendarMap.get(calId) : undefined}
-                      variant="span"
-                      continuesBefore={segment.continuesBefore}
-                      continuesAfter={segment.continuesAfter}
-                      onClick={(rect) => onSelectEvent(segment.event, rect)}
-                      onMouseEnter={(rect) => onHoverEvent?.(segment.event, rect)}
-                      onMouseLeave={onHoverLeave}
-                      onContextMenu={onContextMenuEvent}
-                      currentUserEmails={currentUserEmails}
-                      tabbable={spanInView(segment.startIndex, segment.span)}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-
-            {pendingPreview?.allDay && (() => {
-              const index = days.findIndex((d) => isSameDay(d, pendingPreview.start));
-              if (index === -1) return null;
-              const color = paint(calendars.find((c) => c.id === pendingPreview.calendarId)?.color || "#3b82f6");
+            {days.map((day, dayIndex) => {
+              const key = format(day, "yyyy-MM-dd");
+              const dayTasks = tasksByDay.get(key) || [];
+              const baseRow = dayEventRows[dayIndex];
+              const showPreview = pendingPreview?.allDay && isSameDay(pendingPreview.start, day);
+              const previewColor = showPreview
+                ? paint(calendars.find((c) => c.id === pendingPreview!.calendarId)?.color || "#3b82f6")
+                : "";
               return (
                 <div
-                  data-pending-preview
-                  className="absolute px-0.5 pointer-events-none"
-                  style={{
-                    insetInlineStart: `calc(${(index / colCount) * 100}% + 1px)`,
-                    width: `calc(${(1 / colCount) * 100}% - 2px)`,
-                    top: dayEventRows[index] * 24 + 2,
-                    height: 20,
-                  }}
+                  key={key}
+                  role="gridcell"
+                  className={cn("relative bg-background min-h-[28px] border-e border-border last:border-e-0", onCreateAllDay && "cursor-pointer hover:bg-muted/30")}
+                  onClick={onCreateAllDay ? () => onCreateAllDay(day) : undefined}
+                  onContextMenu={onContextMenuEmpty ? (e) => onContextMenuEmpty(e, day, undefined, true) : undefined}
                 >
-                  <div
-                    className="h-full rounded-xs px-1.5 text-xs leading-[16px] font-medium truncate border-2 border-dashed"
-                    style={{ borderColor: color, color, backgroundColor: `${color}10` }}
-                  >
-                    {pendingPreview.title}
-                  </div>
+                  {/* Events starting on this day, drawn across the days they span. */}
+                  {allDaySegments.filter((segment) => segment.startIndex === dayIndex).map((segment) => {
+                    const calId = getPrimaryCalendarId(segment.event);
+                    return (
+                      <div
+                        key={`${segment.event.id}-${segment.startIndex}-${segment.row}`}
+                        className="absolute z-10 px-0.5"
+                        style={{
+                          insetInlineStart: 1,
+                          width: `calc(${segment.span * 100}% + ${segment.span - 2}px)`,
+                          top: segment.row * 24 + 2,
+                          height: 20,
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        onContextMenu={(e) => e.stopPropagation()}
+                      >
+                        <EventCard
+                          event={segment.event}
+                          isSelected={segment.event.id === selectedEventId}
+                          calendar={calId ? calendarMap.get(calId) : undefined}
+                          variant="span"
+                          continuesBefore={segment.continuesBefore}
+                          continuesAfter={segment.continuesAfter}
+                          onClick={(rect) => onSelectEvent(segment.event, rect)}
+                          onMouseEnter={(rect) => onHoverEvent?.(segment.event, rect)}
+                          onMouseLeave={onHoverLeave}
+                          onContextMenu={onContextMenuEvent}
+                          currentUserEmails={currentUserEmails}
+                          tabbable={spanInView(segment.startIndex, segment.span)}
+                        />
+                      </div>
+                    );
+                  })}
+
+                  {showPreview && (
+                    <div
+                      data-pending-preview
+                      className="absolute z-10 px-0.5 pointer-events-none"
+                      style={{ insetInlineStart: 1, width: "calc(100% - 2px)", top: baseRow * 24 + 2, height: 20 }}
+                    >
+                      <div
+                        className="h-full rounded-xs px-1.5 text-xs leading-[16px] font-medium truncate border-2 border-dashed"
+                        style={{ borderColor: previewColor, color: previewColor, backgroundColor: `${previewColor}10` }}
+                      >
+                        {pendingPreview!.title}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Task chips, stacked under the events of their day (#1107, #1270) */}
+                  {dayTasks.map((task, taskIndex) => (
+                    <div
+                      key={`task-${task.id}`}
+                      className="absolute z-10 px-0.5"
+                      style={{ insetInlineStart: 1, width: "calc(100% - 2px)", top: (baseRow + taskIndex) * 24 + 2, height: 20 }}
+                      onClick={(e) => e.stopPropagation()}
+                      onContextMenu={(e) => e.stopPropagation()}
+                    >
+                      <CalendarTaskChip
+                        task={task}
+                        calendar={calendars.find(c => task.calendarIds[c.id])}
+                        onToggleComplete={onToggleTaskComplete}
+                        onSelect={onSelectTask}
+                        tabbable={inViewKeys.has(key)}
+                      />
+                    </div>
+                  ))}
                 </div>
               );
-            })()}
-
-            {/* Task chips in all-day area, stacked under events of their day (#1107, #1270) */}
-            <div className="absolute inset-0 pointer-events-none">
-              {days.map((day, dayIndex) => {
-                const key = format(day, "yyyy-MM-dd");
-                const dayTasks = tasksByDay.get(key) || [];
-                const baseRow = dayEventRows[dayIndex];
-                return dayTasks.map((task, taskIndex) => (
-                  <div
-                    key={`task-${task.id}`}
-                    className="absolute px-0.5 pointer-events-auto"
-                    style={{
-                      insetInlineStart: `calc(${(dayIndex / colCount) * 100}% + 1px)`,
-                      width: `calc(${(1 / colCount) * 100}% - 2px)`,
-                      top: (baseRow + taskIndex) * 24 + 2,
-                      height: 20,
-                    }}
-                  >
-                    <CalendarTaskChip
-                      task={task}
-                      calendar={calendars.find(c => task.calendarIds[c.id])}
-                      onToggleComplete={onToggleTaskComplete}
-                      onSelect={onSelectTask}
-                      tabbable={inViewKeys.has(key)}
-                    />
-                  </div>
-                ));
-              })}
-            </div>
+            })}
           </div>
         </div>
       )}
@@ -635,8 +630,8 @@ export function CalendarWeekView({
       </div>
 
       <div>
-        <div className="flex relative" style={{ height: gridHeight }}>
-          <div className={gutterClass}>
+        <div className="flex relative" style={{ height: gridHeight }} role="row">
+          <div role="gridcell" className={gutterClass}>
             {visibleHours.map((h) => (
               <div
                 key={h}
@@ -646,7 +641,7 @@ export function CalendarWeekView({
                 {/* Midnight goes unlabelled; a later first hour is labelled
                     inside its row, where the header cannot cover it. */}
                 {(h > firstHour || firstHour > 0) && (
-                  <span className={cn(
+                  <span aria-hidden="true" className={cn(
                     "absolute end-2 leading-none",
                     h > firstHour ? "top-0 -translate-y-1/2" : "top-1",
                     isMobile ? "text-[9px]" : "text-[10px]",
@@ -669,8 +664,7 @@ export function CalendarWeekView({
                 <div
                   key={key}
                   className="relative border-e border-border last:border-e-0"
-                  role="row"
-                  aria-label={intlFormatter.dateTime(day, { weekday: "long", month: "long", day: "numeric" })}
+                  role="gridcell"
                   onPointerDown={(e) => handleGridPointerDown(e, key, day)}
                   onPointerMove={handleGridPointerMove}
                   onPointerUp={handleGridPointerUp}
@@ -678,20 +672,6 @@ export function CalendarWeekView({
                   onDragLeave={handleColumnDragLeave}
                   onDrop={(e) => handleColumnDrop(e, day)}
                 >
-                  {visibleHours.map((h) => (
-                    <div
-                      key={h}
-                      role="gridcell"
-                      aria-label={`${slotDateLabel(day)}, ${formatHour(h)}`}
-                      {...slotProps(day, h, !isMobile)}
-                      onClick={() => handleSlotClick(day, h)}
-                      onDoubleClick={() => handleSlotDoubleClick(day, h)}
-                      onContextMenu={onContextMenuEmpty ? (e) => onContextMenuEmpty(e, day, h, false) : undefined}
-                      className="relative border-b border-border/50 hover:bg-muted/30 cursor-pointer transition-colors outline-none focus-visible:after:absolute focus-visible:after:inset-0 focus-visible:after:z-[15] focus-visible:after:pointer-events-none focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-primary"
-                      style={{ height: hourHeight }}
-                    />
-                  ))}
-
                   {dayLayout && dayLayout.before > 0 && (
                     <HiddenEventsIndicator
                       count={dayLayout.before}
@@ -753,7 +733,7 @@ export function CalendarWeekView({
                         <div
                           data-resize-handle
                           className="absolute top-0 inset-x-1 h-1 cursor-n-resize z-20 flex items-start justify-center opacity-0 group-hover/event:opacity-100 transition-opacity"
-                          aria-label={t("events.resize")}
+                          aria-hidden="true"
                           onPointerDown={(e) => handleResizePointerDown(ev.id, "top", startMinutes, durMin, e)}
                           onPointerMove={handleResizePointerMove}
                           onPointerUp={handleResizePointerUp}
@@ -765,7 +745,7 @@ export function CalendarWeekView({
                         <div
                           data-resize-handle
                           className="absolute bottom-0 inset-x-1 h-1 cursor-s-resize z-20 flex items-end justify-center opacity-0 group-hover/event:opacity-100 transition-opacity"
-                          aria-label={t("events.resize")}
+                          aria-hidden="true"
                           onPointerDown={(e) => handleResizePointerDown(ev.id, "bottom", startMinutes, durMin, e)}
                           onPointerMove={handleResizePointerMove}
                           onPointerUp={handleResizePointerUp}
@@ -776,6 +756,21 @@ export function CalendarWeekView({
                       </div>
                     );
                   })}
+
+                  {/* An empty hour: Enter or a click creates an event there. */}
+                  {visibleHours.map((h) => (
+                    <div
+                      key={h}
+                      role="button"
+                      aria-label={`${slotDateLabel(day)}, ${formatHour(h)}`}
+                      {...slotProps(day, h, !isMobile)}
+                      onClick={() => handleSlotClick(day, h)}
+                      onDoubleClick={() => handleSlotDoubleClick(day, h)}
+                      onContextMenu={onContextMenuEmpty ? (e) => onContextMenuEmpty(e, day, h, false) : undefined}
+                      className="relative border-b border-border/50 hover:bg-muted/30 cursor-pointer transition-colors outline-none focus-visible:after:absolute focus-visible:after:inset-0 focus-visible:after:z-[15] focus-visible:after:pointer-events-none focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-primary"
+                      style={{ height: hourHeight }}
+                    />
+                  ))}
 
                   {todayCol && nowMinutes >= hours.startMinutes && nowMinutes <= hours.endMinutes && (
                     <div
