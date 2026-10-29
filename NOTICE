@@ -50,3 +50,8 @@ Bundled fonts (app/fonts), offered in Settings > Accessibility:
   Open Font License 1.1
 
 The woff2 files come from Fontsource (https://fontsource.org).
+
+Vendored test tool (scripts/a11y-guard/axe.min.js): axe-core 4.10.3,
+Copyright (c) 2015-2025 Deque Systems, Inc., licensed under the Mozilla
+Public License 2.0 (https://mozilla.org/MPL/2.0/). It runs only in the
+accessibility check in CI and is not part of the app.
