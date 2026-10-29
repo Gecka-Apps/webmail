@@ -171,7 +171,7 @@ export function TrustedSendersModal({ isOpen, onClose }: TrustedSendersModalProp
             }
           }}
           className={cn(
-            "flex-1 min-w-0 px-3 py-2 text-sm bg-background border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50",
+            "flex-1 min-w-0 px-3 py-2 text-sm bg-background border rounded-md focus:outline-hidden",
             emailError ? "border-destructive" : "border-border"
           )}
         />
@@ -213,7 +213,7 @@ export function TrustedSendersModal({ isOpen, onClose }: TrustedSendersModalProp
               aria-label={t("search_placeholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full ps-9 pe-3 py-2 text-sm bg-muted border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+              className="w-full ps-9 pe-3 py-2 text-sm bg-muted border border-border rounded-md focus:outline-hidden"
             />
           </div>
         </div>

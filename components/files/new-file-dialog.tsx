@@ -140,7 +140,7 @@ export function NewFileDialog({ isOpen, onClose, onSubmit, formats, validate }: 
               onClick={() => pick(ext)}
               className={cn(
                 "flex flex-col items-center gap-1 rounded-md border px-2 py-3 text-center transition-colors",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "focus-visible:outline-hidden",
                 selected === ext ? "border-primary bg-primary/10" : "border-border hover:bg-muted",
               )}
             >

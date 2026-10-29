@@ -143,7 +143,7 @@ export function MessageListTabs({ panelId }: { panelId: string }) {
             className={cn(
               'relative flex items-center gap-1.5 px-3.5 py-2.5 text-sm whitespace-nowrap select-none',
               'border-b-2 -mb-px rounded-t-md transition-colors duration-150',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset',
+              'focus-visible:outline-hidden focus-inset',
               isActive
                 ? 'border-primary text-foreground font-medium'
                 : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/40',

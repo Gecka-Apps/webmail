@@ -87,7 +87,7 @@ const nordCSS = `
 :root {
   --color-border: #d8dee9;
   --color-input: #d8dee9;
-  --color-ring: #81a1c1;
+  --color-ring: #5e81ac;
   --color-background: #eceff4;
   --color-foreground: #2e3440;
   --color-primary: #5e81ac;
@@ -341,7 +341,7 @@ const elasticCSS = `
 :root {
   --color-border: #dddddd;
   --color-input: #ced4da;
-  --color-ring: #37beff;
+  --color-ring: #0b7dc1;
   --color-background: #ffffff;
   --color-foreground: #27353a;
   --color-primary: #37beff;

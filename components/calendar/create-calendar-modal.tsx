@@ -92,7 +92,7 @@ export function CreateCalendarModal({ client, onClose }: CreateCalendarModalProp
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t("name_placeholder")}
-            className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden"
             disabled={isSubmitting}
             onKeyDown={(e) => { if (e.key === "Enter" && isValid) handleSubmit(); }}
           />

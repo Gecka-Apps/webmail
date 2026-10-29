@@ -17,7 +17,7 @@ export type ConfigSource = 'admin' | 'env' | 'default';
 
 export const inputClass =
   'h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground ' +
-  'hover:border-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-ring ' +
+  'hover:border-muted-foreground focus-visible:outline-hidden focus-visible:border-ring ' +
   'disabled:cursor-not-allowed disabled:opacity-50 transition-colors';
 
 export function SourceBadge({ source, label }: { source?: string; label?: string }) {

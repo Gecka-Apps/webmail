@@ -166,7 +166,7 @@ export function ResizeHandle({ onResizeStart, onResize, onResizeEnd, onDoubleCli
         // Centered over the seam with negative margins so the handle adds no
         // net layout space (panes sit flush) while staying draggable.
         "flex-shrink-0 hover:bg-primary/30 active:bg-primary/50 transition-colors relative group z-10",
-        "focus-visible:outline-none focus-visible:bg-primary/40 focus-visible:ring-2 focus-visible:ring-primary/50",
+        "focus-visible:outline-hidden focus-visible:bg-primary/40",
         // touch-none keeps the browser from turning a touch drag into a
         // scroll and cancelling the pointer.
         "touch-none",

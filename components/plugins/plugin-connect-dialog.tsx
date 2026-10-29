@@ -127,7 +127,7 @@ export function PluginConnectDialog() {
                   value={server}
                   placeholder={t('server_hint')}
                   onChange={(e) => setServer(e.target.value)}
-                  className="w-full rounded-md border border-input bg-background px-2.5 py-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full rounded-md border border-input bg-background px-2.5 py-2 text-sm text-foreground outline-none"
                 />
               </label>
             )}
@@ -139,7 +139,7 @@ export function PluginConnectDialog() {
                   value={username}
                   autoComplete="username"
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full rounded-md border border-input bg-background px-2.5 py-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full rounded-md border border-input bg-background px-2.5 py-2 text-sm text-foreground outline-none"
                 />
               </label>
             )}
@@ -151,7 +151,7 @@ export function PluginConnectDialog() {
                   value={secret}
                   autoComplete="off"
                   onChange={(e) => setSecret(e.target.value)}
-                  className="w-full rounded-md border border-input bg-background px-2.5 py-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full rounded-md border border-input bg-background px-2.5 py-2 text-sm text-foreground outline-none"
                 />
               </label>
             )}

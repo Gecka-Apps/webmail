@@ -126,7 +126,7 @@ export function NotificationPanel({ onClose, className, sheet = false }: { onClo
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => markRead(entry.id)}
-                    className="-mt-1 mb-1 ms-[38px] inline-flex items-center gap-1 rounded text-xs font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    className="-mt-1 mb-1 ms-[38px] inline-flex items-center gap-1 rounded text-xs font-medium text-primary hover:underline focus-visible:outline-hidden"
                   >
                     {entry.action.label}
                     <ExternalLink className="w-3 h-3" aria-hidden="true" />

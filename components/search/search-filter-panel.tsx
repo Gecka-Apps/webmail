@@ -30,7 +30,7 @@ const DATE_PRESETS = [
 const SIZE_PRESETS_MB = [1, 5, 10, 25] as const;
 
 export const SELECT_CLASS =
-  "w-full h-8 text-sm rounded-md border border-input bg-background px-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1";
+  "w-full h-8 text-sm rounded-md border border-input bg-background px-2 text-foreground focus:outline-hidden";
 
 /** `days` before today as the yyyy-mm-dd a date input holds, in local time. */
 export function daysAgo(days: number, now = new Date()): string {

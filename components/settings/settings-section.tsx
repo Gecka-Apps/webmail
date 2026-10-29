@@ -378,7 +378,7 @@ export function Select({ value, onChange, options, disabled, className, ariaLabe
       aria-labelledby={ariaLabel ? undefined : labelledBy}
       dir="auto"
       className={cn(
-        "px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150 pointer-coarse:min-h-11",
+        "px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-hidden transition-colors duration-150 pointer-coarse:min-h-11",
         disabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer hover:border-muted-foreground",
         className
       )}

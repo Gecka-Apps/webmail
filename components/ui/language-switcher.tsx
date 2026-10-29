@@ -170,7 +170,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
         type="button"
         ref={buttonRef}
         onClick={toggle}
-        className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground hover:border-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150 cursor-pointer w-full"
+        className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground hover:border-muted-foreground focus:outline-hidden transition-colors duration-150 cursor-pointer w-full"
         aria-haspopup="listbox"
         aria-expanded={open}
       >

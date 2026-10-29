@@ -78,7 +78,7 @@ export function ContactListItem({ contact, isSelected, isChecked, hasSelection, 
       onClick={onClick}
       onContextMenu={onContextMenu ? (e) => onContextMenu(e, contact) : undefined}
       className={cn(
-        "w-full flex items-center cursor-pointer select-none transition-all duration-200 border-b border-border outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+        "w-full flex items-center cursor-pointer select-none transition-all duration-200 border-b border-border outline-none focus-inset",
         isSelected
           ? "bg-selection shadow-sm"
           : "bg-background hover:bg-muted hover:shadow-sm",

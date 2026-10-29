@@ -207,7 +207,7 @@ function Select({ value, onChange, children, className, id, "aria-label": ariaLa
       onChange={onChange}
       className={cn(
         "text-sm bg-transparent border border-input rounded-md px-2.5 py-2 text-foreground",
-        "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1",
+        "focus:outline-hidden",
         "hover:border-muted-foreground/50 transition-colors",
         className
       )}
@@ -726,7 +726,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
               type="button"
               onClick={() => photoInputRef.current?.click()}
               disabled={photoUploading}
-              className="relative group rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-60"
+              className="relative group rounded-full focus:outline-hidden disabled:opacity-60"
               title={t("upload_photo")}
               aria-label={t("upload_photo")}
             >
@@ -780,7 +780,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                 aria-label={t("section_address_book")}
                 value={selectedBookId}
                 onChange={(e) => setSelectedBookId(e.target.value)}
-                className="w-full px-3 py-2 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                className="w-full px-3 py-2 rounded-md border border-border bg-background text-sm focus:outline-hidden"
               >
                 <option value="">{t("select_address_book")}</option>
                 {addressBooks.map((book) => (
@@ -1217,7 +1217,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
               onChange={(e) => setNote(e.target.value)}
               placeholder={t("note_placeholder")}
               aria-label={t("note")}
-              className="w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground resize-y outline-none focus:ring-2 focus:ring-ring"
+              className="w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground resize-y outline-none"
             />
           </FormSection>
 

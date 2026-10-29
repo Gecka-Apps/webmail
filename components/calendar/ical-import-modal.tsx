@@ -295,7 +295,7 @@ export function ICalImportModal({ calendars, client, onClose, initialUrl }: ICal
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
-                  className={`w-full flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-8 cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  className={`w-full flex flex-col items-center justify-center border-2 border-dashed rounded-lg p-8 cursor-pointer transition-colors focus-visible:outline-hidden ${
                     isDragging
                       ? "border-primary bg-primary/5"
                       : "border-border hover:border-primary/50 hover:bg-muted/50"
@@ -328,7 +328,7 @@ export function ICalImportModal({ calendars, client, onClose, initialUrl }: ICal
                       onChange={(e) => setUrlInput(e.target.value)}
                       placeholder={t("url_placeholder")}
                       aria-label={t("tab_url")}
-                      className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                      className="flex-1 rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden"
                       onKeyDown={(e) => { if (e.key === "Enter") handleUrlFetch(); }}
                     />
                     <Button
@@ -418,7 +418,7 @@ export function ICalImportModal({ calendars, client, onClose, initialUrl }: ICal
                     id={targetId}
                     value={calendarId}
                     onChange={(e) => setCalendarId(e.target.value)}
-                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden"
                   >
                     {calendars.map((cal) => (
                       <option key={cal.id} value={cal.id}>

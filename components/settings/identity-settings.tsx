@@ -103,7 +103,7 @@ export function EmailAddressesSection() {
                 }}
                 aria-label={tEmail('sub_address_delimiter.custom_input_label')}
                 placeholder={DEFAULT_CUSTOM_DELIMITER}
-                className="w-16 px-2 py-1 text-sm font-mono text-center bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-ring"
+                className="w-16 px-2 py-1 text-sm font-mono text-center bg-background border border-border rounded-md focus:outline-hidden"
               />
             )}
           </div>

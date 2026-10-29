@@ -1667,7 +1667,7 @@ function Input({
       placeholder={placeholder}
       required={required}
       autoFocus={autoFocus}
-      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-hidden"
     />
   );
 }
@@ -1680,7 +1680,7 @@ function Select({ value, onChange, options }: { value: string; onChange: (v: str
       aria-describedby={field?.hintId}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-hidden"
     >
       {options.map((o) => (
         <option key={o.value} value={o.value}>

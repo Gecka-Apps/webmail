@@ -58,7 +58,7 @@ export function AddressBookPickerDialog({ isOpen, onClose, addressBooks, current
               onClick={() => setSelected(book.id)}
               onDoubleClick={() => { if (!isCurrent) { onPick(book); onClose(); } }}
               className={cn(
-                "w-full flex items-center gap-2 px-3 h-9 text-sm text-start outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+                "w-full flex items-center gap-2 px-3 h-9 text-sm text-start outline-none focus-inset",
                 isSelected ? "bg-selection" : "hover:bg-muted",
                 isCurrent && "text-muted-foreground",
               )}

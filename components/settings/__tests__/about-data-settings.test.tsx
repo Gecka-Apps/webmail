@@ -56,14 +56,17 @@ describe('Backup & reset', () => {
 });
 
 // SET-25: the About card in the settings sidebar is named by what it shows,
-// not a hard-coded English "About", and shows the focus ring.
+// not a hard-coded English "About". Its focus is the global outline from
+// app/accessibility.css, so it carries no box-shadow ring of its own that
+// would draw a second ring (and vanish in forced colours).
 describe('About card', () => {
-  it('has a visible focus ring and no hard-coded English name', async () => {
+  it('leaves the focus to the global outline and has no hard-coded English name', async () => {
     const { AboutFooter } = await import('../about-data-settings');
     render(<AboutFooter />);
     const button = screen.getByTestId('settings-about').querySelector('button') as HTMLButtonElement;
     expect(button.getAttribute('aria-label')).toBeNull();
-    expect(button.className).toContain('focus-visible:ring-2');
+    expect(button.className).not.toMatch(/focus(-visible)?:ring/);
+    expect(button.className).not.toContain('outline-none');
     expect(button.textContent).toContain('about.title');
   });
 });

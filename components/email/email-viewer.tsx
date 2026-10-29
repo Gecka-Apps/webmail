@@ -560,7 +560,7 @@ export function ContactSidebarPanel({
         <div className="px-4 pb-5 flex flex-col gap-2">
           <MailtoLink
             to={primaryEmail}
-            className="inline-flex items-center justify-center gap-2 h-9 px-3 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="inline-flex items-center justify-center gap-2 h-9 px-3 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow transition-all duration-200 focus-visible:outline-hidden"
             title={t('contact_sidebar.action_email_title')}
           >
             <Send className="w-4 h-4" />
@@ -6394,7 +6394,7 @@ export function EmailViewer({
                     placeholder={t('quick_reply_placeholder')}
                     className={cn(
                       "w-full px-3 py-2 text-sm border border-border bg-background text-foreground rounded-lg",
-                      "hover:border-accent focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all",
+                      "hover:border-accent focus:border-primary focus:outline-hidden transition-all",
                       "resize-none"
                     )}
                     rows={isQuickReplyFocused || quickReplyText ? 3 : 2}

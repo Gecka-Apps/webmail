@@ -50,7 +50,7 @@ function AddressBookEditRow({
             if (e.key === "Enter" && isValid) onSave(name.trim());
             if (e.key === "Escape") onCancel();
           }}
-          className="w-full px-3 py-1.5 text-sm rounded-md border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          className="w-full px-3 py-1.5 text-sm rounded-md border border-border bg-background text-foreground focus:outline-hidden"
           autoFocus
           disabled={isLoading}
         />

@@ -163,7 +163,7 @@ export function TagPicker({
             onChange={(event) => setQuery(event.target.value)}
             placeholder={t("tag_filter_placeholder")}
             aria-label={t("tag_filter_placeholder")}
-            className="w-full ps-8 pe-2 py-1 text-sm bg-muted border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full ps-8 pe-2 py-1 text-sm bg-muted border border-border rounded-md focus:outline-hidden"
           />
         </div>
       )}
@@ -202,7 +202,7 @@ export function TagPicker({
             aria-label={t("new_tag_placeholder")}
             aria-invalid={!!newError}
             className={cn(
-              "w-full px-2 py-1 text-sm bg-background border rounded-md focus:outline-none focus:ring-2 focus:ring-ring",
+              "w-full px-2 py-1 text-sm bg-background border rounded-md focus:outline-hidden",
               newError ? "border-destructive" : "border-border",
             )}
           />

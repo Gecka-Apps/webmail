@@ -195,7 +195,7 @@ export function ComposingSettings() {
                 value={newKeyword}
                 onChange={(e) => setNewKeyword(e.target.value)}
                 placeholder={t('attachment_reminder.add_placeholder')}
-                className="flex-1 min-w-0 px-2 py-1 text-sm bg-background border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-ring"
+                className="flex-1 min-w-0 px-2 py-1 text-sm bg-background border border-border rounded-md focus:outline-hidden"
               />
               <button
                 type="submit"

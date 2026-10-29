@@ -142,7 +142,7 @@ export function ExternalMailSection({ draft }: { draft: OrgPolicyDraft }) {
           onBlur={(e) => commitDomains(e.target.value)}
           placeholder="partner.com"
           spellCheck={false}
-          className="w-full rounded-md border border-input bg-background px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          className="w-full rounded-md border border-input bg-background px-3 py-2 font-mono text-sm text-foreground placeholder:text-muted-foreground focus:outline-hidden"
         />
         {rejected.length > 0 && (
           <p className="text-xs text-destructive" role="status" data-testid="org-external-domains-rejected">

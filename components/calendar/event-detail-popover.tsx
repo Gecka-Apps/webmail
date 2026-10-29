@@ -652,7 +652,7 @@ export function EventDetailPopover({
                 placeholder={t("detail.add_note")}
                 rows={2}
                 autoFocus
-                className="w-full rounded-md border border-input bg-muted/30 px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-md border border-input bg-muted/30 px-3 py-2 text-sm resize-none focus:outline-hidden"
               />
               <div className="flex justify-end gap-1.5">
                 <Button

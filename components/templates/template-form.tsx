@@ -204,7 +204,7 @@ export function TemplateForm({ template, initialData, onSave, onCancel, shared =
           onChange={(e) => setBody(e.target.value)}
           placeholder={tSettings('body_placeholder')}
           rows={6}
-          className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-y"
+          className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-hidden resize-y"
         />
         <button
           type="button"
@@ -256,7 +256,7 @@ export function TemplateForm({ template, initialData, onSave, onCancel, shared =
             id={labelFor("identity")}
             value={identityId}
             onChange={(e) => setIdentityId(e.target.value)}
-            className="mt-1 w-full px-3 py-2 text-sm rounded-md bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+            className="mt-1 w-full px-3 py-2 text-sm rounded-md bg-background border border-border text-foreground focus:outline-hidden"
           >
             <option value="">{tSettings('default_identity')}</option>
             {identities.map((id) => (

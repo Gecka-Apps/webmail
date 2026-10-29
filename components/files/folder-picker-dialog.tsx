@@ -152,7 +152,7 @@ export function FolderPickerDialog({
               onClick={() => setSelected(row.id)}
               onDoubleClick={() => { if (row.id !== current) { onPick(row.id === ROOT ? null : row.id); onClose(); } }}
               className={cn(
-                "flex items-center gap-1.5 pe-3 h-9 text-sm cursor-default select-none outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+                "flex items-center gap-1.5 pe-3 h-9 text-sm cursor-default select-none outline-none focus-inset",
                 isSelected ? "bg-selection" : "hover:bg-muted",
                 isCurrent && "text-muted-foreground",
               )}

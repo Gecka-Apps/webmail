@@ -94,7 +94,7 @@ export function ICalSubscriptionModal({ client, onClose, editSubscription, initi
     ? url !== editSubscription!.url || name !== editSubscription!.name || color !== editSubscription!.color || refreshInterval !== editSubscription!.refreshInterval
     : url.trim().length > 0 || name.trim().length > 0;
 
-  const fieldClass = "w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring";
+  const fieldClass = "w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden";
 
   return (
     <Dialog

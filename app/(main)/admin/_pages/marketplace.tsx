@@ -639,7 +639,7 @@ function ExtensionCard({
           />
         </AdminLink>
       )}
-      <AdminLink href={previewHref} className="block p-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 rounded-lg">
+      <AdminLink href={previewHref} className="block p-4 focus:outline-hidden rounded-lg">
         <div className="flex items-start gap-3">
           <div className="w-10 h-10 rounded-md bg-muted flex items-center justify-center shrink-0 overflow-hidden">
             {extension.iconUrl ? (

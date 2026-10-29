@@ -446,7 +446,7 @@ export function FilterRuleModal({
   };
 
   const selectClass =
-    "px-2.5 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150 cursor-pointer hover:border-muted-foreground";
+    "px-2.5 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-hidden transition-colors duration-150 cursor-pointer hover:border-muted-foreground";
 
   return (
     <>
@@ -862,7 +862,7 @@ export function FilterRuleModal({
                         max={PERIOD_INPUT_MAX}
                         value={periodStart}
                         onChange={(e) => { setPeriodStart(e.target.value); setHalfFilledPeriod(false); }}
-                        className="px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150 hover:border-muted-foreground"
+                        className="px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-hidden transition-colors duration-150 hover:border-muted-foreground"
                       />
                     </label>
                     <label className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -873,7 +873,7 @@ export function FilterRuleModal({
                         max={PERIOD_INPUT_MAX}
                         value={periodEnd}
                         onChange={(e) => { setPeriodEnd(e.target.value); setHalfFilledPeriod(false); }}
-                        className="px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150 hover:border-muted-foreground"
+                        className="px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-hidden transition-colors duration-150 hover:border-muted-foreground"
                       />
                     </label>
                   </div>

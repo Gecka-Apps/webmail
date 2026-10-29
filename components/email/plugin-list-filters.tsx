@@ -72,7 +72,7 @@ export function PluginListFilters({
             onClick={() => setListFilterActive(filter.key)}
             className={cn(
               "inline-flex items-center gap-1 h-7 max-w-[12rem] px-2.5 rounded-full text-xs border transition-colors",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              "focus-visible:outline-hidden",
               on
                 ? "bg-primary/10 text-primary border-primary/30 hover:bg-primary/15"
                 : "border-border text-muted-foreground hover:bg-muted hover:text-foreground",

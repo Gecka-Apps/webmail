@@ -4421,7 +4421,7 @@ export function EmailComposer({
                   focusBody();
                 }
               }}
-              className="flex-1 border-0 focus-visible:ring-0 h-8 px-0 text-sm"
+              className="flex-1 border-0 h-8 px-0 text-sm"
             />
           </div>
       </div>

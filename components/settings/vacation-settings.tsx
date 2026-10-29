@@ -58,7 +58,7 @@ function utcToLocalDatetime(utcIso: string): string {
 }
 
 const DATE_FIELD =
-  'px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150 hover:border-muted-foreground';
+  'px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-hidden transition-colors duration-150 hover:border-muted-foreground';
 
 // The latest moment the date fields offer: a later year has no room in the
 // four digits a stored date has.
@@ -492,7 +492,7 @@ export function VacationSettings() {
             onChange={(e) => changeTyped(setLocalSubject)(e.target.value)}
             placeholder={t('message.subject_placeholder')}
             aria-invalid={oversize.subject}
-            className="w-64 px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150 hover:border-muted-foreground"
+            className="w-64 px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-hidden transition-colors duration-150 hover:border-muted-foreground"
           />
         </SettingItem>
         <FieldMessage text={oversize.subject && sizeLimits ? t('warnings.subject_too_long', { max: sizeLimits.subject }) : null} />
@@ -509,7 +509,7 @@ export function VacationSettings() {
             onChange={(e) => changeTyped(setLocalTextBody)(e.target.value)}
             placeholder={t('message.body_placeholder')}
             rows={6}
-            className="w-full px-3 py-2 text-sm rounded-md bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150 hover:border-muted-foreground resize-y"
+            className="w-full px-3 py-2 text-sm rounded-md bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-hidden transition-colors duration-150 hover:border-muted-foreground resize-y"
           />
           <FieldMessage text={bodyWarning} warning={!oversize.body} />
         </div>
@@ -594,7 +594,7 @@ export function VacationSettings() {
                   placeholder={t('forward.to_placeholder')}
                   aria-label={t('forward.to_label')}
                   aria-invalid={forwardInvalid}
-                  className="w-64 max-w-full px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150 hover:border-muted-foreground"
+                  className="w-64 max-w-full px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground placeholder:text-muted-foreground focus:outline-hidden transition-colors duration-150 hover:border-muted-foreground"
                 />
               </SettingItem>
               <FieldMessage text={forwardInvalid ? t('warnings.forward_address') : null} />

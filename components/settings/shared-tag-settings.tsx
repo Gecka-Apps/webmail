@@ -96,7 +96,7 @@ function SharedTagForm({
             if (e.key === "Enter") save();
             if (e.key === "Escape") { e.stopPropagation(); onCancel(); }
           }}
-          className="w-full rounded-md border border-border bg-background px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+          className="w-full rounded-md border border-border bg-background px-2.5 py-1.5 text-sm focus:outline-hidden"
         />
         {duplicate && <p className="mt-1 text-xs text-destructive">{t("exists")}</p>}
         {tooLong && <p className="mt-1 text-xs text-destructive">{t("too_long")}</p>}

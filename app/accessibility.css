@@ -103,14 +103,18 @@
  * One outline for every focusable element, drawn as a real outline rather
  * than a box-shadow ring: forced-colors mode removes box-shadows, and an
  * outline also keeps its width at any zoom. It outranks the utilities that
- * used to switch the outline off (outline-none plus a ring). Elements that
- * only take focus from script (tabindex="-1": lists, panes, dialog bodies)
- * keep no outline unless "always show focus" is on.
+ * used to switch the outline off (outline-none plus a ring).
+ *
+ * Containers that only take focus from script (tabindex="-1" on a list, a
+ * pane, a dialog, <main>, a heading focused after navigation) skip it: the
+ * focus there is a starting point, not a control. Controls with tabindex="-1"
+ * keep it, because roving-focus widgets (menu items, options, grid cells,
+ * tabs, rows) are focused while their tabindex is -1.
  */
 :root {
   --focus-ring-width: 2px;
   --focus-ring-offset: 2px;
-  --focus-ring-color: var(--color-primary);
+  --focus-ring-color: var(--color-ring);
 }
 :root[data-focus-ring="thick"] {
   --focus-ring-width: 3px;
@@ -119,13 +123,15 @@
   --focus-ring-width: 5px;
   --focus-ring-offset: 3px;
 }
-:focus-visible:not([tabindex="-1"]),
-:root[data-focus-always="on"] :focus:not([tabindex="-1"]) {
+:focus-visible:not([tabindex="-1"]:not(a[href], button, input, select, textarea, summary, [contenteditable="true"], [role="button"], [role="link"], [role="menuitem"], [role="menuitemradio"], [role="menuitemcheckbox"], [role="option"], [role="gridcell"], [role="row"], [role="treeitem"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="slider"], [role="spinbutton"], [role="columnheader"], [role="rowheader"])),
+:root[data-focus-always="on"] :focus:not([tabindex="-1"]:not(a[href], button, input, select, textarea, summary, [contenteditable="true"], [role="button"], [role="link"], [role="menuitem"], [role="menuitemradio"], [role="menuitemcheckbox"], [role="option"], [role="gridcell"], [role="row"], [role="treeitem"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="slider"], [role="spinbutton"], [role="columnheader"], [role="rowheader"])) {
   outline: var(--focus-ring-width) solid var(--focus-ring-color) !important;
   outline-offset: var(--focus-ring-offset) !important;
 }
-/* Inside a scroll container a positive offset is clipped; draw it inside. */
-:is([role="option"], [role="row"], [role="treeitem"], [role="gridcell"], [role="menuitem"], [role="menuitemradio"], [role="menuitemcheckbox"], [role="tab"]):focus-visible:not([tabindex="-1"]) {
+/* Inside a scroll container a positive offset is clipped; draw it inside.
+   `focus-inset` does the same for any control that sits flush against the
+   edge of a clipping container. */
+:is([role="option"], [role="row"], [role="treeitem"], [role="gridcell"], [role="menuitem"], [role="menuitemradio"], [role="menuitemcheckbox"], [role="tab"], .focus-inset):focus-visible {
   outline-offset: calc(var(--focus-ring-width) * -1) !important;
 }
 /* The focused element scrolls clear of sticky headers and the bottom bar. */
@@ -249,7 +255,7 @@ html.dark[data-contrast="more"] {
 /* ---------- Forced colours (Windows contrast themes) ---------- */
 
 @media (forced-colors: active) {
-  :focus-visible:not([tabindex="-1"]) {
+  :focus-visible:not([tabindex="-1"]:not(a[href], button, input, select, textarea, summary, [contenteditable="true"], [role="button"], [role="link"], [role="menuitem"], [role="menuitemradio"], [role="menuitemcheckbox"], [role="option"], [role="gridcell"], [role="row"], [role="treeitem"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="slider"], [role="spinbutton"], [role="columnheader"], [role="rowheader"])) {
     outline-color: Highlight !important;
   }
 }

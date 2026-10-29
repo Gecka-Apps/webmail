@@ -126,7 +126,7 @@ function VersionBadge() {
 
   const triggerClass = cn(
     "peer text-center text-xs transition-colors rounded-sm underline-offset-2 hover:underline",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+    "focus-visible:outline-hidden",
     triggerColor,
   );
 
@@ -1686,7 +1686,7 @@ function LoginPageContent() {
                           onChange={(e) => setRememberMe(e.target.checked)}
                           className="peer sr-only"
                         />
-                        <span className="flex items-center justify-center w-[18px] h-[18px] rounded-[5px] border border-border/80 bg-muted/40 peer-checked:bg-primary peer-checked:border-primary peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background transition-all duration-200">
+                        <span className="flex items-center justify-center w-[18px] h-[18px] rounded-[5px] border border-border/80 bg-muted/40 peer-checked:bg-primary peer-checked:border-primary peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[var(--focus-ring-color)] transition-all duration-200">
                           {rememberMe && (
                             <Check className="w-3 h-3 text-primary-foreground" stroke={3} aria-hidden="true" />
                           )}

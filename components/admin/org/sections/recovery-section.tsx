@@ -52,7 +52,7 @@ export function RecoverySection({ draft }: { draft: OrgPolicyDraft }) {
                 if (!Number.isFinite(parsed)) return;
                 draft.setOrgValue('recovery', 'days', Math.min(MAX_DAYS, Math.max(0, parsed)));
               }}
-              className="h-9 w-28 rounded-md border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              className="h-9 w-28 rounded-md border border-input bg-background px-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-hidden"
             />
             <span className="text-sm text-muted-foreground">days</span>
           </div>

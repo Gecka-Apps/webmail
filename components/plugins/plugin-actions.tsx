@@ -171,7 +171,7 @@ export function PluginActions({ surface, context, variant = 'buttons', mailboxRo
             onClick={(e) => { e.stopPropagation(); void run(action); }}
             className={cn(
               'relative inline-flex h-8 items-center gap-1.5 rounded-md px-2 text-sm text-muted-foreground transition-colors',
-              'hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+              'hover:bg-muted hover:text-foreground focus-visible:outline-hidden',
               'disabled:opacity-50',
               action.badge && 'bg-primary/10 text-primary hover:bg-primary/10 hover:text-primary',
               action.danger && 'text-destructive hover:bg-destructive/10 hover:text-destructive',
@@ -210,7 +210,7 @@ function PluginActionsOverflow({ surface, context, mailboxRole, mimeType, classN
         onClick={(e) => { e.stopPropagation(); openContextMenu(e, true); }}
         className={cn(
           'inline-flex h-8 items-center rounded-md px-2 text-muted-foreground transition-colors',
-          'hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+          'hover:bg-muted hover:text-foreground focus-visible:outline-hidden',
         )}
       >
         <MoreVertical className="h-4 w-4" />

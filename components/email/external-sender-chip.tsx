@@ -138,7 +138,7 @@ export function ExternalSenderChip({ from, accountId, className, interactive = t
             setOpen(false);
           }
         }}
-        className={cn(chipClass, 'cursor-pointer hover:bg-warning/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring')}
+        className={cn(chipClass, 'cursor-pointer hover:bg-warning/20 focus-visible:outline-hidden')}
       >
         {content}
       </button>

@@ -128,7 +128,7 @@ export function CalendarSearchResults({
         onClick={(e) => onSelectEvent(ev, e.currentTarget.getBoundingClientRect())}
         onContextMenu={onContextMenuEvent ? (e) => onContextMenuEvent(e, ev) : undefined}
         onKeyDown={handleRowKeyDown}
-        className="w-full flex items-start gap-3 px-2 sm:px-4 rounded-md hover:bg-muted/60 focus-visible:bg-muted/60 outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring transition-colors text-start"
+        className="w-full flex items-start gap-3 px-2 sm:px-4 rounded-md hover:bg-muted/60 focus-visible:bg-muted/60 outline-none focus-inset transition-colors text-start"
         style={{ paddingBlock: "var(--density-item-py)" }}
       >
         <span className="w-24 sm:w-32 flex-shrink-0 text-sm leading-tight">

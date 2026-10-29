@@ -17,7 +17,7 @@ import {
 type CalendarT = ReturnType<typeof useTranslations>;
 
 const selectClass =
-  "rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring";
+  "rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden";
 
 /** "15 minutes before", plus "by email" for email alerts. */
 export function formatAlertRowLabel(row: Omit<AlertRow, "id">, t: CalendarT): string {

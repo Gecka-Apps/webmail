@@ -84,7 +84,7 @@ function TemplateEditor({
             placeholder={placeholder}
             onChange={(e) => onChange(e.target.value)}
             spellCheck={false}
-            className="flex-1 px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground font-mono focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150"
+            className="flex-1 px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground font-mono focus:outline-hidden transition-colors duration-150"
           />
           <button
             type="button"

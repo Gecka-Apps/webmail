@@ -134,7 +134,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTML
   return (
     <textarea
       ref={ref}
-      className={cn('bk flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground transition-all duration-200 placeholder:text-muted-foreground hover:border-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-ring disabled:cursor-not-allowed disabled:opacity-50', className)}
+      className={cn('bk flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground transition-all duration-200 placeholder:text-muted-foreground hover:border-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-ring disabled:cursor-not-allowed disabled:opacity-50', className)}
       {...rest}
     />
   );
@@ -153,7 +153,7 @@ export function Select({ options, children, onChange, disabled, block = false, c
   return (
     <select
       className={cn(
-        'bk px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150',
+        'bk px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-hidden focus:ring-2 focus:ring-ring transition-colors duration-150',
         disabled ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer hover:border-muted-foreground',
         block && 'w-full',
         className,
@@ -525,7 +525,7 @@ export function Combobox({
                     toggleMultipleOption(opt);
                   }}
                   aria-label={kitString('remove_named', { name: String(opt.label) })}
-                  className="text-muted-foreground hover:text-foreground p-0.5 rounded focus:outline-none"
+                  className="text-muted-foreground hover:text-foreground p-0.5 rounded focus:outline-hidden"
                 >
                   <X className="w-3 h-3" aria-hidden="true" />
                 </button>
@@ -585,7 +585,7 @@ export function Combobox({
               }}
               onClick={handleClear}
               aria-label={kitString('clear')}
-              className="p-1 rounded hover:text-foreground focus:outline-none"
+              className="p-1 rounded hover:text-foreground focus:outline-hidden"
             >
               <X className="w-3.5 h-3.5" aria-hidden="true" />
             </button>
@@ -600,7 +600,7 @@ export function Combobox({
             }}
             onClick={handleToggle}
             aria-label={isOpen ? kitString('close') : kitString('open')}
-            className="p-1 rounded hover:text-foreground focus:outline-none disabled:opacity-50"
+            className="p-1 rounded hover:text-foreground focus:outline-hidden disabled:opacity-50"
           >
             {isOpen ? <ChevronUp className="w-3.5 h-3.5" aria-hidden="true" /> : <ChevronDown className="w-3.5 h-3.5" aria-hidden="true" />}
           </button>
@@ -614,7 +614,7 @@ export function Combobox({
           role="listbox"
           aria-multiselectable={multiple || undefined}
           aria-label={ariaLabel ?? placeholder}
-          className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-border bg-popover text-popover-foreground shadow-md p-1 focus:outline-none"
+          className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-border bg-popover text-popover-foreground shadow-md p-1 focus:outline-hidden"
         >
           {filteredOptions.length === 0 ? (
             <div className="px-2 py-2 text-xs text-muted-foreground text-center">
@@ -679,7 +679,7 @@ export function Checkbox({ checked, onChange, label, hint, disabled = false, id,
       disabled={disabled}
       onClick={() => onChange?.(!checked)}
       className={cn(
-        'bk mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50',
+        'bk mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50',
         checked ? 'border-primary bg-primary text-primary-foreground' : 'border-muted-foreground/50 bg-background',
       )}
     >
@@ -710,7 +710,7 @@ export function Switch({ checked, onChange, disabled = false, label, id }: { che
       disabled={disabled}
       onClick={() => onChange?.(!checked)}
       className={cn(
-        'bk relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+        'bk relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-150 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring',
         checked ? 'bg-primary' : 'bg-muted ring-1 ring-inset ring-muted-foreground',
         disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
       )}
@@ -737,7 +737,7 @@ export function Segmented({ value, options, onChange, label }: { value: string; 
           aria-checked={o.value === value}
           onClick={() => onChange?.(o.value)}
           className={cn(
-            'px-3 py-1.5 text-xs rounded-md transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+            'px-3 py-1.5 text-xs rounded-md transition-colors duration-150 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring',
             o.value === value ? 'bg-primary text-primary-foreground font-medium' : 'bg-muted hover:bg-accent text-foreground',
           )}
         >
@@ -945,7 +945,7 @@ export function Tabs({ value, tabs, onChange, label }: { value: string; tabs: { 
             aria-selected={active}
             onClick={() => onChange(tab.id)}
             className={cn(
-              'flex items-center gap-1.5 px-4 py-2 text-sm font-medium border-b-2 -mb-px whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset',
+              'flex items-center gap-1.5 px-4 py-2 text-sm font-medium border-b-2 -mb-px whitespace-nowrap transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset',
               active ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground',
             )}
           >
@@ -1116,7 +1116,7 @@ export function RowAction({ icon, label, onClick, danger = false }: { icon: stri
       onClick={onClick}
       title={label}
       aria-label={label}
-      className={cn('bk p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring', danger && 'hover:text-destructive')}
+      className={cn('bk p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring', danger && 'hover:text-destructive')}
     >
       <Icon name={icon} />
     </button>
@@ -1152,7 +1152,7 @@ export function Chip({ icon, label, detail, onClick, onRemove, removeLabel, titl
   );
   const box = 'bk inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-muted/60 rounded-md border border-border/50 flex-shrink-0 max-w-full';
   if (onClick && !onRemove) {
-    return <button type="button" title={title} onClick={onClick} className={cn(box, 'hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring')}>{body}</button>;
+    return <button type="button" title={title} onClick={onClick} className={cn(box, 'hover:bg-muted transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring')}>{body}</button>;
   }
   return (
     <span className={box} title={title}>
@@ -1226,7 +1226,7 @@ export function BarButton({ icon, children, onClick, active = false, busy = fals
       disabled={disabled || busy}
       aria-pressed={active || undefined}
       className={cn(
-        'bk inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-md border transition-colors min-h-[36px] disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+        'bk inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-md border transition-colors min-h-[36px] disabled:opacity-50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring',
         active ? 'bg-primary/10 text-primary border-primary/30 font-medium' : 'text-muted-foreground hover:text-foreground border-border hover:bg-muted',
       )}
     >
@@ -1293,7 +1293,7 @@ export function SidebarRow({ icon, label, detail, onClick, title, ariaLabel }: {
       {...(onClick ? { type: 'button' as const, onClick } : {})}
       title={title}
       aria-label={ariaLabel}
-      className={cn('bk w-full flex items-center gap-2 ps-[28px] pe-3 text-sm text-foreground text-start border-s-2 border-transparent transition-colors duration-150', onClick && 'hover:bg-muted/50 focus-visible:outline-none focus-visible:bg-muted/50')}
+      className={cn('bk w-full flex items-center gap-2 ps-[28px] pe-3 text-sm text-foreground text-start border-s-2 border-transparent transition-colors duration-150', onClick && 'hover:bg-muted/50 focus-visible:outline-hidden focus-visible:bg-muted/50')}
       // Folder rows are 44px tall on phones (max-lg); the frame's own
       // viewport can't tell, so the page passes the height in.
       style={{ paddingBlock: 'var(--density-sidebar-py)', minHeight: 'var(--touch-row-min-h, 0px)' }}

@@ -13,8 +13,8 @@ import type { OrgPolicyDraft } from '../use-org-policy-draft';
 
 const inputClass =
   'block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground ' +
-  'placeholder:text-muted-foreground hover:border-muted-foreground focus-visible:outline-none focus-visible:ring-2 ' +
-  'focus-visible:ring-ring focus-visible:border-ring';
+  'placeholder:text-muted-foreground hover:border-muted-foreground focus-visible:outline-hidden ' +
+  'focus-visible:border-ring';
 const labelClass = 'mb-1 block text-xs font-medium text-foreground';
 
 /** Same cap as the sanitiser (organisation-policy.ts): more are not saved. */

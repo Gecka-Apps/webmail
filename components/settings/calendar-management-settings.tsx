@@ -70,7 +70,7 @@ function CalendarColorPicker({
           type="button"
           onClick={() => onChange(color)}
           className={cn(
-            "w-6 h-6 rounded-full transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+            "w-6 h-6 rounded-full transition-transform hover:scale-110 focus-visible:outline-hidden",
             value === color && "ring-2 ring-offset-2 ring-offset-background ring-foreground"
           )}
           style={{ backgroundColor: color }}
@@ -142,7 +142,7 @@ export function CalendarEditForm({
             if (e.key === 'Escape') onCancel();
           }}
           placeholder={t('name_placeholder')}
-          className="w-full px-3 py-1.5 text-sm rounded-md border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          className="w-full px-3 py-1.5 text-sm rounded-md border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-hidden"
           autoFocus
           disabled={isLoading}
         />
@@ -696,7 +696,7 @@ export function CalendarManagementSettings() {
                   type="button"
                   onClick={() => setColorPickerId(colorPickerId === cal.id ? null : cal.id)}
                   className={cn(
-                    "block w-5 h-5 rounded-full shrink-0 transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                    "block w-5 h-5 rounded-full shrink-0 transition-transform hover:scale-110 focus-visible:outline-hidden",
                     TOUCH_HIT_AREA,
                   )}
                   style={{ backgroundColor: color }}

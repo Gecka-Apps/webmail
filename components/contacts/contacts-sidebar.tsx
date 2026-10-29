@@ -808,7 +808,7 @@ function SidebarRow({
           }
         }}
         aria-current={isActive ? "true" : undefined}
-        className="flex flex-1 min-w-0 items-center gap-2 self-stretch text-start rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+        className="flex flex-1 min-w-0 items-center gap-2 self-stretch text-start rounded-sm outline-none focus-inset"
       >
         {icon}
         <span className="truncate" title={label}>{label}</span>

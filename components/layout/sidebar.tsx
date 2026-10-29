@@ -286,7 +286,7 @@ function SidebarRowCounts({
           e.stopPropagation();
           onUnreadClick();
         }}
-        className={cn(unreadClass, "cursor-pointer hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring")}
+        className={cn(unreadClass, "cursor-pointer hover:underline rounded-sm focus-visible:outline-hidden")}
         title={t('unread_filter', { count: unreadCount })}
         aria-label={t('unread_filter', { count: unreadCount })}
       >
@@ -613,7 +613,7 @@ function SidebarSectionHeader({
         data-section-name={label}
         data-expanded={expanded ? 'true' : 'false'}
         aria-expanded={expanded}
-        className="flex flex-1 min-w-0 items-center text-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex flex-1 min-w-0 items-center text-start rounded-sm focus-visible:outline-hidden"
       >
         {expanded ? (
           <ChevronDown className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />

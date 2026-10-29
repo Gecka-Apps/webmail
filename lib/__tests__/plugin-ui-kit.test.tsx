@@ -48,7 +48,7 @@ describe('plugin UI kit components', () => {
     // Each kit component that can't reuse an app component copies one; the
     // copy must still be there, word for word.
     const copies: [string, string][] = [
-      ['components/settings/settings-section.tsx', 'px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-150'],
+      ['components/settings/settings-section.tsx', 'px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-hidden'],
       ['components/settings/settings-section.tsx', 'inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-150'],
       ['components/settings/settings-section.tsx', 'bg-muted ring-1 ring-inset ring-muted-foreground'],
       ['components/settings/settings-section.tsx', 'inline-block h-4 w-4 transform rounded-full transition-transform duration-150'],

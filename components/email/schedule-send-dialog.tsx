@@ -120,7 +120,7 @@ export function ScheduleSendDialog({
             type="button"
             onClick={() => scheduleAt(formatLocalDateTimeInput(preset.date))}
             disabled={disabled}
-            className="flex items-center justify-between gap-3 rounded-md px-3 py-2 max-md:min-h-11 text-start text-sm hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
+            className="flex items-center justify-between gap-3 rounded-md px-3 py-2 max-md:min-h-11 text-start text-sm hover:bg-muted focus-visible:outline-hidden disabled:opacity-50"
           >
             <span>{t(`schedule_preset.${preset.key}`)}</span>
             <span className="text-muted-foreground">
@@ -139,7 +139,7 @@ export function ScheduleSendDialog({
           setValue(e.target.value);
           setError("");
         }}
-        className={cn(error && "border-destructive focus-visible:ring-destructive")}
+        className={cn(error && "border-destructive")}
       />
       {error && <p role="alert" className="mt-2 text-sm text-destructive">{error}</p>}
     </Dialog>

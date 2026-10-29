@@ -230,7 +230,7 @@ export function TaskListView({
               <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); onSelectTask(task); }}
-                className="flex-1 min-w-0 text-start rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex-1 min-w-0 text-start rounded-sm focus-visible:outline-hidden"
               >
                 <span className="flex items-center gap-1.5">
                   <span className={cn(

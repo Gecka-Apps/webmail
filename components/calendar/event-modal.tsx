@@ -1241,7 +1241,7 @@ export function EventModal({
               placeholder={t("form.description")}
               rows={3}
               maxLength={10000}
-              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm resize-none focus:outline-hidden"
             />
           </div>
 
@@ -1352,7 +1352,7 @@ export function EventModal({
                 type="date"
                 value={startDate}
                 onChange={(e) => handleStartDateChange(e.target.value)}
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden"
               />
             </div>
             {!allDay && (
@@ -1363,7 +1363,7 @@ export function EventModal({
                   type="time"
                   value={startTime}
                   onChange={(e) => handleStartTimeChange(e.target.value)}
-                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden"
                 />
               </div>
             )}
@@ -1374,7 +1374,7 @@ export function EventModal({
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden"
               />
             </div>
             {!allDay && (
@@ -1385,7 +1385,7 @@ export function EventModal({
                   type="time"
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
-                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden"
                 />
               </div>
             )}
@@ -1418,7 +1418,7 @@ export function EventModal({
                 id={labelFor("calendar_select")}
                 value={calendarId}
                 onChange={(e) => setCalendarId(e.target.value)}
-                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden"
               >
                 {selectableCalendars.map((cal) => (
                   <option key={cal.id} value={cal.id}>
@@ -1446,7 +1446,7 @@ export function EventModal({
                     setShowRecurrenceEditor(false);
                   }
                 }}
-                className="flex-1 min-w-0 rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                className="flex-1 min-w-0 rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-hidden"
               >
                 <option value="none">{t("recurrence.none")}</option>
                 <option value="daily">{t("recurrence.daily")}</option>

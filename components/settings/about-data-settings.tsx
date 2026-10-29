@@ -90,7 +90,7 @@ export function AboutFooter() {
         <button
           type="button"
           onClick={handleLogoClick}
-          className="flex items-center gap-3 flex-1 min-w-0 text-start rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring group/about cursor-pointer"
+          className="flex items-center gap-3 flex-1 min-w-0 text-start rounded-md focus-visible:outline-hidden group/about cursor-pointer"
         >
           <img
             src={logoLight}

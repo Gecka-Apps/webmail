@@ -198,7 +198,7 @@ export function QuickCreatePopover({
                 value={draft.calendarId}
                 onChange={(e) => onChange({ ...draft, calendarId: e.target.value })}
                 aria-label={t("form.calendar_select")}
-                className="flex-1 min-w-0 rounded-md border border-input bg-background px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                className="flex-1 min-w-0 rounded-md border border-input bg-background px-3 py-1.5 text-sm focus:outline-hidden"
               >
                 {calendars.map((c) => (
                   <option key={c.id} value={c.id}>{c.name}</option>

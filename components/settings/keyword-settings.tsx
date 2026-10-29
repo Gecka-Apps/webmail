@@ -54,7 +54,7 @@ export function KeywordColorPicker({
               type="button"
               onClick={() => onChange(colorKey)}
               className={cn(
-                "w-6 h-6 rounded-full transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                "w-6 h-6 rounded-full transition-transform hover:scale-110 focus-visible:outline-hidden",
                 KEYWORD_PALETTE[colorKey].dot,
                 value === colorKey && "ring-2 ring-offset-2 ring-offset-background ring-foreground"
               )}
@@ -247,7 +247,7 @@ function KeywordEditForm({
           value={label}
           onChange={(e) => setLabel(e.target.value)}
           disabled={isLocked}
-          className="w-full px-2.5 py-1.5 text-sm rounded-md border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-60"
+          className="w-full px-2.5 py-1.5 text-sm rounded-md border border-border bg-background focus:outline-hidden disabled:opacity-60"
           placeholder={t("label_placeholder")}
           autoFocus
           maxLength={30}
@@ -336,7 +336,7 @@ function UnrecognizedKeywordRow({
           type="button"
           onClick={() => setPickingColor((open) => !open)}
           className={cn(
-            "w-5 h-5 shrink-0 rounded-full transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+            "w-5 h-5 shrink-0 rounded-full transition-transform hover:scale-110 focus-visible:outline-hidden",
             KEYWORD_PALETTE[draft.color]?.dot ?? KEYWORD_PALETTE.gray.dot,
           )}
           aria-label={t("color_field")}
@@ -346,7 +346,7 @@ function UnrecognizedKeywordRow({
           type="text"
           value={draft.label}
           onChange={(e) => onChange({ ...draft, label: e.target.value })}
-          className="min-w-0 flex-1 px-2.5 py-1.5 text-sm rounded-md border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+          className="min-w-0 flex-1 px-2.5 py-1.5 text-sm rounded-md border border-border bg-background focus:outline-hidden"
           placeholder={t("label_placeholder")}
           maxLength={30}
           aria-label={t("label_field")}

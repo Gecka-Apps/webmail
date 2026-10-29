@@ -21,7 +21,7 @@ interface AdminButtonLinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 export function AdminButtonLink({ href, variant = 'outline', external, className, children, ...rest }: AdminButtonLinkProps) {
   const classes = cn(
     'inline-flex h-9 items-center justify-center gap-2 rounded-md px-3 text-sm font-medium transition-all duration-200',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+    'focus-visible:outline-hidden',
     VARIANTS[variant],
     className,
   );

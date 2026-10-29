@@ -593,7 +593,7 @@ function CredentialSection({ icon: Icon, i18nNamespace, entries, onCreate, onRem
               onChange={(e) => setAllowedIpsRaw(e.target.value)}
               placeholder={t('app_passwords.allowed_ips_placeholder')}
               rows={2}
-              className="w-full text-xs font-mono px-3 py-2 rounded-md border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full text-xs font-mono px-3 py-2 rounded-md border border-border bg-background focus:outline-hidden"
             />
             <p className="text-[10px] text-muted-foreground mt-1">{t('app_passwords.allowed_ips_hint')}</p>
           </div>
@@ -808,7 +808,7 @@ function PublicKeysSection() {
               placeholder={tk('key_placeholder')}
               rows={3}
               required
-              className="w-full text-xs font-mono px-3 py-2 rounded-md border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full text-xs font-mono px-3 py-2 rounded-md border border-border bg-background focus:outline-hidden"
             />
           </div>
           <div className="flex gap-2">
@@ -833,7 +833,7 @@ function PublicKeysSection() {
               id={labelFor("algorithm_label")}
               value={selectedAlgorithm}
               onChange={(e) => setSelectedAlgorithm(e.target.value as 'Aes128' | 'Aes256')}
-              className="w-full text-xs px-3 py-1.5 rounded-md border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full text-xs px-3 py-1.5 rounded-md border border-border bg-background focus:outline-hidden"
             >
               <option value="Aes256">AES-256</option>
               <option value="Aes128">AES-128</option>
@@ -846,7 +846,7 @@ function PublicKeysSection() {
                 type="checkbox"
                 checked={encryptOnAppend}
                 onChange={(e) => setEncryptOnAppend(e.target.checked)}
-                className="rounded border-border text-primary focus:ring-ring"
+                className="rounded border-border text-primary"
               />
               {t('encryption.encrypt_on_append')}
             </label>
@@ -856,7 +856,7 @@ function PublicKeysSection() {
                 type="checkbox"
                 checked={allowSpamTraining}
                 onChange={(e) => setAllowSpamTraining(e.target.checked)}
-                className="rounded border-border text-primary focus:ring-ring"
+                className="rounded border-border text-primary"
               />
               {t('encryption.allow_spam_training')}
             </label>
@@ -977,12 +977,12 @@ function EmailClientSection() {
               type="text"
               readOnly
               value={jmapUsername}
-              className="py-2 px-3 block w-full bg-background border border-border border-e-transparent rounded-s-lg text-sm text-foreground focus:z-10 focus:border-ring focus:ring-ring"
+              className="py-2 px-3 block w-full bg-background border border-border border-e-transparent rounded-s-lg text-sm text-foreground focus:z-10 focus:border-ring"
             />
             <button
               type="button"
               onClick={handleCopy}
-              className="h-[38px] px-3 shrink-0 inline-flex items-center gap-1.5 rounded-e-lg border border-border bg-muted text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              className="h-[38px] px-3 shrink-0 inline-flex items-center gap-1.5 rounded-e-lg border border-border bg-muted text-sm text-muted-foreground hover:bg-accent hover:text-accent-foreground focus:outline-hidden"
             >
               {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
               {copied ? t('email_client.copied') : t('email_client.copy')}
@@ -1456,7 +1456,7 @@ export function LinkDeviceSection() {
               dir="ltr"
               value={signInLink}
               onFocus={(e) => e.currentTarget.select()}
-              className="py-2 px-3 block w-full bg-background border border-border rounded-md text-xs font-mono text-foreground focus:border-ring focus:ring-ring"
+              className="py-2 px-3 block w-full bg-background border border-border rounded-md text-xs font-mono text-foreground focus:border-ring"
             />
             <Button type="button" variant="outline" size="sm" onClick={handleCopyLink}>
               {copied ? <Check className="w-3 h-3 me-1" /> : <Copy className="w-3 h-3 me-1" />}

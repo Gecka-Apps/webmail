@@ -151,7 +151,7 @@ function SortableFolderRow({ id, title, children }: { id: string; title: string;
         type="button"
         {...attributes}
         {...listeners}
-        className="flex items-center px-1 text-muted-foreground/40 hover:text-foreground cursor-grab active:cursor-grabbing touch-none rounded-md focus:outline-none focus:ring-2 focus:ring-ring flex-shrink-0"
+        className="flex items-center px-1 text-muted-foreground/40 hover:text-foreground cursor-grab active:cursor-grabbing touch-none rounded-md focus:outline-hidden flex-shrink-0"
         title={title}
         aria-label={title}
       >
@@ -542,7 +542,7 @@ export function FolderSettings() {
               }
             }}
             placeholder={parentId ? t('subfolder_name') : t('new_folder_name')}
-            className="flex-1 px-2 py-1 text-sm rounded border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            className="flex-1 px-2 py-1 text-sm rounded border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-hidden"
             autoFocus
             disabled={isLoading}
           />
@@ -592,7 +592,7 @@ export function FolderSettings() {
               if (e.key === 'Enter') handleRename(mb.id);
               if (e.key === 'Escape') cancelEdit();
             }}
-            className="flex-1 px-2 py-1 text-sm rounded border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            className="flex-1 px-2 py-1 text-sm rounded border border-border bg-background text-foreground focus:outline-hidden"
             autoFocus
             disabled={isLoading}
           />
@@ -643,7 +643,7 @@ export function FolderSettings() {
                 onMouseDown={(e) => { if (e.shiftKey) e.preventDefault(); }}
                 onClick={(e) => handleSelectClick(mb.id, e)}
                 className={cn(
-                  "p-0.5 rounded flex-shrink-0 transition-colors hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  "p-0.5 rounded flex-shrink-0 transition-colors hover:bg-accent focus:outline-hidden",
                   isSelected ? "text-primary" : "text-muted-foreground",
                 )}
               >
