@@ -209,7 +209,8 @@
     "mv_next_day": "روز بعد",
     "mv_add_another_account": "افزودن حساب دیگر",
     "mv_manage_account": "مدیریت حساب",
-    "mv_storage_used": "{percent}٪ از {total} استفاده شده"
+    "mv_storage_used": "{percent}٪ از {total} استفاده شده",
+    "accessibility": "دسترس‌پذیری"
   },
   "protocol_handlers": {
     "title": "برنامه‌های پیش‌فرض",
@@ -3447,7 +3448,8 @@
       "refresh": "بازنشانی ایمیل‌ها",
       "select_all": "انتخاب همه",
       "global_search": "جستجو در همه جا",
-      "extend_selection": "گسترش انتخاب به پایین / بالا"
+      "extend_selection": "گسترش انتخاب به پایین / بالا",
+      "accessibility_panel": "باز کردن گزینه‌های دسترس‌پذیری"
     },
     "threads": {
       "expand_collapse": "باز/بسته کردن رشته",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} خوانده‌نشده",
     "level_error": "خطا",
     "level_warning": "هشدار"
+  },
+  "accessibility_panel": {
+    "title": "دسترس‌پذیری",
+    "description": "اندازهٔ متن، تضاد و حرکت. Alt+Shift+A این را از هر جا باز می‌کند.",
+    "button": "دسترس‌پذیری",
+    "all_settings": "همهٔ تنظیمات دسترس‌پذیری",
+    "preset_applied": "{name} {count, plural, one {# تنظیم} other {# تنظیم}} را تغییر داد.",
+    "command": "گزینه‌های دسترس‌پذیری",
+    "command_keywords": "a11y دسترس‌پذیری اندازه متن تضاد حرکت بزرگنمایی"
   }
 }

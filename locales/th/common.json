@@ -323,7 +323,8 @@
     "mv_next_day": "วันถัดไป",
     "mv_add_another_account": "เพิ่มบัญชีอื่น",
     "mv_manage_account": "จัดการบัญชีของคุณ",
-    "mv_storage_used": "ใช้ไป {percent}% จาก {total}"
+    "mv_storage_used": "ใช้ไป {percent}% จาก {total}",
+    "accessibility": "การเข้าถึง"
   },
   "language": {
     "title": "ภาษา",
@@ -765,7 +766,8 @@
       "refresh": "รีเฟรชอีเมล",
       "select_all": "เลือกทั้งหมด",
       "global_search": "ค้นหาทุกรายการ",
-      "extend_selection": "ขยายการเลือกลง / ขึ้น"
+      "extend_selection": "ขยายการเลือกลง / ขึ้น",
+      "accessibility_panel": "เปิดตัวเลือกการเข้าถึง"
     },
     "threads": {
       "expand_collapse": "ขยาย/ย่อการสนทนา",
@@ -5670,5 +5672,14 @@
       "applying": "กำลังนำไปใช้…",
       "finish": "นำไปใช้และเสร็จสิ้น"
     }
+  },
+  "accessibility_panel": {
+    "title": "การเข้าถึง",
+    "description": "ขนาดตัวอักษร คอนทราสต์ และการเคลื่อนไหว กด Alt+Shift+A เพื่อเปิดจากที่ไหนก็ได้",
+    "button": "การเข้าถึง",
+    "all_settings": "การตั้งค่าการเข้าถึงทั้งหมด",
+    "preset_applied": "{name} เปลี่ยนการตั้งค่า {count, plural, other {# รายการ}}",
+    "command": "ตัวเลือกการเข้าถึง",
+    "command_keywords": "a11y การเข้าถึง ขนาดตัวอักษร คอนทราสต์ การเคลื่อนไหว ซูม"
   }
 }

@@ -209,7 +209,8 @@
     "mv_next_day": "Järgmine päev",
     "mv_add_another_account": "Lisa veel üks konto",
     "mv_manage_account": "Halda oma kontot",
-    "mv_storage_used": "{percent}% mahust {total} kasutatud"
+    "mv_storage_used": "{percent}% mahust {total} kasutatud",
+    "accessibility": "Juurdepääsetavus"
   },
   "protocol_handlers": {
     "title": "Vaikerakendused",
@@ -3447,7 +3448,8 @@
       "refresh": "Värskenda e-kirjad",
       "select_all": "Vali kõik",
       "global_search": "Otsi kõike",
-      "extend_selection": "Laienda valikut alla / üles"
+      "extend_selection": "Laienda valikut alla / üles",
+      "accessibility_panel": "Ava juurdepääsetavuse valikud"
     },
     "threads": {
       "expand_collapse": "Ava/sulge vestlus",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} lugemata",
     "level_error": "Viga",
     "level_warning": "Hoiatus"
+  },
+  "accessibility_panel": {
+    "title": "Juurdepääsetavus",
+    "description": "Teksti suurus, kontrast ja liikumine. Alt+Shift+A avab selle kõikjalt.",
+    "button": "Juurdepääsetavus",
+    "all_settings": "Kõik juurdepääsetavuse seaded",
+    "preset_applied": "{name} muutis {count, plural, one {# seadet} other {# seadet}}.",
+    "command": "Juurdepääsetavuse valikud",
+    "command_keywords": "a11y juurdepääsetavus teksti suurus kontrast liikumine suum"
   }
 }

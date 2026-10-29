@@ -209,7 +209,8 @@
     "mv_next_day": "翌日",
     "mv_add_another_account": "別のアカウントを追加",
     "mv_manage_account": "アカウントを管理",
-    "mv_storage_used": "{total} のうち {percent}% を使用中"
+    "mv_storage_used": "{total} のうち {percent}% を使用中",
+    "accessibility": "アクセシビリティ"
   },
   "protocol_handlers": {
     "title": "既定のアプリ",
@@ -3447,7 +3448,8 @@
       "refresh": "メールを更新",
       "select_all": "すべて選択",
       "global_search": "すべてを検索",
-      "extend_selection": "選択範囲を下 / 上に広げる"
+      "extend_selection": "選択範囲を下 / 上に広げる",
+      "accessibility_panel": "アクセシビリティのオプションを開く"
     },
     "threads": {
       "expand_collapse": "スレッドの展開/折りたたみ",
@@ -5662,5 +5664,14 @@
     "unread_count": "未読 {count} 件",
     "level_error": "エラー",
     "level_warning": "警告"
+  },
+  "accessibility_panel": {
+    "title": "アクセシビリティ",
+    "description": "文字サイズ、コントラスト、動き。Alt+Shift+Aでどこからでも開けます。",
+    "button": "アクセシビリティ",
+    "all_settings": "アクセシビリティの全設定",
+    "preset_applied": "{name}が{count, plural, other {#件の設定}}を変更しました。",
+    "command": "アクセシビリティのオプション",
+    "command_keywords": "a11y アクセシビリティ 文字サイズ コントラスト 動き ズーム"
   }
 }

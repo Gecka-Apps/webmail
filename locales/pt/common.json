@@ -209,7 +209,8 @@
     "mv_next_day": "Dia seguinte",
     "mv_add_another_account": "Adicionar outra conta",
     "mv_manage_account": "Gerir a sua conta",
-    "mv_storage_used": "{percent}% de {total} utilizado"
+    "mv_storage_used": "{percent}% de {total} utilizado",
+    "accessibility": "Acessibilidade"
   },
   "protocol_handlers": {
     "title": "Aplicativos padrão",
@@ -3447,7 +3448,8 @@
       "refresh": "Atualizar e-mails",
       "select_all": "Selecionar todos",
       "global_search": "Pesquisar em tudo",
-      "extend_selection": "Expandir a seleção para baixo / cima"
+      "extend_selection": "Expandir a seleção para baixo / cima",
+      "accessibility_panel": "Abrir as opções de acessibilidade"
     },
     "threads": {
       "expand_collapse": "Expandir/recolher conversa",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} não lidas",
     "level_error": "Erro",
     "level_warning": "Aviso"
+  },
+  "accessibility_panel": {
+    "title": "Acessibilidade",
+    "description": "Tamanho do texto, contraste e movimento. Alt+Shift+A abre isto de qualquer lugar.",
+    "button": "Acessibilidade",
+    "all_settings": "Todas as configurações de acessibilidade",
+    "preset_applied": "{name} alterou {count, plural, one {# configuração} other {# configurações}}.",
+    "command": "Opções de acessibilidade",
+    "command_keywords": "a11y acessibilidade tamanho texto contraste movimento zoom"
   }
 }

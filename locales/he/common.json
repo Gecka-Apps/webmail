@@ -208,7 +208,8 @@
     "mv_next_day": "היום הבא",
     "mv_add_another_account": "הוספת חשבון נוסף",
     "mv_manage_account": "ניהול החשבון",
-    "mv_storage_used": "נוצלו {percent}% מתוך {total}"
+    "mv_storage_used": "נוצלו {percent}% מתוך {total}",
+    "accessibility": "נגישות"
   },
   "sidebar_apps": {
     "modal_title": "אפליקציות בסרגל הצד",
@@ -3365,7 +3366,8 @@
       "refresh": "רענן מיילים",
       "select_all": "בחר הכל",
       "global_search": "חיפוש בכל מקום",
-      "extend_selection": "הרחבת הבחירה למטה / למעלה"
+      "extend_selection": "הרחבת הבחירה למטה / למעלה",
+      "accessibility_panel": "פתיחת אפשרויות הנגישות"
     },
     "threads": {
       "expand_collapse": "הרחב/כווץ את השרשור",
@@ -5663,5 +5665,14 @@
     "unread_count": "לא נקראו: {count}",
     "level_error": "שגיאה",
     "level_warning": "אזהרה"
+  },
+  "accessibility_panel": {
+    "title": "נגישות",
+    "description": "גודל טקסט, ניגודיות ותנועה. Alt+Shift+A פותח את זה מכל מקום.",
+    "button": "נגישות",
+    "all_settings": "כל הגדרות הנגישות",
+    "preset_applied": "{name}: שונו {count, plural, one {הגדרה אחת} two {שתי הגדרות} other {# הגדרות}}.",
+    "command": "אפשרויות נגישות",
+    "command_keywords": "a11y נגישות גודל טקסט ניגודיות תנועה זום"
   }
 }

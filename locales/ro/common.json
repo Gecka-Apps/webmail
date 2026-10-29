@@ -209,7 +209,8 @@
     "mv_next_day": "Ziua următoare",
     "mv_add_another_account": "Adaugă alt cont",
     "mv_manage_account": "Gestionează contul",
-    "mv_storage_used": "{percent}% din {total} folosit"
+    "mv_storage_used": "{percent}% din {total} folosit",
+    "accessibility": "Accesibilitate"
   },
   "protocol_handlers": {
     "title": "Aplicații implicite",
@@ -3447,7 +3448,8 @@
       "refresh": "Reîmprospătați e-mailurile",
       "select_all": "Selectează tot",
       "global_search": "Caută în tot",
-      "extend_selection": "Extinde selecția în jos / în sus"
+      "extend_selection": "Extinde selecția în jos / în sus",
+      "accessibility_panel": "Deschide opțiunile de accesibilitate"
     },
     "threads": {
       "expand_collapse": "Extindeți/reduceți firul de discuție",
@@ -5662,5 +5664,14 @@
     "unread_count": "Necitite: {count}",
     "level_error": "Eroare",
     "level_warning": "Avertisment"
+  },
+  "accessibility_panel": {
+    "title": "Accesibilitate",
+    "description": "Dimensiunea textului, contrast și mișcare. Alt+Shift+A deschide panoul de oriunde.",
+    "button": "Accesibilitate",
+    "all_settings": "Toate setările de accesibilitate",
+    "preset_applied": "{name} a modificat {count, plural, one {# setare} few {# setări} other {# de setări}}.",
+    "command": "Opțiuni de accesibilitate",
+    "command_keywords": "a11y accesibilitate dimensiune text contrast mișcare zoom"
   }
 }

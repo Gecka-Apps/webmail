@@ -209,7 +209,8 @@
     "mv_next_day": "Dia següent",
     "mv_add_another_account": "Afegeix un altre compte",
     "mv_manage_account": "Gestiona el teu compte",
-    "mv_storage_used": "{percent}% de {total} utilitzat"
+    "mv_storage_used": "{percent}% de {total} utilitzat",
+    "accessibility": "Accessibilitat"
   },
   "protocol_handlers": {
     "title": "Aplicacions predeterminades",
@@ -3447,7 +3448,8 @@
       "refresh": "Actualitza els correus",
       "select_all": "Selecciona-ho tot",
       "global_search": "Cerca-ho tot",
-      "extend_selection": "Amplia la selecció cap avall / amunt"
+      "extend_selection": "Amplia la selecció cap avall / amunt",
+      "accessibility_panel": "Obre les opcions d'accessibilitat"
     },
     "threads": {
       "expand_collapse": "Desplega/replega el fil",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} sense llegir",
     "level_error": "Error",
     "level_warning": "Avís"
+  },
+  "accessibility_panel": {
+    "title": "Accessibilitat",
+    "description": "Mida del text, contrast i moviment. Alt+Maj+A l'obre des de qualsevol lloc.",
+    "button": "Accessibilitat",
+    "all_settings": "Tots els ajustos d'accessibilitat",
+    "preset_applied": "{name} ha canviat {count, plural, one {# opció} other {# opcions}}.",
+    "command": "Opcions d'accessibilitat",
+    "command_keywords": "a11y accessibilitat mida text contrast moviment zoom"
   }
 }

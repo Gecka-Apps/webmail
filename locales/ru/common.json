@@ -209,7 +209,8 @@
     "mv_next_day": "Следующий день",
     "mv_add_another_account": "Добавить другой аккаунт",
     "mv_manage_account": "Управление аккаунтом",
-    "mv_storage_used": "Использовано {percent}% из {total}"
+    "mv_storage_used": "Использовано {percent}% из {total}",
+    "accessibility": "Специальные возможности"
   },
   "protocol_handlers": {
     "title": "Приложения по умолчанию",
@@ -3447,7 +3448,8 @@
       "refresh": "Обновить письма",
       "select_all": "Выбрать все",
       "global_search": "Искать везде",
-      "extend_selection": "Расширить выделение вниз / вверх"
+      "extend_selection": "Расширить выделение вниз / вверх",
+      "accessibility_panel": "Открыть параметры специальных возможностей"
     },
     "threads": {
       "expand_collapse": "Развернуть/свернуть цепочку",
@@ -5662,5 +5664,14 @@
     "unread_count": "Непрочитанных: {count}",
     "level_error": "Ошибка",
     "level_warning": "Предупреждение"
+  },
+  "accessibility_panel": {
+    "title": "Специальные возможности",
+    "description": "Размер текста, контраст и анимация. Alt+Shift+A открывает это откуда угодно.",
+    "button": "Специальные возможности",
+    "all_settings": "Все настройки специальных возможностей",
+    "preset_applied": "{name}. Изменено: {count, plural, one {# настройка} few {# настройки} many {# настроек} other {# настройки}}.",
+    "command": "Параметры специальных возможностей",
+    "command_keywords": "a11y специальные возможности доступность размер текста контраст анимация масштаб"
   }
 }

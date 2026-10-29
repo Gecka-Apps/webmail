@@ -209,7 +209,8 @@
     "mv_next_day": "Jour suivant",
     "mv_add_another_account": "Ajouter un autre compte",
     "mv_manage_account": "Gérer votre compte",
-    "mv_storage_used": "{percent} % de {total} utilisés"
+    "mv_storage_used": "{percent} % de {total} utilisés",
+    "accessibility": "Accessibilité"
   },
   "protocol_handlers": {
     "title": "Applications par défaut",
@@ -3447,7 +3448,8 @@
       "refresh": "Actualiser les emails",
       "select_all": "Tout sélectionner",
       "global_search": "Tout rechercher",
-      "extend_selection": "Étendre la sélection vers le bas / le haut"
+      "extend_selection": "Étendre la sélection vers le bas / le haut",
+      "accessibility_panel": "Ouvrir les options d'accessibilité"
     },
     "threads": {
       "expand_collapse": "Développer/réduire la conversation",
@@ -5662,5 +5664,14 @@
     "unread_count": "Non lues : {count}",
     "level_error": "Erreur",
     "level_warning": "Avertissement"
+  },
+  "accessibility_panel": {
+    "title": "Accessibilité",
+    "description": "Taille du texte, contraste et mouvements. Alt+Maj+A l'ouvre de partout.",
+    "button": "Accessibilité",
+    "all_settings": "Tous les paramètres d'accessibilité",
+    "preset_applied": "{name} a modifié {count, plural, one {# paramètre} many {# de paramètres} other {# paramètres}}.",
+    "command": "Options d'accessibilité",
+    "command_keywords": "a11y accessibilité taille texte contraste mouvement zoom"
   }
 }

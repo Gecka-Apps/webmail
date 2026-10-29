@@ -209,7 +209,8 @@
     "mv_next_day": "Nākamā diena",
     "mv_add_another_account": "Pievienot citu kontu",
     "mv_manage_account": "Pārvaldīt kontu",
-    "mv_storage_used": "Izmantoti {percent}% no {total}"
+    "mv_storage_used": "Izmantoti {percent}% no {total}",
+    "accessibility": "Pieejamība"
   },
   "protocol_handlers": {
     "title": "Noklusējuma lietotnes",
@@ -3447,7 +3448,8 @@
       "refresh": "Atsvaidzināt vēstules",
       "select_all": "Atlasīt visas",
       "global_search": "Meklēt visā",
-      "extend_selection": "Paplašināt atlasi uz leju / uz augšu"
+      "extend_selection": "Paplašināt atlasi uz leju / uz augšu",
+      "accessibility_panel": "Atvērt pieejamības opcijas"
     },
     "threads": {
       "expand_collapse": "Izvērst/sairt sarunu",
@@ -5662,5 +5664,14 @@
     "unread_count": "Nelasīti: {count}",
     "level_error": "Kļūda",
     "level_warning": "Brīdinājums"
+  },
+  "accessibility_panel": {
+    "title": "Pieejamība",
+    "description": "Teksta izmērs, kontrasts un kustība. Alt+Shift+A to atver jebkurā vietā.",
+    "button": "Pieejamība",
+    "all_settings": "Visi pieejamības iestatījumi",
+    "preset_applied": "{name} mainīja {count, plural, zero {# iestatījumu} one {# iestatījumu} other {# iestatījumus}}.",
+    "command": "Pieejamības opcijas",
+    "command_keywords": "a11y pieejamība teksta izmērs kontrasts kustība tālummaiņa"
   }
 }

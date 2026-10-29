@@ -209,7 +209,8 @@
     "mv_next_day": "Sonraki gün",
     "mv_add_another_account": "Başka bir hesap ekle",
     "mv_manage_account": "Hesabınızı yönetin",
-    "mv_storage_used": "{total} alanın %{percent} kadarı kullanıldı"
+    "mv_storage_used": "{total} alanın %{percent} kadarı kullanıldı",
+    "accessibility": "Erişilebilirlik"
   },
   "protocol_handlers": {
     "title": "Varsayılan uygulamalar",
@@ -3447,7 +3448,8 @@
       "refresh": "E-postaları yenile",
       "select_all": "Tümünü seç",
       "global_search": "Her yerde ara",
-      "extend_selection": "Seçimi aşağı / yukarı genişlet"
+      "extend_selection": "Seçimi aşağı / yukarı genişlet",
+      "accessibility_panel": "Erişilebilirlik seçeneklerini aç"
     },
     "threads": {
       "expand_collapse": "İleti dizisini genişlet/daralt",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} okunmamış",
     "level_error": "Hata",
     "level_warning": "Uyarı"
+  },
+  "accessibility_panel": {
+    "title": "Erişilebilirlik",
+    "description": "Metin boyutu, karşıtlık ve hareket. Alt+Shift+A bunu her yerden açar.",
+    "button": "Erişilebilirlik",
+    "all_settings": "Tüm erişilebilirlik ayarları",
+    "preset_applied": "{name}, {count, plural, one {# ayarı} other {# ayarı}} değiştirdi.",
+    "command": "Erişilebilirlik seçenekleri",
+    "command_keywords": "a11y erişilebilirlik metin boyutu karşıtlık hareket yakınlaştırma"
   }
 }

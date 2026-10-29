@@ -209,7 +209,8 @@
     "mv_next_day": "Наступний день",
     "mv_add_another_account": "Додати інший обліковий запис",
     "mv_manage_account": "Керувати обліковим записом",
-    "mv_storage_used": "Використано {percent}% з {total}"
+    "mv_storage_used": "Використано {percent}% з {total}",
+    "accessibility": "Доступність"
   },
   "protocol_handlers": {
     "title": "Програми за замовчуванням",
@@ -3447,7 +3448,8 @@
       "refresh": "Оновити електронні листи",
       "select_all": "Вибрати все",
       "global_search": "Шукати скрізь",
-      "extend_selection": "Розширити виділення вниз / вгору"
+      "extend_selection": "Розширити виділення вниз / вгору",
+      "accessibility_panel": "Відкрити параметри доступності"
     },
     "threads": {
       "expand_collapse": "Розгорнути/згорнути ланцюжок",
@@ -5662,5 +5664,14 @@
     "unread_count": "Непрочитаних: {count}",
     "level_error": "Помилка",
     "level_warning": "Попередження"
+  },
+  "accessibility_panel": {
+    "title": "Доступність",
+    "description": "Розмір тексту, контраст і рух. Alt+Shift+A відкриває це звідусіль.",
+    "button": "Доступність",
+    "all_settings": "Усі налаштування доступності",
+    "preset_applied": "{name}. Змінено: {count, plural, one {# налаштування} few {# налаштування} many {# налаштувань} other {# налаштування}}.",
+    "command": "Параметри доступності",
+    "command_keywords": "a11y доступність розмір тексту контраст рух масштаб"
   }
 }

@@ -209,7 +209,8 @@
     "mv_next_day": "Next day",
     "mv_add_another_account": "Add another account",
     "mv_manage_account": "Manage your account",
-    "mv_storage_used": "{percent}% of {total} used"
+    "mv_storage_used": "{percent}% of {total} used",
+    "accessibility": "Accessibility"
   },
   "protocol_handlers": {
     "title": "Default apps",
@@ -3447,7 +3448,8 @@
       "refresh": "Refresh emails",
       "select_all": "Select all",
       "global_search": "Search everything",
-      "extend_selection": "Extend selection down / up"
+      "extend_selection": "Extend selection down / up",
+      "accessibility_panel": "Open the accessibility options"
     },
     "threads": {
       "expand_collapse": "Expand/collapse thread",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} unread",
     "level_error": "Error",
     "level_warning": "Warning"
+  },
+  "accessibility_panel": {
+    "title": "Accessibility",
+    "description": "Text size, contrast and motion. Alt+Shift+A opens this from anywhere.",
+    "button": "Accessibility",
+    "all_settings": "All accessibility settings",
+    "preset_applied": "{name} changed {count, plural, one {# setting} other {# settings}}.",
+    "command": "Accessibility options",
+    "command_keywords": "a11y text size contrast motion zoom"
   }
 }

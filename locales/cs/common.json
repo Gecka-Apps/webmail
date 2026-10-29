@@ -209,7 +209,8 @@
     "mv_next_day": "Následující den",
     "mv_add_another_account": "Přidat další účet",
     "mv_manage_account": "Spravovat účet",
-    "mv_storage_used": "Využito {percent} % z {total}"
+    "mv_storage_used": "Využito {percent} % z {total}",
+    "accessibility": "Přístupnost"
   },
   "protocol_handlers": {
     "title": "Výchozí aplikace",
@@ -3447,7 +3448,8 @@
       "refresh": "Obnovit zprávy",
       "select_all": "Vybrat vše",
       "global_search": "Hledat ve všem",
-      "extend_selection": "Rozšířit výběr dolů / nahoru"
+      "extend_selection": "Rozšířit výběr dolů / nahoru",
+      "accessibility_panel": "Otevřít možnosti přístupnosti"
     },
     "threads": {
       "expand_collapse": "Rozbalit/sbalit vlákno",
@@ -5662,5 +5664,14 @@
     "unread_count": "Nepřečtené: {count}",
     "level_error": "Chyba",
     "level_warning": "Upozornění"
+  },
+  "accessibility_panel": {
+    "title": "Přístupnost",
+    "description": "Velikost textu, kontrast a pohyb. Alt+Shift+A to otevře odkudkoli.",
+    "button": "Přístupnost",
+    "all_settings": "Všechna nastavení přístupnosti",
+    "preset_applied": "Předvolba {name} změnila {count, plural, one {# nastavení} few {# nastavení} many {# nastavení} other {# nastavení}}.",
+    "command": "Možnosti přístupnosti",
+    "command_keywords": "a11y přístupnost velikost textu kontrast pohyb zoom"
   }
 }

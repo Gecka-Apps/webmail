@@ -33,6 +33,7 @@ export const GENERAL_SHORTCUTS: readonly ShortcutEntry[] = [
   { key: "Mod + K", description: "shortcuts.global.global_search", shell: "pro" },
   { key: "Mod + K", description: "command_palette.open", shell: "standard" },
   { key: "?", description: "shortcuts.global.help" },
+  { key: "Alt + Shift + A", description: "shortcuts.global.accessibility_panel" },
 ];
 
 /** An app's sections with the general keys added (see GENERAL_SHORTCUTS). */

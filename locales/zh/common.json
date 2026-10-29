@@ -209,7 +209,8 @@
     "mv_next_day": "后一天",
     "mv_add_another_account": "添加其他账户",
     "mv_manage_account": "管理您的账户",
-    "mv_storage_used": "已使用 {total} 中的 {percent}%"
+    "mv_storage_used": "已使用 {total} 中的 {percent}%",
+    "accessibility": "无障碍"
   },
   "protocol_handlers": {
     "title": "默认应用",
@@ -3447,7 +3448,8 @@
       "refresh": "刷新邮件",
       "select_all": "全选",
       "global_search": "全局搜索",
-      "extend_selection": "向下 / 向上扩展选择"
+      "extend_selection": "向下 / 向上扩展选择",
+      "accessibility_panel": "打开无障碍选项"
     },
     "threads": {
       "expand_collapse": "展开/折叠会话",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} 条未读",
     "level_error": "错误",
     "level_warning": "警告"
+  },
+  "accessibility_panel": {
+    "title": "无障碍",
+    "description": "文字大小、对比度和动效。按 Alt+Shift+A 可随时打开。",
+    "button": "无障碍",
+    "all_settings": "全部无障碍设置",
+    "preset_applied": "{name}更改了 {count, plural, other {# 项设置}}。",
+    "command": "无障碍选项",
+    "command_keywords": "a11y 无障碍 辅助功能 文字大小 对比度 动效 缩放"
   }
 }

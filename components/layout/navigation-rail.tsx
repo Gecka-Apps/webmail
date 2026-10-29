@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect, useLayoutEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { Mail, CalendarEvent, Users, Folder, Settings, Keyboard, Plus, Shield, LogOut, Check, Search, Puzzle } from "@/components/icons";
+import { Mail, CalendarEvent, Users, Folder, Settings, Keyboard, Plus, Shield, LogOut, Check, Search, Puzzle, Accessibility } from "@/components/icons";
+import { openAccessibilityPanel } from "@/components/accessibility/accessibility-quick-panel";
 import { AccountSwitcher } from "./account-switcher";
 import { iconForName } from "@/components/icons";
 import { useConfig } from "@/hooks/use-config";
@@ -237,6 +238,7 @@ export function NavigationRail({
   const supportsFiles = client?.supportsFiles() ?? false;
   const supportsContacts = client?.supportsContacts() ?? false;
   const showRailAccountList = useSettingsStore((s) => s.showRailAccountList);
+  const showAccessibilityButton = useSettingsStore((s) => s.showAccessibilityButton);
   const mountainView = useSettingsStore((s) => s.interfaceLayout === 'mountain-view');
   const sidebarAppsEnabled = usePolicyStore((s) => s.isFeatureEnabled('sidebarAppsEnabled'));
   const filesEnabled = usePolicyStore((s) => s.isFeatureEnabled('filesEnabled'));
@@ -753,6 +755,20 @@ export function NavigationRail({
         )}
 
         <NotificationBell placement="side" className="w-10 h-10 rounded-md" />
+
+        {showAccessibilityButton && (
+          <button
+            type="button"
+            onClick={openAccessibilityPanel}
+            data-testid="rail-accessibility"
+            className="flex items-center justify-center w-10 h-10 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            title={t("accessibility")}
+            aria-label={t("accessibility")}
+            aria-keyshortcuts="Alt+Shift+A"
+          >
+            <Accessibility className="w-[18px] h-[18px]" />
+          </button>
+        )}
 
         <Link
           href="/settings"

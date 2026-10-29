@@ -13,6 +13,7 @@ import { PluginDialogHost } from "@/components/plugins/plugin-dialog-host";
 import { ExternalRecipientConfirmHost } from "@/components/email/external-recipient-confirm";
 import { PluginPageNavigator } from "@/components/plugins/plugin-page-navigator";
 import { CommandPaletteHost } from "@/components/command-palette/command-palette";
+import { AccessibilityQuickPanelHost } from "@/components/accessibility/accessibility-quick-panel";
 import { TotpReauthDialog } from "@/components/totp-reauth-dialog";
 import { PluginConnectDialog } from "@/components/plugins/plugin-connect-dialog";
 import { QuickRuleHost } from "@/components/filters/quick-rule-host";
@@ -77,6 +78,7 @@ export default async function LocaleLayout({
                   <PluginDialogHost />
                   <ExternalRecipientConfirmHost />
                   <CommandPaletteHost />
+                  <AccessibilityQuickPanelHost />
                   <TotpReauthDialog />
                   <PluginConnectDialog />
                   <QuickRuleHost />

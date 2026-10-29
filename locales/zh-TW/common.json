@@ -209,7 +209,8 @@
     "mv_next_day": "後一天",
     "mv_add_another_account": "新增其他帳戶",
     "mv_manage_account": "管理您的帳戶",
-    "mv_storage_used": "已使用 {total} 中的 {percent}%"
+    "mv_storage_used": "已使用 {total} 中的 {percent}%",
+    "accessibility": "無障礙"
   },
   "protocol_handlers": {
     "title": "預設應用程式",
@@ -3447,7 +3448,8 @@
       "refresh": "重新整理郵件",
       "select_all": "全部選取",
       "global_search": "全域搜尋",
-      "extend_selection": "向下 / 向上擴展選取"
+      "extend_selection": "向下 / 向上擴展選取",
+      "accessibility_panel": "開啟無障礙選項"
     },
     "threads": {
       "expand_collapse": "展開／收合對話串",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} 則未讀",
     "level_error": "錯誤",
     "level_warning": "警告"
+  },
+  "accessibility_panel": {
+    "title": "無障礙",
+    "description": "文字大小、對比和動態效果。按 Alt+Shift+A 可隨時開啟。",
+    "button": "無障礙",
+    "all_settings": "全部無障礙設定",
+    "preset_applied": "{name}變更了 {count, plural, other {# 項設定}}。",
+    "command": "無障礙選項",
+    "command_keywords": "a11y 無障礙 輔助功能 文字大小 對比 動態效果 縮放"
   }
 }

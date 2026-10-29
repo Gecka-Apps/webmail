@@ -209,7 +209,8 @@
     "mv_next_day": "Volgende dag",
     "mv_add_another_account": "Nog een account toevoegen",
     "mv_manage_account": "Account beheren",
-    "mv_storage_used": "{percent}% van {total} gebruikt"
+    "mv_storage_used": "{percent}% van {total} gebruikt",
+    "accessibility": "Toegankelijkheid"
   },
   "protocol_handlers": {
     "title": "Standaardapps",
@@ -3447,7 +3448,8 @@
       "refresh": "E-mails vernieuwen",
       "select_all": "Alles selecteren",
       "global_search": "Alles doorzoeken",
-      "extend_selection": "Selectie omlaag / omhoog uitbreiden"
+      "extend_selection": "Selectie omlaag / omhoog uitbreiden",
+      "accessibility_panel": "Toegankelijkheidsopties openen"
     },
     "threads": {
       "expand_collapse": "Gesprek uitklappen/inklappen",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} ongelezen",
     "level_error": "Fout",
     "level_warning": "Waarschuwing"
+  },
+  "accessibility_panel": {
+    "title": "Toegankelijkheid",
+    "description": "Tekstgrootte, contrast en beweging. Alt+Shift+A opent dit vanaf elke plek.",
+    "button": "Toegankelijkheid",
+    "all_settings": "Alle toegankelijkheidsinstellingen",
+    "preset_applied": "{name} heeft {count, plural, one {# instelling} other {# instellingen}} gewijzigd.",
+    "command": "Toegankelijkheidsopties",
+    "command_keywords": "a11y toegankelijkheid tekstgrootte contrast beweging zoom"
   }
 }

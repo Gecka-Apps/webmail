@@ -209,7 +209,8 @@
     "mv_next_day": "Дараах өдөр",
     "mv_add_another_account": "Өөр бүртгэл нэмэх",
     "mv_manage_account": "Бүртгэлээ удирдах",
-    "mv_storage_used": "{total}-с {percent}% ашигласан"
+    "mv_storage_used": "{total}-с {percent}% ашигласан",
+    "accessibility": "Хүртээмж"
   },
   "protocol_handlers": {
     "title": "Өгөгдмөл програмууд",
@@ -3447,7 +3448,8 @@
       "refresh": "Имэйл сэргээх",
       "select_all": "Бүгдийг сонго",
       "global_search": "Бүгдийг хайх",
-      "extend_selection": "Сонголтыг доош / дээш өргөтгөх"
+      "extend_selection": "Сонголтыг доош / дээш өргөтгөх",
+      "accessibility_panel": "Хүртээмжийн сонголтуудыг нээх"
     },
     "threads": {
       "expand_collapse": "Хэлхээсийг дэлгэх/хумих",
@@ -5662,5 +5664,14 @@
     "unread_count": "Уншаагүй: {count}",
     "level_error": "Алдаа",
     "level_warning": "Анхааруулга"
+  },
+  "accessibility_panel": {
+    "title": "Хүртээмж",
+    "description": "Текстийн хэмжээ, тодосгогч, хөдөлгөөн. Alt+Shift+A нь үүнийг хаанаас ч нээнэ.",
+    "button": "Хүртээмж",
+    "all_settings": "Хүртээмжийн бүх тохиргоо",
+    "preset_applied": "{name} {count, plural, other {# тохиргоог}} өөрчиллөө.",
+    "command": "Хүртээмжийн сонголтууд",
+    "command_keywords": "a11y хүртээмж текстийн хэмжээ тодосгогч хөдөлгөөн томруулах"
   }
 }

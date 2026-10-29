@@ -209,7 +209,8 @@
     "mv_next_day": "Neste dag",
     "mv_add_another_account": "Legg til en annen konto",
     "mv_manage_account": "Administrer kontoen",
-    "mv_storage_used": "{percent} % av {total} brukt"
+    "mv_storage_used": "{percent} % av {total} brukt",
+    "accessibility": "Tilgjengelighet"
   },
   "protocol_handlers": {
     "title": "Standardapper",
@@ -3447,7 +3448,8 @@
       "refresh": "Oppdater e-poster",
       "select_all": "Velg alle",
       "global_search": "Søk i alt",
-      "extend_selection": "Utvid markeringen ned / opp"
+      "extend_selection": "Utvid markeringen ned / opp",
+      "accessibility_panel": "Åpne alternativer for tilgjengelighet"
     },
     "threads": {
       "expand_collapse": "Utvid eller fold sammen tråden",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} uleste",
     "level_error": "Feil",
     "level_warning": "Advarsel"
+  },
+  "accessibility_panel": {
+    "title": "Tilgjengelighet",
+    "description": "Tekststørrelse, kontrast og bevegelse. Alt+Shift+A åpner dette fra hvor som helst.",
+    "button": "Tilgjengelighet",
+    "all_settings": "Alle innstillinger for tilgjengelighet",
+    "preset_applied": "{name} endret {count, plural, one {# innstilling} other {# innstillinger}}.",
+    "command": "Alternativer for tilgjengelighet",
+    "command_keywords": "a11y tilgjengelighet tekststørrelse kontrast bevegelse zoom"
   }
 }

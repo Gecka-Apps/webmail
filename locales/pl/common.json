@@ -209,7 +209,8 @@
     "mv_next_day": "Następny dzień",
     "mv_add_another_account": "Dodaj kolejne konto",
     "mv_manage_account": "Zarządzaj kontem",
-    "mv_storage_used": "Wykorzystano {percent}% z {total}"
+    "mv_storage_used": "Wykorzystano {percent}% z {total}",
+    "accessibility": "Dostępność"
   },
   "protocol_handlers": {
     "title": "Aplikacje domyślne",
@@ -3447,7 +3448,8 @@
       "refresh": "Odśwież wiadomości",
       "select_all": "Zaznacz wszystko",
       "global_search": "Szukaj wszędzie",
-      "extend_selection": "Rozszerz zaznaczenie w dół / w górę"
+      "extend_selection": "Rozszerz zaznaczenie w dół / w górę",
+      "accessibility_panel": "Otwórz opcje dostępności"
     },
     "threads": {
       "expand_collapse": "Rozwiń/zwiń wątek",
@@ -5662,5 +5664,14 @@
     "unread_count": "Nieprzeczytane: {count}",
     "level_error": "Błąd",
     "level_warning": "Ostrzeżenie"
+  },
+  "accessibility_panel": {
+    "title": "Dostępność",
+    "description": "Rozmiar tekstu, kontrast i ruch. Alt+Shift+A otwiera to z każdego miejsca.",
+    "button": "Dostępność",
+    "all_settings": "Wszystkie ustawienia dostępności",
+    "preset_applied": "{name} zmienia {count, plural, one {# ustawienie} few {# ustawienia} many {# ustawień} other {# ustawienia}}.",
+    "command": "Opcje dostępności",
+    "command_keywords": "a11y dostępność rozmiar tekstu kontrast ruch powiększenie"
   }
 }

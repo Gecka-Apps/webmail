@@ -209,7 +209,8 @@
     "mv_next_day": "Giorno successivo",
     "mv_add_another_account": "Aggiungi un altro account",
     "mv_manage_account": "Gestisci il tuo account",
-    "mv_storage_used": "{percent}% di {total} utilizzato"
+    "mv_storage_used": "{percent}% di {total} utilizzato",
+    "accessibility": "Accessibilità"
   },
   "protocol_handlers": {
     "title": "App predefinite",
@@ -3447,7 +3448,8 @@
       "refresh": "Aggiorna messaggi",
       "select_all": "Seleziona tutto",
       "global_search": "Cerca ovunque",
-      "extend_selection": "Estendi la selezione in basso / in alto"
+      "extend_selection": "Estendi la selezione in basso / in alto",
+      "accessibility_panel": "Apri le opzioni di accessibilità"
     },
     "threads": {
       "expand_collapse": "Espandi/comprimi conversazione",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} non lette",
     "level_error": "Errore",
     "level_warning": "Avviso"
+  },
+  "accessibility_panel": {
+    "title": "Accessibilità",
+    "description": "Dimensione del testo, contrasto e movimento. Alt+Maiusc+A lo apre da qualsiasi punto.",
+    "button": "Accessibilità",
+    "all_settings": "Tutte le impostazioni di accessibilità",
+    "preset_applied": "{name} ha modificato {count, plural, one {# impostazione} other {# impostazioni}}.",
+    "command": "Opzioni di accessibilità",
+    "command_keywords": "a11y accessibilità dimensione testo contrasto movimento zoom"
   }
 }

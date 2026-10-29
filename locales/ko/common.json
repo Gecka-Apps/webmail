@@ -209,7 +209,8 @@
     "mv_next_day": "다음 날",
     "mv_add_another_account": "다른 계정 추가",
     "mv_manage_account": "계정 관리",
-    "mv_storage_used": "{total} 중 {percent}% 사용"
+    "mv_storage_used": "{total} 중 {percent}% 사용",
+    "accessibility": "접근성"
   },
   "protocol_handlers": {
     "title": "기본 앱",
@@ -3447,7 +3448,8 @@
       "refresh": "메일 새로고침",
       "select_all": "모두 선택",
       "global_search": "전체 검색",
-      "extend_selection": "선택 범위를 아래 / 위로 확장"
+      "extend_selection": "선택 범위를 아래 / 위로 확장",
+      "accessibility_panel": "접근성 옵션 열기"
     },
     "threads": {
       "expand_collapse": "대화 펼치기/접기",
@@ -5662,5 +5664,14 @@
     "unread_count": "읽지 않음 {count}개",
     "level_error": "오류",
     "level_warning": "경고"
+  },
+  "accessibility_panel": {
+    "title": "접근성",
+    "description": "글자 크기, 대비, 움직임. Alt+Shift+A를 누르면 어디서든 열려요.",
+    "button": "접근성",
+    "all_settings": "접근성 설정 모두 보기",
+    "preset_applied": "{name} 적용으로 설정 {count, plural, other {#개}}가 바뀌었어요.",
+    "command": "접근성 옵션",
+    "command_keywords": "a11y 접근성 글자 크기 대비 움직임 확대"
   }
 }

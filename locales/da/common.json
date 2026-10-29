@@ -209,7 +209,8 @@
     "mv_next_day": "Næste dag",
     "mv_add_another_account": "Tilføj en anden konto",
     "mv_manage_account": "Administrer din konto",
-    "mv_storage_used": "{percent}% af {total} brugt"
+    "mv_storage_used": "{percent}% af {total} brugt",
+    "accessibility": "Tilgængelighed"
   },
   "protocol_handlers": {
     "title": "Standardapps",
@@ -3447,7 +3448,8 @@
       "refresh": "Opdatér e-mails",
       "select_all": "Vælg alle",
       "global_search": "Søg i alt",
-      "extend_selection": "Udvid markering ned / op"
+      "extend_selection": "Udvid markering ned / op",
+      "accessibility_panel": "Åbn indstillinger for tilgængelighed"
     },
     "threads": {
       "expand_collapse": "Udvid/skjul tråd",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} ulæste",
     "level_error": "Fejl",
     "level_warning": "Advarsel"
+  },
+  "accessibility_panel": {
+    "title": "Tilgængelighed",
+    "description": "Tekststørrelse, kontrast og bevægelse. Alt+Skift+A åbner det fra alle steder.",
+    "button": "Tilgængelighed",
+    "all_settings": "Alle indstillinger for tilgængelighed",
+    "preset_applied": "{name} har ændret {count, plural, one {# indstilling} other {# indstillinger}}.",
+    "command": "Indstillinger for tilgængelighed",
+    "command_keywords": "a11y tilgængelighed tekststørrelse kontrast bevægelse zoom"
   }
 }

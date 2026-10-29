@@ -209,7 +209,8 @@
     "mv_next_day": "اليوم التالي",
     "mv_add_another_account": "إضافة حساب آخر",
     "mv_manage_account": "إدارة حسابك",
-    "mv_storage_used": "تم استخدام {percent}% من {total}"
+    "mv_storage_used": "تم استخدام {percent}% من {total}",
+    "accessibility": "إمكانية الوصول"
   },
   "protocol_handlers": {
     "title": "التطبيقات الافتراضية",
@@ -3447,7 +3448,8 @@
       "refresh": "تحديث الرسائل",
       "select_all": "تحديد الكل",
       "global_search": "البحث في كل شيء",
-      "extend_selection": "توسيع التحديد لأسفل / لأعلى"
+      "extend_selection": "توسيع التحديد لأسفل / لأعلى",
+      "accessibility_panel": "فتح خيارات إمكانية الوصول"
     },
     "threads": {
       "expand_collapse": "توسيع/طي المحادثة",
@@ -5662,5 +5664,14 @@
     "unread_count": "غير المقروءة: {count}",
     "level_error": "خطأ",
     "level_warning": "تحذير"
+  },
+  "accessibility_panel": {
+    "title": "إمكانية الوصول",
+    "description": "حجم النص والتباين والحركة. يفتح Alt+Shift+A هذه اللوحة من أي مكان.",
+    "button": "إمكانية الوصول",
+    "all_settings": "كل إعدادات إمكانية الوصول",
+    "preset_applied": "غيّر {name} {count, plural, zero {# إعدادات} one {إعدادًا واحدًا} two {إعدادين} few {# إعدادات} many {# إعدادًا} other {# إعداد}}.",
+    "command": "خيارات إمكانية الوصول",
+    "command_keywords": "a11y إمكانية الوصول نص حجم تباين حركة تكبير"
   }
 }

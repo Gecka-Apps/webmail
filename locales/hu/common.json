@@ -209,7 +209,8 @@
     "mv_next_day": "Következő nap",
     "mv_add_another_account": "Másik fiók hozzáadása",
     "mv_manage_account": "Fiók kezelése",
-    "mv_storage_used": "{total} {percent}%-a foglalt"
+    "mv_storage_used": "{total} {percent}%-a foglalt",
+    "accessibility": "Kisegítő lehetőségek"
   },
   "protocol_handlers": {
     "title": "Alapértelmezett alkalmazások",
@@ -3447,7 +3448,8 @@
       "refresh": "E-mailek frissítése",
       "select_all": "Összes kijelölése",
       "global_search": "Keresés mindenben",
-      "extend_selection": "Kijelölés bővítése lefelé / felfelé"
+      "extend_selection": "Kijelölés bővítése lefelé / felfelé",
+      "accessibility_panel": "Kisegítő lehetőségek megnyitása"
     },
     "threads": {
       "expand_collapse": "Beszélgetés kibontása/összecsukása",
@@ -5662,5 +5664,14 @@
     "unread_count": "{count} olvasatlan",
     "level_error": "Hiba",
     "level_warning": "Figyelmeztetés"
+  },
+  "accessibility_panel": {
+    "title": "Kisegítő lehetőségek",
+    "description": "Szövegméret, kontraszt és mozgás. Az Alt+Shift+A bárhonnan megnyitja.",
+    "button": "Kisegítő lehetőségek",
+    "all_settings": "Az összes kisegítő beállítás",
+    "preset_applied": "{name} {count, plural, one {# beállítást} other {# beállítást}} módosított.",
+    "command": "Kisegítő lehetőségek beállításai",
+    "command_keywords": "a11y kisegítő lehetőségek akadálymentesség szövegméret kontraszt mozgás nagyítás"
   }
 }
