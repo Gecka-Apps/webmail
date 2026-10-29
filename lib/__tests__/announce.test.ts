@@ -82,3 +82,20 @@ describe('announce', () => {
     expect(polite()?.textContent).toBe('');
   });
 });
+
+describe('announce without a page', () => {
+  it('does nothing when a pending write runs after the document is gone', () => {
+    vi.useFakeTimers();
+    resetAnnouncerForTests();
+    announce('Moved to Archive');
+    const realDocument = globalThis.document;
+    // As when a test file's DOM is torn down before the timer fires.
+    Object.defineProperty(globalThis, 'document', { value: undefined, configurable: true });
+    try {
+      expect(() => vi.advanceTimersByTime(1000)).not.toThrow();
+    } finally {
+      Object.defineProperty(globalThis, 'document', { value: realDocument, configurable: true });
+      vi.useRealTimers();
+    }
+  });
+});

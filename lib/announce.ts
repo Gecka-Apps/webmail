@@ -64,8 +64,9 @@ const HIDDEN_STYLE =
   'position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;';
 
 /** Creates the two regions when they aren't in the page yet. */
-export function ensureLiveRegions(doc: Document = document): void {
-  if (!doc.body) return;
+export function ensureLiveRegions(doc: Document | undefined = typeof document === 'undefined' ? undefined : document): void {
+  // A timer can outlive the page (a test's DOM torn down, server code).
+  if (!doc?.body) return;
   for (const politeness of ['polite', 'assertive'] as const) {
     if (doc.getElementById(LIVE_REGION_IDS[politeness])) continue;
     const el = doc.createElement('div');
@@ -79,6 +80,7 @@ export function ensureLiveRegions(doc: Document = document): void {
 }
 
 function regionElement(politeness: Politeness): HTMLElement | null {
+  if (typeof document === 'undefined') return null;
   ensureLiveRegions();
   return document.getElementById(LIVE_REGION_IDS[politeness]);
 }
