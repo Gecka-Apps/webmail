@@ -6,15 +6,15 @@ import { uiHooks } from "@/lib/plugin-hooks";
 export type ActiveView = "sidebar" | "list" | "viewer";
 
 // Column width constraints (in pixels)
-const SIDEBAR_MIN = 180;
-const SIDEBAR_MAX = 400;
+export const SIDEBAR_MIN = 180;
+export const SIDEBAR_MAX = 400;
 const SIDEBAR_DEFAULT = 256;
-const EMAIL_LIST_MIN = 240;
-const EMAIL_LIST_MAX = 600;
+export const EMAIL_LIST_MIN = 240;
+export const EMAIL_LIST_MAX = 600;
 const EMAIL_LIST_DEFAULT = 384;
 // Email list height (in pixels) for horizontal "Reading Pane at Bottom" layout
-const EMAIL_LIST_HEIGHT_MIN = 160;
-const EMAIL_LIST_HEIGHT_MAX = 800;
+export const EMAIL_LIST_HEIGHT_MIN = 160;
+export const EMAIL_LIST_HEIGHT_MAX = 800;
 const EMAIL_LIST_HEIGHT_DEFAULT = 320;
 
 interface UIState {

@@ -1221,6 +1221,10 @@ export function FileBrowser({
             {sidebar}
           </div>
           <ResizeHandle
+            pane="sidebar"
+            value={sidebarWidth}
+            min={180}
+            max={400}
             onResizeStart={() => { dragStartWidth.current = sidebarWidth; setIsResizing(true); }}
             onResize={(delta) => setSidebarWidth(Math.max(180, Math.min(400, dragStartWidth.current + delta)))}
             onResizeEnd={() => {

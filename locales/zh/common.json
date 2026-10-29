@@ -5721,7 +5721,11 @@
     "reading_pane": "阅读窗格",
     "name_unread": "{name}，{count} 封未读",
     "expand_folder": "展开 {name}",
-    "collapse_folder": "折叠 {name}"
+    "collapse_folder": "折叠 {name}",
+    "resize_sidebar": "调整侧边栏大小",
+    "resize_message_list": "调整邮件列表大小",
+    "resize_contact_list": "调整联系人列表大小",
+    "resize_side_panel": "调整侧面板大小"
   },
   "plugin_pages": {
     "loading": "正在加载页面",

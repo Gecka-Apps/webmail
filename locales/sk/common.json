@@ -5721,7 +5721,11 @@
     "reading_pane": "Tabla na čítanie",
     "name_unread": "{name}, Neprečítané: {count}",
     "expand_folder": "Rozbaliť {name}",
-    "collapse_folder": "Zbaliť {name}"
+    "collapse_folder": "Zbaliť {name}",
+    "resize_sidebar": "Zmeniť veľkosť bočného panela",
+    "resize_message_list": "Zmeniť veľkosť zoznamu správ",
+    "resize_contact_list": "Zmeniť veľkosť zoznamu kontaktov",
+    "resize_side_panel": "Zmeniť veľkosť bočnej oblasti"
   },
   "plugin_pages": {
     "loading": "Načítava sa stránka",

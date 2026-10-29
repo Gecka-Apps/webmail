@@ -5721,7 +5721,11 @@
     "reading_pane": "Okuma bölmesi",
     "name_unread": "{name}, {count} okunmamış",
     "expand_folder": "Genişlet: {name}",
-    "collapse_folder": "Daralt: {name}"
+    "collapse_folder": "Daralt: {name}",
+    "resize_sidebar": "Kenar çubuğunu yeniden boyutlandır",
+    "resize_message_list": "İleti listesini yeniden boyutlandır",
+    "resize_contact_list": "Kişi listesini yeniden boyutlandır",
+    "resize_side_panel": "Yan paneli yeniden boyutlandır"
   },
   "plugin_pages": {
     "loading": "Sayfa yükleniyor",

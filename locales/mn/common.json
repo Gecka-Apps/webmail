@@ -5721,7 +5721,11 @@
     "reading_pane": "Унших хэсэг",
     "name_unread": "{name}, {count} уншаагүй",
     "expand_folder": "{name}-г дэлгэх",
-    "collapse_folder": "{name}-г хураах"
+    "collapse_folder": "{name}-г хураах",
+    "resize_sidebar": "Хажуугийн самбарын хэмжээг өөрчлөх",
+    "resize_message_list": "Захидлын жагсаалтын хэмжээг өөрчлөх",
+    "resize_contact_list": "Харилцагчдын жагсаалтын хэмжээг өөрчлөх",
+    "resize_side_panel": "Хажуугийн хэсгийн хэмжээг өөрчлөх"
   },
   "plugin_pages": {
     "loading": "Хуудсыг ачаалж байна",

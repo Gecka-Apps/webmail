@@ -5721,7 +5721,11 @@
     "reading_pane": "Okienko odczytu",
     "name_unread": "{name}, Nieprzeczytane: {count}",
     "expand_folder": "Rozwiń {name}",
-    "collapse_folder": "Zwiń {name}"
+    "collapse_folder": "Zwiń {name}",
+    "resize_sidebar": "Zmień rozmiar paska bocznego",
+    "resize_message_list": "Zmień rozmiar listy wiadomości",
+    "resize_contact_list": "Zmień rozmiar listy kontaktów",
+    "resize_side_panel": "Zmień rozmiar panelu bocznego"
   },
   "plugin_pages": {
     "loading": "Wczytywanie strony",

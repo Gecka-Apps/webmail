@@ -5721,7 +5721,11 @@
     "reading_pane": "Panoul de citire",
     "name_unread": "{name}, {count} necitite",
     "expand_folder": "Extinde {name}",
-    "collapse_folder": "Restrânge {name}"
+    "collapse_folder": "Restrânge {name}",
+    "resize_sidebar": "Redimensionează bara laterală",
+    "resize_message_list": "Redimensionează lista de mesaje",
+    "resize_contact_list": "Redimensionează lista de contacte",
+    "resize_side_panel": "Redimensionează panoul lateral"
   },
   "plugin_pages": {
     "loading": "Se încarcă pagina",

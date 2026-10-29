@@ -5721,7 +5721,11 @@
     "reading_pane": "قاب خواندن",
     "name_unread": "{name}، {count} خوانده‌نشده",
     "expand_folder": "باز کردن {name}",
-    "collapse_folder": "بستن {name}"
+    "collapse_folder": "بستن {name}",
+    "resize_sidebar": "تغییر اندازه نوار کناری",
+    "resize_message_list": "تغییر اندازه فهرست پیام‌ها",
+    "resize_contact_list": "تغییر اندازه فهرست مخاطبین",
+    "resize_side_panel": "تغییر اندازه پنل کناری"
   },
   "plugin_pages": {
     "loading": "در حال بارگذاری صفحه",

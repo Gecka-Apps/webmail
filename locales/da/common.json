@@ -5721,7 +5721,11 @@
     "reading_pane": "Læserude",
     "name_unread": "{name}, {count} ulæste",
     "expand_folder": "Udvid {name}",
-    "collapse_folder": "Skjul {name}"
+    "collapse_folder": "Skjul {name}",
+    "resize_sidebar": "Tilpas størrelsen på sidepanelet",
+    "resize_message_list": "Tilpas størrelsen på meddelelseslisten",
+    "resize_contact_list": "Tilpas størrelsen på kontaktlisten",
+    "resize_side_panel": "Tilpas størrelsen på sideruden"
   },
   "plugin_pages": {
     "loading": "Indlæser side",

@@ -5721,7 +5721,11 @@
     "reading_pane": "Область чтения",
     "name_unread": "{name}, Непрочитанных: {count}",
     "expand_folder": "Развернуть {name}",
-    "collapse_folder": "Свернуть {name}"
+    "collapse_folder": "Свернуть {name}",
+    "resize_sidebar": "Изменить размер боковой панели",
+    "resize_message_list": "Изменить размер списка писем",
+    "resize_contact_list": "Изменить размер списка контактов",
+    "resize_side_panel": "Изменить размер боковой области"
   },
   "plugin_pages": {
     "loading": "Загрузка страницы",

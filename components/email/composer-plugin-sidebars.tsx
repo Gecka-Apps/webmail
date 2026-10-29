@@ -242,6 +242,10 @@ export function ComposerPluginSidebar({
   const handle = mode === "docked" && onWidthChange ? (
     <ResizeHandle
       testId={`composer-sidebar-resize-${side}`}
+      pane="sidePanel"
+      value={width}
+      min={MIN_COMPOSER_SIDEBAR_WIDTH}
+      max={MAX_COMPOSER_SIDEBAR_WIDTH}
       className="hidden md:block"
       onResizeStart={() => { dragStart.current = width; }}
       onResize={(delta) => onWidthChange(dragStart.current + (side === "left" ? delta : -delta))}

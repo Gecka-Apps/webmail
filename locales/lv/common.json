@@ -5721,7 +5721,11 @@
     "reading_pane": "Lasīšanas rūts",
     "name_unread": "{name}, Nelasīti: {count}",
     "expand_folder": "Izvērst {name}",
-    "collapse_folder": "Sakļaut {name}"
+    "collapse_folder": "Sakļaut {name}",
+    "resize_sidebar": "Mainīt sānjoslas izmēru",
+    "resize_message_list": "Mainīt ziņojumu saraksta izmēru",
+    "resize_contact_list": "Mainīt kontaktu saraksta izmēru",
+    "resize_side_panel": "Mainīt sānu paneļa izmēru"
   },
   "plugin_pages": {
     "loading": "Ielādē lapu",

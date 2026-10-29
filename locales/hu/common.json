@@ -5721,7 +5721,11 @@
     "reading_pane": "Olvasóablak",
     "name_unread": "{name}, {count} olvasatlan",
     "expand_folder": "{name} kibontása",
-    "collapse_folder": "{name} összecsukása"
+    "collapse_folder": "{name} összecsukása",
+    "resize_sidebar": "Oldalsáv átméretezése",
+    "resize_message_list": "Üzenetlista átméretezése",
+    "resize_contact_list": "Névjegylista átméretezése",
+    "resize_side_panel": "Oldalpanel átméretezése"
   },
   "plugin_pages": {
     "loading": "Oldal betöltése",

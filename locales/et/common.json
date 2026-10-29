@@ -5721,7 +5721,11 @@
     "reading_pane": "Lugemispaan",
     "name_unread": "{name}, Lugemata: {count}",
     "expand_folder": "Laienda {name}",
-    "collapse_folder": "Ahenda {name}"
+    "collapse_folder": "Ahenda {name}",
+    "resize_sidebar": "Muuda külgriba suurust",
+    "resize_message_list": "Muuda kirjade loendi suurust",
+    "resize_contact_list": "Muuda kontaktide loendi suurust",
+    "resize_side_panel": "Muuda külgpaneeli suurust"
   },
   "plugin_pages": {
     "loading": "Lehe laadimine",

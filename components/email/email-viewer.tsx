@@ -3866,6 +3866,10 @@ export function EmailViewer({
           <>
             {!sidebarOverlay && (
               <ResizeHandle
+                pane="sidePanel"
+                value={detailSidebarWidth}
+                min={200}
+                max={500}
                 onResizeStart={() => { detailSidebarWidthRef.current = detailSidebarWidth; }}
                 onResize={(delta) => {
                   const newWidth = Math.max(200, Math.min(500, detailSidebarWidthRef.current - delta));

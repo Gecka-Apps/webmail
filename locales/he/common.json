@@ -5722,7 +5722,11 @@
     "reading_pane": "חלונית קריאה",
     "name_unread": "{name}, {count} שלא נקראו",
     "expand_folder": "הרחב את {name}",
-    "collapse_folder": "כווץ את {name}"
+    "collapse_folder": "כווץ את {name}",
+    "resize_sidebar": "שינוי גודל סרגל הצד",
+    "resize_message_list": "שינוי גודל רשימת ההודעות",
+    "resize_contact_list": "שינוי גודל רשימת אנשי הקשר",
+    "resize_side_panel": "שינוי גודל החלונית הצדדית"
   },
   "plugin_pages": {
     "loading": "טוען את הדף",

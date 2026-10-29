@@ -5721,7 +5721,11 @@
     "reading_pane": "Panel de lectura",
     "name_unread": "{name}, {count} sin leer",
     "expand_folder": "Expandir {name}",
-    "collapse_folder": "Contraer {name}"
+    "collapse_folder": "Contraer {name}",
+    "resize_sidebar": "Cambiar el tamaño de la barra lateral",
+    "resize_message_list": "Cambiar el tamaño de la lista de mensajes",
+    "resize_contact_list": "Cambiar el tamaño de la lista de contactos",
+    "resize_side_panel": "Cambiar el tamaño del panel lateral"
   },
   "plugin_pages": {
     "loading": "Cargando la página",

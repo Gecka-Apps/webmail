@@ -1,6 +1,25 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, fireEvent } from '@testing-library/react';
+import { useRef, useState } from 'react';
+import { render, fireEvent, act } from '@testing-library/react';
 import { ResizeHandle } from '../resize-handle';
+
+/** A pane whose width the handle changes, as the apps wire it up. */
+function Pane({ onSave }: { onSave: (width: number) => void }) {
+  const [width, setWidth] = useState(200);
+  const start = useRef(width);
+  return (
+    <ResizeHandle
+      pane="sidebar"
+      value={width}
+      min={180}
+      max={400}
+      onResizeStart={() => { start.current = width; }}
+      onResize={(delta) => setWidth(Math.max(180, Math.min(400, start.current + delta)))}
+      onResizeEnd={() => onSave(width)}
+    />
+  );
+}
+
 
 describe('ResizeHandle', () => {
   it('should render with separator role', () => {
@@ -14,7 +33,7 @@ describe('ResizeHandle', () => {
   });
 
   describe('keyboard interaction', () => {
-    it('should call onResize with negative delta on ArrowLeft', () => {
+    it('should call onResize with negative delta on ArrowLeft', async () => {
       const onResize = vi.fn();
       const onResizeEnd = vi.fn();
       const { getByRole } = render(
@@ -23,10 +42,11 @@ describe('ResizeHandle', () => {
       const handle = getByRole('separator');
       fireEvent.keyDown(handle, { key: 'ArrowLeft' });
       expect(onResize).toHaveBeenCalledWith(-10);
+      await act(async () => {});
       expect(onResizeEnd).toHaveBeenCalled();
     });
 
-    it('should call onResize with positive delta on ArrowRight', () => {
+    it('should call onResize with positive delta on ArrowRight', async () => {
       const onResize = vi.fn();
       const onResizeEnd = vi.fn();
       const { getByRole } = render(
@@ -35,6 +55,7 @@ describe('ResizeHandle', () => {
       const handle = getByRole('separator');
       fireEvent.keyDown(handle, { key: 'ArrowRight' });
       expect(onResize).toHaveBeenCalledWith(10);
+      await act(async () => {});
       expect(onResizeEnd).toHaveBeenCalled();
     });
 
@@ -48,6 +69,58 @@ describe('ResizeHandle', () => {
       fireEvent.keyDown(handle, { key: 'Enter' });
       fireEvent.keyDown(handle, { key: 'a' });
       expect(onResize).not.toHaveBeenCalled();
+    });
+
+    it('should keep the arrows away from the mail shortcuts on the window', () => {
+      const shortcuts = vi.fn();
+      window.addEventListener('keydown', shortcuts);
+      try {
+        const { getAllByRole } = render(
+          <>
+            <ResizeHandle orientation="horizontal" onResize={vi.fn()} />
+            <ResizeHandle onResize={vi.fn()} />
+          </>
+        );
+        const [horizontal, vertical] = getAllByRole('separator');
+        fireEvent.keyDown(horizontal, { key: 'ArrowDown' });
+        fireEvent.keyDown(horizontal, { key: 'ArrowUp' });
+        fireEvent.keyDown(vertical, { key: 'ArrowLeft' });
+        expect(shortcuts).not.toHaveBeenCalled();
+        // Keys the handle doesn't use still reach them.
+        fireEvent.keyDown(vertical, { key: 'j' });
+        expect(shortcuts).toHaveBeenCalledOnce();
+      } finally {
+        window.removeEventListener('keydown', shortcuts);
+      }
+    });
+
+    it('should step from the current width on every press and save the new one', async () => {
+      const onSave = vi.fn();
+      const { getByRole } = render(<Pane onSave={onSave} />);
+      const handle = getByRole('separator');
+      fireEvent.keyDown(handle, { key: 'ArrowRight' });
+      await act(async () => {});
+      fireEvent.keyDown(handle, { key: 'ArrowRight' });
+      await act(async () => {});
+      expect(handle).toHaveAttribute('aria-valuenow', '220');
+      expect(onSave).toHaveBeenLastCalledWith(220);
+    });
+  });
+
+  describe('name and value', () => {
+    it('should say which pane it resizes and how wide it is', () => {
+      const { getByRole } = render(<Pane onSave={vi.fn()} />);
+      const handle = getByRole('separator', { name: 'resize_sidebar' });
+      expect(handle).toHaveAttribute('aria-valuenow', '200');
+      expect(handle).toHaveAttribute('aria-valuemin', '180');
+      expect(handle).toHaveAttribute('aria-valuemax', '400');
+    });
+
+    it('should fall back to a plain name and no value', () => {
+      const { getByRole } = render(<ResizeHandle onResize={vi.fn()} />);
+      const handle = getByRole('separator');
+      expect(handle).toHaveAccessibleName('resize');
+      expect(handle).not.toHaveAttribute('aria-valuenow');
     });
   });
 

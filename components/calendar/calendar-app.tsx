@@ -2201,6 +2201,10 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
           </div>
           {!isNarrow && (
             <ResizeHandle
+              pane="sidebar"
+              value={calSidebarWidth}
+              min={180}
+              max={400}
               onResizeStart={() => { dragStartWidth.current = calSidebarWidth; setIsResizing(true); }}
               onResize={(delta) => setCalSidebarWidth(Math.max(180, Math.min(400, dragStartWidth.current + delta)))}
               onResizeEnd={() => {

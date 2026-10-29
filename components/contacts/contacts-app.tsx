@@ -1275,6 +1275,10 @@ function ContactsAppContent({ linkSegments: routeSegments }: ContactsAppProps = 
                   </div>
                   {!isNarrow && (
                     <ResizeHandle
+                      pane="sidebar"
+                      value={sidebarWidth}
+                      min={180}
+                      max={400}
                       onResizeStart={() => { sidebarDragStartWidth.current = sidebarWidth; setIsSidebarResizing(true); }}
                       onResize={(delta) => setSidebarWidth(Math.max(180, Math.min(400, sidebarDragStartWidth.current + delta)))}
                       onResizeEnd={() => {
@@ -1390,6 +1394,10 @@ function ContactsAppContent({ linkSegments: routeSegments }: ContactsAppProps = 
 
               {!isMobile && (
                 <ResizeHandle
+                  pane="contactList"
+                  value={listWidth}
+                  min={220}
+                  max={500}
                   onResizeStart={() => { listDragStartWidth.current = listWidth; setIsListResizing(true); }}
                   onResize={(delta) => setListWidth(Math.max(220, Math.min(500, listDragStartWidth.current + delta)))}
                   onResizeEnd={() => {

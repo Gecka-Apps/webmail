@@ -5721,7 +5721,11 @@
     "reading_pane": "閱讀窗格",
     "name_unread": "{name}，{count} 封未讀",
     "expand_folder": "展開 {name}",
-    "collapse_folder": "收合 {name}"
+    "collapse_folder": "收合 {name}",
+    "resize_sidebar": "調整側邊欄大小",
+    "resize_message_list": "調整郵件清單大小",
+    "resize_contact_list": "調整聯絡人清單大小",
+    "resize_side_panel": "調整側面板大小"
   },
   "plugin_pages": {
     "loading": "正在載入頁面",

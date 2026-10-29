@@ -5721,7 +5721,11 @@
     "reading_pane": "Leserute",
     "name_unread": "{name}, {count} uleste",
     "expand_folder": "Utvid {name}",
-    "collapse_folder": "Skjul {name}"
+    "collapse_folder": "Skjul {name}",
+    "resize_sidebar": "Endre størrelse på sidepanelet",
+    "resize_message_list": "Endre størrelse på meldingslisten",
+    "resize_contact_list": "Endre størrelse på kontaktlisten",
+    "resize_side_panel": "Endre størrelse på sideruten"
   },
   "plugin_pages": {
     "loading": "Laster inn siden",

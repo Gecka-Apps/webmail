@@ -1188,6 +1188,10 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
       </div>
 
       <ResizeHandle
+        pane="sidebar"
+        value={settingsSidebarWidth}
+        min={180}
+        max={400}
         onResizeStart={() => { dragStartWidth.current = settingsSidebarWidth; setIsResizing(true); }}
         onResize={(delta) => setSettingsSidebarWidth(Math.max(180, Math.min(400, dragStartWidth.current + delta)))}
         onResizeEnd={() => {

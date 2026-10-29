@@ -5721,7 +5721,11 @@
     "reading_pane": "읽기 창",
     "name_unread": "{name}, 읽지 않음 {count}개",
     "expand_folder": "{name} 펼치기",
-    "collapse_folder": "{name} 접기"
+    "collapse_folder": "{name} 접기",
+    "resize_sidebar": "사이드바 크기 조정",
+    "resize_message_list": "메시지 목록 크기 조정",
+    "resize_contact_list": "연락처 목록 크기 조정",
+    "resize_side_panel": "사이드 패널 크기 조정"
   },
   "plugin_pages": {
     "loading": "페이지를 불러오는 중",

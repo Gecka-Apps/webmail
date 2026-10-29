@@ -57,7 +57,7 @@ import { useSettingsStore } from "@/stores/settings-store";
 import { useEffectiveMailLayout } from "@/hooks/use-effective-mail-layout";
 import { useContactStore } from "@/stores/contact-store";
 import { useIdentityStore } from "@/stores/identity-store";
-import { useUIStore } from "@/stores/ui-store";
+import { useUIStore, SIDEBAR_MIN, SIDEBAR_MAX, EMAIL_LIST_MIN, EMAIL_LIST_MAX, EMAIL_LIST_HEIGHT_MIN, EMAIL_LIST_HEIGHT_MAX } from "@/stores/ui-store";
 import { useDeviceDetection } from "@/hooks/use-media-query";
 import { usePaneSize } from "@/hooks/use-pane-size";
 import { usePaneId } from "@/hooks/use-pane-context";
@@ -4922,6 +4922,10 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
             absent under Mountain View, whose navigation has a fixed width) */}
         {!isMobile && !isTablet && !sidebarCollapsed && !inlineApp && !fullscreenReading && !mvShell && (
           <ResizeHandle
+            pane="sidebar"
+            value={sidebarWidth}
+            min={SIDEBAR_MIN}
+            max={SIDEBAR_MAX}
             onResizeStart={() => { dragStartWidth.current = sidebarWidth; setIsResizing(true); }}
             onResize={(delta) => setSidebarWidth(dragStartWidth.current + delta)}
             onResizeEnd={() => { setIsResizing(false); persistColumnWidths(); }}
@@ -5345,6 +5349,10 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
           {/* Email list resize handle (desktop only) */}
           {!isMobile && !isTablet && !isFocusedMailLayout && !isHorizontalMailLayout && !shouldHideViewerPane && !fullscreenReading && (
             <ResizeHandle
+              pane="messageList"
+              value={emailListWidth}
+              min={EMAIL_LIST_MIN}
+              max={EMAIL_LIST_MAX}
               onResizeStart={() => { dragStartWidth.current = emailListWidth; setIsResizing(true); }}
               onResize={(delta) => setEmailListWidth(dragStartWidth.current + delta)}
               onResizeEnd={() => { setIsResizing(false); persistColumnWidths(); }}
@@ -5354,6 +5362,10 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
           {!isMobile && !isTablet && isHorizontalMailLayout && !shouldHideHorizontalViewerPane && !fullscreenReading && (
             <ResizeHandle
               orientation="horizontal"
+              pane="messageList"
+              value={emailListHeight}
+              min={EMAIL_LIST_HEIGHT_MIN}
+              max={EMAIL_LIST_HEIGHT_MAX}
               onResizeStart={() => { dragStartWidth.current = emailListHeight; setIsResizing(true); }}
               onResize={(delta) => setEmailListHeight(dragStartWidth.current + delta)}
               onResizeEnd={() => { setIsResizing(false); persistColumnWidths(); }}

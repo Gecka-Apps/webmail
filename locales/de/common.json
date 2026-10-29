@@ -5721,7 +5721,11 @@
     "reading_pane": "Lesebereich",
     "name_unread": "{name}, {count} ungelesen",
     "expand_folder": "{name} aufklappen",
-    "collapse_folder": "{name} zuklappen"
+    "collapse_folder": "{name} zuklappen",
+    "resize_sidebar": "Größe der Seitenleiste ändern",
+    "resize_message_list": "Größe der Nachrichtenliste ändern",
+    "resize_contact_list": "Größe der Kontaktliste ändern",
+    "resize_side_panel": "Größe des Seitenbereichs ändern"
   },
   "plugin_pages": {
     "loading": "Seite wird geladen",

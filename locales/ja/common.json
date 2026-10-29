@@ -5721,7 +5721,11 @@
     "reading_pane": "閲覧ウィンドウ",
     "name_unread": "{name}、未読 {count} 件",
     "expand_folder": "{name}を展開",
-    "collapse_folder": "{name}を折りたたむ"
+    "collapse_folder": "{name}を折りたたむ",
+    "resize_sidebar": "サイドバーのサイズを変更",
+    "resize_message_list": "メッセージ一覧のサイズを変更",
+    "resize_contact_list": "連絡先一覧のサイズを変更",
+    "resize_side_panel": "サイドパネルのサイズを変更"
   },
   "plugin_pages": {
     "loading": "ページを読み込んでいます",

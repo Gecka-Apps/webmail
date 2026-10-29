@@ -56,7 +56,11 @@
     "reading_pane": "บานหน้าต่างอ่าน",
     "name_unread": "{name}, ยังไม่ได้อ่าน {count}",
     "expand_folder": "ขยาย {name}",
-    "collapse_folder": "ย่อ {name}"
+    "collapse_folder": "ย่อ {name}",
+    "resize_sidebar": "ปรับขนาดแถบด้านข้าง",
+    "resize_message_list": "ปรับขนาดรายการข้อความ",
+    "resize_contact_list": "ปรับขนาดรายชื่อผู้ติดต่อ",
+    "resize_side_panel": "ปรับขนาดแผงด้านข้าง"
   },
   "date": {
     "today": "วันนี้",

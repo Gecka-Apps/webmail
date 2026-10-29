@@ -5721,7 +5721,11 @@
     "reading_pane": "Область читання",
     "name_unread": "{name}, Непрочитаних: {count}",
     "expand_folder": "Розгорнути {name}",
-    "collapse_folder": "Згорнути {name}"
+    "collapse_folder": "Згорнути {name}",
+    "resize_sidebar": "Змінити розмір бічної панелі",
+    "resize_message_list": "Змінити розмір списку листів",
+    "resize_contact_list": "Змінити розмір списку контактів",
+    "resize_side_panel": "Змінити розмір бічної області"
   },
   "plugin_pages": {
     "loading": "Завантаження сторінки",

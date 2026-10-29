@@ -5721,7 +5721,11 @@
     "reading_pane": "Podokno čtení",
     "name_unread": "{name}, Nepřečteno: {count}",
     "expand_folder": "Rozbalit {name}",
-    "collapse_folder": "Sbalit {name}"
+    "collapse_folder": "Sbalit {name}",
+    "resize_sidebar": "Změnit velikost postranního panelu",
+    "resize_message_list": "Změnit velikost seznamu zpráv",
+    "resize_contact_list": "Změnit velikost seznamu kontaktů",
+    "resize_side_panel": "Změnit velikost bočního panelu"
   },
   "plugin_pages": {
     "loading": "Načítání stránky",

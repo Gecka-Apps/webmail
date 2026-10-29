@@ -5721,7 +5721,11 @@
     "reading_pane": "جزء القراءة",
     "name_unread": "{name}، {count} غير مقروءة",
     "expand_folder": "توسيع {name}",
-    "collapse_folder": "طي {name}"
+    "collapse_folder": "طي {name}",
+    "resize_sidebar": "تغيير حجم الشريط الجانبي",
+    "resize_message_list": "تغيير حجم قائمة الرسائل",
+    "resize_contact_list": "تغيير حجم قائمة جهات الاتصال",
+    "resize_side_panel": "تغيير حجم اللوحة الجانبية"
   },
   "plugin_pages": {
     "loading": "جارٍ تحميل الصفحة",

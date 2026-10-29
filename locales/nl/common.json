@@ -5721,7 +5721,11 @@
     "reading_pane": "Leesvenster",
     "name_unread": "{name}, {count} ongelezen",
     "expand_folder": "{name} uitvouwen",
-    "collapse_folder": "{name} samenvouwen"
+    "collapse_folder": "{name} samenvouwen",
+    "resize_sidebar": "Formaat van zijbalk wijzigen",
+    "resize_message_list": "Formaat van berichtenlijst wijzigen",
+    "resize_contact_list": "Formaat van contactenlijst wijzigen",
+    "resize_side_panel": "Formaat van zijpaneel wijzigen"
   },
   "plugin_pages": {
     "loading": "Pagina laden",

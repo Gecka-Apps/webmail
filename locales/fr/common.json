@@ -5721,7 +5721,11 @@
     "reading_pane": "Volet de lecture",
     "name_unread": "{name}, {count} non lus",
     "expand_folder": "Développer {name}",
-    "collapse_folder": "Réduire {name}"
+    "collapse_folder": "Réduire {name}",
+    "resize_sidebar": "Redimensionner la barre latérale",
+    "resize_message_list": "Redimensionner la liste des messages",
+    "resize_contact_list": "Redimensionner la liste des contacts",
+    "resize_side_panel": "Redimensionner le panneau latéral"
   },
   "plugin_pages": {
     "loading": "Chargement de la page",

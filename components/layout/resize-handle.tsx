@@ -13,11 +13,33 @@ interface ResizeHandleProps {
   className?: string;
   /** Stable hook for tests (not user-visible). */
   testId?: string;
+  /**
+   * The pane the handle resizes, which names it for screen readers
+   * ("Resize message list"). Without it the name is a plain "Resize".
+   */
+  pane?: ResizePane;
+  /**
+   * The size of the pane it resizes, in px, and the limits of that size. A
+   * focusable separator must expose its value (WCAG 4.1.2), so screen
+   * readers say how wide the pane is now and how far it can go.
+   */
+  value?: number;
+  min?: number;
+  max?: number;
 }
 
 const KEYBOARD_STEP = 10;
 
-export function ResizeHandle({ onResizeStart, onResize, onResizeEnd, onDoubleClick, orientation = "vertical", className, testId }: ResizeHandleProps) {
+export type ResizePane = "sidebar" | "messageList" | "contactList" | "sidePanel";
+
+const PANE_LABEL_KEYS: Record<ResizePane, string> = {
+  sidebar: "resize_sidebar",
+  messageList: "resize_message_list",
+  contactList: "resize_contact_list",
+  sidePanel: "resize_side_panel",
+};
+
+export function ResizeHandle({ onResizeStart, onResize, onResizeEnd, onDoubleClick, orientation = "vertical", className, testId, pane, value, min, max }: ResizeHandleProps) {
   const t = useTranslations("shell");
   const handleRef = useRef<HTMLDivElement>(null);
   // Id of the pointer that started the drag, or null when idle. Only that
@@ -76,9 +98,17 @@ export function ResizeHandle({ onResizeStart, onResize, onResizeEnd, onDoubleCli
       else return;
     }
     e.preventDefault();
-    onResize(delta);
-    onResizeEnd?.();
-  }, [onResize, onResizeEnd, isHorizontal]);
+    // The arrows belong to the handle: the mail shortcuts listen on the
+    // window and would otherwise also move the selection.
+    e.stopPropagation();
+    // Each step starts from the size the pane has now, as a drag does;
+    // without the start every press moved from the same old width.
+    callbacks.current.onResizeStart?.();
+    callbacks.current.onResize(delta);
+    // The end runs after the new size has rendered, so a caller that saves
+    // the size in its end callback saves this step and not the last one.
+    queueMicrotask(() => callbacks.current.onResizeEnd?.());
+  }, [isHorizontal]);
 
   useEffect(() => {
     const handlePointerMove = (e: PointerEvent) => {
@@ -122,7 +152,10 @@ export function ResizeHandle({ onResizeStart, onResize, onResizeEnd, onDoubleCli
       ref={handleRef}
       role="separator"
       aria-orientation={isHorizontal ? "horizontal" : "vertical"}
-      aria-label={t("resize")}
+      aria-label={t(pane ? PANE_LABEL_KEYS[pane] : "resize")}
+      aria-valuenow={value === undefined ? undefined : Math.round(value)}
+      aria-valuemin={value === undefined ? undefined : min}
+      aria-valuemax={value === undefined ? undefined : max}
       data-testid={testId}
       tabIndex={0}
       onPointerDown={handlePointerDown}
