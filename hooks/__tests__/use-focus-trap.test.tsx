@@ -157,3 +157,23 @@ describe('useFocusTrap and the page behind', () => {
     }
   });
 });
+
+// Presses Escape in its layout effect: after the DOM of a render is in
+// place, before that render's passive effects have run.
+function EscapeOnCommit({ press }: { press: number }) {
+  React.useLayoutEffect(() => {
+    if (press) fireEvent.keyDown(document.body, { key: 'Escape' });
+  }, [press]);
+  return null;
+}
+
+describe('useFocusTrap handler timing', () => {
+  it('answers an Escape right after a render with that render\'s handler', () => {
+    const before = vi.fn();
+    const after = vi.fn();
+    const { rerender } = render(<><Dialog onEscape={before} /><EscapeOnCommit press={0} /></>);
+    rerender(<><Dialog onEscape={after} /><EscapeOnCommit press={1} /></>);
+    expect(after).toHaveBeenCalledTimes(1);
+    expect(before).not.toHaveBeenCalled();
+  });
+});

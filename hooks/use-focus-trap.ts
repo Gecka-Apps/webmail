@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 // The traps that are active, the one opened last at the end. Only that one
 // answers Escape, so a dialog over a dialog closes alone.
@@ -24,9 +24,12 @@ export function useFocusTrap({
   // one from here instead of starting over for it: each new start moved the
   // focus back to the opener and then to the first element, out of the field
   // the user was typing in whenever the page behind rendered again.
+  // Updated during the commit, not after it: an Escape pressed once the
+  // DOM has changed must reach the handler of that render, not the one
+  // before (a form that just closed would ask about its input again).
   const onEscapeRef = useRef(onEscape);
   const initialFocusRef = useRef(initialFocus);
-  useEffect(() => {
+  useLayoutEffect(() => {
     onEscapeRef.current = onEscape;
     initialFocusRef.current = initialFocus;
   });
