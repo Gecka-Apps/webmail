@@ -776,7 +776,8 @@
       "select_all": "เลือกทั้งหมด",
       "global_search": "ค้นหาทุกรายการ",
       "extend_selection": "ขยายการเลือกลง / ขึ้น",
-      "accessibility_panel": "เปิดตัวเลือกการเข้าถึง"
+      "accessibility_panel": "เปิดตัวเลือกการเข้าถึง",
+      "focus_notification": "ไปที่การแจ้งเตือนล่าสุด"
     },
     "threads": {
       "expand_collapse": "ขยาย/ย่อการสนทนา",

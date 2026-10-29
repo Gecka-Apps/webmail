@@ -3496,7 +3496,8 @@
       "select_all": "Selectează tot",
       "global_search": "Caută în tot",
       "extend_selection": "Extinde selecția în jos / în sus",
-      "accessibility_panel": "Deschide opțiunile de accesibilitate"
+      "accessibility_panel": "Deschide opțiunile de accesibilitate",
+      "focus_notification": "Mergi la cea mai recentă notificare"
     },
     "threads": {
       "expand_collapse": "Extindeți/reduceți firul de discuție",

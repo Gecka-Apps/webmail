@@ -3496,7 +3496,8 @@
       "select_all": "Бүгдийг сонго",
       "global_search": "Бүгдийг хайх",
       "extend_selection": "Сонголтыг доош / дээш өргөтгөх",
-      "accessibility_panel": "Хүртээмжийн сонголтуудыг нээх"
+      "accessibility_panel": "Хүртээмжийн сонголтуудыг нээх",
+      "focus_notification": "Хамгийн сүүлийн мэдэгдэл рүү очих"
     },
     "threads": {
       "expand_collapse": "Хэлхээсийг дэлгэх/хумих",

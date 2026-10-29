@@ -3496,7 +3496,8 @@
       "select_all": "Vybrat vše",
       "global_search": "Hledat ve všem",
       "extend_selection": "Rozšířit výběr dolů / nahoru",
-      "accessibility_panel": "Otevřít možnosti přístupnosti"
+      "accessibility_panel": "Otevřít možnosti přístupnosti",
+      "focus_notification": "Přejít na nejnovější oznámení"
     },
     "threads": {
       "expand_collapse": "Rozbalit/sbalit vlákno",

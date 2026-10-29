@@ -3496,7 +3496,8 @@
       "select_all": "全选",
       "global_search": "全局搜索",
       "extend_selection": "向下 / 向上扩展选择",
-      "accessibility_panel": "打开无障碍选项"
+      "accessibility_panel": "打开无障碍选项",
+      "focus_notification": "转到最新通知"
     },
     "threads": {
       "expand_collapse": "展开/折叠会话",

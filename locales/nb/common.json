@@ -3496,7 +3496,8 @@
       "select_all": "Velg alle",
       "global_search": "Søk i alt",
       "extend_selection": "Utvid markeringen ned / opp",
-      "accessibility_panel": "Åpne alternativer for tilgjengelighet"
+      "accessibility_panel": "Åpne alternativer for tilgjengelighet",
+      "focus_notification": "Gå til det nyeste varselet"
     },
     "threads": {
       "expand_collapse": "Utvid eller fold sammen tråden",

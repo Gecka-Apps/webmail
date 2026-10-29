@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef, useId } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle, Loader2 } from "@/components/icons";
@@ -55,6 +55,21 @@ interface ToastProps {
   onClose: (id: string) => void;
   /** Kept out of sight for now (a menu is open over it): the countdown waits. */
   held?: boolean;
+  /** The toast goes away with the keyboard focus in it: put the focus back. */
+  onFocusLost?: () => void;
+}
+
+/**
+ * Jumps to the newest toast from anywhere (Alt+Shift+N), so its Undo can be
+ * reached without tabbing through the page. Listed in lib/keyboard-shortcuts.
+ */
+export function isFocusToastShortcut(e: KeyboardEvent): boolean {
+  return e.altKey && e.shiftKey && !e.ctrlKey && !e.metaKey && e.code === "KeyN";
+}
+
+/** A modal dialog is open: keys and focus belong to it. */
+function modalOpen(): boolean {
+  return document.querySelector('[aria-modal="true"]') !== null;
 }
 
 const icons = {
@@ -83,7 +98,7 @@ const progressBarStyles = {
 // A sideways swipe this far (px) on a touch screen dismisses the toast.
 const SWIPE_DISMISS_DISTANCE = 72;
 
-export function ToastItem({ toast, onClose, held = false }: ToastProps) {
+export function ToastItem({ toast, onClose, held = false, onFocusLost }: ToastProps) {
   const tCommon = useTranslations("common");
   const Icon = icons[toast.type];
   const [exiting, setExiting] = useState(false);
@@ -91,7 +106,14 @@ export function ToastItem({ toast, onClose, held = false }: ToastProps) {
   const [dragX, setDragX] = useState(0);
   const [flungTo, setFlungTo] = useState<number | null>(null);
   const swipeRef = useRef<{ id: number; x: number; y: number; horizontal: boolean | null } | null>(null);
+  // Swiping holds the countdown; so do the pointer over the toast and the
+  // keyboard focus in it (2.2.1), unless the action stops working at a fixed
+  // time (pauseOnHover: false).
   const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const titleId = useId();
   const remainingRef = useRef(toast.duration ?? 5000);
   const startRef = useRef(Date.now());
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -106,8 +128,10 @@ export function ToastItem({ toast, onClose, held = false }: ToastProps) {
 
   const dismiss = useCallback(() => {
     setExiting(true);
+    // Removing the toast would drop the focus onto <body>.
+    if (rootRef.current?.contains(document.activeElement)) onFocusLost?.();
     setTimeout(() => onClose(toast.id), 280);
-  }, [onClose, toast.id]);
+  }, [onClose, toast.id, onFocusLost]);
 
   const dismissByUser = useCallback(() => {
     try {
@@ -118,7 +142,8 @@ export function ToastItem({ toast, onClose, held = false }: ToastProps) {
     dismiss();
   }, [toast, dismiss]);
 
-  const waiting = paused || held;
+  const canPause = toast.pauseOnHover !== false;
+  const waiting = paused || held || (canPause && (hovered || focused));
   useEffect(() => {
     if (!toast.duration || toast.duration <= 0 || isProgress) return;
 
@@ -217,8 +242,22 @@ export function ToastItem({ toast, onClose, held = false }: ToastProps) {
       onPointerMove={onPointerMove}
       onPointerUp={endSwipe}
       onPointerCancel={endSwipe}
-      onMouseEnter={() => { if (toast.pauseOnHover !== false) setPaused(true); }}
-      onMouseLeave={() => setPaused(false)}
+      ref={rootRef}
+      role="group"
+      aria-labelledby={titleId}
+      tabIndex={-1}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setFocused(false);
+      }}
+      onKeyDown={(e) => {
+        if (e.key !== "Escape") return;
+        // The toast's, not the page's Escape (closing the open message).
+        e.stopPropagation();
+        dismissByUser();
+      }}
       onClick={() => {
         if (swiped) return;
         if (toast.onClick && !toast.action) {
@@ -238,7 +277,7 @@ export function ToastItem({ toast, onClose, held = false }: ToastProps) {
 
       {/* Content */}
       <div className="flex-1 min-w-0 pt-px">
-        <p className="text-[13.5px] font-medium text-foreground leading-snug">{toast.title}</p>
+        <p id={titleId} className="text-[13.5px] font-medium text-foreground leading-snug">{toast.title}</p>
         {toast.message && (
           <p className="text-[12.5px] mt-0.5 text-muted-foreground leading-snug">{toast.message}</p>
         )}
@@ -261,6 +300,7 @@ export function ToastItem({ toast, onClose, held = false }: ToastProps) {
       {/* Close button. Phones swipe the toast away instead. */}
       <button
         type="button"
+        data-toast-close=""
         aria-label={tCommon("close")}
         title={tCommon("close")}
         onClick={(e) => {
@@ -300,7 +340,7 @@ export function ToastItem({ toast, onClose, held = false }: ToastProps) {
             className={cn("h-full opacity-60", progressBarStyles[toast.type])}
             style={{
               animation: `toast-progress ${toast.duration}ms linear forwards`,
-              animationPlayState: paused ? "paused" : "running",
+              animationPlayState: waiting ? "paused" : "running",
             }}
           />
         </div>
@@ -318,9 +358,42 @@ export function ToastContainer({ toasts, onClose }: { toasts: Toast[]; onClose: 
   const menuOpen = useContextMenuOpen();
   const phone = useMediaQuery("(max-width: 639px)");
   const held = menuOpen && phone;
+  const containerRef = useRef<HTMLDivElement>(null);
+  // Where the focus was before the shortcut moved it into a toast.
+  const returnFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  const hasToasts = toasts.length > 0;
+  useEffect(() => {
+    if (!hasToasts) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (!isFocusToastShortcut(e) || modalOpen()) return;
+      const items = containerRef.current?.querySelectorAll<HTMLElement>(".toast-item");
+      const newest = items?.[items.length - 1];
+      if (!newest) return;
+      e.preventDefault();
+      const active = document.activeElement as HTMLElement | null;
+      if (active && active !== document.body && !containerRef.current?.contains(active)) {
+        returnFocusRef.current = active;
+      }
+      // Its first action (Undo), else the close button, else the toast.
+      const target =
+        newest.querySelector<HTMLElement>("button:not([data-toast-close])") ??
+        Array.from(newest.querySelectorAll<HTMLElement>("button[data-toast-close]")).find((b) => b.offsetParent !== null || b.getClientRects().length > 0) ??
+        newest;
+      target.focus();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [hasToasts]);
+
+  const returnFocus = useCallback(() => {
+    const back = returnFocusRef.current;
+    returnFocusRef.current = null;
+    if (back && back.isConnected) back.focus();
   }, []);
 
   if (!mounted) return null;
@@ -341,6 +414,7 @@ export function ToastContainer({ toasts, onClose }: { toasts: Toast[]; onClose: 
       // Not a live region: the toast store reads each toast out through
       // lib/announce (errors assertively). A labelled region while toasts
       // are up, so screen reader users can find them.
+      ref={containerRef}
       data-toast-container=""
       role={toasts.length > 0 ? "region" : undefined}
       aria-label={toasts.length > 0 ? tCenter("title") : undefined}
@@ -348,7 +422,7 @@ export function ToastContainer({ toasts, onClose }: { toasts: Toast[]; onClose: 
     >
       {toasts.map((toast) => (
         <div key={toast.id} style={{ pointerEvents: "auto" }}>
-          <ToastItem toast={toast} onClose={onClose} held={held} />
+          <ToastItem toast={toast} onClose={onClose} held={held} onFocusLost={returnFocus} />
         </div>
       ))}
     </div>,

@@ -3496,7 +3496,8 @@
       "select_all": "انتخاب همه",
       "global_search": "جستجو در همه جا",
       "extend_selection": "گسترش انتخاب به پایین / بالا",
-      "accessibility_panel": "باز کردن گزینه‌های دسترس‌پذیری"
+      "accessibility_panel": "باز کردن گزینه‌های دسترس‌پذیری",
+      "focus_notification": "رفتن به آخرین اعلان"
     },
     "threads": {
       "expand_collapse": "باز/بسته کردن رشته",

@@ -3496,7 +3496,8 @@
       "select_all": "すべて選択",
       "global_search": "すべてを検索",
       "extend_selection": "選択範囲を下 / 上に広げる",
-      "accessibility_panel": "アクセシビリティのオプションを開く"
+      "accessibility_panel": "アクセシビリティのオプションを開く",
+      "focus_notification": "最新の通知に移動"
     },
     "threads": {
       "expand_collapse": "スレッドの展開/折りたたみ",

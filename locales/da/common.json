@@ -3496,7 +3496,8 @@
       "select_all": "Vælg alle",
       "global_search": "Søg i alt",
       "extend_selection": "Udvid markering ned / op",
-      "accessibility_panel": "Åbn indstillinger for tilgængelighed"
+      "accessibility_panel": "Åbn indstillinger for tilgængelighed",
+      "focus_notification": "Gå til den seneste notifikation"
     },
     "threads": {
       "expand_collapse": "Udvid/skjul tråd",

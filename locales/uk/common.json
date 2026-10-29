@@ -3496,7 +3496,8 @@
       "select_all": "Вибрати все",
       "global_search": "Шукати скрізь",
       "extend_selection": "Розширити виділення вниз / вгору",
-      "accessibility_panel": "Відкрити параметри доступності"
+      "accessibility_panel": "Відкрити параметри доступності",
+      "focus_notification": "Перейти до останнього сповіщення"
     },
     "threads": {
       "expand_collapse": "Розгорнути/згорнути ланцюжок",

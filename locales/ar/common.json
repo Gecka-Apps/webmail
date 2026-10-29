@@ -3496,7 +3496,8 @@
       "select_all": "تحديد الكل",
       "global_search": "البحث في كل شيء",
       "extend_selection": "توسيع التحديد لأسفل / لأعلى",
-      "accessibility_panel": "فتح خيارات إمكانية الوصول"
+      "accessibility_panel": "فتح خيارات إمكانية الوصول",
+      "focus_notification": "الانتقال إلى أحدث إشعار"
     },
     "threads": {
       "expand_collapse": "توسيع/طي المحادثة",

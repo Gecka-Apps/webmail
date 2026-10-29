@@ -3496,7 +3496,8 @@
       "select_all": "Tümünü seç",
       "global_search": "Her yerde ara",
       "extend_selection": "Seçimi aşağı / yukarı genişlet",
-      "accessibility_panel": "Erişilebilirlik seçeneklerini aç"
+      "accessibility_panel": "Erişilebilirlik seçeneklerini aç",
+      "focus_notification": "En son bildirime git"
     },
     "threads": {
       "expand_collapse": "İleti dizisini genişlet/daralt",

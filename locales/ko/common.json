@@ -3496,7 +3496,8 @@
       "select_all": "모두 선택",
       "global_search": "전체 검색",
       "extend_selection": "선택 범위를 아래 / 위로 확장",
-      "accessibility_panel": "접근성 옵션 열기"
+      "accessibility_panel": "접근성 옵션 열기",
+      "focus_notification": "최근 알림으로 이동"
     },
     "threads": {
       "expand_collapse": "대화 펼치기/접기",

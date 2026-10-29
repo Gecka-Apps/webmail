@@ -3496,7 +3496,8 @@
       "select_all": "Selecciona-ho tot",
       "global_search": "Cerca-ho tot",
       "extend_selection": "Amplia la selecció cap avall / amunt",
-      "accessibility_panel": "Obre les opcions d'accessibilitat"
+      "accessibility_panel": "Obre les opcions d'accessibilitat",
+      "focus_notification": "Ves a la notificació més recent"
     },
     "threads": {
       "expand_collapse": "Desplega/replega el fil",

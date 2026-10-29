@@ -3496,7 +3496,8 @@
       "select_all": "Vali kõik",
       "global_search": "Otsi kõike",
       "extend_selection": "Laienda valikut alla / üles",
-      "accessibility_panel": "Ava juurdepääsetavuse valikud"
+      "accessibility_panel": "Ava juurdepääsetavuse valikud",
+      "focus_notification": "Mine viimase teavituse juurde"
     },
     "threads": {
       "expand_collapse": "Ava/sulge vestlus",

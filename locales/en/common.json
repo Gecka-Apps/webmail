@@ -3496,7 +3496,8 @@
       "select_all": "Select all",
       "global_search": "Search everything",
       "extend_selection": "Extend selection down / up",
-      "accessibility_panel": "Open the accessibility options"
+      "accessibility_panel": "Open the accessibility options",
+      "focus_notification": "Go to the latest notification"
     },
     "threads": {
       "expand_collapse": "Expand/collapse thread",

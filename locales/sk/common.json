@@ -3496,7 +3496,8 @@
       "select_all": "Vybrať všetko",
       "global_search": "Hľadať všade",
       "extend_selection": "Rozšíriť výber nadol / nahor",
-      "accessibility_panel": "Otvoriť možnosti prístupnosti"
+      "accessibility_panel": "Otvoriť možnosti prístupnosti",
+      "focus_notification": "Prejsť na najnovšie upozornenie"
     },
     "threads": {
       "expand_collapse": "Rozbaliť/zbaliť vlákno",

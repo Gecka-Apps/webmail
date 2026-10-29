@@ -34,6 +34,8 @@ export const GENERAL_SHORTCUTS: readonly ShortcutEntry[] = [
   { key: "Mod + K", description: "command_palette.open", shell: "standard" },
   { key: "?", description: "shortcuts.global.help" },
   { key: "Alt + Shift + A", description: "shortcuts.global.accessibility_panel" },
+  // components/ui/toast.tsx (isFocusToastShortcut)
+  { key: "Alt + Shift + N", description: "shortcuts.global.focus_notification" },
 ];
 
 /** An app's sections with the general keys added (see GENERAL_SHORTCUTS). */

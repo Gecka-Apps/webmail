@@ -3496,7 +3496,8 @@
       "select_all": "Összes kijelölése",
       "global_search": "Keresés mindenben",
       "extend_selection": "Kijelölés bővítése lefelé / felfelé",
-      "accessibility_panel": "Kisegítő lehetőségek megnyitása"
+      "accessibility_panel": "Kisegítő lehetőségek megnyitása",
+      "focus_notification": "Ugrás a legújabb értesítésre"
     },
     "threads": {
       "expand_collapse": "Beszélgetés kibontása/összecsukása",

@@ -3496,7 +3496,8 @@
       "select_all": "Alles selecteren",
       "global_search": "Alles doorzoeken",
       "extend_selection": "Selectie omlaag / omhoog uitbreiden",
-      "accessibility_panel": "Toegankelijkheidsopties openen"
+      "accessibility_panel": "Toegankelijkheidsopties openen",
+      "focus_notification": "Naar de nieuwste melding gaan"
     },
     "threads": {
       "expand_collapse": "Gesprek uitklappen/inklappen",

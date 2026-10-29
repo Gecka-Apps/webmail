@@ -3496,7 +3496,8 @@
       "select_all": "Selecionar todos",
       "global_search": "Pesquisar em tudo",
       "extend_selection": "Expandir a seleção para baixo / cima",
-      "accessibility_panel": "Abrir as opções de acessibilidade"
+      "accessibility_panel": "Abrir as opções de acessibilidade",
+      "focus_notification": "Ir para a notificação mais recente"
     },
     "threads": {
       "expand_collapse": "Expandir/recolher conversa",

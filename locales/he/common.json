@@ -3414,7 +3414,8 @@
       "select_all": "בחר הכל",
       "global_search": "חיפוש בכל מקום",
       "extend_selection": "הרחבת הבחירה למטה / למעלה",
-      "accessibility_panel": "פתיחת אפשרויות הנגישות"
+      "accessibility_panel": "פתיחת אפשרויות הנגישות",
+      "focus_notification": "מעבר להתראה האחרונה"
     },
     "threads": {
       "expand_collapse": "הרחב/כווץ את השרשור",
