@@ -18,16 +18,23 @@ export interface RestrictionKeyDef {
   allowedValues?: string[];
   /** The admin page that lists it. */
   page: AdminPageId;
-  /** Which of locked, hidden and allowed values make sense for it. */
-  modes?: ReadonlyArray<'locked' | 'hidden' | 'allowedValues'>;
+  /**
+   * Which of locked, hidden, allowed values and a minimum make sense for
+   * it. A lock always comes with the value users get (`restriction.value`);
+   * `min` keeps users at or above a number (`restriction.min`).
+   */
+  modes?: ReadonlyArray<'locked' | 'hidden' | 'allowedValues' | 'min'>;
+  /** The build's default for the setting (stores/settings-store.ts), for the User policy page. */
+  defaultValue?: boolean | number | string;
 }
 
 export const RESTRICTION_KEYS: readonly RestrictionKeyDef[] = [
   // Text size, motion, contrast and the other reading aids are left out on
   // purpose: an admin can preset them (policy defaults) but not lock or hide
-  // them, see UNLOCKABLE_SETTING_KEYS in lib/accessibility-settings.ts.
-  { key: 'density', label: 'Density', category: 'Appearance', type: 'enum', allowedValues: ['extra-compact', 'compact', 'regular', 'comfortable'], page: 'policy' },
-  { key: 'interfaceLayout', label: 'Interface Layout', category: 'Appearance', type: 'enum', allowedValues: ['default', 'mountain-view'], page: 'policy' },
+  // them, see UNLOCKABLE_SETTING_KEYS in lib/accessibility-settings.ts. The
+  // presets live in lib/admin/policy-settings.ts.
+  { key: 'density', label: 'Density', category: 'Appearance', type: 'enum', allowedValues: ['extra-compact', 'compact', 'regular', 'comfortable'], page: 'policy', defaultValue: 'regular' },
+  { key: 'interfaceLayout', label: 'Interface Layout', category: 'Appearance', type: 'enum', allowedValues: ['default', 'mountain-view'], page: 'policy', defaultValue: 'default' },
   {
     key: 'singleKeyShortcuts',
     label: 'Single-key shortcuts',
@@ -36,31 +43,41 @@ export const RESTRICTION_KEYS: readonly RestrictionKeyDef[] = [
     type: 'boolean',
     page: 'policy',
     modes: ['locked'],
+    defaultValue: true,
   },
   {
     key: 'toastDuration',
     label: 'Notification duration',
-    description: 'How long messages such as "Moved to Archive" with their Undo button stay, in seconds (0 = until closed). With a minimum, users can make them stay longer but not shorter.',
+    description: 'A minimum for how long messages such as "Moved to Archive" with their Undo button stay. Users can make them stay longer, not shorter.',
     category: 'Accessibility',
     type: 'number',
     page: 'policy',
-    modes: ['locked'],
+    modes: ['min'],
+    defaultValue: 5,
   },
-  { key: 'markAsReadDelay', label: 'Mark as Read Delay', category: 'Email', type: 'number', page: 'policy' },
-  { key: 'deleteAction', label: 'Delete Action', category: 'Email', type: 'enum', allowedValues: ['trash', 'trash-and-read', 'permanent'], page: 'policy' },
-  { key: 'showPreview', label: 'Show Preview', category: 'Email', type: 'boolean', page: 'policy' },
-  { key: 'mailLayout', label: 'Mail Layout', category: 'Email', type: 'enum', allowedValues: ['split', 'focus', 'horizontal'], page: 'policy' },
-  { key: 'emailsPerPage', label: 'Emails Per Page', category: 'Email', type: 'number', page: 'policy' },
-  { key: 'externalContentPolicy', label: 'External Content Policy', category: 'Email', type: 'enum', allowedValues: ['allow', 'block', 'ask'], page: 'policy' },
-  { key: 'sendConfirmation', label: 'Send Confirmation', category: 'Composer', type: 'boolean', page: 'policy' },
-  { key: 'defaultReplyMode', label: 'Default Reply Mode', category: 'Composer', type: 'enum', allowedValues: ['reply', 'replyAll'], page: 'policy' },
-  { key: 'autoSelectReplyIdentity', label: 'Auto-select Reply Identity', category: 'Composer', type: 'boolean', page: 'policy' },
-  { key: 'replyIdentityMatch', label: 'Reply Identity Matching', category: 'Composer', type: 'enum', allowedValues: ['exact', 'domain'], page: 'policy' },
-  { key: 'plainTextMode', label: 'Plain Text Only', category: 'Composer', type: 'boolean', page: 'policy' },
-  { key: 'emailNotificationsEnabled', label: 'Email Notifications', category: 'Notifications', type: 'boolean', page: 'policy' },
-  { key: 'calendarNotificationsEnabled', label: 'Calendar Notifications', category: 'Notifications', type: 'boolean', page: 'policy' },
-  { key: 'pushNotifyInboxOnly', label: 'Inbox-only Push Notifications', category: 'Notifications', type: 'boolean', page: 'policy' },
-  { key: 'debugMode', label: 'Debug Mode', category: 'Advanced', type: 'boolean', page: 'policy' },
+  {
+    key: 'sendConfirmation',
+    label: 'Confirm before sending',
+    description: 'Lock: users are asked before a message goes out, or not, as set here. Hide removes the option from their settings.',
+    category: 'Accessibility',
+    type: 'boolean',
+    page: 'policy',
+    defaultValue: false,
+  },
+  { key: 'markAsReadDelay', label: 'Mark as Read Delay', category: 'Email', type: 'number', page: 'policy', defaultValue: 0 },
+  { key: 'deleteAction', label: 'Delete Action', category: 'Email', type: 'enum', allowedValues: ['trash', 'trash-and-read', 'permanent'], page: 'policy', defaultValue: 'trash' },
+  { key: 'showPreview', label: 'Show Preview', category: 'Email', type: 'boolean', page: 'policy', defaultValue: true },
+  { key: 'mailLayout', label: 'Mail Layout', category: 'Email', type: 'enum', allowedValues: ['split', 'focus', 'horizontal'], page: 'policy', defaultValue: 'split' },
+  { key: 'emailsPerPage', label: 'Emails Per Page', category: 'Email', type: 'number', page: 'policy', defaultValue: 50 },
+  { key: 'externalContentPolicy', label: 'External Content Policy', category: 'Email', type: 'enum', allowedValues: ['allow', 'block', 'ask'], page: 'policy', defaultValue: 'ask' },
+  { key: 'defaultReplyMode', label: 'Default Reply Mode', category: 'Composer', type: 'enum', allowedValues: ['reply', 'replyAll'], page: 'policy', defaultValue: 'reply' },
+  { key: 'autoSelectReplyIdentity', label: 'Auto-select Reply Identity', category: 'Composer', type: 'boolean', page: 'policy', defaultValue: false },
+  { key: 'replyIdentityMatch', label: 'Reply Identity Matching', category: 'Composer', type: 'enum', allowedValues: ['exact', 'domain'], page: 'policy', defaultValue: 'domain' },
+  { key: 'plainTextMode', label: 'Plain Text Only', category: 'Composer', type: 'boolean', page: 'policy', defaultValue: false },
+  { key: 'emailNotificationsEnabled', label: 'Email Notifications', category: 'Notifications', type: 'boolean', page: 'policy', defaultValue: true },
+  { key: 'calendarNotificationsEnabled', label: 'Calendar Notifications', category: 'Notifications', type: 'boolean', page: 'policy', defaultValue: true },
+  { key: 'pushNotifyInboxOnly', label: 'Inbox-only Push Notifications', category: 'Notifications', type: 'boolean', page: 'policy', defaultValue: false },
+  { key: 'debugMode', label: 'Debug Mode', category: 'Advanced', type: 'boolean', page: 'policy', defaultValue: false },
   {
     key: 'signature',
     label: 'Signatures',

@@ -1,13 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Loader2, Lock, Plus, Trash2, ArrowUp, ArrowDown } from '@/components/icons';
+import { Loader2, Plus, Trash2, ArrowUp, ArrowDown } from '@/components/icons';
 import { iconForName } from '@/components/icons';
 import type { SettingsPolicy, FeatureGates, PushRelayOption, AdminSidebarApp } from '@/lib/admin/types';
 import { DEFAULT_FEATURE_GATES, DEFAULT_POLICY } from '@/lib/admin/types';
 import { apiFetch } from '@/lib/browser-navigation';
 import { adminPageDef } from '@/lib/admin/admin-nav';
-import { restrictionKeysForPage } from '@/lib/admin/restriction-keys';
 import { useAdminUnsavedChanges } from '@/stores/admin-unsaved-store';
 import { DEFAULT_SIDEBAR_APP_ID_PREFIX, MAX_DEFAULT_SIDEBAR_APPS } from '@/lib/sidebar-apps';
 import { generateUUID, cn } from '@/lib/utils';
@@ -25,6 +24,7 @@ import { AdminSaveBar } from '@/components/admin/save-bar';
 import { Badge } from '@/components/admin/badge';
 import { useAdminFeedback } from '@/components/admin/feedback';
 import { inputClass } from '@/components/admin/config-items';
+import { LockedSettingsSection, PolicyDefaultsSection } from '@/components/admin/policy/user-settings-policy';
 
 // `allMailViewEnabled` is deprecated (folded into `crossAllViewEnabled`, normalized
 // forward on policy load), so it is hidden from the admin UI.
@@ -56,13 +56,10 @@ const FEATURE_GATE_LABELS: Partial<Record<keyof FeatureGates, { label: string; d
   tagsAboveSharedEnabled: { label: 'Tags Above Shared Mailboxes', description: 'List the Tags in the sidebar above the shared mailboxes instead of below them. Turn this on when users have many shared mailboxes and work with tags: expanded, the shared mailboxes push the tags out of sight.' },
 };
 
-const RESTRICTABLE_SETTINGS = restrictionKeysForPage('policy');
-
 const PAGE = adminPageDef('policy');
 
 const fieldLabelClass = 'mb-1 block text-[11px] font-medium text-muted-foreground';
 const cardClass = 'rounded-md border border-border bg-muted/30 p-3';
-const subLabelClass = 'mt-2 text-xs font-semibold text-muted-foreground';
 
 /** Mirrors the sanitizer's URL rule so the admin sees the drop before saving. */
 function isValidDefaultAppUrl(raw: string): boolean {
@@ -201,31 +198,9 @@ export function PolicyPage() {
     setMessage(null);
   }
 
-  function toggleLocked(settingKey: string) {
-    setPolicy(prev => {
-      const existing = prev.restrictions[settingKey] || {};
-      const newRestrictions = { ...prev.restrictions };
-      if (existing.locked) {
-        delete newRestrictions[settingKey];
-      } else {
-        newRestrictions[settingKey] = { ...existing, locked: true };
-      }
-      return { ...prev, restrictions: newRestrictions };
-    });
-    setDirty(true);
-    setMessage(null);
-  }
-
-  function toggleHidden(settingKey: string) {
-    setPolicy(prev => {
-      const existing = prev.restrictions[settingKey] || {};
-      const newRestrictions = { ...prev.restrictions };
-      newRestrictions[settingKey] = { ...existing, hidden: !existing.hidden };
-      if (!newRestrictions[settingKey].hidden && !newRestrictions[settingKey].locked) {
-        delete newRestrictions[settingKey];
-      }
-      return { ...prev, restrictions: newRestrictions };
-    });
+  /** Locks and defaults, for Everyone or a scope (components/admin/policy). */
+  function changePolicy(change: (prev: SettingsPolicy) => SettingsPolicy) {
+    setPolicy(change);
     setDirty(true);
     setMessage(null);
   }
@@ -264,7 +239,6 @@ export function PolicyPage() {
 
   useAdminUnsavedChanges('policy', dirty);
 
-  const categories = [...new Set(RESTRICTABLE_SETTINGS.map(s => s.category))];
   const defaultRelayUrl = resolveDefaultRelayUrl(policy);
   const defaultSidebarApps = policy.defaultSidebarApps ?? [];
 
@@ -568,36 +542,9 @@ export function PolicyPage() {
             })}
           </SettingsSection>
 
-          <SettingsSection
-            id="restrictions"
-            title="Locked settings"
-            description="Lock a setting so users cannot change it, or hide it from their settings entirely."
-          >
-            {categories.map(category => (
-              <div key={category}>
-                <p className={subLabelClass}>{category}</p>
-                {RESTRICTABLE_SETTINGS.filter(s => s.category === category).map(setting => {
-                  const restriction = policy.restrictions[setting.key] || {};
-                  return (
-                    <SettingItem key={setting.key} label={setting.label}>
-                      <div className="flex items-center gap-3">
-                        <label className="flex cursor-pointer items-center gap-1.5 text-xs text-muted-foreground">
-                          <input type="checkbox" checked={!!restriction.locked} onChange={() => toggleLocked(setting.key)}
-                            className="rounded border-input" />
-                          <Lock className="h-3 w-3" /> Lock
-                        </label>
-                        <label className="flex cursor-pointer items-center gap-1.5 text-xs text-muted-foreground">
-                          <input type="checkbox" checked={!!restriction.hidden} onChange={() => toggleHidden(setting.key)}
-                            className="rounded border-input" />
-                          Hide
-                        </label>
-                      </div>
-                    </SettingItem>
-                  );
-                })}
-              </div>
-            ))}
-          </SettingsSection>
+          <LockedSettingsSection policy={policy} onChange={changePolicy} />
+
+          <PolicyDefaultsSection policy={policy} onChange={changePolicy} />
         </div>
       )}
 
