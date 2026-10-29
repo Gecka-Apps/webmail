@@ -4703,7 +4703,9 @@
       "no_results_hint": "Søgningen ser på titler, steder, beskrivelser og gæster.",
       "repeats": "Gentages",
       "results": "{count, plural, one {# begivenhed fundet} other {# begivenheder fundet}}"
-    }
+    },
+    "mini_has_events": "har begivenheder",
+    "mini_week_number": "Uge {week}"
   },
   "calendar_event_notifications": {
     "someone": "Nogen",

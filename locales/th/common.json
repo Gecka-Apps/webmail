@@ -3653,7 +3653,9 @@
       "no_results_hint": "ค้นหาจากชื่อ สถานที่ คำอธิบาย และแขก",
       "repeats": "เกิดซ้ำ",
       "results": "{count, plural, other {พบ # กิจกรรม}}"
-    }
+    },
+    "mini_has_events": "มีกิจกรรม",
+    "mini_week_number": "สัปดาห์ที่ {week}"
   },
   "settings": {
     "title": "การตั้งค่า",

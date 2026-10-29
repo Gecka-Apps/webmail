@@ -4703,7 +4703,9 @@
       "no_results_hint": "搜索范围包括标题、地点、描述和邀请对象。",
       "repeats": "重复",
       "results": "{count, plural, other {找到 # 个活动}}"
-    }
+    },
+    "mini_has_events": "有事件",
+    "mini_week_number": "第 {week} 周"
   },
   "advanced_search": {
     "title": "高级搜索",

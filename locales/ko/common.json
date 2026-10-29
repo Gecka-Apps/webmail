@@ -4703,7 +4703,9 @@
       "no_results_hint": "제목, 장소, 설명, 참석자에서 검색합니다.",
       "repeats": "반복",
       "results": "{count, plural, other {일정 #개를 찾았습니다}}"
-    }
+    },
+    "mini_has_events": "일정 있음",
+    "mini_week_number": "{week}주차"
   },
   "advanced_search": {
     "title": "상세 검색",

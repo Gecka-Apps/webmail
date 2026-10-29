@@ -4703,7 +4703,9 @@
       "no_results_hint": "Hledá se v názvech, místech, popisech a hostech.",
       "repeats": "Opakuje se",
       "results": "{count, plural, one {Nalezena # událost} few {Nalezeny # události} many {Nalezeno # události} other {Nalezeno # událostí}}"
-    }
+    },
+    "mini_has_events": "má události",
+    "mini_week_number": "Týden {week}"
   },
   "advanced_search": {
     "title": "Pokročilé hledání",

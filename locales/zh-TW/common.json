@@ -4703,7 +4703,9 @@
       "no_results_hint": "搜尋範圍包括標題、地點、說明和邀請對象。",
       "repeats": "重複",
       "results": "{count, plural, other {找到 # 個活動}}"
-    }
+    },
+    "mini_has_events": "有活動",
+    "mini_week_number": "第 {week} 週"
   },
   "calendar_event_notifications": {
     "someone": "有人",

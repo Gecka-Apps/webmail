@@ -4703,7 +4703,9 @@
       "no_results_hint": "Search looks at titles, places, descriptions and guests.",
       "repeats": "Repeats",
       "results": "{count, plural, one {# event found} other {# events found}}"
-    }
+    },
+    "mini_has_events": "has events",
+    "mini_week_number": "Week {week}"
   },
   "calendar_event_notifications": {
     "someone": "Someone",

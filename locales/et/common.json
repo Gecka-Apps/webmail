@@ -4703,7 +4703,9 @@
       "no_results_hint": "Otsitakse pealkirjadest, kohtadest, kirjeldustest ja külalistest.",
       "repeats": "Kordub",
       "results": "{count, plural, one {Leiti # sündmus} other {Leiti # sündmust}}"
-    }
+    },
+    "mini_has_events": "on sündmusi",
+    "mini_week_number": "Nädal {week}"
   },
   "calendar_event_notifications": {
     "someone": "Keegi",

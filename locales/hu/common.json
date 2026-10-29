@@ -4703,7 +4703,9 @@
       "no_results_hint": "A keresés a címekben, helyszínekben, leírásokban és vendégekben keres.",
       "repeats": "Ismétlődik",
       "results": "{count, plural, one {# esemény található} other {# esemény található}}"
-    }
+    },
+    "mini_has_events": "vannak események",
+    "mini_week_number": "{week}. hét"
   },
   "calendar_event_notifications": {
     "someone": "Valaki",

@@ -4703,7 +4703,9 @@
       "no_results_hint": "Căutarea se uită la titluri, locuri, descrieri și invitați.",
       "repeats": "Se repetă",
       "results": "{count, plural, one {# eveniment găsit} few {# evenimente găsite} other {# de evenimente găsite}}"
-    }
+    },
+    "mini_has_events": "are evenimente",
+    "mini_week_number": "Săptămâna {week}"
   },
   "calendar_event_notifications": {
     "someone": "Cineva",

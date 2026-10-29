@@ -4703,7 +4703,9 @@
       "no_results_hint": "Hľadá sa v názvoch, miestach, popisoch a hosťoch.",
       "repeats": "Opakuje sa",
       "results": "{count, plural, one {Nájdená # udalosť} few {Nájdené # udalosti} many {Nájdenej # udalosti} other {Nájdených # udalostí}}"
-    }
+    },
+    "mini_has_events": "má udalosti",
+    "mini_week_number": "Týždeň {week}"
   },
   "calendar_event_notifications": {
     "someone": "Niekto",

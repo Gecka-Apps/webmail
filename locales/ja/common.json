@@ -4703,7 +4703,9 @@
       "no_results_hint": "タイトル、場所、説明、ゲストを検索します。",
       "repeats": "繰り返し",
       "results": "{count, plural, other {# 件の予定が見つかりました}}"
-    }
+    },
+    "mini_has_events": "イベントあり",
+    "mini_week_number": "第{week}週"
   },
   "advanced_search": {
     "title": "詳細検索",

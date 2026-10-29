@@ -4703,7 +4703,9 @@
       "no_results_hint": "Søket ser i titler, steder, beskrivelser og gjester.",
       "repeats": "Gjentas",
       "results": "{count, plural, one {# hendelse funnet} other {# hendelser funnet}}"
-    }
+    },
+    "mini_has_events": "har hendelser",
+    "mini_week_number": "Uke {week}"
   },
   "calendar_event_notifications": {
     "someone": "Noen",

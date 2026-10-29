@@ -4703,7 +4703,9 @@
       "no_results_hint": "Er wordt gezocht in titels, locaties, beschrijvingen en gasten.",
       "repeats": "Herhaalt",
       "results": "{count, plural, one {# afspraak gevonden} other {# afspraken gevonden}}"
-    }
+    },
+    "mini_has_events": "heeft afspraken",
+    "mini_week_number": "Week {week}"
   },
   "advanced_search": {
     "title": "Geavanceerd zoeken",

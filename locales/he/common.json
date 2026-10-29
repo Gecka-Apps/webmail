@@ -4621,7 +4621,9 @@
       "no_results_hint": "החיפוש בודק כותרות, מקומות, תיאורים ומוזמנים.",
       "repeats": "חוזר",
       "results": "{count, plural, one {נמצא אירוע אחד} two {נמצאו שני אירועים} other {נמצאו # אירועים}}"
-    }
+    },
+    "mini_has_events": "יש אירועים",
+    "mini_week_number": "שבוע {week}"
   },
   "advanced_search": {
     "title": "חיפוש מתקדם",

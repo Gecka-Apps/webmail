@@ -4703,7 +4703,9 @@
       "no_results_hint": "La recherche porte sur les titres, lieux, descriptions et invités.",
       "repeats": "Se répète",
       "results": "{count, plural, one {# événement trouvé} other {# événements trouvés}}"
-    }
+    },
+    "mini_has_events": "a des événements",
+    "mini_week_number": "Semaine {week}"
   },
   "advanced_search": {
     "title": "Recherche avancée",

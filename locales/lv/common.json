@@ -4703,7 +4703,9 @@
       "no_results_hint": "Meklē nosaukumos, vietās, aprakstos un viesos.",
       "repeats": "Atkārtojas",
       "results": "{count, plural, zero {Atrasti # notikumi} one {Atrasts # notikums} other {Atrasti # notikumi}}"
-    }
+    },
+    "mini_has_events": "ir notikumi",
+    "mini_week_number": "{week}. nedēļa"
   },
   "advanced_search": {
     "title": "Izvērstā meklēšana",

@@ -4703,7 +4703,9 @@
       "no_results_hint": "Gesucht wird in Titeln, Orten, Beschreibungen und Gästen.",
       "repeats": "Wiederholt sich",
       "results": "{count, plural, one {# Termin gefunden} other {# Termine gefunden}}"
-    }
+    },
+    "mini_has_events": "hat Termine",
+    "mini_week_number": "Woche {week}"
   },
   "advanced_search": {
     "title": "Erweiterte Suche",

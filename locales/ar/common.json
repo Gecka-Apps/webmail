@@ -4703,7 +4703,9 @@
       "no_results_hint": "يبحث في العناوين والأماكن والأوصاف والضيوف.",
       "repeats": "متكرر",
       "results": "{count, plural, zero {لم يُعثر على أي حدث} one {تم العثور على حدث واحد} two {تم العثور على حدثين} few {تم العثور على # أحداث} many {تم العثور على # حدثًا} other {تم العثور على # حدث}}"
-    }
+    },
+    "mini_has_events": "فيه أحداث",
+    "mini_week_number": "الأسبوع {week}"
   },
   "calendar_event_notifications": {
     "someone": "شخص ما",

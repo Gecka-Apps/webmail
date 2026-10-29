@@ -4703,7 +4703,9 @@
       "no_results_hint": "Поиск идёт по названиям, местам, описаниям и гостям.",
       "repeats": "Повторяется",
       "results": "{count, plural, one {Найдено # событие} few {Найдено # события} many {Найдено # событий} other {Найдено # события}}"
-    }
+    },
+    "mini_has_events": "есть события",
+    "mini_week_number": "Неделя {week}"
   },
   "advanced_search": {
     "title": "Расширенный поиск",

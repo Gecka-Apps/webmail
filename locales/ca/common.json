@@ -4703,7 +4703,9 @@
       "no_results_hint": "La cerca mira títols, llocs, descripcions i convidats.",
       "repeats": "Es repeteix",
       "results": "{count, plural, one {# esdeveniment trobat} other {# esdeveniments trobats}}"
-    }
+    },
+    "mini_has_events": "té esdeveniments",
+    "mini_week_number": "Setmana {week}"
   },
   "calendar_event_notifications": {
     "someone": "Algú",

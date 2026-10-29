@@ -4703,7 +4703,9 @@
       "no_results_hint": "Пошук іде за назвами, місцями, описами й гостями.",
       "repeats": "Повторюється",
       "results": "{count, plural, one {Знайдено # подію} few {Знайдено # події} many {Знайдено # подій} other {Знайдено # події}}"
-    }
+    },
+    "mini_has_events": "є події",
+    "mini_week_number": "Тиждень {week}"
   },
   "advanced_search": {
     "title": "Розширений пошук",

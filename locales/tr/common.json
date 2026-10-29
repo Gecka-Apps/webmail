@@ -4703,7 +4703,9 @@
       "no_results_hint": "Arama başlıklarda, yerlerde, açıklamalarda ve davetlilerde yapılır.",
       "repeats": "Tekrarlanıyor",
       "results": "{count, plural, one {# etkinlik bulundu} other {# etkinlik bulundu}}"
-    }
+    },
+    "mini_has_events": "etkinlik var",
+    "mini_week_number": "{week}. hafta"
   },
   "calendar_event_notifications": {
     "someone": "Birisi",

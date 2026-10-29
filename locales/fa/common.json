@@ -4703,7 +4703,9 @@
       "no_results_hint": "جستجو در عنوان‌ها، مکان‌ها، توضیحات و مهمان‌ها انجام می‌شود.",
       "repeats": "تکرار می‌شود",
       "results": "{count, plural, one {# رویداد پیدا شد} other {# رویداد پیدا شد}}"
-    }
+    },
+    "mini_has_events": "رویداد دارد",
+    "mini_week_number": "هفته {week}"
   },
   "calendar_event_notifications": {
     "someone": "کسی",
