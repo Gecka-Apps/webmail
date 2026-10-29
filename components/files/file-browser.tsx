@@ -793,8 +793,10 @@ export function FileBrowser({
         navigateUp();
         return;
       }
-      // A slider, tabs or a menu keeps its own arrows.
-      if (e.key.startsWith("Arrow") && isArrowKeyWidgetTarget(e)) return;
+      // A slider, tabs or a menu keeps its own arrows; the files grid itself
+      // is the widget these arrows belong to.
+      const inOwnList = e.target instanceof Node && !!scrollAreaRef.current?.contains(e.target);
+      if (e.key.startsWith("Arrow") && !inOwnList && isArrowKeyWidgetTarget(e)) return;
       if (e.key === "ArrowDown" || e.key === "ArrowUp") {
         e.preventDefault();
         const step = viewMode === "grid" ? gridColumns() : 1;
