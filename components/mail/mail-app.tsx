@@ -97,6 +97,7 @@ import { peekListAttachments, requestListAttachments, type ListAttachmentSource,
 import { useSearchHistoryStore } from "@/stores/search-history-store";
 import { WelcomeBanner } from "@/components/ui/welcome-banner";
 import { NavigationRail } from "@/components/layout/navigation-rail";
+import { AppMain } from "@/components/layout/app-landmarks";
 import { MvTopBar } from "@/components/layout/mv-top-bar";
 import { PluginActions } from "@/components/plugins/plugin-actions";
 import { useAppCommands } from "@/lib/app-commands";
@@ -2059,6 +2060,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
   const appRootRef = useRef<HTMLDivElement>(null);
   // Pro can mount two mail panes at once, so the sidebar id must be per-instance.
   const sidebarId = useId();
+  const listHeadingId = useId();
   const sidebarContainerRef = useRef<HTMLDivElement>(null);
   const sidebarWasOpen = useRef(false);
   useEffect(() => {
@@ -4891,13 +4893,18 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
 
         {/* Main Content Area. Under Mountain View it is the rounded card
             inset from the canvas. */}
-        <div
+        <AppMain
+          embedded={isEmbedded}
+          // The list and the reading pane inside take F6, not the whole.
+          pane={false}
+          heading={t('shell.heading', { place: currentMailboxName, app: t('sidebar.mail') })}
           data-mv-card={mvShell ? "" : undefined}
           className={cn("flex flex-col flex-1 min-w-0", mvShell ? "mb-4 me-4" : "h-full", inlineApp && "hidden")}
         >
           <div className={cn("relative flex flex-1 min-h-0", isHorizontalMailLayout && "md:flex-col")}>
           {/* Email List - full width on mobile, fixed width/height on tablet/desktop */}
-          <div
+          <section
+            aria-labelledby={listHeadingId}
             className={cn(
               "relative flex flex-col bg-background min-w-0",
               isHorizontalMailLayout
@@ -4928,6 +4935,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
                   : (!shouldCollapseListPane && !shouldHideViewerPane ? { width: clampEmailListWidth(emailListWidth) } : undefined)
             }
           >
+            <h2 id={listHeadingId} className="sr-only">{t('shell.message_list')}</h2>
             {/* Mobile Header for List View */}
             <MobileHeader
               title={currentMailboxName}
@@ -5298,7 +5306,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
               <PenSquare className={isMobile ? "h-6 w-6" : "h-5 w-5"} />
               {mvMobile && <span className="text-sm font-medium">{t('sidebar.compose')}</span>}
             </Button>}
-          </div>
+          </section>
 
           {/* Email list resize handle (desktop only) */}
           {!isMobile && !isTablet && !isFocusedMailLayout && !isHorizontalMailLayout && !shouldHideViewerPane && !fullscreenReading && (
@@ -5320,7 +5328,9 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
           )}
 
           {/* Email Viewer / Composer - full screen on mobile, flex on tablet/desktop */}
-          <div
+          <section
+            aria-label={t('shell.reading_pane')}
+            data-pane="reader"
             className={cn(
               "flex flex-col bg-background flex-1 min-w-0",
               isHorizontalMailLayout ? "min-h-0" : "h-full",
@@ -5547,7 +5557,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
             )}
             </>
             )}
-          </div>
+          </section>
           </div>
 
           {/* Bottom Navigation - mobile and tablet (hidden when embedded) */}
@@ -5560,7 +5570,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
               activeAppId={inlineApp?.id ?? null}
             />
           )}
-        </div>
+        </AppMain>
         {/* Mountain View: Gmail's side panel - calendar, tasks and contacts
             next to the mail, with their icons down the right edge. */}
         {mvShell && !inlineApp && !fullscreenReading && <MvSidePanel />}

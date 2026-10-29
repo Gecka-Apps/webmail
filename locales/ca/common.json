@@ -5630,7 +5630,11 @@
     "update_available": "Hi ha una actualització",
     "update_important": "Hi ha una actualització important",
     "folder_unread": "{count} sense llegir",
-    "folder_counts": "{unread} sense llegir, {total} en total"
+    "folder_counts": "{unread} sense llegir, {total} en total",
+    "skip_to_content": "Salta al contingut",
+    "heading": "{place} – {app}",
+    "message_list": "Llista de missatges",
+    "reading_pane": "Panell de lectura"
   },
   "plugin_pages": {
     "loading": "S'està carregant la pàgina",

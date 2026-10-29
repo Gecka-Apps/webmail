@@ -67,7 +67,7 @@ describe('phone conversation header', () => {
 
   it('keeps a long subject to two lines', () => {
     renderView({});
-    expect(screen.getByRole('heading', { level: 1 }).className).toContain('line-clamp-2');
+    expect(screen.getByRole('heading', { level: 2 }).className).toContain('line-clamp-2');
   });
 });
 

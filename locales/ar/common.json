@@ -5630,7 +5630,11 @@
     "update_available": "يتوفر تحديث",
     "update_important": "يتوفر تحديث مهم",
     "folder_unread": "{count} غير مقروءة",
-    "folder_counts": "{unread} غير مقروءة، {total} إجمالًا"
+    "folder_counts": "{unread} غير مقروءة، {total} إجمالًا",
+    "skip_to_content": "انتقل إلى المحتوى",
+    "heading": "{place} – {app}",
+    "message_list": "قائمة الرسائل",
+    "reading_pane": "جزء القراءة"
   },
   "plugin_pages": {
     "loading": "جارٍ تحميل الصفحة",

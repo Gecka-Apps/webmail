@@ -5630,7 +5630,11 @@
     "update_available": "Шинэчлэл гарсан",
     "update_important": "Чухал шинэчлэл гарсан",
     "folder_unread": "{count} уншаагүй",
-    "folder_counts": "{unread} уншаагүй, нийт {total}"
+    "folder_counts": "{unread} уншаагүй, нийт {total}",
+    "skip_to_content": "Агуулга руу шилжих",
+    "heading": "{place} – {app}",
+    "message_list": "Захидлын жагсаалт",
+    "reading_pane": "Унших хэсэг"
   },
   "plugin_pages": {
     "loading": "Хуудсыг ачаалж байна",

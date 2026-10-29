@@ -105,6 +105,7 @@ import { MvTopBar } from "@/components/layout/mv-top-bar";
 import { useMountainViewShell } from "@/hooks/use-mountain-view-shell";
 import { calendarHooks } from "@/lib/plugin-hooks";
 import { eventToView } from "@/lib/plugin-projection";
+import { AppMain, SkipLink } from "@/components/layout/app-landmarks";
 import { calendarShortcutAction } from "@/lib/calendar-shortcuts";
 import { isAppShortcutBlocked, isArrowKeyWidgetTarget } from "@/lib/keyboard";
 import { isContextMenuOpen } from "@/components/ui/context-menu";
@@ -1612,6 +1613,7 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
   // The command palette's Calendar group, while this calendar is the one in
   // front (in the Pro shell: its focused tab).
   const tCommon = useTranslations("common");
+  const tShell = useTranslations("shell");
   const paletteViews: { mode: CalendarViewMode; key: string }[] = [
     { mode: "day", key: "d" },
     { mode: "week", key: "w" },
@@ -2044,6 +2046,7 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
 
   return (
     <div className={cn("flex flex-col overflow-hidden pt-[env(safe-area-inset-top)]", mvShell ? "bg-[var(--mv-canvas)]" : "bg-background", isEmbedded ? "h-full" : "h-dvh")}>
+      {!isEmbedded && <SkipLink>{tShell("skip_to_content")}</SkipLink>}
       <AppTopBannerSlot />
       {refreshIndicator}
       {mvShell && (
@@ -2094,6 +2097,8 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
       {(isNarrow || !sidebarCollapsed) && (
         <>
           <div
+            // A closed drawer is off-screen: not a pane for F6.
+            data-pane={!isNarrow || narrowSidebarOpen ? "sidebar" : undefined}
             className={cn(
               "border-e border-border bg-secondary flex flex-col overflow-hidden flex-shrink-0",
               !isResizing && "transition-[width] duration-300",
@@ -2205,7 +2210,7 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
         </>
       )}
 
-      <div className="flex flex-col flex-1 min-w-0 min-h-0">
+      <AppMain embedded={isEmbedded} label={tSidebar("calendar")} className="flex flex-col flex-1 min-w-0 min-h-0">
         {calendarToolbar}
 
         {/* isolate keeps the views' sticky headers (z-50) below the toolbar's
@@ -2285,7 +2290,7 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
             </Button>
           )}
         </div>
-      </div>
+      </AppMain>
       </div>
       </div>
       )}

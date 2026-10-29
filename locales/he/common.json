@@ -5631,7 +5631,11 @@
     "update_available": "יש עדכון",
     "update_important": "יש עדכון חשוב",
     "folder_unread": "{count} שלא נקראו",
-    "folder_counts": "{unread} שלא נקראו, {total} בסך הכול"
+    "folder_counts": "{unread} שלא נקראו, {total} בסך הכול",
+    "skip_to_content": "דילוג לתוכן",
+    "heading": "{place} – {app}",
+    "message_list": "רשימת הודעות",
+    "reading_pane": "חלונית קריאה"
   },
   "plugin_pages": {
     "loading": "טוען את הדף",

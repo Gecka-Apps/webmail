@@ -17,6 +17,7 @@ import { SidebarAppsModal } from "@/components/layout/sidebar-apps-modal";
 import { InlineAppView } from "@/components/layout/inline-app-view";
 import { useSidebarApps } from "@/hooks/use-sidebar-apps";
 import { useIsEmbedded } from "@/hooks/use-is-embedded";
+import { AppMain, SkipLink } from "@/components/layout/app-landmarks";
 import { useIsFocusedProTab } from "@/hooks/use-pane-context";
 import { useIsMobile } from "@/hooks/use-media-query";
 import { useRefreshGesture } from "@/hooks/use-refresh-gesture";
@@ -51,6 +52,7 @@ export function FilesApp({ linkSegments: routeSegments }: FilesAppProps = {}) {
   const linkSegments = useLiteLinkSegments('files', routeSegments);
   const t = useTranslations("files");
   const tSidebar = useTranslations("sidebar");
+  const tShell = useTranslations("shell");
   useDocumentTitle(tSidebar("files"));
   const tDeepLink = useTranslations("deep_link");
   const filesEnabled = usePolicyStore((s) => s.isFeatureEnabled('filesEnabled'));
@@ -797,6 +799,7 @@ export function FilesApp({ linkSegments: routeSegments }: FilesAppProps = {}) {
 
   return (
     <div className={cn("flex flex-col overflow-hidden pt-[env(safe-area-inset-top)]", mvShell ? "bg-[var(--mv-canvas)]" : "bg-background", isEmbedded ? "h-full" : "h-dvh")}>
+      {!isEmbedded && <SkipLink>{tShell("skip_to_content")}</SkipLink>}
       <AppTopBannerSlot />
       {refreshIndicator}
       {mvShell && (
@@ -832,17 +835,17 @@ export function FilesApp({ linkSegments: routeSegments }: FilesAppProps = {}) {
           <div className="flex-1 min-w-0 flex flex-col">
             <div className="flex-1 min-h-0 flex flex-col">
               {!filesEnabled ? (
-                <div className="flex items-center justify-center h-full">
+                <AppMain embedded={isEmbedded} heading={tSidebar("files")} className="flex items-center justify-center h-full">
                   <div className="max-w-lg text-center space-y-3 px-4">
                     <AlertTriangle className="w-10 h-10 text-amber-600 dark:text-amber-400 mx-auto" />
                     <p className="text-sm font-medium">{t("disabled_title")}</p>
                     <p className="text-xs text-muted-foreground">{t("disabled_description")}</p>
                   </div>
-                </div>
+                </AppMain>
               ) : supportsFiles === false ? (
-                <div className="flex items-center justify-center h-full">
+                <AppMain embedded={isEmbedded} heading={tSidebar("files")} className="flex items-center justify-center h-full">
                   <p className="text-sm text-muted-foreground">{t("not_available")}</p>
-                </div>
+                </AppMain>
               ) : (
                 <FileBrowser
                   currentPath={currentPath}

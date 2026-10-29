@@ -5630,7 +5630,11 @@
     "update_available": "Frissítés érhető el",
     "update_important": "Fontos frissítés érhető el",
     "folder_unread": "{count} olvasatlan",
-    "folder_counts": "{unread} olvasatlan, összesen {total}"
+    "folder_counts": "{unread} olvasatlan, összesen {total}",
+    "skip_to_content": "Ugrás a tartalomhoz",
+    "heading": "{place} – {app}",
+    "message_list": "Üzenetlista",
+    "reading_pane": "Olvasóablak"
   },
   "plugin_pages": {
     "loading": "Oldal betöltése",

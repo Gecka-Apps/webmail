@@ -104,3 +104,18 @@ export function isArrowKeyWidgetTarget(event: Event): boolean {
     'select, [role="slider"], [role="separator"], [role="scrollbar"], [role="spinbutton"], [role="tablist"], [role="radiogroup"], [role="grid"], [role="treegrid"], [role="tree"], [role="listbox"], [role="menu"], [role="menubar"], [role="toolbar"]',
   );
 }
+
+/**
+ * Focuses an element that may not take the focus by itself (a landmark, a
+ * pane): it gets tabindex="-1" until the focus leaves it again. Kept only
+ * while focused, since a container with tabindex keeps the focus on a click
+ * inside it, and the arrow keys then no longer scroll the list in it.
+ */
+export function focusTemporarily(el: HTMLElement, options?: FocusOptions): void {
+  const focusable = el.matches("a[href], button, input, select, textarea, [tabindex]");
+  if (!focusable) {
+    el.setAttribute("tabindex", "-1");
+    el.addEventListener("blur", () => el.removeAttribute("tabindex"), { once: true });
+  }
+  el.focus(options);
+}

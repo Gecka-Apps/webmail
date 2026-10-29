@@ -5630,7 +5630,11 @@
     "update_available": "有可用的更新",
     "update_important": "有重要更新",
     "folder_unread": "{count} 封未讀",
-    "folder_counts": "{unread} 封未讀，共 {total} 封"
+    "folder_counts": "{unread} 封未讀，共 {total} 封",
+    "skip_to_content": "跳到內容",
+    "heading": "{place} – {app}",
+    "message_list": "郵件清單",
+    "reading_pane": "閱讀窗格"
   },
   "plugin_pages": {
     "loading": "正在載入頁面",

@@ -5630,7 +5630,11 @@
     "update_available": "Je k dispozici aktualizace",
     "update_important": "Je k dispozici důležitá aktualizace",
     "folder_unread": "Nepřečteno: {count}",
-    "folder_counts": "Nepřečteno: {unread}, celkem: {total}"
+    "folder_counts": "Nepřečteno: {unread}, celkem: {total}",
+    "skip_to_content": "Přejít na obsah",
+    "heading": "{place} – {app}",
+    "message_list": "Seznam zpráv",
+    "reading_pane": "Podokno čtení"
   },
   "plugin_pages": {
     "loading": "Načítání stránky",

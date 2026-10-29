@@ -266,9 +266,9 @@ export function ThreadConversationView({
         </IconButton>
         <div className="flex-1 min-w-0">
           {/* Two lines at most, so a long subject leaves the actions their room. */}
-          <h1 className="font-semibold text-foreground break-words line-clamp-2" dir="auto" title={thread.latestEmail.subject || undefined}>
+          <h2 className="font-semibold text-foreground break-words line-clamp-2" dir="auto" title={thread.latestEmail.subject || undefined}>
             {thread.latestEmail.subject || t("email_viewer.no_subject")}
-          </h1>
+          </h2>
           <p className="text-sm text-muted-foreground">
             {t("threads.messages_count", { count: emails.length })}
           </p>

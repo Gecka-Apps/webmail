@@ -330,7 +330,7 @@ export function FileGridView({
     <div role="grid" aria-label={t("file_list")} aria-multiselectable className="p-4 space-y-5">
       {folders.length > 0 && (
         <section aria-label={t("folders")}>
-          <h3 className="text-xs font-medium text-muted-foreground mb-2 px-0.5">{t("folders")}</h3>
+          <h2 className="text-xs font-medium text-muted-foreground mb-2 px-0.5">{t("folders")}</h2>
           <div role="row" className="grid grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-2">
             {folders.map((resource) => (
               <FolderTile
@@ -349,7 +349,7 @@ export function FileGridView({
       )}
       {files.length > 0 && (
         <section aria-label={t("files_heading")}>
-          {folders.length > 0 && <h3 className="text-xs font-medium text-muted-foreground mb-2 px-0.5">{t("files_heading")}</h3>}
+          {folders.length > 0 && <h2 className="text-xs font-medium text-muted-foreground mb-2 px-0.5">{t("files_heading")}</h2>}
           <div role="row" className="grid grid-cols-[repeat(auto-fill,minmax(9.5rem,1fr))] gap-3">
             {files.map((resource) => (
               <FileTile

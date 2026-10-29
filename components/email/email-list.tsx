@@ -1067,6 +1067,7 @@ export function EmailList({
         // The mail shell's "Skip to message list" lands here.
         id="message-list"
         tabIndex={-1}
+        data-pane="list"
         // Room under the last row for the round Compose button, which would
         // otherwise sit on that row's actions (Mountain View has no such button).
         className={cn("flex-1 overflow-y-auto bg-background relative outline-none", !mountainViewList && "pb-20")}

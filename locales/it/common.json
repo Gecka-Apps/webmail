@@ -5630,7 +5630,11 @@
     "update_available": "Aggiornamento disponibile",
     "update_important": "Aggiornamento importante disponibile",
     "folder_unread": "{count} non letti",
-    "folder_counts": "{unread} non letti, {total} in totale"
+    "folder_counts": "{unread} non letti, {total} in totale",
+    "skip_to_content": "Vai al contenuto",
+    "heading": "{place} – {app}",
+    "message_list": "Elenco messaggi",
+    "reading_pane": "Riquadro di lettura"
   },
   "plugin_pages": {
     "loading": "Caricamento della pagina",

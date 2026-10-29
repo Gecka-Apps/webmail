@@ -29,6 +29,8 @@ import { FileGridView, FileListView, type FileItemHandlers } from "@/components/
 import { FileDetailsPanel } from "@/components/files/file-details-panel";
 import { INTERNAL_DRAG_TYPE, anchorEvent, isInternalDrag, readDraggedNames } from "@/components/files/file-item-parts";
 import { ResizeHandle } from "@/components/layout/resize-handle";
+import { AppMain } from "@/components/layout/app-landmarks";
+import { useIsEmbedded } from "@/hooks/use-is-embedded";
 import { getDroppedFilesAndFolders } from "@/lib/webdav/drop-utils";
 import { resourceToView, useFileStore, isSharedFilesPage, sharedFilePages, type FileResource } from "@/stores/file-store";
 import { TRASH_LOCATION, TRASH_PATH, isTrashLocation } from "@/lib/files-trash";
@@ -986,6 +988,8 @@ export function FileBrowser({
 
   // ---- Command palette ---------------------------------------------------------
   const tSidebar = useTranslations("sidebar");
+  const tShell = useTranslations("shell");
+  const isEmbedded = useIsEmbedded();
   useRegisterCommands(tSidebar("files"), [
     { id: "upload-files", label: t("upload_files"), icon: Upload, run: () => fileInputRef.current?.click(), when: () => canCreate },
     { id: "upload-folder", label: t("upload_folder"), icon: FolderUp, run: () => folderInputRef.current?.click(), when: () => canCreate },
@@ -1037,7 +1041,7 @@ export function FileBrowser({
     if (accountPickerMode) {
       return accountFolders && accountFolders.length > 0 && onSelectAccount ? (
         <div className="p-4">
-          <h3 className="text-xs font-medium text-muted-foreground mb-2 px-0.5">{t("choose_account")}</h3>
+          <h2 className="text-xs font-medium text-muted-foreground mb-2 px-0.5">{t("choose_account")}</h2>
           <div className="grid gap-3 grid-cols-[repeat(auto-fill,minmax(14rem,1fr))]">
             {accountFolders.map((acc) => (
               <button
@@ -1196,6 +1200,7 @@ export function FileBrowser({
       {sidebar && (isNarrow ? (
         <div
           data-testid="files-sidebar-drawer"
+          data-pane="sidebar"
           className={cn(
             "absolute inset-y-0 start-0 z-50 w-72 border-e border-border",
             "transform transition-[transform,visibility] duration-300 ease-in-out",
@@ -1209,6 +1214,7 @@ export function FileBrowser({
       ) : (
         <>
           <div
+            data-pane="sidebar"
             className={cn("border-e border-border flex-shrink-0", !isResizing && "transition-[width] duration-300")}
             style={{ width: `${sidebarWidth}px` }}
           >
@@ -1226,7 +1232,11 @@ export function FileBrowser({
         </>
       ))}
 
-      <div className="flex flex-col flex-1 min-w-0">
+      <AppMain
+        embedded={isEmbedded}
+        heading={tShell("heading", { place: folderName, app: tSidebar("files") })}
+        className="flex flex-col flex-1 min-w-0"
+      >
         <FilesHeader
           crumbs={crumbs}
           accountLabel={accountLabel}
@@ -1328,7 +1338,7 @@ export function FileBrowser({
           )}
 
         </div>
-      </div>
+      </AppMain>
 
       <input ref={fileInputRef} type="file" multiple className="hidden" onChange={handleInputChange(false)} />
       <input
@@ -1453,10 +1463,10 @@ function SharedWithMe({ folders, pages, onOpen, iconOptions }: {
   const t = useTranslations("files");
   return (
     <section aria-label={t("shared_with_me")} className="px-4 pt-5 pb-4">
-      <h3 className="text-xs font-medium text-muted-foreground mb-2 px-0.5 flex items-center gap-1.5">
+      <h2 className="text-xs font-medium text-muted-foreground mb-2 px-0.5 flex items-center gap-1.5">
         <Share2 className="w-3 h-3" />
         {t("shared_with_me")}
-      </h3>
+      </h2>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-2">
         {folders.map((folder) => (
           <button

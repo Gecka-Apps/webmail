@@ -3988,7 +3988,7 @@ export function EmailViewer({
               alt="Bulwark Mail"
               className="h-12 mx-auto mb-6"
             />
-            <h3 className="text-xl font-semibold text-foreground mb-3">{tDemoWelcome('title')}</h3>
+            <h2 className="text-xl font-semibold text-foreground mb-3">{tDemoWelcome('title')}</h2>
             <p className="text-sm text-muted-foreground mb-6 leading-relaxed">{tDemoWelcome('description')}</p>
             <div className="flex flex-col gap-3 items-center">
               <div className="grid grid-cols-2 gap-3 text-start text-sm text-muted-foreground w-full">
@@ -4031,7 +4031,7 @@ export function EmailViewer({
           <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-background shadow-lg flex items-center justify-center">
             <Mail className="w-10 h-10 text-muted-foreground" />
           </div>
-          <h3 className="text-xl font-semibold text-foreground mb-2">{t('no_conversation_selected')}</h3>
+          <h2 className="text-xl font-semibold text-foreground mb-2">{t('no_conversation_selected')}</h2>
           <p className="text-muted-foreground">{t('no_conversation_description')}</p>
           {onCompose && (
             <Button onClick={onCompose} className="mt-6" title={t('compose_hint')}>
@@ -4677,12 +4677,14 @@ export function EmailViewer({
             )}
             <div className="flex-1 min-w-0">
               <div className="flex items-start gap-2">
-                <h1 dir="auto" className={cn(
+                {/* h2 under the app's h1 ("Inbox – Mail"); the reader's
+                    blocks below are h3 and h4, so no level is skipped. */}
+                <h2 dir="auto" className={cn(
                   "text-foreground break-words min-w-0",
                   mvViewer ? "text-[22px] leading-7 font-normal" : "text-lg lg:text-xl font-bold tracking-tight"
                 )}>
                   {email.subject || t('no_subject')}
-                </h1>
+                </h2>
                 {/* Mountain View: the folder the message sits in, as a chip on the subject line. */}
                 {mvViewer && mvFolderName && (
                   <span className="self-center flex-shrink-0 rounded px-1.5 py-0.5 text-xs bg-muted text-muted-foreground" data-mv-folder-chip="">

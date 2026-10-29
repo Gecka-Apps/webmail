@@ -5630,7 +5630,11 @@
     "update_available": "Pieejams atjauninājums",
     "update_important": "Pieejams svarīgs atjauninājums",
     "folder_unread": "Nelasīti: {count}",
-    "folder_counts": "Nelasīti: {unread}, kopā: {total}"
+    "folder_counts": "Nelasīti: {unread}, kopā: {total}",
+    "skip_to_content": "Pāriet uz saturu",
+    "heading": "{place} – {app}",
+    "message_list": "Ziņojumu saraksts",
+    "reading_pane": "Lasīšanas rūts"
   },
   "plugin_pages": {
     "loading": "Ielādē lapu",

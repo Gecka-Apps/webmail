@@ -1,5 +1,6 @@
 "use client";
 
+import { AppMain, SkipLink } from "@/components/layout/app-landmarks";
 import { useState, useEffect, useCallback, useRef, useMemo, useSyncExternalStore } from 'react';
 import { useRouter } from '@/i18n/navigation';
 import { useTranslations, useMessages } from 'next-intl';
@@ -276,6 +277,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
   const router = useRouter();
   const t = useTranslations('settings');
   const tSidebar = useTranslations('sidebar');
+  const tShell = useTranslations('shell');
   const tDelegates = useTranslations('delegates');
   const tPalette = useTranslations('command_palette');
   useDocumentTitle(tSidebar('settings'));
@@ -928,9 +930,9 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
             <PhoneHeaderActions />
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4">
+          <AppMain embedded={isEmbedded} label={activeTabLabel} className="flex-1 overflow-y-auto p-4">
             {renderTabContent()}
-          </div>
+          </AppMain>
 
           {!isEmbedded && (
             <NavigationRail
@@ -960,7 +962,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
           <PhoneHeaderActions />
         </div>
 
-        <div className="flex-1 overflow-y-auto" data-tour="settings-tabs">
+        <AppMain embedded={isEmbedded} label={t('title')} className="flex-1 overflow-y-auto" data-tour="settings-tabs">
           <div className="px-4 pt-3 pb-1">
             <ToolbarSearch
               value={searchQuery}
@@ -1036,7 +1038,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
               <span>{tSidebar('sign_out')}</span>
             </button>
           </div>
-        </div>
+        </AppMain>
 
         {!isEmbedded && (
           <NavigationRail
@@ -1055,6 +1057,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
   // Desktop layout
   return (
     <div className={cn("flex flex-col pt-[env(safe-area-inset-top)]", mvShell ? "bg-[var(--mv-canvas)]" : "bg-background", isEmbedded ? "h-full" : "h-dvh")}>
+      {!isEmbedded && <SkipLink>{tShell("skip_to_content")}</SkipLink>}
       <AppTopBannerSlot />
       {mvShell && (
         <MvTopBar
@@ -1087,6 +1090,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
       {!inlineApp && (
       <>
       <div
+        data-pane="sidebar"
         className={cn(
           "border-e border-border bg-secondary flex flex-col",
           !isResizing && "transition-[width] duration-300"
@@ -1110,7 +1114,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
           </div>
         )}
 
-        <div className="flex-1 overflow-y-auto py-2" data-tour="settings-tabs">
+        <nav aria-label={t('title')} className="flex-1 overflow-y-auto py-2" data-tour="settings-tabs">
           <div className="px-3 pt-1 pb-1">
             <ToolbarSearch
               value={searchQuery}
@@ -1176,7 +1180,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
               </div>
             ))}
           </div>
-        </div>
+        </nav>
         <div className="border-t border-border px-1 py-1">
           {showAdvanced && <AboutFooter />}
           <AdvancedSettingsSwitch />
@@ -1193,14 +1197,14 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
         onDoubleClick={() => { setSettingsSidebarWidth(256); localStorage.setItem('settings-sidebar-width', '256'); }}
       />
 
-      <div ref={attachContentScroll} className="flex-1 overflow-y-auto">
+      <AppMain ref={attachContentScroll as (el: HTMLElement | null) => void} embedded={isEmbedded} label={activeTabLabel} className="flex-1 overflow-y-auto">
         <div className={effectiveActiveTab.startsWith(PLUGIN_PAGE_PREFIX) ? "px-6 py-6" : "max-w-3xl mx-auto px-6 py-6"}>
           {/* The page's heading for screen readers; the sidebar shows which
               page is open (the phone header has a visible one). */}
           <h1 className="sr-only">{activeTabLabel}</h1>
           {renderTabContent()}
         </div>
-      </div>
+      </AppMain>
       </>
       )}
       <SidebarAppsModal isOpen={showAppsModal} onClose={closeAppsModal} />

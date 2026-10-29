@@ -113,7 +113,8 @@ export function MobileHeader({
         </Button>
 
         {/* Title, unless the bar is in search-first mode */}
-        {!onOpenSearch && <h1 className="font-semibold text-lg truncate">{title}</h1>}
+        {/* Not a heading: the app's h1 already names the folder ("Inbox – Mail"). */}
+        {!onOpenSearch && <div className="font-semibold text-lg truncate">{title}</div>}
       </div>
 
       {onOpenSearch && (

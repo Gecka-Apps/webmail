@@ -1,5 +1,6 @@
 "use client";
 
+import { AppMain, SkipLink } from "@/components/layout/app-landmarks";
 import { Suspense, useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -89,6 +90,7 @@ function ContactsAppContent({ linkSegments: routeSegments }: ContactsAppProps = 
   const t = useTranslations("contacts");
   const tSidebar = useTranslations("sidebar");
   const tCommon = useTranslations("common");
+  const tShell = useTranslations("shell");
   useDocumentTitle(tSidebar("contacts"));
   const contactsEnabled = usePolicyStore((s) => s.isFeatureEnabled('contactsEnabled'));
   const { client, isAuthenticated, logout, checkAuth, isLoading: authLoading } = useAuthStore();
@@ -1156,6 +1158,7 @@ function ContactsAppContent({ linkSegments: routeSegments }: ContactsAppProps = 
 
   return (
     <div className={cn("flex flex-col overflow-hidden pt-[env(safe-area-inset-top)]", mvShell ? "bg-[var(--mv-canvas)]" : "bg-background", isEmbedded ? "h-full" : "h-dvh")}>
+      {!isEmbedded && <SkipLink>{tShell("skip_to_content")}</SkipLink>}
       <AppTopBannerSlot />
       {refreshIndicator}
       {mvShell && (
@@ -1200,13 +1203,12 @@ function ContactsAppContent({ linkSegments: routeSegments }: ContactsAppProps = 
               onClick={() => setNarrowSidebarOpen(false)}
             />
           )}
-          {showListPanel && (
-            <>
-              {/* Panel 1: Categories sidebar (in-flow on desktop, overlay on narrow) */}
-              {(!isMobile || isNarrow) && (
+          {/* Panel 1: Categories sidebar (in-flow on desktop, overlay on narrow) */}
+          {showListPanel && (!isMobile || isNarrow) && (
                 <>
                   <div
                     data-testid={isNarrow ? "contacts-sidebar-drawer" : undefined}
+                    data-pane="sidebar"
                     className={cn(
                       "border-e border-border flex flex-col flex-shrink-0 bg-background",
                       !isSidebarResizing && "transition-[width] duration-300",
@@ -1285,6 +1287,14 @@ function ContactsAppContent({ linkSegments: routeSegments }: ContactsAppProps = 
                 </>
               )}
 
+          {/* The list and the contact: the main content, after the sidebar. */}
+          <AppMain
+            embedded={isEmbedded}
+            heading={tShell("heading", { place: listTitle, app: tSidebar("contacts") })}
+            className="relative flex flex-1 min-w-0 min-h-0"
+          >
+          {showListPanel && (
+            <>
               {/* Panel 2: Contact list */}
               <div
                 data-tour="contacts-list"
@@ -1413,6 +1423,7 @@ function ContactsAppContent({ linkSegments: routeSegments }: ContactsAppProps = 
               </div>
             </div>
           )}
+          </AppMain>
         </div>
 
         {isMobile && !isEmbedded && (

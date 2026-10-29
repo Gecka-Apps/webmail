@@ -1733,7 +1733,7 @@ function SidebarImpl({
       {!isCollapsed && <VacationBanner />}
 
       {/* Mailbox List */}
-      <div className="flex-1 overflow-y-auto" data-tour="sidebar" data-folder-nav="">
+      <nav aria-label={t("folders")} className="flex-1 overflow-y-auto" data-tour="sidebar" data-folder-nav="" data-pane="folders">
         {(showUnified || showCrossUnread || showCrossStarred || showCrossAll) && (
           <div>
             <SidebarSectionHeader
@@ -2060,7 +2060,7 @@ function SidebarImpl({
 
         {!isCollapsed && <PluginSidebarSections mailboxId={selectedKeyword ? null : selectedMailbox || null} />}
         {!isCollapsed && <PluginSlot name="sidebar-widget" className="border-t border-border" />}
-      </div>
+      </nav>
 
       <MailboxContextMenu
         target={mailboxContextMenu.data}

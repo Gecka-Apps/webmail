@@ -5630,7 +5630,11 @@
     "update_available": "Доступно обновление",
     "update_important": "Доступно важное обновление",
     "folder_unread": "Непрочитанных: {count}",
-    "folder_counts": "Непрочитанных: {unread}, всего: {total}"
+    "folder_counts": "Непрочитанных: {unread}, всего: {total}",
+    "skip_to_content": "Перейти к содержимому",
+    "heading": "{place} – {app}",
+    "message_list": "Список писем",
+    "reading_pane": "Область чтения"
   },
   "plugin_pages": {
     "loading": "Загрузка страницы",

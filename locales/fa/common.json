@@ -5630,7 +5630,11 @@
     "update_available": "به‌روزرسانی موجود است",
     "update_important": "به‌روزرسانی مهم موجود است",
     "folder_unread": "{count} خوانده‌نشده",
-    "folder_counts": "{unread} خوانده‌نشده، {total} در مجموع"
+    "folder_counts": "{unread} خوانده‌نشده، {total} در مجموع",
+    "skip_to_content": "رفتن به محتوا",
+    "heading": "{place} – {app}",
+    "message_list": "فهرست پیام‌ها",
+    "reading_pane": "قاب خواندن"
   },
   "plugin_pages": {
     "loading": "در حال بارگذاری صفحه",

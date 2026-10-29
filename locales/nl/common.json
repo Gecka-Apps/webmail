@@ -5630,7 +5630,11 @@
     "update_available": "Update beschikbaar",
     "update_important": "Belangrijke update beschikbaar",
     "folder_unread": "{count} ongelezen",
-    "folder_counts": "{unread} ongelezen, {total} totaal"
+    "folder_counts": "{unread} ongelezen, {total} totaal",
+    "skip_to_content": "Naar inhoud",
+    "heading": "{place} – {app}",
+    "message_list": "Berichtenlijst",
+    "reading_pane": "Leesvenster"
   },
   "plugin_pages": {
     "loading": "Pagina laden",

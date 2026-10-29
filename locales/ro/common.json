@@ -5630,7 +5630,11 @@
     "update_available": "Actualizare disponibilă",
     "update_important": "Actualizare importantă disponibilă",
     "folder_unread": "{count} necitite",
-    "folder_counts": "{unread} necitite, {total} în total"
+    "folder_counts": "{unread} necitite, {total} în total",
+    "skip_to_content": "Salt la conținut",
+    "heading": "{place} – {app}",
+    "message_list": "Lista de mesaje",
+    "reading_pane": "Panoul de citire"
   },
   "plugin_pages": {
     "loading": "Se încarcă pagina",

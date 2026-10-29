@@ -5630,7 +5630,11 @@
     "update_available": "Güncelleme var",
     "update_important": "Önemli güncelleme var",
     "folder_unread": "{count} okunmamış",
-    "folder_counts": "{unread} okunmamış, toplam {total}"
+    "folder_counts": "{unread} okunmamış, toplam {total}",
+    "skip_to_content": "İçeriğe atla",
+    "heading": "{place} – {app}",
+    "message_list": "İleti listesi",
+    "reading_pane": "Okuma bölmesi"
   },
   "plugin_pages": {
     "loading": "Sayfa yükleniyor",

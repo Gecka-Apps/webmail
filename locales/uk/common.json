@@ -5630,7 +5630,11 @@
     "update_available": "Доступне оновлення",
     "update_important": "Доступне важливе оновлення",
     "folder_unread": "Непрочитаних: {count}",
-    "folder_counts": "Непрочитаних: {unread}, усього: {total}"
+    "folder_counts": "Непрочитаних: {unread}, усього: {total}",
+    "skip_to_content": "Перейти до вмісту",
+    "heading": "{place} – {app}",
+    "message_list": "Список листів",
+    "reading_pane": "Область читання"
   },
   "plugin_pages": {
     "loading": "Завантаження сторінки",

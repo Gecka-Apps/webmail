@@ -5630,7 +5630,11 @@
     "update_available": "Saadaval on värskendus",
     "update_important": "Saadaval on oluline värskendus",
     "folder_unread": "Lugemata: {count}",
-    "folder_counts": "Lugemata: {unread}, kokku: {total}"
+    "folder_counts": "Lugemata: {unread}, kokku: {total}",
+    "skip_to_content": "Liigu sisu juurde",
+    "heading": "{place} – {app}",
+    "message_list": "Kirjade loend",
+    "reading_pane": "Lugemispaan"
   },
   "plugin_pages": {
     "loading": "Lehe laadimine",
