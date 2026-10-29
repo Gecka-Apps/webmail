@@ -43,6 +43,7 @@ const TEXT_FIELDS = [
   { key: 'loginImprintUrl', label: 'Imprint URL' },
   { key: 'loginPrivacyPolicyUrl', label: 'Privacy policy URL' },
   { key: 'loginWebsiteUrl', label: 'Company website URL' },
+  { key: 'loginUsernamePlaceholder', label: 'Login email placeholder', placeholder: 'user@company.example' },
 ] as const;
 
 // Accessibility and help links (OP-01): the app shows them on the login
@@ -565,7 +566,7 @@ export function BrandingPage() {
         </SettingsSection>
 
         <SettingsSection id="company" title="Company information">
-          {TEXT_FIELDS.map(field => textRow(field, field.key.includes('Url') ? 'https://...' : 'Enter value'))}
+          {TEXT_FIELDS.map(field => textRow(field, 'placeholder' in field ? field.placeholder : field.key.includes('Url') ? 'https://...' : 'Enter value'))}
         </SettingsSection>
 
         <SettingsSection

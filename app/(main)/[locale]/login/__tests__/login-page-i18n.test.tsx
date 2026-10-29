@@ -18,6 +18,8 @@ vi.mock('@/i18n/navigation', () => ({
   Link: ({ children }: { children: React.ReactNode }) => children,
 }));
 
+const configOverrides = vi.hoisted(() => ({ value: {} as Record<string, unknown> }));
+
 vi.mock('@/hooks/use-config', () => ({
   useConfig: () => ({
     appName: 'Webmail',
@@ -30,6 +32,7 @@ vi.mock('@/hooks/use-config', () => ({
     loginShowVersion: true,
     loginShowTotp: true,
     loginShowRememberMe: true,
+    ...configOverrides.value,
   }),
 }));
 
@@ -62,6 +65,22 @@ describe('login page translations', () => {
     expect(screen.getByRole('button', { name: 'copy' })).toBeInTheDocument();
     act(() => { fireEvent.keyDown(document, { key: 'Escape' }); });
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  }, 30_000);
+
+  it('uses the translated email placeholder unless one is configured (#1423)', async () => {
+    const { unmount } = render(<LoginPage />);
+    expect(await screen.findByLabelText('username_label', {}, { timeout: 10000 }))
+      .toHaveAttribute('placeholder', 'username_placeholder');
+    unmount();
+
+    configOverrides.value = { loginUsernamePlaceholder: 'max.mustermann@acme.example' };
+    try {
+      render(<LoginPage />);
+      expect(await screen.findByLabelText('username_label', {}, { timeout: 10000 }))
+        .toHaveAttribute('placeholder', 'max.mustermann@acme.example');
+    } finally {
+      configOverrides.value = {};
+    }
   }, 30_000);
 });
 

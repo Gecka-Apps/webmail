@@ -80,6 +80,7 @@ export async function GET(request: NextRequest) {
       loginImprintUrl: branded<string>('loginImprintUrl', ''),
       loginPrivacyPolicyUrl: branded<string>('loginPrivacyPolicyUrl', ''),
       loginWebsiteUrl: branded<string>('loginWebsiteUrl', ''),
+      loginUsernamePlaceholder: branded<string>('loginUsernamePlaceholder', ''),
       loginLogoMaxHeight: configManager.get<string>('loginLogoMaxHeight', ''),
       loginLogoMaxWidth: configManager.get<string>('loginLogoMaxWidth', ''),
       loginShowHeading: configManager.get<boolean>('loginShowHeading', true),

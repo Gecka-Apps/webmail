@@ -36,6 +36,7 @@ const MANAGED_ENV = [
   'LOGIN_IMPRINT_URL', 'LOGIN_PRIVACY_POLICY_URL', 'LOGIN_WEBSITE_URL', 'DOMAIN_BRANDING',
   'JMAP_SERVERS', 'JMAP_SERVER_AUTO_PICK_BY_DOMAIN', 'SOURCE_CODE_URL', 'LOGIN_SHOW_REMEMBER_ME',
   'ACCESSIBILITY_STATEMENT_URL', 'ACCESSIBILITY_FEEDBACK_URL', 'HELP_URL', 'EASY_READ_URL', 'SIGN_LANGUAGE_URL',
+  'LOGIN_USERNAME_PLACEHOLDER',
 ] as const;
 
 describe('config API route', () => {
@@ -161,6 +162,13 @@ describe('config API route', () => {
     expect(config.loginImprintUrl).toBe('https://acme.com/imprint');
     expect(config.loginPrivacyPolicyUrl).toBe('https://acme.com/privacy');
     expect(config.loginWebsiteUrl).toBe('https://acme.com');
+  });
+
+  it('publishes the login email placeholder, empty when unset (#1423)', async () => {
+    expect((await getConfig()).loginUsernamePlaceholder).toBe('');
+
+    vi.stubEnv('LOGIN_USERNAME_PLACEHOLDER', 'max.mustermann@acme.example');
+    expect((await getConfig()).loginUsernamePlaceholder).toBe('max.mustermann@acme.example');
   });
 
   it('publishes the source code URL for the About card (#1161)', async () => {
@@ -308,6 +316,16 @@ describe('config API route', () => {
 
       expect(config.accessibilityStatementUrl).toBe('https://one.example/barrierefreiheit');
       expect(config.helpUrl).toBe('https://default.example/help');
+    });
+
+    it('overrides the login email placeholder per domain (#1423)', async () => {
+      vi.stubEnv('LOGIN_USERNAME_PLACEHOLDER', 'name@default.example');
+      vi.stubEnv('DOMAIN_BRANDING', JSON.stringify([
+        { host: 'mail1.example.com', loginUsernamePlaceholder: 'name@one.example' },
+      ]));
+
+      expect((await getConfig({ host: 'mail1.example.com' })).loginUsernamePlaceholder).toBe('name@one.example');
+      expect((await getConfig({ host: 'other.example.com' })).loginUsernamePlaceholder).toBe('name@default.example');
     });
 
     it('falls through to the global value when the host has no entry', async () => {

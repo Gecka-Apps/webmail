@@ -48,6 +48,7 @@ const configValidators = {
   loginImprintUrl: isString,
   loginPrivacyPolicyUrl: isString,
   loginWebsiteUrl: isString,
+  loginUsernamePlaceholder: isString,
   loginLogoMaxHeight: isString,
   loginLogoMaxWidth: isString,
   loginShowHeading: isBoolean,
