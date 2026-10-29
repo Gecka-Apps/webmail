@@ -5393,6 +5393,15 @@ export const useEmailStore = create<EmailStore>((set, get) => ({
       const { query: searchQuery, filters: searchFilters } = transformed
         ?? (emailHooks.onSearch.size > 0 ? await transformSearch(typedQuery, typedFilters) : { query: typedQuery, filters: typedFilters });
       if (controller.signal.aborted) return;
+      // Clearing the filters leaves nothing to search for. Under the
+      // all-folders scope that empty search listed every message of the
+      // account in place of the open folder (#1430), so load the folder.
+      if (!isUnifiedView && !selectedKeyword && get().selectedMailbox && isAllFoldersSearchScope(searchMailboxId)
+        && !searchQuery.trim() && isFilterEmpty(searchFilters)) {
+        set({ searchAbortController: null });
+        await get().fetchEmails(client);
+        return;
+      }
       startProvidedSearchResults(searchQuery, searchFilters, { get, set });
       const emailsPerPage = useSettingsStore.getState().emailsPerPage;
       let result;

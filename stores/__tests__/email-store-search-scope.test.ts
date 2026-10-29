@@ -32,6 +32,8 @@ function makeClient() {
     searchEmails: vi.fn().mockResolvedValue({ emails: [], hasMore: false, total: 0 }),
     advancedSearchEmails: vi.fn().mockResolvedValue({ emails: [], hasMore: false, total: 0 }),
     getSomeEmails: vi.fn().mockResolvedValue([]),
+    getEmails: vi.fn().mockResolvedValue({ emails: [], hasMore: false, total: 0, state: 'email-state' }),
+    getThreads: vi.fn().mockResolvedValue([]),
     getAccountId: () => 'me',
   } as unknown as IJMAPClient;
 }
@@ -173,6 +175,21 @@ describe('search folder scope (#788)', () => {
     useEmailStore.getState().clearSearchFilters();
 
     expect(useEmailStore.getState().searchMailboxId).toBe('');
+  });
+
+  // #1430: "Clear" in the filter panel re-runs the search with nothing left
+  // to search for, which listed every message of the account in the folder.
+  it('shows the open folder again when the filters are cleared', async () => {
+    useEmailStore.setState({ searchFilters: { ...DEFAULT_SEARCH_FILTERS, from: 'bob@example.com' } });
+    await useEmailStore.getState().advancedSearch(client);
+    (client.advancedSearchEmails as ReturnType<typeof vi.fn>).mockClear();
+
+    useEmailStore.getState().clearSearchFilters();
+    await useEmailStore.getState().advancedSearch(client);
+
+    expect(client.advancedSearchEmails).not.toHaveBeenCalled();
+    expect(client.getEmails).toHaveBeenCalledTimes(1);
+    expect((client.getEmails as ReturnType<typeof vi.fn>).mock.calls[0][0]).toBe('sent');
   });
 });
 
