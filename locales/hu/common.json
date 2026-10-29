@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} {count, plural, one {# beállítást} other {# beállítást}} módosított.",
     "command": "Kisegítő lehetőségek beállításai",
     "command_keywords": "a11y kisegítő lehetőségek akadálymentesség szövegméret kontraszt mozgás nagyítás"
+  },
+  "glossary": {
+    "what_is": "Mit jelent az, hogy „{term}”?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "A JMAP az a modern módszer, amellyel ez a webmail a levelezőszervereddel kommunikál. Ezen keresztül tölti be a leveleidet, naptáraidat és névjegyeidet."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "Az IMAP az a szokásos módszer, amellyel a levelezőalkalmazások, például a Thunderbird vagy az Apple Mail, a szerverről olvassák a leveleidet. Az üzenetek a szerveren maradnak."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "Az SMTP az a szokásos módszer, amellyel a levelezőalkalmazások a levelezőszerveren keresztül elküldik az üzeneteidet."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "A CalDAV segítségével más alkalmazások, például a telefonod naptára, megjeleníthetik és módosíthatják a levelezőszervereden lévő naptárakat."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "A CardDAV segítségével más alkalmazások, például a telefonod névjegyei, megjeleníthetik és módosíthatják a levelezőszervereden lévő címjegyzékeket."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "A WebDAV segítségével más alkalmazások és a számítógéped fájlkezelője megnyithatják a levelezőszervereden lévő fájlokat."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "A Sieve az a nyelv, amelyen a levelezőszervered a szűrőszabályokat tárolja. Amikor új levél érkezik, a szerver lefuttatja a szabályokat, akkor is, ha ez a webmail be van zárva."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "Az S/MIME egy tanúsítvánnyal aláírja az üzeneteidet, hogy mások lássák, tényleg tőled jönnek, és titkosítja őket, hogy csak a címzett olvashassa el."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "A PGP (OpenPGP) egy másik módja a levelek aláírásának és titkosításának. Tanúsítvány helyett egy kulcspárt használ, amelyet te magad hozol létre."
+      },
+      "public_key": {
+        "term": "Nyilvános kulcs",
+        "text": "A nyilvános kulcs a kulcsodnak az a része, amelyet megosztasz. Mások ezzel küldenek neked titkosított levelet, és ezzel ellenőrzik az aláírásodat. A privát kulcsod titokban marad."
+      },
+      "two_factor": {
+        "term": "Kétfaktoros hitelesítés",
+        "text": "A kétfaktoros hitelesítés bejelentkezéskor egy második bizonyítékot is kér, általában egy kódot a telefonodon lévő alkalmazásból. Aki csak a jelszavadat ismeri, nem tud belépni."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "A TOTP-kód egy 6 jegyű kód a telefonodon lévő hitelesítő alkalmazásból. 30 másodpercenként változik."
+      },
+      "app_password": {
+        "term": "Alkalmazás jelszó",
+        "text": "Az alkalmazás jelszó egy további jelszó egyetlen levelezőalkalmazáshoz, például a Thunderbirdhöz vagy a telefonod levelezőalkalmazásához. Bármikor törölheted anélkül, hogy a fő jelszavadat megváltoztatnád."
+      },
+      "access_token": {
+        "term": "Hozzáférési token",
+        "text": "A hozzáférési token egy hosszú kód, amellyel egy alkalmazás a jelszavad helyett lép be a fiókodba. A levelezési szolgáltatód beállításaiban hozod létre."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "OAuth (egyszeri bejelentkezés) esetén a szervezeted saját bejelentkezési oldalán lépsz be. Ez a webmail soha nem látja a jelszavadat."
+      },
+      "identity": {
+        "term": "Azonosság",
+        "text": "Az azonosság egy név és egy cím, amelyről leveleket küldhetsz. Minden azonosságnak lehet saját aláírása."
+      },
+      "delegation": {
+        "term": "Meghatalmazás",
+        "text": "Meghatalmazással egy másik személy olvashatja és rendezheti helyetted a leveleidet vagy a naptáradat, például egy asszisztens."
+      },
+      "push": {
+        "term": "Push-értesítések",
+        "text": "A push-értesítések akkor is jelzik az új leveleket, ha ez a weboldal be van zárva. Egy push relé továbbítja a jelzést a böngésződnek vagy a telefonodnak. A leveleidet soha nem látja."
+      },
+      "sync": {
+        "term": "Szinkronizálás",
+        "text": "A szinkronizálás minden eszközödön ugyanazokat az adatokat tartja. Ha egy eszközön módosítasz valamit, az a többin is megjelenik."
+      },
+      "cache": {
+        "term": "Gyorsítótár",
+        "text": "A gyorsítótár az adataid másolata ebben a böngészőben, hogy a webmail gyorsabban betöltődjön. Frissítéskor az adatok újra betöltődnek a szerverről. A szerveren semmi nem törlődik."
+      },
+      "sub_addressing": {
+        "term": "Alcímzés",
+        "text": "Alcímzéskor egy címkét teszel a címedbe, például name+shop@example.com. Az erre a címre küldött levelek így is hozzád érkeznek, és a címke szerint rendezheted őket."
+      },
+      "encryption_at_rest": {
+        "term": "Titkosítás nyugalmi állapotban",
+        "text": "A nyugalmi állapotban történő titkosítás azt jelenti, hogy a szerver titkosítva tárolja a leveleidet. Aki lemásolja a szerver lemezeit, nem tudja elolvasni őket."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "A vCard (.vcf) a névjegyek szokásos fájlformátuma. A legtöbb címjegyzék tudja importálni és exportálni."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "Az iCalendar (.ics) a naptárak és események szokásos fájlformátuma. A legtöbb naptáralkalmazás tudja importálni, vagy fel tud rá iratkozni."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "A CORS egy böngészőszabály. A szervernek először engedélyeznie kell egy weboldalt, csak utána engedi a böngésző, hogy az a weboldal a szerverrel kommunikáljon."
+      }
+    }
   }
 }

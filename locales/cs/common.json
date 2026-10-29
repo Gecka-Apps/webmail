@@ -5806,5 +5806,110 @@
     "preset_applied": "Předvolba {name} změnila {count, plural, one {# nastavení} few {# nastavení} many {# nastavení} other {# nastavení}}.",
     "command": "Možnosti přístupnosti",
     "command_keywords": "a11y přístupnost velikost textu kontrast pohyb zoom"
+  },
+  "glossary": {
+    "what_is": "Co znamená „{term}“?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP je moderní způsob, jakým tento webmail komunikuje s vaším poštovním serverem. Načítá přes něj vaši poštu, kalendáře a kontakty."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP je běžný způsob, jakým poštovní aplikace jako Thunderbird nebo Apple Mail čtou vaši poštu ze serveru. Zprávy zůstávají na serveru."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP je běžný způsob, jakým poštovní aplikace odesílají vaše zprávy přes poštovní server."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "CalDAV umožňuje jiným aplikacím, třeba kalendáři ve vašem telefonu, zobrazovat a měnit kalendáře na vašem poštovním serveru."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "CardDAV umožňuje jiným aplikacím, třeba kontaktům ve vašem telefonu, zobrazovat a měnit adresáře na vašem poštovním serveru."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "WebDAV umožňuje jiným aplikacím a správci souborů ve vašem počítači otevírat soubory na vašem poštovním serveru."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve je jazyk, ve kterém váš poštovní server zapisuje pravidla filtrů. Server pravidla použije, jakmile přijde nová pošta, i když je tento webmail zavřený."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME používá certifikát k podepisování vašich zpráv, aby ostatní viděli, že jsou opravdu od vás, a k jejich šifrování, aby je mohl přečíst jen příjemce."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) je další způsob, jak podepisovat a šifrovat poštu. Místo certifikátu používá dvojici klíčů, kterou si vytvoříte sami."
+      },
+      "public_key": {
+        "term": "Veřejný klíč",
+        "text": "Veřejný klíč je ta část vašeho klíče, kterou sdílíte. Ostatní jím šifrují poštu pro vás a ověřují váš podpis. Váš soukromý klíč zůstává tajný."
+      },
+      "two_factor": {
+        "term": "Dvoufázové ověření",
+        "text": "Dvoufázové ověření chce při přihlášení druhý doklad, obvykle kód z aplikace ve vašem telefonu. Kdo zná jen vaše heslo, se dovnitř nedostane."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "Kód TOTP je šestimístný kód z ověřovací aplikace ve vašem telefonu. Mění se každých 30 sekund."
+      },
+      "app_password": {
+        "term": "Heslo aplikace",
+        "text": "Heslo aplikace je další heslo pro jednu poštovní aplikaci, třeba Thunderbird nebo poštovní aplikaci ve vašem telefonu. Můžete ho kdykoli smazat a hlavní heslo měnit nemusíte."
+      },
+      "access_token": {
+        "term": "Přístupový token",
+        "text": "Přístupový token je dlouhý kód, se kterým se aplikace dostane do vašeho účtu místo hesla. Vytvoříte ho v nastavení u svého poskytovatele pošty."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Při OAuth (jednotném přihlášení) se přihlašujete na přihlašovací stránce své organizace. Tento webmail vaše heslo nikdy nevidí."
+      },
+      "identity": {
+        "term": "Identita",
+        "text": "Identita je jméno s adresou, ze které můžete posílat poštu. Každá identita může mít vlastní podpis."
+      },
+      "delegation": {
+        "term": "Zástupci",
+        "text": "Zástupce je jiná osoba, která může vaši poštu nebo kalendář číst a třídit za vás, například asistent."
+      },
+      "push": {
+        "term": "Push oznámení",
+        "text": "Push oznámení vás upozorní na novou poštu, i když je tento web zavřený. Push relay předá upozornění vašemu prohlížeči nebo telefonu. Vaši poštu nikdy nevidí."
+      },
+      "sync": {
+        "term": "Synchronizace",
+        "text": "Synchronizace udržuje stejná data na všech vašich zařízeních. Změna na jednom zařízení se objeví i na ostatních."
+      },
+      "cache": {
+        "term": "Mezipaměť",
+        "text": "Mezipaměť je kopie vašich dat v tomto prohlížeči, aby se webmail načítal rychleji. Když ji obnovíte, data se znovu načtou ze serveru. Na serveru se nic nesmaže."
+      },
+      "sub_addressing": {
+        "term": "Subadresování",
+        "text": "Subadresování znamená, že k adrese přidáte štítek, například name+shop@example.com. Pošta na tuto adresu k vám pořád dojde a můžete ji podle štítku třídit."
+      },
+      "encryption_at_rest": {
+        "term": "Šifrování dat v klidu",
+        "text": "Šifrování dat v klidu znamená, že server ukládá vaši poštu zašifrovanou. Kdo zkopíruje disky serveru, ji nepřečte."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) je běžný formát souborů pro kontakty. Většina adresářů ho umí importovat i exportovat."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) je běžný formát souborů pro kalendáře a události. Většina kalendářových aplikací ho umí importovat nebo ho odebírat."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS je pravidlo prohlížeče. Server musí webovou stránku nejdřív povolit, teprve pak ji prohlížeč nechá se serverem komunikovat."
+      }
+    }
   }
 }

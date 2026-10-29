@@ -5806,5 +5806,110 @@
     "preset_applied": "{name}, {count, plural, one {# ayarı} other {# ayarı}} değiştirdi.",
     "command": "Erişilebilirlik seçenekleri",
     "command_keywords": "a11y erişilebilirlik metin boyutu karşıtlık hareket yakınlaştırma"
+  },
+  "glossary": {
+    "what_is": "“{term}” ne demek?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP, bu web postanın e-posta sunucunuzla konuşmasının modern yoludur. Postalarınız, takvimleriniz ve kişileriniz bu yolla yüklenir."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP, Thunderbird veya Apple Mail gibi posta uygulamalarının postalarınızı sunucudan okumasının olağan yoludur. İletileriniz sunucuda kalır."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP, posta uygulamalarının iletilerinizi e-posta sunucusu üzerinden göndermesinin olağan yoludur."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "CalDAV, telefonunuzdaki takvim gibi başka uygulamaların e-posta sunucunuzdaki takvimleri göstermesini ve değiştirmesini sağlar."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "CardDAV, telefonunuzdaki kişiler gibi başka uygulamaların e-posta sunucunuzdaki adres defterlerini göstermesini ve değiştirmesini sağlar."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "WebDAV, başka uygulamaların ve bilgisayarınızın dosya yöneticisinin e-posta sunucunuzdaki dosyaları açmasını sağlar."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve, e-posta sunucunuzun filtre kuralları için kullandığı dildir. Sunucu, yeni posta geldiğinde kuralları çalıştırır, bu web posta kapalıyken bile."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME, iletilerinizi imzalamak için bir sertifika kullanır, böylece başkaları iletilerin gerçekten sizden geldiğini görür. İletileri şifrelemek için de kullanır, böylece onları yalnızca alıcı okuyabilir."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP), postaları imzalamanın ve şifrelemenin başka bir yoludur. Sertifika yerine kendi oluşturduğunuz bir anahtar çifti kullanır."
+      },
+      "public_key": {
+        "term": "Ortak anahtar",
+        "text": "Ortak anahtar, anahtarınızın paylaştığınız kısmıdır. Başkaları size şifreli posta göndermek ve imzanızı doğrulamak için onu kullanır. Özel anahtarınız gizli kalır."
+      },
+      "two_factor": {
+        "term": "İki faktörlü kimlik doğrulama",
+        "text": "İki faktörlü kimlik doğrulama, oturum açarken ikinci bir kanıt ister. Bu genellikle telefonunuzdaki bir uygulamadan gelen bir koddur. Yalnızca parolanızı bilen biri giriş yapamaz."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "TOTP kodu, telefonunuzdaki bir doğrulama uygulamasından gelen 6 haneli bir koddur. Her 30 saniyede bir değişir."
+      },
+      "app_password": {
+        "term": "Uygulama parolası",
+        "text": "Uygulama parolası, Thunderbird veya telefonunuzdaki posta uygulaması gibi tek bir posta uygulaması için ek bir paroladır. Ana parolanızı değiştirmeden onu istediğiniz zaman silebilirsiniz."
+      },
+      "access_token": {
+        "term": "Erişim belirteci",
+        "text": "Erişim belirteci, bir uygulamanın parolanız yerine hesabınıza girmesini sağlayan uzun bir koddur. Onu e-posta sağlayıcınızın ayarlarında oluşturursunuz."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "OAuth (çoklu oturum açma) ile kuruluşunuzun kendi giriş sayfasında oturum açarsınız. Bu web posta parolanızı hiçbir zaman görmez."
+      },
+      "identity": {
+        "term": "Kimlik",
+        "text": "Kimlik, posta gönderebileceğiniz bir ad ve adrestir. Her kimliğin kendi imzası olabilir."
+      },
+      "delegation": {
+        "term": "Vekâlet",
+        "text": "Vekâlet, başka bir kişinin, örneğin bir asistanın, sizin yerinize postanızı veya takviminizi okumasını ve düzenlemesini sağlar."
+      },
+      "push": {
+        "term": "Push bildirimleri",
+        "text": "Push bildirimleri, bu web sitesi kapalıyken bile yeni postaları size haber verir. Bir push röle, uyarıyı tarayıcınıza veya telefonunuza iletir. Postanızı hiçbir zaman görmez."
+      },
+      "sync": {
+        "term": "Eşitleme",
+        "text": "Eşitleme, tüm cihazlarınızda aynı verileri tutar. Bir cihazda yaptığınız değişiklik diğerlerinde de görünür."
+      },
+      "cache": {
+        "term": "Önbellek",
+        "text": "Önbellek, web postanın daha hızlı yüklenmesi için verilerinizin bu tarayıcıdaki bir kopyasıdır. Onu yenilemek verileri sunucudan yeniden yükler. Sunucuda hiçbir şey silinmez."
+      },
+      "sub_addressing": {
+        "term": "Alt adresleme",
+        "text": "Alt adresleme, adresinize name+shop@example.com gibi bir etiket eklemektir. Bu adrese gelen postalar yine size ulaşır ve onları etikete göre sıralayabilirsiniz."
+      },
+      "encryption_at_rest": {
+        "term": "Bekleme süresi şifrelemesi",
+        "text": "Bekleme süresi şifrelemesi, sunucunun postanızı şifreli olarak sakladığı anlamına gelir. Sunucunun disklerini kopyalayan biri onu okuyamaz."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf), kişiler için yaygın dosya biçimidir. Çoğu adres defteri onu içe ve dışa aktarabilir."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics), takvimler ve etkinlikler için yaygın dosya biçimidir. Çoğu takvim uygulaması onu içe aktarabilir veya ona abone olabilir."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS bir tarayıcı kuralıdır. Tarayıcının bir web sitesinin sunucuyla konuşmasına izin vermesi için önce sunucunun o siteye izin vermesi gerekir."
+      }
+    }
   }
 }

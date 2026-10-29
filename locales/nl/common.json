@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} heeft {count, plural, one {# instelling} other {# instellingen}} gewijzigd.",
     "command": "Toegankelijkheidsopties",
     "command_keywords": "a11y toegankelijkheid tekstgrootte contrast beweging zoom"
+  },
+  "glossary": {
+    "what_is": "Wat betekent “{term}”?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP is de moderne manier waarop deze webmail met je mailserver praat. Zo laadt de webmail je e-mail, agenda's en contacten."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP is de gebruikelijke manier waarop mail-apps zoals Thunderbird of Apple Mail je e-mail van de server lezen. Je berichten blijven op de server staan."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP is de gebruikelijke manier waarop mail-apps je berichten via de mailserver versturen."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "Met CalDAV kunnen andere apps, zoals de agenda op je telefoon, de agenda's op je mailserver tonen en wijzigen."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "Met CardDAV kunnen andere apps, zoals de contacten op je telefoon, de adresboeken op je mailserver tonen en wijzigen."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "Met WebDAV kunnen andere apps en de bestandsbeheerder van je computer de bestanden op je mailserver openen."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve is de taal die je mailserver gebruikt voor filterregels. De server voert de regels uit zodra er nieuwe e-mail binnenkomt, ook als deze webmail gesloten is."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME gebruikt een certificaat om je berichten te ondertekenen, zodat anderen zien dat ze echt van jou komen, en om ze te versleutelen, zodat alleen de ontvanger ze kan lezen."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) is een andere manier om e-mail te ondertekenen en te versleutelen. In plaats van een certificaat gebruikt het een sleutelpaar dat je zelf maakt."
+      },
+      "public_key": {
+        "term": "Openbare sleutel",
+        "text": "Een openbare sleutel is het deel van je sleutel dat je deelt. Anderen gebruiken die om versleutelde e-mail naar je te sturen en je handtekening te controleren. Je privésleutel blijft geheim."
+      },
+      "two_factor": {
+        "term": "Tweefactorauthenticatie",
+        "text": "Tweefactorauthenticatie vraagt bij het inloggen om een tweede bewijs, meestal een code uit een app op je telefoon. Iemand die alleen je wachtwoord kent, komt er niet in."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "Een TOTP-code is een code van 6 cijfers uit een authenticator-app op je telefoon. De code verandert elke 30 seconden."
+      },
+      "app_password": {
+        "term": "App-wachtwoord",
+        "text": "Een app-wachtwoord is een extra wachtwoord voor één mail-app, zoals Thunderbird of de mail-app op je telefoon. Je kunt het altijd verwijderen zonder je hoofdwachtwoord te wijzigen."
+      },
+      "access_token": {
+        "term": "Toegangstoken",
+        "text": "Een toegangstoken is een lange code waarmee een app in je account komt in plaats van met je wachtwoord. Je maakt het aan in de instellingen van je e-mailprovider."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Met OAuth (single sign-on) log je in op de inlogpagina van je eigen organisatie. Deze webmail ziet je wachtwoord nooit."
+      },
+      "identity": {
+        "term": "Identiteit",
+        "text": "Een identiteit is een naam met een adres waarvandaan je e-mail kunt versturen. Elke identiteit kan een eigen handtekening hebben."
+      },
+      "delegation": {
+        "term": "Delegatie",
+        "text": "Met delegatie kan iemand anders je e-mail of agenda voor je lezen en ordenen, bijvoorbeeld een assistent."
+      },
+      "push": {
+        "term": "Pushmeldingen",
+        "text": "Pushmeldingen laten je weten dat er nieuwe e-mail is, ook als deze website gesloten is. Een push-relay geeft de melding door aan je browser of telefoon. De relay ziet je e-mail nooit."
+      },
+      "sync": {
+        "term": "Synchronisatie",
+        "text": "Synchronisatie houdt dezelfde gegevens op al je apparaten. Een wijziging op het ene apparaat verschijnt ook op de andere."
+      },
+      "cache": {
+        "term": "Cache",
+        "text": "De cache is een kopie van je gegevens in deze browser, zodat de webmail sneller laadt. Als je de cache vernieuwt, worden de gegevens opnieuw van de server geladen. Er wordt niets op de server verwijderd."
+      },
+      "sub_addressing": {
+        "term": "Sub-adressering",
+        "text": "Bij sub-adressering zet je een label in je adres, zoals name+shop@example.com. E-mail naar dat adres komt gewoon bij jou aan, en je kunt die op het label sorteren."
+      },
+      "encryption_at_rest": {
+        "term": "Versleuteling in rust",
+        "text": "Versleuteling in rust betekent dat de server je e-mail versleuteld opslaat. Iemand die de schijven van de server kopieert, kan je e-mail niet lezen."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) is het gangbare bestandsformaat voor contacten. De meeste adresboeken kunnen het importeren en exporteren."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) is het gangbare bestandsformaat voor agenda's en afspraken. De meeste agenda-apps kunnen het importeren of zich erop abonneren."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS is een regel in de browser. Een server moet een website eerst toestaan voordat de browser die website met de server laat praten."
+      }
+    }
   }
 }

@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} changed {count, plural, one {# setting} other {# settings}}.",
     "command": "Accessibility options",
     "command_keywords": "a11y text size contrast motion zoom"
+  },
+  "glossary": {
+    "what_is": "What does “{term}” mean?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP is the modern way this webmail talks to your mail server. It loads your mail, calendars and contacts."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP is the usual way mail apps like Thunderbird or Apple Mail read your mail from the server. Your messages stay on the server."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP is the usual way mail apps send your messages through the mail server."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "CalDAV lets other apps, like the calendar on your phone, show and change the calendars on your mail server."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "CardDAV lets other apps, like the contacts on your phone, show and change the address books on your mail server."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "WebDAV lets other apps and your computer's file manager open the files on your mail server."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve is the language your mail server uses for filter rules. The server runs the rules when new mail arrives, even when this webmail is closed."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME uses a certificate to sign your messages, so people can see they really come from you, and to encrypt them, so only the recipient can read them."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) is another way to sign and encrypt mail. It uses a pair of keys that you make yourself instead of a certificate."
+      },
+      "public_key": {
+        "term": "Public key",
+        "text": "A public key is the part of your key that you share. Others use it to encrypt mail to you and to check your signature. Your private key stays secret."
+      },
+      "two_factor": {
+        "term": "Two-factor authentication",
+        "text": "Two-factor authentication asks for a second proof when you sign in, usually a code from an app on your phone. Someone who only knows your password can't get in."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "A TOTP code is a 6-digit code from an authenticator app on your phone. It changes every 30 seconds."
+      },
+      "app_password": {
+        "term": "App password",
+        "text": "An app password is an extra password for one mail app, like Thunderbird or the mail app on your phone. You can delete it at any time without changing your main password."
+      },
+      "access_token": {
+        "term": "Access token",
+        "text": "An access token is a long code that lets an app into your account instead of your password. You create it in your mail provider's settings."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "OAuth (single sign-on) means you sign in on your organisation's own sign-in page. This webmail never sees your password."
+      },
+      "identity": {
+        "term": "Identity",
+        "text": "An identity is a name and address you can send mail from. Each identity can have its own signature."
+      },
+      "delegation": {
+        "term": "Delegation",
+        "text": "Delegation lets another person read and organise your mail or calendar for you, for example an assistant."
+      },
+      "push": {
+        "term": "Push notifications",
+        "text": "Push notifications tell you about new mail even when this website is closed. A push relay passes the alert to your browser or phone. It never sees your mail."
+      },
+      "sync": {
+        "term": "Sync",
+        "text": "Sync keeps the same data on all your devices. A change on one device shows up on the others."
+      },
+      "cache": {
+        "term": "Cache",
+        "text": "The cache is a copy of your data in this browser, so the webmail loads faster. Refreshing it loads the data from the server again. Nothing is deleted on the server."
+      },
+      "sub_addressing": {
+        "term": "Sub-addressing",
+        "text": "Sub-addressing means adding a tag to your address, like name+shop@example.com. Mail to that address still reaches you, and you can sort it by the tag."
+      },
+      "encryption_at_rest": {
+        "term": "Encryption at rest",
+        "text": "Encryption at rest means the server stores your mail encrypted. Someone who copies the server's disks can't read it."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) is the common file format for contacts. Most address books can import and export it."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) is the common file format for calendars and events. Most calendar apps can import it or subscribe to it."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS is a browser rule. A server has to allow a website before the browser lets that website talk to the server."
+      }
+    }
   }
 }

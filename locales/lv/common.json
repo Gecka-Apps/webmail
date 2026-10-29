@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} mainīja {count, plural, zero {# iestatījumu} one {# iestatījumu} other {# iestatījumus}}.",
     "command": "Pieejamības opcijas",
     "command_keywords": "a11y pieejamība teksta izmērs kontrasts kustība tālummaiņa"
+  },
+  "glossary": {
+    "what_is": "Ko nozīmē „{term}”?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP ir mūsdienīgs veids, kā šis tīmekļa pasts sazinās ar jūsu pasta serveri. Ar to tiek ielādēts jūsu pasts, kalendāri un kontakti."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP ir parasts veids, kā pasta lietotnes, piemēram, Thunderbird vai Apple Mail, lasa jūsu pastu no servera. Ziņojumi paliek serverī."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP ir parasts veids, kā pasta lietotnes nosūta jūsu ziņojumus caur pasta serveri."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "CalDAV ļauj citām lietotnēm, piemēram, kalendāram jūsu tālrunī, rādīt un mainīt kalendārus jūsu pasta serverī."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "CardDAV ļauj citām lietotnēm, piemēram, kontaktiem jūsu tālrunī, rādīt un mainīt adrešu grāmatas jūsu pasta serverī."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "WebDAV ļauj citām lietotnēm un jūsu datora failu pārvaldniekam atvērt failus jūsu pasta serverī."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve ir valoda, ko jūsu pasta serveris izmanto filtru kārtulām. Serveris izpilda kārtulas, kad pienāk jauns pasts, pat ja šis tīmekļa pasts ir aizvērts."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME izmanto sertifikātu, lai parakstītu jūsu ziņojumus, tā ka citi redz, ka tie tiešām ir no jums, un lai tos šifrētu, tā ka tos var izlasīt tikai adresāts."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) ir vēl viens veids, kā parakstīt un šifrēt pastu. Sertifikāta vietā tas izmanto atslēgu pāri, ko jūs izveidojat paši."
+      },
+      "public_key": {
+        "term": "Publiskā atslēga",
+        "text": "Publiskā atslēga ir tā jūsu atslēgas daļa, ar kuru jūs dalāties. Citi to izmanto, lai sūtītu jums šifrētu pastu un pārbaudītu jūsu parakstu. Jūsu privātā atslēga paliek slepena."
+      },
+      "two_factor": {
+        "term": "Divfaktoru autentifikācija",
+        "text": "Divfaktoru autentifikācija, piesakoties, prasa otru pierādījumu, parasti kodu no lietotnes jūsu tālrunī. Kāds, kurš zina tikai jūsu paroli, nevar iekļūt."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "TOTP kods ir 6 ciparu kods no autentifikatora lietotnes jūsu tālrunī. Tas mainās ik pēc 30 sekundēm."
+      },
+      "app_password": {
+        "term": "Lietotnes parole",
+        "text": "Lietotnes parole ir papildu parole vienai pasta lietotnei, piemēram, Thunderbird vai pasta lietotnei jūsu tālrunī. To var jebkurā laikā izdzēst, nemainot galveno paroli."
+      },
+      "access_token": {
+        "term": "Piekļuves marķieris",
+        "text": "Piekļuves marķieris ir garš kods, ar kuru lietotne piekļūst jūsu kontam paroles vietā. Jūs to izveidojat sava pasta pakalpojumu sniedzēja iestatījumos."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Ar OAuth (vienoto pierakstīšanos) jūs piesakāties savas organizācijas pieteikšanās lapā. Šis tīmekļa pasts nekad neredz jūsu paroli."
+      },
+      "identity": {
+        "term": "Identitāte",
+        "text": "Identitāte ir vārds un adrese, no kuras varat sūtīt pastu. Katrai identitātei var būt savs paraksts."
+      },
+      "delegation": {
+        "term": "Pilnvarošana",
+        "text": "Pilnvarošana ļauj citai personai jūsu vietā lasīt un kārtot jūsu pastu vai kalendāru, piemēram, asistentam."
+      },
+      "push": {
+        "term": "Push paziņojumi",
+        "text": "Push paziņojumi ziņo par jaunu pastu arī tad, kad šī vietne ir aizvērta. Push relejs nodod paziņojumu jūsu pārlūkam vai tālrunim. Tas nekad neredz jūsu pastu."
+      },
+      "sync": {
+        "term": "Sinhronizācija",
+        "text": "Sinhronizācija uztur vienādus datus visās jūsu ierīcēs. Izmaiņas vienā ierīcē parādās arī pārējās."
+      },
+      "cache": {
+        "term": "Kešatmiņa",
+        "text": "Kešatmiņa ir jūsu datu kopija šajā pārlūkā, lai tīmekļa pasts ielādētos ātrāk. Atsvaidzinot to, dati no servera tiek ielādēti no jauna. Serverī nekas netiek dzēsts."
+      },
+      "sub_addressing": {
+        "term": "Apakšadresēšana",
+        "text": "Apakšadresēšana nozīmē, ka adresei pievienojat birku, piemēram, name+shop@example.com. Pasts uz šo adresi joprojām nonāk pie jums, un to var kārtot pēc birkas."
+      },
+      "encryption_at_rest": {
+        "term": "Krātuves šifrēšana",
+        "text": "Krātuves šifrēšana nozīmē, ka serveris glabā jūsu pastu šifrētu. Kāds, kurš nokopē servera diskus, to nevar izlasīt."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) ir izplatīts kontaktu failu formāts. Lielākā daļa adrešu grāmatu to var importēt un eksportēt."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) ir izplatīts kalendāru un notikumu failu formāts. Lielākā daļa kalendāra lietotņu to var importēt vai to abonēt."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS ir pārlūka noteikums. Serverim vispirms ir jāatļauj vietne, un tikai tad pārlūks ļauj šai vietnei sazināties ar serveri."
+      }
+    }
   }
 }

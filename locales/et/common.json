@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} muutis {count, plural, one {# seadet} other {# seadet}}.",
     "command": "Juurdepääsetavuse valikud",
     "command_keywords": "a11y juurdepääsetavus teksti suurus kontrast liikumine suum"
+  },
+  "glossary": {
+    "what_is": "Mida tähendab „{term}“?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP on nüüdisaegne viis, kuidas see veebipost sinu meiliserveriga suhtleb. Selle kaudu laaditakse sinu kirjad, kalendrid ja kontaktid."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP on tavaline viis, kuidas meilirakendused, näiteks Thunderbird või Apple Mail, sinu kirju serverist loevad. Kirjad jäävad serverisse."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP on tavaline viis, kuidas meilirakendused sinu kirju meiliserveri kaudu saadavad."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "CalDAV lubab teistel rakendustel, näiteks sinu telefoni kalendril, näidata ja muuta sinu meiliserveris olevaid kalendreid."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "CardDAV lubab teistel rakendustel, näiteks sinu telefoni kontaktidel, näidata ja muuta sinu meiliserveris olevaid aadressiraamatuid."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "WebDAV lubab teistel rakendustel ja sinu arvuti failihalduril avada sinu meiliserveris olevaid faile."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve on keel, mida sinu meiliserver filtrireeglite jaoks kasutab. Server rakendab reegleid, kui saabub uus kiri, ka siis, kui see veebipost on suletud."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME kasutab sertifikaati, et sinu kirju allkirjastada, nii et teised näevad, et need on tõesti sinult, ja et neid krüpteerida, nii et ainult saaja saab neid lugeda."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) on teine viis kirju allkirjastada ja krüpteerida. Sertifikaadi asemel kasutab see võtmepaari, mille sa ise lood."
+      },
+      "public_key": {
+        "term": "Avalik võti",
+        "text": "Avalik võti on see osa sinu võtmest, mida sa jagad. Teised kasutavad seda, et saata sulle krüpteeritud kirju ja kontrollida sinu allkirja. Sinu privaatvõti jääb saladuseks."
+      },
+      "two_factor": {
+        "term": "Kaheastmeline autentimine",
+        "text": "Kaheastmeline autentimine küsib sisselogimisel teist tõendit, tavaliselt koodi sinu telefoni rakendusest. Keegi, kes teab ainult sinu parooli, sisse ei saa."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "TOTP-kood on 6-kohaline kood sinu telefonis olevast autentimisrakendusest. See muutub iga 30 sekundi järel."
+      },
+      "app_password": {
+        "term": "Rakenduse parool",
+        "text": "Rakenduse parool on lisaparool ühe meilirakenduse jaoks, näiteks Thunderbirdi või sinu telefoni meilirakenduse jaoks. Saad selle igal ajal kustutada, ilma et peaksid oma põhiparooli muutma."
+      },
+      "access_token": {
+        "term": "Juurdepääsuluba",
+        "text": "Juurdepääsuluba on pikk kood, millega rakendus pääseb sinu kontole parooli asemel. Sa lood selle oma meiliteenuse pakkuja seadetes."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "OAuthi (ühekordse sisselogimise) korral logid sa sisse oma organisatsiooni sisselogimislehel. See veebipost ei näe kunagi sinu parooli."
+      },
+      "identity": {
+        "term": "Identiteet",
+        "text": "Identiteet on nimi koos aadressiga, millelt saad kirju saata. Igal identiteedil võib olla oma allkiri."
+      },
+      "delegation": {
+        "term": "Asendajad",
+        "text": "Asendaja on teine inimene, kes saab sinu eest sinu kirju või kalendrit lugeda ja korrastada, näiteks assistent."
+      },
+      "push": {
+        "term": "Push-teavitused",
+        "text": "Push-teavitused annavad uutest kirjadest teada ka siis, kui see veebisait on suletud. Push-relee edastab teate sinu brauserile või telefonile. See ei näe kunagi sinu kirju."
+      },
+      "sync": {
+        "term": "Sünkroonimine",
+        "text": "Sünkroonimine hoiab kõigis sinu seadmetes samu andmeid. Muudatus ühes seadmes ilmub ka teistes."
+      },
+      "cache": {
+        "term": "Vahemälu",
+        "text": "Vahemälu on sinu andmete koopia selles brauseris, et veebipost laadiks kiiremini. Värskendamisel laaditakse andmed uuesti serverist. Serverist ei kustutata midagi."
+      },
+      "sub_addressing": {
+        "term": "Alamaadressimine",
+        "text": "Alamaadressimine tähendab, et lisad oma aadressile sildi, näiteks name+shop@example.com. Sellele aadressile saadetud kirjad jõuavad ikka sinuni ja saad neid sildi järgi sortida."
+      },
+      "encryption_at_rest": {
+        "term": "Salvestatud andmete krüpteerimine",
+        "text": "Salvestatud andmete krüpteerimine tähendab, et server hoiab sinu kirju krüpteeritult. Keegi, kes serveri kettad kopeerib, ei saa neid lugeda."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) on kontaktide tavaline failivorming. Enamik aadressiraamatuid oskab seda importida ja eksportida."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) on kalendrite ja sündmuste tavaline failivorming. Enamik kalendrirakendusi oskab seda importida või selle tellida."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS on brauseri reegel. Server peab veebisaidi esmalt lubama, alles siis laseb brauser sellel veebisaidil serveriga suhelda."
+      }
+    }
   }
 }

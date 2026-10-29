@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} a modificat {count, plural, one {# setare} few {# setări} other {# de setări}}.",
     "command": "Opțiuni de accesibilitate",
     "command_keywords": "a11y accesibilitate dimensiune text contrast mișcare zoom"
+  },
+  "glossary": {
+    "what_is": "Ce înseamnă „{term}”?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP este modul modern prin care acest webmail comunică cu serverul dvs. de e-mail. Așa vă încarcă e-mailurile, calendarele și contactele."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP este modul obișnuit prin care aplicațiile de e-mail, precum Thunderbird sau Apple Mail, vă citesc e-mailurile de pe server. Mesajele rămân pe server."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP este modul obișnuit prin care aplicațiile de e-mail vă trimit mesajele prin serverul de e-mail."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "CalDAV permite altor aplicații, de exemplu calendarului de pe telefon, să afișeze și să modifice calendarele de pe serverul dvs. de e-mail."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "CardDAV permite altor aplicații, de exemplu contactelor de pe telefon, să afișeze și să modifice agendele de pe serverul dvs. de e-mail."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "WebDAV permite altor aplicații și managerului de fișiere de pe computer să deschidă fișierele de pe serverul dvs. de e-mail."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve este limbajul pe care serverul dvs. de e-mail îl folosește pentru regulile de filtrare. Serverul aplică regulile când sosesc e-mailuri noi, chiar dacă acest webmail este închis."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME folosește un certificat ca să vă semneze mesajele, astfel încât alții să vadă că sunt într-adevăr de la dvs., și ca să le cripteze, astfel încât doar destinatarul să le poată citi."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) este un alt mod de a semna și cripta e-mailuri. În loc de certificat, folosește o pereche de chei pe care o creați chiar dvs."
+      },
+      "public_key": {
+        "term": "Cheie publică",
+        "text": "Cheia publică este partea din cheia dvs. pe care o dați altora. Ei o folosesc ca să vă trimită e-mailuri criptate și să vă verifice semnătura. Cheia privată rămâne secretă."
+      },
+      "two_factor": {
+        "term": "Autentificare în doi pași",
+        "text": "Autentificarea în doi pași cere o a doua dovadă la conectare, de obicei un cod dintr-o aplicație de pe telefon. Cine vă știe doar parola nu poate intra."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "Un cod TOTP este un cod din 6 cifre dintr-o aplicație de autentificare de pe telefon. Se schimbă la fiecare 30 de secunde."
+      },
+      "app_password": {
+        "term": "Parolă pentru aplicații",
+        "text": "O parolă pentru aplicații este o parolă în plus pentru o singură aplicație de e-mail, de exemplu Thunderbird sau aplicația de e-mail de pe telefon. O puteți șterge oricând, fără să vă schimbați parola principală."
+      },
+      "access_token": {
+        "term": "Token de acces",
+        "text": "Un token de acces este un cod lung care permite unei aplicații să intre în contul dvs. în locul parolei. Îl creați în setările furnizorului dvs. de e-mail."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Cu OAuth (autentificare unică) vă conectați pe pagina de conectare a organizației dvs. Acest webmail nu vă vede niciodată parola."
+      },
+      "identity": {
+        "term": "Identitate",
+        "text": "O identitate este un nume cu o adresă de pe care puteți trimite e-mailuri. Fiecare identitate poate avea propria semnătură."
+      },
+      "delegation": {
+        "term": "Delegare",
+        "text": "Delegarea permite altei persoane să vă citească și să vă organizeze e-mailurile sau calendarul în locul dvs., de exemplu unui asistent."
+      },
+      "push": {
+        "term": "Notificări push",
+        "text": "Notificările push vă anunță când primiți e-mailuri noi, chiar dacă acest site este închis. Un relay push transmite alerta către browserul sau telefonul dvs. Nu vă vede niciodată e-mailurile."
+      },
+      "sync": {
+        "term": "Sincronizare",
+        "text": "Sincronizarea păstrează aceleași date pe toate dispozitivele dvs. O modificare făcută pe un dispozitiv apare și pe celelalte."
+      },
+      "cache": {
+        "term": "Cache",
+        "text": "Cache-ul este o copie a datelor dvs. în acest browser, ca webmailul să se încarce mai repede. Dacă îl reîmprospătați, datele se încarcă din nou de pe server. Pe server nu se șterge nimic."
+      },
+      "sub_addressing": {
+        "term": "Subadresare",
+        "text": "Subadresarea înseamnă să adăugați o etichetă la adresa dvs., de exemplu name+shop@example.com. E-mailurile trimise la această adresă ajung tot la dvs. și le puteți sorta după etichetă."
+      },
+      "encryption_at_rest": {
+        "term": "Criptarea datelor stocate",
+        "text": "Criptarea datelor stocate înseamnă că serverul vă păstrează e-mailurile criptate. Cine copiază discurile serverului nu le poate citi."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) este formatul de fișier obișnuit pentru contacte. Majoritatea agendelor îl pot importa și exporta."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) este formatul de fișier obișnuit pentru calendare și evenimente. Majoritatea aplicațiilor de calendar îl pot importa sau se pot abona la el."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS este o regulă a browserului. Un server trebuie mai întâi să permită un site, apoi browserul lasă acel site să comunice cu serverul."
+      }
+    }
   }
 }

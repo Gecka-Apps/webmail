@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} endret {count, plural, one {# innstilling} other {# innstillinger}}.",
     "command": "Alternativer for tilgjengelighet",
     "command_keywords": "a11y tilgjengelighet tekststørrelse kontrast bevegelse zoom"
+  },
+  "glossary": {
+    "what_is": "Hva betyr «{term}»?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP er den moderne måten denne webmailen snakker med e-postserveren din på. Slik henter den e-post, kalendere og kontakter."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP er den vanlige måten e-postapper som Thunderbird eller Apple Mail leser e-posten din fra serveren på. Meldingene blir liggende på serveren."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP er den vanlige måten e-postapper sender meldingene dine gjennom e-postserveren på."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "Med CalDAV kan andre apper, som kalenderen på telefonen din, vise og endre kalenderne på e-postserveren din."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "Med CardDAV kan andre apper, som kontaktene på telefonen din, vise og endre adressebøkene på e-postserveren din."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "Med WebDAV kan andre apper og filbehandleren på datamaskinen din åpne filene på e-postserveren din."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve er språket e-postserveren din bruker til filterregler. Serveren kjører reglene når ny e-post kommer, også når denne webmailen er lukket."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME bruker et sertifikat til å signere meldingene dine, så andre ser at de virkelig kommer fra deg, og til å kryptere dem, så bare mottakeren kan lese dem."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) er en annen måte å signere og kryptere e-post på. I stedet for et sertifikat bruker det et nøkkelpar som du lager selv."
+      },
+      "public_key": {
+        "term": "Offentlig nøkkel",
+        "text": "En offentlig nøkkel er den delen av nøkkelen din som du deler. Andre bruker den til å sende deg kryptert e-post og til å sjekke signaturen din. Den private nøkkelen din forblir hemmelig."
+      },
+      "two_factor": {
+        "term": "Tofaktorautentisering",
+        "text": "Tofaktorautentisering ber om et ekstra bevis når du logger inn, som regel en kode fra en app på telefonen din. Den som bare kjenner passordet ditt, kommer ikke inn."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "En TOTP-kode er en sekssifret kode fra en autentiseringsapp på telefonen din. Den endres hvert 30. sekund."
+      },
+      "app_password": {
+        "term": "App-passord",
+        "text": "Et app-passord er et ekstra passord for én e-postapp, som Thunderbird eller e-postappen på telefonen din. Du kan slette det når som helst uten å endre hovedpassordet ditt."
+      },
+      "access_token": {
+        "term": "Tilgangstoken",
+        "text": "Et tilgangstoken er en lang kode som slipper en app inn på kontoen din i stedet for passordet ditt. Du lager det i innstillingene hos e-postleverandøren din."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Med OAuth (enkel pålogging) logger du inn på påloggingssiden til din egen organisasjon. Denne webmailen ser aldri passordet ditt."
+      },
+      "identity": {
+        "term": "Identitet",
+        "text": "En identitet er et navn og en adresse du kan sende e-post fra. Hver identitet kan ha sin egen signatur."
+      },
+      "delegation": {
+        "term": "Stedfortredere",
+        "text": "En stedfortreder er en annen person som kan lese og ordne e-posten eller kalenderen din for deg, for eksempel en assistent."
+      },
+      "push": {
+        "term": "Push-varsler",
+        "text": "Push-varsler gir deg beskjed om ny e-post, også når denne nettsiden er lukket. Et push-relé sender varselet videre til nettleseren eller telefonen din. Det ser aldri e-posten din."
+      },
+      "sync": {
+        "term": "Synkronisering",
+        "text": "Synkronisering holder de samme dataene på alle enhetene dine. En endring på én enhet vises også på de andre."
+      },
+      "cache": {
+        "term": "Hurtigbuffer",
+        "text": "Hurtigbufferen er en kopi av dataene dine i denne nettleseren, slik at webmailen lastes raskere. Når du oppdaterer den, hentes dataene på nytt fra serveren. Ingenting blir slettet på serveren."
+      },
+      "sub_addressing": {
+        "term": "Underadressering",
+        "text": "Underadressering betyr at du legger til et merke i adressen din, som name+shop@example.com. E-post til den adressen kommer likevel fram til deg, og du kan sortere den etter merket."
+      },
+      "encryption_at_rest": {
+        "term": "Kryptering av lagrede data",
+        "text": "Kryptering av lagrede data betyr at serveren lagrer e-posten din kryptert. Den som kopierer serverens disker, kan ikke lese den."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) er det vanlige filformatet for kontakter. De fleste adressebøker kan importere og eksportere det."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) er det vanlige filformatet for kalendere og hendelser. De fleste kalenderapper kan importere det eller abonnere på det."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS er en regel i nettleseren. En server må tillate et nettsted før nettleseren lar det nettstedet snakke med serveren."
+      }
+    }
   }
 }

@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} ha canviat {count, plural, one {# opció} other {# opcions}}.",
     "command": "Opcions d'accessibilitat",
     "command_keywords": "a11y accessibilitat mida text contrast moviment zoom"
+  },
+  "glossary": {
+    "what_is": "Què vol dir «{term}»?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP és la manera moderna com aquest webmail parla amb el vostre servidor de correu. Així carrega el vostre correu, els calendaris i els contactes."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP és la manera habitual com les aplicacions de correu, com Thunderbird o Apple Mail, llegeixen el vostre correu del servidor. Els missatges es queden al servidor."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP és la manera habitual com les aplicacions de correu envien els vostres missatges a través del servidor de correu."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "CalDAV permet que altres aplicacions, com el calendari del vostre mòbil, mostrin i canviïn els calendaris del vostre servidor de correu."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "CardDAV permet que altres aplicacions, com els contactes del vostre mòbil, mostrin i canviïn les llibretes d'adreces del vostre servidor de correu."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "WebDAV permet que altres aplicacions i el gestor de fitxers del vostre ordinador obrin els fitxers del vostre servidor de correu."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve és el llenguatge que fa servir el vostre servidor de correu per a les regles de filtre. El servidor aplica les regles quan arriba correu nou, encara que aquest webmail estigui tancat."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME fa servir un certificat per signar els vostres missatges, perquè els altres vegin que de debò són vostres, i per xifrar-los, perquè només el destinatari els pugui llegir."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) és una altra manera de signar i xifrar el correu. En lloc d'un certificat, fa servir un parell de claus que creeu vosaltres mateixos."
+      },
+      "public_key": {
+        "term": "Clau pública",
+        "text": "Una clau pública és la part de la vostra clau que compartiu. Els altres la fan servir per enviar-vos correu xifrat i per comprovar la vostra signatura. La vostra clau privada es queda en secret."
+      },
+      "two_factor": {
+        "term": "Autenticació de dos factors",
+        "text": "L'autenticació de dos factors demana una segona prova quan inicieu la sessió, normalment un codi d'una aplicació del vostre mòbil. Qui només sap la vostra contrasenya no pot entrar."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "Un codi TOTP és un codi de 6 xifres d'una aplicació d'autenticació del vostre mòbil. Canvia cada 30 segons."
+      },
+      "app_password": {
+        "term": "Contrasenya d'aplicació",
+        "text": "Una contrasenya d'aplicació és una contrasenya addicional per a una sola aplicació de correu, com Thunderbird o l'aplicació de correu del vostre mòbil. La podeu suprimir quan vulgueu sense canviar la contrasenya principal."
+      },
+      "access_token": {
+        "term": "Token d'accés",
+        "text": "Un token d'accés és un codi llarg que permet que una aplicació entri al vostre compte en lloc de la contrasenya. El creeu a la configuració del vostre proveïdor de correu."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Amb OAuth (inici de sessió únic) inicieu la sessió a la pàgina d'accés de la vostra organització. Aquest webmail no veu mai la vostra contrasenya."
+      },
+      "identity": {
+        "term": "Identitat",
+        "text": "Una identitat és un nom i una adreça des de la qual podeu enviar correu. Cada identitat pot tenir la seva pròpia signatura."
+      },
+      "delegation": {
+        "term": "Delegació",
+        "text": "La delegació permet que una altra persona llegeixi i organitzi el vostre correu o el vostre calendari per vosaltres, per exemple un assistent."
+      },
+      "push": {
+        "term": "Notificacions push",
+        "text": "Les notificacions push us avisen del correu nou encara que aquest lloc web estigui tancat. Un repetidor push passa l'avís al vostre navegador o al vostre mòbil. No veu mai el vostre correu."
+      },
+      "sync": {
+        "term": "Sincronització",
+        "text": "La sincronització manté les mateixes dades a tots els vostres dispositius. Un canvi en un dispositiu també apareix als altres."
+      },
+      "cache": {
+        "term": "Memòria cau",
+        "text": "La memòria cau és una còpia de les vostres dades en aquest navegador, perquè el webmail es carregui més de pressa. Si l'actualitzeu, les dades es tornen a carregar des del servidor. No s'esborra res al servidor."
+      },
+      "sub_addressing": {
+        "term": "Subadreçament",
+        "text": "El subadreçament consisteix a afegir una etiqueta a la vostra adreça, com name+shop@example.com. El correu a aquesta adreça us continua arribant, i el podeu ordenar per l'etiqueta."
+      },
+      "encryption_at_rest": {
+        "term": "Xifratge en repòs",
+        "text": "El xifratge en repòs vol dir que el servidor desa el vostre correu xifrat. Qui copiï els discos del servidor no el pot llegir."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) és el format de fitxer habitual per als contactes. La majoria de llibretes d'adreces el poden importar i exportar."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) és el format de fitxer habitual per als calendaris i els esdeveniments. La majoria d'aplicacions de calendari el poden importar o s'hi poden subscriure."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS és una regla del navegador. Un servidor ha de permetre primer un lloc web perquè el navegador deixi que aquest lloc parli amb el servidor."
+      }
+    }
   }
 }

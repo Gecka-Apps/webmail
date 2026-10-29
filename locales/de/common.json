@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} hat {count, plural, one {# Einstellung} other {# Einstellungen}} geändert.",
     "command": "Optionen zur Barrierefreiheit",
     "command_keywords": "a11y Schriftgröße Kontrast Bewegung Zoom Barrierefreiheit"
+  },
+  "glossary": {
+    "what_is": "Was bedeutet „{term}“?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP ist die moderne Art, wie dieses Webmail mit Ihrem Mailserver spricht. Darüber lädt es Ihre E-Mails, Kalender und Kontakte."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP ist der übliche Weg, auf dem Mail-Apps wie Thunderbird oder Apple Mail Ihre E-Mails vom Server lesen. Die E-Mails bleiben auf dem Server."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP ist der übliche Weg, auf dem Mail-Apps Ihre E-Mails über den Mailserver versenden."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "Mit CalDAV können andere Apps, etwa der Kalender auf Ihrem Handy, die Kalender auf Ihrem Mailserver anzeigen und ändern."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "Mit CardDAV können andere Apps, etwa die Kontakte auf Ihrem Handy, die Adressbücher auf Ihrem Mailserver anzeigen und ändern."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "Mit WebDAV können andere Apps und der Dateimanager Ihres Computers die Dateien auf Ihrem Mailserver öffnen."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve ist die Sprache, in der Ihr Mailserver Filterregeln speichert. Der Server wendet die Regeln an, sobald neue E-Mails ankommen, auch wenn dieses Webmail geschlossen ist."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME nutzt ein Zertifikat, um Ihre E-Mails zu signieren, damit andere sehen, dass sie wirklich von Ihnen sind, und um sie zu verschlüsseln, damit nur der Empfänger sie lesen kann."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) ist eine andere Art, E-Mails zu signieren und zu verschlüsseln. Es nutzt ein Schlüsselpaar, das Sie selbst erstellen, statt eines Zertifikats."
+      },
+      "public_key": {
+        "term": "Öffentlicher Schlüssel",
+        "text": "Ein öffentlicher Schlüssel ist der Teil Ihres Schlüssels, den Sie weitergeben. Andere verschlüsseln damit E-Mails an Sie und prüfen Ihre Signatur. Ihr privater Schlüssel bleibt geheim."
+      },
+      "two_factor": {
+        "term": "Zwei-Faktor-Authentifizierung",
+        "text": "Bei der Zwei-Faktor-Authentifizierung brauchen Sie zur Anmeldung einen zweiten Nachweis, meist einen Code aus einer App auf Ihrem Handy. Wer nur Ihr Passwort kennt, kommt nicht hinein."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "Ein TOTP-Code ist ein 6-stelliger Code aus einer Authenticator-App auf Ihrem Handy. Er ändert sich alle 30 Sekunden."
+      },
+      "app_password": {
+        "term": "App-Passwort",
+        "text": "Ein App-Passwort ist ein zusätzliches Passwort für eine einzelne Mail-App, etwa Thunderbird oder die Mail-App auf Ihrem Handy. Sie können es jederzeit löschen, ohne Ihr Hauptpasswort zu ändern."
+      },
+      "access_token": {
+        "term": "Zugriffstoken",
+        "text": "Ein Zugriffstoken ist ein langer Code, mit dem eine App statt Ihres Passworts in Ihr Konto kommt. Sie erstellen es in den Einstellungen Ihres Mailanbieters."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Bei OAuth (Single Sign-On) melden Sie sich auf der Anmeldeseite Ihrer Organisation an. Dieses Webmail sieht Ihr Passwort nie."
+      },
+      "identity": {
+        "term": "Identität",
+        "text": "Eine Identität ist ein Name mit Adresse, von der Sie E-Mails senden können. Jede Identität kann eine eigene Signatur haben."
+      },
+      "delegation": {
+        "term": "Stellvertretung",
+        "text": "Mit einer Stellvertretung kann eine andere Person Ihre E-Mails oder Ihren Kalender für Sie lesen und ordnen, zum Beispiel eine Assistenz."
+      },
+      "push": {
+        "term": "Push-Benachrichtigungen",
+        "text": "Push-Benachrichtigungen melden neue E-Mails, auch wenn diese Website geschlossen ist. Ein Push-Relay leitet die Meldung an Ihren Browser oder Ihr Handy weiter. Es sieht Ihre E-Mails nie."
+      },
+      "sync": {
+        "term": "Synchronisierung",
+        "text": "Die Synchronisierung hält auf allen Ihren Geräten dieselben Daten. Eine Änderung auf einem Gerät erscheint auch auf den anderen."
+      },
+      "cache": {
+        "term": "Cache",
+        "text": "Der Cache ist eine Kopie Ihrer Daten in diesem Browser, damit das Webmail schneller lädt. Beim Aktualisieren werden die Daten neu vom Server geladen. Auf dem Server wird nichts gelöscht."
+      },
+      "sub_addressing": {
+        "term": "Sub-Adressierung",
+        "text": "Bei der Sub-Adressierung hängen Sie ein Stichwort an Ihre Adresse, etwa name+shop@example.com. E-Mails an diese Adresse kommen trotzdem bei Ihnen an, und Sie können sie nach dem Stichwort sortieren."
+      },
+      "encryption_at_rest": {
+        "term": "Verschlüsselung im Ruhezustand",
+        "text": "Verschlüsselung im Ruhezustand heißt, dass der Server Ihre E-Mails verschlüsselt speichert. Wer die Festplatten des Servers kopiert, kann sie nicht lesen."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) ist das übliche Dateiformat für Kontakte. Die meisten Adressbücher können es importieren und exportieren."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) ist das übliche Dateiformat für Kalender und Termine. Die meisten Kalender-Apps können es importieren oder abonnieren."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS ist eine Regel im Browser. Ein Server muss eine Website erst erlauben, bevor der Browser diese Website mit dem Server sprechen lässt."
+      }
+    }
   }
 }

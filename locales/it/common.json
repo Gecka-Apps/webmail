@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} ha modificato {count, plural, one {# impostazione} other {# impostazioni}}.",
     "command": "Opzioni di accessibilità",
     "command_keywords": "a11y accessibilità dimensione testo contrasto movimento zoom"
+  },
+  "glossary": {
+    "what_is": "Che cosa significa «{term}»?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP è il modo moderno in cui questa webmail comunica con il tuo server di posta. Così carica la tua posta, i calendari e i contatti."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP è il modo abituale in cui le app di posta come Thunderbird o Apple Mail leggono la tua posta dal server. I messaggi restano sul server."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP è il modo abituale in cui le app di posta inviano i tuoi messaggi tramite il server di posta."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "CalDAV permette ad altre app, come il calendario del tuo telefono, di mostrare e modificare i calendari sul tuo server di posta."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "CardDAV permette ad altre app, come i contatti del tuo telefono, di mostrare e modificare le rubriche sul tuo server di posta."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "WebDAV permette ad altre app e al gestore file del tuo computer di aprire i file sul tuo server di posta."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve è il linguaggio che il tuo server di posta usa per le regole dei filtri. Il server applica le regole quando arriva nuova posta, anche quando questa webmail è chiusa."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME usa un certificato per firmare i tuoi messaggi, così gli altri vedono che vengono davvero da te, e per cifrarli, così solo il destinatario può leggerli."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) è un altro modo per firmare e cifrare la posta. Invece di un certificato usa una coppia di chiavi che crei tu stesso."
+      },
+      "public_key": {
+        "term": "Chiave pubblica",
+        "text": "Una chiave pubblica è la parte della tua chiave che condividi. Gli altri la usano per inviarti posta cifrata e per verificare la tua firma. La tua chiave privata resta segreta."
+      },
+      "two_factor": {
+        "term": "Autenticazione a due fattori",
+        "text": "L'autenticazione a due fattori chiede una seconda prova quando accedi, di solito un codice da un'app sul tuo telefono. Chi conosce solo la tua password non può entrare."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "Un codice TOTP è un codice di 6 cifre generato da un'app di autenticazione sul tuo telefono. Cambia ogni 30 secondi."
+      },
+      "app_password": {
+        "term": "Password per le app",
+        "text": "Una password per le app è una password in più per una sola app di posta, come Thunderbird o l'app di posta del tuo telefono. Puoi eliminarla in qualsiasi momento senza cambiare la tua password principale."
+      },
+      "access_token": {
+        "term": "Token di accesso",
+        "text": "Un token di accesso è un codice lungo che fa entrare un'app nel tuo account al posto della password. Lo crei nelle impostazioni del tuo provider di posta."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Con OAuth (accesso unico) accedi dalla pagina di accesso della tua organizzazione. Questa webmail non vede mai la tua password."
+      },
+      "identity": {
+        "term": "Identità",
+        "text": "Un'identità è un nome con un indirizzo da cui puoi inviare posta. Ogni identità può avere la sua firma."
+      },
+      "delegation": {
+        "term": "Delega",
+        "text": "La delega permette a un'altra persona di leggere e organizzare la tua posta o il tuo calendario al posto tuo, per esempio un assistente."
+      },
+      "push": {
+        "term": "Notifiche push",
+        "text": "Le notifiche push ti avvisano della nuova posta anche quando questo sito è chiuso. Un relay push passa l'avviso al tuo browser o al tuo telefono. Non vede mai la tua posta."
+      },
+      "sync": {
+        "term": "Sincronizzazione",
+        "text": "La sincronizzazione mantiene gli stessi dati su tutti i tuoi dispositivi. Una modifica su un dispositivo compare anche sugli altri."
+      },
+      "cache": {
+        "term": "Cache",
+        "text": "La cache è una copia dei tuoi dati in questo browser, così la webmail si carica più in fretta. Aggiornarla ricarica i dati dal server. Sul server non viene eliminato nulla."
+      },
+      "sub_addressing": {
+        "term": "Sotto-indirizzamento",
+        "text": "Il sotto-indirizzamento consiste nell'aggiungere un'etichetta al tuo indirizzo, come name+shop@example.com. La posta inviata a quell'indirizzo arriva comunque a te, e puoi ordinarla in base all'etichetta."
+      },
+      "encryption_at_rest": {
+        "term": "Crittografia a riposo",
+        "text": "Crittografia a riposo significa che il server salva la tua posta in forma cifrata. Chi copia i dischi del server non può leggerla."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) è il formato di file comune per i contatti. La maggior parte delle rubriche può importarlo ed esportarlo."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) è il formato di file comune per calendari ed eventi. La maggior parte delle app di calendario può importarlo o abbonarsi."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS è una regola del browser. Un server deve autorizzare un sito web prima che il browser permetta a quel sito di comunicare con il server."
+      }
+    }
   }
 }

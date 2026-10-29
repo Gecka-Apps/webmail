@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} zmienia {count, plural, one {# ustawienie} few {# ustawienia} many {# ustawień} other {# ustawienia}}.",
     "command": "Opcje dostępności",
     "command_keywords": "a11y dostępność rozmiar tekstu kontrast ruch powiększenie"
+  },
+  "glossary": {
+    "what_is": "Co oznacza „{term}”?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP to nowoczesny sposób, w jaki ta poczta internetowa rozmawia z Twoim serwerem pocztowym. Dzięki niemu wczytuje Twoją pocztę, kalendarze i kontakty."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP to zwykły sposób, w jaki aplikacje pocztowe, takie jak Thunderbird czy Apple Mail, czytają Twoją pocztę z serwera. Wiadomości zostają na serwerze."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP to zwykły sposób, w jaki aplikacje pocztowe wysyłają Twoje wiadomości przez serwer pocztowy."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "CalDAV pozwala innym aplikacjom, na przykład kalendarzowi w telefonie, wyświetlać i zmieniać kalendarze na Twoim serwerze pocztowym."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "CardDAV pozwala innym aplikacjom, na przykład kontaktom w telefonie, wyświetlać i zmieniać książki adresowe na Twoim serwerze pocztowym."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "WebDAV pozwala innym aplikacjom i menedżerowi plików na Twoim komputerze otwierać pliki na Twoim serwerze pocztowym."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve to język, w którym Twój serwer pocztowy zapisuje reguły filtrów. Serwer stosuje reguły, gdy przychodzi nowa poczta, nawet gdy ta poczta internetowa jest zamknięta."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME używa certyfikatu, by podpisywać Twoje wiadomości, żeby inni widzieli, że naprawdę są od Ciebie, i by je szyfrować, żeby tylko odbiorca mógł je przeczytać."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) to inny sposób podpisywania i szyfrowania poczty. Zamiast certyfikatu używa pary kluczy, którą tworzysz samodzielnie."
+      },
+      "public_key": {
+        "term": "Klucz publiczny",
+        "text": "Klucz publiczny to część Twojego klucza, którą udostępniasz innym. Używają go, żeby wysyłać Ci zaszyfrowaną pocztę i sprawdzać Twój podpis. Twój klucz prywatny pozostaje tajny."
+      },
+      "two_factor": {
+        "term": "Uwierzytelnianie dwuskładnikowe",
+        "text": "Uwierzytelnianie dwuskładnikowe prosi przy logowaniu o drugi dowód, zwykle kod z aplikacji w telefonie. Ktoś, kto zna tylko Twoje hasło, nie zaloguje się."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "Kod TOTP to 6-cyfrowy kod z aplikacji uwierzytelniającej w telefonie. Zmienia się co 30 sekund."
+      },
+      "app_password": {
+        "term": "Hasło aplikacji",
+        "text": "Hasło aplikacji to dodatkowe hasło dla jednej aplikacji pocztowej, na przykład Thunderbirda lub aplikacji pocztowej w telefonie. Możesz je w każdej chwili usunąć bez zmiany głównego hasła."
+      },
+      "access_token": {
+        "term": "Token dostępu",
+        "text": "Token dostępu to długi kod, dzięki któremu aplikacja wchodzi na Twoje konto zamiast hasła. Tworzysz go w ustawieniach swojego dostawcy poczty."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Przy OAuth (logowaniu jednokrotnym) logujesz się na stronie logowania swojej organizacji. Ta poczta internetowa nigdy nie widzi Twojego hasła."
+      },
+      "identity": {
+        "term": "Tożsamość",
+        "text": "Tożsamość to imię i nazwisko z adresem, z którego możesz wysyłać pocztę. Każda tożsamość może mieć własny podpis."
+      },
+      "delegation": {
+        "term": "Pełnomocnicy",
+        "text": "Pełnomocnik to inna osoba, która może czytać i porządkować Twoją pocztę lub kalendarz za Ciebie, na przykład asystent."
+      },
+      "push": {
+        "term": "Powiadomienia push",
+        "text": "Powiadomienia push informują o nowej poczcie, nawet gdy ta strona jest zamknięta. Przekaźnik push przekazuje alert do Twojej przeglądarki lub telefonu. Nigdy nie widzi Twojej poczty."
+      },
+      "sync": {
+        "term": "Synchronizacja",
+        "text": "Synchronizacja utrzymuje te same dane na wszystkich Twoich urządzeniach. Zmiana na jednym urządzeniu pojawia się na pozostałych."
+      },
+      "cache": {
+        "term": "Pamięć podręczna",
+        "text": "Pamięć podręczna to kopia Twoich danych w tej przeglądarce, dzięki której poczta wczytuje się szybciej. Odświeżenie jej wczytuje dane z serwera od nowa. Na serwerze nic nie jest usuwane."
+      },
+      "sub_addressing": {
+        "term": "Subadresowanie",
+        "text": "Subadresowanie polega na dodaniu etykiety do adresu, na przykład name+shop@example.com. Poczta na ten adres nadal do Ciebie trafia i możesz ją sortować według etykiety."
+      },
+      "encryption_at_rest": {
+        "term": "Szyfrowanie danych w spoczynku",
+        "text": "Szyfrowanie danych w spoczynku oznacza, że serwer przechowuje Twoją pocztę w postaci zaszyfrowanej. Ktoś, kto skopiuje dyski serwera, nie może jej przeczytać."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) to popularny format plików z kontaktami. Większość książek adresowych potrafi go importować i eksportować."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) to popularny format plików z kalendarzami i wydarzeniami. Większość aplikacji kalendarza potrafi go importować lub go subskrybować."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS to reguła przeglądarki. Serwer musi najpierw zezwolić na stronę internetową, zanim przeglądarka pozwoli tej stronie rozmawiać z serwerem."
+      }
+    }
   }
 }

@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} alterou {count, plural, one {# configuração} other {# configurações}}.",
     "command": "Opções de acessibilidade",
     "command_keywords": "a11y acessibilidade tamanho texto contraste movimento zoom"
+  },
+  "glossary": {
+    "what_is": "O que significa “{term}”?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP é a forma moderna como este webmail conversa com o seu servidor de e-mail. É assim que ele carrega seus e-mails, calendários e contatos."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP é a forma comum como aplicativos de e-mail, como Thunderbird ou Apple Mail, leem seus e-mails no servidor. As mensagens continuam no servidor."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP é a forma comum como aplicativos de e-mail enviam suas mensagens pelo servidor de e-mail."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "O CalDAV permite que outros aplicativos, como o calendário do seu celular, mostrem e alterem os calendários do seu servidor de e-mail."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "O CardDAV permite que outros aplicativos, como os contatos do seu celular, mostrem e alterem os catálogos de endereços do seu servidor de e-mail."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "O WebDAV permite que outros aplicativos e o gerenciador de arquivos do seu computador abram os arquivos do seu servidor de e-mail."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve é a linguagem que o seu servidor de e-mail usa para regras de filtro. O servidor aplica as regras quando chegam novos e-mails, mesmo com este webmail fechado."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "O S/MIME usa um certificado para assinar suas mensagens, para que as pessoas vejam que elas vêm mesmo de você, e para criptografá-las, para que só o destinatário possa lê-las."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "O PGP (OpenPGP) é outra forma de assinar e criptografar e-mails. Em vez de um certificado, ele usa um par de chaves que você mesmo cria."
+      },
+      "public_key": {
+        "term": "Chave pública",
+        "text": "Uma chave pública é a parte da sua chave que você compartilha. Outras pessoas a usam para enviar e-mails criptografados para você e para verificar sua assinatura. Sua chave privada fica em segredo."
+      },
+      "two_factor": {
+        "term": "Autenticação de dois fatores",
+        "text": "A autenticação de dois fatores pede uma segunda prova quando você entra, normalmente um código de um aplicativo no seu celular. Quem só sabe a sua senha não consegue entrar."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "Um código TOTP é um código de 6 dígitos de um aplicativo autenticador no seu celular. Ele muda a cada 30 segundos."
+      },
+      "app_password": {
+        "term": "Senha de aplicativo",
+        "text": "Uma senha de aplicativo é uma senha extra para um único aplicativo de e-mail, como o Thunderbird ou o aplicativo de e-mail do seu celular. Você pode excluí-la a qualquer momento sem mudar sua senha principal."
+      },
+      "access_token": {
+        "term": "Token de acesso",
+        "text": "Um token de acesso é um código longo que deixa um aplicativo entrar na sua conta no lugar da senha. Você o cria nas configurações do seu provedor de e-mail."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Com OAuth (login único), você entra pela página de login da sua organização. Este webmail nunca vê a sua senha."
+      },
+      "identity": {
+        "term": "Identidade",
+        "text": "Uma identidade é um nome com um endereço de onde você pode enviar e-mails. Cada identidade pode ter sua própria assinatura."
+      },
+      "delegation": {
+        "term": "Delegação",
+        "text": "A delegação permite que outra pessoa leia e organize seus e-mails ou seu calendário por você, por exemplo um assistente."
+      },
+      "push": {
+        "term": "Notificações push",
+        "text": "As notificações push avisam sobre novos e-mails mesmo com este site fechado. Um relay push repassa o aviso para o seu navegador ou celular. Ele nunca vê seus e-mails."
+      },
+      "sync": {
+        "term": "Sincronização",
+        "text": "A sincronização mantém os mesmos dados em todos os seus dispositivos. Uma mudança em um dispositivo aparece nos outros."
+      },
+      "cache": {
+        "term": "Cache",
+        "text": "O cache é uma cópia dos seus dados neste navegador, para o webmail carregar mais rápido. Ao atualizá-lo, os dados são carregados de novo do servidor. Nada é excluído no servidor."
+      },
+      "sub_addressing": {
+        "term": "Subendereçamento",
+        "text": "Subendereçamento é acrescentar uma etiqueta ao seu endereço, como name+shop@example.com. Os e-mails para esse endereço continuam chegando para você, e você pode organizá-los pela etiqueta."
+      },
+      "encryption_at_rest": {
+        "term": "Criptografia em repouso",
+        "text": "Criptografia em repouso significa que o servidor guarda seus e-mails criptografados. Quem copiar os discos do servidor não consegue lê-los."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) é o formato de arquivo comum para contatos. A maioria dos catálogos de endereços consegue importá-lo e exportá-lo."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) é o formato de arquivo comum para calendários e eventos. A maioria dos aplicativos de calendário consegue importá-lo ou assiná-lo."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS é uma regra do navegador. Um servidor precisa permitir um site antes que o navegador deixe esse site conversar com o servidor."
+      }
+    }
   }
 }

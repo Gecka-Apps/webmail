@@ -5806,5 +5806,110 @@
     "preset_applied": "{name} a modifié {count, plural, one {# paramètre} many {# de paramètres} other {# paramètres}}.",
     "command": "Options d'accessibilité",
     "command_keywords": "a11y accessibilité taille texte contraste mouvement zoom"
+  },
+  "glossary": {
+    "what_is": "Que signifie « {term} » ?",
+    "terms": {
+      "jmap": {
+        "term": "JMAP",
+        "text": "JMAP est la méthode moderne qu'utilise ce webmail pour communiquer avec votre serveur de messagerie. Il charge ainsi vos e-mails, vos calendriers et vos contacts."
+      },
+      "imap": {
+        "term": "IMAP",
+        "text": "IMAP est la méthode habituelle qu'utilisent les applications de messagerie comme Thunderbird ou Apple Mail pour lire vos e-mails sur le serveur. Vos messages restent sur le serveur."
+      },
+      "smtp": {
+        "term": "SMTP",
+        "text": "SMTP est la méthode habituelle qu'utilisent les applications de messagerie pour envoyer vos messages via le serveur de messagerie."
+      },
+      "caldav": {
+        "term": "CalDAV",
+        "text": "CalDAV permet à d'autres applications, comme le calendrier de votre téléphone, d'afficher et de modifier les calendriers de votre serveur de messagerie."
+      },
+      "carddav": {
+        "term": "CardDAV",
+        "text": "CardDAV permet à d'autres applications, comme les contacts de votre téléphone, d'afficher et de modifier les carnets d'adresses de votre serveur de messagerie."
+      },
+      "webdav": {
+        "term": "WebDAV",
+        "text": "WebDAV permet à d'autres applications et au gestionnaire de fichiers de votre ordinateur d'ouvrir les fichiers de votre serveur de messagerie."
+      },
+      "sieve": {
+        "term": "Sieve",
+        "text": "Sieve est le langage que votre serveur de messagerie utilise pour les règles de filtrage. Le serveur applique les règles dès qu'un nouvel e-mail arrive, même quand ce webmail est fermé."
+      },
+      "smime": {
+        "term": "S/MIME",
+        "text": "S/MIME utilise un certificat pour signer vos messages, afin que l'on voie qu'ils viennent bien de vous, et pour les chiffrer, afin que seul le destinataire puisse les lire."
+      },
+      "pgp": {
+        "term": "PGP",
+        "text": "PGP (OpenPGP) est une autre façon de signer et de chiffrer les e-mails. Au lieu d'un certificat, il utilise une paire de clés que vous créez vous-même."
+      },
+      "public_key": {
+        "term": "Clé publique",
+        "text": "Une clé publique est la partie de votre clé que vous partagez. Les autres l'utilisent pour vous envoyer des e-mails chiffrés et pour vérifier votre signature. Votre clé privée reste secrète."
+      },
+      "two_factor": {
+        "term": "Authentification à deux facteurs",
+        "text": "L'authentification à deux facteurs demande une deuxième preuve à la connexion, en général un code d'une application sur votre téléphone. Quelqu'un qui connaît seulement votre mot de passe ne peut pas entrer."
+      },
+      "totp": {
+        "term": "TOTP",
+        "text": "Un code TOTP est un code à 6 chiffres donné par une application d'authentification sur votre téléphone. Il change toutes les 30 secondes."
+      },
+      "app_password": {
+        "term": "Mot de passe d'application",
+        "text": "Un mot de passe d'application est un mot de passe supplémentaire pour une seule application de messagerie, comme Thunderbird ou l'application de messagerie de votre téléphone. Vous pouvez le supprimer à tout moment sans changer votre mot de passe principal."
+      },
+      "access_token": {
+        "term": "Jeton d'accès",
+        "text": "Un jeton d'accès est un long code qui permet à une application d'accéder à votre compte à la place de votre mot de passe. Vous le créez dans les paramètres de votre fournisseur de messagerie."
+      },
+      "oauth": {
+        "term": "OAuth",
+        "text": "Avec OAuth (authentification unique), vous vous connectez sur la page de connexion de votre organisation. Ce webmail ne voit jamais votre mot de passe."
+      },
+      "identity": {
+        "term": "Identité",
+        "text": "Une identité est un nom et une adresse depuis lesquels vous pouvez envoyer des e-mails. Chaque identité peut avoir sa propre signature."
+      },
+      "delegation": {
+        "term": "Délégation",
+        "text": "La délégation permet à une autre personne de lire et de ranger vos e-mails ou votre calendrier à votre place, par exemple un assistant."
+      },
+      "push": {
+        "term": "Notifications push",
+        "text": "Les notifications push vous signalent les nouveaux e-mails même quand ce site est fermé. Un relais push transmet l'alerte à votre navigateur ou à votre téléphone. Il ne voit jamais vos e-mails."
+      },
+      "sync": {
+        "term": "Synchronisation",
+        "text": "La synchronisation garde les mêmes données sur tous vos appareils. Une modification faite sur un appareil apparaît sur les autres."
+      },
+      "cache": {
+        "term": "Cache",
+        "text": "Le cache est une copie de vos données dans ce navigateur, pour que le webmail se charge plus vite. L'actualiser recharge les données depuis le serveur. Rien n'est supprimé sur le serveur."
+      },
+      "sub_addressing": {
+        "term": "Sous-adressage",
+        "text": "Le sous-adressage consiste à ajouter un mot-clé à votre adresse, comme name+shop@example.com. Les e-mails envoyés à cette adresse vous parviennent quand même, et vous pouvez les trier selon ce mot-clé."
+      },
+      "encryption_at_rest": {
+        "term": "Chiffrement au repos",
+        "text": "Le chiffrement au repos signifie que le serveur stocke vos e-mails sous forme chiffrée. Quelqu'un qui copie les disques du serveur ne peut pas les lire."
+      },
+      "vcard": {
+        "term": "vCard",
+        "text": "vCard (.vcf) est le format de fichier courant pour les contacts. La plupart des carnets d'adresses peuvent l'importer et l'exporter."
+      },
+      "icalendar": {
+        "term": "iCalendar",
+        "text": "iCalendar (.ics) est le format de fichier courant pour les calendriers et les événements. La plupart des applications de calendrier peuvent l'importer ou s'y abonner."
+      },
+      "cors": {
+        "term": "CORS",
+        "text": "CORS est une règle du navigateur. Un serveur doit d'abord autoriser un site web avant que le navigateur laisse ce site communiquer avec le serveur."
+      }
+    }
   }
 }
