@@ -36,7 +36,8 @@ describe('SettingItem controls', () => {
         <p>rows</p>
       </SettingsSection>
     );
-    expect(screen.getByRole('heading', { name: /Delegates/ }).querySelector('[data-glossary-term="delegation"]')).not.toBeNull();
+    const heading = screen.getByRole('heading', { name: 'Delegates' });
+    expect(heading.parentElement?.querySelector('[data-glossary-term="delegation"]')).not.toBeNull();
   });
 
   it('lets an explicit ariaLabel win over the row label', () => {

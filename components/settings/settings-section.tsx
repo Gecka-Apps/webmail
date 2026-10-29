@@ -200,11 +200,14 @@ export function SettingsSection({ title, description, children, advanced, id, te
   return (
     <div data-search-label={title} data-settings-section={id} className="space-y-4 scroll-mt-4">
       <div>
-        <h3 className="text-lg font-medium text-foreground flex items-center gap-2">
-          {title}
+        <div className="flex items-center gap-2">
+          <h3 className="text-lg font-medium text-foreground flex items-center gap-2">
+            {title}
+            {advanced && <AdvancedBadge />}
+          </h3>
+          {/* Beside the heading, so its name in the headings list stays the title. */}
           {term && <TermInfo id={term} />}
-          {advanced && <AdvancedBadge />}
-        </h3>
+        </div>
         {description && (
           <p className="text-sm text-muted-foreground mt-1">{description}</p>
         )}

@@ -864,11 +864,13 @@ export function CalendarManagementSettings() {
       {/* iCal Subscriptions */}
       {icalSubscriptions.length > 0 && (
         <div className="mt-6 space-y-2">
-          <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
-            <Globe className="w-4 h-4 text-muted-foreground" />
-            {tSub('section_title')}
+          <div className="flex items-center gap-2">
+            <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
+              <Globe className="w-4 h-4 text-muted-foreground" />
+              {tSub('section_title')}
+            </h4>
             <TermInfo id="icalendar" />
-          </h4>
+          </div>
           {icalSubscriptions.map((sub) => {
             return (
               <div
