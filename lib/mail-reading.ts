@@ -206,7 +206,10 @@ export function mailOverrideCss(o: MailOverride): string {
     `${text}{font-family:inherit!important;font-size:1em!important;line-height:inherit!important;color:${fg}!important;background-color:transparent!important;background-image:none!important;text-shadow:none!important}`,
     'h1{font-size:1.6em!important}h2{font-size:1.4em!important}h3{font-size:1.2em!important}h4,h5,h6{font-size:1.05em!important}',
     o.minPx > 0 ? `small,sub,sup{font-size:max(0.85em,${o.minPx}px)!important}` : 'small,sub,sup{font-size:0.85em!important}',
+    // Underlined too: with the backgrounds gone, a link drawn as a button
+    // would otherwise look like plain text.
     `a[href],a[href] *{color:${link}!important}`,
+    'a[href]{text-decoration-line:underline!important}',
     // Never justified (the text pass catches justify from <style> rules).
     '[align="justify"],[style*="justify"]{text-align:start!important}',
   ];
