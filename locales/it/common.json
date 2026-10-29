@@ -1206,7 +1206,8 @@
       "general": "Generale",
       "organize": "Cartelle ed etichette",
       "addons": "Componenti aggiuntivi",
-      "backup": "Backup e ripristino"
+      "backup": "Backup e ripristino",
+      "accessibility": "Accessibilità"
     },
     "themes": {
       "title": "Temi",
@@ -1403,6 +1404,11 @@
         "dot": "Punto colorato",
         "tint": "Riga colorata",
         "none": "Niente"
+      },
+      "accessibility_link": {
+        "label": "Dimensione del testo e movimento",
+        "description": "Dimensione del testo, caratteri, spaziatura e movimento ridotto si trovano nella pagina Accessibilità.",
+        "button": "Accessibilità"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Immagini e contenuti esterni",
         "images_description": "Le immagini remote possono rivelare al mittente che hai aperto il messaggio.",
         "attachments": "Allegati"
+      },
+      "plain_text_font_link": {
+        "label": "Carattere della posta in testo semplice",
+        "description": "Si imposta insieme agli altri caratteri nella pagina Accessibilità.",
+        "button": "Accessibilità"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Risposte",
         "sending": "Prima dell'invio",
         "receipts": "Conferme di lettura"
+      }
+    },
+    "accessibility": {
+      "system": "Sistema",
+      "on": "Attivo",
+      "off": "Disattivo",
+      "presets": {
+        "title": "Preset",
+        "description": "Ogni preset modifica più impostazioni in una volta. Dopo diventano normali impostazioni che puoi cambiare una per una, e puoi combinare più preset.",
+        "applied": "{name} ha modificato {count, plural, one {# impostazione} other {# impostazioni}}:",
+        "nothing_changed": "{name}: le tue impostazioni sono già queste.",
+        "undo": "Annulla",
+        "show_button": "Mostra il pulsante Accessibilità nella barra di navigazione",
+        "screen-reader": {
+          "label": "Screen reader",
+          "description": "Nessun riquadro di lettura accanto all'elenco, nessun raggruppamento in conversazioni, l'anteprima viene letta con ogni messaggio."
+        },
+        "low-vision": {
+          "label": "Ipovisione",
+          "description": "Testo più grande, più contrasto, un contorno del focus più spesso, link sottolineati e un cursore grande."
+        },
+        "dyslexia": {
+          "label": "Dislessia",
+          "description": "Un carattere più leggibile, più spazio tra righe, lettere e parole e una colonna di lettura più stretta."
+        },
+        "focus": {
+          "label": "Concentrazione",
+          "description": "Layout semplice, nessuna anteprima né immagine del mittente, un punto al posto del numero di non letti, nessun movimento."
+        },
+        "motor": {
+          "label": "Tastiera e motricità",
+          "description": "Elementi più grandi, menu che si aprono con un clic, un pulsante azioni su ogni messaggio, notifiche più lunghe."
+        },
+        "motion": {
+          "label": "Movimento e crisi epilettiche",
+          "description": "Nessuna animazione, immagini animate in pausa, nessun pannello trasparente, nessun avviso lampeggiante."
+        },
+        "hearing": {
+          "label": "Sordità e ipoacusia",
+          "description": "Avvisi visivi al posto dei suoni e notifiche che restano finché non le chiudi."
+        }
+      },
+      "quick_button": {
+        "label": "Pulsante Accessibilità nella barra di navigazione",
+        "description": "Aggiunge un pulsante che apre da qualsiasi punto dimensione del testo, contrasto, movimento e preset. Alt+Maiusc+A apre lo stesso pannello, con o senza il pulsante."
+      },
+      "sections": {
+        "text": "Testo e lettura",
+        "contrast": "Colore e contrasto",
+        "motion": "Movimento",
+        "keyboard": "Tastiera e focus",
+        "pointer": "Puntatore e touch",
+        "mail": "Posta",
+        "timing": "Tempi ed errori",
+        "alerts": "Avvisi e distrazioni",
+        "screen_readers": "Screen reader"
+      },
+      "text_size": {
+        "label": "Dimensione del testo",
+        "description": "Ridimensiona il testo impostato nel browser. 100% è la dimensione del browser.",
+        "small": "87,5%",
+        "medium": "100%",
+        "large": "112,5%",
+        "x-large": "125%",
+        "xx-large": "150%",
+        "xxx-large": "175%",
+        "huge": "200%"
+      },
+      "font": {
+        "label": "Carattere",
+        "description": "Atkinson Hyperlegible e Lexend sono progettati per distinguere bene le lettere; OpenDyslexic aiuta alcune persone con dislessia. Coprono l'alfabeto latino.",
+        "default": "Carattere del tema"
+      },
+      "plain_text_font": {
+        "label": "Carattere della posta in testo semplice",
+        "description": "Per i messaggi inviati senza formattazione.",
+        "sans": "Come sopra",
+        "mono": "Spaziatura fissa"
+      },
+      "spacing": {
+        "normal": "Normale",
+        "relaxed": "Di più",
+        "loose": "Al massimo",
+        "wide": "Ampia",
+        "wider": "Più ampia"
+      },
+      "line_spacing": {
+        "label": "Interlinea",
+        "description": "Spazio tra le righe di testo."
+      },
+      "letter_spacing": {
+        "label": "Spaziatura tra le lettere",
+        "description": "Spazio tra le lettere."
+      },
+      "word_spacing": {
+        "label": "Spaziatura tra le parole",
+        "description": "Spazio tra le parole."
+      },
+      "paragraph_spacing": {
+        "label": "Spaziatura tra i paragrafi",
+        "description": "Spazio dopo ogni paragrafo."
+      },
+      "reading_width": {
+        "label": "Larghezza di lettura",
+        "description": "Limita le righe nei messaggi a circa 80 caratteri, così gli occhi non devono spostarsi troppo.",
+        "full": "Larghezza intera",
+        "comfortable": "Circa 80 caratteri"
+      },
+      "reading_mask": {
+        "label": "Maschera di lettura",
+        "description": "Oscura tutto in un messaggio tranne alcune righe intorno al puntatore, per aiutarti a non perdere il segno."
+      },
+      "plain_language": {
+        "label": "Linguaggio semplice",
+        "description": "Parole più semplici per impostazioni e messaggi di errore, e brevi spiegazioni dei termini tecnici. Disponibile in inglese e tedesco."
+      },
+      "contrast": {
+        "label": "Contrasto",
+        "description": "Più contrasto rende testo, bordi e contorno del focus più scuri o più chiari con qualsiasi tema e sottolinea i link. Sistema segue il tuo dispositivo.",
+        "more": "Più alto",
+        "normal": "Normale"
+      },
+      "transparency": {
+        "label": "Riduci la trasparenza",
+        "description": "Sfondi pieni al posto di pannelli trasparenti e sfocati."
+      },
+      "underline_links": {
+        "label": "Sottolinea i link",
+        "description": "Sottolinea i link nell'app e nei messaggi, così non dipendono solo dal colore."
+      },
+      "color_names": {
+        "label": "Mostra i nomi accanto ai colori",
+        "description": "Mostra i nomi delle etichette sui messaggi e dei calendari sugli eventi, invece dei soli pallini colorati."
+      },
+      "cvd_palette": {
+        "label": "Colori adatti al daltonismo",
+        "description": "Usa colori per etichette, cartelle e calendari che restano distinguibili con daltonismo rosso-verde o blu-giallo."
+      },
+      "theme_link": {
+        "label": "Tema e modalità colore",
+        "description": "Chiaro, scuro e i temi si trovano nella pagina Aspetto.",
+        "button": "Aspetto"
+      },
+      "reduce_motion": {
+        "label": "Riduci il movimento",
+        "description": "Disattiva pannelli scorrevoli, transizioni e scorrimento fluido, anche dentro i messaggi. Sistema segue il tuo dispositivo."
+      },
+      "pause_images": {
+        "label": "Metti in pausa le immagini animate",
+        "description": "Mostra il primo fotogramma delle GIF animate nei messaggi, con un pulsante per riprodurle. Sistema le mette in pausa quando il dispositivo chiede meno movimento."
+      },
+      "single_key_shortcuts": {
+        "label": "Scorciatoie a tasto singolo",
+        "description": "Scorciatoie come j, k, e e # che usano un solo tasto. Disattivale se usi l'input vocale o premi tasti per errore. Le scorciatoie con Ctrl o Alt continuano a funzionare."
+      },
+      "shortcut_list": {
+        "label": "Scorciatoie da tastiera",
+        "description": "Tutte le scorciatoie dell'app in cui ti trovi.",
+        "button": "Mostra le scorciatoie"
+      },
+      "focus_ring": {
+        "label": "Contorno del focus",
+        "description": "Il contorno intorno al pulsante, link o campo su cui si trova la tastiera.",
+        "normal": "Normale",
+        "thick": "Spesso",
+        "extra": "Molto spesso"
+      },
+      "focus_always": {
+        "label": "Mostra sempre il focus",
+        "description": "Mostra il contorno anche dopo i clic, non solo quando usi la tastiera."
+      },
+      "large_targets": {
+        "label": "Elementi grandi",
+        "description": "Rende pulsanti, caselle di controllo e altri controlli di almeno 44 pixel. Sistema lo attiva per gli schermi touch."
+      },
+      "large_cursor": {
+        "label": "Puntatore del mouse grande",
+        "description": "Un puntatore più grande dentro l'app."
+      },
+      "open_on_hover": {
+        "label": "Apri al passaggio del mouse",
+        "description": "Menu, anteprime e schede si aprono quando il puntatore si ferma sopra. Disattiva per aprirli solo con un clic."
+      },
+      "row_action_button": {
+        "label": "Pulsante azioni su ogni messaggio",
+        "description": "Mostra su ogni riga un pulsante che apre le azioni del messaggio, così non serve passare il mouse o fare clic destro."
+      },
+      "native_scrollbars": {
+        "label": "Barre di scorrimento più larghe",
+        "description": "Usa le barre di scorrimento del browser, che sono più larghe e più facili da afferrare."
+      },
+      "row_actions_link": {
+        "label": "Azioni al passaggio e allo scorrimento",
+        "description": "Quali azioni compaiono sulle righe dei messaggi.",
+        "button": "Elenco messaggi"
+      },
+      "mail_view": {
+        "label": "Mostra i messaggi come",
+        "description": "Il testo semplice elimina layout, colori e immagini di un messaggio. Puoi cambiare ogni messaggio nel lettore.",
+        "html": "Formattato",
+        "plain": "Testo semplice"
+      },
+      "mail_text_size": {
+        "label": "Dimensione del testo nei messaggi",
+        "description": "Dimensione del testo dentro i messaggi. Resta uguale per ogni messaggio.",
+        "follow": "Come l'app"
+      },
+      "mail_min_font_size": {
+        "label": "Testo minimo nei messaggi",
+        "description": "Ingrandisce il testo che un messaggio imposta più piccolo di questo valore.",
+        "none": "Nessun minimo",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Usa il mio carattere e i miei colori nei messaggi",
+        "description": "Sostituisce carattere, dimensione e colori del mittente con i tuoi. Questo può cambiare l'aspetto delle newsletter.",
+        "never": "Mai",
+        "high_contrast": "Con più contrasto",
+        "always": "Sempre"
+      },
+      "mail_fit_width": {
+        "label": "Adatta i messaggi larghi alla finestra",
+        "description": "Riduce i messaggi più larghi del riquadro di lettura invece di scorrere in orizzontale."
+      },
+      "read_aloud_rate": {
+        "label": "Velocità della lettura ad alta voce",
+        "description": "Quanto velocemente la lettura ad alta voce legge un messaggio."
+      },
+      "compose_font": {
+        "label": "Carattere per i nuovi messaggi",
+        "description": "Il carattere con cui iniziano i nuovi messaggi. I destinatari lo vedono se la loro app di posta lo ha.",
+        "default": "Predefinito",
+        "sans": "Senza grazie",
+        "serif": "Con grazie",
+        "mono": "Spaziatura fissa"
+      },
+      "compose_size": {
+        "label": "Dimensione del testo per i nuovi messaggi",
+        "description": "La dimensione con cui iniziano i nuovi messaggi.",
+        "default": "Predefinita"
+      },
+      "toast_duration": {
+        "label": "Durata delle notifiche",
+        "description": "Per quanto tempo restano sullo schermo messaggi come «Spostato in Archivio» con il loro pulsante Annulla.",
+        "until_closed": "Finché non le chiudo",
+        "seconds": "{seconds} secondi"
+      },
+      "confirm_send": {
+        "label": "Conferma prima di inviare",
+        "description": "Chiede conferma prima di inviare un messaggio."
+      },
+      "confirm_delete": {
+        "label": "Conferma prima di eliminare",
+        "description": "Chiede conferma prima di eliminare un messaggio, anche se è uno solo."
+      },
+      "confirm_archive": {
+        "label": "Conferma prima di archiviare",
+        "description": "Chiede conferma prima di archiviare un messaggio."
+      },
+      "send_warnings_link": {
+        "label": "Avvisi prima dell'invio",
+        "description": "Oggetto mancante, allegato dimenticato e testo segnaposto.",
+        "button": "Composizione"
+      },
+      "visual_alerts": {
+        "label": "Avvisi visivi",
+        "description": "Fa lampeggiare lentamente il titolo della scheda quando arriva nuova posta o un promemoria, e lascia i promemoria sullo schermo finché non li chiudi."
+      },
+      "unread_counts": {
+        "label": "Contatori dei non letti",
+        "description": "Come cartelle e barra di navigazione mostrano la posta non letta.",
+        "count": "Numero",
+        "dot": "Punto",
+        "hidden": "Nascosti"
+      },
+      "do_not_disturb": {
+        "label": "Non disturbare",
+        "description": "Nessun suono, notifica a comparsa o annuncio vocale per la nuova posta finché non lo disattivi."
+      },
+      "announce_new_mail": {
+        "label": "Annuncia la nuova posta",
+        "description": "Gli screen reader dicono quanti nuovi messaggi sono arrivati, senza leggerli."
+      },
+      "announce_preview": {
+        "label": "Leggi l'anteprima nell'elenco",
+        "description": "Gli screen reader leggono la prima riga di ogni messaggio insieme a mittente e oggetto."
+      },
+      "simple_mode": {
+        "label": "Modalità semplice",
+        "description": "Una sola colonna, meno pulsanti e nessun pannello laterale."
+      },
+      "simple_mode_paged": {
+        "label": "Scorri l'elenco dei messaggi per pagine",
+        "description": "Mostra l'elenco in pagine da 50 con Successivo e Precedente invece dello scorrimento infinito. Più facile con uno screen reader."
+      },
+      "reset": {
+        "title": "Ripristino",
+        "label": "Ripristina le impostazioni di accessibilità",
+        "description": "Riporta ogni impostazione di questa pagina al valore predefinito, o a quello scelto dalla tua organizzazione. Le impostazioni condivise, come la vista a conversazioni, restano invariate.",
+        "button": "Ripristina",
+        "done": "Impostazioni di accessibilità ripristinate."
       }
     }
   },

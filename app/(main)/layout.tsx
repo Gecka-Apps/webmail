@@ -17,6 +17,7 @@ import {
 import { withBasePath } from "@/lib/browser-navigation";
 import { locales, defaultLocale } from "@/i18n/routing";
 import { IS_LITE, LITE_MOUNT_GLOBAL } from "@/lib/lite";
+import { accessibilityBootScript } from "@/lib/accessibility-settings";
 import "../globals.css";
 import "../print.css";
 
@@ -312,6 +313,7 @@ export default async function RootLayout({
                 } catch (e) {
                   document.documentElement.classList.add('light');
                 }
+                ${accessibilityBootScript()}
               })();
             `,
           }}

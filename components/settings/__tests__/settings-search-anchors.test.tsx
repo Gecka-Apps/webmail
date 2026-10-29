@@ -39,6 +39,7 @@ const pages = {
   general: (await import('../general-settings')).GeneralSettings,
   notifications: (await import('../notification-settings')).NotificationSettings,
   appearance: (await import('../appearance-settings')).AppearanceSettings,
+  accessibility: (await import('../accessibility-settings')).AccessibilitySettings,
   message_list: (await import('../message-list-settings')).MessageListSettings,
   reading: (await import('../reading-settings')).ReadingSettings,
   composing: (await import('../composing-settings')).ComposingSettings,
@@ -72,6 +73,7 @@ const CLIENT = new Proxy({}, {
 // The settings tabs and the components settings-app.tsx draws for them.
 const TAB_PAGES: Record<string, string[]> = {
   account: ['account'], general: ['general'], notifications: ['notifications'], appearance: ['appearance'],
+  accessibility: ['accessibility'],
   message_list: ['message_list'], reading: ['reading'], composing: ['composing'], vacation: ['vacation'],
   filters: ['filters'], organize: ['organize'], security: ['security'], sharing: ['sharing'], recovery: ['recovery'], calendar: ['calendar', 'calendar2'],
   contacts: ['contacts', 'contacts2'], files: ['files'], addons: ['addons'], backup: ['backup'],

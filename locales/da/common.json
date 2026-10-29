@@ -1209,7 +1209,8 @@
       "general": "Generelt",
       "organize": "Mapper og tags",
       "addons": "Tilføjelser",
-      "backup": "Sikkerhedskopi og nulstilling"
+      "backup": "Sikkerhedskopi og nulstilling",
+      "accessibility": "Tilgængelighed"
     },
     "themes": {
       "title": "Temaer",
@@ -1406,6 +1407,11 @@
         "dot": "Farvet prik",
         "tint": "Farvet række",
         "none": "Intet"
+      },
+      "accessibility_link": {
+        "label": "Tekststørrelse og bevægelse",
+        "description": "Tekststørrelse, skrifttyper, afstande og reduceret bevægelse findes på siden Tilgængelighed.",
+        "button": "Tilgængelighed"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Billeder og eksternt indhold",
         "images_description": "Eksterne billeder kan afsløre over for afsenderen, at du har åbnet mailen.",
         "attachments": "Vedhæftninger"
+      },
+      "plain_text_font_link": {
+        "label": "Skrifttype til mails med ren tekst",
+        "description": "Indstilles sammen med de andre skrifttyper på siden Tilgængelighed.",
+        "button": "Tilgængelighed"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Svar",
         "sending": "Før afsendelse",
         "receipts": "Læsekvitteringer"
+      }
+    },
+    "accessibility": {
+      "system": "System",
+      "on": "Til",
+      "off": "Fra",
+      "presets": {
+        "title": "Forudindstillinger",
+        "description": "Hver forudindstilling ændrer flere indstillinger på én gang. Bagefter er det helt almindelige indstillinger, du kan ændre én ad gangen, og du kan kombinere forudindstillinger.",
+        "applied": "{name} har ændret {count, plural, one {# indstilling} other {# indstillinger}}:",
+        "nothing_changed": "{name}: dine indstillinger passer allerede.",
+        "undo": "Fortryd",
+        "show_button": "Vis tilgængelighedsknappen i navigationslinjen",
+        "screen-reader": {
+          "label": "Skærmlæser",
+          "description": "Intet læsepanel ved siden af listen, ingen gruppering i samtaler, og forhåndsvisningen læses op sammen med hver besked."
+        },
+        "low-vision": {
+          "label": "Nedsat syn",
+          "description": "Større tekst, mere kontrast, en tykkere fokusramme, understregede links og en stor markør."
+        },
+        "dyslexia": {
+          "label": "Ordblindhed",
+          "description": "En mere læsbar skrifttype, mere plads mellem linjer, bogstaver og ord og en smallere læsekolonne."
+        },
+        "focus": {
+          "label": "Fokus",
+          "description": "Enkelt layout, ingen forhåndsvisninger eller afsenderbilleder, en prik i stedet for antal ulæste og ingen bevægelse."
+        },
+        "motor": {
+          "label": "Tastatur og motorik",
+          "description": "Større knapper, menuer der åbner ved klik, en handlingsknap på hver besked og notifikationer, der vises længere."
+        },
+        "motion": {
+          "label": "Ingen bevægelse og anfaldssikker",
+          "description": "Ingen animationer, animerede billeder sat på pause, ingen gennemsigtige paneler og ingen blinkende advarsler."
+        },
+        "hearing": {
+          "label": "Døve og hørehæmmede",
+          "description": "Visuelle advarsler i stedet for lyde og notifikationer, der bliver, indtil du lukker dem."
+        }
+      },
+      "quick_button": {
+        "label": "Tilgængelighedsknap i navigationslinjen",
+        "description": "Tilføjer en knap, der åbner tekststørrelse, kontrast, bevægelse og forudindstillingerne fra alle steder. Alt+Skift+A åbner det samme panel, med eller uden knappen."
+      },
+      "sections": {
+        "text": "Tekst og læsning",
+        "contrast": "Farver og kontrast",
+        "motion": "Bevægelse",
+        "keyboard": "Tastatur og fokus",
+        "pointer": "Markør og touch",
+        "mail": "Mail",
+        "timing": "Tid og fejl",
+        "alerts": "Advarsler og forstyrrelser",
+        "screen_readers": "Skærmlæsere"
+      },
+      "text_size": {
+        "label": "Tekststørrelse",
+        "description": "Skalerer den tekst, du har indstillet i din browser. 100 % er din browsers størrelse.",
+        "small": "87,5 %",
+        "medium": "100 %",
+        "large": "112,5 %",
+        "x-large": "125 %",
+        "xx-large": "150 %",
+        "xxx-large": "175 %",
+        "huge": "200 %"
+      },
+      "font": {
+        "label": "Skrifttype",
+        "description": "Atkinson Hyperlegible og Lexend er lavet, så bogstaverne er lette at kende fra hinanden; OpenDyslexic hjælper nogle med ordblindhed. De dækker latinsk skrift.",
+        "default": "Temaets skrifttype"
+      },
+      "plain_text_font": {
+        "label": "Skrifttype til mails med ren tekst",
+        "description": "Til beskeder, der er sendt uden formatering.",
+        "sans": "Som ovenfor",
+        "mono": "Skrifttype med fast bredde"
+      },
+      "spacing": {
+        "normal": "Normal",
+        "relaxed": "Mere",
+        "loose": "Mest",
+        "wide": "Bred",
+        "wider": "Bredere"
+      },
+      "line_spacing": {
+        "label": "Linjeafstand",
+        "description": "Afstand mellem tekstlinjer."
+      },
+      "letter_spacing": {
+        "label": "Bogstavafstand",
+        "description": "Afstand mellem bogstaver."
+      },
+      "word_spacing": {
+        "label": "Ordafstand",
+        "description": "Afstand mellem ord."
+      },
+      "paragraph_spacing": {
+        "label": "Afsnitsafstand",
+        "description": "Afstand efter hvert afsnit."
+      },
+      "reading_width": {
+        "label": "Læsebredde",
+        "description": "Holder linjerne i beskeder på omkring 80 tegn, så dine øjne ikke skal flytte sig så langt.",
+        "full": "Fuld bredde",
+        "comfortable": "Omkring 80 tegn"
+      },
+      "reading_mask": {
+        "label": "Læsemaske",
+        "description": "Gør alt i en besked mørkt undtagen nogle få linjer omkring markøren, så du ikke mister pladsen."
+      },
+      "plain_language": {
+        "label": "Letforståeligt sprog",
+        "description": "Enklere formuleringer i indstillinger og fejlmeddelelser og korte forklaringer af tekniske begreber. Findes på engelsk og tysk."
+      },
+      "contrast": {
+        "label": "Kontrast",
+        "description": "Mere kontrast gør tekst, kanter og fokusramme mørkere eller lysere i ethvert tema og understreger links. System følger din enhed.",
+        "more": "Mere",
+        "normal": "Normal"
+      },
+      "transparency": {
+        "label": "Reducér gennemsigtighed",
+        "description": "Solide baggrunde i stedet for gennemsigtige og slørede paneler."
+      },
+      "underline_links": {
+        "label": "Understreg links",
+        "description": "Understreger links i appen og i beskeder, så de ikke kun kendes på farven."
+      },
+      "color_names": {
+        "label": "Vis navne ved siden af farver",
+        "description": "Viser tagnavne på beskeder og kalendernavne på begivenheder i stedet for kun farvede prikker."
+      },
+      "cvd_palette": {
+        "label": "Farver til farveblinde",
+        "description": "Bruger farver til tags, mapper og kalendere, som kan skelnes ved rød-grøn eller blå-gul farveblindhed."
+      },
+      "theme_link": {
+        "label": "Tema og farvetilstand",
+        "description": "Lys, mørk og temaerne findes på siden Udseende.",
+        "button": "Udseende"
+      },
+      "reduce_motion": {
+        "label": "Reducér bevægelse",
+        "description": "Slår glidende paneler, overgange og blød rulning fra, også inde i beskeder. System følger din enhed."
+      },
+      "pause_images": {
+        "label": "Sæt animerede billeder på pause",
+        "description": "Viser første billede af animerede GIF'er i beskeder med en knap til at afspille dem. System sætter dem på pause, når din enhed beder om mindre bevægelse."
+      },
+      "single_key_shortcuts": {
+        "label": "Genveje med én tast",
+        "description": "Genveje som j, k, e og #, der bruger én tast. Slå dem fra, hvis du bruger stemmestyring eller kommer til at trykke på taster. Genveje med Ctrl eller Alt virker stadig."
+      },
+      "shortcut_list": {
+        "label": "Tastaturgenveje",
+        "description": "Alle genveje i den app, du er i.",
+        "button": "Vis genveje"
+      },
+      "focus_ring": {
+        "label": "Fokusramme",
+        "description": "Rammen om den knap, det link eller det felt, tastaturet står på.",
+        "normal": "Normal",
+        "thick": "Tyk",
+        "extra": "Ekstra tyk"
+      },
+      "focus_always": {
+        "label": "Vis altid fokus",
+        "description": "Viser rammen også efter klik, ikke kun når du bruger tastaturet."
+      },
+      "large_targets": {
+        "label": "Store knapper",
+        "description": "Gør knapper, afkrydsningsfelter og andre kontrolelementer mindst 44 pixel store. System slår det til på touchskærme."
+      },
+      "large_cursor": {
+        "label": "Stor musemarkør",
+        "description": "En større markør i appen."
+      },
+      "open_on_hover": {
+        "label": "Åbn ved hover",
+        "description": "Menuer, forhåndsvisninger og kort åbner, når markøren hviler på dem. Slå fra for kun at åbne dem ved at klikke."
+      },
+      "row_action_button": {
+        "label": "Handlingsknap på hver besked",
+        "description": "Viser en knap på hver række, der åbner beskedens handlinger, så du hverken skal holde markøren over den eller højreklikke."
+      },
+      "native_scrollbars": {
+        "label": "Bredere rullepaneler",
+        "description": "Bruger din browsers egne rullepaneler, som er bredere og lettere at gribe fat i."
+      },
+      "row_actions_link": {
+        "label": "Handlinger ved hover og swipe",
+        "description": "Hvilke handlinger der vises på beskedrækkerne.",
+        "button": "Beskedliste"
+      },
+      "mail_view": {
+        "label": "Vis beskeder som",
+        "description": "Ren tekst fjerner beskedens layout, farver og billeder. Du kan skifte for hver enkelt besked i læseren.",
+        "html": "Formateret",
+        "plain": "Ren tekst"
+      },
+      "mail_text_size": {
+        "label": "Tekststørrelse i beskeder",
+        "description": "Tekststørrelsen inde i beskeder. Den er den samme for alle beskeder.",
+        "follow": "Som appen"
+      },
+      "mail_min_font_size": {
+        "label": "Mindste tekst i beskeder",
+        "description": "Gør tekst større, hvis en besked sætter den mindre end dette.",
+        "none": "Intet minimum",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Brug min skrifttype og mine farver i beskeder",
+        "description": "Erstatter afsenderens skrifttype, størrelse og farver med dine egne. Nyhedsbreve kan se anderledes ud.",
+        "never": "Aldrig",
+        "high_contrast": "Med mere kontrast",
+        "always": "Altid"
+      },
+      "mail_fit_width": {
+        "label": "Tilpas brede beskeder til vinduet",
+        "description": "Gør beskeder, der er bredere end læsepanelet, mindre i stedet for at rulle til siden."
+      },
+      "read_aloud_rate": {
+        "label": "Oplæsningshastighed",
+        "description": "Hvor hurtigt Oplæs læser en besked op."
+      },
+      "compose_font": {
+        "label": "Skrifttype til nye beskeder",
+        "description": "Den skrifttype, nye beskeder starter med. Modtagere ser den, hvis deres mailprogram har den.",
+        "default": "Standard",
+        "sans": "Sans serif",
+        "serif": "Serif",
+        "mono": "Fast bredde"
+      },
+      "compose_size": {
+        "label": "Tekststørrelse til nye beskeder",
+        "description": "Den størrelse, nye beskeder starter med.",
+        "default": "Standard"
+      },
+      "toast_duration": {
+        "label": "Visningstid for notifikationer",
+        "description": "Hvor længe notifikationer som »Flyttet til Arkiv« med knappen Fortryd bliver på skærmen.",
+        "until_closed": "Indtil jeg lukker dem",
+        "seconds": "{seconds} sekunder"
+      },
+      "confirm_send": {
+        "label": "Bekræft før afsendelse",
+        "description": "Spørger, før en besked sendes."
+      },
+      "confirm_delete": {
+        "label": "Bekræft før sletning",
+        "description": "Spørger, før en besked slettes, også ved enkelte beskeder."
+      },
+      "confirm_archive": {
+        "label": "Bekræft før arkivering",
+        "description": "Spørger, før en besked arkiveres."
+      },
+      "send_warnings_link": {
+        "label": "Advarsler før afsendelse",
+        "description": "Manglende emne, glemt vedhæftning og pladsholdertekst.",
+        "button": "Skrivning"
+      },
+      "visual_alerts": {
+        "label": "Visuelle advarsler",
+        "description": "Får fanens titel til at blinke langsomt, når der kommer ny mail eller en påmindelse, og lader påmindelser blive på skærmen, indtil du lukker dem."
+      },
+      "unread_counts": {
+        "label": "Antal ulæste",
+        "description": "Hvordan mapper og navigationslinjen viser ulæste mails.",
+        "count": "Tal",
+        "dot": "Prik",
+        "hidden": "Skjult"
+      },
+      "do_not_disturb": {
+        "label": "Forstyr ikke",
+        "description": "Ingen lyde, pop op-notifikationer eller oplæste beskeder om nye mails, indtil du slår det fra."
+      },
+      "announce_new_mail": {
+        "label": "Meddel nye mails",
+        "description": "Skærmlæsere siger, hvor mange nye beskeder der er kommet, uden at læse dem op."
+      },
+      "announce_preview": {
+        "label": "Læs forhåndsvisningen i listen op",
+        "description": "Skærmlæsere læser første linje af hver besked op sammen med afsender og emne."
+      },
+      "simple_mode": {
+        "label": "Enkel tilstand",
+        "description": "Én kolonne, færre knapper og ingen sidepaneler."
+      },
+      "simple_mode_paged": {
+        "label": "Bladr i beskedlisten",
+        "description": "Viser listen på sider med 50 beskeder og Næste og Forrige i stedet for endeløs rulning. Nemmere med en skærmlæser."
+      },
+      "reset": {
+        "title": "Nulstil",
+        "label": "Nulstil tilgængelighedsindstillinger",
+        "description": "Sætter alle indstillinger på denne side tilbage til standard eller til det, din organisation har valgt. Delte indstillinger som samtalevisning forbliver, som de er.",
+        "button": "Nulstil",
+        "done": "Tilgængelighedsindstillingerne er nulstillet."
       }
     }
   },

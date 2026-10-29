@@ -1206,7 +1206,8 @@
       "general": "Vispārīgi",
       "organize": "Mapes un tagi",
       "addons": "Papildinājumi",
-      "backup": "Dublēšana un atiestatīšana"
+      "backup": "Dublēšana un atiestatīšana",
+      "accessibility": "Pieejamība"
     },
     "themes": {
       "title": "Tēmas",
@@ -1403,6 +1404,11 @@
         "dot": "Krāsains punkts",
         "tint": "Tonēta rinda",
         "none": "Nekas"
+      },
+      "accessibility_link": {
+        "label": "Teksta izmērs un kustība",
+        "description": "Teksta izmērs, fonti, atstarpes un samazināta kustība ir lapā Pieejamība.",
+        "button": "Pieejamība"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Attēli un ārējs saturs",
         "images_description": "Attālie attēli var atklāt sūtītājam, ka esat atvēris ziņu.",
         "attachments": "Pielikumi"
+      },
+      "plain_text_font_link": {
+        "label": "Vienkārša teksta pasta fonts",
+        "description": "Tiek iestatīts kopā ar pārējiem fontiem lapā Pieejamība.",
+        "button": "Pieejamība"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Atbildēšana",
         "sending": "Pirms sūtīšanas",
         "receipts": "Lasīšanas apstiprinājumi"
+      }
+    },
+    "accessibility": {
+      "system": "Sistēma",
+      "on": "Ieslēgts",
+      "off": "Izslēgts",
+      "presets": {
+        "title": "Sagataves",
+        "description": "Katra sagatave vienlaikus maina vairākus iestatījumus. Pēc tam tie ir parasti iestatījumi, ko varat mainīt pa vienam, un sagataves var apvienot.",
+        "applied": "{name} mainīja {count, plural, zero {# iestatījumu} one {# iestatījumu} other {# iestatījumus}}:",
+        "nothing_changed": "{name}: jūsu iestatījumi jau atbilst.",
+        "undo": "Atsaukt",
+        "show_button": "Rādīt pieejamības pogu navigācijas joslā",
+        "screen-reader": {
+          "label": "Ekrāna lasītājs",
+          "description": "Nav lasīšanas rūts blakus sarakstam, nav grupēšanas sarunās, priekšskatījums tiek nolasīts kopā ar katru ziņu."
+        },
+        "low-vision": {
+          "label": "Redzes traucējumi",
+          "description": "Lielāks teksts, lielāks kontrasts, biezāks fokusa apvadījums, pasvītrotas saites un liels kursors."
+        },
+        "dyslexia": {
+          "label": "Disleksija",
+          "description": "Labāk lasāms fonts, lielākas atstarpes starp rindām, burtiem un vārdiem, kā arī šaurāka lasīšanas kolonna."
+        },
+        "focus": {
+          "label": "Koncentrēšanās",
+          "description": "Vienkāršs izkārtojums, nav priekšskatījumu un sūtītāju attēlu, punkts nelasīto skaita vietā, nav kustību."
+        },
+        "motor": {
+          "label": "Tastatūra un kustību traucējumi",
+          "description": "Lielāki elementi, izvēlnes, kas atveras ar klikšķi, darbību poga pie katras ziņas, ilgāk redzami paziņojumi."
+        },
+        "motion": {
+          "label": "Kustības un lēkmju drošība",
+          "description": "Nav animāciju, animētie attēli apturēti, nav caurspīdīgu paneļu, nav mirgojošu brīdinājumu."
+        },
+        "hearing": {
+          "label": "Nedzirdīgie un vājdzirdīgie",
+          "description": "Vizuāli brīdinājumi skaņu vietā un paziņojumi, kas paliek, līdz tos aizverat."
+        }
+      },
+      "quick_button": {
+        "label": "Pieejamības poga navigācijas joslā",
+        "description": "Pievieno pogu, kas jebkurā vietā atver teksta izmēru, kontrastu, kustību un sagataves. Alt+Shift+A atver to pašu paneli ar pogu vai bez tās."
+      },
+      "sections": {
+        "text": "Teksts un lasīšana",
+        "contrast": "Krāsa un kontrasts",
+        "motion": "Kustība",
+        "keyboard": "Tastatūra un fokuss",
+        "pointer": "Rādītājs un pieskārieni",
+        "mail": "Pasts",
+        "timing": "Laiks un kļūdas",
+        "alerts": "Brīdinājumi un traucēkļi",
+        "screen_readers": "Ekrāna lasītāji"
+      },
+      "text_size": {
+        "label": "Teksta izmērs",
+        "description": "Maina teksta izmēru, ko esat iestatījis pārlūkā. 100 % ir pārlūka izmērs.",
+        "small": "87,5 %",
+        "medium": "100 %",
+        "large": "112,5 %",
+        "x-large": "125 %",
+        "xx-large": "150 %",
+        "xxx-large": "175 %",
+        "huge": "200 %"
+      },
+      "font": {
+        "label": "Fonts",
+        "description": "Atkinson Hyperlegible un Lexend ir veidoti tā, lai burtus varētu labi atšķirt; OpenDyslexic palīdz dažiem cilvēkiem ar disleksiju. Tie aptver latīņu rakstu.",
+        "default": "Motīva fonts"
+      },
+      "plain_text_font": {
+        "label": "Vienkārša teksta pasta fonts",
+        "description": "Ziņām, kas nosūtītas bez formatējuma.",
+        "sans": "Tāpat kā iepriekš",
+        "mono": "Vienplatuma"
+      },
+      "spacing": {
+        "normal": "Parasta",
+        "relaxed": "Lielāka",
+        "loose": "Lielākā",
+        "wide": "Plata",
+        "wider": "Platāka"
+      },
+      "line_spacing": {
+        "label": "Rindstarpas",
+        "description": "Atstarpe starp teksta rindām."
+      },
+      "letter_spacing": {
+        "label": "Burtstarpas",
+        "description": "Atstarpe starp burtiem."
+      },
+      "word_spacing": {
+        "label": "Vārdstarpas",
+        "description": "Atstarpe starp vārdiem."
+      },
+      "paragraph_spacing": {
+        "label": "Atstarpe starp rindkopām",
+        "description": "Atstarpe pēc katras rindkopas."
+      },
+      "reading_width": {
+        "label": "Lasīšanas platums",
+        "description": "Ierobežo rindas ziņās līdz aptuveni 80 rakstzīmēm, lai acīm nebūtu tālu jāpārvietojas.",
+        "full": "Pilns platums",
+        "comfortable": "Aptuveni 80 rakstzīmes"
+      },
+      "reading_mask": {
+        "label": "Lasīšanas maska",
+        "description": "Aptumšo visu ziņā, izņemot dažas rindas ap rādītāju, lai nepazaudētu vietu, kur lasāt."
+      },
+      "plain_language": {
+        "label": "Vienkārša valoda",
+        "description": "Vienkāršāki formulējumi iestatījumos un kļūdu ziņojumos un īsi skaidrojumi tehniskiem terminiem. Pieejama angļu un vācu valodā."
+      },
+      "contrast": {
+        "label": "Kontrasts",
+        "description": "Lielāks kontrasts padara tekstu, apmales un fokusa apvadījumu tumšāku vai gaišāku jebkurā motīvā un pasvītro saites. Sistēma seko jūsu ierīcei.",
+        "more": "Lielāks",
+        "normal": "Parasts"
+      },
+      "transparency": {
+        "label": "Samazināt caurspīdīgumu",
+        "description": "Necaurspīdīgi foni caurspīdīgu un izpludinātu paneļu vietā."
+      },
+      "underline_links": {
+        "label": "Pasvītrot saites",
+        "description": "Pasvītro saites lietotnē un ziņās, lai tās nebūtu atkarīgas tikai no krāsas."
+      },
+      "color_names": {
+        "label": "Rādīt nosaukumus līdzās krāsām",
+        "description": "Rāda tagu nosaukumus pie ziņām un kalendāru nosaukumus pie notikumiem, nevis tikai krāsainus punktus."
+      },
+      "cvd_palette": {
+        "label": "Krāsas krāsu aklumam",
+        "description": "Izmanto tagu, mapju un kalendāru krāsas, kas paliek atšķirīgas arī sarkani zaļā vai zili dzeltenā krāsu akluma gadījumā."
+      },
+      "theme_link": {
+        "label": "Motīvs un krāsu režīms",
+        "description": "Gaišais, tumšais režīms un motīvi ir lapā Izskats.",
+        "button": "Izskats"
+      },
+      "reduce_motion": {
+        "label": "Samazināt kustību",
+        "description": "Izslēdz slīdošus paneļus, pārejas un vienmērīgu ritināšanu, arī ziņu iekšpusē. Sistēma seko jūsu ierīcei."
+      },
+      "pause_images": {
+        "label": "Apturēt animētos attēlus",
+        "description": "Ziņās rāda animēto GIF pirmo kadru ar pogu to atskaņošanai. Sistēma tos aptur, ja ierīce prasa mazāk kustību."
+      },
+      "single_key_shortcuts": {
+        "label": "Īsinājumtaustiņi ar vienu taustiņu",
+        "description": "Īsinājumtaustiņi, piemēram, j, k, e un #, kam vajag tikai vienu taustiņu. Izslēdziet tos, ja izmantojat balss ievadi vai nejauši nospiežat taustiņus. Īsinājumtaustiņi ar Ctrl vai Alt turpina darboties."
+      },
+      "shortcut_list": {
+        "label": "Tastatūras īsinājumtaustiņi",
+        "description": "Visi īsinājumtaustiņi lietotnei, kurā atrodaties.",
+        "button": "Rādīt īsinājumtaustiņus"
+      },
+      "focus_ring": {
+        "label": "Fokusa apvadījums",
+        "description": "Apvadījums ap pogu, saiti vai lauku, kurā atrodas tastatūra.",
+        "normal": "Parasts",
+        "thick": "Biezs",
+        "extra": "Ļoti biezs"
+      },
+      "focus_always": {
+        "label": "Vienmēr rādīt fokusu",
+        "description": "Rāda apvadījumu arī pēc klikšķiem, ne tikai tad, kad lietojat tastatūru."
+      },
+      "large_targets": {
+        "label": "Lieli elementi",
+        "description": "Padara pogas, izvēles rūtiņas un citas vadīklas vismaz 44 pikseļus lielas. Sistēma to ieslēdz skārienekrāniem."
+      },
+      "large_cursor": {
+        "label": "Liels peles rādītājs",
+        "description": "Lielāks rādītājs lietotnē."
+      },
+      "open_on_hover": {
+        "label": "Atvērt, uzvelkot rādītāju",
+        "description": "Izvēlnes, priekšskatījumi un kartītes atveras, kad rādītājs uz tām apstājas. Izslēdziet, lai tās atvērtos tikai ar klikšķi."
+      },
+      "row_action_button": {
+        "label": "Darbību poga pie katras ziņas",
+        "description": "Katrā rindā rāda pogu, kas atver ziņas darbības, lai nevajadzētu uzvilkt rādītāju vai klikšķināt ar labo pogu."
+      },
+      "native_scrollbars": {
+        "label": "Platākas ritjoslas",
+        "description": "Izmanto pārlūka paša ritjoslas, kas ir platākas un vieglāk satveramas."
+      },
+      "row_actions_link": {
+        "label": "Darbības, uzvelkot rādītāju un velkot",
+        "description": "Kādas darbības parādās ziņu rindās.",
+        "button": "Ziņu saraksts"
+      },
+      "mail_view": {
+        "label": "Rādīt ziņas kā",
+        "description": "Vienkāršs teksts noņem ziņas izkārtojumu, krāsas un attēlus. Katru ziņu var pārslēgt lasītājā.",
+        "html": "Formatētu",
+        "plain": "Vienkāršu tekstu"
+      },
+      "mail_text_size": {
+        "label": "Teksta izmērs ziņās",
+        "description": "Teksta izmērs ziņu iekšpusē. Tas paliek tāds pats visām ziņām.",
+        "follow": "Tāpat kā lietotnē"
+      },
+      "mail_min_font_size": {
+        "label": "Mazākais teksts ziņās",
+        "description": "Palielina tekstu, ko ziņa iestata mazāku par šo izmēru.",
+        "none": "Bez minimuma",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Izmantot manu fontu un krāsas ziņās",
+        "description": "Aizstāj sūtītāja fontu, izmēru un krāsas ar jūsu izvēlētajiem. Tas var mainīt informatīvo izdevumu izskatu.",
+        "never": "Nekad",
+        "high_contrast": "Ar lielāku kontrastu",
+        "always": "Vienmēr"
+      },
+      "mail_fit_width": {
+        "label": "Pielāgot platas ziņas logam",
+        "description": "Samazina ziņas, kas ir platākas par lasīšanas rūti, nevis ritina uz sāniem."
+      },
+      "read_aloud_rate": {
+        "label": "Nolasīšanas ātrums",
+        "description": "Cik ātri nolasīšana runā ziņu."
+      },
+      "compose_font": {
+        "label": "Jaunu ziņu fonts",
+        "description": "Fonts, ar kādu sākas jaunas ziņas. Saņēmēji to redz, ja viņu pasta lietotnē tas ir.",
+        "default": "Noklusējuma",
+        "sans": "Bezserifa",
+        "serif": "Ar serifiem",
+        "mono": "Vienplatuma"
+      },
+      "compose_size": {
+        "label": "Jaunu ziņu teksta izmērs",
+        "description": "Izmērs, ar kādu sākas jaunas ziņas.",
+        "default": "Noklusējuma"
+      },
+      "toast_duration": {
+        "label": "Paziņojumu ilgums",
+        "description": "Cik ilgi ekrānā paliek paziņojumi, piemēram, „Pārvietots uz arhīvu”, ar pogu Atsaukt.",
+        "until_closed": "Līdz es tos aizveru",
+        "seconds": "{seconds} s"
+      },
+      "confirm_send": {
+        "label": "Apstiprināt pirms sūtīšanas",
+        "description": "Pajautā, pirms ziņa tiek nosūtīta."
+      },
+      "confirm_delete": {
+        "label": "Apstiprināt pirms dzēšanas",
+        "description": "Pajautā, pirms ziņa tiek dzēsta, arī atsevišķām ziņām."
+      },
+      "confirm_archive": {
+        "label": "Apstiprināt pirms arhivēšanas",
+        "description": "Pajautā, pirms ziņa tiek arhivēta."
+      },
+      "send_warnings_link": {
+        "label": "Brīdinājumi pirms sūtīšanas",
+        "description": "Trūkstoša tēma, aizmirsts pielikums un vietturteksts.",
+        "button": "Rakstīšana"
+      },
+      "visual_alerts": {
+        "label": "Vizuāli brīdinājumi",
+        "description": "Lēni mirgina cilnes nosaukumu, kad ienāk jauns pasts vai atgādinājums, un atstāj atgādinājumus ekrānā, līdz tos aizverat."
+      },
+      "unread_counts": {
+        "label": "Nelasīto skaitītāji",
+        "description": "Kā mapes un navigācijas josla rāda nelasīto pastu.",
+        "count": "Skaitlis",
+        "dot": "Punkts",
+        "hidden": "Paslēpti"
+      },
+      "do_not_disturb": {
+        "label": "Netraucēt",
+        "description": "Nav skaņu, uznirstošu paziņojumu vai balss paziņojumu par jaunu pastu, līdz to izslēdzat."
+      },
+      "announce_new_mail": {
+        "label": "Paziņot par jaunu pastu",
+        "description": "Ekrāna lasītāji pasaka, cik jaunu ziņu ir ienācis, tās nenolasot."
+      },
+      "announce_preview": {
+        "label": "Nolasīt priekšskatījumu sarakstā",
+        "description": "Ekrāna lasītāji kopā ar sūtītāju un tēmu nolasa katras ziņas pirmo rindu."
+      },
+      "simple_mode": {
+        "label": "Vienkāršais režīms",
+        "description": "Viena kolonna, mazāk pogu un nav sānu paneļu."
+      },
+      "simple_mode_paged": {
+        "label": "Ziņu saraksts pa lapām",
+        "description": "Rāda sarakstu lapās pa 50 ar pogām Nākamā un Iepriekšējā bezgalīgas ritināšanas vietā. Ar ekrāna lasītāju ir vieglāk."
+      },
+      "reset": {
+        "title": "Atiestatīšana",
+        "label": "Atiestatīt pieejamības iestatījumus",
+        "description": "Atgriež visus šīs lapas iestatījumus noklusējuma vērtībās vai tajās, ko iestatījusi jūsu organizācija. Koplietojami iestatījumi, piemēram, sarunu skats, paliek, kā bijuši.",
+        "button": "Atiestatīt",
+        "done": "Pieejamības iestatījumi atiestatīti."
       }
     }
   },

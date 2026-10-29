@@ -1206,7 +1206,8 @@
       "general": "Général",
       "organize": "Dossiers et étiquettes",
       "addons": "Extensions",
-      "backup": "Sauvegarde et réinitialisation"
+      "backup": "Sauvegarde et réinitialisation",
+      "accessibility": "Accessibilité"
     },
     "themes": {
       "title": "Thèmes",
@@ -1403,6 +1404,11 @@
         "dot": "Point coloré",
         "tint": "Ligne teintée",
         "none": "Rien"
+      },
+      "accessibility_link": {
+        "label": "Taille du texte et mouvement",
+        "description": "La taille du texte, les polices, les espacements et la réduction des mouvements se trouvent sur la page Accessibilité.",
+        "button": "Accessibilité"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Images et contenu externe",
         "images_description": "Les images distantes peuvent révéler à l'expéditeur que vous avez ouvert le message.",
         "attachments": "Pièces jointes"
+      },
+      "plain_text_font_link": {
+        "label": "Police des messages en texte brut",
+        "description": "Se règle avec les autres polices sur la page Accessibilité.",
+        "button": "Accessibilité"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Réponses",
         "sending": "Avant l'envoi",
         "receipts": "Accusés de lecture"
+      }
+    },
+    "accessibility": {
+      "system": "Système",
+      "on": "Activé",
+      "off": "Désactivé",
+      "presets": {
+        "title": "Préréglages",
+        "description": "Chaque préréglage modifie plusieurs paramètres à la fois. Ensuite, ce sont des paramètres normaux que vous pouvez changer un par un, et vous pouvez combiner plusieurs préréglages.",
+        "applied": "{name} a modifié {count, plural, one {# paramètre} many {# de paramètres} other {# paramètres}} :",
+        "nothing_changed": "{name} : vos paramètres correspondent déjà.",
+        "undo": "Annuler",
+        "show_button": "Afficher le bouton d'accessibilité dans la barre de navigation",
+        "screen-reader": {
+          "label": "Lecteur d'écran",
+          "description": "Pas de volet de lecture à côté de la liste, pas de regroupement en conversations, l'aperçu est lu à voix haute avec chaque message."
+        },
+        "low-vision": {
+          "label": "Basse vision",
+          "description": "Texte plus grand, plus de contraste, un contour de focus plus épais, des liens soulignés et un grand curseur."
+        },
+        "dyslexia": {
+          "label": "Dyslexie",
+          "description": "Une police plus lisible, plus d'espace entre les lignes, les lettres et les mots, et une colonne de lecture plus étroite."
+        },
+        "focus": {
+          "label": "Concentration",
+          "description": "Disposition simple, sans aperçus ni photos d'expéditeurs, un point à la place des compteurs de non lus, aucun mouvement."
+        },
+        "motor": {
+          "label": "Clavier et motricité",
+          "description": "Cibles plus grandes, menus qui s'ouvrent au clic, un bouton d'actions sur chaque message, notifications plus longues."
+        },
+        "motion": {
+          "label": "Sans mouvement ni risque de crise",
+          "description": "Aucune animation, images animées en pause, pas de panneaux transparents, pas d'alertes clignotantes."
+        },
+        "hearing": {
+          "label": "Sourds et malentendants",
+          "description": "Des alertes visuelles à la place des sons, et des notifications qui restent jusqu'à ce que vous les fermiez."
+        }
+      },
+      "quick_button": {
+        "label": "Bouton d'accessibilité dans la barre de navigation",
+        "description": "Ajoute un bouton qui ouvre de partout la taille du texte, le contraste, les mouvements et les préréglages. Alt+Maj+A ouvre le même panneau, avec ou sans le bouton."
+      },
+      "sections": {
+        "text": "Texte et lecture",
+        "contrast": "Couleur et contraste",
+        "motion": "Mouvement",
+        "keyboard": "Clavier et focus",
+        "pointer": "Pointeur et tactile",
+        "mail": "Courrier",
+        "timing": "Délais et erreurs",
+        "alerts": "Alertes et distractions",
+        "screen_readers": "Lecteurs d'écran"
+      },
+      "text_size": {
+        "label": "Taille du texte",
+        "description": "Met à l'échelle le texte défini dans votre navigateur. 100 % correspond à la taille de votre navigateur.",
+        "small": "87,5 %",
+        "medium": "100 %",
+        "large": "112,5 %",
+        "x-large": "125 %",
+        "xx-large": "150 %",
+        "xxx-large": "175 %",
+        "huge": "200 %"
+      },
+      "font": {
+        "label": "Police",
+        "description": "Atkinson Hyperlegible et Lexend sont conçues pour que les caractères se distinguent bien ; OpenDyslexic aide certaines personnes dyslexiques. Elles couvrent l'alphabet latin.",
+        "default": "Police du thème"
+      },
+      "plain_text_font": {
+        "label": "Police des messages en texte brut",
+        "description": "Pour les messages envoyés sans mise en forme.",
+        "sans": "Comme ci-dessus",
+        "mono": "Chasse fixe"
+      },
+      "spacing": {
+        "normal": "Normal",
+        "relaxed": "Plus",
+        "loose": "Le plus",
+        "wide": "Large",
+        "wider": "Plus large"
+      },
+      "line_spacing": {
+        "label": "Interligne",
+        "description": "Espace entre les lignes de texte."
+      },
+      "letter_spacing": {
+        "label": "Espacement des lettres",
+        "description": "Espace entre les lettres."
+      },
+      "word_spacing": {
+        "label": "Espacement des mots",
+        "description": "Espace entre les mots."
+      },
+      "paragraph_spacing": {
+        "label": "Espacement des paragraphes",
+        "description": "Espace après chaque paragraphe."
+      },
+      "reading_width": {
+        "label": "Largeur de lecture",
+        "description": "Limite les lignes des messages à environ 80 caractères pour que vos yeux aient moins de chemin à faire.",
+        "full": "Pleine largeur",
+        "comfortable": "Environ 80 caractères"
+      },
+      "reading_mask": {
+        "label": "Masque de lecture",
+        "description": "Assombrit tout le message sauf quelques lignes autour du pointeur, pour vous aider à ne pas perdre votre place."
+      },
+      "plain_language": {
+        "label": "Langage simple",
+        "description": "Formulations plus simples pour les paramètres et les messages d'erreur, avec de courtes explications des termes techniques. Disponible en anglais et en allemand."
+      },
+      "contrast": {
+        "label": "Contraste",
+        "description": "Plus de contraste rend le texte, les bordures et le contour de focus plus sombres ou plus clairs avec n'importe quel thème, et souligne les liens. Système suit votre appareil.",
+        "more": "Plus",
+        "normal": "Normal"
+      },
+      "transparency": {
+        "label": "Réduire la transparence",
+        "description": "Des arrière-plans pleins à la place des panneaux transparents et flous."
+      },
+      "underline_links": {
+        "label": "Souligner les liens",
+        "description": "Souligne les liens dans l'application et dans les messages, pour qu'ils ne dépendent pas de la couleur."
+      },
+      "color_names": {
+        "label": "Afficher les noms à côté des couleurs",
+        "description": "Affiche le nom des étiquettes sur les messages et le nom des calendriers sur les événements, et pas seulement des pastilles de couleur."
+      },
+      "cvd_palette": {
+        "label": "Couleurs adaptées au daltonisme",
+        "description": "Utilise pour les étiquettes, les dossiers et les calendriers des couleurs qui restent distinctes en cas de daltonisme rouge-vert ou bleu-jaune."
+      },
+      "theme_link": {
+        "label": "Thème et mode de couleur",
+        "description": "Clair, sombre et les thèmes se trouvent sur la page Apparence.",
+        "button": "Apparence"
+      },
+      "reduce_motion": {
+        "label": "Réduire les mouvements",
+        "description": "Désactive les panneaux coulissants, les transitions et le défilement fluide, y compris dans les messages. Système suit votre appareil."
+      },
+      "pause_images": {
+        "label": "Mettre en pause les images animées",
+        "description": "Affiche la première image des GIF animés dans les messages, avec un bouton pour les lire. Système les met en pause quand votre appareil demande moins de mouvement."
+      },
+      "single_key_shortcuts": {
+        "label": "Raccourcis à une touche",
+        "description": "Des raccourcis comme j, k, e et # qui n'utilisent qu'une touche. Désactivez-les si vous utilisez la saisie vocale ou appuyez sur des touches par erreur. Les raccourcis avec Ctrl ou Alt continuent de fonctionner."
+      },
+      "shortcut_list": {
+        "label": "Raccourcis clavier",
+        "description": "Tous les raccourcis de l'application où vous vous trouvez.",
+        "button": "Afficher les raccourcis"
+      },
+      "focus_ring": {
+        "label": "Contour de focus",
+        "description": "Le contour autour du bouton, du lien ou du champ où se trouve le clavier.",
+        "normal": "Normal",
+        "thick": "Épais",
+        "extra": "Très épais"
+      },
+      "focus_always": {
+        "label": "Toujours afficher le focus",
+        "description": "Affiche le contour aussi après un clic, et pas seulement avec le clavier."
+      },
+      "large_targets": {
+        "label": "Grandes cibles",
+        "description": "Donne aux boutons, cases à cocher et autres commandes une taille d'au moins 44 pixels. Système l'active sur les écrans tactiles."
+      },
+      "large_cursor": {
+        "label": "Grand pointeur de souris",
+        "description": "Un pointeur plus grand dans l'application."
+      },
+      "open_on_hover": {
+        "label": "Ouvrir au survol",
+        "description": "Les menus, aperçus et cartes s'ouvrent quand le pointeur reste dessus. Désactivez pour ne les ouvrir qu'au clic."
+      },
+      "row_action_button": {
+        "label": "Bouton d'actions sur chaque message",
+        "description": "Affiche sur chaque ligne un bouton qui ouvre les actions du message, sans avoir à survoler ni à faire un clic droit."
+      },
+      "native_scrollbars": {
+        "label": "Barres de défilement plus larges",
+        "description": "Utilise les barres de défilement de votre navigateur, plus larges et plus faciles à saisir."
+      },
+      "row_actions_link": {
+        "label": "Actions au survol et au balayage",
+        "description": "Les actions qui apparaissent sur les lignes de messages.",
+        "button": "Liste des messages"
+      },
+      "mail_view": {
+        "label": "Afficher les messages en",
+        "description": "Le texte brut supprime la mise en page, les couleurs et les images d'un message. Vous pouvez changer message par message dans le lecteur.",
+        "html": "Mis en forme",
+        "plain": "Texte brut"
+      },
+      "mail_text_size": {
+        "label": "Taille du texte des messages",
+        "description": "Taille du texte à l'intérieur des messages. Elle reste la même pour tous les messages.",
+        "follow": "Comme l'application"
+      },
+      "mail_min_font_size": {
+        "label": "Plus petit texte dans les messages",
+        "description": "Agrandit le texte qu'un message définit plus petit que cette valeur.",
+        "none": "Pas de minimum",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Utiliser ma police et mes couleurs dans les messages",
+        "description": "Remplace la police, la taille et les couleurs de l'expéditeur par les vôtres. L'aspect des newsletters peut changer.",
+        "never": "Jamais",
+        "high_contrast": "Avec plus de contraste",
+        "always": "Toujours"
+      },
+      "mail_fit_width": {
+        "label": "Adapter les messages larges à la fenêtre",
+        "description": "Réduit les messages plus larges que le volet de lecture au lieu de les faire défiler sur le côté."
+      },
+      "read_aloud_rate": {
+        "label": "Vitesse de lecture à voix haute",
+        "description": "La vitesse à laquelle la lecture à voix haute prononce un message."
+      },
+      "compose_font": {
+        "label": "Police des nouveaux messages",
+        "description": "La police avec laquelle commencent les nouveaux messages. Les destinataires la voient si leur application de messagerie la possède.",
+        "default": "Par défaut",
+        "sans": "Sans empattement",
+        "serif": "Avec empattement",
+        "mono": "Chasse fixe"
+      },
+      "compose_size": {
+        "label": "Taille du texte des nouveaux messages",
+        "description": "La taille avec laquelle commencent les nouveaux messages.",
+        "default": "Par défaut"
+      },
+      "toast_duration": {
+        "label": "Durée des notifications",
+        "description": "Combien de temps restent affichées les notifications comme « Déplacé vers Archives » avec leur bouton Annuler.",
+        "until_closed": "Jusqu'à ce que je les ferme",
+        "seconds": "{seconds} secondes"
+      },
+      "confirm_send": {
+        "label": "Confirmer avant l'envoi",
+        "description": "Demande une confirmation avant l'envoi d'un message."
+      },
+      "confirm_delete": {
+        "label": "Confirmer avant la suppression",
+        "description": "Demande une confirmation avant la suppression d'un message, même pour un seul message."
+      },
+      "confirm_archive": {
+        "label": "Confirmer avant l'archivage",
+        "description": "Demande une confirmation avant l'archivage d'un message."
+      },
+      "send_warnings_link": {
+        "label": "Avertissements avant l'envoi",
+        "description": "Objet manquant, pièce jointe oubliée et texte provisoire.",
+        "button": "Rédaction"
+      },
+      "visual_alerts": {
+        "label": "Alertes visuelles",
+        "description": "Fait clignoter lentement le titre de l'onglet à l'arrivée d'un nouveau message ou d'un rappel, et laisse les rappels affichés jusqu'à ce que vous les fermiez."
+      },
+      "unread_counts": {
+        "label": "Compteurs de non lus",
+        "description": "La façon dont les dossiers et la barre de navigation indiquent les messages non lus.",
+        "count": "Nombre",
+        "dot": "Point",
+        "hidden": "Masqué"
+      },
+      "do_not_disturb": {
+        "label": "Ne pas déranger",
+        "description": "Aucun son, notification contextuelle ni annonce vocale pour les nouveaux messages, jusqu'à ce que vous le désactiviez."
+      },
+      "announce_new_mail": {
+        "label": "Annoncer les nouveaux messages",
+        "description": "Les lecteurs d'écran indiquent combien de nouveaux messages sont arrivés, sans les lire."
+      },
+      "announce_preview": {
+        "label": "Lire l'aperçu dans la liste",
+        "description": "Les lecteurs d'écran lisent la première ligne de chaque message avec l'expéditeur et l'objet."
+      },
+      "simple_mode": {
+        "label": "Mode simple",
+        "description": "Une seule colonne, moins de boutons et pas de panneaux latéraux."
+      },
+      "simple_mode_paged": {
+        "label": "Parcourir la liste des messages page par page",
+        "description": "Affiche la liste par pages de 50 avec Suivant et Précédent, au lieu d'un défilement sans fin. Plus facile avec un lecteur d'écran."
+      },
+      "reset": {
+        "title": "Réinitialiser",
+        "label": "Réinitialiser les paramètres d'accessibilité",
+        "description": "Remet tous les paramètres de cette page à leur valeur par défaut, ou à celle définie par votre organisation. Les paramètres partagés, comme l'affichage en conversations, restent inchangés.",
+        "button": "Réinitialiser",
+        "done": "Paramètres d'accessibilité réinitialisés."
       }
     }
   },

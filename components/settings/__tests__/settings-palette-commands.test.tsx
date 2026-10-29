@@ -25,6 +25,7 @@ vi.mock('@/components/layout/navigation-rail', () => ({ NavigationRail: () => nu
 vi.mock('@/components/layout/sidebar-apps-modal', () => ({ SidebarAppsModal: () => null }));
 vi.mock('@/components/plugins/app-top-banner-slot', () => ({ AppTopBannerSlot: () => null }));
 vi.mock('@/components/settings/appearance-settings', () => ({ AppearanceSettings: () => null }));
+vi.mock('@/components/settings/accessibility-settings', () => ({ AccessibilitySettings: () => null }));
 
 const { SettingsApp } = await import('../settings-app');
 const { useAuthStore } = await import('@/stores/auth-store');

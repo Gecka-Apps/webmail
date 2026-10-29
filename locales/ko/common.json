@@ -1206,7 +1206,8 @@
       "general": "일반",
       "organize": "폴더 및 태그",
       "addons": "추가 기능",
-      "backup": "백업 및 초기화"
+      "backup": "백업 및 초기화",
+      "accessibility": "접근성"
     },
     "themes": {
       "title": "테마",
@@ -1403,6 +1404,11 @@
         "dot": "색상 점",
         "tint": "행 색조",
         "none": "없음"
+      },
+      "accessibility_link": {
+        "label": "글자 크기와 움직임",
+        "description": "글자 크기, 글꼴, 간격, 움직임 줄이기는 접근성 페이지에 있어요.",
+        "button": "접근성"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "이미지 및 외부 콘텐츠",
         "images_description": "원격 이미지는 메일을 열었다는 사실을 보낸 사람에게 알릴 수 있습니다.",
         "attachments": "첨부 파일"
+      },
+      "plain_text_font_link": {
+        "label": "일반 텍스트 메일 글꼴",
+        "description": "다른 글꼴과 함께 접근성 페이지에서 설정해요.",
+        "button": "접근성"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "답장",
         "sending": "보내기 전",
         "receipts": "읽음 확인"
+      }
+    },
+    "accessibility": {
+      "system": "시스템",
+      "on": "켜짐",
+      "off": "꺼짐",
+      "presets": {
+        "title": "프리셋",
+        "description": "프리셋 하나가 여러 설정을 한 번에 바꿔요. 적용한 뒤에는 일반 설정이라 하나씩 바꿀 수 있고, 프리셋을 함께 쓸 수도 있어요.",
+        "applied": "{name} 적용으로 설정 {count, plural, other {#개}}가 바뀌었어요:",
+        "nothing_changed": "{name}: 설정이 이미 같아요.",
+        "undo": "실행 취소",
+        "show_button": "탐색 바에 접근성 버튼 표시",
+        "screen-reader": {
+          "label": "화면 낭독기",
+          "description": "목록 옆에 읽기 창을 두지 않고, 대화로 묶지 않고, 메시지마다 미리 보기를 함께 읽어 줘요."
+        },
+        "low-vision": {
+          "label": "저시력",
+          "description": "더 큰 글자, 더 높은 대비, 더 굵은 포커스 윤곽선, 밑줄 있는 링크, 큰 커서."
+        },
+        "dyslexia": {
+          "label": "난독증",
+          "description": "읽기 쉬운 글꼴, 줄·글자·단어 사이 간격 확대, 더 좁은 읽기 열."
+        },
+        "focus": {
+          "label": "집중",
+          "description": "단순한 레이아웃, 미리 보기와 보낸 사람 사진 없음, 읽지 않은 수 대신 점 표시, 움직임 없음."
+        },
+        "motor": {
+          "label": "키보드 및 운동 기능",
+          "description": "더 큰 버튼, 클릭하면 열리는 메뉴, 메시지마다 작업 버튼, 더 오래 표시되는 알림."
+        },
+        "motion": {
+          "label": "움직임 및 광과민성 발작 대비",
+          "description": "애니메이션 없음, 움직이는 이미지 일시 중지, 비치는 패널 없음, 깜박이는 알림 없음."
+        },
+        "hearing": {
+          "label": "청각 장애 및 난청",
+          "description": "소리 대신 시각적 알림, 닫을 때까지 남아 있는 알림."
+        }
+      },
+      "quick_button": {
+        "label": "탐색 바의 접근성 버튼",
+        "description": "글자 크기, 대비, 움직임, 프리셋을 어디서든 열 수 있는 버튼을 추가해요. Alt+Shift+A를 누르면 버튼이 있든 없든 같은 패널이 열려요."
+      },
+      "sections": {
+        "text": "글자와 읽기",
+        "contrast": "색상과 대비",
+        "motion": "움직임",
+        "keyboard": "키보드와 포커스",
+        "pointer": "포인터와 터치",
+        "mail": "메일",
+        "timing": "시간과 실수",
+        "alerts": "알림과 방해 요소",
+        "screen_readers": "화면 낭독기"
+      },
+      "text_size": {
+        "label": "글자 크기",
+        "description": "브라우저에서 설정한 글자 크기를 조절해요. 100%가 브라우저의 기본 크기예요.",
+        "small": "87.5%",
+        "medium": "100%",
+        "large": "112.5%",
+        "x-large": "125%",
+        "xx-large": "150%",
+        "xxx-large": "175%",
+        "huge": "200%"
+      },
+      "font": {
+        "label": "글꼴",
+        "description": "Atkinson Hyperlegible과 Lexend는 글자를 쉽게 구분할 수 있게 만든 글꼴이고, OpenDyslexic은 난독증이 있는 일부 분께 도움이 돼요. 라틴 문자를 지원해요.",
+        "default": "테마 글꼴"
+      },
+      "plain_text_font": {
+        "label": "일반 텍스트 메일 글꼴",
+        "description": "서식 없이 보낸 메시지에 적용돼요.",
+        "sans": "위와 동일",
+        "mono": "고정폭"
+      },
+      "spacing": {
+        "normal": "보통",
+        "relaxed": "넓게",
+        "loose": "가장 넓게",
+        "wide": "넓음",
+        "wider": "더 넓음"
+      },
+      "line_spacing": {
+        "label": "줄 간격",
+        "description": "글줄 사이의 간격이에요."
+      },
+      "letter_spacing": {
+        "label": "글자 간격",
+        "description": "글자 사이의 간격이에요."
+      },
+      "word_spacing": {
+        "label": "단어 간격",
+        "description": "단어 사이의 간격이에요."
+      },
+      "paragraph_spacing": {
+        "label": "문단 간격",
+        "description": "각 문단 뒤의 간격이에요."
+      },
+      "reading_width": {
+        "label": "읽기 너비",
+        "description": "메시지의 한 줄을 약 80자로 제한해서 시선을 멀리 옮기지 않아도 돼요.",
+        "full": "전체 너비",
+        "comfortable": "약 80자"
+      },
+      "reading_mask": {
+        "label": "읽기 마스크",
+        "description": "메시지에서 포인터 주변 몇 줄을 빼고 나머지를 어둡게 해서 읽던 위치를 놓치지 않게 도와줘요."
+      },
+      "plain_language": {
+        "label": "쉬운 말",
+        "description": "설정과 오류 메시지를 더 쉬운 말로 바꾸고, 전문 용어에 짧은 설명을 붙여요. 영어와 독일어에서 사용할 수 있어요."
+      },
+      "contrast": {
+        "label": "대비",
+        "description": "대비를 높이면 어떤 테마에서든 글자, 테두리, 포커스 윤곽선이 더 어둡거나 밝아지고 링크에 밑줄이 생겨요. 시스템은 기기 설정을 따라요.",
+        "more": "높게",
+        "normal": "보통"
+      },
+      "transparency": {
+        "label": "투명 효과 줄이기",
+        "description": "비치거나 흐릿한 패널 대신 단색 배경을 사용해요."
+      },
+      "underline_links": {
+        "label": "링크에 밑줄 표시",
+        "description": "앱과 메시지 안의 링크에 밑줄을 그어서 색상에만 의존하지 않게 해요."
+      },
+      "color_names": {
+        "label": "색상 옆에 이름 표시",
+        "description": "색 점만 보여 주는 대신 메시지에는 태그 이름을, 일정에는 캘린더 이름을 함께 보여 줘요."
+      },
+      "cvd_palette": {
+        "label": "색약 친화 색상",
+        "description": "적록 색약이나 청황 색약이 있어도 구분되는 태그, 폴더, 캘린더 색상을 사용해요."
+      },
+      "theme_link": {
+        "label": "테마와 색상 모드",
+        "description": "라이트, 다크 모드와 테마는 화면 설정 페이지에 있어요.",
+        "button": "화면 설정"
+      },
+      "reduce_motion": {
+        "label": "움직임 줄이기",
+        "description": "밀려 나오는 패널, 전환 효과, 부드러운 스크롤을 꺼요. 메시지 안에도 적용돼요. 시스템은 기기 설정을 따라요."
+      },
+      "pause_images": {
+        "label": "움직이는 이미지 일시 중지",
+        "description": "메시지 안의 움직이는 GIF는 첫 프레임만 보여 주고 재생 버튼을 둬요. 시스템은 기기에서 움직임 줄이기를 요청하면 일시 중지해요."
+      },
+      "single_key_shortcuts": {
+        "label": "단일 키 단축키",
+        "description": "j, k, e, #처럼 키 하나로 쓰는 단축키예요. 음성 입력을 쓰거나 실수로 키를 누르는 경우에는 꺼 두세요. Ctrl이나 Alt를 함께 쓰는 단축키는 그대로 작동해요."
+      },
+      "shortcut_list": {
+        "label": "키보드 단축키",
+        "description": "지금 사용 중인 앱의 모든 단축키예요.",
+        "button": "단축키 보기"
+      },
+      "focus_ring": {
+        "label": "포커스 윤곽선",
+        "description": "키보드가 가리키는 버튼, 링크, 입력란 둘레의 윤곽선이에요.",
+        "normal": "보통",
+        "thick": "굵게",
+        "extra": "아주 굵게"
+      },
+      "focus_always": {
+        "label": "포커스 항상 표시",
+        "description": "키보드를 쓸 때만이 아니라 클릭한 뒤에도 윤곽선을 보여 줘요."
+      },
+      "large_targets": {
+        "label": "큰 터치 영역",
+        "description": "버튼, 체크박스 등의 컨트롤을 최소 44픽셀로 키워요. 시스템은 터치스크린에서 이 설정을 켜요."
+      },
+      "large_cursor": {
+        "label": "큰 마우스 포인터",
+        "description": "앱 안에서 포인터를 더 크게 보여 줘요."
+      },
+      "open_on_hover": {
+        "label": "마우스를 올리면 열기",
+        "description": "포인터를 올려 두면 메뉴, 미리 보기, 카드가 열려요. 끄면 클릭할 때만 열려요."
+      },
+      "row_action_button": {
+        "label": "메시지마다 작업 버튼",
+        "description": "각 줄에 메시지 작업을 여는 버튼을 표시해서 마우스를 올리거나 오른쪽 클릭을 하지 않아도 돼요."
+      },
+      "native_scrollbars": {
+        "label": "더 넓은 스크롤 막대",
+        "description": "브라우저 기본 스크롤 막대를 사용해요. 더 넓어서 잡기 쉬워요."
+      },
+      "row_actions_link": {
+        "label": "마우스 오버 및 스와이프 작업",
+        "description": "메시지 줄에 표시할 작업을 정해요.",
+        "button": "메시지 목록"
+      },
+      "mail_view": {
+        "label": "메시지 표시 방식",
+        "description": "일반 텍스트는 메시지의 레이아웃, 색상, 이미지를 없애요. 읽기 화면에서 메시지마다 바꿀 수 있어요.",
+        "html": "서식 있음",
+        "plain": "일반 텍스트"
+      },
+      "mail_text_size": {
+        "label": "메시지 글자 크기",
+        "description": "메시지 안의 글자 크기예요. 모든 메시지에서 같게 유지돼요.",
+        "follow": "앱과 동일"
+      },
+      "mail_min_font_size": {
+        "label": "메시지의 최소 글자 크기",
+        "description": "메시지가 이 크기보다 작게 지정한 글자를 키워요.",
+        "none": "최소값 없음",
+        "px": "{size}px"
+      },
+      "mail_override": {
+        "label": "메시지에 내 글꼴과 색상 사용",
+        "description": "보낸 사람의 글꼴, 크기, 색상을 내 설정으로 바꿔요. 뉴스레터의 모양이 달라질 수 있어요.",
+        "never": "사용 안 함",
+        "high_contrast": "대비가 높을 때",
+        "always": "항상"
+      },
+      "mail_fit_width": {
+        "label": "넓은 메시지를 창 크기에 맞추기",
+        "description": "읽기 창보다 넓은 메시지를 옆으로 스크롤하는 대신 줄여서 보여 줘요."
+      },
+      "read_aloud_rate": {
+        "label": "소리 내어 읽기 속도",
+        "description": "소리 내어 읽기가 메시지를 읽는 속도예요."
+      },
+      "compose_font": {
+        "label": "새 메시지 글꼴",
+        "description": "새 메시지를 쓸 때 처음 적용되는 글꼴이에요. 받는 사람의 메일 앱에 그 글꼴이 있으면 그대로 보여요.",
+        "default": "기본",
+        "sans": "산세리프",
+        "serif": "세리프",
+        "mono": "고정폭"
+      },
+      "compose_size": {
+        "label": "새 메시지 글자 크기",
+        "description": "새 메시지를 쓸 때 처음 적용되는 크기예요.",
+        "default": "기본"
+      },
+      "toast_duration": {
+        "label": "알림 표시 시간",
+        "description": "“보관함으로 이동됨”처럼 실행 취소 버튼이 있는 알림이 화면에 머무는 시간이에요.",
+        "until_closed": "닫을 때까지",
+        "seconds": "{seconds}초"
+      },
+      "confirm_send": {
+        "label": "보내기 전에 확인",
+        "description": "메시지를 보내기 전에 한 번 더 물어봐요."
+      },
+      "confirm_delete": {
+        "label": "삭제 전에 확인",
+        "description": "메시지를 삭제하기 전에 물어봐요. 메시지 하나만 삭제할 때도 물어봐요."
+      },
+      "confirm_archive": {
+        "label": "보관 전에 확인",
+        "description": "메시지를 보관하기 전에 물어봐요."
+      },
+      "send_warnings_link": {
+        "label": "보내기 전 경고",
+        "description": "제목 누락, 첨부 파일 누락, 자리 표시 텍스트를 알려 줘요.",
+        "button": "작성"
+      },
+      "visual_alerts": {
+        "label": "시각적 알림",
+        "description": "새 메일이나 알림이 오면 탭 제목을 천천히 깜박이고, 알림은 닫을 때까지 화면에 남겨 둬요."
+      },
+      "unread_counts": {
+        "label": "읽지 않은 수 표시",
+        "description": "폴더와 탐색 바에서 읽지 않은 메일을 표시하는 방식이에요.",
+        "count": "숫자",
+        "dot": "점",
+        "hidden": "숨김"
+      },
+      "do_not_disturb": {
+        "label": "방해 금지",
+        "description": "끌 때까지 새 메일에 대한 소리, 팝업 알림, 음성 안내를 내지 않아요."
+      },
+      "announce_new_mail": {
+        "label": "새 메일 안내",
+        "description": "화면 낭독기가 새 메시지가 몇 개 왔는지만 알려 주고, 내용은 읽지 않아요."
+      },
+      "announce_preview": {
+        "label": "목록에서 미리 보기 읽기",
+        "description": "화면 낭독기가 보낸 사람과 제목에 더해 각 메시지의 첫 줄을 읽어 줘요."
+      },
+      "simple_mode": {
+        "label": "간단 모드",
+        "description": "한 열로 표시하고, 버튼을 줄이고, 사이드 패널을 없애요."
+      },
+      "simple_mode_paged": {
+        "label": "메시지 목록을 페이지로 넘기기",
+        "description": "무한 스크롤 대신 50개씩 페이지로 목록을 보여 주고 다음, 이전 버튼으로 이동해요. 화면 낭독기에서 더 쓰기 쉬워요."
+      },
+      "reset": {
+        "title": "초기화",
+        "label": "접근성 설정 초기화",
+        "description": "이 페이지의 모든 설정을 기본값 또는 조직에서 정한 값으로 되돌려요. 대화 보기처럼 공유되는 설정은 그대로 유지돼요.",
+        "button": "초기화",
+        "done": "접근성 설정을 초기화했어요."
       }
     }
   },

@@ -3,7 +3,9 @@
 import { useTranslations } from 'next-intl';
 import { useThemeStore } from '@/stores/theme-store';
 import { useSettingsStore, type Density } from '@/stores/settings-store';
-import { SettingsSection, SettingItem, RadioGroup, ToggleSwitch } from './settings-section';
+import { SettingsSection, SettingItem, RadioGroup } from './settings-section';
+import { Button } from '@/components/ui/button';
+import { ChevronRight } from '@/components/icons';
 import { ThemesSettings } from './themes-settings';
 import { LayoutSection, SidebarSection, ExperimentalSection } from './layout-settings';
 import { cn } from '@/lib/utils';
@@ -69,7 +71,7 @@ function DensityPreview({ density }: { density: Density }) {
 export function AppearanceSettings() {
   const t = useTranslations('settings.appearance');
   const { theme, setTheme } = useThemeStore();
-  const { fontSize, density, animationsEnabled, updateSetting } = useSettingsStore();
+  const { density, updateSetting } = useSettingsStore();
   const { isSettingLocked, isSettingHidden, getColorModePolicy, isFeatureEnabled } = usePolicyStore();
 
   return (
@@ -90,20 +92,6 @@ export function AppearanceSettings() {
       </SettingsSection>
 
       <SettingsSection id="text" title={t('sections.text')}>
-        {!isSettingHidden('fontSize') && (
-        <SettingItem label={t('font_size.label')} description={t('font_size.description')} locked={isSettingLocked('fontSize')}>
-          <RadioGroup
-            value={fontSize}
-            onChange={(value) => updateSetting('fontSize', value as 'small' | 'medium' | 'large')}
-            options={[
-              { value: 'small', label: t('font_size.small') },
-              { value: 'medium', label: t('font_size.medium') },
-              { value: 'large', label: t('font_size.large') },
-            ]}
-          />
-        </SettingItem>
-        )}
-
         {!isSettingHidden('density') && (
         <SettingItem label={t('list_density.label')} description={t('list_density.description')} locked={isSettingLocked('density')}>
           <RadioGroup
@@ -122,14 +110,17 @@ export function AppearanceSettings() {
         </SettingItem>
         )}
 
-        {!isSettingHidden('animationsEnabled') && (
-        <SettingItem label={t('animations.label')} description={t('animations.description')} locked={isSettingLocked('animationsEnabled')}>
-          <ToggleSwitch
-            checked={animationsEnabled}
-            onChange={(checked) => updateSetting('animationsEnabled', checked)}
-          />
+        {/* Text size and motion moved to Settings > Accessibility. */}
+        <SettingItem label={t('accessibility_link.label')} description={t('accessibility_link.description')}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => window.dispatchEvent(new CustomEvent('settings-tab-change', { detail: { tab: 'accessibility', section: 'text' } }))}
+          >
+            {t('accessibility_link.button')}
+            <ChevronRight className="w-4 h-4 ms-1" />
+          </Button>
         </SettingItem>
-        )}
       </SettingsSection>
 
       <LayoutSection />

@@ -23,10 +23,29 @@ export interface RestrictionKeyDef {
 }
 
 export const RESTRICTION_KEYS: readonly RestrictionKeyDef[] = [
-  { key: 'fontSize', label: 'Font Size', category: 'Appearance', type: 'enum', allowedValues: ['small', 'medium', 'large'], page: 'policy' },
-  { key: 'density', label: 'Density', category: 'Appearance', type: 'enum', allowedValues: ['compact', 'regular', 'spacious'], page: 'policy' },
+  // Text size, motion, contrast and the other reading aids are left out on
+  // purpose: an admin can preset them (policy defaults) but not lock or hide
+  // them, see UNLOCKABLE_SETTING_KEYS in lib/accessibility-settings.ts.
+  { key: 'density', label: 'Density', category: 'Appearance', type: 'enum', allowedValues: ['extra-compact', 'compact', 'regular', 'comfortable'], page: 'policy' },
   { key: 'interfaceLayout', label: 'Interface Layout', category: 'Appearance', type: 'enum', allowedValues: ['default', 'mountain-view'], page: 'policy' },
-  { key: 'animationsEnabled', label: 'Animations', category: 'Appearance', type: 'boolean', page: 'policy' },
+  {
+    key: 'singleKeyShortcuts',
+    label: 'Single-key shortcuts',
+    description: 'Lock: users keep the shortcuts as set here. Turning them off helps people who use speech input, where a dictated letter can delete or archive mail.',
+    category: 'Accessibility',
+    type: 'boolean',
+    page: 'policy',
+    modes: ['locked'],
+  },
+  {
+    key: 'toastDuration',
+    label: 'Notification duration',
+    description: 'How long messages such as "Moved to Archive" with their Undo button stay, in seconds (0 = until closed). With a minimum, users can make them stay longer but not shorter.',
+    category: 'Accessibility',
+    type: 'number',
+    page: 'policy',
+    modes: ['locked'],
+  },
   { key: 'markAsReadDelay', label: 'Mark as Read Delay', category: 'Email', type: 'number', page: 'policy' },
   { key: 'deleteAction', label: 'Delete Action', category: 'Email', type: 'enum', allowedValues: ['trash', 'trash-and-read', 'permanent'], page: 'policy' },
   { key: 'showPreview', label: 'Show Preview', category: 'Email', type: 'boolean', page: 'policy' },
@@ -34,7 +53,7 @@ export const RESTRICTION_KEYS: readonly RestrictionKeyDef[] = [
   { key: 'emailsPerPage', label: 'Emails Per Page', category: 'Email', type: 'number', page: 'policy' },
   { key: 'externalContentPolicy', label: 'External Content Policy', category: 'Email', type: 'enum', allowedValues: ['allow', 'block', 'ask'], page: 'policy' },
   { key: 'sendConfirmation', label: 'Send Confirmation', category: 'Composer', type: 'boolean', page: 'policy' },
-  { key: 'defaultReplyMode', label: 'Default Reply Mode', category: 'Composer', type: 'enum', allowedValues: ['reply', 'reply-all'], page: 'policy' },
+  { key: 'defaultReplyMode', label: 'Default Reply Mode', category: 'Composer', type: 'enum', allowedValues: ['reply', 'replyAll'], page: 'policy' },
   { key: 'autoSelectReplyIdentity', label: 'Auto-select Reply Identity', category: 'Composer', type: 'boolean', page: 'policy' },
   { key: 'replyIdentityMatch', label: 'Reply Identity Matching', category: 'Composer', type: 'enum', allowedValues: ['exact', 'domain'], page: 'policy' },
   { key: 'plainTextMode', label: 'Plain Text Only', category: 'Composer', type: 'boolean', page: 'policy' },

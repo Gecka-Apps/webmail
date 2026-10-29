@@ -27,6 +27,7 @@ vi.mock('@/components/settings/about-data-settings', () => ({
   AboutFooter: () => <div data-testid="about-footer" />,
 }));
 vi.mock('@/components/settings/appearance-settings',() => ({ AppearanceSettings: () => <div>appearance pane</div> }));
+vi.mock('@/components/settings/accessibility-settings', () => ({ AccessibilitySettings: () => <div>accessibility pane</div> }));
 vi.mock('@/components/settings/organize-settings', () => ({
   OrganizeSettings: () => (
     <div>

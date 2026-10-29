@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 
 @import "./theme-inline.css";
+@import "./accessibility.css";
 
 /* The app's font stack replaces Tailwind's default --font-sans, so the
    font-sans utility and body use the same stack, and a theme's
@@ -74,8 +75,10 @@
   --color-chart-4: #ef4444;
   --color-chart-5: #8b5cf6;
 
-  /* Settings variables */
-  --font-size-base: 16px;
+  /* Settings variables. The text size is a percentage of the browser's own
+     default, so the browser's font size setting still counts (EN 301 549
+     9.7); Settings > Accessibility multiplies it. */
+  --font-size-base: 100%;
   --list-item-height: 48px;
   --transition-duration: 0.2s;
 
@@ -250,22 +253,24 @@ optgroup {
   }
 }
 
-/* Minimalist scrollbar */
-::-webkit-scrollbar {
+/* Minimalist scrollbar, unless the user asked for the browser's own wider
+   one in Settings > Accessibility: Chromium draws its native scrollbar only
+   while no ::-webkit-scrollbar rule matches. */
+:root:not([data-native-scrollbars="on"]) ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
-::-webkit-scrollbar-track {
+:root:not([data-native-scrollbars="on"]) ::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb {
+:root:not([data-native-scrollbars="on"]) ::-webkit-scrollbar-thumb {
   background-color: var(--color-border);
   border-radius: 9999px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+:root:not([data-native-scrollbars="on"]) ::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-muted-foreground);
 }
 
@@ -740,11 +745,12 @@ optgroup {
   animation: cal-slide-in-left 0.25s ease-out;
 }
 
-/* Reduced motion: respect user OS preference */
+/* Reduced motion: respect the OS preference unless the user turned Reduce
+   motion off in Settings > Accessibility. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  :root:not([data-motion="full"]) *,
+  :root:not([data-motion="full"]) *::before,
+  :root:not([data-motion="full"]) *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     /* Every element transitions `all` by default once it has a duration.
@@ -756,10 +762,10 @@ optgroup {
   }
 }
 
-/* The same when the user turns animations off in the settings (#1215). */
-[data-animations="off"] *,
-[data-animations="off"] *::before,
-[data-animations="off"] *::after {
+/* The same when the user turns Reduce motion on in the settings (#1215). */
+[data-motion="reduce"] *,
+[data-motion="reduce"] *::before,
+[data-motion="reduce"] *::after {
   animation-duration: 0.01ms !important;
   animation-iteration-count: 1 !important;
   transition-property: all, visibility !important;

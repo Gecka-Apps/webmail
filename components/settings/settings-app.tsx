@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef, useMemo, useSyncExternalStore
 import { useRouter } from '@/i18n/navigation';
 import { useTranslations, useMessages } from 'next-intl';
 import {
+  Accessibility,
   ArrowLeft,
   ChevronRight,
   LogOut,
@@ -32,6 +33,7 @@ import { Button } from '@/components/ui/button';
 import { IconButton } from '@/components/ui/icon-button';
 import { ToolbarSearch } from '@/components/ui/toolbar';
 import { AppearanceSettings } from '@/components/settings/appearance-settings';
+import { AccessibilitySettings } from '@/components/settings/accessibility-settings';
 import { AppTopBannerSlot } from '@/components/plugins/app-top-banner-slot';
 import { GeneralSettings } from '@/components/settings/general-settings';
 import { ReadingSettings } from '@/components/settings/reading-settings';
@@ -130,6 +132,7 @@ const tabIcons: Record<Tab, AppIcon> = {
   general: SettingsIcon,
   notifications: Bell,
   appearance: Palette,
+  accessibility: Accessibility,
   message_list: LayoutList,
   reading: BookOpen,
   composing: PenLine,
@@ -692,6 +695,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
     { id: 'notifications', label: t('tabs.notifications'), icon: tabIcons.notifications, group: 'top' },
     { id: 'general', label: t('tabs.general'), icon: tabIcons.general, group: 'top' },
     { id: 'appearance', label: t('tabs.appearance'), icon: tabIcons.appearance, group: 'top' },
+    { id: 'accessibility', label: t('tabs.accessibility'), icon: tabIcons.accessibility, group: 'top' },
 
     // Mail
     { id: 'message_list', label: t('tabs.message_list'), icon: tabIcons.message_list, group: 'mail' },
@@ -855,6 +859,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
       {effectiveActiveTab === 'general' && <GeneralSettings supportsCalendar={supportsCalendar} />}
       {effectiveActiveTab === 'notifications' && <NotificationSettings />}
       {effectiveActiveTab === 'appearance' && <AppearanceSettings />}
+      {effectiveActiveTab === 'accessibility' && <AccessibilitySettings />}
       {effectiveActiveTab === 'message_list' && <MessageListSettings />}
       {effectiveActiveTab === 'reading' && <ReadingSettings />}
       {effectiveActiveTab === 'composing' && <ComposingSettings />}

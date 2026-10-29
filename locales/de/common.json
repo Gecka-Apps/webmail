@@ -1206,7 +1206,8 @@
       "general": "Allgemein",
       "organize": "Ordner & Tags",
       "addons": "Erweiterungen",
-      "backup": "Sicherung & Zurücksetzen"
+      "backup": "Sicherung & Zurücksetzen",
+      "accessibility": "Barrierefreiheit"
     },
     "themes": {
       "title": "Designs",
@@ -1403,6 +1404,11 @@
         "dot": "Farbpunkt",
         "tint": "Eingefärbte Zeile",
         "none": "Nichts"
+      },
+      "accessibility_link": {
+        "label": "Schriftgröße und Bewegung",
+        "description": "Schriftgröße, Schriftarten, Abstände und reduzierte Bewegung finden Sie unter Barrierefreiheit.",
+        "button": "Barrierefreiheit"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Bilder & externe Inhalte",
         "images_description": "Externe Bilder können dem Absender verraten, dass Sie die Mail geöffnet haben.",
         "attachments": "Anhänge"
+      },
+      "plain_text_font_link": {
+        "label": "Schrift für Nur-Text-Nachrichten",
+        "description": "Wird zusammen mit den anderen Schriften unter Barrierefreiheit eingestellt.",
+        "button": "Barrierefreiheit"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Antworten",
         "sending": "Vor dem Senden",
         "receipts": "Lesebestätigungen"
+      }
+    },
+    "accessibility": {
+      "system": "System",
+      "on": "An",
+      "off": "Aus",
+      "presets": {
+        "title": "Voreinstellungen",
+        "description": "Jede Voreinstellung ändert mehrere Einstellungen auf einmal. Danach sind es normale Einstellungen, die Sie einzeln ändern können, und Sie können Voreinstellungen kombinieren.",
+        "applied": "{name} hat {count, plural, one {# Einstellung} other {# Einstellungen}} geändert:",
+        "nothing_changed": "{name}: Ihre Einstellungen passen bereits.",
+        "undo": "Rückgängig",
+        "show_button": "Barrierefreiheits-Schaltfläche in der Navigationsleiste zeigen",
+        "screen-reader": {
+          "label": "Screenreader",
+          "description": "Kein Lesebereich neben der Liste, keine Gruppierung nach Konversation, die Vorschau wird mit jeder Nachricht vorgelesen."
+        },
+        "low-vision": {
+          "label": "Sehbehinderung",
+          "description": "Größere Schrift, mehr Kontrast, ein dickerer Fokusrahmen, unterstrichene Links und ein großer Mauszeiger."
+        },
+        "dyslexia": {
+          "label": "Legasthenie",
+          "description": "Eine besser lesbare Schrift, mehr Abstand zwischen Zeilen, Buchstaben und Wörtern und eine schmalere Lesespalte."
+        },
+        "focus": {
+          "label": "Konzentration",
+          "description": "Einfaches Layout, keine Vorschau und keine Absenderbilder, ein Punkt statt Ungelesen-Zahlen, keine Bewegung."
+        },
+        "motor": {
+          "label": "Tastatur und Motorik",
+          "description": "Größere Schaltflächen, Menüs öffnen per Klick, eine Aktionen-Schaltfläche an jeder Nachricht, länger sichtbare Hinweise."
+        },
+        "motion": {
+          "label": "Bewegung und Anfälle",
+          "description": "Keine Animationen, animierte Bilder angehalten, keine durchscheinenden Flächen, keine blinkenden Hinweise."
+        },
+        "hearing": {
+          "label": "Gehörlos und schwerhörig",
+          "description": "Sichtbare Hinweise statt Töne und Benachrichtigungen, die bleiben, bis Sie sie schließen."
+        }
+      },
+      "quick_button": {
+        "label": "Barrierefreiheits-Schaltfläche in der Navigationsleiste",
+        "description": "Fügt eine Schaltfläche hinzu, die Schriftgröße, Kontrast, Bewegung und die Voreinstellungen von überall öffnet. Alt+Umschalt+A öffnet dasselbe Fenster, mit oder ohne Schaltfläche."
+      },
+      "sections": {
+        "text": "Text und Lesen",
+        "contrast": "Farbe und Kontrast",
+        "motion": "Bewegung",
+        "keyboard": "Tastatur und Fokus",
+        "pointer": "Zeiger und Touch",
+        "mail": "E-Mail",
+        "timing": "Zeit und Fehler",
+        "alerts": "Hinweise und Ablenkungen",
+        "screen_readers": "Screenreader"
+      },
+      "text_size": {
+        "label": "Schriftgröße",
+        "description": "Skaliert die Schriftgröße, die Sie im Browser eingestellt haben. 100 % ist die Größe Ihres Browsers.",
+        "small": "87,5 %",
+        "medium": "100 %",
+        "large": "112,5 %",
+        "x-large": "125 %",
+        "xx-large": "150 %",
+        "xxx-large": "175 %",
+        "huge": "200 %"
+      },
+      "font": {
+        "label": "Schriftart",
+        "description": "Atkinson Hyperlegible und Lexend sind so gestaltet, dass sich die Buchstaben gut unterscheiden; OpenDyslexic hilft manchen Menschen mit Legasthenie. Sie decken lateinische Schrift ab.",
+        "default": "Schrift des Designs"
+      },
+      "plain_text_font": {
+        "label": "Schrift für Nur-Text-Nachrichten",
+        "description": "Für Nachrichten ohne Formatierung.",
+        "sans": "Wie oben",
+        "mono": "Festbreitenschrift"
+      },
+      "spacing": {
+        "normal": "Normal",
+        "relaxed": "Mehr",
+        "loose": "Am meisten",
+        "wide": "Weit",
+        "wider": "Weiter"
+      },
+      "line_spacing": {
+        "label": "Zeilenabstand",
+        "description": "Abstand zwischen Textzeilen."
+      },
+      "letter_spacing": {
+        "label": "Buchstabenabstand",
+        "description": "Abstand zwischen Buchstaben."
+      },
+      "word_spacing": {
+        "label": "Wortabstand",
+        "description": "Abstand zwischen Wörtern."
+      },
+      "paragraph_spacing": {
+        "label": "Absatzabstand",
+        "description": "Abstand nach jedem Absatz."
+      },
+      "reading_width": {
+        "label": "Lesebreite",
+        "description": "Begrenzt Zeilen in Nachrichten auf etwa 80 Zeichen, damit die Augen keine weiten Wege gehen müssen.",
+        "full": "Volle Breite",
+        "comfortable": "Etwa 80 Zeichen"
+      },
+      "reading_mask": {
+        "label": "Lesemaske",
+        "description": "Blendet in einer Nachricht alles außer ein paar Zeilen um den Zeiger ab, damit Sie die Stelle nicht verlieren."
+      },
+      "plain_language": {
+        "label": "Einfache Sprache",
+        "description": "Einfachere Formulierungen in Einstellungen und Fehlermeldungen und kurze Erklärungen zu Fachbegriffen. Auf Deutsch und Englisch verfügbar."
+      },
+      "contrast": {
+        "label": "Kontrast",
+        "description": "Mehr Kontrast macht Text, Rahmen und den Fokusrahmen bei jedem Design dunkler oder heller und unterstreicht Links. System folgt Ihrem Gerät.",
+        "more": "Mehr",
+        "normal": "Normal"
+      },
+      "transparency": {
+        "label": "Transparenz reduzieren",
+        "description": "Feste Hintergründe statt durchscheinender und unscharfer Flächen."
+      },
+      "underline_links": {
+        "label": "Links unterstreichen",
+        "description": "Unterstreicht Links in der App und in Nachrichten, damit sie nicht nur an der Farbe erkennbar sind."
+      },
+      "color_names": {
+        "label": "Namen neben Farben zeigen",
+        "description": "Zeigt Tag-Namen an Nachrichten und Kalendernamen an Terminen statt nur farbiger Punkte."
+      },
+      "cvd_palette": {
+        "label": "Farben für Farbenblindheit",
+        "description": "Verwendet Farben für Tags, Ordner und Kalender, die bei Rot-Grün- oder Blau-Gelb-Schwäche unterscheidbar bleiben."
+      },
+      "theme_link": {
+        "label": "Design und Farbmodus",
+        "description": "Hell, dunkel und die Designs finden Sie unter Darstellung.",
+        "button": "Darstellung"
+      },
+      "reduce_motion": {
+        "label": "Bewegung reduzieren",
+        "description": "Schaltet gleitende Bereiche, Übergänge und weiches Scrollen aus, auch in Nachrichten. System folgt Ihrem Gerät."
+      },
+      "pause_images": {
+        "label": "Animierte Bilder anhalten",
+        "description": "Zeigt bei animierten GIFs in Nachrichten das erste Bild mit einer Schaltfläche zum Abspielen. System hält sie an, wenn Ihr Gerät weniger Bewegung wünscht."
+      },
+      "single_key_shortcuts": {
+        "label": "Tastenkürzel mit einer Taste",
+        "description": "Kürzel wie j, k, e und #, die nur eine Taste nutzen. Schalten Sie sie aus, wenn Sie Spracheingabe nutzen oder versehentlich Tasten drücken. Kürzel mit Strg oder Alt funktionieren weiter."
+      },
+      "shortcut_list": {
+        "label": "Tastenkürzel",
+        "description": "Alle Kürzel für die App, in der Sie gerade sind.",
+        "button": "Kürzel anzeigen"
+      },
+      "focus_ring": {
+        "label": "Fokusrahmen",
+        "description": "Der Rahmen um die Schaltfläche, den Link oder das Feld, auf dem die Tastatur gerade ist.",
+        "normal": "Normal",
+        "thick": "Dick",
+        "extra": "Extra dick"
+      },
+      "focus_always": {
+        "label": "Fokus immer zeigen",
+        "description": "Zeigt den Rahmen auch nach Klicks, nicht nur bei Tastaturbedienung."
+      },
+      "large_targets": {
+        "label": "Große Bedienelemente",
+        "description": "Macht Schaltflächen, Kontrollkästchen und andere Elemente mindestens 44 Pixel groß. System schaltet das bei Touchscreens ein."
+      },
+      "large_cursor": {
+        "label": "Großer Mauszeiger",
+        "description": "Ein größerer Zeiger in der App."
+      },
+      "open_on_hover": {
+        "label": "Beim Darüberfahren öffnen",
+        "description": "Menüs, Vorschauen und Karten öffnen sich, wenn der Zeiger darauf ruht. Ausschalten, damit sie sich nur per Klick öffnen."
+      },
+      "row_action_button": {
+        "label": "Aktionen-Schaltfläche an jeder Nachricht",
+        "description": "Zeigt in jeder Zeile eine Schaltfläche mit den Aktionen der Nachricht, damit Sie weder darüberfahren noch rechtsklicken müssen."
+      },
+      "native_scrollbars": {
+        "label": "Breitere Bildlaufleisten",
+        "description": "Verwendet die Bildlaufleisten Ihres Browsers, die breiter und leichter zu greifen sind."
+      },
+      "row_actions_link": {
+        "label": "Aktionen beim Darüberfahren und Wischen",
+        "description": "Welche Aktionen an Nachrichtenzeilen erscheinen.",
+        "button": "Nachrichtenliste"
+      },
+      "mail_view": {
+        "label": "Nachrichten anzeigen als",
+        "description": "Nur-Text entfernt Layout, Farben und Bilder einer Nachricht. Sie können jede Nachricht im Lesebereich umschalten.",
+        "html": "Formatiert",
+        "plain": "Nur Text"
+      },
+      "mail_text_size": {
+        "label": "Schriftgröße in Nachrichten",
+        "description": "Schriftgröße innerhalb von Nachrichten. Sie bleibt für jede Nachricht gleich.",
+        "follow": "Wie in der App"
+      },
+      "mail_min_font_size": {
+        "label": "Kleinste Schrift in Nachrichten",
+        "description": "Vergrößert Text, den eine Nachricht kleiner setzt.",
+        "none": "Kein Minimum",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Meine Schrift und Farben in Nachrichten",
+        "description": "Ersetzt Schrift, Größe und Farben des Absenders durch Ihre. Newsletter können dadurch anders aussehen.",
+        "never": "Nie",
+        "high_contrast": "Bei mehr Kontrast",
+        "always": "Immer"
+      },
+      "mail_fit_width": {
+        "label": "Breite Nachrichten einpassen",
+        "description": "Verkleinert Nachrichten, die breiter als der Lesebereich sind, statt seitlich zu scrollen."
+      },
+      "read_aloud_rate": {
+        "label": "Vorlesegeschwindigkeit",
+        "description": "Wie schnell Vorlesen eine Nachricht spricht."
+      },
+      "compose_font": {
+        "label": "Schrift für neue Nachrichten",
+        "description": "Die Schrift, mit der neue Nachrichten beginnen. Empfänger sehen sie, wenn ihr E-Mail-Programm sie hat.",
+        "default": "Standard",
+        "sans": "Serifenlos",
+        "serif": "Serif",
+        "mono": "Festbreitenschrift"
+      },
+      "compose_size": {
+        "label": "Schriftgröße für neue Nachrichten",
+        "description": "Die Größe, mit der neue Nachrichten beginnen.",
+        "default": "Standard"
+      },
+      "toast_duration": {
+        "label": "Anzeigedauer von Hinweisen",
+        "description": "Wie lange Hinweise wie „In Archiv verschoben“ mit ihrer Schaltfläche Rückgängig sichtbar bleiben.",
+        "until_closed": "Bis ich sie schließe",
+        "seconds": "{seconds} Sekunden"
+      },
+      "confirm_send": {
+        "label": "Vor dem Senden bestätigen",
+        "description": "Fragt nach, bevor eine Nachricht gesendet wird."
+      },
+      "confirm_delete": {
+        "label": "Vor dem Löschen bestätigen",
+        "description": "Fragt nach, bevor eine Nachricht gelöscht wird, auch bei einzelnen Nachrichten."
+      },
+      "confirm_archive": {
+        "label": "Vor dem Archivieren bestätigen",
+        "description": "Fragt nach, bevor eine Nachricht archiviert wird."
+      },
+      "send_warnings_link": {
+        "label": "Warnungen vor dem Senden",
+        "description": "Fehlender Betreff, vergessener Anhang und Platzhaltertext.",
+        "button": "Verfassen"
+      },
+      "visual_alerts": {
+        "label": "Sichtbare Hinweise",
+        "description": "Lässt den Tab-Titel langsam blinken, wenn neue E-Mails oder Erinnerungen eintreffen, und lässt Erinnerungen stehen, bis Sie sie schließen."
+      },
+      "unread_counts": {
+        "label": "Ungelesen-Zähler",
+        "description": "Wie Ordner und die Navigationsleiste ungelesene E-Mails zeigen.",
+        "count": "Zahl",
+        "dot": "Punkt",
+        "hidden": "Aus"
+      },
+      "do_not_disturb": {
+        "label": "Nicht stören",
+        "description": "Keine Töne, Benachrichtigungen oder Ansagen für neue E-Mails, bis Sie das wieder ausschalten."
+      },
+      "announce_new_mail": {
+        "label": "Neue E-Mails ansagen",
+        "description": "Screenreader sagen, wie viele neue Nachrichten angekommen sind, ohne sie vorzulesen."
+      },
+      "announce_preview": {
+        "label": "Vorschau in der Liste vorlesen",
+        "description": "Screenreader lesen die erste Zeile jeder Nachricht zusammen mit Absender und Betreff."
+      },
+      "simple_mode": {
+        "label": "Einfacher Modus",
+        "description": "Eine Spalte, weniger Schaltflächen und keine Seitenbereiche."
+      },
+      "simple_mode_paged": {
+        "label": "Nachrichtenliste seitenweise",
+        "description": "Zeigt die Liste in Seiten zu 50 mit Weiter und Zurück statt endlosem Scrollen. Mit Screenreader einfacher."
+      },
+      "reset": {
+        "title": "Zurücksetzen",
+        "label": "Barrierefreiheit zurücksetzen",
+        "description": "Setzt alle Einstellungen auf dieser Seite auf den Standard zurück, oder auf den Wert, den Ihre Organisation festgelegt hat. Gemeinsame Einstellungen wie die Konversationsansicht bleiben, wie sie sind.",
+        "button": "Zurücksetzen",
+        "done": "Barrierefreiheit zurückgesetzt."
       }
     }
   },

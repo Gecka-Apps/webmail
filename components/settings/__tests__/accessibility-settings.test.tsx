@@ -1,0 +1,101 @@
+import { fireEvent, render, screen, within } from '@testing-library/react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { AccessibilitySettings } from '../accessibility-settings';
+import { useSettingsStore } from '@/stores/settings-store';
+import { usePolicyStore } from '@/stores/policy-store';
+import { DEFAULT_POLICY } from '@/lib/admin/types';
+import { presetChanges } from '@/lib/accessibility-presets';
+
+// Labels are their keys; plural/ICU arguments are appended so tests can see them.
+vi.mock('next-intl', () => ({
+  useTranslations: (ns?: string) => (key: string, values?: Record<string, unknown>) =>
+    `${ns ? `${ns}.` : ''}${key}${values ? ` ${JSON.stringify(values)}` : ''}`,
+}));
+
+const settings = () => useSettingsStore.getState();
+
+beforeEach(() => {
+  localStorage.clear();
+  usePolicyStore.setState({ policy: { ...DEFAULT_POLICY }, loaded: true });
+  settings().resetToDefaults();
+});
+
+function presetButton(name: string) {
+  return screen.getByRole('button', { name: new RegExp(`settings\\.accessibility\\.presets\\.${name}\\.label`) });
+}
+
+describe('accessibility presets', () => {
+  it('changes several settings at once and lists what changed', () => {
+    render(<AccessibilitySettings />);
+    fireEvent.click(presetButton('low-vision'));
+    expect(settings().fontSize).toBe('xx-large');
+    expect(settings().contrast).toBe('more');
+    expect(settings().largeCursor).toBe(true);
+    const summary = screen.getByTestId('preset-summary');
+    expect(within(summary).getByText('settings.accessibility.text_size.label')).toBeTruthy();
+    expect(within(summary).getByText('settings.accessibility.contrast.label')).toBeTruthy();
+  });
+
+  it('undoes exactly what the preset changed', () => {
+    settings().updateSetting('fontSize', 'large');
+    settings().updateSetting('underlineLinks', true);
+    render(<AccessibilitySettings />);
+    fireEvent.click(presetButton('low-vision'));
+    expect(settings().fontSize).toBe('xx-large');
+    fireEvent.click(screen.getByRole('button', { name: 'settings.accessibility.presets.undo' }));
+    expect(settings().fontSize).toBe('large');
+    // Already on before the preset; the undo must not switch it off.
+    expect(settings().underlineLinks).toBe(true);
+    expect(settings().contrast).toBe('system');
+  });
+
+  it('combines presets: a second one keeps what the first set', () => {
+    render(<AccessibilitySettings />);
+    fireEvent.click(presetButton('dyslexia'));
+    fireEvent.click(presetButton('motion'));
+    expect(settings().appFont).toBe('atkinson');
+    expect(settings().reduceMotion).toBe('on');
+  });
+
+  it('offers to show the quick button after a preset', () => {
+    render(<AccessibilitySettings />);
+    fireEvent.click(presetButton('motor'));
+    fireEvent.click(screen.getByRole('button', { name: 'settings.accessibility.presets.show_button' }));
+    expect(settings().showAccessibilityButton).toBe(true);
+  });
+
+  it('skips settings the admin locked and toast durations under the minimum', () => {
+    const state = { ...settings() } as unknown as Record<string, unknown>;
+    const changes = presetChanges('hearing', state, (key) => key === 'emailNotificationSound');
+    expect(changes.map((c) => c.key)).not.toContain('emailNotificationSound');
+
+    const motor = presetChanges('motor', state, () => false, (key, value) => key !== 'toastDuration' || (value as number) >= 60);
+    expect(motor.map((c) => c.key)).not.toContain('toastDuration');
+  });
+});
+
+describe('reset', () => {
+  it('puts the accessibility settings back to their defaults', () => {
+    settings().updateSetting('appFont', 'lexend');
+    settings().updateSetting('fontSize', 'huge');
+    settings().updateSetting('disableThreading', true);
+    render(<AccessibilitySettings />);
+    fireEvent.click(screen.getByRole('button', { name: 'settings.accessibility.reset.button' }));
+    expect(settings().appFont).toBe('default');
+    expect(settings().fontSize).toBe('medium');
+    // A shared everyday preference is not an accessibility setting to reset.
+    expect(settings().disableThreading).toBe(true);
+  });
+});
+
+describe('toast duration', () => {
+  it('only offers durations at or above the admin minimum', () => {
+    usePolicyStore.setState({ policy: { ...DEFAULT_POLICY, restrictions: { toastDuration: { min: 20 } } }, loaded: true });
+    render(<AccessibilitySettings />);
+    const select = screen.getAllByRole('combobox').find((el) =>
+      Array.from((el as HTMLSelectElement).options).some((o) => o.textContent?.includes('until_closed')),
+    ) as HTMLSelectElement;
+    const values = Array.from(select.options).map((o) => o.value);
+    expect(values).toEqual(['20', '60', '0']);
+  });
+});

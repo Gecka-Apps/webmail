@@ -17,6 +17,16 @@ import { DEFAULT_FILES_SETTINGS, normalizeFilesSettings, type FilesSettings } fr
 import { orderForMailbox, sanitizeSortLevels, type MessageListOrderScope, type SortLevel } from '@/lib/message-list-order';
 import { EMPTY_SIGNATURE_DETAILS, sanitizeSignatureDetails, type SignatureDetails } from '@/lib/org-signature';
 import {
+  ACCESSIBILITY_DEFAULTS,
+  ACCESSIBILITY_KEYS,
+  UNLOCKABLE_SETTING_KEYS,
+  applyAccessibilityTo,
+  isAllowedAccessibilityValue,
+  toastDurationAtLeast,
+  type AccessibilitySettings,
+  type FontSize,
+} from '@/lib/accessibility-settings';
+import {
   DEFAULT_SUB_ADDRESS_DELIMITER,
   isValidSubAddressDelimiter,
 } from '@/lib/sub-addressing';
@@ -259,7 +269,7 @@ function toKeywordViews(keywords: KeywordDefinition[]): { id: string; name: stri
   return keywords.map((k) => ({ id: k.id, name: k.label, color: k.color }));
 }
 
-export type FontSize = 'small' | 'medium' | 'large';
+export type { FontSize } from '@/lib/accessibility-settings';
 export type Density = 'extra-compact' | 'compact' | 'regular' | 'comfortable';
 /**
  * Which interface layout drives the shell's geometry. `default` is the app's
@@ -507,7 +517,7 @@ export const DEV_KEYWORDS: KeywordDefinition[] = [
 
 const USING_MOCK_SERVER = process.env.NEXT_PUBLIC_DEV_MOCK_JMAP === 'true';
 
-interface SettingsState {
+interface SettingsState extends AccessibilitySettings {
   // Appearance
   fontSize: FontSize;
   density: Density;
@@ -516,7 +526,6 @@ interface SettingsState {
   // The folded sections of the "Unread first" inbox; per device.
   mvUnreadSectionCollapsed: boolean;
   mvEverythingElseCollapsed: boolean;
-  animationsEnabled: boolean;
   // Message-list ordering (#718): prioritised sort levels mapped onto the JMAP
   // Email/query sort; empty = chronological. Scope: Inbox only or every folder.
   messageListOrder: SortLevel[];
@@ -837,7 +846,8 @@ const DEFAULT_SETTINGS = {
   mvInboxType: 'unread-first' as MvInboxType,
   mvUnreadSectionCollapsed: false,
   mvEverythingElseCollapsed: false,
-  animationsEnabled: true,
+  // Settings > Accessibility (lib/accessibility-settings.ts)
+  ...ACCESSIBILITY_DEFAULTS,
   messageListOrder: [] as SortLevel[],
   messageListOrderScope: 'inbox' as MessageListOrderScope,
 
@@ -1085,14 +1095,33 @@ function isAllowedPolicyValue(key: string, value: unknown, restriction?: Setting
   if (key === 'sendDelaySeconds' && ![0, 10, 30, 60].includes(value as number)) return false;
   if (key === 'subAddressDelimiter' && !isValidSubAddressDelimiter(value as string)) return false;
   if (key === 'messageListOrderScope' && value !== 'inbox' && value !== 'all') return false;
+  if (!isAllowedAccessibilityValue(key, value)) return false;
   if (restriction && typeof restriction === 'object') {
     if (Array.isArray(restriction.allowedValues) && !restriction.allowedValues.includes(value)) return false;
+    // 0 keeps toasts until they're closed, which meets any minimum.
+    if (key === 'toastDuration' && typeof restriction.min === 'number') {
+      return toastDurationAtLeast(value as number, restriction.min);
+    }
     if (typeof value === 'number') {
       if (typeof restriction.min === 'number' && value < restriction.min) return false;
       if (typeof restriction.max === 'number' && value > restriction.max) return false;
     }
   }
   return true;
+}
+
+/**
+ * A policy.json written for builds before Reduce motion (v9) presets or
+ * locks `animationsEnabled`; it now means the same `reduceMotion` value.
+ */
+function withLegacyPolicyKeys<T>(record: Record<string, T>): Record<string, T> {
+  if (!hasOwn(record, 'animationsEnabled') || hasOwn(record, 'reduceMotion')) return record;
+  const { animationsEnabled: legacy, ...rest } = record as Record<string, unknown>;
+  const toMotion = (v: unknown) => (v === false ? 'on' : v === true ? 'system' : v);
+  const mapped = isPlainRecord(legacy)
+    ? { ...legacy, ...(hasOwn(legacy, 'value') ? { value: toMotion(legacy.value) } : {}) }
+    : toMotion(legacy);
+  return { ...rest, reduceMotion: mapped } as Record<string, T>;
 }
 
 /**
@@ -1118,8 +1147,8 @@ export function adminPolicyPatch(
   policy: Partial<Pick<SettingsPolicy, 'defaults' | 'restrictions'>>,
 ): Record<string, unknown> {
   const explicit = new Set(Array.isArray(state.explicitSettings) ? (state.explicitSettings as string[]) : []);
-  const defaults = isPlainRecord(policy.defaults) ? policy.defaults : {};
-  const restrictions: Record<string, SettingRestriction> = isPlainRecord(policy.restrictions) ? policy.restrictions : {};
+  const defaults = withLegacyPolicyKeys(isPlainRecord(policy.defaults) ? policy.defaults : {});
+  const restrictions = withLegacyPolicyKeys<SettingRestriction>(isPlainRecord(policy.restrictions) ? policy.restrictions : {});
   const restrictionFor = (key: string) => (hasOwn(restrictions, key) ? restrictions[key] : undefined);
   const patch: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(defaults)) {
@@ -1130,6 +1159,9 @@ export function adminPolicyPatch(
     if (!isPlainRecord(restriction) || restriction.locked !== true) continue;
     const value = hasOwn(restriction, 'value') ? restriction.value : hasOwn(defaults, key) ? defaults[key] : undefined;
     if (!isAllowedPolicyValue(key, value, restriction)) continue;
+    // Text size, contrast, motion and the other reading aids can't be
+    // locked: a lock on one of them works as a default the user may change.
+    if (UNLOCKABLE_SETTING_KEYS.has(key) && explicit.has(key)) continue;
     if (state[key] !== value) patch[key] = value;
     else delete patch[key];
   }
@@ -1198,11 +1230,10 @@ export const useSettingsStore = create<SettingsState>()(
       };
 
       const applyVisualSettings = () => {
-        const { fontSize, density, interfaceLayout, animationsEnabled } = get();
-        applyFontSize(fontSize);
-        applyDensity(density, interfaceLayout);
-        applyInterfaceLayout(interfaceLayout, density);
-        applyAnimations(animationsEnabled);
+        const state = get();
+        applyAccessibility(state);
+        applyDensity(state.density, state.interfaceLayout);
+        applyInterfaceLayout(state.interfaceLayout, state.density);
       };
 
       /** Sets what the admin policy changes; true when anything changed. */
@@ -1219,9 +1250,10 @@ export const useSettingsStore = create<SettingsState>()(
       const applySetting = <K extends keyof SettingsState>(key: K, value: SettingsState[K]) => {
         set({ [key]: value } as Partial<SettingsState>);
 
-        // Apply font size to document root
-        if (key === 'fontSize') {
-          applyFontSize(value as FontSize);
+        // Text size, contrast, motion and the other visual accessibility
+        // settings live on <html> (lib/accessibility-settings.ts).
+        if (key === 'fontSize' || ACCESSIBILITY_DOM_KEYS.has(key)) {
+          applyAccessibility(get());
         }
 
         // Apply density to document root
@@ -1235,10 +1267,6 @@ export const useSettingsStore = create<SettingsState>()(
           applyInterfaceLayout(value as InterfaceLayout, get().density);
         }
 
-        // Apply animations to document root
-        if (key === 'animationsEnabled') {
-          applyAnimations(value as boolean);
-        }
       };
 
       const buildExport = (opts?: { forSync?: boolean; subscriptionOwner?: string }): string => {
@@ -1252,7 +1280,6 @@ export const useSettingsStore = create<SettingsState>()(
           density: state.density,
           interfaceLayout: state.interfaceLayout,
           mvInboxType: state.mvInboxType,
-          animationsEnabled: state.animationsEnabled,
           messageListOrder: state.messageListOrder,
           messageListOrderScope: state.messageListOrderScope,
           dateFormat: state.dateFormat,
@@ -1373,6 +1400,9 @@ export const useSettingsStore = create<SettingsState>()(
           debugCategories: state.debugCategories,
           settingsSyncDisabled: state.settingsSyncDisabled,
           explicitSettings: state.explicitSettings,
+          emailAlwaysLightMode: state.emailAlwaysLightMode,
+          showToolbarLabels: state.showToolbarLabels,
+          ...Object.fromEntries(ACCESSIBILITY_KEYS.map((key) => [key, state[key]])),
           // Cross-store settings
           theme: useThemeStore.getState().theme,
           themeChosen: useThemeStore.getState().themeChosen,
@@ -1462,6 +1492,7 @@ export const useSettingsStore = create<SettingsState>()(
           if (typeof settings.protocolOpenMode !== 'string' && typeof settings.protocolMailtoOpenMode === 'string') {
             settings.protocolOpenMode = settings.protocolMailtoOpenMode;
           }
+          migrateAnimationsSetting(settings);
 
           // Apply settings, noting which keys were taken over for the
           // onSettingsImport hook.
@@ -1481,6 +1512,11 @@ export const useSettingsStore = create<SettingsState>()(
               }
               if (key === 'sendDelaySeconds' && ![0, 10, 30, 60].includes(settings[key])) {
                 put(key, { sendDelaySeconds: 0 });
+                return;
+              }
+              // An enum the page doesn't know (an older or newer export, a
+              // hand-edited file) keeps the current value.
+              if (!isAllowedAccessibilityValue(key, settings[key])) {
                 return;
               }
               // Validity of the zone id itself is checked at use time
@@ -1858,7 +1894,7 @@ export const useSettingsStore = create<SettingsState>()(
     },
     {
       name: 'settings-storage',
-      version: 8,
+      version: 9,
       migrate: migrateSettings,
       onRehydrateStorage: () => {
         return (state) => {
@@ -1883,10 +1919,9 @@ export const useSettingsStore = create<SettingsState>()(
             if (state.messageListOrderScope !== 'inbox' && state.messageListOrderScope !== 'all') {
               state.messageListOrderScope = 'inbox';
             }
-            applyFontSize(state.fontSize);
+            applyAccessibility(state);
             applyDensity(state.density, state.interfaceLayout);
             applyInterfaceLayout(state.interfaceLayout, state.density);
-            applyAnimations(state.animationsEnabled);
           }
         };
       },
@@ -1963,20 +1998,38 @@ export function migrateSettings(persisted: unknown, version: number): SettingsSt
         if (version < 8 || !Array.isArray(state.explicitSettings)) {
           state.explicitSettings = legacyExplicitSettings(state);
         }
+        migrateAnimationsSetting(state);
         return state as unknown as SettingsState;
 }
 
-// Helper functions to apply settings to DOM
-function applyFontSize(size: FontSize) {
-  if (typeof document === 'undefined') return;
+/**
+ * v9: the Animations on/off switch became Reduce motion (System / On /
+ * Off). Off meant "no animations"; On let the OS setting decide, which is
+ * what System does now. Imports and server copies from older builds still
+ * carry the old key and go through this too.
+ */
+export function migrateAnimationsSetting(state: Record<string, unknown>): void {
+  if (typeof state.animationsEnabled === 'boolean') {
+    if (state.reduceMotion === undefined) state.reduceMotion = state.animationsEnabled ? 'system' : 'on';
+    delete state.animationsEnabled;
+  }
+  if (Array.isArray(state.explicitSettings)) {
+    state.explicitSettings = (state.explicitSettings as unknown[]).map((key) => (key === 'animationsEnabled' ? 'reduceMotion' : key));
+  }
+}
 
-  const root = document.documentElement;
-  const sizeMap = {
-    small: '14px',
-    medium: '16px',
-    large: '18px',
-  };
-  root.style.setProperty('--font-size-base', sizeMap[size]);
+// Helper functions to apply settings to DOM
+
+/** The settings applyAccessibilityTo() writes onto <html>. */
+const ACCESSIBILITY_DOM_KEYS: ReadonlySet<string> = new Set([
+  'contrast', 'reduceTransparency', 'underlineLinks', 'appFont', 'lineSpacing', 'letterSpacing', 'wordSpacing',
+  'paragraphSpacing', 'readingWidth', 'reduceMotion', 'focusRing', 'focusAlwaysVisible', 'largeTargets',
+  'largeCursor', 'nativeScrollbars', 'simpleMode', 'unreadCountStyle', 'colorBlindPalette', 'showColorNames',
+]);
+
+function applyAccessibility(state: { fontSize: FontSize } & AccessibilitySettings) {
+  if (typeof document === 'undefined') return;
+  applyAccessibilityTo(document.documentElement, state);
 }
 
 type DensityVars = Record<string, string>;
@@ -2060,22 +2113,6 @@ function applyInterfaceLayout(layout: InterfaceLayout, density: Density) {
   applyDensity(density, layout);
 }
 
-function applyAnimations(enabled: boolean) {
-  if (typeof document === 'undefined') return;
-
-  const root = document.documentElement;
-  if (enabled) {
-    root.style.removeProperty('--transition-duration');
-    delete root.dataset.animations;
-  } else {
-    root.style.setProperty('--transition-duration', '0s');
-    // The variable alone reached nothing that animates: the panes slide on
-    // Tailwind transitions and the menus on keyframes. globals.css stops
-    // them all under this attribute, as it does for prefers-reduced-motion.
-    root.dataset.animations = 'off';
-  }
-}
-
 // Tag definitions change from the settings editor, from plugins (host-api
 // writes the store directly) and from imports and server loads. Watching the
 // list catches every path once instead of hooking each writer.
@@ -2088,10 +2125,9 @@ useSettingsStore.subscribe((state, prev) => {
 // Initialize settings on load
 if (typeof window !== 'undefined') {
   const store = useSettingsStore.getState();
-  applyFontSize(store.fontSize);
+  applyAccessibility(store);
   applyDensity(store.density, store.interfaceLayout);
   applyInterfaceLayout(store.interfaceLayout, store.density);
-  applyAnimations(store.animationsEnabled);
 
   // The service worker shows push notifications without this store, so it
   // reads the sound preference from its own Cache store (#1289).

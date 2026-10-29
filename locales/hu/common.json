@@ -1209,7 +1209,8 @@
       "general": "Általános",
       "organize": "Mappák és címkék",
       "addons": "Bővítmények",
-      "backup": "Biztonsági mentés és visszaállítás"
+      "backup": "Biztonsági mentés és visszaállítás",
+      "accessibility": "Kisegítő lehetőségek"
     },
     "themes": {
       "title": "Témák",
@@ -1406,6 +1407,11 @@
         "dot": "Színes pont",
         "tint": "Színezett sor",
         "none": "Semmi"
+      },
+      "accessibility_link": {
+        "label": "Szöveg mérete és mozgás",
+        "description": "A szövegméret, a betűtípusok, a térközök és a csökkentett mozgás a Kisegítő lehetőségek oldalon találhatók.",
+        "button": "Kisegítő lehetőségek"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Képek és külső tartalom",
         "images_description": "A távoli képek elárulhatják a feladónak, hogy megnyitotta a levelet.",
         "attachments": "Mellékletek"
+      },
+      "plain_text_font_link": {
+        "label": "Egyszerű szöveges levelek betűtípusa",
+        "description": "A többi betűtípussal együtt a Kisegítő lehetőségek oldalon állítható be.",
+        "button": "Kisegítő lehetőségek"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Válaszolás",
         "sending": "Küldés előtt",
         "receipts": "Olvasási visszaigazolások"
+      }
+    },
+    "accessibility": {
+      "system": "Rendszer",
+      "on": "Be",
+      "off": "Ki",
+      "presets": {
+        "title": "Előbeállítások",
+        "description": "Minden előbeállítás egyszerre több beállítást módosít. Utána ezek közönséges beállítások, amelyeket egyenként is megváltoztathat, és az előbeállításokat kombinálhatja is.",
+        "applied": "{name} {count, plural, one {# beállítást} other {# beállítást}} módosított:",
+        "nothing_changed": "{name}: a beállításai már megfelelnek.",
+        "undo": "Visszavonás",
+        "show_button": "Kisegítő gomb megjelenítése a navigációs sávban",
+        "screen-reader": {
+          "label": "Képernyőolvasó",
+          "description": "Nincs olvasópanel a lista mellett, nincs beszélgetésekbe csoportosítás, az előnézetet minden üzenetnél felolvassa."
+        },
+        "low-vision": {
+          "label": "Gyengénlátás",
+          "description": "Nagyobb szöveg, nagyobb kontraszt, vastagabb fókuszkeret, aláhúzott hivatkozások és nagy kurzor."
+        },
+        "dyslexia": {
+          "label": "Diszlexia",
+          "description": "Jobban olvasható betűtípus, nagyobb térköz a sorok, betűk és szavak között, és keskenyebb olvasási oszlop."
+        },
+        "focus": {
+          "label": "Koncentráció",
+          "description": "Egyszerű elrendezés, nincs előnézet és feladóképek, olvasatlan számok helyett egy pont, nincs mozgás."
+        },
+        "motor": {
+          "label": "Billentyűzet és mozgásszervi",
+          "description": "Nagyobb kezelőelemek, kattintásra nyíló menük, műveletgomb minden üzeneten, hosszabban látható értesítések."
+        },
+        "motion": {
+          "label": "Mozgás és rohamok elleni védelem",
+          "description": "Nincsenek animációk, az animált képek szüneteltetve vannak, nincsenek áttetsző panelek, nincsenek villogó értesítések."
+        },
+        "hearing": {
+          "label": "Siket és nagyothalló",
+          "description": "Hangok helyett látható értesítések, és olyan értesítések, amelyek addig maradnak, amíg be nem zárja őket."
+        }
+      },
+      "quick_button": {
+        "label": "Kisegítő gomb a navigációs sávban",
+        "description": "Hozzáad egy gombot, amely bárhonnan megnyitja a szövegméretet, a kontrasztot, a mozgást és az előbeállításokat. Az Alt+Shift+A ugyanezt a panelt nyitja meg, a gombbal és anélkül is."
+      },
+      "sections": {
+        "text": "Szöveg és olvasás",
+        "contrast": "Szín és kontraszt",
+        "motion": "Mozgás",
+        "keyboard": "Billentyűzet és fókusz",
+        "pointer": "Mutató és érintés",
+        "mail": "Levelek",
+        "timing": "Idő és hibák",
+        "alerts": "Értesítések és zavaró tényezők",
+        "screen_readers": "Képernyőolvasók"
+      },
+      "text_size": {
+        "label": "Szövegméret",
+        "description": "A böngészőben beállított szöveg méretét skálázza. A 100 % a böngésző saját mérete.",
+        "small": "87,5 %",
+        "medium": "100 %",
+        "large": "112,5 %",
+        "x-large": "125 %",
+        "xx-large": "150 %",
+        "xxx-large": "175 %",
+        "huge": "200 %"
+      },
+      "font": {
+        "label": "Betűtípus",
+        "description": "Az Atkinson Hyperlegible és a Lexend úgy készült, hogy a betűk jól megkülönböztethetők legyenek; az OpenDyslexic egyes diszlexiás embereknek segít. Latin írásrendszerre működnek.",
+        "default": "A téma betűtípusa"
+      },
+      "plain_text_font": {
+        "label": "Egyszerű szöveges levelek betűtípusa",
+        "description": "Formázás nélkül küldött üzenetekhez.",
+        "sans": "Mint fent",
+        "mono": "Fix szélességű"
+      },
+      "spacing": {
+        "normal": "Normál",
+        "relaxed": "Több",
+        "loose": "Legtöbb",
+        "wide": "Széles",
+        "wider": "Szélesebb"
+      },
+      "line_spacing": {
+        "label": "Sortávolság",
+        "description": "A szövegsorok közötti térköz."
+      },
+      "letter_spacing": {
+        "label": "Betűköz",
+        "description": "A betűk közötti térköz."
+      },
+      "word_spacing": {
+        "label": "Szóköz",
+        "description": "A szavak közötti térköz."
+      },
+      "paragraph_spacing": {
+        "label": "Bekezdések közötti távolság",
+        "description": "Az egyes bekezdések utáni térköz."
+      },
+      "reading_width": {
+        "label": "Olvasási szélesség",
+        "description": "Az üzenetek sorait körülbelül 80 karakterre korlátozza, hogy a szemnek ne kelljen messzire követnie a sort.",
+        "full": "Teljes szélesség",
+        "comfortable": "Körülbelül 80 karakter"
+      },
+      "reading_mask": {
+        "label": "Olvasómaszk",
+        "description": "Az üzenetben a mutató körüli néhány sor kivételével mindent elhomályosít, hogy ne veszítse el a helyét."
+      },
+      "plain_language": {
+        "label": "Egyszerű nyelv",
+        "description": "Egyszerűbb megfogalmazás a beállításokban és a hibaüzenetekben, valamint rövid magyarázatok a szakkifejezésekhez. Angolul és németül érhető el."
+      },
+      "contrast": {
+        "label": "Kontraszt",
+        "description": "A nagyobb kontraszt minden témán sötétebbé vagy világosabbá teszi a szöveget, a kereteket és a fókuszkeretet, és aláhúzza a hivatkozásokat. A Rendszer az eszköze beállítását követi.",
+        "more": "Nagyobb",
+        "normal": "Normál"
+      },
+      "transparency": {
+        "label": "Átlátszóság csökkentése",
+        "description": "Tömör háttér az áttetsző és elmosott panelek helyett."
+      },
+      "underline_links": {
+        "label": "Hivatkozások aláhúzása",
+        "description": "Aláhúzza a hivatkozásokat az alkalmazásban és az üzenetekben, hogy ne csak a színük alapján lehessen felismerni őket."
+      },
+      "color_names": {
+        "label": "Nevek megjelenítése a színek mellett",
+        "description": "Az üzeneteken a címkék nevét, az eseményeken a naptárak nevét is megmutatja, nem csak színes pontokat."
+      },
+      "cvd_palette": {
+        "label": "Színtévesztőknek megfelelő színek",
+        "description": "Olyan címke-, mappa- és naptárszíneket használ, amelyek vörös-zöld vagy kék-sárga színtévesztés esetén is megkülönböztethetők maradnak."
+      },
+      "theme_link": {
+        "label": "Téma és színmód",
+        "description": "A világos és sötét módot, valamint a témákat a Megjelenés oldalon találja.",
+        "button": "Megjelenés"
+      },
+      "reduce_motion": {
+        "label": "Mozgás csökkentése",
+        "description": "Kikapcsolja a becsúszó paneleket, az átmeneteket és a finom görgetést, az üzeneteken belül is. A Rendszer az eszköze beállítását követi."
+      },
+      "pause_images": {
+        "label": "Animált képek szüneteltetése",
+        "description": "Az üzenetekben az animált GIF-ek első képkockáját mutatja, lejátszás gombbal. A Rendszer akkor szünetelteti őket, ha az eszköz csökkentett mozgást kér."
+      },
+      "single_key_shortcuts": {
+        "label": "Egybillentyűs gyorsbillentyűk",
+        "description": "Egyetlen billentyűt használó gyorsbillentyűk, például j, k, e és #. Kapcsolja ki őket, ha hangvezérlést használ, vagy véletlenül nyom meg billentyűket. A Ctrl vagy Alt billentyűvel használt gyorsbillentyűk továbbra is működnek."
+      },
+      "shortcut_list": {
+        "label": "Gyorsbillentyűk",
+        "description": "Az éppen használt alkalmazás összes gyorsbillentyűje.",
+        "button": "Gyorsbillentyűk megjelenítése"
+      },
+      "focus_ring": {
+        "label": "Fókuszkeret",
+        "description": "A keret azon gomb, hivatkozás vagy mező körül, amelyen a billentyűzet áll.",
+        "normal": "Normál",
+        "thick": "Vastag",
+        "extra": "Extra vastag"
+      },
+      "focus_always": {
+        "label": "Fókusz mindig látszik",
+        "description": "A keretet kattintás után is megmutatja, nem csak billentyűzetes használatnál."
+      },
+      "large_targets": {
+        "label": "Nagy kezelőelemek",
+        "description": "A gombokat, jelölőnégyzeteket és más kezelőelemeket legalább 44 képpont méretűvé teszi. A Rendszer ezt érintőképernyőn bekapcsolja."
+      },
+      "large_cursor": {
+        "label": "Nagy egérmutató",
+        "description": "Nagyobb mutató az alkalmazáson belül."
+      },
+      "open_on_hover": {
+        "label": "Megnyitás rámutatáskor",
+        "description": "A menük, előnézetek és kártyák megnyílnak, ha a mutató rajtuk áll. Kapcsolja ki, ha csak kattintásra szeretné megnyitni őket."
+      },
+      "row_action_button": {
+        "label": "Műveletgomb minden üzeneten",
+        "description": "Minden sorban megjelenít egy gombot, amely megnyitja az üzenet műveleteit, így nem kell rámutatnia vagy jobb gombbal kattintania."
+      },
+      "native_scrollbars": {
+        "label": "Szélesebb görgetősávok",
+        "description": "A böngésző saját görgetősávjait használja, amelyek szélesebbek és könnyebben megfoghatók."
+      },
+      "row_actions_link": {
+        "label": "Rámutatásos és csúsztatásos műveletek",
+        "description": "Mely műveletek jelenjenek meg az üzenetsorokon.",
+        "button": "Üzenetlista"
+      },
+      "mail_view": {
+        "label": "Üzenetek megjelenítése így",
+        "description": "Az egyszerű szöveg elhagyja az üzenet elrendezését, színeit és képeit. Az olvasóban üzenetenként átválthat.",
+        "html": "Formázott",
+        "plain": "Egyszerű szöveg"
+      },
+      "mail_text_size": {
+        "label": "Szövegméret az üzenetekben",
+        "description": "Az üzeneteken belüli szöveg mérete. Minden üzenetnél ugyanaz marad.",
+        "follow": "Mint az alkalmazásban"
+      },
+      "mail_min_font_size": {
+        "label": "Legkisebb szöveg az üzenetekben",
+        "description": "Megnagyítja azt a szöveget, amelyet egy üzenet ennél kisebbre állít.",
+        "none": "Nincs minimum",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Saját betűtípus és színek az üzenetekben",
+        "description": "A feladó betűtípusát, méretét és színeit az Öné váltja fel. Ettől a hírlevelek máshogy nézhetnek ki.",
+        "never": "Soha",
+        "high_contrast": "Nagyobb kontrasztnál",
+        "always": "Mindig"
+      },
+      "mail_fit_width": {
+        "label": "Széles üzenetek az ablakhoz igazítása",
+        "description": "Összezsugorítja az olvasópanelnél szélesebb üzeneteket, ahelyett hogy oldalra kellene görgetni."
+      },
+      "read_aloud_rate": {
+        "label": "Felolvasás sebessége",
+        "description": "Milyen gyorsan olvassa fel az üzenetet a Felolvasás."
+      },
+      "compose_font": {
+        "label": "Új üzenetek betűtípusa",
+        "description": "A betűtípus, amellyel az új üzenetek indulnak. A címzettek akkor látják, ha a levelezőprogramjukban megvan.",
+        "default": "Alapértelmezett",
+        "sans": "Talpatlan",
+        "serif": "Talpas",
+        "mono": "Fix szélességű"
+      },
+      "compose_size": {
+        "label": "Új üzenetek szövegmérete",
+        "description": "A méret, amellyel az új üzenetek indulnak.",
+        "default": "Alapértelmezett"
+      },
+      "toast_duration": {
+        "label": "Értesítések megjelenítési ideje",
+        "description": "Mennyi ideig maradnak a képernyőn az olyan üzenetek, mint az „Áthelyezve az Archívumba”, a Visszavonás gombjukkal együtt.",
+        "until_closed": "Amíg be nem zárom",
+        "seconds": "{seconds} másodperc"
+      },
+      "confirm_send": {
+        "label": "Megerősítés küldés előtt",
+        "description": "Rákérdez, mielőtt elküld egy üzenetet."
+      },
+      "confirm_delete": {
+        "label": "Megerősítés törlés előtt",
+        "description": "Rákérdez, mielőtt töröl egy üzenetet, egyes üzeneteknél is."
+      },
+      "confirm_archive": {
+        "label": "Megerősítés archiválás előtt",
+        "description": "Rákérdez, mielőtt archivál egy üzenetet."
+      },
+      "send_warnings_link": {
+        "label": "Figyelmeztetések küldés előtt",
+        "description": "Hiányzó tárgy, elfelejtett melléklet és helyőrző szöveg.",
+        "button": "Írás"
+      },
+      "visual_alerts": {
+        "label": "Látható jelzések",
+        "description": "Lassan villogtatja a lap címét, ha új levél vagy emlékeztető érkezik, és az emlékeztetőket a képernyőn tartja, amíg be nem zárja őket."
+      },
+      "unread_counts": {
+        "label": "Olvasatlan számlálók",
+        "description": "Hogyan mutatják a mappák és a navigációs sáv az olvasatlan leveleket.",
+        "count": "Szám",
+        "dot": "Pont",
+        "hidden": "Rejtett"
+      },
+      "do_not_disturb": {
+        "label": "Ne zavarjanak",
+        "description": "Nincsenek hangok, felugró értesítések vagy felolvasott közlemények az új levelekről, amíg ki nem kapcsolja."
+      },
+      "announce_new_mail": {
+        "label": "Új levelek bejelentése",
+        "description": "A képernyőolvasók bemondják, hány új üzenet érkezett, de nem olvassák fel őket."
+      },
+      "announce_preview": {
+        "label": "Előnézet felolvasása a listában",
+        "description": "A képernyőolvasók a feladó és a tárgy mellett felolvassák minden üzenet első sorát."
+      },
+      "simple_mode": {
+        "label": "Egyszerű mód",
+        "description": "Egy oszlop, kevesebb gomb és nincsenek oldalpanelek."
+      },
+      "simple_mode_paged": {
+        "label": "Üzenetlista lapozása",
+        "description": "A listát 50 elemes oldalakban mutatja Következő és Előző gombokkal, végtelen görgetés helyett. Képernyőolvasóval egyszerűbb."
+      },
+      "reset": {
+        "title": "Visszaállítás",
+        "label": "Kisegítő beállítások visszaállítása",
+        "description": "Az oldal minden beállítását visszaállítja az alapértelmezettre, vagy arra, amelyet a szervezete megadott. A közös beállítások, például a beszélgetésnézet, változatlanok maradnak.",
+        "button": "Visszaállítás",
+        "done": "A kisegítő beállítások visszaállítva."
       }
     }
   },

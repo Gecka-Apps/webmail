@@ -1206,7 +1206,8 @@
       "general": "Obecné",
       "organize": "Složky a štítky",
       "addons": "Doplňky",
-      "backup": "Záloha a obnovení"
+      "backup": "Záloha a obnovení",
+      "accessibility": "Přístupnost"
     },
     "themes": {
       "title": "Motivy",
@@ -1403,6 +1404,11 @@
         "dot": "Barevná tečka",
         "tint": "Podbarvený řádek",
         "none": "Nic"
+      },
+      "accessibility_link": {
+        "label": "Velikost textu a pohyb",
+        "description": "Velikost textu, písma, mezery a omezení pohybu najdete na stránce Přístupnost.",
+        "button": "Přístupnost"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Obrázky a externí obsah",
         "images_description": "Vzdálené obrázky mohou odesílateli prozradit, že jste zprávu otevřeli.",
         "attachments": "Přílohy"
+      },
+      "plain_text_font_link": {
+        "label": "Písmo pošty v prostém textu",
+        "description": "Nastavuje se spolu s ostatními písmy na stránce Přístupnost.",
+        "button": "Přístupnost"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Odpovídání",
         "sending": "Před odesláním",
         "receipts": "Potvrzení o přečtení"
+      }
+    },
+    "accessibility": {
+      "system": "Systém",
+      "on": "Zapnuto",
+      "off": "Vypnuto",
+      "presets": {
+        "title": "Předvolby",
+        "description": "Každá předvolba změní několik nastavení najednou. Poté jde o běžná nastavení, která můžete měnit jednotlivě, a předvolby můžete kombinovat.",
+        "applied": "Předvolba {name} změnila {count, plural, one {# nastavení} few {# nastavení} many {# nastavení} other {# nastavení}}:",
+        "nothing_changed": "Předvolba {name}: vaše nastavení už odpovídá.",
+        "undo": "Zpět",
+        "show_button": "Zobrazit tlačítko přístupnosti v navigačním panelu",
+        "screen-reader": {
+          "label": "Čtečka obrazovky",
+          "description": "Bez čtecího panelu vedle seznamu, bez seskupování do konverzací, náhled se čte spolu s každou zprávou."
+        },
+        "low-vision": {
+          "label": "Slabý zrak",
+          "description": "Větší text, vyšší kontrast, silnější obrys zaměření, podtržené odkazy a velký kurzor."
+        },
+        "dyslexia": {
+          "label": "Dyslexie",
+          "description": "Čitelnější písmo, větší mezery mezi řádky, písmeny a slovy a užší sloupec textu."
+        },
+        "focus": {
+          "label": "Soustředění",
+          "description": "Jednoduché rozvržení, bez náhledů a obrázků odesílatelů, tečka místo počtu nepřečtených, bez pohybu."
+        },
+        "motor": {
+          "label": "Klávesnice a motorika",
+          "description": "Větší ovládací prvky, nabídky otevírané kliknutím, tlačítko akcí u každé zprávy a déle zobrazená oznámení."
+        },
+        "motion": {
+          "label": "Bez pohybu a záchvatů",
+          "description": "Bez animací, animované obrázky zastavené, bez průhledných panelů a bez blikajících upozornění."
+        },
+        "hearing": {
+          "label": "Neslyšící a nedoslýchaví",
+          "description": "Vizuální upozornění místo zvuků a oznámení, která zůstanou, dokud je nezavřete."
+        }
+      },
+      "quick_button": {
+        "label": "Tlačítko přístupnosti v navigačním panelu",
+        "description": "Přidá tlačítko, které odkudkoli otevře velikost textu, kontrast, pohyb a předvolby. Alt+Shift+A otevře stejný panel, s tlačítkem i bez něj."
+      },
+      "sections": {
+        "text": "Text a čtení",
+        "contrast": "Barvy a kontrast",
+        "motion": "Pohyb",
+        "keyboard": "Klávesnice a zaměření",
+        "pointer": "Ukazatel a dotyk",
+        "mail": "Pošta",
+        "timing": "Čas a chyby",
+        "alerts": "Upozornění a rušivé prvky",
+        "screen_readers": "Čtečky obrazovky"
+      },
+      "text_size": {
+        "label": "Velikost textu",
+        "description": "Zvětší nebo zmenší text podle nastavení v prohlížeči. 100 % je velikost vašeho prohlížeče.",
+        "small": "87,5 %",
+        "medium": "100 %",
+        "large": "112,5 %",
+        "x-large": "125 %",
+        "xx-large": "150 %",
+        "xxx-large": "175 %",
+        "huge": "200 %"
+      },
+      "font": {
+        "label": "Písmo",
+        "description": "Atkinson Hyperlegible a Lexend jsou navržena tak, aby se znaky dobře rozlišovaly; OpenDyslexic pomáhá některým lidem s dyslexií. Podporují latinku.",
+        "default": "Písmo motivu"
+      },
+      "plain_text_font": {
+        "label": "Písmo pošty v prostém textu",
+        "description": "Pro zprávy odeslané bez formátování.",
+        "sans": "Stejné jako výše",
+        "mono": "Neproporcionální"
+      },
+      "spacing": {
+        "normal": "Normální",
+        "relaxed": "Větší",
+        "loose": "Největší",
+        "wide": "Široké",
+        "wider": "Širší"
+      },
+      "line_spacing": {
+        "label": "Řádkování",
+        "description": "Mezera mezi řádky textu."
+      },
+      "letter_spacing": {
+        "label": "Mezery mezi písmeny",
+        "description": "Mezera mezi písmeny."
+      },
+      "word_spacing": {
+        "label": "Mezery mezi slovy",
+        "description": "Mezera mezi slovy."
+      },
+      "paragraph_spacing": {
+        "label": "Mezery mezi odstavci",
+        "description": "Mezera za každým odstavcem."
+      },
+      "reading_width": {
+        "label": "Šířka čtení",
+        "description": "Omezí řádky ve zprávách na zhruba 80 znaků, aby oči nemusely tolik cestovat.",
+        "full": "Plná šířka",
+        "comfortable": "Zhruba 80 znaků"
+      },
+      "reading_mask": {
+        "label": "Čtecí maska",
+        "description": "Ve zprávě ztlumí vše kromě několika řádků kolem ukazatele, abyste neztratili místo, kde čtete."
+      },
+      "plain_language": {
+        "label": "Jednoduchý jazyk",
+        "description": "Jednodušší formulace v nastavení a chybových hlášeních a krátké vysvětlivky odborných výrazů. K dispozici v angličtině a němčině."
+      },
+      "contrast": {
+        "label": "Kontrast",
+        "description": "Vyšší kontrast zesvětlí nebo ztmaví text, okraje a obrys zaměření v jakémkoli motivu a podtrhne odkazy. Systém se řídí vaším zařízením.",
+        "more": "Vyšší",
+        "normal": "Normální"
+      },
+      "transparency": {
+        "label": "Omezit průhlednost",
+        "description": "Plné pozadí místo průhledných a rozmazaných panelů."
+      },
+      "underline_links": {
+        "label": "Podtrhávat odkazy",
+        "description": "Podtrhne odkazy v aplikaci i ve zprávách, aby nebyly rozpoznatelné jen podle barvy."
+      },
+      "color_names": {
+        "label": "Zobrazovat názvy vedle barev",
+        "description": "U zpráv zobrazí názvy štítků a u událostí názvy kalendářů, ne jen barevné tečky."
+      },
+      "cvd_palette": {
+        "label": "Barvy vhodné pro barvoslepost",
+        "description": "Používá barvy štítků, složek a kalendářů, které zůstanou rozlišitelné i při červeno-zelené nebo modro-žluté barvosleposti."
+      },
+      "theme_link": {
+        "label": "Motiv a barevný režim",
+        "description": "Světlý a tmavý režim a motivy najdete na stránce Vzhled.",
+        "button": "Vzhled"
+      },
+      "reduce_motion": {
+        "label": "Omezit pohyb",
+        "description": "Vypne vysouvací panely, přechody a plynulé posouvání, i uvnitř zpráv. Systém se řídí vaším zařízením."
+      },
+      "pause_images": {
+        "label": "Pozastavit animované obrázky",
+        "description": "U animovaných GIFů ve zprávách ukáže první snímek a tlačítko pro přehrání. Systém je pozastaví, když zařízení žádá méně pohybu."
+      },
+      "single_key_shortcuts": {
+        "label": "Zkratky jednou klávesou",
+        "description": "Zkratky jako j, k, e a #, které používají jedinou klávesu. Vypněte je, pokud používáte hlasové ovládání nebo omylem mačkáte klávesy. Zkratky s Ctrl nebo Alt fungují dál."
+      },
+      "shortcut_list": {
+        "label": "Klávesové zkratky",
+        "description": "Všechny zkratky aplikace, ve které se právě nacházíte.",
+        "button": "Zobrazit zkratky"
+      },
+      "focus_ring": {
+        "label": "Obrys zaměření",
+        "description": "Obrys kolem tlačítka, odkazu nebo pole, na kterém je klávesnice.",
+        "normal": "Normální",
+        "thick": "Silný",
+        "extra": "Extra silný"
+      },
+      "focus_always": {
+        "label": "Vždy zobrazovat zaměření",
+        "description": "Zobrazí obrys i po kliknutí, nejen při ovládání klávesnicí."
+      },
+      "large_targets": {
+        "label": "Velké ovládací prvky",
+        "description": "Tlačítka, zaškrtávací pole a další prvky budou mít alespoň 44 pixelů. Systém to zapíná u dotykových obrazovek."
+      },
+      "large_cursor": {
+        "label": "Velký ukazatel myši",
+        "description": "Větší ukazatel uvnitř aplikace."
+      },
+      "open_on_hover": {
+        "label": "Otevírat po najetí",
+        "description": "Nabídky, náhledy a karty se otevřou, když na nich ukazatel chvíli setrvá. Vypněte, aby se otevíraly jen kliknutím."
+      },
+      "row_action_button": {
+        "label": "Tlačítko akcí u každé zprávy",
+        "description": "Zobrazí na každém řádku tlačítko s akcemi zprávy, takže nemusíte najíždět ani klikat pravým tlačítkem."
+      },
+      "native_scrollbars": {
+        "label": "Širší posuvníky",
+        "description": "Použije posuvníky vašeho prohlížeče, které jsou širší a lépe se chytají."
+      },
+      "row_actions_link": {
+        "label": "Akce po najetí a přejetí",
+        "description": "Které akce se zobrazují na řádcích zpráv.",
+        "button": "Seznam zpráv"
+      },
+      "mail_view": {
+        "label": "Zobrazovat zprávy jako",
+        "description": "Prostý text odstraní ze zprávy rozvržení, barvy a obrázky. Každou zprávu můžete přepnout ve čtečce.",
+        "html": "Formátované",
+        "plain": "Prostý text"
+      },
+      "mail_text_size": {
+        "label": "Velikost textu ve zprávách",
+        "description": "Velikost textu uvnitř zpráv. Zůstává stejná pro všechny zprávy.",
+        "follow": "Stejná jako v aplikaci"
+      },
+      "mail_min_font_size": {
+        "label": "Nejmenší text ve zprávách",
+        "description": "Zvětší text, který zpráva nastavuje menší než tato hodnota.",
+        "none": "Bez minima",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Používat ve zprávách moje písmo a barvy",
+        "description": "Nahradí písmo, velikost a barvy odesílatele vašimi. Newslettery pak mohou vypadat jinak.",
+        "never": "Nikdy",
+        "high_contrast": "S vyšším kontrastem",
+        "always": "Vždy"
+      },
+      "mail_fit_width": {
+        "label": "Přizpůsobit široké zprávy oknu",
+        "description": "Zmenší zprávy, které jsou širší než čtecí panel, místo posouvání do strany."
+      },
+      "read_aloud_rate": {
+        "label": "Rychlost předčítání",
+        "description": "Jak rychle předčítání zprávu přečte."
+      },
+      "compose_font": {
+        "label": "Písmo nových zpráv",
+        "description": "Písmo, kterým nové zprávy začínají. Příjemci ho uvidí, pokud ho má jejich poštovní aplikace.",
+        "default": "Výchozí",
+        "sans": "Bezpatkové",
+        "serif": "Patkové",
+        "mono": "Neproporcionální"
+      },
+      "compose_size": {
+        "label": "Velikost textu nových zpráv",
+        "description": "Velikost, kterou nové zprávy začínají.",
+        "default": "Výchozí"
+      },
+      "toast_duration": {
+        "label": "Doba zobrazení oznámení",
+        "description": "Jak dlouho zůstanou na obrazovce oznámení jako „Přesunuto do archivu“ s tlačítkem Zpět.",
+        "until_closed": "Dokud je nezavřu",
+        "seconds": "{seconds} s"
+      },
+      "confirm_send": {
+        "label": "Potvrzovat před odesláním",
+        "description": "Zeptá se před odesláním zprávy."
+      },
+      "confirm_delete": {
+        "label": "Potvrzovat před smazáním",
+        "description": "Zeptá se před smazáním zprávy, i u jediné zprávy."
+      },
+      "confirm_archive": {
+        "label": "Potvrzovat před archivací",
+        "description": "Zeptá se před archivací zprávy."
+      },
+      "send_warnings_link": {
+        "label": "Upozornění před odesláním",
+        "description": "Chybějící předmět, zapomenutá příloha a zástupný text.",
+        "button": "Psaní"
+      },
+      "visual_alerts": {
+        "label": "Vizuální upozornění",
+        "description": "Pomalu bliká názvem karty, když dorazí nová pošta nebo připomenutí, a nechá připomenutí na obrazovce, dokud je nezavřete."
+      },
+      "unread_counts": {
+        "label": "Počty nepřečtených",
+        "description": "Jak složky a navigační panel ukazují nepřečtenou poštu.",
+        "count": "Číslo",
+        "dot": "Tečka",
+        "hidden": "Skryto"
+      },
+      "do_not_disturb": {
+        "label": "Nerušit",
+        "description": "Žádné zvuky, vyskakovací oznámení ani hlasová hlášení o nové poště, dokud to nevypnete."
+      },
+      "announce_new_mail": {
+        "label": "Hlásit novou poštu",
+        "description": "Čtečky obrazovky řeknou, kolik nových zpráv dorazilo, aniž by je četly."
+      },
+      "announce_preview": {
+        "label": "Číst náhled v seznamu",
+        "description": "Čtečky obrazovky přečtou první řádek každé zprávy spolu s odesílatelem a předmětem."
+      },
+      "simple_mode": {
+        "label": "Jednoduchý režim",
+        "description": "Jeden sloupec, méně tlačítek a žádné boční panely."
+      },
+      "simple_mode_paged": {
+        "label": "Listovat seznamem zpráv",
+        "description": "Zobrazí seznam po stránkách po 50 zprávách s tlačítky Další a Předchozí místo nekonečného posouvání. S čtečkou obrazovky je to snazší."
+      },
+      "reset": {
+        "title": "Obnovit",
+        "label": "Obnovit nastavení přístupnosti",
+        "description": "Vrátí všechna nastavení na této stránce na výchozí hodnoty nebo na hodnoty, které nastavila vaše organizace. Sdílená nastavení, například zobrazení konverzací, zůstanou beze změny.",
+        "button": "Obnovit",
+        "done": "Nastavení přístupnosti bylo obnoveno."
       }
     }
   },

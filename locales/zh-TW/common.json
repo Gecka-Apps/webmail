@@ -1209,7 +1209,8 @@
       "general": "一般",
       "organize": "資料夾與標籤",
       "addons": "附加元件",
-      "backup": "備份與重設"
+      "backup": "備份與重設",
+      "accessibility": "無障礙"
     },
     "themes": {
       "title": "主題",
@@ -1406,6 +1407,11 @@
         "dot": "彩色圓點",
         "tint": "列著色",
         "none": "無"
+      },
+      "accessibility_link": {
+        "label": "文字大小與動態效果",
+        "description": "文字大小、字型、間距和減少動態效果都在「無障礙」頁面中。",
+        "button": "無障礙"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "圖片與外部內容",
         "images_description": "遠端圖片可能會讓寄件者知道您已開啟郵件。",
         "attachments": "附件"
+      },
+      "plain_text_font_link": {
+        "label": "純文字郵件字型",
+        "description": "與其他字型一起在「無障礙」頁面中設定。",
+        "button": "無障礙"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "回覆",
         "sending": "傳送前",
         "receipts": "讀取回條"
+      }
+    },
+    "accessibility": {
+      "system": "跟隨系統",
+      "on": "開",
+      "off": "關",
+      "presets": {
+        "title": "預設組合",
+        "description": "每個預設組合會一次變更多項設定。之後它們就是一般設定，您可以逐項修改，也可以組合使用多個預設組合。",
+        "applied": "{name}變更了 {count, plural, other {# 項設定}}：",
+        "nothing_changed": "{name}：您的設定已經符合。",
+        "undo": "復原",
+        "show_button": "在導覽列顯示無障礙按鈕",
+        "screen-reader": {
+          "label": "螢幕閱讀器",
+          "description": "清單旁不顯示閱讀窗格，不依對話分組，每封郵件都會朗讀預覽。"
+        },
+        "low-vision": {
+          "label": "低視力",
+          "description": "更大的文字、更高的對比、更粗的焦點外框、有底線的連結和大型游標。"
+        },
+        "dyslexia": {
+          "label": "閱讀障礙",
+          "description": "更易讀的字型，行、字母和字詞之間的間距更大，閱讀欄更窄。"
+        },
+        "focus": {
+          "label": "專注",
+          "description": "簡潔版面，不顯示預覽和寄件者圖片，以圓點取代未讀數，無動態效果。"
+        },
+        "motor": {
+          "label": "鍵盤與肢體操作",
+          "description": "更大的點選目標，選單點選後展開，每封郵件都有動作按鈕，通知停留更久。"
+        },
+        "motion": {
+          "label": "無動態效果，避免誘發癲癇",
+          "description": "無動畫，動態圖片暫停，無半透明面板，無閃爍提醒。"
+        },
+        "hearing": {
+          "label": "聽障",
+          "description": "以視覺提醒取代聲音，通知會保留到您關閉為止。"
+        }
+      },
+      "quick_button": {
+        "label": "導覽列中的無障礙按鈕",
+        "description": "新增一個按鈕，可隨時開啟文字大小、對比、動態效果和預設組合。無論是否顯示該按鈕，Alt+Shift+A 都會開啟同一個面板。"
+      },
+      "sections": {
+        "text": "文字與閱讀",
+        "contrast": "色彩與對比",
+        "motion": "動態效果",
+        "keyboard": "鍵盤與焦點",
+        "pointer": "指標與觸控",
+        "mail": "郵件",
+        "timing": "時間與誤操作",
+        "alerts": "提醒與干擾",
+        "screen_readers": "螢幕閱讀器"
+      },
+      "text_size": {
+        "label": "文字大小",
+        "description": "依比例縮放您在瀏覽器中設定的文字。100% 為瀏覽器的大小。",
+        "small": "87.5%",
+        "medium": "100%",
+        "large": "112.5%",
+        "x-large": "125%",
+        "xx-large": "150%",
+        "xxx-large": "175%",
+        "huge": "200%"
+      },
+      "font": {
+        "label": "字型",
+        "description": "Atkinson Hyperlegible 和 Lexend 的設計讓字母更容易區分；OpenDyslexic 對部分閱讀障礙者有幫助。這些字型支援拉丁字母。",
+        "default": "主題字型"
+      },
+      "plain_text_font": {
+        "label": "純文字郵件字型",
+        "description": "用於未經排版寄出的郵件。",
+        "sans": "與上方相同",
+        "mono": "等寬"
+      },
+      "spacing": {
+        "normal": "正常",
+        "relaxed": "較大",
+        "loose": "最大",
+        "wide": "寬",
+        "wider": "更寬"
+      },
+      "line_spacing": {
+        "label": "行距",
+        "description": "文字行與行之間的距離。"
+      },
+      "letter_spacing": {
+        "label": "字母間距",
+        "description": "字母之間的距離。"
+      },
+      "word_spacing": {
+        "label": "字詞間距",
+        "description": "字詞與字詞之間的距離。"
+      },
+      "paragraph_spacing": {
+        "label": "段落間距",
+        "description": "每個段落之後的距離。"
+      },
+      "reading_width": {
+        "label": "閱讀寬度",
+        "description": "將郵件中的每行限制在約 80 個字元，減少眼睛移動的距離。",
+        "full": "全寬",
+        "comfortable": "約 80 個字元"
+      },
+      "reading_mask": {
+        "label": "閱讀遮罩",
+        "description": "將郵件中指標周圍幾行以外的內容調暗，幫助您不會找不到閱讀位置。"
+      },
+      "plain_language": {
+        "label": "白話語言",
+        "description": "設定和錯誤訊息使用更簡單的措辭，並為技術術語提供簡短說明。支援英文和德文。"
+      },
+      "contrast": {
+        "label": "對比",
+        "description": "較高的對比會讓任何主題下的文字、邊框和焦點外框更深或更淺，並為連結加上底線。「跟隨系統」會沿用您裝置的設定。",
+        "more": "較高",
+        "normal": "正常"
+      },
+      "transparency": {
+        "label": "減少透明效果",
+        "description": "使用純色背景，取代半透明和模糊的面板。"
+      },
+      "underline_links": {
+        "label": "連結加底線",
+        "description": "為應用程式和郵件中的連結加上底線，這樣不必只靠顏色來辨識。"
+      },
+      "color_names": {
+        "label": "在顏色旁顯示名稱",
+        "description": "在郵件上顯示標籤名稱，在活動上顯示行事曆名稱，而不只是彩色圓點。"
+      },
+      "cvd_palette": {
+        "label": "色盲友善配色",
+        "description": "標籤、資料夾和行事曆使用在紅綠色盲或藍黃色盲下仍能區分的顏色。"
+      },
+      "theme_link": {
+        "label": "主題與色彩模式",
+        "description": "淺色、深色和各主題在「外觀」頁面中。",
+        "button": "外觀"
+      },
+      "reduce_motion": {
+        "label": "減少動態效果",
+        "description": "關閉滑動面板、轉場和平滑捲動，郵件內部也一樣。「跟隨系統」會沿用您裝置的設定。"
+      },
+      "pause_images": {
+        "label": "暫停動態圖片",
+        "description": "郵件中的動態 GIF 只顯示第一格，並提供播放按鈕。「跟隨系統」會在裝置要求減少動態效果時暫停它們。"
+      },
+      "single_key_shortcuts": {
+        "label": "單鍵快速鍵",
+        "description": "只需按一個鍵的快速鍵，如 j、k、e 和 #。如果您使用語音輸入或常誤觸按鍵，請關閉。使用 Ctrl 或 Alt 的快速鍵不受影響。"
+      },
+      "shortcut_list": {
+        "label": "鍵盤快速鍵",
+        "description": "您目前所在應用程式的全部快速鍵。",
+        "button": "顯示快速鍵"
+      },
+      "focus_ring": {
+        "label": "焦點外框",
+        "description": "鍵盤目前所在的按鈕、連結或欄位周圍的外框。",
+        "normal": "正常",
+        "thick": "粗",
+        "extra": "特粗"
+      },
+      "focus_always": {
+        "label": "一律顯示焦點",
+        "description": "點選後也顯示外框，而不只是在使用鍵盤時顯示。"
+      },
+      "large_targets": {
+        "label": "大型點選目標",
+        "description": "讓按鈕、核取方塊和其他控制項至少為 44 像素。「跟隨系統」會在觸控螢幕上開啟此項。"
+      },
+      "large_cursor": {
+        "label": "大型滑鼠指標",
+        "description": "應用程式內使用更大的指標。"
+      },
+      "open_on_hover": {
+        "label": "停留時展開",
+        "description": "指標停在選單、預覽和卡片上時就會展開。關閉後只有點選才會展開。"
+      },
+      "row_action_button": {
+        "label": "每封郵件的動作按鈕",
+        "description": "在每一列顯示一個按鈕，用來開啟該郵件的動作，這樣就不必停留或按滑鼠右鍵。"
+      },
+      "native_scrollbars": {
+        "label": "更寬的捲軸",
+        "description": "使用瀏覽器內建的捲軸，它更寬，也更容易抓取。"
+      },
+      "row_actions_link": {
+        "label": "停留和滑動動作",
+        "description": "郵件列上顯示哪些動作。",
+        "button": "郵件清單"
+      },
+      "mail_view": {
+        "label": "郵件顯示為",
+        "description": "純文字會去掉郵件的版面、顏色和圖片。您可以在閱讀時逐封切換。",
+        "html": "含格式",
+        "plain": "純文字"
+      },
+      "mail_text_size": {
+        "label": "郵件文字大小",
+        "description": "郵件內部的文字大小。所有郵件保持一致。",
+        "follow": "與應用程式相同"
+      },
+      "mail_min_font_size": {
+        "label": "郵件中的最小文字",
+        "description": "放大郵件中設定得比此值更小的文字。",
+        "none": "無下限",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "在郵件中使用我的字型和顏色",
+        "description": "以您的字型、大小和顏色取代寄件者設定的樣式。這可能會改變電子報的外觀。",
+        "never": "永不",
+        "high_contrast": "高對比時",
+        "always": "一律"
+      },
+      "mail_fit_width": {
+        "label": "讓寬郵件符合視窗",
+        "description": "將比閱讀窗格更寬的郵件縮小，而不是左右捲動。"
+      },
+      "read_aloud_rate": {
+        "label": "朗讀速度",
+        "description": "「朗讀」功能讀郵件的快慢。"
+      },
+      "compose_font": {
+        "label": "新郵件字型",
+        "description": "新郵件起始使用的字型。如果收件者的郵件應用程式有該字型，就能看到。",
+        "default": "預設",
+        "sans": "無襯線",
+        "serif": "襯線",
+        "mono": "等寬"
+      },
+      "compose_size": {
+        "label": "新郵件文字大小",
+        "description": "新郵件起始使用的大小。",
+        "default": "預設"
+      },
+      "toast_duration": {
+        "label": "通知顯示時間",
+        "description": "像「已移至封存」這類附有「復原」按鈕的提示在畫面上停留多久。",
+        "until_closed": "直到我關閉",
+        "seconds": "{seconds} 秒"
+      },
+      "confirm_send": {
+        "label": "寄出前確認",
+        "description": "寄出郵件前先詢問。"
+      },
+      "confirm_delete": {
+        "label": "刪除前確認",
+        "description": "刪除郵件前先詢問，單封郵件也一樣。"
+      },
+      "confirm_archive": {
+        "label": "封存前確認",
+        "description": "封存郵件前先詢問。"
+      },
+      "send_warnings_link": {
+        "label": "寄出前警告",
+        "description": "缺少主旨、忘記附件和預留位置文字。",
+        "button": "撰寫"
+      },
+      "visual_alerts": {
+        "label": "視覺提醒",
+        "description": "有新郵件或提醒時，讓分頁標題緩慢閃爍，並讓提醒一直留在畫面上，直到您關閉。"
+      },
+      "unread_counts": {
+        "label": "未讀數",
+        "description": "資料夾和導覽列如何顯示未讀郵件。",
+        "count": "數字",
+        "dot": "圓點",
+        "hidden": "隱藏"
+      },
+      "do_not_disturb": {
+        "label": "勿擾",
+        "description": "新郵件不發出聲音、不跳出通知、不語音播報，直到您關閉此項。"
+      },
+      "announce_new_mail": {
+        "label": "播報新郵件",
+        "description": "螢幕閱讀器會說出收到了多少封新郵件，但不朗讀內容。"
+      },
+      "announce_preview": {
+        "label": "朗讀清單中的預覽",
+        "description": "螢幕閱讀器會連同寄件者和主旨一起朗讀每封郵件的第一行。"
+      },
+      "simple_mode": {
+        "label": "簡易模式",
+        "description": "單欄、更少的按鈕，沒有側邊面板。"
+      },
+      "simple_mode_paged": {
+        "label": "郵件清單分頁",
+        "description": "清單以每頁 50 封分頁，用「下一頁」和「上一頁」取代無限捲動。搭配螢幕閱讀器更方便。"
+      },
+      "reset": {
+        "title": "重設",
+        "label": "重設無障礙設定",
+        "description": "將此頁面的所有設定還原為預設值，或還原為您所屬組織設定的值。對話檢視等共用設定維持不變。",
+        "button": "重設",
+        "done": "無障礙設定已重設。"
       }
     }
   },

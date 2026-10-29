@@ -35,7 +35,6 @@ export function ReadingSettings() {
     hideInlineImageAttachments,
     attachmentImagePreviewsEnabled,
     messageSpacing,
-    plainTextFont,
     externalContentPolicy,
     emailAlwaysLightMode,
     trustedSenders,
@@ -100,18 +99,17 @@ export function ReadingSettings() {
         </SettingItem>
         )}
 
-        {!isSettingHidden('plainTextFont') && (
-        <SettingItem label={t('plain_text_font.label')} description={t('plain_text_font.description')} locked={isSettingLocked('plainTextFont')}>
-          <Select
-            value={plainTextFont}
-            onChange={(value) => updateSetting('plainTextFont', value as typeof plainTextFont)}
-            options={[
-              { value: 'mono', label: t('plain_text_font.mono') },
-              { value: 'sans', label: t('plain_text_font.sans') },
-            ]}
-          />
+        {/* The plain text font is part of the font settings on Accessibility. */}
+        <SettingItem label={tPage('plain_text_font_link.label')} description={tPage('plain_text_font_link.description')}>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent('settings-tab-change', { detail: { tab: 'accessibility', section: 'text' } }))}
+            className="flex items-center gap-2 px-3 py-1.5 bg-muted hover:bg-accent rounded-md transition-colors"
+          >
+            <span className="text-sm text-foreground">{tPage('plain_text_font_link.button')}</span>
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+          </button>
         </SettingItem>
-        )}
 
         <SettingItem label={t('always_light_mode.label')} description={t('always_light_mode.description')}>
           <ToggleSwitch

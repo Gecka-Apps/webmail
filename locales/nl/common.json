@@ -1206,7 +1206,8 @@
       "general": "Algemeen",
       "organize": "Mappen en tags",
       "addons": "Add-ons",
-      "backup": "Back-up en herstel"
+      "backup": "Back-up en herstel",
+      "accessibility": "Toegankelijkheid"
     },
     "themes": {
       "title": "Thema's",
@@ -1403,6 +1404,11 @@
         "dot": "Gekleurde stip",
         "tint": "Gekleurde rij",
         "none": "Niets"
+      },
+      "accessibility_link": {
+        "label": "Tekstgrootte en beweging",
+        "description": "Tekstgrootte, lettertypen, afstanden en minder beweging vind je op de pagina Toegankelijkheid.",
+        "button": "Toegankelijkheid"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Afbeeldingen en externe inhoud",
         "images_description": "Externe afbeeldingen kunnen de afzender verraden dat u het bericht hebt geopend.",
         "attachments": "Bijlagen"
+      },
+      "plain_text_font_link": {
+        "label": "Lettertype voor e-mail in platte tekst",
+        "description": "Wordt samen met de andere lettertypen ingesteld op de pagina Toegankelijkheid.",
+        "button": "Toegankelijkheid"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Beantwoorden",
         "sending": "Voor het verzenden",
         "receipts": "Leesbevestigingen"
+      }
+    },
+    "accessibility": {
+      "system": "Systeem",
+      "on": "Aan",
+      "off": "Uit",
+      "presets": {
+        "title": "Voorinstellingen",
+        "description": "Elke voorinstelling wijzigt meerdere instellingen tegelijk. Daarna zijn het gewone instellingen die je één voor één kunt aanpassen, en je kunt voorinstellingen combineren.",
+        "applied": "{name} heeft {count, plural, one {# instelling} other {# instellingen}} gewijzigd:",
+        "nothing_changed": "{name}: je instellingen komen al overeen.",
+        "undo": "Ongedaan maken",
+        "show_button": "De toegankelijkheidsknop in de navigatiebalk tonen",
+        "screen-reader": {
+          "label": "Schermlezer",
+          "description": "Geen leesvenster naast de lijst, geen groepering in gesprekken, en de voorbeeldtekst wordt bij elk bericht voorgelezen."
+        },
+        "low-vision": {
+          "label": "Slechtziend",
+          "description": "Grotere tekst, meer contrast, een dikkere focusrand, onderstreepte links en een grote cursor."
+        },
+        "dyslexia": {
+          "label": "Dyslexie",
+          "description": "Een beter leesbaar lettertype, meer ruimte tussen regels, letters en woorden, en een smallere leeskolom."
+        },
+        "focus": {
+          "label": "Concentratie",
+          "description": "Eenvoudige indeling, geen voorbeeldtekst of afzenderafbeeldingen, een stip in plaats van aantallen ongelezen berichten, geen beweging."
+        },
+        "motor": {
+          "label": "Toetsenbord en motoriek",
+          "description": "Grotere knoppen, menu's die met een klik openen, een actieknop bij elk bericht, meldingen die langer blijven staan."
+        },
+        "motion": {
+          "label": "Beweging en aanvalsveilig",
+          "description": "Geen animaties, bewegende afbeeldingen gepauzeerd, geen doorzichtige vlakken, geen knipperende waarschuwingen."
+        },
+        "hearing": {
+          "label": "Doof en slechthorend",
+          "description": "Zichtbare waarschuwingen in plaats van geluiden, en meldingen die blijven staan tot je ze sluit."
+        }
+      },
+      "quick_button": {
+        "label": "Toegankelijkheidsknop in de navigatiebalk",
+        "description": "Voegt een knop toe die overal tekstgrootte, contrast, beweging en de voorinstellingen opent. Alt+Shift+A opent hetzelfde paneel, met of zonder de knop."
+      },
+      "sections": {
+        "text": "Tekst en lezen",
+        "contrast": "Kleur en contrast",
+        "motion": "Beweging",
+        "keyboard": "Toetsenbord en focus",
+        "pointer": "Aanwijzer en aanraking",
+        "mail": "E-mail",
+        "timing": "Tijd en fouten",
+        "alerts": "Waarschuwingen en afleiding",
+        "screen_readers": "Schermlezers"
+      },
+      "text_size": {
+        "label": "Tekstgrootte",
+        "description": "Schaalt de tekst die je in je browser hebt ingesteld. 100% is de grootte van je browser.",
+        "small": "87,5%",
+        "medium": "100%",
+        "large": "112,5%",
+        "x-large": "125%",
+        "xx-large": "150%",
+        "xxx-large": "175%",
+        "huge": "200%"
+      },
+      "font": {
+        "label": "Lettertype",
+        "description": "Atkinson Hyperlegible en Lexend zijn ontworpen om letters goed uit elkaar te houden; OpenDyslexic helpt sommige mensen met dyslexie. Ze ondersteunen het Latijnse schrift.",
+        "default": "Lettertype van het thema"
+      },
+      "plain_text_font": {
+        "label": "Lettertype voor e-mail in platte tekst",
+        "description": "Voor berichten die zonder opmaak zijn verstuurd.",
+        "sans": "Zelfde als hierboven",
+        "mono": "Monospace"
+      },
+      "spacing": {
+        "normal": "Normaal",
+        "relaxed": "Meer",
+        "loose": "Meest",
+        "wide": "Breed",
+        "wider": "Breder"
+      },
+      "line_spacing": {
+        "label": "Regelafstand",
+        "description": "Ruimte tussen tekstregels."
+      },
+      "letter_spacing": {
+        "label": "Letterafstand",
+        "description": "Ruimte tussen letters."
+      },
+      "word_spacing": {
+        "label": "Woordafstand",
+        "description": "Ruimte tussen woorden."
+      },
+      "paragraph_spacing": {
+        "label": "Alinea-afstand",
+        "description": "Ruimte na elke alinea."
+      },
+      "reading_width": {
+        "label": "Leesbreedte",
+        "description": "Houdt regels in berichten op ongeveer 80 tekens, zodat je ogen niet zo ver hoeven te reizen.",
+        "full": "Volledige breedte",
+        "comfortable": "Ongeveer 80 tekens"
+      },
+      "reading_mask": {
+        "label": "Leesmasker",
+        "description": "Dimt alles in een bericht behalve een paar regels rond de aanwijzer, zodat je je plek niet kwijtraakt."
+      },
+      "plain_language": {
+        "label": "Makkelijke taal",
+        "description": "Eenvoudigere formuleringen bij instellingen en foutmeldingen, en korte uitleg bij technische termen. Beschikbaar in het Engels en Duits."
+      },
+      "contrast": {
+        "label": "Contrast",
+        "description": "Meer contrast maakt tekst, randen en de focusrand donkerder of lichter in elk thema en onderstreept links. Systeem volgt je apparaat.",
+        "more": "Meer",
+        "normal": "Normaal"
+      },
+      "transparency": {
+        "label": "Transparantie verminderen",
+        "description": "Effen achtergronden in plaats van doorzichtige en vervaagde vlakken."
+      },
+      "underline_links": {
+        "label": "Links onderstrepen",
+        "description": "Onderstreept links in de app en in berichten, zodat ze niet alleen van kleur afhangen."
+      },
+      "color_names": {
+        "label": "Namen naast kleuren tonen",
+        "description": "Toont labelnamen bij berichten en agendanamen bij afspraken, in plaats van alleen gekleurde stippen."
+      },
+      "cvd_palette": {
+        "label": "Kleuren voor kleurenblindheid",
+        "description": "Gebruikt kleuren voor labels, mappen en agenda's die goed te onderscheiden blijven bij rood-groen- of blauw-geelkleurenblindheid."
+      },
+      "theme_link": {
+        "label": "Thema en kleurmodus",
+        "description": "Licht, donker en de thema's vind je op de pagina Uiterlijk.",
+        "button": "Uiterlijk"
+      },
+      "reduce_motion": {
+        "label": "Beweging verminderen",
+        "description": "Schakelt schuivende vlakken, overgangen en soepel scrollen uit, ook binnen berichten. Systeem volgt je apparaat."
+      },
+      "pause_images": {
+        "label": "Bewegende afbeeldingen pauzeren",
+        "description": "Toont het eerste beeld van geanimeerde GIF's in berichten, met een knop om ze af te spelen. Systeem pauzeert ze wanneer je apparaat om minder beweging vraagt."
+      },
+      "single_key_shortcuts": {
+        "label": "Sneltoetsen met één toets",
+        "description": "Sneltoetsen zoals j, k, e en # die maar één toets gebruiken. Zet ze uit als je spraakinvoer gebruikt of per ongeluk toetsen indrukt. Sneltoetsen met Ctrl of Alt blijven werken."
+      },
+      "shortcut_list": {
+        "label": "Sneltoetsen",
+        "description": "Alle sneltoetsen voor de app waarin je zit.",
+        "button": "Sneltoetsen tonen"
+      },
+      "focus_ring": {
+        "label": "Focusrand",
+        "description": "De rand rond de knop, link of het veld waar het toetsenbord op staat.",
+        "normal": "Normaal",
+        "thick": "Dik",
+        "extra": "Extra dik"
+      },
+      "focus_always": {
+        "label": "Focus altijd tonen",
+        "description": "Toont de rand ook na klikken, niet alleen als je het toetsenbord gebruikt."
+      },
+      "large_targets": {
+        "label": "Grote doelen",
+        "description": "Maakt knoppen, selectievakjes en andere bedieningselementen minstens 44 pixels groot. Systeem zet dit aan voor touchscreens."
+      },
+      "large_cursor": {
+        "label": "Grote muisaanwijzer",
+        "description": "Een grotere aanwijzer in de app."
+      },
+      "open_on_hover": {
+        "label": "Openen bij aanwijzen",
+        "description": "Menu's, voorbeelden en kaarten openen als de aanwijzer erop blijft staan. Zet uit om ze alleen door te klikken te openen."
+      },
+      "row_action_button": {
+        "label": "Actieknop bij elk bericht",
+        "description": "Toont op elke rij een knop die de acties van het bericht opent, zodat je niet hoeft te aanwijzen of rechts te klikken."
+      },
+      "native_scrollbars": {
+        "label": "Bredere schuifbalken",
+        "description": "Gebruikt de eigen schuifbalken van je browser, die breder en makkelijker vast te pakken zijn."
+      },
+      "row_actions_link": {
+        "label": "Acties bij aanwijzen en vegen",
+        "description": "Welke acties op berichtrijen verschijnen.",
+        "button": "Berichtenlijst"
+      },
+      "mail_view": {
+        "label": "Berichten tonen als",
+        "description": "Platte tekst laat de opmaak, kleuren en afbeeldingen van een bericht weg. Je kunt per bericht omschakelen in de lezer.",
+        "html": "Opgemaakt",
+        "plain": "Platte tekst"
+      },
+      "mail_text_size": {
+        "label": "Tekstgrootte in berichten",
+        "description": "Tekstgrootte binnen berichten. Die blijft voor elk bericht gelijk.",
+        "follow": "Zelfde als de app"
+      },
+      "mail_min_font_size": {
+        "label": "Kleinste tekst in berichten",
+        "description": "Vergroot tekst die een bericht kleiner instelt dan dit.",
+        "none": "Geen minimum",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Mijn lettertype en kleuren in berichten gebruiken",
+        "description": "Vervangt lettertype, grootte en kleuren van de afzender door die van jou. Hierdoor kunnen nieuwsbrieven er anders uitzien.",
+        "never": "Nooit",
+        "high_contrast": "Bij meer contrast",
+        "always": "Altijd"
+      },
+      "mail_fit_width": {
+        "label": "Brede berichten in het venster passen",
+        "description": "Verkleint berichten die breder zijn dan het leesvenster in plaats van zijwaarts te scrollen."
+      },
+      "read_aloud_rate": {
+        "label": "Voorleessnelheid",
+        "description": "Hoe snel Voorlezen een bericht uitspreekt."
+      },
+      "compose_font": {
+        "label": "Lettertype voor nieuwe berichten",
+        "description": "Het lettertype waarmee nieuwe berichten beginnen. Ontvangers zien het als hun mailapp het heeft.",
+        "default": "Standaard",
+        "sans": "Schreefloos",
+        "serif": "Schreef",
+        "mono": "Monospace"
+      },
+      "compose_size": {
+        "label": "Tekstgrootte voor nieuwe berichten",
+        "description": "De grootte waarmee nieuwe berichten beginnen.",
+        "default": "Standaard"
+      },
+      "toast_duration": {
+        "label": "Duur van meldingen",
+        "description": "Hoe lang berichten zoals „Verplaatst naar Archief” met hun knop Ongedaan maken op het scherm blijven staan.",
+        "until_closed": "Tot ik ze sluit",
+        "seconds": "{seconds} seconden"
+      },
+      "confirm_send": {
+        "label": "Bevestigen voor het verzenden",
+        "description": "Vraagt om bevestiging voordat een bericht wordt verzonden."
+      },
+      "confirm_delete": {
+        "label": "Bevestigen voor het verwijderen",
+        "description": "Vraagt om bevestiging voordat een bericht wordt verwijderd, ook bij losse berichten."
+      },
+      "confirm_archive": {
+        "label": "Bevestigen voor het archiveren",
+        "description": "Vraagt om bevestiging voordat een bericht wordt gearchiveerd."
+      },
+      "send_warnings_link": {
+        "label": "Waarschuwingen voor het verzenden",
+        "description": "Ontbrekend onderwerp, vergeten bijlage en plaatsaanduidingstekst.",
+        "button": "Opstellen"
+      },
+      "visual_alerts": {
+        "label": "Visuele waarschuwingen",
+        "description": "Laat de tabtitel langzaam knipperen als er nieuwe e-mail of een herinnering binnenkomt, en laat herinneringen op het scherm staan tot je ze sluit."
+      },
+      "unread_counts": {
+        "label": "Aantal ongelezen berichten",
+        "description": "Hoe mappen en de navigatiebalk ongelezen e-mail tonen.",
+        "count": "Aantal",
+        "dot": "Stip",
+        "hidden": "Verborgen"
+      },
+      "do_not_disturb": {
+        "label": "Niet storen",
+        "description": "Geen geluiden, pop-upmeldingen of gesproken aankondigingen voor nieuwe e-mail totdat je dit uitzet."
+      },
+      "announce_new_mail": {
+        "label": "Nieuwe e-mail aankondigen",
+        "description": "Schermlezers zeggen hoeveel nieuwe berichten er zijn binnengekomen, zonder ze voor te lezen."
+      },
+      "announce_preview": {
+        "label": "Voorbeeldtekst in de lijst voorlezen",
+        "description": "Schermlezers lezen de eerste regel van elk bericht voor, samen met afzender en onderwerp."
+      },
+      "simple_mode": {
+        "label": "Eenvoudige modus",
+        "description": "Eén kolom, minder knoppen en geen zijpanelen."
+      },
+      "simple_mode_paged": {
+        "label": "Berichtenlijst per pagina",
+        "description": "Toont de lijst in pagina's van 50 met Volgende en Vorige in plaats van eindeloos scrollen. Makkelijker met een schermlezer."
+      },
+      "reset": {
+        "title": "Herstellen",
+        "label": "Toegankelijkheidsinstellingen herstellen",
+        "description": "Zet elke instelling op deze pagina terug naar de standaardwaarde, of naar de waarde die je organisatie heeft ingesteld. Gedeelde instellingen zoals de gespreksweergave blijven zoals ze zijn.",
+        "button": "Herstellen",
+        "done": "Toegankelijkheidsinstellingen hersteld."
       }
     }
   },

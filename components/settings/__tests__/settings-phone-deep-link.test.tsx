@@ -24,6 +24,7 @@ vi.mock('@/components/layout/navigation-rail', () => ({ NavigationRail: () => nu
 vi.mock('@/components/layout/sidebar-apps-modal', () => ({ SidebarAppsModal: () => null }));
 vi.mock('@/components/plugins/app-top-banner-slot', () => ({ AppTopBannerSlot: () => null }));
 vi.mock('@/components/settings/appearance-settings', () => ({ AppearanceSettings: () => <div>appearance pane</div> }));
+vi.mock('@/components/settings/accessibility-settings', () => ({ AccessibilitySettings: () => <div>accessibility pane</div> }));
 vi.mock('@/components/settings/organize-settings', () => ({ OrganizeSettings: () => <div>organize pane</div> }));
 
 const { SettingsApp } = await import('../settings-app');

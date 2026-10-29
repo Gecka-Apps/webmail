@@ -1209,7 +1209,8 @@
       "general": "Üldine",
       "organize": "Kaustad ja sildid",
       "addons": "Lisad",
-      "backup": "Varundus ja lähtestamine"
+      "backup": "Varundus ja lähtestamine",
+      "accessibility": "Juurdepääsetavus"
     },
     "themes": {
       "title": "Teemad",
@@ -1406,6 +1407,11 @@
         "dot": "Värviline täpp",
         "tint": "Toonitud rida",
         "none": "Mitte midagi"
+      },
+      "accessibility_link": {
+        "label": "Teksti suurus ja liikumine",
+        "description": "Teksti suurus, kirjatüübid, vahed ja vähendatud liikumine on lehel Juurdepääsetavus.",
+        "button": "Juurdepääsetavus"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Pildid ja väline sisu",
         "images_description": "Kaugpildid võivad saatjale reeta, et avasid kirja.",
         "attachments": "Manused"
+      },
+      "plain_text_font_link": {
+        "label": "Lihtteksti kirjade kirjatüüp",
+        "description": "Määratakse koos teiste kirjatüüpidega lehel Juurdepääsetavus.",
+        "button": "Juurdepääsetavus"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Vastamine",
         "sending": "Enne saatmist",
         "receipts": "Lugemiskinnitused"
+      }
+    },
+    "accessibility": {
+      "system": "Süsteem",
+      "on": "Sees",
+      "off": "Väljas",
+      "presets": {
+        "title": "Eelseaded",
+        "description": "Iga eelseade muudab korraga mitut seadet. Pärast seda on need tavalised seaded, mida saad ükshaaval muuta, ja eelseadeid saab omavahel kombineerida.",
+        "applied": "{name} muutis {count, plural, one {# seadet} other {# seadet}}:",
+        "nothing_changed": "{name}: sinu seaded juba vastavad sellele.",
+        "undo": "Võta tagasi",
+        "show_button": "Näita juurdepääsetavuse nuppu navigeerimisribal",
+        "screen-reader": {
+          "label": "Ekraanilugeja",
+          "description": "Loendi kõrval pole lugemispaani, vestlusi ei rühmitata ja eelvaade loetakse iga kirjaga koos ette."
+        },
+        "low-vision": {
+          "label": "Nõrk nägemine",
+          "description": "Suurem tekst, rohkem kontrasti, paksem fookusraam, allajoonitud lingid ja suur kursor."
+        },
+        "dyslexia": {
+          "label": "Düsleksia",
+          "description": "Loetavam kirjatüüp, rohkem ruumi ridade, tähtede ja sõnade vahel ning kitsam lugemisveerg."
+        },
+        "focus": {
+          "label": "Keskendumine",
+          "description": "Lihtne paigutus, eelvaateid ja saatjate pilte pole, lugemata kirjade arvu asemel on täpp ning liikumist pole."
+        },
+        "motor": {
+          "label": "Klaviatuur ja motoorika",
+          "description": "Suuremad nupud, klõpsuga avanevad menüüd, igal kirjal toimingunupp ja kauem nähtaval olevad teavitused."
+        },
+        "motion": {
+          "label": "Liikumiseta ja krambihoogude ohutu",
+          "description": "Animatsioone pole, animeeritud pildid on peatatud, läbipaistvaid paneele pole ja vilkuvaid märguandeid pole."
+        },
+        "hearing": {
+          "label": "Kurdid ja vaegkuuljad",
+          "description": "Helide asemel nähtavad märguanded ning teavitused, mis jäävad nähtavale, kuni need sulged."
+        }
+      },
+      "quick_button": {
+        "label": "Juurdepääsetavuse nupp navigeerimisribal",
+        "description": "Lisab nupu, mis avab kõikjalt teksti suuruse, kontrasti, liikumise ja eelseaded. Alt+Shift+A avab sama paani, nupuga või ilma."
+      },
+      "sections": {
+        "text": "Tekst ja lugemine",
+        "contrast": "Värv ja kontrast",
+        "motion": "Liikumine",
+        "keyboard": "Klaviatuur ja fookus",
+        "pointer": "Osuti ja puuteekraan",
+        "mail": "Kirjad",
+        "timing": "Ajastus ja vead",
+        "alerts": "Märguanded ja segajad",
+        "screen_readers": "Ekraanilugejad"
+      },
+      "text_size": {
+        "label": "Teksti suurus",
+        "description": "Skaleerib teksti, mille oled brauseris määranud. 100% on sinu brauseri suurus.",
+        "small": "87,5%",
+        "medium": "100%",
+        "large": "112,5%",
+        "x-large": "125%",
+        "xx-large": "150%",
+        "xxx-large": "175%",
+        "huge": "200%"
+      },
+      "font": {
+        "label": "Kirjatüüp",
+        "description": "Atkinson Hyperlegible ja Lexend on kujundatud nii, et tähti on lihtne eristada; OpenDyslexic aitab mõnda düsleksiaga inimest. Need katavad ladina kirja.",
+        "default": "Teema kirjatüüp"
+      },
+      "plain_text_font": {
+        "label": "Lihtteksti kirjade kirjatüüp",
+        "description": "Kirjadele, mis on saadetud ilma vorminduseta.",
+        "sans": "Sama mis ülal",
+        "mono": "Püsilaiusega"
+      },
+      "spacing": {
+        "normal": "Tavaline",
+        "relaxed": "Rohkem",
+        "loose": "Kõige rohkem",
+        "wide": "Lai",
+        "wider": "Laiem"
+      },
+      "line_spacing": {
+        "label": "Reavahe",
+        "description": "Tekstiridade vaheline ruum."
+      },
+      "letter_spacing": {
+        "label": "Tähevahe",
+        "description": "Tähtede vaheline ruum."
+      },
+      "word_spacing": {
+        "label": "Sõnavahe",
+        "description": "Sõnade vaheline ruum."
+      },
+      "paragraph_spacing": {
+        "label": "Lõiguvahe",
+        "description": "Ruum iga lõigu järel."
+      },
+      "reading_width": {
+        "label": "Lugemislaius",
+        "description": "Hoiab kirjade read umbes 80 tähemärgi pikkused, et silmad ei peaks nii kaugele liikuma.",
+        "full": "Täislaius",
+        "comfortable": "Umbes 80 tähemärki"
+      },
+      "reading_mask": {
+        "label": "Lugemismask",
+        "description": "Tumendab kirjas kõik peale mõne rea osuti ümber, et sa ei kaotaks kohta silmist."
+      },
+      "plain_language": {
+        "label": "Lihtsas keeles",
+        "description": "Lihtsamad sõnastused seadetes ja veateadetes ning lühikesed selgitused tehnilistele terminitele. Saadaval inglise ja saksa keeles."
+      },
+      "contrast": {
+        "label": "Kontrast",
+        "description": "Suurem kontrast muudab teksti, äärised ja fookusraami igas teemas tumedamaks või heledamaks ning joonib lingid alla. Süsteem järgib sinu seadet.",
+        "more": "Suurem",
+        "normal": "Tavaline"
+      },
+      "transparency": {
+        "label": "Vähenda läbipaistvust",
+        "description": "Läbipaistvate ja hägustatud paneelide asemel tahked taustad."
+      },
+      "underline_links": {
+        "label": "Joonda lingid alla",
+        "description": "Joonib lingid rakenduses ja kirjades alla, et neid ei tuvastaks ainult värvi järgi."
+      },
+      "color_names": {
+        "label": "Näita värvide kõrval nimesid",
+        "description": "Näitab kirjadel siltide nimesid ja sündmustel kalendrite nimesid, mitte ainult värvilisi täppe."
+      },
+      "cvd_palette": {
+        "label": "Värvipimedusele sobivad värvid",
+        "description": "Kasutab siltide, kaustade ja kalendrite värve, mis jäävad eristatavaks ka punase-rohelise või sinise-kollase värvipimeduse korral."
+      },
+      "theme_link": {
+        "label": "Teema ja värvirežiim",
+        "description": "Hele, tume ja teemad on lehel Välimus.",
+        "button": "Välimus"
+      },
+      "reduce_motion": {
+        "label": "Vähenda liikumist",
+        "description": "Lülitab välja liuguvad paneelid, üleminekud ja sujuva kerimise, ka kirjades. Süsteem järgib sinu seadet."
+      },
+      "pause_images": {
+        "label": "Peata animeeritud pildid",
+        "description": "Näitab kirjades animeeritud GIF-ide esimest kaadrit ja nuppu esitamiseks. Süsteem peatab need, kui sinu seade küsib vähem liikumist."
+      },
+      "single_key_shortcuts": {
+        "label": "Ühe klahviga otseteed",
+        "description": "Otseteed nagu j, k, e ja #, mis kasutavad ühte klahvi. Lülita need välja, kui kasutad häälsisendit või vajutad kogemata klahve. Ctrl- või Alt-klahviga otseteed töötavad edasi."
+      },
+      "shortcut_list": {
+        "label": "Klaviatuuri otseteed",
+        "description": "Kõik otseteed rakenduses, kus sa oled.",
+        "button": "Näita otseteid"
+      },
+      "focus_ring": {
+        "label": "Fookusraam",
+        "description": "Raam nupu, lingi või välja ümber, kus klaviatuur parajasti on.",
+        "normal": "Tavaline",
+        "thick": "Paks",
+        "extra": "Eriti paks"
+      },
+      "focus_always": {
+        "label": "Näita fookust alati",
+        "description": "Näitab raami ka pärast klõpsu, mitte ainult klaviatuuri kasutades."
+      },
+      "large_targets": {
+        "label": "Suured nupud",
+        "description": "Muudab nupud, märkeruudud ja muud juhtelemendid vähemalt 44 pikslit suureks. Süsteem lülitab selle puuteekraanidel sisse."
+      },
+      "large_cursor": {
+        "label": "Suur hiirekursor",
+        "description": "Suurem kursor rakenduses."
+      },
+      "open_on_hover": {
+        "label": "Ava hiirega üle liikudes",
+        "description": "Menüüd, eelvaated ja kaardid avanevad, kui osuti nende kohal peatub. Lülita välja, et need avaneksid ainult klõpsuga."
+      },
+      "row_action_button": {
+        "label": "Toimingunupp igal kirjal",
+        "description": "Näitab igal real nuppu, mis avab kirja toimingud, nii et sul pole vaja hiirega üle liikuda ega paremklõpsata."
+      },
+      "native_scrollbars": {
+        "label": "Laiemad kerimisribad",
+        "description": "Kasutab sinu brauseri enda kerimisribasid, mis on laiemad ja neist on kergem kinni võtta."
+      },
+      "row_actions_link": {
+        "label": "Hiirega üle liikumise ja pühkimise toimingud",
+        "description": "Millised toimingud kirjade ridadel kuvatakse.",
+        "button": "Kirjade loend"
+      },
+      "mail_view": {
+        "label": "Näita kirju kujul",
+        "description": "Lihttekst jätab kirjast välja paigutuse, värvid ja pildid. Igat kirja saab lugejas eraldi ümber lülitada.",
+        "html": "Vormindatud",
+        "plain": "Lihttekst"
+      },
+      "mail_text_size": {
+        "label": "Teksti suurus kirjades",
+        "description": "Teksti suurus kirjade sees. See on kõigil kirjadel ühesugune.",
+        "follow": "Sama mis rakenduses"
+      },
+      "mail_min_font_size": {
+        "label": "Väikseim tekst kirjades",
+        "description": "Suurendab teksti, mille kiri määrab sellest väiksemaks.",
+        "none": "Miinimumi pole",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Kasuta kirjades minu kirjatüüpi ja värve",
+        "description": "Asendab saatja kirjatüübi, suuruse ja värvid sinu omadega. Uudiskirjad võivad välja näha teisiti.",
+        "never": "Mitte kunagi",
+        "high_contrast": "Suurema kontrastiga",
+        "always": "Alati"
+      },
+      "mail_fit_width": {
+        "label": "Mahuta laiad kirjad aknasse",
+        "description": "Vähendab kirju, mis on lugemispaanist laiemad, selle asemel et külgsuunas kerida."
+      },
+      "read_aloud_rate": {
+        "label": "Ettelugemise kiirus",
+        "description": "Kui kiiresti ettelugemine kirja loeb."
+      },
+      "compose_font": {
+        "label": "Uute kirjade kirjatüüp",
+        "description": "Kirjatüüp, millega uued kirjad algavad. Adressaadid näevad seda, kui nende meilirakenduses on see olemas.",
+        "default": "Vaikimisi",
+        "sans": "Seriifideta",
+        "serif": "Seriifidega",
+        "mono": "Püsilaiusega"
+      },
+      "compose_size": {
+        "label": "Uute kirjade teksti suurus",
+        "description": "Suurus, millega uued kirjad algavad.",
+        "default": "Vaikimisi"
+      },
+      "toast_duration": {
+        "label": "Teavituste kestus",
+        "description": "Kui kaua jäävad ekraanile teavitused nagu „Teisaldatud arhiivi“ koos nupuga Võta tagasi.",
+        "until_closed": "Kuni ma need sulgen",
+        "seconds": "{seconds} sekundit"
+      },
+      "confirm_send": {
+        "label": "Kinnita enne saatmist",
+        "description": "Küsib enne kirja saatmist üle."
+      },
+      "confirm_delete": {
+        "label": "Kinnita enne kustutamist",
+        "description": "Küsib enne kirja kustutamist üle, ka üksiku kirja puhul."
+      },
+      "confirm_archive": {
+        "label": "Kinnita enne arhiveerimist",
+        "description": "Küsib enne kirja arhiveerimist üle."
+      },
+      "send_warnings_link": {
+        "label": "Hoiatused enne saatmist",
+        "description": "Puuduv teema, unustatud manus ja kohatäitetekst.",
+        "button": "Kirjutamine"
+      },
+      "visual_alerts": {
+        "label": "Nähtavad märguanded",
+        "description": "Vilgutab aeglaselt vahelehe pealkirja, kui saabub uus kiri või meeldetuletus, ja hoiab meeldetuletused ekraanil, kuni need sulged."
+      },
+      "unread_counts": {
+        "label": "Lugemata kirjade arv",
+        "description": "Kuidas kaustad ja navigeerimisriba lugemata kirju näitavad.",
+        "count": "Arv",
+        "dot": "Täpp",
+        "hidden": "Peidetud"
+      },
+      "do_not_disturb": {
+        "label": "Mitte segada",
+        "description": "Uute kirjade kohta ei anta helisid, hüpikteavitusi ega häälteateid, kuni selle välja lülitad."
+      },
+      "announce_new_mail": {
+        "label": "Teata uutest kirjadest",
+        "description": "Ekraanilugejad ütlevad, mitu uut kirja saabus, kirju ette lugemata."
+      },
+      "announce_preview": {
+        "label": "Loe loendis eelvaade ette",
+        "description": "Ekraanilugejad loevad iga kirja esimese rea koos saatja ja teemaga ette."
+      },
+      "simple_mode": {
+        "label": "Lihtne režiim",
+        "description": "Üks veerg, vähem nuppe ja külgpaane pole."
+      },
+      "simple_mode_paged": {
+        "label": "Lehitse kirjade loendit",
+        "description": "Näitab loendit 50-kaupa lehtedel nuppudega Järgmine ja Eelmine, lõputu kerimise asemel. Ekraanilugejaga on see lihtsam."
+      },
+      "reset": {
+        "title": "Lähtesta",
+        "label": "Lähtesta juurdepääsetavuse seaded",
+        "description": "Taastab kõik selle lehe seaded vaikeväärtustele või need, mille sinu organisatsioon on määranud. Ühised seaded, nagu vestlusvaade, jäävad samaks.",
+        "button": "Lähtesta",
+        "done": "Juurdepääsetavuse seaded on lähtestatud."
       }
     }
   },

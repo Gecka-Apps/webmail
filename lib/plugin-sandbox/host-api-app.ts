@@ -121,7 +121,8 @@ export async function doAppSearchSettings(query: unknown, options?: unknown): Pr
  * and nothing that addresses a server (the push relay).
  */
 export const SHARED_SETTINGS = [
-  'fontSize', 'density', 'interfaceLayout', 'mailLayout', 'toolbarPosition', 'showToolbarLabels', 'animationsEnabled', 'proInterface',
+  'fontSize', 'density', 'interfaceLayout', 'mailLayout', 'toolbarPosition', 'showToolbarLabels', 'reduceMotion', 'proInterface',
+  'contrast', 'underlineLinks', 'appFont', 'focusRing', 'largeTargets', 'singleKeyShortcuts', 'toastDuration',
   'dateFormat', 'timeFormat', 'firstDayOfWeek', 'timeZone',
   'disableThreading', 'showPreview', 'listColumns', 'emailsPerPage', 'showVerificationCodes',
   'markAsReadDelay', 'externalContentPolicy', 'attachmentPosition', 'mailAttachmentAction', 'emailAlwaysLightMode', 'returnToListAfterAction', 'plainTextFont',
@@ -141,6 +142,8 @@ export function doAppGetSettings(): AppSettingsView {
     if (typeof value === 'string' || typeof value === 'boolean' || (typeof value === 'number' && Number.isFinite(value))) out[key] = value;
     else if (Array.isArray(value) && value.every((v) => typeof v === 'number' || typeof v === 'string')) out[key] = value.slice(0, 20) as number[] | string[];
   }
+  // Plugins written before Reduce motion (v9) read this switch.
+  out.animationsEnabled = state.reduceMotion !== 'on';
   // Minutes without activity before Bulwark signs out (0 = never). The user
   // setting of that name was never read; the organisation's idle timeout is
   // what applies, the strictest of the accounts signed in here.

@@ -178,3 +178,60 @@ describe('settings stored before #1248', () => {
     expect([...migrated.explicitSettings].sort()).toEqual(['density', 'showSharedMailAccounts']);
   });
 });
+
+describe('accessibility settings and the admin policy', () => {
+  it('presets an accessibility option for users who never set it', () => {
+    loadPolicy({ defaults: { fontSize: 'x-large', contrast: 'more' } });
+    expect(settings().fontSize).toBe('x-large');
+    expect(settings().contrast).toBe('more');
+  });
+
+  it("treats a lock on text size as a default, so the user's own choice wins", () => {
+    settings().updateSetting('fontSize', 'huge');
+    loadPolicy({ restrictions: { fontSize: { locked: true, value: 'small' } } });
+    expect(settings().fontSize).toBe('huge');
+  });
+
+  it('still enforces a lock on single-key shortcuts', () => {
+    settings().updateSetting('singleKeyShortcuts', true);
+    loadPolicy({ restrictions: { singleKeyShortcuts: { locked: true, value: false } } });
+    expect(settings().singleKeyShortcuts).toBe(false);
+  });
+
+  it('applies a preset written for the old Animations switch', () => {
+    loadPolicy({ defaults: { animationsEnabled: false } });
+    expect(settings().reduceMotion).toBe('on');
+  });
+
+  it('ignores a preset value the page does not know', () => {
+    loadPolicy({ defaults: { fontSize: 'enormous' } });
+    expect(settings().fontSize).toBe('medium');
+  });
+
+  it('keeps toasts at least as long as the minimum an admin sets', () => {
+    loadPolicy({ restrictions: { toastDuration: { locked: true, value: 5, min: 20 } } });
+    expect(settings().toastDuration).toBe(5);
+    loadPolicy({ restrictions: { toastDuration: { locked: true, value: 0, min: 20 } } });
+    expect(settings().toastDuration).toBe(0);
+  });
+});
+
+describe('settings export', () => {
+  it('syncs always-light mail, toolbar labels and the accessibility options', () => {
+    settings().updateSetting('emailAlwaysLightMode', true);
+    settings().updateSetting('showToolbarLabels', false);
+    settings().updateSetting('appFont', 'atkinson');
+    const exported = JSON.parse(settings().exportSettings());
+    expect(exported.emailAlwaysLightMode).toBe(true);
+    expect(exported.showToolbarLabels).toBe(false);
+    expect(exported.appFont).toBe('atkinson');
+    expect(exported.reduceMotion).toBe('system');
+  });
+
+  it('keeps the current value when an import carries one the page does not know', () => {
+    settings().updateSetting('fontSize', 'large');
+    settings().importSettings(JSON.stringify({ fontSize: 'enormous', appFont: 'comic-sans' }));
+    expect(settings().fontSize).toBe('large');
+    expect(settings().appFont).toBe('default');
+  });
+});

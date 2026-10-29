@@ -1209,7 +1209,8 @@
       "general": "General",
       "organize": "Carpetes i etiquetes",
       "addons": "Complements",
-      "backup": "Còpia de seguretat i restabliment"
+      "backup": "Còpia de seguretat i restabliment",
+      "accessibility": "Accessibilitat"
     },
     "themes": {
       "title": "Temes",
@@ -1406,6 +1407,11 @@
         "dot": "Punt de color",
         "tint": "Fila tenyida",
         "none": "Res"
+      },
+      "accessibility_link": {
+        "label": "Mida del text i moviment",
+        "description": "La mida del text, els tipus de lletra, l'espaiat i la reducció de moviment són a la pàgina Accessibilitat.",
+        "button": "Accessibilitat"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Imatges i contingut extern",
         "images_description": "Les imatges remotes poden revelar al remitent que heu obert el missatge.",
         "attachments": "Fitxers adjunts"
+      },
+      "plain_text_font_link": {
+        "label": "Tipus de lletra del correu en text pla",
+        "description": "Es defineix juntament amb els altres tipus de lletra a la pàgina Accessibilitat.",
+        "button": "Accessibilitat"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Respostes",
         "sending": "Abans d'enviar",
         "receipts": "Confirmacions de lectura"
+      }
+    },
+    "accessibility": {
+      "system": "Sistema",
+      "on": "Activat",
+      "off": "Desactivat",
+      "presets": {
+        "title": "Perfils predefinits",
+        "description": "Cada perfil canvia diverses opcions alhora. Després són opcions normals que pots canviar una per una, i pots combinar perfils.",
+        "applied": "{name} ha canviat {count, plural, one {# opció} other {# opcions}}:",
+        "nothing_changed": "{name}: les teves opcions ja coincideixen.",
+        "undo": "Desfés",
+        "show_button": "Mostra el botó d'accessibilitat a la barra de navegació",
+        "screen-reader": {
+          "label": "Lector de pantalla",
+          "description": "Sense panell de lectura al costat de la llista, sense agrupar per converses, i la vista prèvia es llegeix amb cada missatge."
+        },
+        "low-vision": {
+          "label": "Baixa visió",
+          "description": "Text més gran, més contrast, un contorn de focus més gruixut, enllaços subratllats i un cursor gran."
+        },
+        "dyslexia": {
+          "label": "Dislèxia",
+          "description": "Un tipus de lletra més llegible, més espai entre línies, lletres i paraules, i una columna de lectura més estreta."
+        },
+        "focus": {
+          "label": "Concentració",
+          "description": "Disposició senzilla, sense vistes prèvies ni fotos dels remitents, un punt en lloc del nombre de no llegits i sense moviment."
+        },
+        "motor": {
+          "label": "Teclat i motricitat",
+          "description": "Elements més grans, menús que s'obren amb un clic, un botó d'accions a cada missatge i avisos que duren més."
+        },
+        "motion": {
+          "label": "Sense moviment ni risc de crisis",
+          "description": "Sense animacions, imatges animades en pausa, sense panells translúcids i sense avisos intermitents."
+        },
+        "hearing": {
+          "label": "Sordesa i hipoacúsia",
+          "description": "Avisos visuals en lloc de sons i notificacions que es queden fins que les tanquis."
+        }
+      },
+      "quick_button": {
+        "label": "Botó d'accessibilitat a la barra de navegació",
+        "description": "Afegeix un botó que obre des de qualsevol lloc la mida del text, el contrast, el moviment i els perfils predefinits. Alt+Maj+A obre el mateix panell, amb botó o sense."
+      },
+      "sections": {
+        "text": "Text i lectura",
+        "contrast": "Color i contrast",
+        "motion": "Moviment",
+        "keyboard": "Teclat i focus",
+        "pointer": "Punter i tàctil",
+        "mail": "Correu",
+        "timing": "Temps i errors",
+        "alerts": "Avisos i distraccions",
+        "screen_readers": "Lectors de pantalla"
+      },
+      "text_size": {
+        "label": "Mida del text",
+        "description": "Escala el text que has definit al navegador. El 100 % és la mida del teu navegador.",
+        "small": "87,5 %",
+        "medium": "100 %",
+        "large": "112,5 %",
+        "x-large": "125 %",
+        "xx-large": "150 %",
+        "xxx-large": "175 %",
+        "huge": "200 %"
+      },
+      "font": {
+        "label": "Tipus de lletra",
+        "description": "Atkinson Hyperlegible i Lexend estan dissenyades perquè les lletres es distingeixin bé; OpenDyslexic ajuda algunes persones amb dislèxia. Cobreixen l'alfabet llatí.",
+        "default": "Lletra del tema"
+      },
+      "plain_text_font": {
+        "label": "Tipus de lletra del correu en text pla",
+        "description": "Per als missatges enviats sense format.",
+        "sans": "Igual que a dalt",
+        "mono": "Monoespaiada"
+      },
+      "spacing": {
+        "normal": "Normal",
+        "relaxed": "Més",
+        "loose": "El màxim",
+        "wide": "Ample",
+        "wider": "Més ample"
+      },
+      "line_spacing": {
+        "label": "Interlineat",
+        "description": "Espai entre les línies de text."
+      },
+      "letter_spacing": {
+        "label": "Espaiat entre lletres",
+        "description": "Espai entre les lletres."
+      },
+      "word_spacing": {
+        "label": "Espaiat entre paraules",
+        "description": "Espai entre les paraules."
+      },
+      "paragraph_spacing": {
+        "label": "Espaiat entre paràgrafs",
+        "description": "Espai després de cada paràgraf."
+      },
+      "reading_width": {
+        "label": "Amplada de lectura",
+        "description": "Limita les línies dels missatges a uns 80 caràcters perquè els ulls no hagin de fer tant recorregut.",
+        "full": "Amplada completa",
+        "comfortable": "Uns 80 caràcters"
+      },
+      "reading_mask": {
+        "label": "Màscara de lectura",
+        "description": "Enfosqueix tot el missatge excepte unes quantes línies al voltant del punter, perquè no perdis el lloc."
+      },
+      "plain_language": {
+        "label": "Llenguatge senzill",
+        "description": "Textos més simples a les opcions i als missatges d'error, i explicacions breus dels termes tècnics. Disponible en anglès i alemany."
+      },
+      "contrast": {
+        "label": "Contrast",
+        "description": "Més contrast fa que el text, les vores i el contorn de focus siguin més foscos o més clars amb qualsevol tema, i subratlla els enllaços. Sistema segueix el teu dispositiu.",
+        "more": "Més",
+        "normal": "Normal"
+      },
+      "transparency": {
+        "label": "Redueix la transparència",
+        "description": "Fons sòlids en lloc de panells translúcids i borrosos."
+      },
+      "underline_links": {
+        "label": "Subratlla els enllaços",
+        "description": "Subratlla els enllaços a l'aplicació i als missatges, perquè no depenguin del color."
+      },
+      "color_names": {
+        "label": "Mostra els noms al costat dels colors",
+        "description": "Mostra el nom de les etiquetes als missatges i el dels calendaris als esdeveniments, en lloc de només punts de color."
+      },
+      "cvd_palette": {
+        "label": "Colors aptes per al daltonisme",
+        "description": "Fa servir colors d'etiquetes, carpetes i calendaris que continuen sent distingibles amb daltonisme vermell-verd o blau-groc."
+      },
+      "theme_link": {
+        "label": "Tema i mode de color",
+        "description": "El mode clar, el fosc i els temes són a la pàgina Aparença.",
+        "button": "Aparença"
+      },
+      "reduce_motion": {
+        "label": "Redueix el moviment",
+        "description": "Desactiva els panells lliscants, les transicions i el desplaçament suau, també dins dels missatges. Sistema segueix el teu dispositiu."
+      },
+      "pause_images": {
+        "label": "Posa en pausa les imatges animades",
+        "description": "Mostra el primer fotograma dels GIF animats dels missatges, amb un botó per reproduir-los. Sistema els posa en pausa quan el dispositiu demana menys moviment."
+      },
+      "single_key_shortcuts": {
+        "label": "Dreceres d'una sola tecla",
+        "description": "Dreceres com j, k, e i # que fan servir una sola tecla. Desactiva-les si uses l'entrada per veu o prems tecles sense voler. Les dreceres amb Ctrl o Alt continuen funcionant."
+      },
+      "shortcut_list": {
+        "label": "Dreceres de teclat",
+        "description": "Totes les dreceres de l'aplicació on ets.",
+        "button": "Mostra les dreceres"
+      },
+      "focus_ring": {
+        "label": "Contorn de focus",
+        "description": "El contorn al voltant del botó, l'enllaç o el camp on és el teclat.",
+        "normal": "Normal",
+        "thick": "Gruixut",
+        "extra": "Molt gruixut"
+      },
+      "focus_always": {
+        "label": "Mostra sempre el focus",
+        "description": "Mostra el contorn també després de fer clic, no només quan uses el teclat."
+      },
+      "large_targets": {
+        "label": "Elements grans",
+        "description": "Fa que els botons, les caselles i altres controls mesurin almenys 44 píxels. Sistema ho activa en pantalles tàctils."
+      },
+      "large_cursor": {
+        "label": "Punter del ratolí gran",
+        "description": "Un punter més gran dins de l'aplicació."
+      },
+      "open_on_hover": {
+        "label": "Obre en passar-hi el cursor",
+        "description": "Els menús, les vistes prèvies i les targetes s'obren quan el punter s'hi atura. Desactiva-ho per obrir-los només amb un clic."
+      },
+      "row_action_button": {
+        "label": "Botó d'accions a cada missatge",
+        "description": "Mostra a cada fila un botó que obre les accions del missatge, perquè no calgui passar-hi el cursor ni fer clic dret."
+      },
+      "native_scrollbars": {
+        "label": "Barres de desplaçament més amples",
+        "description": "Fa servir les barres de desplaçament del navegador, que són més amples i fàcils d'agafar."
+      },
+      "row_actions_link": {
+        "label": "Accions en passar el cursor i en lliscar",
+        "description": "Quines accions apareixen a les files de missatges.",
+        "button": "Llista de missatges"
+      },
+      "mail_view": {
+        "label": "Mostra els missatges com a",
+        "description": "El text pla treu la disposició, els colors i les imatges d'un missatge. Pots canviar-ho missatge a missatge al lector.",
+        "html": "Amb format",
+        "plain": "Text pla"
+      },
+      "mail_text_size": {
+        "label": "Mida del text dels missatges",
+        "description": "Mida del text dins dels missatges. És la mateixa per a tots els missatges.",
+        "follow": "Igual que l'aplicació"
+      },
+      "mail_min_font_size": {
+        "label": "Text més petit als missatges",
+        "description": "Amplia el text que un missatge defineix més petit que aquest valor.",
+        "none": "Sense mínim",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Fes servir el meu tipus de lletra i colors als missatges",
+        "description": "Substitueix el tipus de lletra, la mida i els colors del remitent pels teus. Els butlletins poden tenir un altre aspecte.",
+        "never": "Mai",
+        "high_contrast": "Amb més contrast",
+        "always": "Sempre"
+      },
+      "mail_fit_width": {
+        "label": "Ajusta els missatges amples a la finestra",
+        "description": "Redueix els missatges més amples que el panell de lectura en lloc de desplaçar-los cap als costats."
+      },
+      "read_aloud_rate": {
+        "label": "Velocitat de lectura en veu alta",
+        "description": "Amb quina rapidesa llegeix un missatge la lectura en veu alta."
+      },
+      "compose_font": {
+        "label": "Tipus de lletra dels missatges nous",
+        "description": "El tipus de lletra amb què comencen els missatges nous. Els destinataris el veuen si la seva aplicació de correu el té.",
+        "default": "Predeterminat",
+        "sans": "Sense serifa",
+        "serif": "Amb serifa",
+        "mono": "Monoespaiada"
+      },
+      "compose_size": {
+        "label": "Mida del text dels missatges nous",
+        "description": "La mida amb què comencen els missatges nous.",
+        "default": "Predeterminada"
+      },
+      "toast_duration": {
+        "label": "Durada de les notificacions",
+        "description": "Quant de temps es queden a la pantalla avisos com «S'ha mogut a Arxiu» amb el seu botó Desfés.",
+        "until_closed": "Fins que les tanqui",
+        "seconds": "{seconds} segons"
+      },
+      "confirm_send": {
+        "label": "Confirma abans d'enviar",
+        "description": "Pregunta abans d'enviar un missatge."
+      },
+      "confirm_delete": {
+        "label": "Confirma abans de suprimir",
+        "description": "Pregunta abans de suprimir un missatge, també si és un de sol."
+      },
+      "confirm_archive": {
+        "label": "Confirma abans d'arxivar",
+        "description": "Pregunta abans d'arxivar un missatge."
+      },
+      "send_warnings_link": {
+        "label": "Advertiments abans d'enviar",
+        "description": "Assumpte buit, adjunt oblidat i text de farciment.",
+        "button": "Redacció"
+      },
+      "visual_alerts": {
+        "label": "Avisos visuals",
+        "description": "Fa parpellejar lentament el títol de la pestanya quan arriba correu nou o un recordatori, i deixa els recordatoris a la pantalla fins que els tanquis."
+      },
+      "unread_counts": {
+        "label": "Comptadors de no llegits",
+        "description": "Com mostren el correu no llegit les carpetes i la barra de navegació.",
+        "count": "Nombre",
+        "dot": "Punt",
+        "hidden": "Ocult"
+      },
+      "do_not_disturb": {
+        "label": "No molestis",
+        "description": "Sense sons, notificacions emergents ni anuncis per veu per al correu nou fins que ho desactivis."
+      },
+      "announce_new_mail": {
+        "label": "Anuncia el correu nou",
+        "description": "Els lectors de pantalla diuen quants missatges nous han arribat, sense llegir-los."
+      },
+      "announce_preview": {
+        "label": "Llegeix la vista prèvia a la llista",
+        "description": "Els lectors de pantalla llegeixen la primera línia de cada missatge juntament amb el remitent i l'assumpte."
+      },
+      "simple_mode": {
+        "label": "Mode senzill",
+        "description": "Una columna, menys botons i sense panells laterals."
+      },
+      "simple_mode_paged": {
+        "label": "Pagina la llista de missatges",
+        "description": "Mostra la llista en pàgines de 50 amb Següent i Anterior en lloc del desplaçament sense fi. Més fàcil amb un lector de pantalla."
+      },
+      "reset": {
+        "title": "Restableix",
+        "label": "Restableix les opcions d'accessibilitat",
+        "description": "Torna totes les opcions d'aquesta pàgina al valor per defecte, o al que hagi fixat la teva organització. Les opcions compartides, com la vista de converses, no canvien.",
+        "button": "Restableix",
+        "done": "S'han restablert les opcions d'accessibilitat."
       }
     }
   },

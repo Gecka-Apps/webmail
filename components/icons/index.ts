@@ -13,6 +13,7 @@ export type { TablerIcon as AppIcon, IconProps as AppIconProps } from '@tabler/i
 export { iconForName, toStoredIconName, toTablerName, POPULAR_ICON_NAMES, loadAllIconNames, TABLER_ICON_PREFIX } from './named';
 
 export {
+  IconAccessible as Accessibility,
   IconActivity as Activity,
   IconAlertCircle as AlertCircle,
   IconAlertTriangle as AlertTriangle,

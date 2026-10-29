@@ -1209,7 +1209,8 @@
       "general": "General",
       "organize": "Folders & tags",
       "addons": "Add-ons",
-      "backup": "Backup & reset"
+      "backup": "Backup & reset",
+      "accessibility": "Accessibility"
     },
     "themes": {
       "title": "Themes",
@@ -1406,6 +1407,11 @@
         "dot": "Colored dot",
         "tint": "Tinted row",
         "none": "Nothing"
+      },
+      "accessibility_link": {
+        "label": "Text size and motion",
+        "description": "Text size, fonts, spacing and reduced motion are on the Accessibility page.",
+        "button": "Accessibility"
       }
     },
     "keywords": {
@@ -2756,6 +2762,11 @@
         "images": "Images & external content",
         "images_description": "Remote images can tell the sender that you opened the mail.",
         "attachments": "Attachments"
+      },
+      "plain_text_font_link": {
+        "label": "Font for plain text mail",
+        "description": "Set together with the other fonts on the Accessibility page.",
+        "button": "Accessibility"
       }
     },
     "composing_page": {
@@ -2765,6 +2776,307 @@
         "replying": "Replying",
         "sending": "Before sending",
         "receipts": "Read receipts"
+      }
+    },
+    "accessibility": {
+      "system": "System",
+      "on": "On",
+      "off": "Off",
+      "presets": {
+        "title": "Presets",
+        "description": "Each preset changes several settings at once. Afterwards they are normal settings you can change one by one, and you can combine presets.",
+        "applied": "{name} changed {count, plural, one {# setting} other {# settings}}:",
+        "nothing_changed": "{name}: your settings already match.",
+        "undo": "Undo",
+        "show_button": "Show the accessibility button in the navigation bar",
+        "screen-reader": {
+          "label": "Screen reader",
+          "description": "No reading pane next to the list, no conversation grouping, the preview read out with each message."
+        },
+        "low-vision": {
+          "label": "Low vision",
+          "description": "Larger text, more contrast, a thicker focus outline, underlined links and a large cursor."
+        },
+        "dyslexia": {
+          "label": "Dyslexia",
+          "description": "A more readable font, more space between lines, letters and words, and a narrower reading column."
+        },
+        "focus": {
+          "label": "Focus",
+          "description": "Simple layout, no previews or sender pictures, a dot instead of unread counts, no motion."
+        },
+        "motor": {
+          "label": "Keyboard and motor",
+          "description": "Larger targets, menus that open on click, an actions button on each message, longer notifications."
+        },
+        "motion": {
+          "label": "Motion and seizure safe",
+          "description": "No animations, animated images paused, no see-through panels, no flashing alerts."
+        },
+        "hearing": {
+          "label": "Deaf and hard of hearing",
+          "description": "Visual alerts instead of sounds, and notifications that stay until you close them."
+        }
+      },
+      "quick_button": {
+        "label": "Accessibility button in the navigation bar",
+        "description": "Adds a button that opens text size, contrast, motion and the presets from anywhere. Alt+Shift+A opens the same panel, with or without the button."
+      },
+      "sections": {
+        "text": "Text and reading",
+        "contrast": "Colour and contrast",
+        "motion": "Motion",
+        "keyboard": "Keyboard and focus",
+        "pointer": "Pointer and touch",
+        "mail": "Mail",
+        "timing": "Timing and mistakes",
+        "alerts": "Alerts and distractions",
+        "screen_readers": "Screen readers"
+      },
+      "text_size": {
+        "label": "Text size",
+        "description": "Scales the text you set in your browser. 100% is your browser's size.",
+        "small": "87.5%",
+        "medium": "100%",
+        "large": "112.5%",
+        "x-large": "125%",
+        "xx-large": "150%",
+        "xxx-large": "175%",
+        "huge": "200%"
+      },
+      "font": {
+        "label": "Font",
+        "description": "Atkinson Hyperlegible and Lexend are designed to be easy to tell apart; OpenDyslexic helps some people with dyslexia. They cover Latin script.",
+        "default": "Theme font"
+      },
+      "plain_text_font": {
+        "label": "Plain text mail font",
+        "description": "For messages sent without formatting.",
+        "sans": "Same as above",
+        "mono": "Monospace"
+      },
+      "spacing": {
+        "normal": "Normal",
+        "relaxed": "More",
+        "loose": "Most",
+        "wide": "Wide",
+        "wider": "Wider"
+      },
+      "line_spacing": {
+        "label": "Line spacing",
+        "description": "Space between lines of text."
+      },
+      "letter_spacing": {
+        "label": "Letter spacing",
+        "description": "Space between letters."
+      },
+      "word_spacing": {
+        "label": "Word spacing",
+        "description": "Space between words."
+      },
+      "paragraph_spacing": {
+        "label": "Paragraph spacing",
+        "description": "Space after each paragraph."
+      },
+      "reading_width": {
+        "label": "Reading width",
+        "description": "Keeps lines in messages to about 80 characters, so your eyes don't have to travel as far.",
+        "full": "Full width",
+        "comfortable": "About 80 characters"
+      },
+      "reading_mask": {
+        "label": "Reading mask",
+        "description": "Dims everything in a message except a few lines around the pointer, to help you keep your place."
+      },
+      "plain_language": {
+        "label": "Plain language",
+        "description": "Simpler wording for settings and error messages, and short explanations of technical terms. Available in English and German."
+      },
+      "contrast": {
+        "label": "Contrast",
+        "description": "More contrast makes text, borders and the focus outline darker or lighter on any theme, and underlines links. System follows your device.",
+        "more": "More",
+        "normal": "Normal"
+      },
+      "transparency": {
+        "label": "Reduce transparency",
+        "description": "Solid backgrounds instead of see-through and blurred panels."
+      },
+      "underline_links": {
+        "label": "Underline links",
+        "description": "Underlines links in the app and in messages, so they don't depend on colour."
+      },
+      "color_names": {
+        "label": "Show names next to colours",
+        "description": "Shows tag names on messages and calendar names on events instead of colour dots alone."
+      },
+      "cvd_palette": {
+        "label": "Colour-blind-safe colours",
+        "description": "Uses tag, folder and calendar colours that stay distinct with red-green or blue-yellow colour blindness."
+      },
+      "theme_link": {
+        "label": "Theme and colour mode",
+        "description": "Light, dark and the themes are on the Appearance page.",
+        "button": "Appearance"
+      },
+      "reduce_motion": {
+        "label": "Reduce motion",
+        "description": "Turns off sliding panels, transitions and smooth scrolling, also inside messages. System follows your device."
+      },
+      "pause_images": {
+        "label": "Pause animated images",
+        "description": "Shows the first frame of animated GIFs in messages with a button to play them. System pauses them when your device asks for reduced motion."
+      },
+      "single_key_shortcuts": {
+        "label": "Single-key shortcuts",
+        "description": "Shortcuts such as j, k, e and # that use one key. Turn them off if you use speech input or press keys by accident. Shortcuts with Ctrl or Alt keep working."
+      },
+      "shortcut_list": {
+        "label": "Keyboard shortcuts",
+        "description": "All shortcuts for the app you're in.",
+        "button": "Show shortcuts"
+      },
+      "focus_ring": {
+        "label": "Focus outline",
+        "description": "The outline around the button, link or field the keyboard is on.",
+        "normal": "Normal",
+        "thick": "Thick",
+        "extra": "Extra thick"
+      },
+      "focus_always": {
+        "label": "Always show focus",
+        "description": "Shows the outline after clicks too, not only when you use the keyboard."
+      },
+      "large_targets": {
+        "label": "Large targets",
+        "description": "Makes buttons, checkboxes and other controls at least 44 pixels. System turns this on for touch screens."
+      },
+      "large_cursor": {
+        "label": "Large mouse pointer",
+        "description": "A bigger pointer inside the app."
+      },
+      "open_on_hover": {
+        "label": "Open on hover",
+        "description": "Menus, previews and cards open when the pointer rests on them. Turn off to open them only by clicking."
+      },
+      "row_action_button": {
+        "label": "Actions button on each message",
+        "description": "Shows a button on each row that opens the message's actions, so you don't need to hover or right-click."
+      },
+      "native_scrollbars": {
+        "label": "Wider scrollbars",
+        "description": "Uses your browser's own scrollbars, which are wider and easier to grab."
+      },
+      "row_actions_link": {
+        "label": "Hover and swipe actions",
+        "description": "Which actions appear on message rows.",
+        "button": "Message list"
+      },
+      "mail_view": {
+        "label": "Show messages as",
+        "description": "Plain text drops a message's layout, colours and pictures. You can switch each message in the reader.",
+        "html": "Formatted",
+        "plain": "Plain text"
+      },
+      "mail_text_size": {
+        "label": "Message text size",
+        "description": "Text size inside messages. It stays the same for every message.",
+        "follow": "Same as the app"
+      },
+      "mail_min_font_size": {
+        "label": "Smallest text in messages",
+        "description": "Enlarges text that a message sets smaller than this.",
+        "none": "No minimum",
+        "px": "{size} px"
+      },
+      "mail_override": {
+        "label": "Use my font and colours in messages",
+        "description": "Replaces the sender's font, size and colours with yours. This can change how newsletters look.",
+        "never": "Never",
+        "high_contrast": "With more contrast",
+        "always": "Always"
+      },
+      "mail_fit_width": {
+        "label": "Fit wide messages to the window",
+        "description": "Shrinks messages that are wider than the reading pane instead of scrolling sideways."
+      },
+      "read_aloud_rate": {
+        "label": "Read aloud speed",
+        "description": "How fast Read aloud speaks a message."
+      },
+      "compose_font": {
+        "label": "Font for new messages",
+        "description": "The font new messages start with. Recipients see it if their mail app has it.",
+        "default": "Default",
+        "sans": "Sans serif",
+        "serif": "Serif",
+        "mono": "Monospace"
+      },
+      "compose_size": {
+        "label": "Text size for new messages",
+        "description": "The size new messages start with.",
+        "default": "Default"
+      },
+      "toast_duration": {
+        "label": "Notification duration",
+        "description": "How long messages such as \"Moved to Archive\" with their Undo button stay on screen.",
+        "until_closed": "Until I close them",
+        "seconds": "{seconds} seconds"
+      },
+      "confirm_send": {
+        "label": "Confirm before sending",
+        "description": "Asks before a message is sent."
+      },
+      "confirm_delete": {
+        "label": "Confirm before deleting",
+        "description": "Asks before a message is deleted, also for single messages."
+      },
+      "confirm_archive": {
+        "label": "Confirm before archiving",
+        "description": "Asks before a message is archived."
+      },
+      "send_warnings_link": {
+        "label": "Warnings before sending",
+        "description": "Missing subject, forgotten attachment and placeholder text.",
+        "button": "Composing"
+      },
+      "visual_alerts": {
+        "label": "Visual alerts",
+        "description": "Flashes the tab title slowly when new mail or a reminder arrives, and keeps reminders on screen until you close them."
+      },
+      "unread_counts": {
+        "label": "Unread counts",
+        "description": "How folders and the navigation bar show unread mail.",
+        "count": "Number",
+        "dot": "Dot",
+        "hidden": "Hidden"
+      },
+      "do_not_disturb": {
+        "label": "Do not disturb",
+        "description": "No sounds, pop-up notifications or spoken announcements for new mail until you turn this off."
+      },
+      "announce_new_mail": {
+        "label": "Announce new mail",
+        "description": "Screen readers say how many new messages arrived, without reading them out."
+      },
+      "announce_preview": {
+        "label": "Read the preview in the list",
+        "description": "Screen readers read the first line of each message along with sender and subject."
+      },
+      "simple_mode": {
+        "label": "Simple mode",
+        "description": "One column, fewer buttons and no side panels."
+      },
+      "simple_mode_paged": {
+        "label": "Page through the message list",
+        "description": "Shows the list in pages of 50 with Next and Previous instead of endless scrolling. Easier with a screen reader."
+      },
+      "reset": {
+        "title": "Reset",
+        "label": "Reset accessibility settings",
+        "description": "Puts every setting on this page back to its default, or to the one your organisation set. Shared settings such as conversation view stay as they are.",
+        "button": "Reset",
+        "done": "Accessibility settings reset."
       }
     }
   },
