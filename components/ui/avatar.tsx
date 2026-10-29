@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { getLuminance, parseColor } from "@/lib/color-transform";
 import { useSettingsStore } from "@/stores/settings-store";
 import { useContactStore, getContactPhotoIndex, type ContactPhotoRef } from "@/stores/contact-store";
 import { useConfig } from "@/hooks/use-config";
@@ -156,6 +157,18 @@ interface AvatarProps {
   fallbackColor?: string;
 }
 
+/**
+ * White or black initials, whichever contrasts more with the background.
+ * One of the two always reaches 4.58:1, so the initials pass 4.5:1 on every
+ * generated colour (white alone failed on yellows and greens).
+ */
+function initialsColor(background: string): string {
+  const rgb = parseColor(background);
+  if (!rgb) return '#ffffff';
+  const l = getLuminance(rgb.r, rgb.g, rgb.b);
+  return 1.05 / (l + 0.05) >= (l + 0.05) / 0.05 ? '#ffffff' : '#000000';
+}
+
 export function Avatar({ name, email, contactPhoto, size = "md", className, disableImages = false, disableFavicon = false, fallbackColor }: AvatarProps) {
   const [imgError, setImgError] = useState(false);
   const [pluginAvatarUrl, setPluginAvatarUrl] = useState<string | null>(null);
@@ -272,6 +285,8 @@ export function Avatar({ name, email, contactPhoto, size = "md", className, disa
     }
   }, [imgSrc, pluginAvatar, faviconDomain, resolvedContactPhoto, customAvatar, profilePic]);
 
+  const initialsBackground = fallbackColor ?? getBackgroundColor();
+
   return (
     <div
       ref={observe}
@@ -280,7 +295,10 @@ export function Avatar({ name, email, contactPhoto, size = "md", className, disa
         sizeClasses[size],
         className
       )}
-      style={{ backgroundColor: imgSrc ? (isFavicon ? "#ffffff" : "transparent") : (fallbackColor ?? getBackgroundColor()) }}
+      style={{
+        backgroundColor: imgSrc ? (isFavicon ? "#ffffff" : "transparent") : initialsBackground,
+        color: imgSrc ? undefined : initialsColor(initialsBackground),
+      }}
       title={name || email}
     >
       {imgSrc ? (
