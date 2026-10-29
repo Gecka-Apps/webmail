@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import type { FileResource } from '@/lib/jmap/types';
+import type { FileResource } from '@/stores/file-store';
 import { FilesSidebar, type FilesSidebarProps } from '../files-sidebar';
 
 // SR-09: the Files sidebar claimed tree roles without arrow keys. It is a
