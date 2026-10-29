@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {nincs üzenet} other {# üzenet}}",
       "search_results": "{count, plural, =0 {Nincs találat} other {# találat}}"
     },
-    "category_tabs": "Beérkezett üzenetek kategóriái"
+    "category_tabs": "Beérkezett üzenetek kategóriái",
+    "listbox_label": "Üzenetek",
+    "row_actions": "Műveletek"
   },
   "shared_tags": {
     "title": "Megosztott címkék",
@@ -3569,7 +3571,9 @@
     "star": "Beszélgetés csillagozása",
     "unstar": "Beszélgetés csillagozásának megszüntetése",
     "toggle_thread": "Beszélgetés váltása",
-    "messages_count": "{count, plural, one {# üzenet} other {# üzenet}}"
+    "messages_count": "{count, plural, one {# üzenet} other {# üzenet}}",
+    "expand_named": "Beszélgetés kibontása: {subject}",
+    "collapse_named": "Beszélgetés összecsukása: {subject}"
   },
   "identities": {
     "modal_title": "Küldő azonosságok kezelése",

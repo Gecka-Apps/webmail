@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {žiadne správy} one {# správa} few {# správy} other {# správ}}",
       "search_results": "{count, plural, =0 {Žiadne výsledky} one {# výsledok} few {# výsledky} other {# výsledkov}}"
     },
-    "category_tabs": "Kategórie doručenej pošty"
+    "category_tabs": "Kategórie doručenej pošty",
+    "listbox_label": "Správy",
+    "row_actions": "Akcie"
   },
   "shared_tags": {
     "title": "Zdieľané štítky",
@@ -3569,7 +3571,9 @@
     "star": "Označiť konverzáciu hviezdičkou",
     "unstar": "Odstrániť hviezdičku z konverzácie",
     "toggle_thread": "Prepnúť zobrazenie vlákna",
-    "messages_count": "{count, plural, one {# správa} few {# správy} many {# správy} other {# správ}}"
+    "messages_count": "{count, plural, one {# správa} few {# správy} many {# správy} other {# správ}}",
+    "expand_named": "Rozbaliť konverzáciu: {subject}",
+    "collapse_named": "Zbaliť konverzáciu: {subject}"
   },
   "identities": {
     "modal_title": "Správa identít odosielateľa",

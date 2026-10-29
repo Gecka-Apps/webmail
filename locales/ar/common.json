@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {لا توجد رسائل} one {رسالة واحدة} other {# رسائل}}",
       "search_results": "{count, plural, =0 {لا توجد نتائج} one {نتيجة واحدة} other {# نتائج}}"
     },
-    "category_tabs": "فئات البريد الوارد"
+    "category_tabs": "فئات البريد الوارد",
+    "listbox_label": "الرسائل",
+    "row_actions": "الإجراءات"
   },
   "shared_tags": {
     "title": "الوسوم المشتركة",
@@ -3569,7 +3571,9 @@
     "star": "تمييز المحادثة بنجمة",
     "unstar": "إزالة النجمة عن المحادثة",
     "toggle_thread": "تبديل عرض المحادثة",
-    "messages_count": "{count, plural, zero {لا رسائل} one {رسالة واحدة} two {رسالتان} few {# رسائل} many {# رسالة} other {# رسالة}}"
+    "messages_count": "{count, plural, zero {لا رسائل} one {رسالة واحدة} two {رسالتان} few {# رسائل} many {# رسالة} other {# رسالة}}",
+    "expand_named": "توسيع المحادثة: {subject}",
+    "collapse_named": "طي المحادثة: {subject}"
   },
   "identities": {
     "modal_title": "إدارة هويات الإرسال",

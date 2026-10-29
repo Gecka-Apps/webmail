@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {ileti yok} other {# ileti}}",
       "search_results": "{count, plural, =0 {Sonuç yok} other {# sonuç}}"
     },
-    "category_tabs": "Gelen kutusu kategorileri"
+    "category_tabs": "Gelen kutusu kategorileri",
+    "listbox_label": "Mesajlar",
+    "row_actions": "Eylemler"
   },
   "shared_tags": {
     "title": "Paylaşılan etiketler",
@@ -3569,7 +3571,9 @@
     "star": "Konuşmaya yıldız ekle",
     "unstar": "Konuşmanın yıldızını kaldır",
     "toggle_thread": "İleti dizisini aç/kapat",
-    "messages_count": "{count, plural, one {# ileti} other {# ileti}}"
+    "messages_count": "{count, plural, one {# ileti} other {# ileti}}",
+    "expand_named": "Konuşmayı genişlet: {subject}",
+    "collapse_named": "Konuşmayı daralt: {subject}"
   },
   "identities": {
     "modal_title": "Gönderme Kimliklerini Yönet",

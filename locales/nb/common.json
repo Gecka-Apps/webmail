@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {ingen meldinger} one {# melding} other {# meldinger}}",
       "search_results": "{count, plural, =0 {Ingen treff} one {# treff} other {# treff}}"
     },
-    "category_tabs": "Innbokskategorier"
+    "category_tabs": "Innbokskategorier",
+    "listbox_label": "Meldinger",
+    "row_actions": "Handlinger"
   },
   "shared_tags": {
     "title": "Delte etiketter",
@@ -3569,7 +3571,9 @@
     "star": "Stjernemerk samtalen",
     "unstar": "Fjern stjernemerking fra samtalen",
     "toggle_thread": "Utvid eller fold sammen tråden",
-    "messages_count": "{count, plural, one {# melding} other {# meldinger}}"
+    "messages_count": "{count, plural, one {# melding} other {# meldinger}}",
+    "expand_named": "Utvid samtalen: {subject}",
+    "collapse_named": "Fold sammen samtalen: {subject}"
   },
   "identities": {
     "modal_title": "Administrer avsenderidentiteter",

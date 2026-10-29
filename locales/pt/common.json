@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {nenhuma mensagem} one {# mensagem} other {# mensagens}}",
       "search_results": "{count, plural, =0 {Nenhum resultado} one {# resultado} other {# resultados}}"
     },
-    "category_tabs": "Categorias da caixa de entrada"
+    "category_tabs": "Categorias da caixa de entrada",
+    "listbox_label": "Mensagens",
+    "row_actions": "Ações"
   },
   "shared_tags": {
     "title": "Etiquetas compartilhadas",
@@ -3569,7 +3571,9 @@
     "star": "Adicionar estrela à conversa",
     "unstar": "Remover estrela da conversa",
     "toggle_thread": "Expandir/recolher conversa",
-    "messages_count": "{count, plural, one {# mensagem} other {# mensagens}}"
+    "messages_count": "{count, plural, one {# mensagem} other {# mensagens}}",
+    "expand_named": "Expandir conversa: {subject}",
+    "collapse_named": "Recolher conversa: {subject}"
   },
   "identities": {
     "modal_title": "Gerenciar Identidades de Envio",

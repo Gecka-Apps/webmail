@@ -2,6 +2,7 @@
 
 import React, { useCallback } from "react";
 import { cleanPreview, formatDate } from "@/lib/utils";
+import { rowA11yProps, rowLabel } from "./list-a11y";
 import { emailDisplayDate } from "@/lib/email-date";
 import { formatScheduledSendAt } from "@/lib/scheduled-send-label";
 import { Email, ThreadGroup } from "@/lib/jmap/types";
@@ -11,7 +12,7 @@ import { VerificationCodeChip, useListVerificationCode } from "./verification-co
 import type { Attachment } from "@/lib/jmap/types";
 import type { LoadListAttachments } from "@/lib/list-attachments";
 import { SelectableAvatar } from "@/components/email/selectable-avatar";
-import { Paperclip, Star, Pin, Circle, ChevronRight, ChevronDown, Loader2, MessageSquare, CheckSquare, Square, Reply, Forward, CalendarClock, Folder, Archive, Trash2, MailOpen, ShieldAlert } from "@/components/icons";
+import { Paperclip, Star, Pin, Circle, ChevronRight, ChevronDown, Loader2, MessageSquare, CheckSquare, Square, Reply, Forward, CalendarClock, Folder, Archive, Trash2, MailOpen, ShieldAlert, MoreHorizontal } from "@/components/icons";
 import type { AppIcon } from "@/components/icons";
 import { useSettingsStore, KEYWORD_PALETTE } from "@/stores/settings-store";
 import { useShallow } from "zustand/react/shallow";
@@ -408,6 +409,8 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
     const accountColor = account?.avatarColor;
     const accountDescription = describeAccount(email.accountLabel, account);
     const isChecked = selectedEmailKeys.has(emailKeyFor(email));
+    const announceRowPreview = useSettingsStore((state) => state.announceRowPreview);
+    const showRowActionButton = useSettingsStore((state) => state.showRowActionButton);
     const isMobile = useUIStore((state) => state.isMobile);
     // One line per row where the list has the full width; stacked on phones.
     const { oneLine: oneLineRow, columns } = useListRowShape();
@@ -519,6 +522,20 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
       onContextMenu?.(e, email);
     };
 
+    // The row's name for screen readers, in the order people scan a row.
+    const a11yLabel = rowLabel([
+      isUnread && t('unread'),
+      sender?.name || (sender?.email && formatAddress(sender.email)) || tUnknown,
+      email.subject || tNoSubject,
+      formatDate(emailDisplayDate(email)),
+      isPinned && tStatus('pinned'),
+      isStarred && tStatus('starred'),
+      isAnswered && tStatus('replied'),
+      isForwarded && tStatus('forwarded'),
+      showPaperclip && tStatus('has_attachment'),
+      announceRowPreview && trimmedPreview,
+    ]);
+
     // Once something is ticked, the whole row is the checkbox, as in phone
     // mail apps (#1014). Mountain View on the desktop opens the message and
     // keeps the ticks instead, as Gmail does (#1231).
@@ -557,7 +574,15 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
         data-mv-mobile-row={mvMobileRow ? "" : undefined}
         data-mv-row={mvRow && !resolvedRowTint ? "" : undefined}
         data-checked={isChecked ? "" : undefined}
-        aria-current={selected ? 'true' : undefined}
+        {...rowA11yProps({
+          rowKey: emailKeyFor(email),
+          label: a11yLabel,
+          selected,
+          checked: isChecked,
+          selectionMode: selectedEmailKeys.size > 0,
+          onToggleCheck: () => toggleEmailSelection(email),
+          onOpenMenu: onContextMenu ? handleContextMenu : undefined,
+        })}
         className={cn(
           "relative group cursor-pointer select-none transition-shadow duration-200 border-b border-border overflow-hidden",
           mvMobileRow && "border-b-transparent",
@@ -589,6 +614,22 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
         onContextMenu={handleContextMenu}
         style={{ minHeight: oneLineRow ? undefined : 'var(--list-item-height)', touchAction: swipeEnabled ? 'pan-y' : undefined }}
       >
+        {showRowActionButton && onContextMenu && (
+          // For pointers that can't hover or right-click (MO-18); keyboards use
+          // Shift+F10 on the row, so it stays out of the Tab order.
+          <div role="gridcell" className="absolute end-2 top-1/2 z-20 -translate-y-1/2">
+            <button
+              type="button"
+              data-row-actions=""
+              onClick={(e) => { e.stopPropagation(); handleContextMenu(e); }}
+              aria-label={tStatus('row_actions')}
+              title={tStatus('row_actions')}
+              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-background text-muted-foreground hover:bg-muted hover:text-foreground"
+            >
+              <MoreHorizontal className="w-4 h-4" aria-hidden="true" />
+            </button>
+          </div>
+        )}
         {swipeEnabled && swipeMeta && (
           // Decorative reveal on the physically exposed edge. That edge
           // follows the (physical) translate direction, not text direction,
@@ -603,7 +644,8 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
           </div>
         )}
         <div
-          className={cn('px-3', oneLineRow ? 'flex items-center' : 'flex items-start', mvRow && 'min-h-10', swipeEnabled && 'relative z-10 bg-inherit')}
+          role="gridcell"
+          className={cn('px-3', showRowActionButton && onContextMenu && 'pe-12', oneLineRow ? 'flex items-center' : 'flex items-start', mvRow && 'min-h-10', swipeEnabled && 'relative z-10 bg-inherit')}
           style={{ gap: 'var(--density-item-gap)', paddingBlock: mvRow ? undefined : 'var(--density-item-py)', transform: swipeEnabled && offsetX ? `translateX(${offsetX}px)` : undefined, transition: swipeEnabled && offsetX === 0 ? 'transform 200ms ease-out' : undefined }}
         >
           {/* Checkbox - only for extra-compact density (no avatar) while in selection mode */}
@@ -891,6 +933,8 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
 
         {/* Hover Quick Actions */}
         {hoverActionsArmed && !email.isScheduled && (
+          // A cell of its own: a row holds cells, not buttons (SR-01).
+          <div role="gridcell">
           <EmailHoverActions
             email={email}
             backgroundClassName={resolvedRowTint ? resolvedRowTint : mvRow ? mvHoverBackground(isChecked, isUnread, selected) : ((selected || isChecked) ? "bg-accent" : "bg-muted")}
@@ -906,6 +950,7 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
             mailboxRole={currentMailboxRole ?? null}
             pinToFirstLine={mvRow}
           />
+          </div>
         )}
       </div>
     );
@@ -1089,6 +1134,8 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
       thread.emails.some(e => emailKeyFor(e) === selectedEmailKey);
 
     const isChecked = thread.emails.some(e => selectedEmailKeys.has(emailKeyFor(e)));
+    const announceRowPreview = useSettingsStore((state) => state.announceRowPreview);
+    const showRowActionButton = useSettingsStore((state) => state.showRowActionButton);
 
     if (emailCount === 1) {
       return (
@@ -1194,8 +1241,23 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
       onContextMenu?.(e, latestEmail);
     };
 
+    const threadSubject = latestEmail.subject || tNoSubject;
+    const a11yLabel = rowLabel([
+      hasUnread && tEmailViewer('unread'),
+      displayNames.join(', '),
+      threadSubject,
+      t('messages_tooltip', { count: emailCount }),
+      formatDate(emailDisplayDate(latestEmail)),
+      hasPinned && tStatus('pinned'),
+      hasStarred && tStatus('starred'),
+      hasAnswered && tStatus('replied'),
+      hasForwarded && tStatus('forwarded'),
+      hasAttachment && tStatus('has_attachment'),
+      announceRowPreview && trimmedPreview,
+    ]);
+
     return (
-      <div ref={ref} className={cn(
+      <div ref={ref} role="presentation" className={cn(
         "border-b border-border",
         mvMobileRow && "border-b-transparent",
         isThreadDragging && "opacity-50 scale-[0.98] ring-2 ring-primary/30"
@@ -1206,7 +1268,18 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
           onPointerOver={armHoverActions}
           onFocus={armHoverActions}
           onPointerDown={(e) => { if (onPrefetch && isMousePressOnRow(e)) onPrefetch(latestEmail); }}
-          aria-current={isSelected ? 'true' : undefined}
+          {...rowA11yProps({
+            rowKey: emailKeyFor(latestEmail),
+            label: a11yLabel,
+            selected: isSelected && !isExpanded,
+            expanded: isExpanded,
+            checked: isChecked,
+            selectionMode: selectedEmailKeys.size > 0,
+            onToggleCheck: toggleThreadSelection,
+            onOpenMenu: onContextMenu ? handleContextMenu : undefined,
+          })}
+          // Every message in the conversation: the open one may be any of them.
+          data-thread-keys={thread.emails.map((e) => emailKeyFor(e)).join(' ')}
           data-unread={hasUnread ? 'true' : 'false'}
           data-mv-mobile-row={mvMobileRow ? "" : undefined}
           data-mv-row={mvRow && !rowTint ? "" : undefined}
@@ -1241,6 +1314,22 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
           onContextMenu={handleContextMenu}
           style={{ minHeight: oneLineRow ? undefined : 'var(--list-item-height)', touchAction: threadSwipeEnabled ? 'pan-y' : undefined }}
         >
+          {showRowActionButton && onContextMenu && (
+            // For pointers that can't hover or right-click (MO-18); keyboards use
+            // Shift+F10 on the row, so it stays out of the Tab order.
+            <div role="gridcell" className="absolute end-2 top-1/2 z-20 -translate-y-1/2">
+              <button
+                type="button"
+                data-row-actions=""
+                onClick={(e) => { e.stopPropagation(); handleContextMenu(e); }}
+                aria-label={tStatus('row_actions')}
+                title={tStatus('row_actions')}
+                className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-background text-muted-foreground hover:bg-muted hover:text-foreground"
+              >
+                <MoreHorizontal className="w-4 h-4" aria-hidden="true" />
+              </button>
+            </div>
+          )}
           {threadSwipeEnabled && threadSwipeMeta && (
             // As on a single message's row: the physically exposed edge.
             <div
@@ -1252,7 +1341,8 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
             </div>
           )}
           <div
-            className={cn('px-3', oneLineRow ? 'flex items-center' : 'flex items-start', mvRow && 'min-h-10', threadSwipeEnabled && 'relative z-10 bg-inherit')}
+            role="gridcell"
+            className={cn('px-3', showRowActionButton && onContextMenu && 'pe-12', oneLineRow ? 'flex items-center' : 'flex items-start', mvRow && 'min-h-10', threadSwipeEnabled && 'relative z-10 bg-inherit')}
             style={{ gap: 'var(--density-item-gap)', paddingBlock: mvRow ? undefined : 'var(--density-item-py)', transform: threadSwipeEnabled && threadOffsetX ? `translateX(${threadOffsetX}px)` : undefined, transition: threadSwipeEnabled && threadOffsetX === 0 ? 'transform 200ms ease-out' : undefined }}
           >
             {/* Checkbox for thread selection - only for extra-compact density (no avatar) while in selection mode */}
@@ -1319,7 +1409,7 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
                       "bg-background border border-border"
                     )}
                     aria-expanded={isExpanded}
-                    aria-label={t('toggle_thread')}
+                    aria-label={isExpanded ? t('collapse_named', { subject: threadSubject }) : t('expand_named', { subject: threadSubject })}
                   >
                     {isLoading ? (
                       <Loader2 className="w-3 h-3 animate-spin" />
@@ -1364,7 +1454,7 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
                           }}
                           className="-m-0.5 shrink-0 rounded p-0.5 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                           aria-expanded={isExpanded}
-                          aria-label={t('toggle_thread')}
+                          aria-label={isExpanded ? t('collapse_named', { subject: threadSubject }) : t('expand_named', { subject: threadSubject })}
                         >
                           {isLoading ? (
                             <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -1620,6 +1710,7 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
 
           {/* Hover Quick Actions for thread header */}
           {hoverActionsArmed && !latestEmail.isScheduled && (
+            <div role="gridcell">
             <EmailHoverActions
               email={latestEmail}
               backgroundClassName={rowTint ? rowTint : mvRow ? mvHoverBackground(isChecked, hasUnread, isSelected) : ((isSelected || isChecked) ? "bg-accent" : "bg-muted")}
@@ -1635,15 +1726,18 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
               mailboxRole={currentMailboxRole ?? null}
               pinToFirstLine={mvRow}
             />
+            </div>
           )}
         </div>
 
         {isExpanded && !isMobile && (
           <div className="bg-muted/20 animate-in slide-in-from-top-2 duration-200">
             {isLoading ? (
-              <div className="py-4 flex items-center justify-center text-sm text-muted-foreground">
-                <Loader2 className="w-4 h-4 animate-spin me-2" />
-                {t('loading')}
+              <div role="row" aria-level={2} className="py-4 flex items-center justify-center text-sm text-muted-foreground">
+                <div role="gridcell" className="flex items-center">
+                  <Loader2 className="w-4 h-4 animate-spin me-2" aria-hidden="true" />
+                  {t('loading')}
+                </div>
               </div>
             ) : (
               emailsToShow.map((email, index) => (

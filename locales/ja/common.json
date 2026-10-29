@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {メッセージはありません} other {#件のメッセージ}}",
       "search_results": "{count, plural, =0 {結果はありません} other {#件の結果}}"
     },
-    "category_tabs": "受信トレイのカテゴリ"
+    "category_tabs": "受信トレイのカテゴリ",
+    "listbox_label": "メッセージ",
+    "row_actions": "アクション"
   },
   "shared_tags": {
     "title": "共有タグ",
@@ -3569,7 +3571,9 @@
     "star": "会話にスターを付ける",
     "unstar": "会話のスターを外す",
     "toggle_thread": "スレッドの展開/折りたたみ",
-    "messages_count": "{count, plural, other {#件のメッセージ}}"
+    "messages_count": "{count, plural, other {#件のメッセージ}}",
+    "expand_named": "会話を展開: {subject}",
+    "collapse_named": "会話を折りたたむ: {subject}"
   },
   "identities": {
     "modal_title": "送信者情報を管理",

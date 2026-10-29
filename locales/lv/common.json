@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {nav vēstuļu} zero {# vēstules} one {# vēstule} other {# vēstules}}",
       "search_results": "{count, plural, =0 {Nav rezultātu} zero {# rezultāti} one {# rezultāts} other {# rezultāti}}"
     },
-    "category_tabs": "Iesūtnes kategorijas"
+    "category_tabs": "Iesūtnes kategorijas",
+    "listbox_label": "Vēstules",
+    "row_actions": "Darbības"
   },
   "shared_tags": {
     "title": "Kopīgotie tagi",
@@ -3569,7 +3571,9 @@
     "star": "Pievienot zvaigznīti sarunai",
     "unstar": "Noņemt zvaigznīti sarunai",
     "toggle_thread": "Pārslēgt sarunu",
-    "messages_count": "{count, plural, zero {# ziņojumu} one {# ziņojums} other {# ziņojumi}}"
+    "messages_count": "{count, plural, zero {# ziņojumu} one {# ziņojums} other {# ziņojumi}}",
+    "expand_named": "Izvērst sarunu: {subject}",
+    "collapse_named": "Sairt sarunu: {subject}"
   },
   "identities": {
     "modal_title": "Pārvaldīt sūtītāja identitātes",

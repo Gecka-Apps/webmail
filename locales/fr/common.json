@@ -379,7 +379,9 @@
       "folder_loaded": "{folder} : {count, plural, =0 {aucun message} one {# message} other {# messages}}",
       "search_results": "{count, plural, =0 {Aucun résultat} one {# résultat} other {# résultats}}"
     },
-    "category_tabs": "Catégories de la boîte de réception"
+    "category_tabs": "Catégories de la boîte de réception",
+    "listbox_label": "Messages",
+    "row_actions": "Actions"
   },
   "shared_tags": {
     "title": "Étiquettes partagées",
@@ -3569,7 +3571,9 @@
     "star": "Marquer la conversation comme favorite",
     "unstar": "Retirer des favoris",
     "toggle_thread": "Déplier/replier la discussion",
-    "messages_count": "{count, plural, one {# message} other {# messages}}"
+    "messages_count": "{count, plural, one {# message} other {# messages}}",
+    "expand_named": "Développer la conversation: {subject}",
+    "collapse_named": "Réduire la conversation: {subject}"
   },
   "identities": {
     "modal_title": "Gérer les identités d'envoi",

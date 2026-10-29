@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {cap missatge} one {# missatge} other {# missatges}}",
       "search_results": "{count, plural, =0 {Cap resultat} one {# resultat} other {# resultats}}"
     },
-    "category_tabs": "Categories de la safata d'entrada"
+    "category_tabs": "Categories de la safata d'entrada",
+    "listbox_label": "Missatges",
+    "row_actions": "Accions"
   },
   "shared_tags": {
     "title": "Etiquetes compartides",
@@ -3569,7 +3571,9 @@
     "star": "Marca la conversa amb estrella",
     "unstar": "Treu l'estrella de la conversa",
     "toggle_thread": "Commuta el fil",
-    "messages_count": "{count, plural, one {# missatge} other {# missatges}}"
+    "messages_count": "{count, plural, one {# missatge} other {# missatges}}",
+    "expand_named": "Desplega la conversa: {subject}",
+    "collapse_named": "Replega la conversa: {subject}"
   },
   "identities": {
     "modal_title": "Gestiona les identitats d'enviament",

@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {зурвас алга} other {# зурвас}}",
       "search_results": "{count, plural, =0 {Илэрц алга} other {# илэрц}}"
     },
-    "category_tabs": "Ирсэн шуудангийн ангиллууд"
+    "category_tabs": "Ирсэн шуудангийн ангиллууд",
+    "listbox_label": "Зурвасууд",
+    "row_actions": "Үйлдлүүд"
   },
   "shared_tags": {
     "title": "Хуваалцсан тагууд",
@@ -3569,7 +3571,9 @@
     "star": "Харилцан яриаг одтой болгох",
     "unstar": "Харилцан ярианы одыг авах",
     "toggle_thread": "Хэлхээсийг дэлгэх/хумих",
-    "messages_count": "{count, plural, one {# мессеж} other {# мессеж}}"
+    "messages_count": "{count, plural, one {# мессеж} other {# мессеж}}",
+    "expand_named": "Харилцан яриаг өргөжүүлэх: {subject}",
+    "collapse_named": "Харилцан яриаг хураах: {subject}"
   },
   "identities": {
     "modal_title": "Илгээж буй таниулбаруудыг удирдах",

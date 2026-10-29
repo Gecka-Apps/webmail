@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {kirju pole} one {# kiri} other {# kirja}}",
       "search_results": "{count, plural, =0 {Tulemusi pole} one {# tulemus} other {# tulemust}}"
     },
-    "category_tabs": "Postkasti kategooriad"
+    "category_tabs": "Postkasti kategooriad",
+    "listbox_label": "Sõnumid",
+    "row_actions": "Toimingud"
   },
   "shared_tags": {
     "title": "Jagatud sildid",
@@ -3569,7 +3571,9 @@
     "star": "Tähista vestlus",
     "unstar": "Eemalda vestluse tähistus",
     "toggle_thread": "Lülita vestlus",
-    "messages_count": "{count, plural, one {# sõnum} other {# sõnumit}}"
+    "messages_count": "{count, plural, one {# sõnum} other {# sõnumit}}",
+    "expand_named": "Ava vestlus: {subject}",
+    "collapse_named": "Sulge vestlus: {subject}"
   },
   "identities": {
     "modal_title": "Halda saatja identiteete",

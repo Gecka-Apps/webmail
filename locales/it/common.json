@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {nessun messaggio} one {# messaggio} other {# messaggi}}",
       "search_results": "{count, plural, =0 {Nessun risultato} one {# risultato} other {# risultati}}"
     },
-    "category_tabs": "Categorie della posta in arrivo"
+    "category_tabs": "Categorie della posta in arrivo",
+    "listbox_label": "Messaggi",
+    "row_actions": "Azioni"
   },
   "shared_tags": {
     "title": "Etichette condivise",
@@ -3569,7 +3571,9 @@
     "star": "Aggiungi stella alla conversazione",
     "unstar": "Rimuovi stella dalla conversazione",
     "toggle_thread": "Espandi/comprimi discussione",
-    "messages_count": "{count, plural, one {# messaggio} other {# messaggi}}"
+    "messages_count": "{count, plural, one {# messaggio} other {# messaggi}}",
+    "expand_named": "Espandi conversazione: {subject}",
+    "collapse_named": "Comprimi conversazione: {subject}"
   },
   "identities": {
     "modal_title": "Gestisci identità di invio",

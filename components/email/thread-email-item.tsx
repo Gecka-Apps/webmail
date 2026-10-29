@@ -21,6 +21,7 @@ import { useTagDisplay } from "@/hooks/use-tag-display";
 import { TagBadge } from "./tag-badge";
 import { useListRowShape, LIST_COLUMN_CLASS } from "@/hooks/use-list-row-shape";
 import { SizeCell, listLeadClass } from "./list-columns";
+import { rowA11yProps, rowLabel } from "./list-a11y";
 
 interface ThreadEmailItemProps {
   email: Email;
@@ -40,6 +41,8 @@ export function ThreadEmailItem({
   onContextMenu,
 }: ThreadEmailItemProps) {
   const t = useTranslations('email_viewer');
+  const tBatch = useTranslations('email_list.batch_actions');
+  const tStatus = useTranslations('email_list');
   const isUnread = !email.keywords?.$seen;
   const isStarred = email.keywords?.$flagged;
   const isAnswered = email.keywords?.$answered;
@@ -103,6 +106,29 @@ export function ThreadEmailItem({
     }
   };
 
+  const senderName = sender?.name || sender?.email?.split('@')[0] || t('unknown_sender');
+  const selectLabel = tBatch('select_row', { sender: senderName, subject: email.subject || t('no_subject') });
+  const a11y = rowA11yProps({
+    rowKey: emailKeyFor(email),
+    label: rowLabel([
+      isUnread && t('unread'),
+      senderName,
+      formatDate(emailDisplayDate(email)),
+      isStarred && tStatus('starred'),
+      isAnswered && tStatus('replied'),
+      isForwarded && tStatus('forwarded'),
+      email.hasAttachment && tStatus('has_attachment'),
+      // The row shows the message's text where the subject would be.
+      cleanPreview(email.preview),
+    ]),
+    selected: !!selected,
+    level: 2,
+    checked: isChecked,
+    selectionMode: selectedEmailKeys.size > 0,
+    onToggleCheck: () => toggleEmailSelection(email),
+    onOpenMenu: onContextMenu ? handleContextMenu : undefined,
+  });
+
   const rowHandlers = {
     onClick: handleClick,
     onDoubleClick: (e: React.MouseEvent) => {
@@ -125,6 +151,7 @@ export function ThreadEmailItem({
         {...dragHandlers}
         {...longPressHandlers}
         {...rowHandlers}
+        {...a11y}
         data-testid="thread-email-row"
         className={cn(
           "relative cursor-pointer select-none px-3 transition-colors duration-150",
@@ -137,7 +164,7 @@ export function ThreadEmailItem({
         )}
         style={{ paddingBlock: 'var(--density-item-py)' }}
       >
-        <div className="flex items-center" style={{ gap: 'var(--density-item-gap)' }}>
+        <div role="gridcell" className="flex items-center" style={{ gap: 'var(--density-item-gap)' }}>
           {lead && (
             <span className={cn(lead, 'flex shrink-0 items-center justify-center')}>
               {selecting ? (
@@ -145,6 +172,7 @@ export function ThreadEmailItem({
                   onClick={handleCheckboxClick}
                   role="checkbox"
                   aria-checked={isChecked}
+                  aria-label={selectLabel}
                   className={cn("rounded p-1 hover:bg-muted/50", isChecked && "text-primary")}
                 >
                   {isChecked ? <CheckSquare className="w-3.5 h-3.5" /> : <Square className="w-3.5 h-3.5 text-muted-foreground" />}
@@ -198,6 +226,7 @@ export function ThreadEmailItem({
     <div
       {...dragHandlers}
       {...longPressHandlers}
+      {...a11y}
       className={cn(
         "relative cursor-pointer select-none transition-all duration-150",
         "ps-12 pe-4",
@@ -221,11 +250,14 @@ export function ThreadEmailItem({
       onContextMenu={handleContextMenu}
       style={{ paddingBlock: 'var(--density-item-py)' }}
     >
-      <div className="flex items-start gap-3">
+      <div role="gridcell" className="flex items-start gap-3">
         {/* Checkbox - only visible when in selection mode */}
         {selectedEmailKeys.size > 0 && (
           <button
             onClick={handleCheckboxClick}
+            role="checkbox"
+            aria-checked={isChecked}
+            aria-label={selectLabel}
             className={cn(
               "p-1 rounded mt-0.5 flex-shrink-0 transition-all duration-200",
               "hover:bg-muted/50 hover:scale-110",

@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {niciun mesaj} one {# mesaj} few {# mesaje} other {# de mesaje}}",
       "search_results": "{count, plural, =0 {Niciun rezultat} one {# rezultat} few {# rezultate} other {# de rezultate}}"
     },
-    "category_tabs": "Categoriile căsuței de primire"
+    "category_tabs": "Categoriile căsuței de primire",
+    "listbox_label": "Mesaje",
+    "row_actions": "Acțiuni"
   },
   "shared_tags": {
     "title": "Etichete partajate",
@@ -3569,7 +3571,9 @@
     "star": "Marcați conversația cu stea",
     "unstar": "Dezactivează marcajul conversației",
     "toggle_thread": "Comutare fir de discuție",
-    "messages_count": "{count, plural, one {# mesaj} few {# mesaje} other {# de mesaje}}"
+    "messages_count": "{count, plural, one {# mesaj} few {# mesaje} other {# de mesaje}}",
+    "expand_named": "Extinde conversația: {subject}",
+    "collapse_named": "Ascunde conversația: {subject}"
   },
   "identities": {
     "modal_title": "Gestionarea identităților de expediere",

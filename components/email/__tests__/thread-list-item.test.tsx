@@ -846,7 +846,8 @@ describe('ThreadListItem open message', () => {
     const { container } = render(
       <ThreadListItem thread={thread} isExpanded={false} selectedEmailKey="login-a/cf:eaaaaab" onToggleExpand={() => {}} onEmailSelect={() => {}} />,
     );
-    expect(container.querySelector('[aria-current="true"]') !== null).toBe(open);
+    // The open message's row is marked current in the list (SR-01).
+    expect(container.querySelector('[role="row"][aria-current="true"]') !== null).toBe(open);
   });
 });
 
@@ -898,5 +899,70 @@ describe('ThreadListItem text direction', () => {
       const el = screen.getAllByText((_c, node) => node?.textContent?.trim() === text && node.children.length === 0)[0];
       expect(el.closest('[dir="auto"]'), text).not.toBeNull();
     }
+  });
+});
+
+describe('ThreadListItem for screen readers and keyboards (SR-01, MO-18)', () => {
+  beforeEach(() => {
+    useSettingsStore.setState({ showPreview: false, announceRowPreview: false, showRowActionButton: false, interfaceLayout: 'default' } as never);
+    useEmailStore.setState({ selectedEmailKeys: new Set<string>(), selectedMailbox: '' });
+  });
+
+  it('is one row named after sender, subject and state', () => {
+    renderRow(makeEmail({ keywords: {}, from: [{ name: 'Anna Berg', email: 'anna@example.com' }], subject: 'Budget' }));
+    const row = screen.getByRole('row');
+    const name = row.getAttribute('aria-label') ?? '';
+    expect(name).toMatch(/^unread, Anna Berg, Budget, /);
+  });
+
+  it('reads the preview only when that setting is on', () => {
+    const email = makeEmail({ preview: 'Numbers for Q3 attached' });
+    const { unmount } = renderRow(email);
+    expect(screen.getByRole('row').getAttribute('aria-label')).not.toContain('Numbers for Q3');
+    unmount();
+    useSettingsStore.setState({ announceRowPreview: true } as never);
+    renderRow(email);
+    expect(screen.getByRole('row').getAttribute('aria-label')).toContain('Numbers for Q3 attached');
+  });
+
+  it('ticks the row with Space', () => {
+    renderRow(makeEmail({ id: 'm1' }));
+    fireEvent.keyDown(screen.getByRole('row'), { key: ' ' });
+    expect(useEmailStore.getState().selectedEmailKeys.size).toBe(1);
+  });
+
+  it('shows an actions button that opens the row menu when that setting is on', () => {
+    const onContextMenu = vi.fn();
+    const [thread] = groupEmailsByThread([makeEmail()]);
+    const ui = (
+      <ThreadListItem thread={thread} isExpanded={false} onToggleExpand={() => {}} onEmailSelect={() => {}} onContextMenu={onContextMenu} />
+    );
+    const { rerender } = render(ui);
+    expect(screen.queryByRole('button', { name: 'row_actions' })).toBeNull();
+    act(() => { useSettingsStore.setState({ showRowActionButton: true } as never); });
+    rerender(ui);
+    fireEvent.click(screen.getByRole('button', { name: 'row_actions' }));
+    expect(onContextMenu).toHaveBeenCalledTimes(1);
+  });
+
+  it('tells screen readers whether a conversation is open and puts its messages a level down', () => {
+    const first = makeEmail({ id: 'a', threadId: 't', receivedAt: '2024-01-15T09:00:00Z' });
+    const second = makeEmail({ id: 'b', threadId: 't', receivedAt: '2024-01-15T10:00:00Z' });
+    const [thread] = groupEmailsByThread([first, second]);
+    render(<ThreadListItem thread={thread} isExpanded expandedEmails={thread.emails} onToggleExpand={() => {}} onEmailSelect={() => {}} />);
+    const rows = screen.getAllByRole('row');
+    expect(rows[0]).toHaveAttribute('aria-expanded', 'true');
+    expect(rows[0]).toHaveAttribute('aria-level', '1');
+    expect(rows.slice(1).every((r) => r.getAttribute('aria-level') === '2')).toBe(true);
+    // Each row holds its content in a cell, so its controls are allowed there.
+    expect(rows[0].querySelector('[role="gridcell"]')).not.toBeNull();
+  });
+
+  it('names the conversation toggle after its subject', () => {
+    const first = makeEmail({ id: 'a', threadId: 't', subject: 'Trip', receivedAt: '2024-01-15T09:00:00Z' });
+    const second = makeEmail({ id: 'b', threadId: 't', subject: 'Trip', receivedAt: '2024-01-15T10:00:00Z' });
+    const [thread] = groupEmailsByThread([first, second]);
+    render(<ThreadListItem thread={thread} isExpanded={false} onToggleExpand={() => {}} onEmailSelect={() => {}} />);
+    expect(screen.getByRole('button', { name: /expand_named/ })).toBeTruthy();
   });
 });

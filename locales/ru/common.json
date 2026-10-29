@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {нет сообщений} one {# сообщение} few {# сообщения} many {# сообщений} other {# сообщения}}",
       "search_results": "{count, plural, =0 {Ничего не найдено} one {# результат} few {# результата} many {# результатов} other {# результата}}"
     },
-    "category_tabs": "Категории входящих"
+    "category_tabs": "Категории входящих",
+    "listbox_label": "Сообщения",
+    "row_actions": "Действия"
   },
   "shared_tags": {
     "title": "Общие теги",
@@ -3569,7 +3571,9 @@
     "star": "Добавить звёздочку к разговору",
     "unstar": "Убрать звёздочку у разговора",
     "toggle_thread": "Переключить цепочку",
-    "messages_count": "{count, plural, one {# сообщение} few {# сообщения} many {# сообщений} other {# сообщения}}"
+    "messages_count": "{count, plural, one {# сообщение} few {# сообщения} many {# сообщений} other {# сообщения}}",
+    "expand_named": "Развернуть разговор: {subject}",
+    "collapse_named": "Свернуть разговор: {subject}"
   },
   "identities": {
     "modal_title": "Управление идентификациями отправителя",

@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {brak wiadomości} one {# wiadomość} few {# wiadomości} many {# wiadomości} other {# wiadomości}}",
       "search_results": "{count, plural, =0 {Brak wyników} one {# wynik} few {# wyniki} many {# wyników} other {# wyników}}"
     },
-    "category_tabs": "Kategorie skrzynki odbiorczej"
+    "category_tabs": "Kategorie skrzynki odbiorczej",
+    "listbox_label": "Wiadomości",
+    "row_actions": "Akcje"
   },
   "shared_tags": {
     "title": "Wspólne etykiety",
@@ -3569,7 +3571,9 @@
     "star": "Oznacz konwersację gwiazdką",
     "unstar": "Usuń gwiazdkę z konwersacji",
     "toggle_thread": "Przełącz widok wątku",
-    "messages_count": "{count, plural, one {# wiadomość} few {# wiadomości} many {# wiadomości} other {# wiadomości}}"
+    "messages_count": "{count, plural, one {# wiadomość} few {# wiadomości} many {# wiadomości} other {# wiadomości}}",
+    "expand_named": "Rozwiń konwersację: {subject}",
+    "collapse_named": "Zwiń konwersację: {subject}"
   },
   "identities": {
     "modal_title": "Zarządzaj tożsamościami nadawcy",

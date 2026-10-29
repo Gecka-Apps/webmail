@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {ingen beskeder} one {# besked} other {# beskeder}}",
       "search_results": "{count, plural, =0 {Ingen resultater} one {# resultat} other {# resultater}}"
     },
-    "category_tabs": "Indbakkekategorier"
+    "category_tabs": "Indbakkekategorier",
+    "listbox_label": "Beskeder",
+    "row_actions": "Handlinger"
   },
   "shared_tags": {
     "title": "Delte tags",
@@ -3569,7 +3571,9 @@
     "star": "Stjernemarkér samtale",
     "unstar": "Fjern stjernemarkering",
     "toggle_thread": "Slå tråd til/fra",
-    "messages_count": "{count, plural, one {# besked} other {# beskeder}}"
+    "messages_count": "{count, plural, one {# besked} other {# beskeder}}",
+    "expand_named": "Udvid samtale: {subject}",
+    "collapse_named": "Skjul samtale: {subject}"
   },
   "identities": {
     "modal_title": "Administrér afsenderidentiteter",

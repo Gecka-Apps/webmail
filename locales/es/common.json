@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {ningún mensaje} one {# mensaje} other {# mensajes}}",
       "search_results": "{count, plural, =0 {Sin resultados} one {# resultado} other {# resultados}}"
     },
-    "category_tabs": "Categorías de la bandeja de entrada"
+    "category_tabs": "Categorías de la bandeja de entrada",
+    "listbox_label": "Mensajes",
+    "row_actions": "Acciones"
   },
   "shared_tags": {
     "title": "Etiquetas compartidas",
@@ -3569,7 +3571,9 @@
     "star": "Destacar conversación",
     "unstar": "Quitar destacado de conversación",
     "toggle_thread": "Expandir/contraer hilo",
-    "messages_count": "{count, plural, one {# mensaje} other {# mensajes}}"
+    "messages_count": "{count, plural, one {# mensaje} other {# mensajes}}",
+    "expand_named": "Expandir conversación: {subject}",
+    "collapse_named": "Contraer conversación: {subject}"
   },
   "identities": {
     "modal_title": "Administrar Identidades de Envío",

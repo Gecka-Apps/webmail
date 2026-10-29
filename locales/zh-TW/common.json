@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}：{count, plural, =0 {沒有郵件} other {# 封郵件}}",
       "search_results": "{count, plural, =0 {沒有結果} other {# 個結果}}"
     },
-    "category_tabs": "收件匣分類"
+    "category_tabs": "收件匣分類",
+    "listbox_label": "郵件",
+    "row_actions": "動作"
   },
   "shared_tags": {
     "title": "共用標籤",
@@ -3569,7 +3571,9 @@
     "star": "為對話串加上星號",
     "unstar": "移除對話串星號",
     "toggle_thread": "展開／收合對話串",
-    "messages_count": "{count, plural, other {# 封郵件}}"
+    "messages_count": "{count, plural, other {# 封郵件}}",
+    "expand_named": "展開對話串: {subject}",
+    "collapse_named": "收合對話串: {subject}"
   },
   "identities": {
     "modal_title": "管理寄件身分",

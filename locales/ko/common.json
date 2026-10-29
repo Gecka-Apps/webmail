@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {메시지 없음} other {메시지 #개}}",
       "search_results": "{count, plural, =0 {결과 없음} other {결과 #개}}"
     },
-    "category_tabs": "받은편지함 카테고리"
+    "category_tabs": "받은편지함 카테고리",
+    "listbox_label": "메시지",
+    "row_actions": "작업"
   },
   "shared_tags": {
     "title": "공유 태그",
@@ -3569,7 +3571,9 @@
     "star": "대화 전체에 별표 달기",
     "unstar": "대화 전체 별표 해제",
     "toggle_thread": "스레드 켜기/끄기",
-    "messages_count": "{count, plural, other {메시지 #개}}"
+    "messages_count": "{count, plural, other {메시지 #개}}",
+    "expand_named": "대화 펼치기: {subject}",
+    "collapse_named": "대화 접기: {subject}"
   },
   "identities": {
     "modal_title": "보내는 사람 관리",

@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}：{count, plural, =0 {没有邮件} other {# 封邮件}}",
       "search_results": "{count, plural, =0 {没有结果} other {# 个结果}}"
     },
-    "category_tabs": "收件箱分类"
+    "category_tabs": "收件箱分类",
+    "listbox_label": "邮件",
+    "row_actions": "操作"
   },
   "shared_tags": {
     "title": "共享标签",
@@ -3569,7 +3571,9 @@
     "star": "会话加星标",
     "unstar": "取消会话星标",
     "toggle_thread": "展开/折叠会话",
-    "messages_count": "{count, plural, other {# 条消息}}"
+    "messages_count": "{count, plural, other {# 条消息}}",
+    "expand_named": "展开会话: {subject}",
+    "collapse_named": "折叠会话: {subject}"
   },
   "identities": {
     "modal_title": "管理发送身份",

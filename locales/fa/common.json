@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {بدون پیام} other {# پیام}}",
       "search_results": "{count, plural, =0 {نتیجه‌ای نیست} other {# نتیجه}}"
     },
-    "category_tabs": "دسته‌های صندوق ورودی"
+    "category_tabs": "دسته‌های صندوق ورودی",
+    "listbox_label": "پیام‌ها",
+    "row_actions": "اقدامات"
   },
   "shared_tags": {
     "title": "برچسب‌های مشترک",
@@ -3569,7 +3571,9 @@
     "star": "ستاره‌دار کردن مکالمه",
     "unstar": "حذف ستاره مکالمه",
     "toggle_thread": "تغییر وضعیت رشته",
-    "messages_count": "{count, plural, one {# پیام} other {# پیام}}"
+    "messages_count": "{count, plural, one {# پیام} other {# پیام}}",
+    "expand_named": "باز کردن مکالمه: {subject}",
+    "collapse_named": "جمع کردن مکالمه: {subject}"
   },
   "identities": {
     "modal_title": "مدیریت هویت‌های ارسال",

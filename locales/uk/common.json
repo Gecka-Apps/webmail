@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {немає повідомлень} one {# повідомлення} few {# повідомлення} many {# повідомлень} other {# повідомлення}}",
       "search_results": "{count, plural, =0 {Нічого не знайдено} one {# результат} few {# результати} many {# результатів} other {# результату}}"
     },
-    "category_tabs": "Категорії вхідних"
+    "category_tabs": "Категорії вхідних",
+    "listbox_label": "Повідомлення",
+    "row_actions": "Дії"
   },
   "shared_tags": {
     "title": "Спільні теги",
@@ -3569,7 +3571,9 @@
     "star": "Зоряна розмова",
     "unstar": "Зняти зірочку з розмови",
     "toggle_thread": "Перемкнути потік",
-    "messages_count": "{count, plural, one {# повідомлення} few {# повідомлення} many {# повідомлень} other {# повідомлення}}"
+    "messages_count": "{count, plural, one {# повідомлення} few {# повідомлення} many {# повідомлень} other {# повідомлення}}",
+    "expand_named": "Розгорнути бесіду: {subject}",
+    "collapse_named": "Згорнути бесіду: {subject}"
   },
   "identities": {
     "modal_title": "Керування ідентифікаторами надсилання",

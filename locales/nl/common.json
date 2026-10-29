@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {geen berichten} one {# bericht} other {# berichten}}",
       "search_results": "{count, plural, =0 {Geen resultaten} one {# resultaat} other {# resultaten}}"
     },
-    "category_tabs": "Inboxcategorieën"
+    "category_tabs": "Inboxcategorieën",
+    "listbox_label": "Berichten",
+    "row_actions": "Acties"
   },
   "shared_tags": {
     "title": "Gedeelde labels",
@@ -3569,7 +3571,9 @@
     "star": "Ster toevoegen aan gesprek",
     "unstar": "Ster verwijderen van gesprek",
     "toggle_thread": "Gesprek in-/uitvouwen",
-    "messages_count": "{count, plural, one {# bericht} other {# berichten}}"
+    "messages_count": "{count, plural, one {# bericht} other {# berichten}}",
+    "expand_named": "Gesprek uitklappen: {subject}",
+    "collapse_named": "Gesprek inklappen: {subject}"
   },
   "identities": {
     "modal_title": "Verzendidentiteiten beheren",

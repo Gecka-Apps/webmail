@@ -379,7 +379,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {no messages} one {# message} other {# messages}}",
       "search_results": "{count, plural, =0 {No results} one {# result} other {# results}}"
     },
-    "category_tabs": "Inbox categories"
+    "category_tabs": "Inbox categories",
+    "listbox_label": "Messages",
+    "row_actions": "Actions"
   },
   "shared_tags": {
     "title": "Shared tags",
@@ -3569,7 +3571,9 @@
     "star": "Star conversation",
     "unstar": "Unstar conversation",
     "toggle_thread": "Toggle thread",
-    "messages_count": "{count, plural, one {# message} other {# messages}}"
+    "messages_count": "{count, plural, one {# message} other {# messages}}",
+    "expand_named": "Expand conversation: {subject}",
+    "collapse_named": "Collapse conversation: {subject}"
   },
   "identities": {
     "modal_title": "Manage sending identities",

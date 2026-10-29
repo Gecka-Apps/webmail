@@ -456,7 +456,9 @@
     "star": "ติดดาวการสนทนา",
     "unstar": "ยกเลิกติดดาวการสนทนา",
     "toggle_thread": "สลับมุมมองการสนทนา",
-    "messages_count": "{count, plural, other {# ข้อความ}}"
+    "messages_count": "{count, plural, other {# ข้อความ}}",
+    "expand_named": "ขยายการสนทนา: {subject}",
+    "collapse_named": "ย่อการสนทนา: {subject}"
   },
   "notifications": {
     "email_sent": "ส่งอีเมลแล้ว",
@@ -641,7 +643,9 @@
       "folder_loaded": "{folder}: {count, plural, =0 {ไม่มีข้อความ} other {# ข้อความ}}",
       "search_results": "{count, plural, =0 {ไม่พบผลลัพธ์} other {# ผลลัพธ์}}"
     },
-    "category_tabs": "หมวดหมู่กล่องจดหมายเข้า"
+    "category_tabs": "หมวดหมู่กล่องจดหมายเข้า",
+    "listbox_label": "ข้อความ",
+    "row_actions": "การดำเนินการ"
   },
   "shared_tags": {
     "title": "ป้ายกำกับที่แชร์",

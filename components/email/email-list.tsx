@@ -3,6 +3,7 @@
 import { Email, ThreadGroup } from "@/lib/jmap/types";
 import { MemoizedThreadListItem, listMailboxRole } from "./thread-list-item";
 import { ListColumnsHeader } from "./list-columns";
+import { useListboxFocus } from "./list-a11y";
 import { useStableHandlers } from "@/hooks/use-stable-handlers";
 import type { Attachment } from "@/lib/jmap/types";
 import type { LoadListAttachments } from "@/lib/list-attachments";
@@ -487,6 +488,8 @@ export function EmailList({
     [items],
   );
 
+  // Each row's place among the rows (headers and notes don't count).
+  const rowPosOfItem = useMemo(() => new Map(itemOfThread.map((item, i) => [item, i + 1])), [itemOfThread]);
   const virtualizer = useVirtualizer({
     count: items.length,
     getScrollElement: () => parentRef.current,
@@ -499,6 +502,14 @@ export function EmailList({
     measureElement: (element, entry) =>
       entry?.borderBoxSize?.[0]?.blockSize ?? element.getBoundingClientRect().height,
   });
+
+  // One Tab stop in the list, and the focus going along with j/k (SR-01/02).
+  const renderedRows = virtualizer.getVirtualItems();
+  useListboxFocus(
+    parentRef,
+    selectedEmailKey,
+    `${items.length}:${renderedRows[0]?.index ?? -1}-${renderedRows[renderedRows.length - 1]?.index ?? -1}:${expandedThreadIds.size}`,
+  );
 
   // Another folder, tag, account, unified view or plugin tab - or another
   // search - opens at the top. The scroll container outlives the switch, so
@@ -1119,6 +1130,13 @@ export function EmailList({
         ) : (
           <>
             <div
+              role="treegrid"
+              aria-label={t('listbox_label')}
+              aria-multiselectable
+              aria-busy={isLoading || undefined}
+              // Rows report where they are in the whole list (useListboxFocus);
+              // -1 while more can still load.
+              data-setsize={footerHasMore ? -1 : itemOfThread.length}
               className={cn("transition-opacity duration-200", isLoading && "opacity-50")}
               style={{
                 height: `${virtualizer.getTotalSize()}px`,
@@ -1133,6 +1151,8 @@ export function EmailList({
                   <div
                     key={virtualItem.key}
                     data-index={virtualItem.index}
+                    role="presentation"
+                    data-pos={thread ? rowPosOfItem.get(virtualItem.index) : undefined}
                     ref={virtualizer.measureElement}
                     style={{
                       position: 'absolute',
