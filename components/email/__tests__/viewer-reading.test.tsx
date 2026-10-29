@@ -274,3 +274,35 @@ describe('pausing animated images', () => {
     expect(await frameKey()).not.toContain('/p');
   });
 });
+
+describe('reader toolbar actions', () => {
+  async function openMenu() {
+    await act(async () => { screen.getByRole('button', { name: 'more_actions' }).click(); });
+  }
+  const item = (name: string) => screen.getAllByRole('menuitem').find((el) => el.textContent?.includes(name));
+
+  it('switches one HTML message to plain text and back', async () => {
+    const { container } = await show(message({ html: '<p>Fancy <b>HTML</b> version</p>', text: 'The plain version' }));
+    await openMenu();
+    await act(async () => { item('show_as_plain_text')!.click(); });
+    expect(container.querySelector('iframe')).toBeNull();
+    expect(screen.getByText('The plain version')).toBeInTheDocument();
+    await openMenu();
+    expect(item('show_formatted')).toBeTruthy();
+  });
+
+  it('opens the reader view as a dialog that Escape closes, with focus back', async () => {
+    await show(message({ html: '<p>Read <a href="https://ex.com/r">this</a> in peace.</p>' }));
+    const more = screen.getByRole('button', { name: 'more_actions' });
+    await openMenu();
+    await act(async () => { item('reader_view')!.click(); });
+    const dialog = screen.getByRole('dialog', { name: 'Bonjour' });
+    expect(dialog).toHaveAttribute('aria-modal', 'true');
+    expect(screen.getByTestId('reader-view-body').textContent).toContain('Read this (https://ex.com/r) in peace.');
+    expect(dialog.contains(document.activeElement)).toBe(true);
+    await act(async () => { document.activeElement!.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); });
+    expect(screen.queryByRole('dialog', { name: 'Bonjour' })).toBeNull();
+    await act(async () => { await new Promise((r) => setTimeout(r, 0)); });
+    expect(document.activeElement === more || more.contains(document.activeElement)).toBe(true);
+  });
+});

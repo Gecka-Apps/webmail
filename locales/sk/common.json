@@ -782,7 +782,8 @@
     "read_aloud_paused": "Čítanie pozastavené",
     "read_aloud_pause": "Pozastaviť",
     "read_aloud_resume": "Pokračovať",
-    "read_aloud_stop": "Zastaviť čítanie"
+    "read_aloud_stop": "Zastaviť čítanie",
+    "reader_view": "Zobrazenie na čítanie"
   },
   "external_mail": {
     "sender_label": "Externé",

@@ -782,7 +782,8 @@
     "read_aloud_paused": "Ettelugemine on peatatud",
     "read_aloud_pause": "Peata",
     "read_aloud_resume": "Jätka",
-    "read_aloud_stop": "Lõpeta ettelugemine"
+    "read_aloud_stop": "Lõpeta ettelugemine",
+    "reader_view": "Lugemisvaade"
   },
   "external_mail": {
     "sender_label": "Väline",

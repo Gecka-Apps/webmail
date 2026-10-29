@@ -782,7 +782,8 @@
     "read_aloud_paused": "Чтение приостановлено",
     "read_aloud_pause": "Пауза",
     "read_aloud_resume": "Продолжить",
-    "read_aloud_stop": "Остановить чтение"
+    "read_aloud_stop": "Остановить чтение",
+    "reader_view": "Режим чтения"
   },
   "external_mail": {
     "sender_label": "Внешнее",

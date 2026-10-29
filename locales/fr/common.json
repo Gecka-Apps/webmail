@@ -782,7 +782,8 @@
     "read_aloud_paused": "Lecture en pause",
     "read_aloud_pause": "Pause",
     "read_aloud_resume": "Reprendre",
-    "read_aloud_stop": "Arrêter la lecture"
+    "read_aloud_stop": "Arrêter la lecture",
+    "reader_view": "Mode lecture"
   },
   "external_mail": {
     "sender_label": "Externe",

@@ -782,7 +782,8 @@
     "read_aloud_paused": "Okuma duraklatıldı",
     "read_aloud_pause": "Duraklat",
     "read_aloud_resume": "Devam et",
-    "read_aloud_stop": "Okumayı durdur"
+    "read_aloud_stop": "Okumayı durdur",
+    "reader_view": "Okuma görünümü"
   },
   "external_mail": {
     "sender_label": "Harici",

@@ -782,7 +782,8 @@
     "read_aloud_paused": "朗讀已暫停",
     "read_aloud_pause": "暫停",
     "read_aloud_resume": "繼續",
-    "read_aloud_stop": "停止朗讀"
+    "read_aloud_stop": "停止朗讀",
+    "reader_view": "閱讀檢視"
   },
   "external_mail": {
     "sender_label": "外部",

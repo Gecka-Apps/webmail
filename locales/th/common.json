@@ -1712,7 +1712,8 @@
     "read_aloud_paused": "หยุดการอ่านชั่วคราว",
     "read_aloud_pause": "หยุดชั่วคราว",
     "read_aloud_resume": "อ่านต่อ",
-    "read_aloud_stop": "หยุดอ่าน"
+    "read_aloud_stop": "หยุดอ่าน",
+    "reader_view": "มุมมองการอ่าน"
   },
   "external_mail": {
     "sender_label": "ภายนอก",

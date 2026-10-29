@@ -747,7 +747,8 @@
     "read_aloud_paused": "ההקראה מושהית",
     "read_aloud_pause": "השהיה",
     "read_aloud_resume": "המשך",
-    "read_aloud_stop": "עצירת ההקראה"
+    "read_aloud_stop": "עצירת ההקראה",
+    "reader_view": "תצוגת קריאה"
   },
   "external_mail": {
     "sender_label": "חיצוני",

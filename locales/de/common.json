@@ -782,7 +782,8 @@
     "read_aloud_paused": "Vorlesen angehalten",
     "read_aloud_pause": "Anhalten",
     "read_aloud_resume": "Fortsetzen",
-    "read_aloud_stop": "Vorlesen beenden"
+    "read_aloud_stop": "Vorlesen beenden",
+    "reader_view": "Leseansicht"
   },
   "external_mail": {
     "sender_label": "Extern",

@@ -782,7 +782,8 @@
     "read_aloud_paused": "読み上げを一時停止中",
     "read_aloud_pause": "一時停止",
     "read_aloud_resume": "再開",
-    "read_aloud_stop": "読み上げを停止"
+    "read_aloud_stop": "読み上げを停止",
+    "reader_view": "リーダー表示"
   },
   "external_mail": {
     "sender_label": "外部",

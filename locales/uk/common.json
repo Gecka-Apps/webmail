@@ -782,7 +782,8 @@
     "read_aloud_paused": "Читання призупинено",
     "read_aloud_pause": "Пауза",
     "read_aloud_resume": "Продовжити",
-    "read_aloud_stop": "Зупинити читання"
+    "read_aloud_stop": "Зупинити читання",
+    "reader_view": "Режим читання"
   },
   "external_mail": {
     "sender_label": "Зовнішнє",

@@ -782,7 +782,8 @@
     "read_aloud_paused": "Nolasīšana pauzēta",
     "read_aloud_pause": "Pauzēt",
     "read_aloud_resume": "Turpināt",
-    "read_aloud_stop": "Beigt nolasīšanu"
+    "read_aloud_stop": "Beigt nolasīšanu",
+    "reader_view": "Lasīšanas skats"
   },
   "external_mail": {
     "sender_label": "Ārējs",

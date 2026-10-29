@@ -782,7 +782,8 @@
     "read_aloud_paused": "Opplesning satt på pause",
     "read_aloud_pause": "Pause",
     "read_aloud_resume": "Fortsett",
-    "read_aloud_stop": "Stopp opplesning"
+    "read_aloud_stop": "Stopp opplesning",
+    "reader_view": "Lesevisning"
   },
   "external_mail": {
     "sender_label": "Ekstern",

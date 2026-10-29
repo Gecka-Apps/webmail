@@ -13,6 +13,7 @@ import { applyMailTextSize, mailFitOptions } from "@/lib/mail-reading";
 import { useMailReading } from "@/hooks/use-mail-reading";
 import { useReadAloud } from "@/hooks/use-read-aloud";
 import { ReadAloudBar } from "./read-aloud-bar";
+import { ReaderViewDialog } from "./reader-view-dialog";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailColorScheme, emailDarkModeCss, emailHasNativeDarkMode as htmlHasNativeDarkMode, resolveColorSchemeMedia } from "@/lib/email-dark-mode";
@@ -108,6 +109,7 @@ import {
   Minimize2,
   Type,
   Volume2,
+  BookOpen,
   ArrowLeft,
   Pencil,
 } from "@/components/icons";
@@ -2224,6 +2226,7 @@ export function EmailViewer({
     setShowSourceModal(false);
     setEmailViewDarkOverride(null);
     setPlainViewOverride(null);
+    setReaderViewOpen(false);
     setPluginRenderedHtml(null);
     setPluginRenderedText(null);
     setPluginRenderedAttachments(NO_POSTAL_ATTACHMENTS);
@@ -2860,8 +2863,8 @@ export function EmailViewer({
   const [plainViewOverride, setPlainViewOverride] = useState<boolean | null>(null);
   const plainView = plainViewOverride ?? mailViewMode === 'plain';
   const hasHtmlBody = decodedEmailContent.isHtml;
-  const effectiveEmailContent = useMemo(() => {
-    if (!plainView || !decodedEmailContent.isHtml) return decodedEmailContent;
+  // The decoded body as plain text: the text part, else the HTML converted.
+  const readableText = useCallback(() => {
     let text: string | null = null;
     if (decodedEmailContent === emailContent && email) {
       const textPart = email.textBody?.[0];
@@ -2869,14 +2872,23 @@ export function EmailViewer({
         text = email.bodyValues?.[textPart.partId]?.value ?? null;
       }
     }
-    if (!text?.trim()) text = htmlToReadableText(decodedEmailContent.html);
+    return text?.trim() ? text : htmlToReadableText(decodedEmailContent.html);
+  }, [decodedEmailContent, emailContent, email]);
+  const effectiveEmailContent = useMemo(() => {
+    if (!plainView || !decodedEmailContent.isHtml) return decodedEmailContent;
     return {
-      html: collapsePlainTextQuotes(plainTextToSafeHtml(text), { show: t('show_quoted_text'), hide: t('hide_quoted_text') }),
+      html: collapsePlainTextQuotes(plainTextToSafeHtml(readableText()), { show: t('show_quoted_text'), hide: t('hide_quoted_text') }),
       isHtml: false,
       hasStyleTag: false,
       externalBlocked: false,
     };
-  }, [plainView, decodedEmailContent, emailContent, email, t]);
+  }, [plainView, decodedEmailContent, readableText, t]);
+  // Reader view: the message full screen in the app's own look.
+  const [readerViewOpen, setReaderViewOpen] = useState(false);
+  const readerViewHtml = useMemo(() => {
+    if (!readerViewOpen) return '';
+    return decodedEmailContent.isHtml ? plainTextToSafeHtml(readableText()) : decodedEmailContent.html;
+  }, [readerViewOpen, decodedEmailContent, readableText]);
 
   const resolveAttachmentName = useCallback(
     (attachment: EffectiveAttachment) => {
@@ -4167,6 +4179,9 @@ export function EmailViewer({
   const readerExtras: MessageActionEntry[] = [
     ...(readAloud.supported && !isBodyLoading
       ? [{ kind: 'item' as const, key: 'extra:read_aloud' as const, icon: Volume2, label: t('read_aloud'), run: readAloud.start }]
+      : []),
+    ...(!isBodyLoading
+      ? [{ kind: 'item' as const, key: 'extra:reader_view' as const, icon: BookOpen, label: t('reader_view'), run: () => { readAloud.stop(); setReaderViewOpen(true); } }]
       : []),
     ...(hasHtmlBody
       ? [{ kind: 'item' as const, key: 'extra:plain_text' as const, icon: plainView ? Type : FileText, label: plainView ? t('show_formatted') : t('show_as_plain_text'), run: () => setPlainViewOverride(!plainView) }]
@@ -6232,6 +6247,16 @@ export function EmailViewer({
           )}
           style={isDark ? { backgroundColor: '#121212' } : undefined}>
             <ReadAloudBar state={readAloud.state} onPause={readAloud.pause} onResume={readAloud.resume} onStop={readAloud.stop} />
+            {readerViewOpen && (
+              <ReaderViewDialog
+                isOpen
+                onClose={() => setReaderViewOpen(false)}
+                title={email?.subject || t('no_subject')}
+                description={frameSender ? (frameSender.name ? `${frameSender.name} <${frameSender.email}>` : frameSender.email) : undefined}
+                html={readerViewHtml}
+                lang={bodyLanguage}
+              />
+            )}
             {!isBodyLoading && plainView && hasHtmlBody && (
               <div className="flex flex-wrap items-center gap-x-2 px-6 pt-3 text-sm text-muted-foreground" data-testid="plain-view-note">
                 <span>{t('shown_as_plain_text')}</span>

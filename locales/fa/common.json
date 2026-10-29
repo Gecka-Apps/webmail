@@ -782,7 +782,8 @@
     "read_aloud_paused": "خواندن متوقف شد",
     "read_aloud_pause": "توقف",
     "read_aloud_resume": "ادامه",
-    "read_aloud_stop": "پایان خواندن"
+    "read_aloud_stop": "پایان خواندن",
+    "reader_view": "نمای مطالعه"
   },
   "external_mail": {
     "sender_label": "خارجی",

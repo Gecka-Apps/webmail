@@ -782,7 +782,8 @@
     "read_aloud_paused": "Předčítání pozastaveno",
     "read_aloud_pause": "Pozastavit",
     "read_aloud_resume": "Pokračovat",
-    "read_aloud_stop": "Ukončit předčítání"
+    "read_aloud_stop": "Ukončit předčítání",
+    "reader_view": "Zobrazení pro čtení"
   },
   "external_mail": {
     "sender_label": "Externí",

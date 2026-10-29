@@ -782,7 +782,8 @@
     "read_aloud_paused": "القراءة متوقفة مؤقتًا",
     "read_aloud_pause": "إيقاف مؤقت",
     "read_aloud_resume": "استئناف",
-    "read_aloud_stop": "إيقاف القراءة"
+    "read_aloud_stop": "إيقاف القراءة",
+    "reader_view": "عرض القراءة"
   },
   "external_mail": {
     "sender_label": "خارجي",
