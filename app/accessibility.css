@@ -276,6 +276,52 @@ html.dark[data-contrast="more"] {
   background-color: var(--color-background) !important;
 }
 
+/* Aurora Glass draws its surfaces as tints that let the gradient behind
+   them show through. With less transparency they take the same tint laid
+   over the page colour, as solid colours. */
+@media (prefers-reduced-transparency: reduce) {
+  :root:not([data-transparency="full"]) body[data-theme-skin="builtin-aurora-glass"] {
+  --color-sidebar-accent: #e1e2fb;
+  --color-selection: #dcdcfc;
+  }
+  :root.dark:not([data-transparency="full"]) body[data-theme-skin="builtin-aurora-glass"] {
+  --color-secondary: #15161d;
+  --color-muted: #12131b;
+  --color-card: #101119;
+  --color-accent: #1b1a35;
+  --color-sidebar-accent: #1e1c3a;
+  --color-selection: #232144;
+  }
+}
+:root[data-transparency="reduce"] body[data-theme-skin="builtin-aurora-glass"] {
+  --color-sidebar-accent: #e1e2fb;
+  --color-selection: #dcdcfc;
+}
+:root.dark[data-transparency="reduce"] body[data-theme-skin="builtin-aurora-glass"] {
+  --color-secondary: #15161d;
+  --color-muted: #12131b;
+  --color-card: #101119;
+  --color-accent: #1b1a35;
+  --color-sidebar-accent: #1e1c3a;
+  --color-selection: #232144;
+}
+
+/* Its glass panes, menus and dialogs, which the skin tints with !important. */
+@media (prefers-reduced-transparency: reduce) {
+  :root:not([data-transparency="full"]) body[data-theme-skin="builtin-aurora-glass"] :is(.bg-card, .bg-popover, [role="menu"], [role="dialog"], [role="listbox"]) {
+    background-color: var(--color-popover) !important;
+  }
+  :root:not([data-transparency="full"]) body[data-theme-skin="builtin-aurora-glass"] :is(.w-14.bg-secondary, .bg-secondary.border-r) {
+    background-color: var(--color-sidebar) !important;
+  }
+}
+:root[data-transparency="reduce"] body[data-theme-skin="builtin-aurora-glass"] :is(.bg-card, .bg-popover, [role="menu"], [role="dialog"], [role="listbox"]) {
+  background-color: var(--color-popover) !important;
+}
+:root[data-transparency="reduce"] body[data-theme-skin="builtin-aurora-glass"] :is(.w-14.bg-secondary, .bg-secondary.border-r) {
+  background-color: var(--color-sidebar) !important;
+}
+
 /* ---------- Large targets (WCAG 2.5.5) ----------
  *
  * On a touch screen the components already size themselves (TOUCH_HIT_AREA

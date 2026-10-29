@@ -185,3 +185,11 @@ describe('scroll padding', () => {
     expect(el('<div class="overflow-auto"></div>').matches(panes)).toBe(true);
   });
 });
+
+describe('reduced transparency', () => {
+  it('gives Aurora Glass solid surfaces, in both colour schemes', () => {
+    expect(css).toMatch(/:root\[data-transparency="reduce"\] body\[data-theme-skin="builtin-aurora-glass"\] \{\s*--color-sidebar-accent: #e1e2fb;/);
+    expect(css).toMatch(/:root\.dark\[data-transparency="reduce"\] body\[data-theme-skin="builtin-aurora-glass"\] \{[^}]*--color-card: #101119;/);
+    expect(css).toMatch(/:root\[data-transparency="reduce"\] body\[data-theme-skin="builtin-aurora-glass"\] :is\(\.bg-card, \.bg-popover, \[role="menu"\], \[role="dialog"\], \[role="listbox"\]\) \{\s*background-color: var\(--color-popover\) !important;/);
+  });
+});
