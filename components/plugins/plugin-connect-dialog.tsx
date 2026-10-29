@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { KeyRound } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { useConfig } from '@/hooks/use-config';
+import { useFocusTrap } from '@/hooks/use-focus-trap';
 import { productName } from '@/lib/product-name';
 import {
   currentConnect,
@@ -45,6 +46,15 @@ export function PluginConnectDialog() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [request]);
+
+  // Tab stays in the dialog, the first field takes the focus, and the focus
+  // goes back to where it was when the dialog closes. (Escape is the
+  // listener above.)
+  const panelRef = useFocusTrap({
+    isActive: !!request,
+    restoreFocus: true,
+    initialFocus: () => panelRef.current?.querySelector<HTMLElement>('input:not(:disabled)'),
+  });
 
   if (!request) return null;
 
@@ -96,10 +106,10 @@ export function PluginConnectDialog() {
         if (e.target === e.currentTarget) request.resolve({ connected: false });
       }}
     >
-      <div className="flex w-full max-w-[440px] flex-col rounded-lg border border-border bg-popover text-popover-foreground shadow-xl">
+      <div ref={panelRef} className="flex w-full max-w-[440px] flex-col rounded-lg border border-border bg-popover text-popover-foreground shadow-xl">
         <form className="p-5" onSubmit={(e) => { e.preventDefault(); void submit(); }}>
           <div className="mb-3 flex items-center gap-2">
-            <KeyRound className="h-5 w-5 flex-shrink-0 text-muted-foreground" />
+            <KeyRound className="h-5 w-5 flex-shrink-0 text-muted-foreground" aria-hidden="true" />
             <h2 id={titleId} className="text-lg font-semibold text-foreground">{t('title', { label: spec.label })}</h2>
           </div>
           <p className="mb-4 text-sm text-muted-foreground [overflow-wrap:anywhere]">{intro}</p>
@@ -116,7 +126,6 @@ export function PluginConnectDialog() {
                   spellCheck={false}
                   value={server}
                   placeholder={t('server_hint')}
-                  autoFocus
                   onChange={(e) => setServer(e.target.value)}
                   className="w-full rounded-md border border-input bg-background px-2.5 py-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"
                 />
@@ -129,7 +138,6 @@ export function PluginConnectDialog() {
                   type="text"
                   value={username}
                   autoComplete="username"
-                  autoFocus={!!fixedOrigin}
                   onChange={(e) => setUsername(e.target.value)}
                   className="w-full rounded-md border border-input bg-background px-2.5 py-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"
                 />
@@ -142,7 +150,6 @@ export function PluginConnectDialog() {
                   type="password"
                   value={secret}
                   autoComplete="off"
-                  autoFocus={!!fixedOrigin && !needsUsername}
                   onChange={(e) => setSecret(e.target.value)}
                   className="w-full rounded-md border border-input bg-background px-2.5 py-2 text-sm text-foreground outline-none focus:ring-2 focus:ring-ring"
                 />

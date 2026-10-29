@@ -16,6 +16,7 @@ import { useTranslations } from 'next-intl';
 import { cancelForPlugin, head, overlay, resolveDialog, subscribe, type DialogRequest } from '@/lib/plugin-sandbox/host-dialog';
 import type { DialogButtonSpec } from '@/lib/plugin-sandbox/ui-kit/dialog-buttons';
 import { usePluginStore } from '@/stores/plugin-store';
+import { useFocusTrap } from '@/hooks/use-focus-trap';
 import { toast } from '@/stores/toast-store';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -165,6 +166,23 @@ function PluginDialogView({ current, layer }: { current: DialogRequest; layer: '
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current, canSubmit, values]);
 
+  // Tab stays in the dialog and the focus goes back to what opened it. The
+  // first field of a prompt takes the focus, a confirm's safe button (Cancel
+  // when it is destructive), else the first control. A dialog under another
+  // one lets go. Escape is the listener above.
+  const cancelButtonRef = useRef<HTMLButtonElement>(null);
+  const confirmButtonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useFocusTrap({
+    isActive: !!current && layer !== 'below',
+    restoreFocus: true,
+    initialFocus: () => {
+      if (current?.kind === 'prompt') return panelRef.current?.querySelector<HTMLElement>('input');
+      if (current?.kind === 'confirm' && current.danger) return cancelButtonRef.current;
+      if (current?.kind === 'confirm' || current?.kind === 'alert') return confirmButtonRef.current;
+      return undefined;
+    },
+  });
+
   if (!current) return null;
 
   const name = pluginName ?? current.pluginId;
@@ -200,6 +218,7 @@ function PluginDialogView({ current, layer }: { current: DialogRequest; layer: '
       }}
     >
       <div
+        ref={panelRef}
         className="flex w-full flex-col overflow-hidden rounded-lg border border-border bg-background text-foreground shadow-xl animate-in zoom-in-95 duration-200"
         style={{ maxWidth: custom ? (current.width ?? 560) : 448, maxHeight: '90vh' }}
         data-plugin-dialog={current.pluginId}
@@ -218,7 +237,7 @@ function PluginDialogView({ current, layer }: { current: DialogRequest; layer: '
                 aria-label={t('close')}
                 className="p-1.5 rounded-md hover:bg-muted transition-colors duration-150 text-muted-foreground hover:text-foreground"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto px-6 py-4">
@@ -262,16 +281,16 @@ function PluginDialogView({ current, layer }: { current: DialogRequest; layer: '
               {isPrompt ? (
                 <form onSubmit={(e) => { e.preventDefault(); submitPrompt(); }}>
                   <div className="mb-6 flex flex-col gap-4">
-                    {fields.map((f, i) => (
+                    {fields.map((f) => (
                       <label key={f.name} className="block">
                         <span className="text-sm font-medium mb-1 block text-foreground">
-                          {f.label}{f.required && <span className="text-destructive"> *</span>}
+                          {f.label}{f.required && <span className="text-destructive" aria-hidden="true"> *</span>}
                         </span>
                         <Input
                           type={f.type === 'password' ? 'password' : 'text'}
                           value={values[f.name] ?? ''}
                           placeholder={f.placeholder}
-                          autoFocus={i === 0}
+                          aria-required={f.required || undefined}
                           autoComplete={f.type === 'password' ? 'off' : undefined}
                           onChange={(e) => setValues((v) => ({ ...v, [f.name]: e.target.value }))}
                         />
@@ -289,12 +308,12 @@ function PluginDialogView({ current, layer }: { current: DialogRequest; layer: '
               ) : (
                 <div className={cn('flex items-center justify-end gap-3', !current.message && 'mt-3')}>
                   {current.kind === 'confirm' && (
-                    <Button type="button" variant="outline" autoFocus={!!current.danger} onClick={cancel}>{cancelLabel}</Button>
+                    <Button ref={cancelButtonRef} type="button" variant="outline" onClick={cancel}>{cancelLabel}</Button>
                   )}
                   <Button
+                    ref={confirmButtonRef}
                     type="button"
                     variant={current.danger ? 'destructive' : 'default'}
-                    autoFocus={current.kind === 'alert' || !current.danger}
                     onClick={() => resolveThis(true)}
                   >
                     {confirmLabel}

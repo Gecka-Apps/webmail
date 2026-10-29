@@ -78,6 +78,25 @@ describe('connect dialog', () => {
     await expect(result).resolves.toEqual({ connected: false });
   });
 
+  // A modal: the first field takes the focus, Tab stays inside, and the
+  // focus goes back to what opened it.
+  it('holds the focus while open and gives it back after', async () => {
+    const opener = document.createElement('button');
+    document.body.appendChild(opener);
+    opener.focus();
+    render(<PluginConnectDialog />);
+    const result = open();
+    const server = screen.getByText('server').parentElement!.querySelector('input')!;
+    expect(server).toHaveFocus();
+    const dialog = screen.getByRole('dialog');
+    fireEvent.keyDown(server, { key: 'Tab', shiftKey: true });
+    expect(dialog).toContainElement(document.activeElement as HTMLElement);
+    fireEvent.click(screen.getByRole('button', { name: 'cancel' }));
+    await expect(result).resolves.toEqual({ connected: false });
+    await waitFor(() => expect(opener).toHaveFocus());
+    opener.remove();
+  });
+
   it('shows the server error and stays open', async () => {
     apiFetch.mockResolvedValueOnce(new Response(JSON.stringify({ error: 'The server address must start with https://' }), { status: 400 }));
     render(<PluginConnectDialog />);
