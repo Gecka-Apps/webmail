@@ -1,6 +1,6 @@
 import { configManager } from '@/lib/admin/config-manager';
 import { logger } from '@/lib/logger';
-import { getCookieOptions } from '@/lib/oauth/cookie-config';
+import { getSignInCookieOptions } from '@/lib/oauth/cookie-config';
 import { fitsSetCookieBudget } from '@/lib/oauth/set-cookie-budget';
 
 /*
@@ -52,6 +52,7 @@ export function storeIdToken(
   idToken: unknown,
   basePath: string | undefined,
   otherCookieValues: ReadonlyArray<string | null | undefined> = [],
+  remember = true,
 ): void {
   const name = idTokenCookieName(slot);
   const path = idTokenCookiePath(basePath);
@@ -61,7 +62,7 @@ export function storeIdToken(
     if (cookieStore.get(name)) cookieStore.delete({ name, path });
     return;
   }
-  cookieStore.set(name, idToken, { ...getCookieOptions(), path });
+  cookieStore.set(name, idToken, { ...getSignInCookieOptions(remember), path });
 }
 
 export function clearIdToken(cookieStore: CookieWriter, slot: number, basePath: string | undefined): void {

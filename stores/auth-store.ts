@@ -450,8 +450,9 @@ async function exchangeOAuthCode(params: {
   redirectUri: string;
   slot: number;
   serverId?: string;
+  remember: boolean;
 }): Promise<Response> {
-  const { serverUrl, code, codeVerifier, redirectUri, slot, serverId } = params;
+  const { serverUrl, code, codeVerifier, redirectUri, slot, serverId, remember } = params;
   if (!IS_LITE) {
     return apiFetch(`/api/auth/token?slot=${slot}`, {
       method: 'POST',
@@ -462,6 +463,7 @@ async function exchangeOAuthCode(params: {
         redirect_uri: redirectUri,
         slot,
         ...(serverId ? { server_id: serverId } : {}),
+        remember,
       }),
     }).then((res) => noteSessionAnswer(res, slot));
   }
@@ -587,12 +589,17 @@ async function noteSessionAnswer(res: Response, slot: number | undefined): Promi
   return res;
 }
 
-/** PUT /api/auth/token?slot=N - renew (or, unless `force`, reuse) the slot's access token. */
-async function fetchSlotAccessToken(slot: number, opts: { force?: boolean } = {}): Promise<Response> {
+/**
+ * PUT /api/auth/token?slot=N - renew (or, unless `force`, reuse) the slot's
+ * access token. `remember: false` keeps a rotated refresh token in a cookie
+ * that ends with the browser session.
+ */
+async function fetchSlotAccessToken(slot: number, opts: { force?: boolean; remember?: boolean } = {}): Promise<Response> {
   // Renewing would write the tokens of a slot being signed out back.
   if (closingSlots.has(slot)) return jsonResponse({ error: 'signed_out' }, 401);
   if (!IS_LITE) {
-    return trackSessionWrite(slot, (signal) => apiFetch(`/api/auth/token?slot=${slot}${opts.force ? '&force=true' : ''}`, { method: 'PUT', signal }))
+    const query = `${opts.force ? '&force=true' : ''}${opts.remember === false ? '&remember=false' : ''}`;
+    return trackSessionWrite(slot, (signal) => apiFetch(`/api/auth/token?slot=${slot}${query}`, { method: 'PUT', signal }))
       .then((res) => noteSessionAnswer(res, slot));
   }
   // Like the route's cookie cache: a restore resumes with the token it had,
@@ -1854,8 +1861,10 @@ export const useAuthStore = create<AuthState>()(
           const slot = !isNaN(pendingSlot) && pendingSlot >= 0 && pendingSlot < MAX_ACCOUNT_SLOTS
             ? pendingSlot
             : accountStore.getNextCookieSlot();
+          // The login page parks "Remember me" here when the box is offered.
+          const remember = typeof window === 'undefined' || sessionStorage.getItem('oauth_remember') !== 'false';
 
-          const tokenRes = await exchangeOAuthCode({ serverUrl, code, codeVerifier, redirectUri, slot, serverId });
+          const tokenRes = await exchangeOAuthCode({ serverUrl, code, codeVerifier, redirectUri, slot, serverId, remember });
 
           if (!tokenRes.ok) {
             throw new Error('token_exchange_failed');
@@ -1902,7 +1911,7 @@ export const useAuthStore = create<AuthState>()(
             serverUrl,
             username,
             authMode: 'oauth',
-            rememberMe: true,
+            rememberMe: remember,
             displayName: primaryIdentity?.name || username,
             email: primaryIdentity?.email || username,
             lastLoginAt: Date.now(),
@@ -1960,6 +1969,7 @@ export const useAuthStore = create<AuthState>()(
           // Clean up sessionStorage
           if (typeof window !== 'undefined') {
             sessionStorage.removeItem('oauth_cookie_slot');
+            sessionStorage.removeItem('oauth_remember');
           }
 
           notifySignedIn(get());
@@ -2012,7 +2022,8 @@ export const useAuthStore = create<AuthState>()(
             throw new Error(errorData.error || 'token_exchange_failed');
           }
 
-          const { access_token, expires_in } = await ssoRes.json();
+          // `remember` is what the login page chose when the flow started.
+          const { access_token, expires_in, remember } = await ssoRes.json();
 
           const ssoServerUrl = config.jmapServerUrl;
 
@@ -2049,7 +2060,7 @@ export const useAuthStore = create<AuthState>()(
             serverUrl: ssoServerUrl,
             username,
             authMode: 'oauth',
-            rememberMe: true,
+            rememberMe: remember !== false,
             displayName: primaryIdentity?.name || username,
             email: primaryIdentity?.email || username,
             lastLoginAt: Date.now(),
@@ -2143,7 +2154,7 @@ export const useAuthStore = create<AuthState>()(
             // the current token is unusable (rejected by JMAP, or due for
             // scheduled renewal), so the server-side cache must be skipped.
             // Session restore passes allowCached to reuse a still-valid token.
-            const res = await fetchSlotAccessToken(slot, { force: !options?.allowCached });
+            const res = await fetchSlotAccessToken(slot, { force: !options?.allowCached, remember: account?.rememberMe });
 
             if (!res.ok) {
               // Only a definitive 401 ends the session. Anything else (5xx
@@ -2494,7 +2505,7 @@ export const useAuthStore = create<AuthState>()(
           // Client not connected - try to restore
           try {
             if (targetAccount.authMode === 'oauth') {
-              const res = await fetchSlotAccessToken(targetAccount.cookieSlot);
+              const res = await fetchSlotAccessToken(targetAccount.cookieSlot, { remember: targetAccount.rememberMe });
               if (res.ok) {
                 const { access_token, expires_in } = await res.json();
                 targetClient = JMAPClient.withBearer(targetAccount.serverUrl, access_token, targetAccount.username, () => get().refreshAccessToken({ accountId }));
@@ -2765,7 +2776,7 @@ export const useAuthStore = create<AuthState>()(
             // way; a missing one surfaces as a 401 from fetchSlotSession below
             // and evicts too.) A password + TOTP login runs on tokens, but
             // without rememberMe it ends the same way: its refresh token goes.
-            // Provider sign-ins are always remembered.
+            // So does a provider sign-in made with the box left unticked.
             if (!account.rememberMe && !IS_LITE) {
               forgottenAccounts += 1;
               evictAccount(account.id);

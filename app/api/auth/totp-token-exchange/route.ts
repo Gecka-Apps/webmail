@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { logger } from '@/lib/logger';
 import { refreshTokenCookieName, refreshTokenServerCookieName } from '@/lib/oauth/tokens';
-import { getCookieOptions } from '@/lib/oauth/cookie-config';
+import { getCookieOptions, getSignInCookieOptions } from '@/lib/oauth/cookie-config';
 import { readFileEnv } from '@/lib/read-file-env';
 import { configManager } from '@/lib/admin/config-manager';
 import { isPublicHttpUrl } from '@/lib/security/url-guard';
@@ -214,8 +214,7 @@ async function storeAndRespond(
   if (tokens.refresh_token) {
     const cookieName = refreshTokenCookieName(slot);
     // Without "Remember me" the sign-in ends with the browser session.
-    const { maxAge: _maxAge, ...sessionOptions } = getCookieOptions();
-    const options = rememberMe ? getCookieOptions() : sessionOptions;
+    const options = getSignInCookieOptions(rememberMe);
     cookieStore.set(cookieName, tokens.refresh_token, options);
     writeSignInStamp(cookieStore, slot, { signedInAt, refreshToken: tokens.refresh_token }, options);
   }

@@ -22,6 +22,7 @@ vi.mock('@/lib/logger', () => ({ logger: { warn: () => {}, error: () => {}, info
 vi.mock('@/lib/telemetry/login-tracker', () => ({ recordLogin: () => {} }));
 vi.mock('@/lib/oauth/cookie-config', () => ({
   getCookieOptions: () => ({ httpOnly: true, secure: true, sameSite: 'lax', path: '/', maxAge: 2592000 }),
+  getSignInCookieOptions: (remember: boolean) => ({ httpOnly: true, secure: true, sameSite: 'lax', path: '/', ...(remember ? { maxAge: 2592000 } : {}) }),
 }));
 
 const jar = new Map<string, string>();

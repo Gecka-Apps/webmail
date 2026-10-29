@@ -10,7 +10,7 @@ import {
 } from '@/lib/oauth/token-exchange';
 import { buildRedeemBundle } from '@/lib/auth/pair-bundle';
 import { refreshTokenCookieName, refreshTokenServerCookieName } from '@/lib/oauth/tokens';
-import { getCookieOptions } from '@/lib/oauth/cookie-config';
+import { getCookieOptions, getSignInCookieOptions } from '@/lib/oauth/cookie-config';
 import { storeIdToken } from '@/lib/oauth/end-session';
 import { rejectCrossOriginRequest } from '@/lib/security/same-origin';
 import { MAX_ACCOUNT_SLOTS } from '@/lib/account-utils';
@@ -98,6 +98,7 @@ export async function POST(request: NextRequest) {
       typeof pending.mobile_redirect_uri === 'string' ? pending.mobile_redirect_uri : null;
     const mobileState = typeof pending.mobile_state === 'string' ? pending.mobile_state : null;
     const isMobileFlow = Boolean(mobileRedirectUri);
+    const remember = pending.remember !== false;
 
     if (!codeVerifier || !redirectUri) {
       cookieStore.delete(SSO_PENDING_COOKIE);
@@ -116,9 +117,11 @@ export async function POST(request: NextRequest) {
     if (!isMobileFlow) {
       if (tokens.refresh_token) {
         const cookieName = refreshTokenCookieName(slot);
-        cookieStore.set(cookieName, tokens.refresh_token, getCookieOptions());
+        // Without "Remember me" the sign-in ends with the browser session.
+        const options = getSignInCookieOptions(remember);
+        cookieStore.set(cookieName, tokens.refresh_token, options);
         // A sign-in: the maximum session length counts from here (lib/auth/session-age.ts).
-        writeSignInStamp(cookieStore, slot, { signedInAt, refreshToken: tokens.refresh_token });
+        writeSignInStamp(cookieStore, slot, { signedInAt, refreshToken: tokens.refresh_token }, options);
       }
       const serverCookieName = refreshTokenServerCookieName(slot);
       if (pendingServerId) {
@@ -126,7 +129,7 @@ export async function POST(request: NextRequest) {
       } else {
         cookieStore.delete(serverCookieName);
       }
-      storeIdToken(cookieStore, slot, tokens.id_token, request.nextUrl.basePath, [tokens.refresh_token, pendingServerId]);
+      storeIdToken(cookieStore, slot, tokens.id_token, request.nextUrl.basePath, [tokens.refresh_token, pendingServerId], remember);
     }
 
     // Delete pending cookie
@@ -171,6 +174,7 @@ export async function POST(request: NextRequest) {
       access_token: tokens.access_token,
       expires_in: tokens.expires_in,
       signed_in_at: signedInAt,
+      remember,
     });
   } catch (error) {
     // Clean up pending cookie on any error

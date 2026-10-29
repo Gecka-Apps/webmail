@@ -327,6 +327,10 @@ function LoginPageContent() {
   // (LOGIN_SHOW_REMEMBER_ME).
   const showRememberMe = canRememberSession && loginShowRememberMe;
   const persistSession = canRememberSession && (!loginShowRememberMe || rememberMe);
+  // A provider sign-in follows the box whenever it is shown, the automatic
+  // one included (it starts unticked), and is remembered otherwise. Lite
+  // keeps the provider's tokens in the browser like any other sign-in.
+  const persistProviderSession = IS_LITE ? persistSession : !showRememberMe || rememberMe;
 
   // Lite on Stalwart: which provider signs the typed account in
   // (lib/auth/lite-oauth.ts). A domain Stalwart delegates to an external
@@ -585,6 +589,7 @@ function LoginPageContent() {
           redirect_uri: redirectUri,
           locale: params.locale,
           server_id: selectedServer?.id,
+          remember: persistProviderSession,
           ...(isMobileHandoff
             ? { mobile_redirect_uri: mobileRedirectUri, mobile_state: mobileState }
             : {}),
@@ -614,7 +619,7 @@ function LoginPageContent() {
     } catch {
       setOauthLoading(false);
     }
-  }, [params.locale, selectedServer?.id, isMobileHandoff, mobileRedirectUri, mobileState]);
+  }, [params.locale, selectedServer?.id, persistProviderSession, isMobileHandoff, mobileRedirectUri, mobileState]);
 
   useEffect(() => {
     // After signing out, show the login page rather than signing straight
@@ -906,6 +911,8 @@ function LoginPageContent() {
     if (isAddAccountMode) {
       sessionStorage.setItem("oauth_add_account_mode", "true");
     }
+    // Read back by loginWithOAuth (stores/auth-store.ts) for the code exchange.
+    sessionStorage.setItem("oauth_remember", String(persistProviderSession));
 
     // Persist the next-free cookie slot so loginWithOAuth (in stores/auth-store.ts)
     // writes the refresh token to the correct per-account jmap_rt_<slot> cookie.
@@ -1075,6 +1082,27 @@ function LoginPageContent() {
       {s.oauth?.buttonLabel}
     </Button>
   ));
+
+  const rememberMeBox = (
+    <label className="flex items-center gap-2.5 cursor-pointer group select-none pt-1">
+      <span className="relative flex items-center justify-center">
+        <input
+          type="checkbox"
+          checked={rememberMe}
+          onChange={(e) => setRememberMe(e.target.checked)}
+          className="peer sr-only"
+        />
+        <span className="flex items-center justify-center w-[18px] h-[18px] rounded-[5px] border border-border/80 bg-muted/40 peer-checked:bg-primary peer-checked:border-primary peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[var(--focus-ring-color)] transition-all duration-200">
+          {rememberMe && (
+            <Check className="w-3 h-3 text-primary-foreground" stroke={3} aria-hidden="true" />
+          )}
+        </span>
+      </span>
+      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+        {t("remember_me")}
+      </span>
+    </label>
+  );
 
   // Demo-only mode: show only a large demo login button
   if (demoMode && !isAddAccountMode) {
@@ -1413,6 +1441,7 @@ function LoginPageContent() {
               /* OAuth-only mode: server picker (if any) plus the SSO button */
               <div className="space-y-4">
                 {serverPicker}
+                {oauthMetadata && showRememberMe && rememberMeBox}
                 {oauthMetadata ? (
                   <Button
                     type="button"
@@ -1676,27 +1705,8 @@ function LoginPageContent() {
                     </button>
                   )}
 
-                  {/* Remember me */}
-                  {showRememberMe && (
-                    <label className="flex items-center gap-2.5 cursor-pointer group select-none pt-1">
-                      <span className="relative flex items-center justify-center">
-                        <input
-                          type="checkbox"
-                          checked={rememberMe}
-                          onChange={(e) => setRememberMe(e.target.checked)}
-                          className="peer sr-only"
-                        />
-                        <span className="flex items-center justify-center w-[18px] h-[18px] rounded-[5px] border border-border/80 bg-muted/40 peer-checked:bg-primary peer-checked:border-primary peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[var(--focus-ring-color)] transition-all duration-200">
-                          {rememberMe && (
-                            <Check className="w-3 h-3 text-primary-foreground" stroke={3} aria-hidden="true" />
-                          )}
-                        </span>
-                      </span>
-                      <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                        {t("remember_me")}
-                      </span>
-                    </label>
-                  )}
+                  {/* Remember me, for the password and the SSO buttons below */}
+                  {showRememberMe && rememberMeBox}
                 </fieldset>
 
                 <Button

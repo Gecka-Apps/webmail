@@ -18,7 +18,7 @@ import {
   DEFAULT_CLIENT_ID,
 } from '@/lib/oauth/token-exchange';
 import type { OAuthMetadata } from '@/lib/oauth/discovery';
-import { getCookieOptions } from '@/lib/oauth/cookie-config';
+import { getCookieOptions, getSignInCookieOptions } from '@/lib/oauth/cookie-config';
 import { fitsSetCookieBudget } from '@/lib/oauth/set-cookie-budget';
 import {
   buildEndSessionUrl,
@@ -123,6 +123,7 @@ function cacheAccessToken(
   accessToken: string,
   expiresIn: number,
   otherCookieValues: ReadonlyArray<string | null | undefined>,
+  remember: boolean,
 ): string | null {
   const name = accessTokenCookieName(slot);
   const value = encodeCachedAccessToken(accessToken, expiresIn);
@@ -131,7 +132,8 @@ function cacheAccessToken(
     if (cookieStore.get(name)) cookieStore.delete(name);
     return null;
   }
-  cookieStore.set(name, value, { ...getCookieOptions(), maxAge: expiresIn });
+  // The value carries its own expiry, so a session cookie needs no maxAge.
+  cookieStore.set(name, value, remember ? { ...getCookieOptions(), maxAge: expiresIn } : getSignInCookieOptions(false));
   return value;
 }
 
@@ -141,7 +143,10 @@ export async function POST(request: NextRequest) {
   const crossOrigin = rejectCrossOriginRequest(request);
   if (crossOrigin) return crossOrigin;
   try {
-    const { code, code_verifier, redirect_uri, slot: bodySlot, server_id: bodyServerId } = await request.json();
+    const { code, code_verifier, redirect_uri, slot: bodySlot, server_id: bodyServerId, remember: bodyRemember } = await request.json();
+    // "Remember me" left unticked: the cookies end with the browser session.
+    // Clients from before the choice remembered every sign-in.
+    const remember = bodyRemember !== false;
 
     if (!code || !code_verifier || !redirect_uri) {
       return NextResponse.json({ error: 'Missing required parameters' }, { status: 400 });
@@ -164,11 +169,12 @@ export async function POST(request: NextRequest) {
     const cookieStore = await cookies();
     if (tokens.refresh_token) {
       const cookieName = refreshTokenCookieName(slot);
-      cookieStore.set(cookieName, tokens.refresh_token, getCookieOptions());
-      writeSignInStamp(cookieStore, slot, { signedInAt, refreshToken: tokens.refresh_token });
+      const options = getSignInCookieOptions(remember);
+      cookieStore.set(cookieName, tokens.refresh_token, options);
+      writeSignInStamp(cookieStore, slot, { signedInAt, refreshToken: tokens.refresh_token }, options);
     }
-    const cachedAccessToken = cacheAccessToken(cookieStore, slot, tokens.access_token, tokens.expires_in || 3600, [tokens.refresh_token, serverId]);
-    storeIdToken(cookieStore, slot, tokens.id_token, request.nextUrl.basePath, [tokens.refresh_token, cachedAccessToken, serverId]);
+    const cachedAccessToken = cacheAccessToken(cookieStore, slot, tokens.access_token, tokens.expires_in || 3600, [tokens.refresh_token, serverId], remember);
+    storeIdToken(cookieStore, slot, tokens.id_token, request.nextUrl.basePath, [tokens.refresh_token, cachedAccessToken, serverId], remember);
     // Persist which server entry minted this refresh token so the PUT/DELETE
     // handlers can route the refresh/revocation calls to the right token
     // endpoint without the client having to track it across page loads.
@@ -197,6 +203,9 @@ export async function PUT(request: NextRequest) {
     const cookieStore = await cookies();
     const refreshToken = cookieStore.get(cookieName)?.value;
     const serverId = cookieStore.get(refreshTokenServerCookieName(slot))?.value || null;
+    // A sign-in without "Remember me": the rotated token keeps ending with
+    // the browser session instead of turning into a 30-day cookie.
+    const remember = request.nextUrl.searchParams.get('remember') !== 'false';
 
     if (!refreshToken) {
       cookieStore.delete(accessTokenCookieName(slot));
@@ -218,7 +227,7 @@ export async function PUT(request: NextRequest) {
         return NextResponse.json({ error: SESSION_TOO_OLD, maxHours }, { status: 401 });
       }
       // Bind the time to this token from now on.
-      if (!age.stamp) writeSignInStamp(cookieStore, slot, { signedInAt: age.signedInAt, refreshToken, ...(account ? { account } : {}) });
+      if (!age.stamp) writeSignInStamp(cookieStore, slot, { signedInAt: age.signedInAt, refreshToken, ...(account ? { account } : {}) }, getSignInCookieOptions(remember));
     }
     const signedIn = age ? { signed_in_at: age.signedInAt } : {};
 
@@ -285,23 +294,24 @@ export async function PUT(request: NextRequest) {
     }
 
     if (tokens.refresh_token) {
-      cookieStore.set(cookieName, tokens.refresh_token, getCookieOptions());
+      const options = getSignInCookieOptions(remember);
+      cookieStore.set(cookieName, tokens.refresh_token, options);
       // The stamp follows the rotated token, with the same sign-in time and lifetime.
       if (age) {
         writeSignInStamp(cookieStore, slot, {
           signedInAt: age.signedInAt,
           refreshToken: tokens.refresh_token,
           ...(age.stamp?.account ? { account: age.stamp.account } : {}),
-        });
+        }, options);
       }
     }
 
     const expiresIn = tokens.expires_in || 3600;
-    const cachedAccessToken = cacheAccessToken(cookieStore, slot, tokens.access_token, expiresIn, [tokens.refresh_token]);
+    const cachedAccessToken = cacheAccessToken(cookieStore, slot, tokens.access_token, expiresIn, [tokens.refresh_token], remember);
     // Providers may reissue the id token on refresh. Only a slot signed in
     // through the provider keeps one; a password login's slot gains none here.
     if (typeof tokens.id_token === 'string' && cookieStore.get(idTokenCookieName(slot))) {
-      storeIdToken(cookieStore, slot, tokens.id_token, request.nextUrl.basePath, [tokens.refresh_token, cachedAccessToken]);
+      storeIdToken(cookieStore, slot, tokens.id_token, request.nextUrl.basePath, [tokens.refresh_token, cachedAccessToken], remember);
     }
 
     return NextResponse.json({

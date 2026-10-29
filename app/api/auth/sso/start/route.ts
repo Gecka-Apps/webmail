@@ -53,6 +53,7 @@ export async function POST(request: NextRequest) {
       mobile_state: rawMobileState,
       purpose: rawPurpose,
       slot: rawSlot,
+      remember,
     } = await request.json();
 
     // `reauth` drives the step-up flow for device pairing: it forces a fresh
@@ -126,6 +127,9 @@ export async function POST(request: NextRequest) {
       ...(mobileState ? { mobile_state: mobileState } : {}),
       // The re-auth completes into a grant for the phone paired to this slot.
       ...(isReauth ? { purpose: 'reauth', slot: reauthSlot } : {}),
+      // "Remember me" left unticked: /complete writes cookies that end with
+      // the browser session. Callers from before the choice remembered.
+      ...(remember === false ? { remember: false } : {}),
     };
 
     const encrypted = encryptPayload(pendingData, 'sso-pending');
