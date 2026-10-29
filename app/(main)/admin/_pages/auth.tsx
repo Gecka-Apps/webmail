@@ -8,6 +8,7 @@ import { useAdminUnsavedChanges } from '@/stores/admin-unsaved-store';
 import { DEFAULT_OAUTH_SCOPES } from '@/lib/oauth/scopes';
 import { SettingsSection, SettingItem, SectionNav } from '@/components/settings/settings-section';
 import { Button } from '@/components/ui/button';
+import { Dialog } from '@/components/ui/dialog';
 import { AdminPageHeader } from '@/components/admin/page-header';
 import { AdminSaveBar } from '@/components/admin/save-bar';
 import { withEdit } from '@/lib/admin/edits';
@@ -177,92 +178,86 @@ export function AuthPage() {
     <div>
       <AdminPageHeader title={PAGE.label} description={PAGE.description} />
 
-
-      {setupOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="oauth-setup-title"
-          onClick={(e) => { if (e.target === e.currentTarget && !setupRunning) setSetupOpen(false); }}
-        >
-          <div className="w-full max-w-md rounded-lg border border-border bg-background shadow-xl">
-            <div className="px-5 py-4 border-b border-border">
-              <h3 id="oauth-setup-title" className="text-base font-medium text-foreground">Auto-configure OAuth</h3>
-              <p className="text-xs text-muted-foreground mt-1">
-                Verify the URLs below before continuing. The webmail and Stalwart can live on different domains.
-              </p>
-            </div>
-            <div className="px-5 py-4 space-y-4">
-              <div>
-                <label htmlFor="setup-origin" className="block text-xs font-medium text-foreground mb-1">
-                  Webmail origin
-                </label>
-                <input
-                  id="setup-origin"
-                  type="url"
-                  value={setupOrigin}
-                  onChange={(e) => setSetupOrigin(e.target.value)}
-                  disabled={setupRunning}
-                  placeholder="https://webmail.example.com"
-                  className={cn(inputClass, 'w-full')}
-                />
-                <p className="text-[11px] text-muted-foreground mt-1">
-                  Used to register redirect URIs (one per locale: <code>{setupOrigin.trim().replace(/\/+$/, '') || 'https://…'}/&lt;locale&gt;/auth/callback</code>) on Stalwart.
-                </p>
-                {!setupOriginValid && setupOrigin.length > 0 && (
-                  <p className="text-[11px] text-destructive mt-1">Must be like https://host with no path.</p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="setup-issuer" className="block text-xs font-medium text-foreground mb-1">
-                  Stalwart issuer URL
-                </label>
-                <input
-                  id="setup-issuer"
-                  type="url"
-                  value={setupIssuer}
-                  onChange={(e) => setSetupIssuer(e.target.value)}
-                  disabled={setupRunning}
-                  placeholder="https://mail.example.com"
-                  className={cn(inputClass, 'w-full')}
-                />
-                <p className="text-[11px] text-muted-foreground mt-1">
-                  Where Stalwart serves <code>/.well-known/oauth-authorization-server</code>. Saved as <code>OAUTH_ISSUER_URL</code>. Pre-filled from your JMAP server URL.
-                </p>
-                {!setupIssuerValid && setupIssuer.length > 0 && (
-                  <p className="text-[11px] text-destructive mt-1">Must be like https://host with no path.</p>
-                )}
-              </div>
-              <label className="inline-flex items-center gap-2 text-xs text-foreground select-none cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={setupOauthOnly}
-                  onChange={(e) => setSetupOauthOnly(e.target.checked)}
-                  className="h-3.5 w-3.5 rounded border-input"
-                  disabled={setupRunning}
-                />
-                Also enable “OAuth only” (hide password login)
-              </label>
-            </div>
-            <div className="px-5 py-3 border-t border-border flex items-center justify-end gap-2 bg-muted/30 rounded-b-lg">
-              <Button type="button" variant="outline" size="sm" onClick={() => setSetupOpen(false)} disabled={setupRunning}>
-                Cancel
-              </Button>
-              <Button
-                type="button"
-                size="sm"
-                className="gap-2"
-                onClick={handleAutoSetup}
-                disabled={setupRunning || !setupOriginValid || !setupIssuerValid}
-              >
-                {setupRunning ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-                {setupRunning ? 'Configuring…' : 'Configure'}
-              </Button>
-            </div>
+      {/* The shared dialog: focus moved in and given back, Tab kept inside,
+          Escape and an outside click close it unless setup is running. */}
+      <Dialog
+        isOpen={setupOpen}
+        onClose={() => { if (!setupRunning) setSetupOpen(false); }}
+        preventOutsideClose={setupRunning}
+        showClose={!setupRunning}
+        title="Auto-configure OAuth"
+        description="Verify the URLs below before continuing. The webmail and Stalwart can live on different domains."
+        footer={
+          <>
+            <Button type="button" variant="outline" size="sm" onClick={() => setSetupOpen(false)} disabled={setupRunning}>
+              Cancel
+            </Button>
+            <Button
+              type="button"
+              size="sm"
+              className="gap-2"
+              onClick={handleAutoSetup}
+              disabled={setupRunning || !setupOriginValid || !setupIssuerValid}
+            >
+              {setupRunning ? <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" /> : <Sparkles className="w-4 h-4" aria-hidden="true" />}
+              {setupRunning ? 'Configuring…' : 'Configure'}
+            </Button>
+          </>
+        }
+      >
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="setup-origin" className="block text-xs font-medium text-foreground mb-1">
+              Webmail origin
+            </label>
+            <input
+              id="setup-origin"
+              type="url"
+              value={setupOrigin}
+              onChange={(e) => setSetupOrigin(e.target.value)}
+              disabled={setupRunning}
+              placeholder="https://webmail.example.com"
+              className={cn(inputClass, 'w-full')}
+            />
+            <p className="text-[11px] text-muted-foreground mt-1">
+              Used to register redirect URIs (one per locale: <code>{setupOrigin.trim().replace(/\/+$/, '') || 'https://…'}/&lt;locale&gt;/auth/callback</code>) on Stalwart.
+            </p>
+            {!setupOriginValid && setupOrigin.length > 0 && (
+              <p className="text-[11px] text-destructive mt-1">Must be like https://host with no path.</p>
+            )}
           </div>
+          <div>
+            <label htmlFor="setup-issuer" className="block text-xs font-medium text-foreground mb-1">
+              Stalwart issuer URL
+            </label>
+            <input
+              id="setup-issuer"
+              type="url"
+              value={setupIssuer}
+              onChange={(e) => setSetupIssuer(e.target.value)}
+              disabled={setupRunning}
+              placeholder="https://mail.example.com"
+              className={cn(inputClass, 'w-full')}
+            />
+            <p className="text-[11px] text-muted-foreground mt-1">
+              Where Stalwart serves <code>/.well-known/oauth-authorization-server</code>. Saved as <code>OAUTH_ISSUER_URL</code>. Pre-filled from your JMAP server URL.
+            </p>
+            {!setupIssuerValid && setupIssuer.length > 0 && (
+              <p className="text-[11px] text-destructive mt-1">Must be like https://host with no path.</p>
+            )}
+          </div>
+          <label className="inline-flex items-center gap-2 text-xs text-foreground select-none cursor-pointer">
+            <input
+              type="checkbox"
+              checked={setupOauthOnly}
+              onChange={(e) => setSetupOauthOnly(e.target.checked)}
+              className="h-3.5 w-3.5 rounded border-input"
+              disabled={setupRunning}
+            />
+            Also enable “OAuth only” (hide password login)
+          </label>
         </div>
-      )}
+      </Dialog>
 
       <div className="space-y-10">
         <SectionNav />

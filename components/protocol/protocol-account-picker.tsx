@@ -7,6 +7,8 @@ import type { ParsedWebcal } from "@/lib/protocol-handlers/webcal";
 import type { AccountEntry } from "@/stores/account-store";
 import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/ui/avatar";
+import { useId } from "react";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 type ProtocolAccountPickerProps = {
   accounts: AccountEntry[];
@@ -50,18 +52,32 @@ export function ProtocolAccountPicker({
         ]
     : [];
 
+  // A modal: the focus starts on the account in use (else the first one),
+  // Tab stays inside, Escape cancels unless a switch is under way, and the
+  // focus goes back to where it was.
+  const titleId = useId();
+  const panelRef = useFocusTrap({
+    isActive: true,
+    onEscape: () => { if (!isSwitching) onCancel(); },
+    restoreFocus: true,
+    initialFocus: () =>
+      panelRef.current?.querySelector<HTMLElement>('[data-active-account="true"]')
+      ?? panelRef.current?.querySelector<HTMLElement>('[data-account-option]'),
+  });
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]" onClick={onCancel} aria-hidden="true" />
       <div
+        ref={panelRef}
         role="dialog"
         aria-modal="true"
-        aria-label={t("select_account_title")}
+        aria-labelledby={titleId}
         className="relative w-full max-w-md rounded-lg border border-border bg-background shadow-xl animate-in zoom-in-95 duration-200"
       >
         <div className="flex items-start justify-between gap-4 border-b border-border px-5 py-4">
           <div>
-            <h2 className="text-lg font-semibold text-foreground">{t("select_account_title")}</h2>
+            <h2 id={titleId} className="text-lg font-semibold text-foreground">{t("select_account_title")}</h2>
             <p className="mt-1 text-sm text-muted-foreground">
               {kind === "mailto" ? t("select_mailto_account") : t("select_webcal_account")}
             </p>
@@ -72,7 +88,7 @@ export function ProtocolAccountPicker({
             className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             aria-label={tCommon("close")}
           >
-            <X className="h-5 w-5" />
+            <X className="h-5 w-5" aria-hidden="true" />
           </button>
         </div>
 
@@ -103,6 +119,9 @@ export function ProtocolAccountPicker({
               <button
                 key={account.id}
                 type="button"
+                data-account-option=""
+                data-active-account={isActive || undefined}
+                aria-current={isActive || undefined}
                 disabled={isSwitching}
                 onClick={() => onSelect(account.id)}
                 className={cn(

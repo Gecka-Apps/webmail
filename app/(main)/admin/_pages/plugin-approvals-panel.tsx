@@ -6,6 +6,7 @@ import { apiFetch } from '@/lib/browser-navigation';
 import { HIGH_RISK_PERMISSIONS } from '@/lib/plugin-sandbox/permission-text';
 import { SettingsSection } from '@/components/settings/settings-section';
 import { Button } from '@/components/ui/button';
+import { Dialog } from '@/components/ui/dialog';
 import { useAdminShell } from '@/components/admin/shell-context';
 import { Badge, type BadgeTone } from '@/components/admin/badge';
 
@@ -186,24 +187,26 @@ export function PluginApprovalsPanel() {
         </div>
       )}
 
-      {source && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onMouseDown={(e) => { if (e.target === e.currentTarget) setSource(null); }}>
-          <div role="dialog" aria-modal="true" aria-label="Plugin code" className="flex max-h-[90vh] w-full max-w-4xl flex-col rounded-lg border border-border bg-background shadow-xl">
-            <div className="flex items-center justify-between border-b border-border px-4 py-3">
-              <span className="text-sm font-medium">{source.entry.manifest.name ?? source.entry.pluginId} v{source.entry.manifest.version}</span>
-              <button type="button" onClick={() => setSource(null)} aria-label="Close" className="rounded p-1 hover:bg-accent"><X className="h-4 w-4" /></button>
-            </div>
-            {source.warnings && source.warnings.length > 0 && (
-              <div className="flex items-start gap-2 border-b border-border px-4 py-2 text-xs text-foreground">
-                <AlertTriangle className="mt-0.5 h-3.5 w-3.5 text-warning" /> {source.warnings.join('; ')}
-              </div>
-            )}
-            <pre className="min-h-0 flex-1 overflow-auto whitespace-pre-wrap break-all p-4 font-mono text-[11px] leading-relaxed">
-              {source.error ?? source.code ?? (<span className="inline-flex items-center gap-2"><Loader2 className="h-3.5 w-3.5 animate-spin" /> Loading</span>)}
-            </pre>
+      {/* The shared dialog: focus moved in and given back, Tab kept inside,
+          Escape closes, and the title names the plugin. */}
+      <Dialog
+        isOpen={!!source}
+        onClose={() => setSource(null)}
+        title={source ? `Code of ${source.entry.manifest.name ?? source.entry.pluginId} v${source.entry.manifest.version}` : ''}
+        size="lg"
+        className="max-w-4xl"
+        bodyClassName="flex flex-col"
+      >
+        {source?.warnings && source.warnings.length > 0 && (
+          <div className="mb-2 flex items-start gap-2 text-xs text-foreground">
+            <AlertTriangle className="mt-0.5 h-3.5 w-3.5 text-warning" aria-hidden="true" /> {source.warnings.join('; ')}
           </div>
-        </div>
-      )}
+        )}
+        {/* Focusable, so the keyboard can scroll the code. */}
+        <pre tabIndex={0} aria-label="Plugin code" className="min-h-0 flex-1 overflow-auto whitespace-pre-wrap break-all rounded-md border border-border p-4 font-mono text-[11px] leading-relaxed">
+          {source?.error ?? source?.code ?? (<span className="inline-flex items-center gap-2"><Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" /> Loading</span>)}
+        </pre>
+      </Dialog>
     </SettingsSection>
   );
 }
