@@ -383,6 +383,7 @@ function EmailCard({
       {/* Card Header - Always visible */}
       <button
         onClick={onToggleExpanded}
+        aria-expanded={isExpanded}
         className={cn(
           "w-full flex items-start text-start transition-colors",
           !isExpanded && "hover:bg-muted/50"
@@ -973,6 +974,7 @@ export function ConversationEmailBody({
                     onDownloadAttachment?.(attachment.blobId, attachment.name || 'attachment', attachment.type, source);
                   }}
                   title={opensPreview ? t('files.preview') : t('email_viewer.download')}
+                  aria-label={t(opensPreview ? 'email_viewer.preview_named' : 'email_viewer.download_named', { name: attachment.name ? stripBidiControls(attachment.name) : 'Attachment' })}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors text-sm"
                 >
                   <Icon className="w-4 h-4 text-muted-foreground" />

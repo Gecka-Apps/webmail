@@ -734,7 +734,9 @@
       "load_failed": "לא ניתן היה לטעון את התיקיות. נסו שוב."
     },
     "frame_title": "הודעה: {subject}",
-    "frame_title_from": "הודעה מאת {sender}"
+    "frame_title_from": "הודעה מאת {sender}",
+    "download_named": "הורדת {name}",
+    "preview_named": "תצוגה מקדימה של {name}"
   },
   "external_mail": {
     "sender_label": "חיצוני",

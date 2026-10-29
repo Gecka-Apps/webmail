@@ -769,7 +769,9 @@
       "load_failed": "Mapperne kunne ikke indlæses. Prøv igen."
     },
     "frame_title": "Besked: {subject}",
-    "frame_title_from": "Besked fra {sender}"
+    "frame_title_from": "Besked fra {sender}",
+    "download_named": "Download {name}",
+    "preview_named": "Forhåndsvis {name}"
   },
   "external_mail": {
     "sender_label": "Ekstern",

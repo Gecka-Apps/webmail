@@ -769,7 +769,9 @@
       "load_failed": "Nie udało się wczytać folderów. Spróbuj ponownie."
     },
     "frame_title": "Wiadomość: {subject}",
-    "frame_title_from": "Wiadomość od {sender}"
+    "frame_title_from": "Wiadomość od {sender}",
+    "download_named": "Pobierz {name}",
+    "preview_named": "Podgląd {name}"
   },
   "external_mail": {
     "sender_label": "Zewnętrzny",

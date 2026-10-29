@@ -769,7 +769,9 @@
       "load_failed": "无法加载文件夹。请重试。"
     },
     "frame_title": "邮件：{subject}",
-    "frame_title_from": "来自 {sender} 的邮件"
+    "frame_title_from": "来自 {sender} 的邮件",
+    "download_named": "下载 {name}",
+    "preview_named": "预览 {name}"
   },
   "external_mail": {
     "sender_label": "外部",

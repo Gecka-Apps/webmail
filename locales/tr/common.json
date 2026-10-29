@@ -769,7 +769,9 @@
       "load_failed": "Klasörler yüklenemedi. Yeniden deneyin."
     },
     "frame_title": "İleti: {subject}",
-    "frame_title_from": "{sender} adlı kişiden ileti"
+    "frame_title_from": "{sender} adlı kişiden ileti",
+    "download_named": "{name} dosyasını indir",
+    "preview_named": "{name} önizlemesi"
   },
   "external_mail": {
     "sender_label": "Harici",

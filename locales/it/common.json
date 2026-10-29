@@ -769,7 +769,9 @@
       "load_failed": "Impossibile caricare le cartelle. Riprova."
     },
     "frame_title": "Messaggio: {subject}",
-    "frame_title_from": "Messaggio da {sender}"
+    "frame_title_from": "Messaggio da {sender}",
+    "download_named": "Scarica {name}",
+    "preview_named": "Anteprima di {name}"
   },
   "external_mail": {
     "sender_label": "Esterno",

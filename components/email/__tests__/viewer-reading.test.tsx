@@ -94,3 +94,14 @@ describe('message body frame', () => {
     expect(screen.getByText('Hallo zusammen').closest('[lang]')?.getAttribute('lang')).toBe('de');
   });
 });
+
+describe('attachment actions', () => {
+  it('name the file they act on', async () => {
+    await show(message({
+      html: '<p>See the <b>attached</b> report</p>',
+      hasAttachment: true,
+      attachments: [{ partId: '2', blobId: 'blob2', name: 'report.pdf', type: 'application/pdf', size: 2048 }] as never,
+    }));
+    expect(screen.getAllByRole('button', { name: 'download_named {"name":"report.pdf"}' }).length).toBeGreaterThan(0);
+  });
+});

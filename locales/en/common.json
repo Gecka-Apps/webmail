@@ -769,7 +769,9 @@
     "plugin_panel_show": "Show plugin panel",
     "plugin_panel_hide": "Hide plugin panel",
     "frame_title": "Message: {subject}",
-    "frame_title_from": "Message from {sender}"
+    "frame_title_from": "Message from {sender}",
+    "download_named": "Download {name}",
+    "preview_named": "Preview {name}"
   },
   "external_mail": {
     "sender_label": "External",

@@ -769,7 +769,9 @@
       "load_failed": "Не удалось загрузить папки. Повторите попытку."
     },
     "frame_title": "Письмо: {subject}",
-    "frame_title_from": "Письмо от {sender}"
+    "frame_title_from": "Письмо от {sender}",
+    "download_named": "Скачать {name}",
+    "preview_named": "Предпросмотр {name}"
   },
   "external_mail": {
     "sender_label": "Внешнее",

@@ -769,7 +769,9 @@
       "load_failed": "Nem sikerült betölteni a mappákat. Próbálja újra."
     },
     "frame_title": "Üzenet: {subject}",
-    "frame_title_from": "Üzenet tőle: {sender}"
+    "frame_title_from": "Üzenet tőle: {sender}",
+    "download_named": "{name} letöltése",
+    "preview_named": "{name} előnézete"
   },
   "external_mail": {
     "sender_label": "Külső",

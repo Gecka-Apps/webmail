@@ -769,7 +769,9 @@
       "load_failed": "پوشه‌ها بارگذاری نشدند. دوباره امتحان کنید."
     },
     "frame_title": "پیام: {subject}",
-    "frame_title_from": "پیام از {sender}"
+    "frame_title_from": "پیام از {sender}",
+    "download_named": "دانلود {name}",
+    "preview_named": "پیش‌نمایش {name}"
   },
   "external_mail": {
     "sender_label": "خارجی",

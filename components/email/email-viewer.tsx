@@ -5882,6 +5882,7 @@ export function EmailViewer({
                     <button
                       className="p-1 hover:bg-accent rounded transition-colors"
                       title={t('download')}
+                      aria-label={t('download_named', { name: getAttachmentDisplayName(attachment.name, attachment.type) })}
                       onClick={(e) => { e.stopPropagation(); handleEffectiveAttachmentDownload(attachment); }}
                     >
                       <Download className="w-4 h-4 text-foreground" />
@@ -5890,6 +5891,7 @@ export function EmailViewer({
                       <button
                         className="p-1 hover:bg-accent rounded transition-colors"
                         title={tFiles('preview')}
+                        aria-label={t('preview_named', { name: getAttachmentDisplayName(attachment.name, attachment.type) })}
                         onClick={(e) => { e.stopPropagation(); handleEffectiveAttachmentOpen(attachment); }}
                       >
                         <Eye className="w-4 h-4 text-foreground" />
@@ -5949,6 +5951,7 @@ export function EmailViewer({
                           <button
                             className="p-1 hover:bg-accent rounded transition-colors"
                             title={t('download')}
+                            aria-label={t('download_named', { name: getAttachmentDisplayName(attachment.name, attachment.type) })}
                             onClick={(e) => { e.stopPropagation(); handleEffectiveAttachmentDownload(attachment); setShowAllBelowHeaderAttachments(false); }}
                           >
                             <Download className="w-4 h-4 text-foreground" />
@@ -5957,6 +5960,7 @@ export function EmailViewer({
                             <button
                               className="p-1 hover:bg-accent rounded transition-colors"
                               title={tFiles('preview')}
+                              aria-label={t('preview_named', { name: getAttachmentDisplayName(attachment.name, attachment.type) })}
                               onClick={(e) => { e.stopPropagation(); handleEffectiveAttachmentOpen(attachment); setShowAllBelowHeaderAttachments(false); }}
                             >
                               <Eye className="w-4 h-4 text-foreground" />
@@ -6044,6 +6048,7 @@ export function EmailViewer({
                       <button
                         className="p-1 hover:bg-accent rounded transition-colors"
                         title={t('download')}
+                        aria-label={t('download_named', { name: getAttachmentDisplayName(attachment.name, attachment.type) })}
                         onClick={(e) => { e.stopPropagation(); handleEffectiveAttachmentDownload(attachment); }}
                       >
                         <Download className="w-4 h-4 text-foreground" />
@@ -6052,6 +6057,7 @@ export function EmailViewer({
                         <button
                           className="p-1 hover:bg-accent rounded transition-colors"
                           title={tFiles('preview')}
+                          aria-label={t('preview_named', { name: getAttachmentDisplayName(attachment.name, attachment.type) })}
                           onClick={(e) => { e.stopPropagation(); handleEffectiveAttachmentOpen(attachment); }}
                         >
                           <Eye className="w-4 h-4 text-foreground" />

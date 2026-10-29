@@ -1699,7 +1699,9 @@
     "plugin_panel_show": "แสดงแถบปลั๊กอิน",
     "plugin_panel_hide": "ซ่อนแถบปลั๊กอิน",
     "frame_title": "ข้อความ: {subject}",
-    "frame_title_from": "ข้อความจาก {sender}"
+    "frame_title_from": "ข้อความจาก {sender}",
+    "download_named": "ดาวน์โหลด {name}",
+    "preview_named": "ดูตัวอย่าง {name}"
   },
   "external_mail": {
     "sender_label": "ภายนอก",

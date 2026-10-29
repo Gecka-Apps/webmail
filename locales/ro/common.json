@@ -769,7 +769,9 @@
       "load_failed": "Dosarele nu au putut fi încărcate. Încearcă din nou."
     },
     "frame_title": "Mesaj: {subject}",
-    "frame_title_from": "Mesaj de la {sender}"
+    "frame_title_from": "Mesaj de la {sender}",
+    "download_named": "Descărcați {name}",
+    "preview_named": "Previzualizați {name}"
   },
   "external_mail": {
     "sender_label": "Extern",

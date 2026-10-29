@@ -769,7 +769,9 @@
       "load_failed": "Ihre Ordner konnten nicht geladen werden. Versuchen Sie es erneut."
     },
     "frame_title": "Nachricht: {subject}",
-    "frame_title_from": "Nachricht von {sender}"
+    "frame_title_from": "Nachricht von {sender}",
+    "download_named": "{name} herunterladen",
+    "preview_named": "Vorschau von {name}"
   },
   "external_mail": {
     "sender_label": "Extern",

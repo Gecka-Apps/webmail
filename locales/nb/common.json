@@ -769,7 +769,9 @@
       "load_failed": "Kunne ikke laste inn mappene. Prøv igjen."
     },
     "frame_title": "Melding: {subject}",
-    "frame_title_from": "Melding fra {sender}"
+    "frame_title_from": "Melding fra {sender}",
+    "download_named": "Last ned {name}",
+    "preview_named": "Forhåndsvis {name}"
   },
   "external_mail": {
     "sender_label": "Ekstern",

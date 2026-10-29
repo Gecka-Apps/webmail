@@ -54,3 +54,19 @@ describe('conversation message frames', () => {
     expect(screen.queryByTitle('Email content')).toBeNull();
   });
 });
+
+describe('conversation controls name their target', () => {
+  it('card headers say whether they are expanded', () => {
+    show([mail('a'), mail('b')]);
+    const headers = screen.getAllByText('Sender').map((el) => el.closest('button'));
+    expect(headers.map((h) => h?.getAttribute('aria-expanded')).sort()).toEqual(['false', 'true']);
+  });
+
+  it('attachment buttons include the file name', () => {
+    show([mail('a', {
+      hasAttachment: true,
+      attachments: [{ partId: '2', blobId: 'blob2', name: 'report.pdf', type: 'application/pdf', size: 2048 }],
+    })]);
+    expect(screen.getByRole('button', { name: /^email_viewer\.(download|preview)_named \{"name":"report\.pdf"\}$/ })).toBeInTheDocument();
+  });
+});

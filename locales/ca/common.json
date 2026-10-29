@@ -769,7 +769,9 @@
       "load_failed": "No s'han pogut carregar les carpetes. Torna-ho a provar."
     },
     "frame_title": "Missatge: {subject}",
-    "frame_title_from": "Missatge de {sender}"
+    "frame_title_from": "Missatge de {sender}",
+    "download_named": "Baixa {name}",
+    "preview_named": "Previsualitza {name}"
   },
   "external_mail": {
     "sender_label": "Extern",

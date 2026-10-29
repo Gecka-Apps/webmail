@@ -769,7 +769,9 @@
       "load_failed": "Neizdevās ielādēt mapes. Mēģiniet vēlreiz."
     },
     "frame_title": "Ziņojums: {subject}",
-    "frame_title_from": "Ziņojums no {sender}"
+    "frame_title_from": "Ziņojums no {sender}",
+    "download_named": "Lejupielādēt {name}",
+    "preview_named": "Priekšskatīt {name}"
   },
   "external_mail": {
     "sender_label": "Ārējs",

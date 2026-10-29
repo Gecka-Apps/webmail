@@ -769,7 +769,9 @@
       "load_failed": "Priečinky sa nepodarilo načítať. Skúste to znova."
     },
     "frame_title": "Správa: {subject}",
-    "frame_title_from": "Správa od {sender}"
+    "frame_title_from": "Správa od {sender}",
+    "download_named": "Stiahnuť {name}",
+    "preview_named": "Náhľad {name}"
   },
   "external_mail": {
     "sender_label": "Externé",

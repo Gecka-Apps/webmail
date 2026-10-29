@@ -769,7 +769,9 @@
       "load_failed": "Impossible de charger vos dossiers. Réessayez."
     },
     "frame_title": "Message : {subject}",
-    "frame_title_from": "Message de {sender}"
+    "frame_title_from": "Message de {sender}",
+    "download_named": "Télécharger {name}",
+    "preview_named": "Aperçu de {name}"
   },
   "external_mail": {
     "sender_label": "Externe",

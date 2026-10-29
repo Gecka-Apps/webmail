@@ -769,7 +769,9 @@
       "load_failed": "تعذّر تحميل مجلداتك. حاول مرة أخرى."
     },
     "frame_title": "الرسالة: {subject}",
-    "frame_title_from": "رسالة من {sender}"
+    "frame_title_from": "رسالة من {sender}",
+    "download_named": "تنزيل {name}",
+    "preview_named": "معاينة {name}"
   },
   "external_mail": {
     "sender_label": "خارجي",

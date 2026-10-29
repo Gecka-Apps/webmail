@@ -769,7 +769,9 @@
       "load_failed": "Не вдалося завантажити теки. Спробуйте ще раз."
     },
     "frame_title": "Лист: {subject}",
-    "frame_title_from": "Лист від {sender}"
+    "frame_title_from": "Лист від {sender}",
+    "download_named": "Завантажити {name}",
+    "preview_named": "Переглянути {name}"
   },
   "external_mail": {
     "sender_label": "Зовнішнє",

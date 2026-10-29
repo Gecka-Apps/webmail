@@ -769,7 +769,9 @@
       "load_failed": "Složky se nepodařilo načíst. Zkuste to znovu."
     },
     "frame_title": "Zpráva: {subject}",
-    "frame_title_from": "Zpráva od {sender}"
+    "frame_title_from": "Zpráva od {sender}",
+    "download_named": "Stáhnout {name}",
+    "preview_named": "Náhled {name}"
   },
   "external_mail": {
     "sender_label": "Externí",

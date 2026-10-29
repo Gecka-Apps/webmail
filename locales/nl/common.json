@@ -769,7 +769,9 @@
       "load_failed": "Kon je mappen niet laden. Probeer het opnieuw."
     },
     "frame_title": "Bericht: {subject}",
-    "frame_title_from": "Bericht van {sender}"
+    "frame_title_from": "Bericht van {sender}",
+    "download_named": "{name} downloaden",
+    "preview_named": "Voorbeeld van {name}"
   },
   "external_mail": {
     "sender_label": "Extern",

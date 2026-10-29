@@ -769,7 +769,9 @@
       "load_failed": "Хавтсуудыг ачаалж чадсангүй. Дахин оролдоно уу."
     },
     "frame_title": "Захидал: {subject}",
-    "frame_title_from": "{sender}-с ирсэн захидал"
+    "frame_title_from": "{sender}-с ирсэн захидал",
+    "download_named": "{name}-г татаж авах",
+    "preview_named": "{name}-г урьдчилан харах"
   },
   "external_mail": {
     "sender_label": "Гадаад",

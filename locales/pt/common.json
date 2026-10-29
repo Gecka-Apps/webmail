@@ -769,7 +769,9 @@
       "load_failed": "Não foi possível carregar as pastas. Tente novamente."
     },
     "frame_title": "Mensagem: {subject}",
-    "frame_title_from": "Mensagem de {sender}"
+    "frame_title_from": "Mensagem de {sender}",
+    "download_named": "Baixar {name}",
+    "preview_named": "Pré-visualizar {name}"
   },
   "external_mail": {
     "sender_label": "Externo",
