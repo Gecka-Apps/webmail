@@ -15,6 +15,7 @@ import { getParticipantCount, isDeclinedByUser } from "@/lib/calendar-participan
 import { useScrollWindow } from "@/hooks/use-scroll-window";
 import type { ScrollWindowViewProps } from "@/lib/calendar-scroll-window";
 import type { CalendarEvent, Calendar } from "@/lib/jmap/types";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 interface CalendarAgendaViewProps extends ScrollWindowViewProps {
   events: CalendarEvent[];
@@ -55,6 +56,7 @@ export function CalendarAgendaView({
   onCreateEvent,
 }: CalendarAgendaViewProps) {
   const t = useTranslations("calendar");
+  const paint = useCvdColor();
   // Grid days / event dates are display dates (local fields = wall-clock in
   // the user's zone); the app-wide formatter would shift them again (#755).
   const intlFormatter = useDisplayDateFormatter();
@@ -240,7 +242,7 @@ export function CalendarAgendaView({
             {group.events.map((ev) => {
               const calId = getPrimaryCalendarId(ev);
               const calendar = calId ? calendarMap.get(calId) : undefined;
-              const color = getEventColor(ev, calendar);
+              const color = paint(getEventColor(ev, calendar));
               const start = getEventStartDate(ev);
               const end = getEventEndDate(ev);
               // iTIP CANCEL marks the attendee's copy with status "cancelled"

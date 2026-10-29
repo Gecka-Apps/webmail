@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { Check } from "@/components/icons";
 import type { Calendar, CalendarTask } from "@/lib/jmap/types";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 interface CalendarTaskChipProps {
   task: CalendarTask;
@@ -23,8 +24,9 @@ interface CalendarTaskChipProps {
  */
 export function CalendarTaskChip({ task, calendar, onToggleComplete, onSelect, touch = false, tabbable = true, className }: CalendarTaskChipProps) {
   const t = useTranslations("calendar");
+  const paint = useCvdColor();
   const isCompleted = task.progress === "completed";
-  const color = calendar?.color || "#3b82f6";
+  const color = paint(calendar?.color || "#3b82f6");
   const title = task.title || t("tasks.no_title");
 
   return (

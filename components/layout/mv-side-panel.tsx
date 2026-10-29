@@ -26,6 +26,7 @@ import { requestInternalMailto } from "@/lib/protocol-handlers/mailto";
 import { formatDateTime, cn } from "@/lib/utils";
 import { Avatar } from "@/components/ui/avatar";
 import type { CalendarEvent } from "@/lib/jmap/types";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 export type MvSidePanelId = "calendar" | "tasks" | "contacts";
 
@@ -171,9 +172,10 @@ function CalendarPanel({ onClose }: { onClose: () => void }) {
     if (scrollRef.current) scrollRef.current.scrollTop = hour * HOUR_PX;
   }, [day]);
 
+  const paint = useCvdColor();
   const colorOf = (event: CalendarEvent) => {
     const calId = Object.keys(event.calendarIds ?? {})[0];
-    return event.color || calendars.find((c) => c.id === calId)?.color || "var(--color-primary)";
+    return paint(event.color || calendars.find((c) => c.id === calId)?.color || "var(--color-primary)");
   };
 
   const visible = events.filter((e) => {

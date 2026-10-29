@@ -17,6 +17,7 @@ import { displayNow } from "@/lib/timezone";
 import type { Calendar, CalendarEvent } from "@/lib/jmap/types";
 import type { CalendarSearchResults as Results } from "@/hooks/use-calendar-event-search";
 import { getEventColor } from "./event-card";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 const RESULT_SELECTOR = "[data-search-result]";
 
@@ -83,6 +84,7 @@ export function CalendarSearchResults({
   query, results, calendars, timeFormat = "24h", currentUserEmails, onSelectEvent, onContextMenuEvent, onClearSearch,
 }: CalendarSearchResultsProps) {
   const t = useTranslations("calendar");
+  const paint = useCvdColor();
   const intlFormatter = useDisplayDateFormatter();
   const listRef = useRef<HTMLDivElement>(null);
   const calendarMap = useMemo(() => new Map(calendars.map((c) => [c.id, c])), [calendars]);
@@ -108,7 +110,7 @@ export function CalendarSearchResults({
   const renderRow = (ev: CalendarEvent) => {
     const calId = getPrimaryCalendarId(ev);
     const calendar = calId ? calendarMap.get(calId) : undefined;
-    const color = getEventColor(ev, calendar);
+    const color = paint(getEventColor(ev, calendar));
     const start = getEventStartDate(ev);
     const end = getEventEndDate(ev);
     const isInactive = ev.status === "cancelled" || isDeclinedByUser(ev, currentUserEmails);

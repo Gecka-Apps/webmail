@@ -10,6 +10,7 @@ import { Clock, X } from "@/components/icons";
 import { IconButton } from "@/components/ui/icon-button";
 import type { Calendar } from "@/lib/jmap/types";
 import { useDisplayDateFormatter } from "@/hooks/use-display-date-formatter";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 export interface QuickCreateDraft {
   start: Date;
@@ -66,6 +67,7 @@ export function QuickCreatePopover({
   onClose,
 }: QuickCreatePopoverProps) {
   const t = useTranslations("calendar");
+  const paint = useCvdColor();
   const tCommon = useTranslations("common");
   const intlFormatter = useDisplayDateFormatter();
   const ref = useRef<HTMLDivElement>(null);
@@ -189,7 +191,7 @@ export function QuickCreatePopover({
             <div className="flex items-center gap-2.5">
               <span
                 className="w-4 h-4 rounded-sm flex-shrink-0"
-                style={{ backgroundColor: calendars.find((c) => c.id === draft.calendarId)?.color || "#3b82f6" }}
+                style={{ backgroundColor: paint(calendars.find((c) => c.id === draft.calendarId)?.color || "#3b82f6") }}
                 aria-hidden="true"
               />
               <select

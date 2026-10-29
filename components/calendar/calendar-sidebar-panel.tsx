@@ -23,6 +23,7 @@ import type { IJMAPClient } from '@/lib/jmap/client-interface';
 import { displayNow } from "@/lib/timezone";
 import { readableTextOn } from "@/lib/color-transform";
 import { shareRecipientNames, useShareRecipientLabels } from "@/hooks/use-share-recipient-labels";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 /**
  * Split a per-account calendar list into "owned" (the user's own) and
@@ -92,6 +93,7 @@ export function CalendarSidebarPanel({
   multiAccountMode,
 }: CalendarSidebarPanelProps) {
   const t = useTranslations("calendar");
+  const paint = useCvdColor();
   const tSub = useTranslations("calendar.subscription");
   const tMgmt = useTranslations("calendar.management");
   const isSubscriptionCalendar = useCalendarStore((s) => s.isSubscriptionCalendar);
@@ -277,7 +279,7 @@ export function CalendarSidebarPanel({
 
   const renderCalendarItem = (cal: Calendar) => {
     const isVisible = selectedCalendarIds.includes(cal.id);
-    const color = cal.color || "#3b82f6";
+    const color = paint(cal.color || "#3b82f6");
     const hasMenu = isSubscriptionCalendar(cal.id) ? !!client : true;
 
     return (

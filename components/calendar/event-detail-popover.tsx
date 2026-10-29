@@ -32,6 +32,7 @@ import { eventToView } from "@/lib/plugin-projection";
 import { ParticipantStatusBadge, RsvpButtons } from "./rsvp-buttons";
 import { isEditableEventTarget } from "@/lib/keyboard";
 import { isSingleKeyShortcutOff } from "@/lib/single-key-shortcuts";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 interface EventDetailPopoverProps {
   event: CalendarEvent;
@@ -140,6 +141,7 @@ export function EventDetailPopover({
   pinned = false,
 }: EventDetailPopoverProps) {
   const t = useTranslations("calendar");
+  const paint = useCvdColor();
   const tCommon = useTranslations("common");
   const locale = useLocale();
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -154,7 +156,7 @@ export function EventDetailPopover({
   // render with the contact card's name instead of the raw email.
   const resolveContactName = useContactNameResolver();
 
-  const color = getEventColor(event, calendar);
+  const color = paint(getEventColor(event, calendar));
   const startDate = getEventStartDate(event);
   const durationMinutes = parseDuration(event.duration);
   const endDate = getEventEndDate(event);

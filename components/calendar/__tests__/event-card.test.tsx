@@ -112,3 +112,19 @@ describe('EventCard fill', () => {
     });
   });
 });
+
+describe('EventCard colour settings', () => {
+  const calendar = { id: 'cal-1', name: 'Work', color: '#22c55e' } as unknown as Calendar;
+  afterEach(() => {
+    cleanup();
+    useSettingsStore.setState({ showColorNames: false, colorBlindPalette: false });
+  });
+
+  it("draws the event in the colour-blind-safe colour and keeps the calendar's own", () => {
+    useSettingsStore.setState({ colorBlindPalette: true });
+    render(<EventCard event={makeOccurrence('a', 'accepted')} calendar={calendar} variant="block" currentUserEmails={me} />);
+    // #009E73, the palette's bluish green
+    expect(screen.getByRole('button').style.backgroundColor).toBe('rgb(0, 158, 115)');
+    expect(calendar.color).toBe('#22c55e');
+  });
+});

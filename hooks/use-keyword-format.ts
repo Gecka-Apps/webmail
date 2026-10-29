@@ -10,6 +10,7 @@ import {
 import { formatKeyword, formatKeywordLabels, keywordRenderings } from "@/lib/keyword-format";
 import { suggestKeywordColor } from "@/lib/keyword-discovery";
 import { useAccountTags, type TagScope } from "@/hooks/use-account-tags";
+import { CVD_CLASSES, cvdHue } from "@/lib/cvd-palette";
 
 /**
  * Names and colours tags for the screen, bound to the user's tag settings.
@@ -27,6 +28,7 @@ import { useAccountTags, type TagScope } from "@/hooks/use-account-tags";
 export function useKeywordFormat(scope?: TagScope | null) {
   const keywords = useAccountTags(scope).definitions;
   const nested = useSettingsStore((state) => state.nestedTags);
+  const colorBlindPalette = useSettingsStore((state) => state.colorBlindPalette);
 
   return useMemo(
     () => ({
@@ -50,9 +52,15 @@ export function useKeywordFormat(scope?: TagScope | null) {
        * the proposal names a colour the palette does not hold.
        */
       tagColor: (id: string): KeywordColor => {
-        const color = keywords.find((keyword) => keyword.id === id)?.color;
-        if (color && KEYWORD_PALETTE[color]) return KEYWORD_PALETTE[color];
-        return KEYWORD_PALETTE[suggestKeywordColor(id)] ?? KEYWORD_PALETTE[FALLBACK_KEYWORD_COLOR];
+        const stored = keywords.find((keyword) => keyword.id === id)?.color;
+        const suggested = suggestKeywordColor(id);
+        const color = stored && KEYWORD_PALETTE[stored]
+          ? stored
+          : KEYWORD_PALETTE[suggested] ? suggested : FALLBACK_KEYWORD_COLOR;
+        // Colour-blind-safe colours: the same tag, drawn in the palette
+        // colour nearest its own (lib/cvd-palette.ts). The stored colour stays.
+        if (colorBlindPalette) return CVD_CLASSES[cvdHue(color) ?? "grey"];
+        return KEYWORD_PALETTE[color];
       },
 
       /**
@@ -74,6 +82,6 @@ export function useKeywordFormat(scope?: TagScope | null) {
         );
       },
     }),
-    [keywords, nested],
+    [keywords, nested, colorBlindPalette],
   );
 }

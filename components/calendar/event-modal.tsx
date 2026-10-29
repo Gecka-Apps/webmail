@@ -50,6 +50,7 @@ import { eventToView } from "@/lib/plugin-projection";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 export interface PendingEventPreview {
   start: Date;
@@ -267,6 +268,7 @@ export function EventModal({
   isMobile = false,
 }: EventModalProps) {
   const t = useTranslations("calendar");
+  const paint = useCvdColor();
   const tCommon = useTranslations("common");
   const locale = useLocale();
   const timeFormat = useSettingsStore((s) => s.timeFormat);
@@ -988,7 +990,7 @@ export function EventModal({
     const recurrenceLabel = getRecurrenceLabel(event, t, locale);
     const alertLabel = formatEventAlertsLabel(event, calendars, t);
     const eventCalendar = calendars.find(c => event.calendarIds[c.id]);
-    const color = getEventColor(event, eventCalendar);
+    const color = paint(getEventColor(event, eventCalendar));
 
     return (
       <div ref={modalRef} role="dialog" aria-modal={isMobile || undefined} aria-label={event.title || t("events.no_title")} className={isMobile ? mobileRootClass : "flex flex-col h-full bg-background"}>

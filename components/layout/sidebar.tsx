@@ -195,17 +195,20 @@ const getIconForMailbox = (role?: string, hasChildren?: boolean, isExpanded?: bo
 
 // Role tints from the theme's tokens (R11), so a theme recolours them and
 // dark mode has its own values: the chart palette for the main roles.
+// With colour-blind-safe colours on (<html data-cvd-palette="on">) each
+// colour is swapped for one of the palette in lib/cvd-palette.ts. Written
+// out in full so Tailwind generates the classes.
 const ROLE_ICON_COLOR: Record<string, string> = {
-  inbox: "text-chart-1/80",
-  sent: "text-chart-2/80",
-  drafts: "text-chart-5/80",
+  inbox: "text-chart-1/80 [[data-cvd-palette=on]_&]:text-[#0072B2]",
+  sent: "text-chart-2/80 [[data-cvd-palette=on]_&]:text-[#009E73]",
+  drafts: "text-chart-5/80 [[data-cvd-palette=on]_&]:text-[#CC79A7]",
   trash: "text-muted-foreground",
-  junk: "text-chart-4/80",
-  archive: "text-chart-3/80",
-  shared: "text-info/80",
-  important: "text-warning/80",
-  memos: "text-warning/80",
-  scheduled: "text-info/80",
+  junk: "text-chart-4/80 [[data-cvd-palette=on]_&]:text-[#D55E00]",
+  archive: "text-chart-3/80 [[data-cvd-palette=on]_&]:text-[#56B4E9]",
+  shared: "text-info/80 [[data-cvd-palette=on]_&]:text-[#F0E442]",
+  important: "text-warning/80 [[data-cvd-palette=on]_&]:text-[#E69F00]",
+  memos: "text-warning/80 [[data-cvd-palette=on]_&]:text-[#E69F00]",
+  scheduled: "text-info/80 [[data-cvd-palette=on]_&]:text-[#F0E442]",
   snoozed: "text-muted-foreground",
 };
 

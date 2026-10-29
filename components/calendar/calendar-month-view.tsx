@@ -23,6 +23,7 @@ import { useCalendarErrorMessage } from "@/hooks/use-calendar-error-message";
 import { PluginDayLabel } from "./plugin-day-label";
 import { useDisplayDateFormatter } from "@/hooks/use-display-date-formatter";
 import type { MoveEventHandler } from "@/hooks/use-time-grid-interactions";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 interface CalendarMonthViewProps extends ScrollWindowViewProps {
   selectedDate: Date;
@@ -94,6 +95,7 @@ export function CalendarMonthView({
   onMoveEvent,
 }: CalendarMonthViewProps) {
   const t = useTranslations("calendar");
+  const paint = useCvdColor();
   const describeError = useCalendarErrorMessage();
   const showTimeInMonthView = useSettingsStore((state) => state.showTimeInMonthView);
   // On mobile the month view collapses events to dots unless the user opted
@@ -469,7 +471,7 @@ export function CalendarMonthView({
                       {dayEvents.slice(0, 3).map((ev) => {
                         const calId = getPrimaryCalendarId(ev);
                         const cal = calId ? calendarMap.get(calId) : undefined;
-                        const evColor = ev.color || cal?.color || "#3b82f6";
+                        const evColor = paint(ev.color || cal?.color || "#3b82f6");
                         const inactive = ev.status === "cancelled" || isDeclinedByUser(ev, currentUserEmails);
                         return (
                           <span
@@ -487,7 +489,7 @@ export function CalendarMonthView({
                             key={`task-${task.id}`}
                             data-calendar-task={task.id}
                             className={cn("w-1.5 h-1.5 rounded-full border", task.progress === "completed" && "opacity-40")}
-                            style={{ borderColor: (calId && calendarMap.get(calId)?.color) || "#3b82f6" }}
+                            style={{ borderColor: paint((calId && calendarMap.get(calId)?.color) || "#3b82f6") }}
                           />
                         );
                       })}
@@ -497,7 +499,7 @@ export function CalendarMonthView({
                       {pendingPreview && checkIsSameDay(pendingPreview.start, day) && (
                         <span
                           className="w-1.5 h-1.5 rounded-full border border-dashed"
-                          style={{ borderColor: calendarMap.get(pendingPreview.calendarId)?.color || "#3b82f6" }}
+                          style={{ borderColor: paint(calendarMap.get(pendingPreview.calendarId)?.color || "#3b82f6") }}
                         />
                       )}
                     </div>
@@ -512,7 +514,7 @@ export function CalendarMonthView({
               if (previewDayIdx === -1) return null;
               const previewRow = Math.max(rowCount, dayEventRows[previewDayIdx] + dayTasks[previewDayIdx].length);
               const cal = calendarMap.get(pendingPreview.calendarId);
-              const color = cal?.color || "#3b82f6";
+              const color = paint(cal?.color || "#3b82f6");
               return (
                 <div className="absolute inset-x-0 pointer-events-none" style={{ top: overlayTop }}>
                   <div

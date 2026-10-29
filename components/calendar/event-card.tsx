@@ -11,6 +11,7 @@ import { getEventEndDate, getEventStartDate } from "@/lib/calendar-utils";
 import { useSettingsStore } from "@/stores/settings-store";
 import { readableTextOn } from "@/lib/color-transform";
 import { useLongPress } from "@/hooks/use-long-press";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 interface EventCardProps {
   event: CalendarEvent;
@@ -117,7 +118,8 @@ function createEventDragPreview(title: string, timeRange: string, color: string)
 export function EventCard({ event, calendar, variant, onClick, onMouseEnter, onMouseLeave, onContextMenu, isSelected, draggable: isDraggable, continuesBefore = false, continuesAfter = false, className, style, currentUserEmails, tabbable = true }: EventCardProps) {
   const t = useTranslations("calendar");
   const [isBeingDragged, setIsBeingDragged] = useState(false);
-  const color = getEventColor(event, calendar);
+  const paint = useCvdColor();
+  const color = paint(getEventColor(event, calendar));
   const startDate = getEventStartDate(event);
   const timeFormat = useSettingsStore((state) => state.timeFormat);
   const showTimeInMonthView = useSettingsStore((state) => state.showTimeInMonthView);

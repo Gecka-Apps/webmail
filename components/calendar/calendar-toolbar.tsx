@@ -15,6 +15,7 @@ import type { CalendarViewMode } from "@/stores/calendar-store";
 import type { Calendar } from "@/lib/jmap/types";
 import { useCalendarLocale } from "@/hooks/use-calendar-locale";
 import { displayNow } from "@/lib/timezone";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 interface CalendarToolbarProps {
   selectedDate: Date;
@@ -102,6 +103,7 @@ export function CalendarToolbar({
   onCloseSearch,
 }: CalendarToolbarProps) {
   const t = useTranslations("calendar");
+  const paint = useCvdColor();
   const tCommon = useTranslations("common");
   const {
     weekStartsOn,
@@ -316,7 +318,7 @@ export function CalendarToolbar({
                       <div className="space-y-0.5">
                         {calendars.filter(c => !c.isShared).map((cal) => {
                           const isVisible = selectedCalendarIds.includes(cal.id);
-                          const color = cal.color || "#3b82f6";
+                          const color = paint(cal.color || "#3b82f6");
                           return (
                             <button
                               key={cal.id}
@@ -356,7 +358,7 @@ export function CalendarToolbar({
                             <div className="space-y-0.5">
                               {group.cals.map((cal) => {
                                 const isVisible = selectedCalendarIds.includes(cal.id);
-                                const color = cal.color || "#3b82f6";
+                                const color = paint(cal.color || "#3b82f6");
                                 return (
                                   <button
                                     key={cal.id}

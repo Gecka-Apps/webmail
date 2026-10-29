@@ -25,6 +25,7 @@ import { dayKey, type ScrollWindowViewProps } from "@/lib/calendar-scroll-window
 import type { PendingEventPreview } from "./event-modal";
 import { useCalendarErrorMessage } from "@/hooks/use-calendar-error-message";
 import { PluginDayLabel } from "./plugin-day-label";
+import { useCvdColor } from "@/hooks/use-cvd-color";
 
 interface CalendarWeekViewProps extends ScrollWindowViewProps {
   selectedDate: Date;
@@ -106,6 +107,7 @@ export function CalendarWeekView({
   revealAt,
 }: CalendarWeekViewProps) {
   const t = useTranslations("calendar");
+  const paint = useCvdColor();
   const tintedEvents = useSettingsStore((s) => s.calendarTintedEvents);
   const describeError = useCalendarErrorMessage();
   // Grid days / event dates are display dates (local fields = wall-clock in
@@ -575,7 +577,7 @@ export function CalendarWeekView({
             {pendingPreview?.allDay && (() => {
               const index = days.findIndex((d) => isSameDay(d, pendingPreview.start));
               if (index === -1) return null;
-              const color = calendars.find((c) => c.id === pendingPreview.calendarId)?.color || "#3b82f6";
+              const color = paint(calendars.find((c) => c.id === pendingPreview.calendarId)?.color || "#3b82f6");
               return (
                 <div
                   data-pending-preview
@@ -833,7 +835,7 @@ export function CalendarWeekView({
                       if (startMin + durationMin <= hours.startMinutes || startMin >= hours.endMinutes) return null;
                       const clip = clipToDisplayHours(startMin, startMin + durationMin, hours);
                       const cal = calendars.find(c => c.id === pendingPreview.calendarId);
-                      const color = cal?.color || "#3b82f6";
+                      const color = paint(cal?.color || "#3b82f6");
                       // Drawn like a saved event, so the new event shows where
                       // it will land while it is being created.
                       return (
