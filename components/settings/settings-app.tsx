@@ -280,7 +280,6 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
   const tShell = useTranslations('shell');
   const tDelegates = useTranslations('delegates');
   const tPalette = useTranslations('command_palette');
-  useDocumentTitle(tSidebar('settings'));
   const { client, isAuthenticated, logout, checkAuth, isLoading: authLoading } = useAuthStore();
   const { showAppsModal, inlineApp, loadedApps, handleManageApps, handleInlineApp, closeInlineApp, closeAppsModal } = useSidebarApps();
   const isEmbedded = useIsEmbedded();
@@ -799,6 +798,15 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
     ? requestedTab
     : (managedAccountId ? (visibleTabs[0]?.id ?? 'appearance') : 'appearance');
 
+  // "<Page> - Settings - <account> - <app>" (WCAG 2.4.2). On a phone the
+  // page list alone, with no page open, is just Settings.
+  const activeTabLabel = visibleTabs.find((tab) => tab.id === effectiveActiveTab)?.label ?? '';
+  useDocumentTitle(
+    activeTabLabel && (isDesktop || mobileShowContent)
+      ? `${activeTabLabel} - ${tSidebar('settings')}`
+      : tSidebar('settings'),
+  );
+
   const handleTabSelect = (tabId: SettingsTabId) => {
     setActiveTab(tabId);
     setPendingSection(null);
@@ -835,8 +843,6 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
   if (!isAuthenticated) {
     return null;
   }
-
-  const activeTabLabel = visibleTabs.find((tab) => tab.id === effectiveActiveTab)?.label ?? '';
 
   const renderTabContent = () => (
     <AdvancedSettingsProvider key={effectiveActiveTab}>

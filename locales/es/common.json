@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Cambiar el tamaño de la barra lateral",
     "resize_message_list": "Cambiar el tamaño de la lista de mensajes",
     "resize_contact_list": "Cambiar el tamaño de la lista de contactos",
-    "resize_side_panel": "Cambiar el tamaño del panel lateral"
+    "resize_side_panel": "Cambiar el tamaño del panel lateral",
+    "admin_pages": "Páginas de administración",
+    "admin_search": "Buscar en las páginas de administración",
+    "back": "Atrás"
   },
   "plugin_pages": {
     "loading": "Cargando la página",

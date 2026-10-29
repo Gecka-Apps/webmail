@@ -5752,7 +5752,10 @@
     "resize_sidebar": "사이드바 크기 조정",
     "resize_message_list": "메시지 목록 크기 조정",
     "resize_contact_list": "연락처 목록 크기 조정",
-    "resize_side_panel": "사이드 패널 크기 조정"
+    "resize_side_panel": "사이드 패널 크기 조정",
+    "admin_pages": "관리 페이지",
+    "admin_search": "관리 페이지 검색",
+    "back": "뒤로"
   },
   "plugin_pages": {
     "loading": "페이지를 불러오는 중",

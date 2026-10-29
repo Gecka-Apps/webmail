@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Größe der Seitenleiste ändern",
     "resize_message_list": "Größe der Nachrichtenliste ändern",
     "resize_contact_list": "Größe der Kontaktliste ändern",
-    "resize_side_panel": "Größe des Seitenbereichs ändern"
+    "resize_side_panel": "Größe des Seitenbereichs ändern",
+    "admin_pages": "Admin-Seiten",
+    "admin_search": "Admin-Seiten durchsuchen",
+    "back": "Zurück"
   },
   "plugin_pages": {
     "loading": "Seite wird geladen",

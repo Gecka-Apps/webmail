@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Formaat van zijbalk wijzigen",
     "resize_message_list": "Formaat van berichtenlijst wijzigen",
     "resize_contact_list": "Formaat van contactenlijst wijzigen",
-    "resize_side_panel": "Formaat van zijpaneel wijzigen"
+    "resize_side_panel": "Formaat van zijpaneel wijzigen",
+    "admin_pages": "Beheerpagina's",
+    "admin_search": "Beheerpagina's doorzoeken",
+    "back": "Terug"
   },
   "plugin_pages": {
     "loading": "Pagina laden",

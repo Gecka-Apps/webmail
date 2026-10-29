@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Muuda külgriba suurust",
     "resize_message_list": "Muuda kirjade loendi suurust",
     "resize_contact_list": "Muuda kontaktide loendi suurust",
-    "resize_side_panel": "Muuda külgpaneeli suurust"
+    "resize_side_panel": "Muuda külgpaneeli suurust",
+    "admin_pages": "Halduse lehed",
+    "admin_search": "Otsi halduse lehtedelt",
+    "back": "Tagasi"
   },
   "plugin_pages": {
     "loading": "Lehe laadimine",

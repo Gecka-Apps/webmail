@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Redimensionează bara laterală",
     "resize_message_list": "Redimensionează lista de mesaje",
     "resize_contact_list": "Redimensionează lista de contacte",
-    "resize_side_panel": "Redimensionează panoul lateral"
+    "resize_side_panel": "Redimensionează panoul lateral",
+    "admin_pages": "Pagini de administrare",
+    "admin_search": "Caută în paginile de administrare",
+    "back": "Înapoi"
   },
   "plugin_pages": {
     "loading": "Se încarcă pagina",

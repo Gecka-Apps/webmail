@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Redimensionar a barra lateral",
     "resize_message_list": "Redimensionar a lista de mensagens",
     "resize_contact_list": "Redimensionar a lista de contatos",
-    "resize_side_panel": "Redimensionar o painel lateral"
+    "resize_side_panel": "Redimensionar o painel lateral",
+    "admin_pages": "Páginas de administração",
+    "admin_search": "Pesquisar nas páginas de administração",
+    "back": "Voltar"
   },
   "plugin_pages": {
     "loading": "Carregando a página",

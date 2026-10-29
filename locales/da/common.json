@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Tilpas størrelsen på sidepanelet",
     "resize_message_list": "Tilpas størrelsen på meddelelseslisten",
     "resize_contact_list": "Tilpas størrelsen på kontaktlisten",
-    "resize_side_panel": "Tilpas størrelsen på sideruden"
+    "resize_side_panel": "Tilpas størrelsen på sideruden",
+    "admin_pages": "Administrationssider",
+    "admin_search": "Søg i administrationssider",
+    "back": "Tilbage"
   },
   "plugin_pages": {
     "loading": "Indlæser side",

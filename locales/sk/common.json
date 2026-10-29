@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Zmeniť veľkosť bočného panela",
     "resize_message_list": "Zmeniť veľkosť zoznamu správ",
     "resize_contact_list": "Zmeniť veľkosť zoznamu kontaktov",
-    "resize_side_panel": "Zmeniť veľkosť bočnej oblasti"
+    "resize_side_panel": "Zmeniť veľkosť bočnej oblasti",
+    "admin_pages": "Stránky správy",
+    "admin_search": "Hľadať na stránkach správy",
+    "back": "Späť"
   },
   "plugin_pages": {
     "loading": "Načítava sa stránka",

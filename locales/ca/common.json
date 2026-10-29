@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Canvia la mida de la barra lateral",
     "resize_message_list": "Canvia la mida de la llista de missatges",
     "resize_contact_list": "Canvia la mida de la llista de contactes",
-    "resize_side_panel": "Canvia la mida del tauler lateral"
+    "resize_side_panel": "Canvia la mida del tauler lateral",
+    "admin_pages": "Pàgines d'administració",
+    "admin_search": "Cerca a les pàgines d'administració",
+    "back": "Enrere"
   },
   "plugin_pages": {
     "loading": "S'està carregant la pàgina",

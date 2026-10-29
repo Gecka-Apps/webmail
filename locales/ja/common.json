@@ -5752,7 +5752,10 @@
     "resize_sidebar": "サイドバーのサイズを変更",
     "resize_message_list": "メッセージ一覧のサイズを変更",
     "resize_contact_list": "連絡先一覧のサイズを変更",
-    "resize_side_panel": "サイドパネルのサイズを変更"
+    "resize_side_panel": "サイドパネルのサイズを変更",
+    "admin_pages": "管理ページ",
+    "admin_search": "管理ページを検索",
+    "back": "戻る"
   },
   "plugin_pages": {
     "loading": "ページを読み込んでいます",

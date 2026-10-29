@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Resize sidebar",
     "resize_message_list": "Resize message list",
     "resize_contact_list": "Resize contact list",
-    "resize_side_panel": "Resize side panel"
+    "resize_side_panel": "Resize side panel",
+    "admin_pages": "Admin pages",
+    "admin_search": "Search admin pages",
+    "back": "Back"
   },
   "plugin_pages": {
     "loading": "Loading page",

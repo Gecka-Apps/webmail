@@ -5752,7 +5752,10 @@
     "resize_sidebar": "調整側邊欄大小",
     "resize_message_list": "調整郵件清單大小",
     "resize_contact_list": "調整聯絡人清單大小",
-    "resize_side_panel": "調整側面板大小"
+    "resize_side_panel": "調整側面板大小",
+    "admin_pages": "管理頁面",
+    "admin_search": "搜尋管理頁面",
+    "back": "返回"
   },
   "plugin_pages": {
     "loading": "正在載入頁面",

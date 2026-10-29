@@ -54,6 +54,11 @@ describe('useDocumentTitle', () => {
     expect(document.title).toBe('Calendar - jane@example.com - Acme Mail');
   });
 
+  it('leaves the account out of a page that is not about one', () => {
+    renderHook(() => useDocumentTitle('Settings - Admin', { showAccount: false }));
+    expect(document.title).toBe('Settings - Admin - Acme Mail');
+  });
+
   it('follows an account switch', () => {
     renderHook(() => useDocumentTitle('Calendar'));
     act(() => useAccountStore.setState({ activeAccountId: 'b' }));

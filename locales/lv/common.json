@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Mainīt sānjoslas izmēru",
     "resize_message_list": "Mainīt ziņojumu saraksta izmēru",
     "resize_contact_list": "Mainīt kontaktu saraksta izmēru",
-    "resize_side_panel": "Mainīt sānu paneļa izmēru"
+    "resize_side_panel": "Mainīt sānu paneļa izmēru",
+    "admin_pages": "Administrēšanas lapas",
+    "admin_search": "Meklēt administrēšanas lapās",
+    "back": "Atpakaļ"
   },
   "plugin_pages": {
     "loading": "Ielādē lapu",

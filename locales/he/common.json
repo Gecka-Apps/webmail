@@ -5753,7 +5753,10 @@
     "resize_sidebar": "שינוי גודל סרגל הצד",
     "resize_message_list": "שינוי גודל רשימת ההודעות",
     "resize_contact_list": "שינוי גודל רשימת אנשי הקשר",
-    "resize_side_panel": "שינוי גודל החלונית הצדדית"
+    "resize_side_panel": "שינוי גודל החלונית הצדדית",
+    "admin_pages": "דפי ניהול",
+    "admin_search": "חיפוש בדפי הניהול",
+    "back": "חזרה"
   },
   "plugin_pages": {
     "loading": "טוען את הדף",

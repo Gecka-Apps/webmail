@@ -5752,7 +5752,10 @@
     "resize_sidebar": "تغییر اندازه نوار کناری",
     "resize_message_list": "تغییر اندازه فهرست پیام‌ها",
     "resize_contact_list": "تغییر اندازه فهرست مخاطبین",
-    "resize_side_panel": "تغییر اندازه پنل کناری"
+    "resize_side_panel": "تغییر اندازه پنل کناری",
+    "admin_pages": "صفحه‌های مدیریت",
+    "admin_search": "جستجو در صفحه‌های مدیریت",
+    "back": "بازگشت"
   },
   "plugin_pages": {
     "loading": "در حال بارگذاری صفحه",

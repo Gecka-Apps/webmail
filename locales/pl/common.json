@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Zmień rozmiar paska bocznego",
     "resize_message_list": "Zmień rozmiar listy wiadomości",
     "resize_contact_list": "Zmień rozmiar listy kontaktów",
-    "resize_side_panel": "Zmień rozmiar panelu bocznego"
+    "resize_side_panel": "Zmień rozmiar panelu bocznego",
+    "admin_pages": "Strony administracyjne",
+    "admin_search": "Szukaj na stronach administracyjnych",
+    "back": "Wstecz"
   },
   "plugin_pages": {
     "loading": "Wczytywanie strony",

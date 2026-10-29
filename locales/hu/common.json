@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Oldalsáv átméretezése",
     "resize_message_list": "Üzenetlista átméretezése",
     "resize_contact_list": "Névjegylista átméretezése",
-    "resize_side_panel": "Oldalpanel átméretezése"
+    "resize_side_panel": "Oldalpanel átméretezése",
+    "admin_pages": "Adminisztrációs oldalak",
+    "admin_search": "Keresés az adminisztrációs oldalakon",
+    "back": "Vissza"
   },
   "plugin_pages": {
     "loading": "Oldal betöltése",

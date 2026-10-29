@@ -5752,7 +5752,10 @@
     "resize_sidebar": "Kenar çubuğunu yeniden boyutlandır",
     "resize_message_list": "İleti listesini yeniden boyutlandır",
     "resize_contact_list": "Kişi listesini yeniden boyutlandır",
-    "resize_side_panel": "Yan paneli yeniden boyutlandır"
+    "resize_side_panel": "Yan paneli yeniden boyutlandır",
+    "admin_pages": "Yönetim sayfaları",
+    "admin_search": "Yönetim sayfalarında ara",
+    "back": "Geri"
   },
   "plugin_pages": {
     "loading": "Sayfa yükleniyor",

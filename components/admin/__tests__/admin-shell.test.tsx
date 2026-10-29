@@ -40,7 +40,16 @@ describe('AdminShell', () => {
   it('does not server-render the phone layout, which desktop would show until hydration', () => {
     const html = renderToString(shell({ authenticated: false, isStalwartAutoLogin: false }));
     expect(html).not.toContain('back_to_mail');
-    expect(html).not.toContain('Search admin');
+    expect(html).not.toContain('admin_search');
+  });
+
+  // The shell's own names come from the translations, and the tab says
+  // which admin page is open.
+  it('names the page list and the search in the language of the user', () => {
+    render(shell({ authenticated: true, isStalwartAutoLogin: false }));
+    expect(screen.getByRole('navigation', { name: 'admin_pages' })).toBeTruthy();
+    expect(screen.getByRole('searchbox', { name: 'admin_search' })).toHaveAttribute('placeholder', 'admin_search');
+    expect(document.title).toMatch(/^.+ - admin - /);
   });
 
   it('draws the desktop sidebar once on the client', () => {

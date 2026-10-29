@@ -33,6 +33,7 @@ import { NavigationRail } from '@/components/layout/navigation-rail';
 import { AboutFooter } from '@/components/settings/about-data-settings';
 import { scrollToSettingsSection } from '@/components/settings/settings-section';
 import { useIsDesktop } from '@/hooks/use-media-query';
+import { useDocumentTitle } from '@/hooks/use-document-title';
 import { useAdminLocation, navigateAdmin } from '@/hooks/use-admin-navigation';
 import { useUpdateStore, selectHasUpdate } from '@/stores/update-store';
 import { useAdminUnsavedStore } from '@/stores/admin-unsaved-store';
@@ -94,6 +95,7 @@ export function AdminShell({ authenticated, isStalwartAutoLogin, configReadOnly,
   const pathname = usePathname();
   const tShell = useTranslations('shell');
   const tSettings = useTranslations('settings');
+  const tSidebar = useTranslations('sidebar');
   const location = useAdminLocation();
   const isDesktop = useIsDesktop();
   // The server can't know the window width, so its HTML would be the phone
@@ -110,6 +112,10 @@ export function AdminShell({ authenticated, isStalwartAutoLogin, configReadOnly,
   const onChangePassword = pathname === '/admin/change-password';
   const activePage: AdminPageId | null = location.page ?? (isDesktop && !onChangePassword ? 'dashboard' : null);
   const activeDef = location.page ? ADMIN_PAGES.find((p) => p.id === location.page) ?? null : null;
+  // "<Page> - Admin - <app>", so the tab and the window list say which
+  // admin page is open (WCAG 2.4.2).
+  const pageName = onChangePassword ? 'Change password' : ADMIN_PAGES.find((p) => p.id === activePage)?.label;
+  useDocumentTitle(pageName ? `${pageName} - ${tSidebar('admin')}` : tSidebar('admin'), { showAccount: false });
 
   // Match the navigation rail: red for security/deprecated, amber for normal.
   const hasUpdate = useUpdateStore(selectHasUpdate);
@@ -218,8 +224,8 @@ export function AdminShell({ authenticated, isStalwartAutoLogin, configReadOnly,
         type="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search admin"
-        aria-label="Search admin pages"
+        placeholder={tShell('admin_search')}
+        aria-label={tShell('admin_search')}
         className={cn('h-9 ps-9 [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none', query && 'pe-8')}
       />
       {query && (
@@ -227,7 +233,7 @@ export function AdminShell({ authenticated, isStalwartAutoLogin, configReadOnly,
           type="button"
           onClick={() => setQuery('')}
           className="absolute end-2 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-          aria-label="Clear search"
+          aria-label={tSettings('search_clear')}
         >
           <X className="h-4 w-4" />
         </button>
@@ -306,7 +312,7 @@ export function AdminShell({ authenticated, isStalwartAutoLogin, configReadOnly,
               <AdminLink
                 href={backHref}
                 className="flex h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-muted"
-                aria-label="Back"
+                aria-label={tShell('back')}
               >
                 <ArrowLeft className="h-5 w-5" />
               </AdminLink>
@@ -407,7 +413,7 @@ export function AdminShell({ authenticated, isStalwartAutoLogin, configReadOnly,
 
           <div className="flex-1 overflow-y-auto py-2">
             <div className="px-3 pb-1 pt-1">{searchBox}</div>
-            <nav className="space-y-0.5 px-2" aria-label="Admin pages">
+            <nav className="space-y-0.5 px-2" aria-label={tShell('admin_pages')}>
               {groups.length === 0 && noResults}
               {groups.map((group, groupIndex) => (
                 <div key={group.group}>
