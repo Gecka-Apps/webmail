@@ -1,7 +1,16 @@
 import '@testing-library/jest-dom/vitest';
-import { cleanup } from '@testing-library/react';
+import { cleanup, configure } from '@testing-library/react';
 import { afterEach, beforeEach, vi } from 'vitest';
 import { setNoThirdPartyTraffic } from '@/lib/third-party-mode';
+import { LIVE_REGION_IDS } from '@/lib/announce';
+
+// Every toast is also read out through the app-wide live regions
+// (lib/announce), so its title is in the page twice for a few seconds.
+// Text queries look at what is on screen; tests of the announcements read
+// the regions by id.
+configure({
+  defaultIgnore: `script, style, #${LIVE_REGION_IDS.polite}, #${LIVE_REGION_IDS.assertive}`,
+});
 
 // jsdom does not implement matchMedia; components that read media queries
 // (e.g. responsive layout hooks) call it during render. Provide a minimal

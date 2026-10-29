@@ -11,6 +11,7 @@ import { useCalendarNotificationStore } from '@/stores/calendar-notification-sto
 import { useToastStore } from '@/stores/toast-store';
 import { getPendingAlerts, getPendingTaskAlerts, getNextAlertFireTime, buildAlertKey } from '@/lib/calendar-alerts';
 import { playNotificationSound } from '@/lib/notification-sound';
+import { lastingToastDuration } from '@/lib/toast-duration';
 import { getPathPrefix } from '@/lib/browser-navigation';
 import type { CalendarEvent } from '@/lib/jmap/types';
 import { calendarHooks } from '@/lib/plugin-hooks';
@@ -21,6 +22,26 @@ const PROACTIVE_FETCH_HOURS = 24;
 const PROACTIVE_THROTTLE_MS = CHECK_INTERVAL_MS * 5;
 // Longest single wait for the next reminder; the periodic check covers the rest.
 const MAX_WAKE_DELAY_MS = 6 * 60 * 60 * 1000;
+/** How long a reminder stays at the shortest "Notification duration". */
+export const REMINDER_TOAST_MS = 15000;
+
+/**
+ * How long a reminder toast stays: until it is closed with Visual alerts on
+ * (someone who can't hear the sound must not miss it) or with "until
+ * closed"; otherwise the "Notification duration", at least 15 seconds.
+ */
+export function reminderToastDuration(): number {
+  if (useSettingsStore.getState().visualAlerts) return 0;
+  return lastingToastDuration(REMINDER_TOAST_MS);
+}
+
+/**
+ * Whether a reminder plays its sound. Do not disturb keeps reminders on
+ * screen (they were asked for) but silent.
+ */
+function reminderSoundOn(soundSetting: boolean): boolean {
+  return soundSetting && !useSettingsStore.getState().doNotDisturb;
+}
 
 export function useCalendarAlerts() {
   const { isAuthenticated, client } = useAuthStore();
@@ -64,7 +85,7 @@ export function useCalendarAlerts() {
         shownKeysRef.current.add(key);
         acknowledgeAlert(key, alert.fireTimeMs);
 
-        if (calendarNotificationSound) {
+        if (reminderSoundOn(calendarNotificationSound)) {
           playNotificationSound(notificationSoundChoice);
         }
 
@@ -90,7 +111,7 @@ export function useCalendarAlerts() {
           type: 'info',
           title: alert.event.title || t('alert_title'),
           message,
-          duration: 15000,
+          duration: reminderToastDuration(),
           onClick: () => {
             window.location.href = `${getPathPrefix(locale)}/${locale}/calendar`;
           },
@@ -110,7 +131,7 @@ export function useCalendarAlerts() {
           shownKeysRef.current.add(key);
           acknowledgeAlert(key, taskAlert.fireTimeMs);
 
-          if (calendarNotificationSound) {
+          if (reminderSoundOn(calendarNotificationSound)) {
             playNotificationSound(notificationSoundChoice);
           }
 
@@ -122,7 +143,7 @@ export function useCalendarAlerts() {
             type: 'info',
             title: taskAlert.task.title || t('alert_title'),
             message: taskMsg,
-            duration: 15000,
+            duration: reminderToastDuration(),
             onClick: () => {
               window.location.href = `${getPathPrefix(locale)}/${locale}/calendar`;
             },

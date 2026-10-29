@@ -4,6 +4,7 @@ import { generateUUID } from "@/lib/utils";
 import { toastHooks } from "@/lib/plugin-hooks";
 import { recordNotification } from "@/stores/notification-center-store";
 import { announce } from "@/lib/announce";
+import { effectiveToastDuration } from "@/lib/toast-duration";
 
 /**
  * What a screen reader hears when a toast appears: its title and message as
@@ -39,7 +40,9 @@ export const useToastStore = create<ToastStore>((set, get) => ({
     const newToast: Toast = {
       ...toast,
       id,
-      duration: toast.duration ?? 5000,
+      // The "Notification duration" setting, for toasts with an action
+      // and errors (lib/toast-duration).
+      duration: effectiveToastDuration(toast),
     };
 
     set((state) => ({
