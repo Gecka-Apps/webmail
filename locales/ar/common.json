@@ -378,7 +378,8 @@
     "status": {
       "folder_loaded": "{folder}: {count, plural, =0 {لا توجد رسائل} one {رسالة واحدة} other {# رسائل}}",
       "search_results": "{count, plural, =0 {لا توجد نتائج} one {نتيجة واحدة} other {# نتائج}}"
-    }
+    },
+    "category_tabs": "فئات البريد الوارد"
   },
   "shared_tags": {
     "title": "الوسوم المشتركة",

@@ -378,7 +378,8 @@
     "status": {
       "folder_loaded": "{folder}: {count, plural, =0 {nenhuma mensagem} one {# mensagem} other {# mensagens}}",
       "search_results": "{count, plural, =0 {Nenhum resultado} one {# resultado} other {# resultados}}"
-    }
+    },
+    "category_tabs": "Categorias da caixa de entrada"
   },
   "shared_tags": {
     "title": "Etiquetas compartilhadas",

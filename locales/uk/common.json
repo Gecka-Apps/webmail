@@ -378,7 +378,8 @@
     "status": {
       "folder_loaded": "{folder}: {count, plural, =0 {немає повідомлень} one {# повідомлення} few {# повідомлення} many {# повідомлень} other {# повідомлення}}",
       "search_results": "{count, plural, =0 {Нічого не знайдено} one {# результат} few {# результати} many {# результатів} other {# результату}}"
-    }
+    },
+    "category_tabs": "Категорії вхідних"
   },
   "shared_tags": {
     "title": "Спільні теги",

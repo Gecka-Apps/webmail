@@ -8,7 +8,7 @@ import { MvComposeInline, MvComposeWindow } from "@/components/email/mv-compose-
 import { usePinnedPerSession } from "@/hooks/use-pinned-per-session";
 import { useConfig } from "@/hooks/use-config";
 import { productName } from "@/lib/product-name";
-import { MessageListTabs } from "@/components/email/message-list-tabs";
+import { MessageListTabs, useMessageListPanelProps } from "@/components/email/message-list-tabs";
 import dynamic from "next/dynamic";
 import type { ComposerDraftData } from "@/components/email/email-composer";
 
@@ -234,6 +234,9 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
   const tQuote = useTranslations('quote_header');
   const tComposer = useTranslations('email_composer');
   const tViewer = useTranslations('email_viewer');
+  // The list is the category tabs' panel while the tabs are shown.
+  const messageListPanelId = useId();
+  const messageListPanelProps = useMessageListPanelProps(messageListPanelId);
   const mailLayout = useEffectiveMailLayout();
   const interfaceLayout = useSettingsStore((state) => state.interfaceLayout);
   // Phones present search full-screen from the header field rather than
@@ -5185,9 +5188,10 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
             <div className="flex-1 min-h-0 flex flex-col">
             {/* Plugin-registered category tabs (Gmail-style). Renders nothing
                 unless an enabled plugin registered tabs via api.tabs.set. */}
-            {!isScheduledView && <MessageListTabs />}
+            {!isScheduledView && <MessageListTabs panelId={messageListPanelId} />}
             <WelcomeBanner />
 
+            <div {...messageListPanelProps} className="flex-1 min-h-0 flex flex-col">
             <ErrorBoundary fallback={EmailListErrorFallback}>
               <EmailList
                 onFindFromSender={mvShell ? (sender) => void handleSelectContactSuggestion(sender, 'from') : undefined}
@@ -5316,6 +5320,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
                 className="flex-1 min-h-0"
               />
             </ErrorBoundary>
+            </div>
             </div>
 
             {/* Floating Compose Button - on desktop Mountain View puts Compose

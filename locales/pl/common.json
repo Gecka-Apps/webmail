@@ -378,7 +378,8 @@
     "status": {
       "folder_loaded": "{folder}: {count, plural, =0 {brak wiadomości} one {# wiadomość} few {# wiadomości} many {# wiadomości} other {# wiadomości}}",
       "search_results": "{count, plural, =0 {Brak wyników} one {# wynik} few {# wyniki} many {# wyników} other {# wyników}}"
-    }
+    },
+    "category_tabs": "Kategorie skrzynki odbiorczej"
   },
   "shared_tags": {
     "title": "Wspólne etykiety",

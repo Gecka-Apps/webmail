@@ -637,7 +637,8 @@
     "status": {
       "folder_loaded": "{folder}: {count, plural, =0 {ไม่มีข้อความ} other {# ข้อความ}}",
       "search_results": "{count, plural, =0 {ไม่พบผลลัพธ์} other {# ผลลัพธ์}}"
-    }
+    },
+    "category_tabs": "หมวดหมู่กล่องจดหมายเข้า"
   },
   "shared_tags": {
     "title": "ป้ายกำกับที่แชร์",

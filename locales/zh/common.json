@@ -378,7 +378,8 @@
     "status": {
       "folder_loaded": "{folder}：{count, plural, =0 {没有邮件} other {# 封邮件}}",
       "search_results": "{count, plural, =0 {没有结果} other {# 个结果}}"
-    }
+    },
+    "category_tabs": "收件箱分类"
   },
   "shared_tags": {
     "title": "共享标签",

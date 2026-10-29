@@ -378,7 +378,8 @@
     "status": {
       "folder_loaded": "{folder}: {count, plural, =0 {žádné zprávy} one {# zpráva} few {# zprávy} other {# zpráv}}",
       "search_results": "{count, plural, =0 {Žádné výsledky} one {# výsledek} few {# výsledky} other {# výsledků}}"
-    }
+    },
+    "category_tabs": "Kategorie doručené pošty"
   },
   "shared_tags": {
     "title": "Sdílené štítky",
