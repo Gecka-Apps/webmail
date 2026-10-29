@@ -177,3 +177,11 @@ describe('large text in narrow panes', () => {
     expect(wrap.some((s) => rowLabel.matches(s))).toBe(false);
   });
 });
+
+describe('scroll padding', () => {
+  it('keeps a focused element clear of sticky headers inside the scrolling panes too', () => {
+    const panes = selectorsOf('scroll-padding-block: 3rem;').join(', ');
+    expect(el('<div class="flex-1 overflow-y-auto"></div>').matches(panes)).toBe(true);
+    expect(el('<div class="overflow-auto"></div>').matches(panes)).toBe(true);
+  });
+});

@@ -168,3 +168,43 @@ describe('toasts and open menus', () => {
     expect(toastContainer()).not.toHaveClass('invisible');
   });
 });
+
+// A toast covered the focused Save button at the foot of the event editor
+// (WCAG 2.4.11). The stack moves to the top corner while it would cover the
+// focused element, and back once the focus is elsewhere.
+describe('toasts and the focused element', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    useToastStore.setState({ toasts: [] });
+  });
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
+
+  function rect(top: number, left: number, width: number, height: number) {
+    return { top, left, width, height, right: left + width, bottom: top + height, x: left, y: top, toJSON: () => ({}) } as DOMRect;
+  }
+
+  it('moves out from over the focused button and comes back when the focus leaves', () => {
+    const h = window.innerHeight;
+    vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function (this: HTMLElement) {
+      if (this.hasAttribute('data-toast-container')) return rect(h - 100, 600, 360, 80);
+      if (this.id === 'save') return rect(h - 70, 700, 80, 36);
+      return rect(10, 10, 80, 36);
+    });
+    render(<><Toasts /><button id="save">Save</button><button id="title">Title</button></>);
+    act(() => { toast.success('Event created'); });
+    act(() => { vi.advanceTimersByTime(20); });
+    expect(toastContainer()).not.toHaveAttribute('data-dodging');
+
+    act(() => { (document.getElementById('save') as HTMLElement).focus(); });
+    act(() => { vi.advanceTimersByTime(20); });
+    expect(toastContainer()).toHaveAttribute('data-dodging');
+    expect(toastContainer()).toHaveClass('top-5');
+
+    act(() => { (document.getElementById('title') as HTMLElement).focus(); });
+    act(() => { vi.advanceTimersByTime(20); });
+    expect(toastContainer()).not.toHaveAttribute('data-dodging');
+  });
+});

@@ -134,9 +134,15 @@
 :is([role="option"], [role="row"], [role="treeitem"], [role="gridcell"], [role="menuitem"], [role="menuitemradio"], [role="menuitemcheckbox"], [role="tab"], .focus-inset):focus-visible {
   outline-offset: calc(var(--focus-ring-width) * -1) !important;
 }
-/* The focused element scrolls clear of sticky headers and the bottom bar. */
+/* The focused element scrolls clear of sticky headers and the bottom bar,
+   in the page and inside the panes, which scroll on their own (scroll
+   padding belongs to the scrolling box, so the root's alone did nothing
+   there). :where() keeps the panes' rule overridable. */
 :root {
   scroll-padding-block: 4rem;
+}
+:where(.overflow-y-auto, .overflow-auto, .overflow-y-scroll, .overflow-scroll) {
+  scroll-padding-block: 3rem;
 }
 
 /* ---------- Large text in narrow panes (WCAG 1.4.4, 1.4.10) ----------

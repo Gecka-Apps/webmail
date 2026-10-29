@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef, useId } from "react";
+import { useEffect, useLayoutEffect, useState, useCallback, useRef, useId } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle, Loader2 } from "@/components/icons";
@@ -354,6 +354,31 @@ export function ToastItem({ toast, onClose, held = false, onFocusLost }: ToastPr
   );
 }
 
+/**
+ * True when the toast stack, in its usual place at the bottom, overlaps the
+ * element that has the focus. The stack's own box is measured where it is
+ * now; while it sits at the top, its bottom place is worked out from the gap
+ * it left there (data-bottom-gap).
+ */
+export function stackWouldCoverFocus(stack: HTMLElement | null): boolean {
+  if (!stack) return false;
+  const focused = document.activeElement as HTMLElement | null;
+  if (!focused || focused === document.body || stack.contains(focused)) return false;
+  const box = stack.getBoundingClientRect();
+  if (box.height === 0) return false;
+  let top = box.top;
+  let bottom = box.bottom;
+  if (stack.dataset.dodging) {
+    const gap = Number(stack.dataset.bottomGap || 20);
+    bottom = window.innerHeight - gap;
+    top = bottom - box.height;
+  } else {
+    stack.dataset.bottomGap = String(Math.max(0, window.innerHeight - box.bottom));
+  }
+  const f = focused.getBoundingClientRect();
+  return f.right > box.left && f.left < box.right && f.bottom > top && f.top < bottom;
+}
+
 export function ToastContainer({ toasts, onClose }: { toasts: Toast[]; onClose: (id: string) => void }) {
   const tCenter = useTranslations("notification_center");
   const [mounted, setMounted] = useState(false);
@@ -366,12 +391,35 @@ export function ToastContainer({ toasts, onClose }: { toasts: Toast[]; onClose: 
   const containerRef = useRef<HTMLDivElement>(null);
   // Where the focus was before the shortcut moved it into a toast.
   const returnFocusRef = useRef<HTMLElement | null>(null);
+  // The stack moves to the top corner while it would cover the element that
+  // has the keyboard focus (WCAG 2.4.11): a Save button at the foot of the
+  // event editor sat right under it.
+  const [dodge, setDodge] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const hasToasts = toasts.length > 0;
+  useLayoutEffect(() => {
+    if (!hasToasts) {
+      setDodge(false);
+      return;
+    }
+    let frame = 0;
+    const check = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => setDodge(stackWouldCoverFocus(containerRef.current)));
+    };
+    check();
+    document.addEventListener("focusin", check);
+    window.addEventListener("resize", check);
+    return () => {
+      cancelAnimationFrame(frame);
+      document.removeEventListener("focusin", check);
+      window.removeEventListener("resize", check);
+    };
+  }, [hasToasts, toasts.length]);
   useEffect(() => {
     if (!hasToasts) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -414,8 +462,11 @@ export function ToastContainer({ toasts, onClose }: { toasts: Toast[]; onClose: 
         // (the tab bar, or whichever bar registered with useBottomControls).
         "max-sm:inset-x-3 max-sm:bottom-[calc(var(--bottom-controls-height,3.75rem)+0.75rem)]",
         "max-sm:[html[data-composer-open]_&]:bottom-[max(5rem,calc(var(--bottom-controls-height,3.75rem)+0.75rem))]",
+        // Out of the way of the focused element: the top end corner.
+        dodge && "top-5 bottom-auto! max-sm:top-[calc(env(safe-area-inset-top)+0.75rem)]",
         held && "invisible"
       )}
+      data-dodging={dodge || undefined}
       // Not a live region: the toast store reads each toast out through
       // lib/announce (errors assertively). A labelled region while toasts
       // are up, so screen reader users can find them.
