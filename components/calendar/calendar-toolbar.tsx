@@ -232,8 +232,10 @@ export function CalendarToolbar({
                 <div className="flex-1 min-w-0">{mobileSearchField}</div>
               </div>
             ) : (
-            /* Row 1: Back / Date nav / Today */
-            <div className="flex items-center gap-1">
+            /* Row 1: Back / Date nav / Today. Below 400px (25rem, so a larger
+               text size counts too) the period title takes a line of its own
+               above the buttons: beside them it was cut to one letter. */
+            <div className="flex flex-wrap items-center gap-1">
               {/* The way back to the month takes the menu's place: both left the date no room. */}
               {onMenuClick && !onNavigateBack && (
                 <IconButton size="icon-lg" label={t("nav_open_menu")} onClick={onMenuClick} className="-ms-1 touch-manipulation">
@@ -251,7 +253,7 @@ export function CalendarToolbar({
                 </IconButton>
               )}
               <span
-                className="text-sm font-semibold text-center flex-1 select-none truncate"
+                className="text-sm font-semibold text-center flex-1 select-none truncate max-[25rem]:order-first max-[25rem]:basis-full max-[25rem]:ps-1 max-[25rem]:text-start"
                 title={viewMode === "day" ? formatFullDate(titleDate) : getDateLabel()}
               >
                 {getDateLabel()}

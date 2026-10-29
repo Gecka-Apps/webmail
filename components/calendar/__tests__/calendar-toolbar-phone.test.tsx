@@ -42,3 +42,14 @@ describe('phone toolbar in the day view', () => {
     expect(screen.getByRole('button', { name: 'nav_open_menu' })).toBeInTheDocument();
   });
 });
+
+// At 320px the month title was cut to one letter ("C…") beside the menu, the
+// chevrons, Today and the header buttons.
+describe('phone toolbar at 320px', () => {
+  it('gives the period title a line of its own below 25rem', () => {
+    renderToolbar({ viewMode: 'month' });
+    const title = screen.getByText('Oct 2026');
+    expect(title).toHaveClass('max-[25rem]:basis-full', 'max-[25rem]:order-first');
+    expect(title.parentElement).toHaveClass('flex-wrap');
+  });
+});
