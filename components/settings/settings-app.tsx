@@ -103,6 +103,7 @@ import { useLiteLinkSegments } from '@/hooks/use-lite-link-segments';
 import { useDocumentTitle } from '@/hooks/use-document-title';
 import { MvTopBar } from "@/components/layout/mv-top-bar";
 import { useMountainViewShell } from "@/hooks/use-mountain-view-shell";
+import { scrollBehavior } from '@/lib/reduced-motion';
 
 type Tab = SettingsSearchTab;
 
@@ -602,7 +603,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
         }
         return;
       }
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
       // Remove + reflow + add restarts the CSS animation if the class was
       // already present (re-clicking the same sub-result).
       el.classList.remove('settings-search-highlight');

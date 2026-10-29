@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { Button, TOUCH_HIT_AREA } from '@/components/ui/button';
 import { TermInfo, type GlossaryId } from '@/components/ui/term';
 import { useSettingsStore } from '@/stores/settings-store';
+import { scrollBehavior } from '@/lib/reduced-motion';
 
 /**
  * The Advanced switch. Rows and sections marked `advanced` render nothing
@@ -106,7 +107,7 @@ const highlightTimers = new WeakMap<HTMLElement, ReturnType<typeof setTimeout>>(
 export function scrollToSettingsSection(id: string, root: ParentNode = document): boolean {
   const el = root.querySelector<HTMLElement>(`[data-settings-section="${id.replace(/"/g, '\\"')}"]`);
   if (!el) return false;
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  el.scrollIntoView({ behavior: scrollBehavior(), block: 'start' });
   // Remove + reflow + add restarts the animation on a second click.
   clearTimeout(highlightTimers.get(el));
   el.classList.remove('settings-search-highlight');

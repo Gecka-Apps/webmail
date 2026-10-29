@@ -12,6 +12,7 @@ import { isDocumentRTL } from "@/i18n/direction";
 import { findTourTarget, isTourStepOnPage } from "./tour-steps";
 import { usePathname } from "@/i18n/navigation";
 import { useIsMobile } from "@/hooks/use-media-query";
+import { prefersReducedMotion, scrollBehavior } from "@/lib/reduced-motion";
 
 export { findTourTarget };
 
@@ -173,7 +174,7 @@ export function TourOverlay() {
       if (!onPageRef.current) return false;
       const el = findTourTarget(step.target);
       if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        el.scrollIntoView({ behavior: scrollBehavior(), block: "nearest" });
         // Delay after scroll for layout to settle
         pendingTimerRef.current = setTimeout(() => {
           if (cancelled) return;
@@ -292,9 +293,7 @@ export function TourOverlay() {
   const isFirst = currentStep === 0;
   const isInteractive = step.interactive;
 
-  const reducedMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reducedMotion = typeof window !== "undefined" && prefersReducedMotion();
 
   const transitionStyle = reducedMotion ? "none" : "all 300ms ease";
 
