@@ -2131,7 +2131,9 @@ if (typeof window !== 'undefined') {
 
   // The service worker shows push notifications without this store, so it
   // reads the sound preference from its own Cache store (#1289).
-  const pushSound = (s: SettingsState) => s.emailNotificationsEnabled && s.emailNotificationSound;
+  // Do not disturb can't keep a push from showing (browsers require one per
+  // push), but it keeps it silent.
+  const pushSound = (s: SettingsState) => s.emailNotificationsEnabled && s.emailNotificationSound && !s.doNotDisturb;
   let lastPushSound = pushSound(store);
   void writePushPreferences({ sound: lastPushSound });
   useSettingsStore.subscribe((state) => {
