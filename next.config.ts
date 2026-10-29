@@ -61,6 +61,12 @@ const nextConfig: NextConfig = {
   // it from node_modules at runtime instead of trying to bundle it. Used by
   // PLUGIN_DEV_DIR's on-the-fly bundler.
   serverExternalPackages: ["esbuild"],
+  // The build's type check leaves out tests, which are a third of the files
+  // and push tsc past the default heap on a 4 GB machine (#1431).
+  // `npm run typecheck` still checks them with tsconfig.json.
+  typescript: {
+    tsconfigPath: "tsconfig.build.json",
+  },
   // No proxyClientMaxBodySize: Next copies every body proxy.ts runs for up to
   // that size before routing, so it stays at the 10 MB default. The routes
   // that take bigger uploads (WOPI saves, WebDAV, /api/plugin-proxy) are left
