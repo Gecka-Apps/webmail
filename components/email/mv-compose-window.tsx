@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useId, useMemo, useState, type ReactNode } from "react";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { cn } from "@/lib/utils";
 import { MvComposeWindowContext, type MvComposeWindowState } from "@/components/email/mv-compose-context";
 
@@ -16,6 +17,19 @@ export function MvComposeWindow({ children }: { children: ReactNode }) {
   const minimized = state === "minimized";
   const maximized = state === "maximized";
   const controls = useMemo(() => ({ variant: "window" as const, state, setState }), [state]);
+  // Opened up, the window covers the page behind a backdrop: a modal dialog
+  // then, named by the composer's title bar, with Tab kept inside. Escape is
+  // left to the composer.
+  const windowRef = useFocusTrap({ isActive: maximized, restoreFocus: true, initialFocus: () => document.activeElement as HTMLElement | null });
+  const fallbackTitleId = useId();
+  const [titleId, setTitleId] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    if (!maximized) return;
+    const heading = windowRef.current?.querySelector<HTMLElement>("[data-mv-compose-titlebar] h1, [data-mv-compose-titlebar] h2, [data-mv-compose-titlebar] h3");
+    if (!heading) return;
+    if (!heading.id) heading.id = fallbackTitleId;
+    setTitleId(heading.id);
+  }, [maximized, fallbackTitleId, windowRef]);
 
   return (
     <MvComposeWindowContext.Provider value={controls}>
@@ -27,6 +41,10 @@ export function MvComposeWindow({ children }: { children: ReactNode }) {
         />
       )}
       <div
+        ref={windowRef}
+        role={maximized ? "dialog" : undefined}
+        aria-modal={maximized ? true : undefined}
+        aria-labelledby={maximized ? titleId : undefined}
         data-mv-compose-window=""
         data-state={state}
         className={cn(
