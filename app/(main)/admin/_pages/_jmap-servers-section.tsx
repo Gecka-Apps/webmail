@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Plus, Trash2, ChevronDown, ChevronRight } from '@/components/icons';
 import type { JmapServerEntry } from '@/lib/admin/jmap-servers';
 import { Button } from '@/components/ui/button';
@@ -101,6 +101,9 @@ const fieldClass = cn(inputClass, 'w-full');
 
 export function JmapServersSection({ value, source, onChange, onRevert }: Props) {
   const [drafts, setDrafts] = useState<RowDraft[]>(() => value.map(entryToDraft));
+  // Ids that tie each row's labels to its fields.
+  const idBase = useId();
+  const labelFor = (row: number) => (key: string) => `${idBase}-${row}-${key}`;
   const lastEmittedRef = useRef(value);
 
   useEffect(() => {
@@ -166,8 +169,9 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
           <div key={i} className="rounded-md border border-border bg-muted/20 p-3 space-y-2">
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-start">
               <div className="sm:col-span-3">
-                <label className={fieldLabelClass}>ID</label>
+                <label htmlFor={labelFor(i)("id")} className={fieldLabelClass}>ID</label>
                 <input
+                  id={labelFor(i)("id")}
                   type="text"
                   value={d.id}
                   onChange={(e) => update(i, { id: e.target.value })}
@@ -177,8 +181,9 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
                 {isDuplicate && <p className="text-[10px] text-destructive mt-0.5">Duplicate id</p>}
               </div>
               <div className="sm:col-span-4">
-                <label className={fieldLabelClass}>Label</label>
+                <label htmlFor={labelFor(i)("label")} className={fieldLabelClass}>Label</label>
                 <input
+                  id={labelFor(i)("label")}
                   type="text"
                   value={d.label}
                   onChange={(e) => update(i, { label: e.target.value })}
@@ -187,9 +192,10 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
                 />
               </div>
               <div className="sm:col-span-5">
-                <label className={fieldLabelClass}>JMAP URL</label>
+                <label htmlFor={labelFor(i)("url")} className={fieldLabelClass}>JMAP URL</label>
                 <div className="flex items-center gap-2">
                   <input
+                    id={labelFor(i)("url")}
                     type="url"
                     value={d.url}
                     onChange={(e) => update(i, { url: e.target.value })}
@@ -209,10 +215,11 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
               </div>
             </div>
             <div>
-              <label className={fieldLabelClass}>
+              <label htmlFor={labelFor(i)("domains")} className={fieldLabelClass}>
                 Email domains (comma-separated, used for auto-pick)
               </label>
               <input
+                id={labelFor(i)("domains")}
                 type="text"
                 value={d.domains}
                 onChange={(e) => update(i, { domains: e.target.value })}
@@ -231,8 +238,9 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
             {d.oauthExpanded && (
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 ps-4 border-s border-border">
                 <div>
-                  <label className={fieldLabelClass}>OAuth Client ID</label>
+                  <label htmlFor={labelFor(i)("oauth-client-id")} className={fieldLabelClass}>OAuth Client ID</label>
                   <input
+                    id={labelFor(i)("oauth-client-id")}
                     type="text"
                     value={d.oauthClientId}
                     onChange={(e) => update(i, { oauthClientId: e.target.value })}
@@ -240,8 +248,9 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
                   />
                 </div>
                 <div>
-                  <label className={fieldLabelClass}>OAuth Issuer URL</label>
+                  <label htmlFor={labelFor(i)("oauth-issuer")} className={fieldLabelClass}>OAuth Issuer URL</label>
                   <input
+                    id={labelFor(i)("oauth-issuer")}
                     type="url"
                     value={d.oauthIssuerUrl}
                     onChange={(e) => update(i, { oauthIssuerUrl: e.target.value })}
@@ -250,8 +259,9 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
                   />
                 </div>
                 <div>
-                  <label className={fieldLabelClass}>OAuth Client Secret</label>
+                  <label htmlFor={labelFor(i)("oauth-secret")} className={fieldLabelClass}>OAuth Client Secret</label>
                   <input
+                    id={labelFor(i)("oauth-secret")}
                     type="password"
                     value={d.oauthClientSecret}
                     onChange={(e) => update(i, { oauthClientSecret: e.target.value })}
@@ -260,8 +270,9 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
                   />
                 </div>
                 <div className="sm:col-span-3">
-                  <label className={fieldLabelClass}>Sign-in button label</label>
+                  <label htmlFor={labelFor(i)("oauth-button")} className={fieldLabelClass}>Sign-in button label</label>
                   <input
+                    id={labelFor(i)("oauth-button")}
                     type="text"
                     value={d.oauthButtonLabel}
                     onChange={(e) => update(i, { oauthButtonLabel: e.target.value })}
@@ -274,8 +285,9 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
                   </p>
                 </div>
                 <div className="sm:col-span-3">
-                  <label className={fieldLabelClass}>Provider logout URL</label>
+                  <label htmlFor={labelFor(i)("logout-url")} className={fieldLabelClass}>Provider logout URL</label>
                   <input
+                    id={labelFor(i)("logout-url")}
                     type="url"
                     value={d.oauthEndSessionUrl}
                     onChange={(e) => update(i, { oauthEndSessionUrl: e.target.value })}

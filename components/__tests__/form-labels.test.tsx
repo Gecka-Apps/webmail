@@ -3,6 +3,10 @@ import { describe, expect, it, vi } from 'vitest';
 import { unnamedFields } from '@/lib/__tests__/helpers/form-labels';
 import { ContactForm } from '@/components/contacts/contact-form';
 import type { ContactCard } from '@/lib/jmap/types';
+import { TemplateForm } from '@/components/templates/template-form';
+import { MvSearchForm } from '@/components/search/mv-search-form';
+import { DEFAULT_SEARCH_FILTERS } from '@/lib/jmap/search-utils';
+import { JmapServersSection } from '@/app/(main)/admin/_pages/_jmap-servers-section';
 
 // Every field of the big forms has a name a screen reader reads out (WCAG
 // 1.3.1, 3.3.2, 4.1.2): a <label> tied to it or an aria-label, never just
@@ -34,6 +38,29 @@ describe('form fields have labels', () => {
     unmount();
     render(<ContactForm contact={fullContact} onSave={vi.fn()} onCancel={vi.fn()} />);
     expect(document.querySelectorAll('input, select, textarea').length).toBeGreaterThan(20);
+    expect(unnamedFields()).toEqual([]);
+  });
+
+  it('template form', () => {
+    render(<TemplateForm onSave={vi.fn()} onCancel={vi.fn()} />);
+    expect(unnamedFields()).toEqual([]);
+  });
+
+  it('advanced search form', () => {
+    render(<MvSearchForm filters={DEFAULT_SEARCH_FILTERS} onChange={vi.fn()} onSearch={vi.fn()} onClear={vi.fn()} />);
+    expect(document.querySelectorAll('input').length).toBeGreaterThan(5);
+    expect(unnamedFields()).toEqual([]);
+  });
+
+  it('admin server list, with two servers', () => {
+    render(
+      <JmapServersSection
+        value={[{ id: 'a', label: 'A', url: 'https://a.example' }, { id: 'b', label: 'B', url: 'https://b.example' }] as never}
+        onChange={vi.fn()}
+        onRevert={vi.fn()}
+      />,
+    );
+    expect(document.querySelectorAll('input').length).toBeGreaterThanOrEqual(8);
     expect(unnamedFields()).toEqual([]);
   });
 });

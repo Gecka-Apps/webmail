@@ -65,6 +65,7 @@ export function MvSearchForm({ filters, onChange, onSearch, onClear, folderSelec
             inputMode="numeric"
             className={FIELD}
             placeholder={t("size_min")}
+            aria-label={t("size_min")}
             value={filters.minSizeKb}
             onChange={(e) => onChange({ minSizeKb: e.target.value })}
           />
@@ -74,6 +75,7 @@ export function MvSearchForm({ filters, onChange, onSearch, onClear, folderSelec
             inputMode="numeric"
             className={FIELD}
             placeholder={t("size_max")}
+            aria-label={t("size_max")}
             value={filters.maxSizeKb}
             onChange={(e) => onChange({ maxSizeKb: e.target.value })}
           />

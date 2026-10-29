@@ -1222,7 +1222,8 @@ export function EventModal({
         <div className="px-6 py-4 space-y-4">
           <div>
             <label htmlFor={labelFor("title")} className="text-sm font-medium mb-1 block">{t("form.title")}</label>
-            <Input id={labelFor("title")}
+            <Input
+              id={labelFor("title")}
               ref={titleRef}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -1233,7 +1234,8 @@ export function EventModal({
 
           <div>
             <label htmlFor={labelFor("description")} className="text-sm font-medium mb-1 block">{t("form.description")}</label>
-            <textarea id={labelFor("description")}
+            <textarea
+              id={labelFor("description")}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder={t("form.description")}
@@ -1245,7 +1247,8 @@ export function EventModal({
 
           <div>
             <label htmlFor={labelFor("location")} className="text-sm font-medium mb-1 block">{t("form.location")}</label>
-            <Input id={labelFor("location")}
+            <Input
+              id={labelFor("location")}
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder={t("form.location")}
@@ -1344,7 +1347,8 @@ export function EventModal({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label htmlFor={labelFor("start_date")} className="text-sm font-medium mb-1 block">{t("form.start_date")}</label>
-              <input id={labelFor("start_date")}
+              <input
+                id={labelFor("start_date")}
                 type="date"
                 value={startDate}
                 onChange={(e) => handleStartDateChange(e.target.value)}
@@ -1354,7 +1358,8 @@ export function EventModal({
             {!allDay && (
               <div>
                 <label htmlFor={labelFor("start_time")} className="text-sm font-medium mb-1 block">{t("form.start_time")}</label>
-                <input id={labelFor("start_time")}
+                <input
+                  id={labelFor("start_time")}
                   type="time"
                   value={startTime}
                   onChange={(e) => handleStartTimeChange(e.target.value)}
@@ -1364,7 +1369,8 @@ export function EventModal({
             )}
             <div>
               <label htmlFor={labelFor("end_date")} className="text-sm font-medium mb-1 block">{t("form.end_date")}</label>
-              <input id={labelFor("end_date")}
+              <input
+                id={labelFor("end_date")}
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
@@ -1374,7 +1380,8 @@ export function EventModal({
             {!allDay && (
               <div>
                 <label htmlFor={labelFor("end_time")} className="text-sm font-medium mb-1 block">{t("form.end_time")}</label>
-                <input id={labelFor("end_time")}
+                <input
+                  id={labelFor("end_time")}
                   type="time"
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
@@ -1407,7 +1414,8 @@ export function EventModal({
           {selectableCalendars.length > 1 && (
             <div>
               <label htmlFor={labelFor("calendar_select")} className="text-sm font-medium mb-1 block">{t("form.calendar_select")}</label>
-              <select id={labelFor("calendar_select")}
+              <select
+                id={labelFor("calendar_select")}
                 value={calendarId}
                 onChange={(e) => setCalendarId(e.target.value)}
                 className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
@@ -1424,7 +1432,8 @@ export function EventModal({
           <div>
             <label htmlFor={labelFor("title-1")} className="text-sm font-medium mb-1 block">{t("recurrence.title")}</label>
             <div className="flex items-center gap-2">
-              <select id={labelFor("title-1")}
+              <select
+                id={labelFor("title-1")}
                 value={recurrence}
                 onChange={(e) => {
                   const value = e.target.value as RecurrenceOption;

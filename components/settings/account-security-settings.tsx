@@ -87,7 +87,8 @@ function PasswordChangeSection() {
         <div>
           <label htmlFor={labelFor("current")} className="text-xs text-muted-foreground mb-1 block">{t('password.current')}</label>
           <div className="relative">
-            <Input id={labelFor("current")}
+            <Input
+              id={labelFor("current")}
               type={showCurrent ? 'text' : 'password'}
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
@@ -108,7 +109,8 @@ function PasswordChangeSection() {
         {otpEnabled && (
           <div>
             <label htmlFor={labelFor("verification_code")} className="text-xs text-muted-foreground mb-1 block">{t('totp.verification_code')}</label>
-            <Input id={labelFor("verification_code")}
+            <Input
+              id={labelFor("verification_code")}
               value={otpCode}
               onChange={(e) => setOtpCode(e.target.value)}
               required
@@ -121,7 +123,8 @@ function PasswordChangeSection() {
         <div>
           <label htmlFor={labelFor("new")} className="text-xs text-muted-foreground mb-1 block">{t('password.new')}</label>
           <div className="relative">
-            <Input id={labelFor("new")}
+            <Input
+              id={labelFor("new")}
               type={showNew ? 'text' : 'password'}
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
@@ -142,7 +145,8 @@ function PasswordChangeSection() {
         </div>
         <div>
           <label htmlFor={labelFor("confirm")} className="text-xs text-muted-foreground mb-1 block">{t('password.confirm')}</label>
-          <Input id={labelFor("confirm")}
+          <Input
+            id={labelFor("confirm")}
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -567,7 +571,8 @@ function CredentialSection({ icon: Icon, i18nNamespace, entries, onCreate, onRem
         <form onSubmit={handleAdd} className="p-3 bg-muted rounded-md space-y-2">
           <div>
             <label htmlFor={labelFor("field6")} className="text-xs text-muted-foreground mb-1 block">{tk('name_label')}</label>
-            <Input id={labelFor("field6")}
+            <Input
+              id={labelFor("field6")}
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
               placeholder={tk('name_placeholder')}
@@ -580,7 +585,8 @@ function CredentialSection({ icon: Icon, i18nNamespace, entries, onCreate, onRem
           </div>
           <div>
             <label htmlFor={labelFor("allowed_ips_label")} className="text-xs text-muted-foreground mb-1 block">{t('app_passwords.allowed_ips_label')}</label>
-            <textarea id={labelFor("allowed_ips_label")}
+            <textarea
+              id={labelFor("allowed_ips_label")}
               value={allowedIpsRaw}
               onChange={(e) => setAllowedIpsRaw(e.target.value)}
               placeholder={t('app_passwords.allowed_ips_placeholder')}
@@ -779,7 +785,8 @@ function PublicKeysSection() {
         <form onSubmit={handleAdd} className="p-3 bg-muted rounded-md space-y-2">
           <div>
             <label htmlFor={labelFor("field9")} className="text-xs text-muted-foreground mb-1 block">{tk('name_label')}</label>
-            <Input id={labelFor("field9")}
+            <Input
+              id={labelFor("field9")}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder={tk('name_placeholder')}
@@ -788,7 +795,8 @@ function PublicKeysSection() {
           </div>
           <div>
             <label htmlFor={labelFor("field10")} className="text-xs text-muted-foreground mb-1 block">{tk('key_label')}</label>
-            <textarea id={labelFor("field10")}
+            <textarea
+              id={labelFor("field10")}
               value={publicKey}
               onChange={(e) => setPublicKey(e.target.value)}
               placeholder={tk('key_placeholder')}
@@ -815,7 +823,8 @@ function PublicKeysSection() {
           
           <div>
             <label htmlFor={labelFor("algorithm_label")} className="text-xs text-muted-foreground mb-1 block">{t('encryption.algorithm_label')}</label>
-            <select id={labelFor("algorithm_label")}
+            <select
+              id={labelFor("algorithm_label")}
               value={selectedAlgorithm}
               onChange={(e) => setSelectedAlgorithm(e.target.value as 'Aes128' | 'Aes256')}
               className="w-full text-xs px-3 py-1.5 rounded-md border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring"

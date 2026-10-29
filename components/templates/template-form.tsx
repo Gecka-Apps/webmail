@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useMemo, useEffect, useId, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -43,6 +43,9 @@ export function TemplateForm({ template, initialData, onSave, onCancel, shared =
   const t = useTranslations('templates');
   const tSettings = useTranslations('settings.templates');
   const tComposer = useTranslations('email_composer');
+  // Ids that tie each visible label to its field.
+  const labelIdBase = useId();
+  const labelFor = (key: string) => `${labelIdBase}-${key}`;
 
   const { identities } = useAuthStore();
   const browserList = useTemplateStore((s) => s.templates);
@@ -139,24 +142,28 @@ export function TemplateForm({ template, initialData, onSave, onCancel, shared =
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="text-sm font-medium text-foreground">{tSettings('name')}</label>
+        <label htmlFor={labelFor("name")} className="text-sm font-medium text-foreground">{tSettings('name')}</label>
         <Input
+          id={labelFor("name")}
           value={name}
           onChange={(e) => { setName(e.target.value); setNameError(null); }}
           placeholder={tSettings('name_placeholder')}
           className={cn('mt-1', nameError && 'border-destructive')}
+          aria-invalid={nameError ? true : undefined}
+          aria-describedby={nameError ? labelFor("name-error") : undefined}
           autoFocus
         />
         {nameError && (
-          <p className="text-xs text-red-600 dark:text-red-400 mt-1">
+          <p id={labelFor("name-error")} className="text-xs text-red-600 dark:text-red-400 mt-1">
             {tSettings(`validation.${nameError}`)}
           </p>
         )}
       </div>
 
       <div>
-        <label className="text-sm font-medium text-foreground">{tSettings('category')}</label>
+        <label htmlFor={labelFor("category")} className="text-sm font-medium text-foreground">{tSettings('category')}</label>
         <Input
+          id={labelFor("category")}
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           placeholder={tSettings('category_placeholder')}
@@ -174,10 +181,11 @@ export function TemplateForm({ template, initialData, onSave, onCancel, shared =
 
       <div>
         <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-foreground">{tSettings('subject')}</label>
+          <label htmlFor={labelFor("subject")} className="text-sm font-medium text-foreground">{tSettings('subject')}</label>
           {placeholderButton('subject')}
         </div>
         <Input
+          id={labelFor("subject")}
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
           placeholder={tSettings('subject_placeholder')}
@@ -187,10 +195,11 @@ export function TemplateForm({ template, initialData, onSave, onCancel, shared =
 
       <div>
         <div className="flex items-center justify-between">
-          <label className="text-sm font-medium text-foreground">{tSettings('body')}</label>
+          <label htmlFor={labelFor("body")} className="text-sm font-medium text-foreground">{tSettings('body')}</label>
           {placeholderButton('body')}
         </div>
         <textarea
+          id={labelFor("body")}
           value={body}
           onChange={(e) => setBody(e.target.value)}
           placeholder={tSettings('body_placeholder')}
@@ -209,8 +218,9 @@ export function TemplateForm({ template, initialData, onSave, onCancel, shared =
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div>
-          <label className="text-sm font-medium text-foreground">{tComposer('to')}</label>
+          <label htmlFor={labelFor("to")} className="text-sm font-medium text-foreground">{tComposer('to')}</label>
           <Input
+            id={labelFor("to")}
             value={toRecipients}
             onChange={(e) => setToRecipients(e.target.value)}
             placeholder={tSettings('recipients_placeholder')}
@@ -218,8 +228,9 @@ export function TemplateForm({ template, initialData, onSave, onCancel, shared =
           />
         </div>
         <div>
-          <label className="text-sm font-medium text-foreground">{tComposer('cc')}</label>
+          <label htmlFor={labelFor("cc")} className="text-sm font-medium text-foreground">{tComposer('cc')}</label>
           <Input
+            id={labelFor("cc")}
             value={ccRecipients}
             onChange={(e) => setCcRecipients(e.target.value)}
             placeholder={tSettings('recipients_placeholder')}
@@ -227,8 +238,9 @@ export function TemplateForm({ template, initialData, onSave, onCancel, shared =
           />
         </div>
         <div>
-          <label className="text-sm font-medium text-foreground">{tComposer('bcc')}</label>
+          <label htmlFor={labelFor("bcc")} className="text-sm font-medium text-foreground">{tComposer('bcc')}</label>
           <Input
+            id={labelFor("bcc")}
             value={bccRecipients}
             onChange={(e) => setBccRecipients(e.target.value)}
             placeholder={tSettings('recipients_placeholder')}
@@ -239,8 +251,9 @@ export function TemplateForm({ template, initialData, onSave, onCancel, shared =
 
       {!shared && identities.length > 1 && (
         <div>
-          <label className="text-sm font-medium text-foreground">{tSettings('identity')}</label>
+          <label htmlFor={labelFor("identity")} className="text-sm font-medium text-foreground">{tSettings('identity')}</label>
           <select
+            id={labelFor("identity")}
             value={identityId}
             onChange={(e) => setIdentityId(e.target.value)}
             className="mt-1 w-full px-3 py-2 text-sm rounded-md bg-background border border-border text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
