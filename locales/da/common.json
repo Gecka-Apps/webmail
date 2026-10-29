@@ -3459,7 +3459,9 @@
       "send": "Send e-mail",
       "schedule_send": "Planlæg afsendelse",
       "template_picker": "Åbn skabelonvælger"
-    }
+    },
+    "single_keys_off": "Genveje med én tast er slået fra. Genveje med Ctrl, Alt eller ⌘ virker stadig, og det gør Delete, Enter, Escape og piletasterne også.",
+    "tip_single_keys_off": "Du kan slå dem til igen under Indstillinger > Tilgængelighed."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# besked i denne samtale} other {# beskeder i denne samtale}}",

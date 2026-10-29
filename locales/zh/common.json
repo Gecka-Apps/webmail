@@ -3459,7 +3459,9 @@
       "send": "发送邮件",
       "schedule_send": "定时发送",
       "template_picker": "打开模板选择器"
-    }
+    },
+    "single_keys_off": "单键快捷键已关闭。带 Ctrl、Alt 或 ⌘ 的快捷键仍然可用，Delete、Enter、Esc 和方向键也一样。",
+    "tip_single_keys_off": "可以在 设置 > 无障碍 中重新打开。"
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {此会话中有 # 条消息} other {此会话中有 # 条消息}}",

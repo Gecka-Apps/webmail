@@ -4,6 +4,7 @@ import { useKeyboardShortcuts } from '../use-keyboard-shortcuts';
 
 // MO-05: with focus inside the shortcuts help or the Create folder dialog,
 // Delete, #, e, j, k and ArrowDown acted on the message behind the dialog.
+// MO-04: single-character shortcuts can be turned off (WCAG 2.1.4).
 
 function handlers() {
   return {
@@ -150,5 +151,50 @@ describe('useKeyboardShortcuts: arrows only in the message list', () => {
     renderHook(() => useKeyboardShortcuts({ emails: [], selectedEmailId: 'e1', handlers: h }));
     press(document, 'j', 'KeyJ');
     expect(h.onNextEmail).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('useKeyboardShortcuts: single-key shortcuts off', () => {
+  it.each([
+    ['j', 'KeyJ', {}, 'onNextEmail'],
+    ['e', 'KeyE', {}, 'onArchive'],
+    ['#', 'Digit3', { shiftKey: true }, 'onDelete'],
+    ['c', 'KeyC', {}, 'onCompose'],
+    ['?', 'Slash', { shiftKey: true }, 'onShowHelp'],
+  ] as [string, string, KeyboardEventInit, keyof Handlers][])('turns off %s', (key, code, init, handler) => {
+    const h = handlers();
+    renderHook(() => useKeyboardShortcuts({ emails: [], selectedEmailId: 'e1', singleKeyShortcuts: false, handlers: h }));
+    press(document, key, code, init);
+    expect(h[handler]).not.toHaveBeenCalled();
+  });
+
+  it('turns off the g sequences', () => {
+    const h = handlers();
+    renderHook(() => useKeyboardShortcuts({ emails: [], mountainViewKeys: true, singleKeyShortcuts: false, handlers: h }));
+    press(document, 'g', 'KeyG');
+    press(document, 'i', 'KeyI');
+    expect(h.onGoToMailbox).not.toHaveBeenCalled();
+  });
+
+  it('keeps Delete, Escape, arrows in the list and Ctrl+A', () => {
+    const h = handlers();
+    renderHook(() => useKeyboardShortcuts({ emails: [], selectedEmailId: 'e1', singleKeyShortcuts: false, handlers: h }));
+    const list = messageList();
+    press(document, 'Delete', 'Delete');
+    press(document, 'Escape', 'Escape');
+    press(list, 'ArrowDown', 'ArrowDown');
+    press(document, 'a', 'KeyA', { ctrlKey: true });
+    expect(h.onDelete).toHaveBeenCalledTimes(1);
+    expect(h.onCloseEmail).toHaveBeenCalledTimes(1);
+    expect(h.onNextEmail).toHaveBeenCalledTimes(1);
+    expect(h.onSelectAll).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps the g sequences with the setting on', () => {
+    const h = handlers();
+    renderHook(() => useKeyboardShortcuts({ emails: [], mountainViewKeys: true, singleKeyShortcuts: true, handlers: h }));
+    press(document, 'g', 'KeyG');
+    press(document, 'i', 'KeyI');
+    expect(h.onGoToMailbox).toHaveBeenCalledWith('inbox');
   });
 });

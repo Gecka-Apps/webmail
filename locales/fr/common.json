@@ -3459,7 +3459,9 @@
       "send": "Envoyer l'e-mail",
       "schedule_send": "Planifier l'envoi",
       "template_picker": "Ouvrir le sélecteur de modèles"
-    }
+    },
+    "single_keys_off": "Les raccourcis à une touche sont désactivés. Les raccourcis avec Ctrl, Alt ou ⌘ fonctionnent toujours, tout comme Suppr, Entrée, Échap et les flèches.",
+    "tip_single_keys_off": "Vous pouvez les réactiver dans Paramètres > Accessibilité."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# message dans cette conversation} other {# messages dans cette conversation}}",

@@ -3459,7 +3459,9 @@
       "send": "E-Mail senden",
       "schedule_send": "Senden planen",
       "template_picker": "Vorlagenauswahl öffnen"
-    }
+    },
+    "single_keys_off": "Tastenkürzel mit einer Taste sind ausgeschaltet. Kürzel mit Strg, Alt oder ⌘ funktionieren weiter, ebenso Entf, Eingabe, Esc und die Pfeiltasten.",
+    "tip_single_keys_off": "Sie können sie unter Einstellungen > Barrierefreiheit wieder einschalten."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# Nachricht in dieser Unterhaltung} other {# Nachrichten in dieser Unterhaltung}}",

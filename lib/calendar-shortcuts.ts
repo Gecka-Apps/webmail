@@ -25,13 +25,19 @@ const LETTERS: Record<string, CalendarShortcutAction> = {
   c: "new",
 };
 
-/** The action a key press asks for, or null when it isn't a calendar shortcut. */
+/**
+ * The action a key press asks for, or null when it isn't a calendar shortcut.
+ * With `singleKeys` false (single-key shortcuts turned off, WCAG 2.1.4) only
+ * the arrows are left.
+ */
 export function calendarShortcutAction(
   event: Pick<KeyboardEvent, "key" | "code" | "ctrlKey" | "metaKey" | "altKey" | "shiftKey">,
+  singleKeys = true,
 ): CalendarShortcutAction | null {
   if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return null;
   if (event.key === "ArrowLeft") return "prev";
   if (event.key === "ArrowRight") return "next";
+  if (!singleKeys) return null;
   // `/` focuses the search, as in Mail (R8); on any layout, by its key.
   if (event.code === "Slash" || (!event.code && event.key === "/")) return "search";
   const code = event.code;

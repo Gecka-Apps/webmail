@@ -3459,7 +3459,9 @@
       "send": "Odoslať e-mail",
       "schedule_send": "Naplánovať odoslanie",
       "template_picker": "Otvoriť výber šablón"
-    }
+    },
+    "single_keys_off": "Skratky na jednu klávesu sú vypnuté. Skratky s Ctrl, Alt alebo ⌘ naďalej fungujú, rovnako ako Delete, Enter, Esc a šípky.",
+    "tip_single_keys_off": "Znova ich zapnete v Nastavenia > Prístupnosť."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# správa v tejto konverzácii} few {# správy v tejto konverzácii} many {# správy v tejto konverzácii} other {# správ v tejto konverzácii}}",

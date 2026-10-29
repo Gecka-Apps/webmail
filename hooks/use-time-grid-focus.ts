@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState, type KeyboardEvent, type RefObject } from "react";
 import { dayKey } from "@/lib/calendar-scroll-window";
 import { calendarShortcutAction } from "@/lib/calendar-shortcuts";
+import { useSettingsStore } from "@/stores/settings-store";
 import { displayNow } from "@/lib/timezone";
 import type { DisplayHours } from "@/lib/calendar-display-range";
 
@@ -83,7 +84,7 @@ export function useTimeGridFocus({
     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
     const key = dayKey(day);
     const index = dayIndexByKey.get(key) ?? 0;
-    if (e.key === "Enter" || calendarShortcutAction(e.nativeEvent) === "new") {
+    if (e.key === "Enter" || calendarShortcutAction(e.nativeEvent, useSettingsStore.getState().singleKeyShortcuts !== false) === "new") {
       // The slot's own create, not the calendar's `n` at the selected day.
       e.preventDefault();
       const start = new Date(day);

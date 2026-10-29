@@ -3459,7 +3459,9 @@
       "send": "Saada e-kiri",
       "schedule_send": "Ajasta saatmine",
       "template_picker": "Ava mallivalija"
-    }
+    },
+    "single_keys_off": "Ühe klahviga otseteed on välja lülitatud. Otseteed Ctrl-, Alt- või ⌘-klahviga töötavad edasi, samuti Delete, Enter, Escape ja nooleklahvid.",
+    "tip_single_keys_off": "Saate need uuesti sisse lülitada jaotises Seaded > Juurdepääsetavus."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# sõnum selles vestluses} other {# sõnumit selles vestluses}}",

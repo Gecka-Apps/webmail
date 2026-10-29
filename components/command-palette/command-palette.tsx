@@ -38,6 +38,7 @@ import { commandMatches, useRegisteredCommandGroups } from "@/lib/command-regist
 import { shortcutAlternatives } from "@/lib/shortcut-keys";
 import { toUnicodeEmail } from "@/lib/idn";
 import { isEditableEventTarget, isKeyboardLayerOpen } from "@/lib/keyboard";
+import { isSingleKeyShortcutOff } from "@/lib/single-key-shortcuts";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { IconButton } from "@/components/ui/icon-button";
@@ -110,6 +111,9 @@ export function CommandPaletteHost() {
       if (!question || isEditableEventTarget(event) || isContextMenuOpen()) return;
       // Another dialog, a menu or a popup is open: the key belongs to it.
       if (event.defaultPrevented || isKeyboardLayerOpen()) return;
+      // Turned off with the other single-key shortcuts; the menu and the
+      // command palette still open the help.
+      if (isSingleKeyShortcutOff(event)) return;
       event.preventDefault();
       event.stopImmediatePropagation();
       setShowShortcuts(true);

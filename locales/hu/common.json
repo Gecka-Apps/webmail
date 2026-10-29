@@ -3459,7 +3459,9 @@
       "send": "E-mail küldése",
       "schedule_send": "Késleltetett küldés",
       "template_picker": "Sablonválasztó megnyitása"
-    }
+    },
+    "single_keys_off": "Az egybillentyűs gyorsbillentyűk ki vannak kapcsolva. A Ctrl, Alt vagy ⌘ billentyűvel kombinált gyorsbillentyűk továbbra is működnek, ahogy a Delete, az Enter, az Esc és a nyílbillentyűk is.",
+    "tip_single_keys_off": "A Beállítások > Kisegítő lehetőségek alatt újra bekapcsolhatja őket."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# üzenet ebben a beszélgetésben} other {# üzenet ebben a beszélgetésben}}",

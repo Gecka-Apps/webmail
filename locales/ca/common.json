@@ -3459,7 +3459,9 @@
       "send": "Envia el correu",
       "schedule_send": "Programa l'enviament",
       "template_picker": "Obre el selector de plantilles"
-    }
+    },
+    "single_keys_off": "Les dreceres d'una sola tecla estan desactivades. Les dreceres amb Ctrl, Alt o ⌘ continuen funcionant, igual que Supr, Retorn, Esc i les fletxes.",
+    "tip_single_keys_off": "Les podeu tornar a activar a Configuració > Accessibilitat."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# missatge en aquesta conversa} other {# missatges en aquesta conversa}}",

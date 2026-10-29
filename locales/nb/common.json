@@ -3459,7 +3459,9 @@
       "send": "Send e-post",
       "schedule_send": "Planlegg sending",
       "template_picker": "Åpne malvelgeren"
-    }
+    },
+    "single_keys_off": "Hurtigtaster med én tast er slått av. Hurtigtaster med Ctrl, Alt eller ⌘ virker fortsatt, og det gjør også Delete, Enter, Escape og piltastene.",
+    "tip_single_keys_off": "Du kan slå dem på igjen under Innstillinger > Tilgjengelighet."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# melding i denne samtalen} other {# meldinger i denne samtalen}}",

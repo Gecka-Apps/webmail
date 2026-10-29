@@ -3459,7 +3459,9 @@
       "send": "Send email",
       "schedule_send": "Schedule send",
       "template_picker": "Open template picker"
-    }
+    },
+    "single_keys_off": "Single-key shortcuts are off. Shortcuts with Ctrl, Alt or ⌘ still work, and so do Delete, Enter, Escape and the arrow keys.",
+    "tip_single_keys_off": "You can turn single-key shortcuts back on in Settings > Accessibility."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# message in this conversation} other {# messages in this conversation}}",

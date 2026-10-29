@@ -42,6 +42,7 @@ export function KeyboardShortcutsModal({ isOpen, onClose, app }: KeyboardShortcu
   // scroll to the tour link at the bottom when there are no tabs.
   const contentRef = useRef<HTMLDivElement>(null);
   const interfaceLayout = useSettingsStore((state) => state.interfaceLayout);
+  const singleKeyShortcuts = useSettingsStore((state) => state.singleKeyShortcuts);
   const shell = useProInterfaceActive() ? "pro" : "standard";
   const features = usePolicyStore((s) => s.policy.features);
   // Plugin buttons in the composer that have a shortcut (composer-toolbar-actions).
@@ -91,6 +92,11 @@ export function KeyboardShortcutsModal({ isOpen, onClose, app }: KeyboardShortcu
       initialFocus={contentRef}
     >
       <div ref={contentRef} tabIndex={-1} className="outline-none">
+        {!singleKeyShortcuts && (
+          <p className="mt-4 rounded-md border border-border bg-muted/50 px-3 py-2 text-sm text-foreground" data-testid="single-keys-off">
+            {t("shortcuts.single_keys_off")}
+          </p>
+        )}
         {apps.length > 1 && (
           <div role="tablist" aria-label={t("shortcuts.title")} className="mt-4 flex flex-wrap gap-1 border-b border-border">
             {apps.map((a) => (
@@ -150,7 +156,7 @@ export function KeyboardShortcutsModal({ isOpen, onClose, app }: KeyboardShortcu
         {/* Footer tip */}
         <div className="mt-6 pt-4 border-t border-border">
           <p className="text-sm text-muted-foreground text-center">
-            {t("shortcuts.tip")}
+            {singleKeyShortcuts ? t("shortcuts.tip") : t("shortcuts.tip_single_keys_off")}
           </p>
           <p className="text-sm text-center mt-2">
             <button

@@ -3377,7 +3377,9 @@
       "template_picker": "פתח את בוחר התבניות",
       "send": "שלח דוא״ל",
       "schedule_send": "תזמן שליחה"
-    }
+    },
+    "single_keys_off": "קיצורי מקש יחיד כבויים. קיצורים עם Ctrl,‏ Alt או ⌘ עדיין עובדים, וכך גם Delete,‏ Enter,‏ Escape ומקשי החיצים.",
+    "tip_single_keys_off": "אפשר להפעיל אותם שוב בהגדרות > נגישות."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {הודעה אחת בשיחה זו} two {שתי הודעות בשיחה זו} other {# הודעות בשיחה זו}}",

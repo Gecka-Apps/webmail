@@ -3459,7 +3459,9 @@
       "send": "Wyślij e-mail",
       "schedule_send": "Zaplanuj wysyłkę",
       "template_picker": "Otwórz wybór szablonu"
-    }
+    },
+    "single_keys_off": "Skróty jednoklawiszowe są wyłączone. Skróty z Ctrl, Alt lub ⌘ nadal działają, podobnie jak Delete, Enter, Esc i strzałki.",
+    "tip_single_keys_off": "Możesz je ponownie włączyć w Ustawienia > Dostępność."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# wiadomość w tej konwersacji} few {# wiadomości w tej konwersacji} many {# wiadomości w tej konwersacji} other {# wiadomości w tej konwersacji}}",

@@ -42,3 +42,21 @@ describe('Calendar keyboard shortcuts', () => {
     expect(calendarShortcutAction({ ...pressed('ArrowLeft'), altKey: true })).toBeNull();
   });
 });
+
+// MO-04: with single-key shortcuts off only the arrows are left.
+describe('Calendar shortcuts with single keys off', () => {
+  it('ignores letters and /', () => {
+    expect(calendarShortcutAction(pressed('t', 'KeyT'), false)).toBeNull();
+    expect(calendarShortcutAction(pressed('n', 'KeyN'), false)).toBeNull();
+    expect(calendarShortcutAction(pressed('/', 'Slash'), false)).toBeNull();
+  });
+
+  it('keeps the arrows', () => {
+    expect(calendarShortcutAction(pressed('ArrowLeft', 'ArrowLeft'), false)).toBe('prev');
+    expect(calendarShortcutAction(pressed('ArrowRight', 'ArrowRight'), false)).toBe('next');
+  });
+
+  it('keeps letters by default', () => {
+    expect(calendarShortcutAction(pressed('t', 'KeyT'))).toBe('today');
+  });
+});

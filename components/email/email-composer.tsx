@@ -57,6 +57,7 @@ import { sanitizeSignatureHtml, sanitizeSignatureHtmlForDisplay, sanitizeEmailHt
 import { buildReplySubject, buildForwardSubject } from "@/lib/subject-prefix";
 import { isFilePreviewable } from "@/lib/file-preview";
 import { isEditableEventTarget } from "@/lib/keyboard";
+import { isSingleKeyShortcutOff } from "@/lib/single-key-shortcuts";
 import { markReplyQuoteHeader } from "@/components/email/reply-quote-collapse";
 import { buildQuotedHtmlBlock, serializeEditorContent } from "@/components/email/quoted-html";
 import { containsEmbeddedSignature } from "@/components/email/signature-block";
@@ -2077,6 +2078,7 @@ export function EmailComposer({
       // island doesn't trigger the picker (#654).
       if (isEditableEventTarget(e)) return;
       if (!templatesEnabled) return;
+      if (isSingleKeyShortcutOff(e)) return;
       if (e.key === 't' && !e.ctrlKey && !e.metaKey && !e.altKey) {
         e.preventDefault();
         setShowTemplatePicker(true);

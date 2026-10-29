@@ -3459,7 +3459,9 @@
       "send": "Enviar correo",
       "schedule_send": "Programar envío",
       "template_picker": "Abrir selector de plantillas"
-    }
+    },
+    "single_keys_off": "Los atajos de una sola tecla están desactivados. Los atajos con Ctrl, Alt o ⌘ siguen funcionando, igual que Supr, Intro, Esc y las flechas.",
+    "tip_single_keys_off": "Puedes volver a activarlos en Configuración > Accesibilidad."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# mensaje en esta conversación} other {# mensajes en esta conversación}}",

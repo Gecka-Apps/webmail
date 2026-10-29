@@ -3459,7 +3459,9 @@
       "send": "E-mail verzenden",
       "schedule_send": "Verzenden plannen",
       "template_picker": "Sjabloonkiezer openen"
-    }
+    },
+    "single_keys_off": "Sneltoetsen met één toets staan uit. Sneltoetsen met Ctrl, Alt of ⌘ werken nog, net als Delete, Enter, Escape en de pijltjestoetsen.",
+    "tip_single_keys_off": "Je kunt ze weer aanzetten via Instellingen > Toegankelijkheid."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# bericht in dit gesprek} other {# berichten in dit gesprek}}",

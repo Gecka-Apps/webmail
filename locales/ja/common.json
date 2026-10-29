@@ -3459,7 +3459,9 @@
       "send": "メールを送信",
       "schedule_send": "送信を予約",
       "template_picker": "テンプレートピッカーを開く"
-    }
+    },
+    "single_keys_off": "1キーのショートカットはオフです。Ctrl、Alt、⌘ を使うショートカットと、Delete、Enter、Esc、矢印キーは引き続き使えます。",
+    "tip_single_keys_off": "設定 > アクセシビリティでオンに戻せます。"
   },
   "threads": {
     "messages_tooltip": "{count, plural, other {この会話の#件のメッセージ}}",

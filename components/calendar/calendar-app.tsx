@@ -1586,7 +1586,7 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
       if (isContextMenuOpen()) return;
       if (showEventModal || showTaskModal || detailPinned) return;
 
-      const action = calendarShortcutAction(e);
+      const action = calendarShortcutAction(e, useSettingsStore.getState().singleKeyShortcuts !== false);
       if (!action) return;
       // A slider, tabs or a menu keeps its own arrows.
       if ((action === "prev" || action === "next") && isArrowKeyWidgetTarget(e)) return;

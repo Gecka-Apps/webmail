@@ -31,6 +31,7 @@ import { PluginSlot } from "@/components/plugins/plugin-slot";
 import { eventToView } from "@/lib/plugin-projection";
 import { ParticipantStatusBadge, RsvpButtons } from "./rsvp-buttons";
 import { isEditableEventTarget } from "@/lib/keyboard";
+import { isSingleKeyShortcutOff } from "@/lib/single-key-shortcuts";
 
 interface EventDetailPopoverProps {
   event: CalendarEvent;
@@ -300,6 +301,7 @@ export function EventDetailPopover({
       if (e.key === "Escape") onClose();
       if (isEditableEventTarget(e)) return;
       if (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey) return;
+      if (isSingleKeyShortcutOff(e)) return;
       if (e.code === "KeyE" && !noteExpanded && canEditBody) {
         e.preventDefault();
         onEdit();

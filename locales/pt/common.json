@@ -3459,7 +3459,9 @@
       "send": "Enviar e-mail",
       "schedule_send": "Agendar envio",
       "template_picker": "Abrir seletor de modelos"
-    }
+    },
+    "single_keys_off": "Os atalhos de uma tecla estão desativados. Os atalhos com Ctrl, Alt ou ⌘ continuam funcionando, assim como Delete, Enter, Esc e as setas.",
+    "tip_single_keys_off": "Você pode reativá-los em Configurações > Acessibilidade."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# mensagem nesta conversa} other {# mensagens nesta conversa}}",

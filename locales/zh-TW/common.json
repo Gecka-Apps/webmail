@@ -3459,7 +3459,9 @@
       "send": "傳送郵件",
       "schedule_send": "排程寄送",
       "template_picker": "開啟範本選取器"
-    }
+    },
+    "single_keys_off": "單鍵快速鍵已關閉。搭配 Ctrl、Alt 或 ⌘ 的快速鍵仍可使用，Delete、Enter、Esc 和方向鍵也一樣。",
+    "tip_single_keys_off": "可以在 設定 > 無障礙 中重新開啟。"
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {此對話串有 # 封郵件} other {此對話串有 # 封郵件}}",

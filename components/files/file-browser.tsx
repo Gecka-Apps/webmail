@@ -39,6 +39,7 @@ import type { IJMAPClient } from "@/lib/jmap/client-interface";
 import type { FileNodeRights } from "@/lib/jmap/types";
 import type { FileResourceView } from "@/lib/plugin-types";
 import { isAppShortcutBlocked, isArrowKeyWidgetTarget } from "@/lib/keyboard";
+import { isSingleKeyShortcutOff } from "@/lib/single-key-shortcuts";
 
 const NO_FORMATS: string[] = [];
 
@@ -726,7 +727,7 @@ export function FileBrowser({
       const selected = selectedList.map((r) => r.name);
 
       // "/" as in Mail and Contacts; Ctrl/⌘+F as in a file manager.
-      if ((mod && e.key.toLowerCase() === "f") || (e.key === "/" && !mod && !e.altKey)) {
+      if ((mod && e.key.toLowerCase() === "f") || (e.key === "/" && !mod && !e.altKey && !isSingleKeyShortcutOff(e))) {
         e.preventDefault();
         searchInputRef.current?.focus();
         return;

@@ -3459,7 +3459,9 @@
       "send": "Trimite e-mail",
       "schedule_send": "Programează trimiterea",
       "template_picker": "Deschide selectorul de șabloane"
-    }
+    },
+    "single_keys_off": "Comenzile rapide cu o singură tastă sunt dezactivate. Comenzile cu Ctrl, Alt sau ⌘ funcționează în continuare, la fel Delete, Enter, Escape și săgețile.",
+    "tip_single_keys_off": "Le puteți reactiva din Setări > Accesibilitate."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# mesaj în această conversație} few {# mesaje în această conversație} other {# de mesaje în această conversație}}",

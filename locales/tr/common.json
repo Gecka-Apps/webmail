@@ -3459,7 +3459,9 @@
       "send": "E-posta gönder",
       "schedule_send": "Göndermeyi planla",
       "template_picker": "Şablon seçiciyi aç"
-    }
+    },
+    "single_keys_off": "Tek tuşlu kısayollar kapalı. Ctrl, Alt veya ⌘ ile kullanılan kısayollar çalışmaya devam eder; Delete, Enter, Escape ve ok tuşları da çalışır.",
+    "tip_single_keys_off": "Bunları Ayarlar > Erişilebilirlik bölümünden yeniden açabilirsiniz."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {Bu konuşmada # ileti} other {Bu konuşmada # ileti}}",

@@ -242,3 +242,34 @@ describe('command palette and plugin pages', () => {
     pages.resetPages();
   });
 });
+
+// MO-04 / MO-05: "?" opens the help, except with single-key shortcuts off or
+// with a menu or dialog open.
+describe('the ? key', () => {
+  const pressQuestion = () =>
+    act(() => { fireEvent.keyDown(document.body, { key: '?', code: 'Slash', shiftKey: true }); });
+
+  it('opens the shortcuts help', () => {
+    render(<CommandPaletteHost />);
+    pressQuestion();
+    expect(screen.getByText('shortcuts help')).toBeInTheDocument();
+  });
+
+  it('does nothing with single-key shortcuts off', async () => {
+    const { useSettingsStore } = await import('@/stores/settings-store');
+    useSettingsStore.setState({ singleKeyShortcuts: false });
+    try {
+      render(<CommandPaletteHost />);
+      pressQuestion();
+      expect(screen.queryByText('shortcuts help')).toBeNull();
+    } finally {
+      useSettingsStore.setState({ singleKeyShortcuts: true });
+    }
+  });
+
+  it('does nothing while a menu is open', () => {
+    render(<><div role="menu" /><CommandPaletteHost /></>);
+    pressQuestion();
+    expect(screen.queryByText('shortcuts help')).toBeNull();
+  });
+});

@@ -14,6 +14,7 @@ vi.mock('@/lib/keyboard-shortcuts/contacts', () => ({ CONTACTS_SECTIONS: [] }));
 vi.mock('@/lib/keyboard-shortcuts/files', () => ({ FILES_SECTIONS: [] }));
 
 const { KeyboardShortcutsModal } = await import('../keyboard-shortcuts-modal');
+const { useSettingsStore } = await import('@/stores/settings-store');
 
 describe('keyboard shortcuts help per app', () => {
   it("opens on the current app's tab and lists the general keys there too", () => {
@@ -37,5 +38,28 @@ describe('keyboard shortcuts help per app', () => {
     render(<KeyboardShortcutsModal isOpen onClose={() => {}} />);
     expect(screen.getAllByText('or').length).toBeGreaterThan(0);
     expect(screen.getAllByText('Ctrl + K').length).toBe(1);
+  });
+});
+
+// MO-04: the help says when single-key shortcuts are off.
+describe('keyboard shortcuts help with single-key shortcuts off', () => {
+  it('says so and drops the "press ?" tip', () => {
+    nav.pathname = '/';
+    useSettingsStore.setState({ singleKeyShortcuts: false });
+    try {
+      render(<KeyboardShortcutsModal isOpen onClose={() => {}} />);
+      expect(screen.getByText('shortcuts.single_keys_off')).toBeInTheDocument();
+      expect(screen.getByText('shortcuts.tip_single_keys_off')).toBeInTheDocument();
+      expect(screen.queryByText('shortcuts.tip')).toBeNull();
+    } finally {
+      useSettingsStore.setState({ singleKeyShortcuts: true });
+    }
+  });
+
+  it('says nothing with them on', () => {
+    nav.pathname = '/';
+    render(<KeyboardShortcutsModal isOpen onClose={() => {}} />);
+    expect(screen.queryByText('shortcuts.single_keys_off')).toBeNull();
+    expect(screen.getByText('shortcuts.tip')).toBeInTheDocument();
   });
 });

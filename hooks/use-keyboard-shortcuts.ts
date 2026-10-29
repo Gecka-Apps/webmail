@@ -2,7 +2,7 @@
 
 import { useEffect, useCallback, useRef } from "react";
 import { Email } from "@/lib/jmap/types";
-import { isActivatableEventTarget, isAppShortcutBlocked, isEventInside } from "@/lib/keyboard";
+import { isActivatableEventTarget, isAppShortcutBlocked, isEventInside, isSingleCharacterKey } from "@/lib/keyboard";
 import { keyboardHooks } from "@/lib/plugin-hooks";
 
 export interface KeyboardShortcutHandlers {
@@ -68,6 +68,12 @@ export interface UseKeyboardShortcutsOptions {
    */
   mountainViewKeys?: boolean;
   /**
+   * False turns off every shortcut that is a single character without Ctrl,
+   * Alt or ⌘ (WCAG 2.1.4): j, k, e, #, the `g` sequences. Delete, the arrows,
+   * Enter, Escape and Ctrl+A keep working.
+   */
+  singleKeyShortcuts?: boolean;
+  /**
    * Where the arrow keys move the selection: only while the focus is in the
    * message list, so they still scroll the reading pane or move a resize
    * handle elsewhere on the page.
@@ -105,6 +111,7 @@ function physicalShortcutKey(event: KeyboardEvent): string {
 export function useKeyboardShortcuts({
   enabled = true,
   mountainViewKeys = false,
+  singleKeyShortcuts = true,
   listSelector = "#message-list",
   emails,
   selectedEmailId,
@@ -130,6 +137,13 @@ export function useKeyboardShortcuts({
       // Nor while a dialog, menu or popup is open: Delete in the shortcuts
       // help deleted the message behind it.
       if (isAppShortcutBlocked(event)) return;
+      if (!singleKeyShortcuts && isSingleCharacterKey(event)) {
+        if (pendingGoTo.current !== null) {
+          clearTimeout(pendingGoTo.current);
+          pendingGoTo.current = null;
+        }
+        return;
+      }
       if ((event.key === "ArrowDown" || event.key === "ArrowUp") && !isEventInside(event, listSelector)) return;
 
       const h = handlersRef.current;
@@ -342,7 +356,7 @@ export function useKeyboardShortcuts({
           break;
       }
     },
-    [selectedEmailId, selectionCount, mountainViewKeys, listSelector]
+    [selectedEmailId, selectionCount, mountainViewKeys, singleKeyShortcuts, listSelector]
   );
 
   // A pending sequence must not outlive the hook.

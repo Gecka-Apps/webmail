@@ -3459,7 +3459,9 @@
       "send": "Invia email",
       "schedule_send": "Programma invio",
       "template_picker": "Apri selettore modelli"
-    }
+    },
+    "single_keys_off": "Le scorciatoie a tasto singolo sono disattivate. Le scorciatoie con Ctrl, Alt o ⌘ funzionano ancora, come anche Canc, Invio, Esc e le frecce.",
+    "tip_single_keys_off": "Puoi riattivarle in Impostazioni > Accessibilità."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# messaggio in questa conversazione} other {# messaggi in questa conversazione}}",

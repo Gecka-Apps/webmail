@@ -3459,7 +3459,9 @@
       "send": "Nosūtīt e-pastu",
       "schedule_send": "Ieplānot nosūtīšanu",
       "template_picker": "Atvērt veidņu izvēli"
-    }
+    },
+    "single_keys_off": "Īsinājumtaustiņi ar vienu taustiņu ir izslēgti. Īsinājumtaustiņi ar Ctrl, Alt vai ⌘ joprojām darbojas, tāpat Delete, Enter, Escape un bulttaustiņi.",
+    "tip_single_keys_off": "Tos var atkal ieslēgt sadaļā Iestatījumi > Pieejamība."
   },
   "threads": {
     "messages_tooltip": "{count, plural, zero {# ziņojumu šajā sarunā} one {# ziņojums šajā sarunā} other {# ziņojumi šajā sarunā}}",

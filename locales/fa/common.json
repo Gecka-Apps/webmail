@@ -3459,7 +3459,9 @@
       "send": "ارسال ایمیل",
       "schedule_send": "زمان‌بندی ارسال",
       "template_picker": "انتخاب‌گر قالب"
-    }
+    },
+    "single_keys_off": "میانبرهای تک‌کلیدی خاموش هستند. میانبرهای با Ctrl، Alt یا ⌘ همچنان کار می‌کنند، و همچنین Delete، Enter، Escape و کلیدهای جهت‌نما.",
+    "tip_single_keys_off": "می‌توانید آن‌ها را در تنظیمات > دسترس‌پذیری دوباره روشن کنید."
   },
   "threads": {
     "messages_tooltip": "{count, plural, one {# پیام در این مکالمه} other {# پیام در این مکالمه}}",
