@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} attend la fin du delai impose par le serveur avant d'envoyer d'autres requetes authentifiees. Reessayez dans {seconds}s.",
     "pull_to_refresh": "Tirez pour actualiser",
     "release_to_refresh": "Relâchez pour actualiser",
-    "refreshing": "Actualisation…"
+    "refreshing": "Actualisation…",
+    "move_item_up": "Monter {name}",
+    "move_item_down": "Descendre {name}"
   },
   "notifications": {
     "email_sent": "E-mail envoyé",

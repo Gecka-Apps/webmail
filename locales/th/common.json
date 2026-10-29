@@ -26,7 +26,9 @@
     "rate_limited_action_detail": "{appName} กำลังรอช่วงเวลาพักการทำงานของเซิร์ฟเวอร์ก่อนส่งคำขอยืนยันตัวตนเพิ่มเติม กรุณาลองใหม่อีกครั้งใน {seconds} วินาที",
     "pull_to_refresh": "ดึงลงเพื่อรีเฟรช",
     "release_to_refresh": "ปล่อยเพื่อรีเฟรช",
-    "refreshing": "กำลังรีเฟรช…"
+    "refreshing": "กำลังรีเฟรช…",
+    "move_item_up": "ย้าย {name} ขึ้น",
+    "move_item_down": "ย้าย {name} ลง"
   },
   "confirm_dialog": {
     "confirm": "ยืนยัน",

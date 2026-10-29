@@ -1,5 +1,6 @@
 "use client";
 
+import { MoveButtons } from "@/components/ui/move-buttons";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { SettingsSection, ToggleSwitch } from "./settings-section";
@@ -458,13 +459,10 @@ export function FilterSettings() {
     []
   );
 
-  const handleDrop = useCallback(
-    async (e: React.DragEvent, dropIndex: number) => {
-      e.preventDefault();
-      setDragOverIndex(null);
-      const fromIndex = draggedIndexRef.current;
-      if (fromIndex === null || fromIndex === dropIndex) return;
-
+  // Dragging and the Move up / Move down buttons both end here.
+  const moveRule = useCallback(
+    async (fromIndex: number, dropIndex: number) => {
+      if (fromIndex === dropIndex || dropIndex < 0 || dropIndex >= rules.length) return;
       const previousOrder = rules.map((r) => r.id);
       const newOrder = [...previousOrder];
       const [moved] = newOrder.splice(fromIndex, 1);
@@ -481,6 +479,17 @@ export function FilterSettings() {
       }
     },
     [rules, reorderRules, client, saveFilters, tNotifications]
+  );
+
+  const handleDrop = useCallback(
+    async (e: React.DragEvent, dropIndex: number) => {
+      e.preventDefault();
+      setDragOverIndex(null);
+      const fromIndex = draggedIndexRef.current;
+      if (fromIndex === null) return;
+      await moveRule(fromIndex, dropIndex);
+    },
+    [moveRule]
   );
 
   const handleDragEnd = useCallback(() => {
@@ -702,6 +711,13 @@ export function FilterSettings() {
                     )}
                   </div>
 
+                  {/* The order decides which rule runs first: also by keyboard. */}
+                  <MoveButtons
+                    index={index}
+                    count={rules.length}
+                    name={rule.name}
+                    onMove={(from, to) => void moveRule(from, to)}
+                  />
                   <IconButton
                     label={t("delete_rule")}
                     onClick={() => void handleDelete(rule.id)}

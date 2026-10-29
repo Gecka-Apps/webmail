@@ -29,6 +29,15 @@ describe('KeywordSettings', () => {
     expect(screen.getByText('$label:blue')).toBeInTheDocument();
   });
 
+  // MO-06: the tag order was drag-only.
+  it('moves a tag down with its Move down button', () => {
+    render(<KeywordSettings />);
+    const [first, second] = useSettingsStore.getState().emailKeywords.map((k) => k.id);
+    fireEvent.click(screen.getAllByTestId('move-down')[0]);
+    const ids = useSettingsStore.getState().emailKeywords.map((k) => k.id);
+    expect(ids.slice(0, 2)).toEqual([second, first]);
+  });
+
   it('renders add keyword button', () => {
     render(<KeywordSettings />);
     expect(screen.getByText('add_keyword')).toBeInTheDocument();

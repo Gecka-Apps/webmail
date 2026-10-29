@@ -1,5 +1,6 @@
 "use client";
 
+import { MoveButtons } from "@/components/ui/move-buttons";
 import { useState, useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Plus, Pencil, Trash2, ExternalLink, PanelRight, GripVertical, Lock } from "@/components/icons";
@@ -272,16 +273,22 @@ export function SidebarAppsSettings() {
     setDragOverIndex(index);
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent, dropIndex: number) => {
-    e.preventDefault();
-    setDragOverIndex(null);
-    const fromIndex = draggedIndexRef.current;
-    if (fromIndex === null || fromIndex === dropIndex) return;
+  // Dragging and the Move up / Move down buttons both end here.
+  const moveApp = useCallback((fromIndex: number, dropIndex: number) => {
+    if (fromIndex === dropIndex || dropIndex < 0 || dropIndex >= sidebarApps.length) return;
     const newApps = [...sidebarApps];
     const [moved] = newApps.splice(fromIndex, 1);
     newApps.splice(dropIndex, 0, moved);
     reorderSidebarApps(newApps);
   }, [sidebarApps, reorderSidebarApps]);
+
+  const handleDrop = useCallback((e: React.DragEvent, dropIndex: number) => {
+    e.preventDefault();
+    setDragOverIndex(null);
+    const fromIndex = draggedIndexRef.current;
+    if (fromIndex === null) return;
+    moveApp(fromIndex, dropIndex);
+  }, [moveApp]);
 
   const handleDragEnd = useCallback(() => {
     draggedIndexRef.current = null;
@@ -342,6 +349,7 @@ export function SidebarAppsSettings() {
                 )}>
                   {app.openMode === "inline" ? tApps("inline_badge") : tApps("tab_badge")}
                 </span>
+                <MoveButtons index={index} count={sidebarApps.length} name={app.name} onMove={moveApp} />
                 <IconButton label={tApps("edit_app")} onClick={() => setEditingApp(app.id)} className="text-muted-foreground">
                   <Pencil />
                 </IconButton>

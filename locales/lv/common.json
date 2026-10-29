@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} gaida servera noildzes beigas pirms jaunu autentificētu pieprasījumu sūtīšanas. Mēģiniet vēlreiz pēc {seconds} s.",
     "pull_to_refresh": "Velciet, lai atsvaidzinātu",
     "release_to_refresh": "Atlaidiet, lai atsvaidzinātu",
-    "refreshing": "Atsvaidzina…"
+    "refreshing": "Atsvaidzina…",
+    "move_item_up": "Pārvietot {name} uz augšu",
+    "move_item_down": "Pārvietot {name} uz leju"
   },
   "notifications": {
     "email_sent": "Vēstule nosūtīta",

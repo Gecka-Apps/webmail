@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "Aplikace čeká na ukončení doby blokování serveru před odesláním dalších ověřovaných požadavků. Zkuste to znovu za {seconds} s.",
     "pull_to_refresh": "Přetažením obnovíte",
     "release_to_refresh": "Uvolněním obnovíte",
-    "refreshing": "Obnovování…"
+    "refreshing": "Obnovování…",
+    "move_item_up": "Posunout {name} nahoru",
+    "move_item_down": "Posunout {name} dolů"
   },
   "notifications": {
     "email_sent": "Zpráva byla odeslána",

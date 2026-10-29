@@ -239,6 +239,20 @@ export function AccountSwitcher({
     e.dataTransfer.dropEffect = "move";
     if (overId !== dragOverId) setDragOverId(overId);
   };
+  // Alt+Shift+↑ / ↓ on an account moves it, as dragging does (WCAG 2.1.1);
+  // Settings > Accounts has Move up / Move down buttons for the same order.
+  const handleMoveKey = (e: React.KeyboardEvent, accountId: string) => {
+    if (!e.altKey || !e.shiftKey || (e.key !== "ArrowUp" && e.key !== "ArrowDown")) return;
+    const movable = displayAccounts.filter((a) => !a.isDefault);
+    const index = movable.findIndex((a) => a.id === accountId);
+    const other = movable[index + (e.key === "ArrowUp" ? -1 : 1)];
+    if (index < 0 || !other) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const next = reorderNonDefaultIds(accounts, accountId, other.id);
+    if (next) reorderAccounts(next);
+  };
+
   const handleDrop = (e: React.DragEvent, overId: string) => {
     e.preventDefault();
     if (dragId) {
@@ -408,6 +422,8 @@ export function AccountSwitcher({
                 >
                 <button
                   onClick={() => handleSwitch(account.id)}
+                  onKeyDown={isDraggable ? (e) => handleMoveKey(e, account.id) : undefined}
+                  aria-keyshortcuts={isDraggable ? "Alt+Shift+ArrowUp Alt+Shift+ArrowDown" : undefined}
                   data-testid="account-option"
                   data-account-id={account.id}
                   data-account-email={account.email || account.username}

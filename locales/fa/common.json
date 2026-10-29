@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} منتظر پایان زمان انتظار سرور است. در {seconds} ثانیه دوباره تلاش کنید.",
     "pull_to_refresh": "برای تازه‌سازی بکشید",
     "release_to_refresh": "برای تازه‌سازی رها کنید",
-    "refreshing": "در حال تازه‌سازی…"
+    "refreshing": "در حال تازه‌سازی…",
+    "move_item_up": "انتقال {name} به بالا",
+    "move_item_down": "انتقال {name} به پایین"
   },
   "notifications": {
     "email_sent": "ایمیل ارسال شد",

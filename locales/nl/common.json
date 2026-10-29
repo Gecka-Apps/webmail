@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} wacht tot de servercooldown voorbij is voordat er nieuwe geauthenticeerde verzoeken worden verzonden. Probeer het over {seconds}s opnieuw.",
     "pull_to_refresh": "Trek om te vernieuwen",
     "release_to_refresh": "Laat los om te vernieuwen",
-    "refreshing": "Vernieuwen…"
+    "refreshing": "Vernieuwen…",
+    "move_item_up": "{name} omhoog verplaatsen",
+    "move_item_down": "{name} omlaag verplaatsen"
   },
   "notifications": {
     "email_sent": "E-mail verzonden",

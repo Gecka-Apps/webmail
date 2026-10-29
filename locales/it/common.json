@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} attende che termini il cooldown del server prima di inviare altre richieste autenticate. Riprova tra {seconds}s.",
     "pull_to_refresh": "Trascina per aggiornare",
     "release_to_refresh": "Rilascia per aggiornare",
-    "refreshing": "Aggiornamento…"
+    "refreshing": "Aggiornamento…",
+    "move_item_up": "Sposta {name} in alto",
+    "move_item_down": "Sposta {name} in basso"
   },
   "notifications": {
     "email_sent": "Messaggio inviato",

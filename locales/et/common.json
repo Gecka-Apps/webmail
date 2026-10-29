@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} ootab serveri jahtumisaja lõppu, enne kui saadab rohkem autenditud päringuid. Proovi uuesti {seconds}s pärast.",
     "pull_to_refresh": "Värskendamiseks tõmba alla",
     "release_to_refresh": "Värskendamiseks vabasta",
-    "refreshing": "Värskendamine…"
+    "refreshing": "Värskendamine…",
+    "move_item_up": "Liiguta {name} üles",
+    "move_item_down": "Liiguta {name} alla"
   },
   "notifications": {
     "email_sent": "E-kiri saadeti",

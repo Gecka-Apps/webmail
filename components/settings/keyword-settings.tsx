@@ -1,5 +1,6 @@
 "use client";
 
+import { MoveButtons } from "@/components/ui/move-buttons";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "@/stores/toast-store";
@@ -79,6 +80,9 @@ function KeywordRow({
   onDragEnd,
   isDragOver,
   isDragging,
+  index,
+  count,
+  onMove,
 }: {
   keyword: KeywordDefinition;
   keywords: KeywordDefinition[];
@@ -92,6 +96,9 @@ function KeywordRow({
   onDragEnd: () => void;
   isDragOver: boolean;
   isDragging: boolean;
+  index: number;
+  count: number;
+  onMove: (from: number, to: number) => void;
 }) {
   const t = useTranslations("settings.keywords");
   const hasChildren = hasChildKeywords(keyword.id, keywords);
@@ -137,6 +144,8 @@ function KeywordRow({
         ariaLabel={t("visibility_field")}
         className="text-xs py-1"
       />
+      {/* The order without dragging; always shown, not only on hover. */}
+      <MoveButtons index={index} count={count} name={tagLabel} onMove={onMove} />
       <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 focus-within:opacity-100 pointer-coarse:opacity-100 transition-opacity">
         <IconButton label={t("edit_tag", { name: tagLabel })} title={t("edit")} onClick={onEdit} className="text-muted-foreground">
           <Pencil />
@@ -552,16 +561,16 @@ export function KeywordSettings() {
     if (index !== dragOverIndex) setDragOverIndex(index);
   };
 
-  const handleDrop = (index: number) => {
-    if (dragIndex === null || dragIndex === index) {
-      setDragIndex(null);
-      setDragOverIndex(null);
-      return;
-    }
+  const moveKeyword = (from: number, to: number) => {
+    if (from === to || to < 0 || to >= emailKeywords.length) return;
     const reordered = [...emailKeywords];
-    const [moved] = reordered.splice(dragIndex, 1);
-    reordered.splice(index, 0, moved);
+    const [moved] = reordered.splice(from, 1);
+    reordered.splice(to, 0, moved);
     reorderKeywords(reordered);
+  };
+
+  const handleDrop = (index: number) => {
+    if (dragIndex !== null) moveKeyword(dragIndex, index);
     setDragIndex(null);
     setDragOverIndex(null);
   };
@@ -711,6 +720,9 @@ export function KeywordSettings() {
               onDragEnd={handleDragEnd}
               isDragOver={dragOverIndex === index && dragIndex !== index}
               isDragging={dragIndex === index}
+              index={index}
+              count={emailKeywords.length}
+              onMove={moveKeyword}
             />
           )
         )}

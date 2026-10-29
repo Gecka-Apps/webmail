@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "A(z) {appName} várja a szerver lehűlését, mielőtt további hitelesített kéréseket küldene. Próbáld újra {seconds} másodperc múlva.",
     "pull_to_refresh": "Húzza le a frissítéshez",
     "release_to_refresh": "Engedje el a frissítéshez",
-    "refreshing": "Frissítés…"
+    "refreshing": "Frissítés…",
+    "move_item_up": "{name} feljebb helyezése",
+    "move_item_down": "{name} lejjebb helyezése"
   },
   "notifications": {
     "email_sent": "E-mail elküldve",

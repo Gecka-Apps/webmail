@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} чекає закінчення часу відновлення сервера, перш ніж надсилати додаткові автентифіковані запити. Повторіть спробу через {seconds} с.",
     "pull_to_refresh": "Потягніть, щоб оновити",
     "release_to_refresh": "Відпустіть, щоб оновити",
-    "refreshing": "Оновлення…"
+    "refreshing": "Оновлення…",
+    "move_item_up": "Перемістити «{name}» вгору",
+    "move_item_down": "Перемістити «{name}» вниз"
   },
   "notifications": {
     "email_sent": "Лист надіслано",

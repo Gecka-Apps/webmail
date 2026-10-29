@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} is waiting for the server cooldown to end before sending more authenticated requests. Try again in {seconds}s.",
     "pull_to_refresh": "Pull to refresh",
     "release_to_refresh": "Release to refresh",
-    "refreshing": "Refreshing…"
+    "refreshing": "Refreshing…",
+    "move_item_up": "Move {name} up",
+    "move_item_down": "Move {name} down"
   },
   "notifications": {
     "email_sent": "Email sent",

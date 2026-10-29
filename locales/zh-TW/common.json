@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} 正在等待伺服器的冷卻時間結束，再傳送更多需要驗證的請求。請在 {seconds} 秒後重試。",
     "pull_to_refresh": "下拉重新整理",
     "release_to_refresh": "鬆開重新整理",
-    "refreshing": "正在重新整理…"
+    "refreshing": "正在重新整理…",
+    "move_item_up": "上移 {name}",
+    "move_item_down": "下移 {name}"
   },
   "notifications": {
     "email_sent": "郵件已傳送",

@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} czeka na zakończenie okresu blokady serwera przed wysłaniem kolejnych uwierzytelnionych żądań. Spróbuj ponownie za {seconds}s.",
     "pull_to_refresh": "Pociągnij, aby odświeżyć",
     "release_to_refresh": "Puść, aby odświeżyć",
-    "refreshing": "Odświeżanie…"
+    "refreshing": "Odświeżanie…",
+    "move_item_up": "Przenieś {name} w górę",
+    "move_item_down": "Przenieś {name} w dół"
   },
   "notifications": {
     "email_sent": "Wiadomość wysłana",

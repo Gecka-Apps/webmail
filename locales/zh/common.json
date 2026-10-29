@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} 正在等待服务器冷却，然后再发送更多请求。请在 {seconds} 秒后重试。",
     "pull_to_refresh": "下拉刷新",
     "release_to_refresh": "松开刷新",
-    "refreshing": "正在刷新…"
+    "refreshing": "正在刷新…",
+    "move_item_up": "上移 {name}",
+    "move_item_down": "下移 {name}"
   },
   "notifications": {
     "email_sent": "邮件已发送",

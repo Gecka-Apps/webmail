@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} wartet, bis die Serverabklingzeit endet, bevor weitere authentifizierte Anfragen gesendet werden. Versuchen Sie es in {seconds}s erneut.",
     "pull_to_refresh": "Zum Aktualisieren ziehen",
     "release_to_refresh": "Zum Aktualisieren loslassen",
-    "refreshing": "Wird aktualisiert…"
+    "refreshing": "Wird aktualisiert…",
+    "move_item_up": "{name} nach oben verschieben",
+    "move_item_down": "{name} nach unten verschieben"
   },
   "notifications": {
     "email_sent": "E-Mail gesendet",

@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "El {appName} espera que acabi el temps d'espera del servidor abans d'enviar més sol·licituds autenticades. Torneu-ho a provar d'aquí a {seconds} s.",
     "pull_to_refresh": "Estira per actualitzar",
     "release_to_refresh": "Deixa anar per actualitzar",
-    "refreshing": "S'està actualitzant…"
+    "refreshing": "S'està actualitzant…",
+    "move_item_up": "Mou {name} amunt",
+    "move_item_down": "Mou {name} avall"
   },
   "notifications": {
     "email_sent": "Correu enviat",

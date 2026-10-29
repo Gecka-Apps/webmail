@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "ينتظر {appName} انتهاء فترة تهدئة الخادم قبل إرسال المزيد من الطلبات الموثّقة. حاول مرة أخرى خلال {seconds} ثانية.",
     "pull_to_refresh": "اسحب للتحديث",
     "release_to_refresh": "أفلت للتحديث",
-    "refreshing": "جارٍ التحديث…"
+    "refreshing": "جارٍ التحديث…",
+    "move_item_up": "نقل {name} للأعلى",
+    "move_item_down": "نقل {name} للأسفل"
   },
   "notifications": {
     "email_sent": "تم إرسال الرسالة",

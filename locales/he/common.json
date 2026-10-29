@@ -997,7 +997,9 @@
     "rate_limited_action_detail": "{appName} ממתין עד שקירור השרת יסתיים לפני שליחת בקשות מאומתות יותר. נסה שוב ב-{seconds}s.",
     "pull_to_refresh": "משוך לרענון",
     "release_to_refresh": "שחרר לרענון",
-    "refreshing": "מרענן…"
+    "refreshing": "מרענן…",
+    "move_item_up": "הזזת {name} למעלה",
+    "move_item_down": "הזזת {name} למטה"
   },
   "notifications": {
     "email_sent": "האימייל נשלח",

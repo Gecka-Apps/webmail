@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} venter til sperreperioden på serveren er over før flere autentiserte forespørsler sendes. Prøv igjen om {seconds} sekunder.",
     "pull_to_refresh": "Dra ned for å oppdatere",
     "release_to_refresh": "Slipp for å oppdatere",
-    "refreshing": "Oppdaterer..."
+    "refreshing": "Oppdaterer...",
+    "move_item_up": "Flytt {name} opp",
+    "move_item_down": "Flytt {name} ned"
   },
   "notifications": {
     "email_sent": "E-posten er sendt",

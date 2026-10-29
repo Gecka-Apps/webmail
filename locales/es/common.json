@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} está esperando a que termine el enfriamiento del servidor antes de enviar más solicitudes autenticadas. Inténtalo de nuevo en {seconds}s.",
     "pull_to_refresh": "Desliza para actualizar",
     "release_to_refresh": "Suelta para actualizar",
-    "refreshing": "Actualizando…"
+    "refreshing": "Actualizando…",
+    "move_item_up": "Subir {name}",
+    "move_item_down": "Bajar {name}"
   },
   "notifications": {
     "email_sent": "Correo enviado",

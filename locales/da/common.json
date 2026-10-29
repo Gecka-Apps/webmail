@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} venter på, at serverens nedkølingsperiode slutter, før der sendes flere godkendte anmodninger. Prøv igen om {seconds}s.",
     "pull_to_refresh": "Træk for at opdatere",
     "release_to_refresh": "Slip for at opdatere",
-    "refreshing": "Opdaterer…"
+    "refreshing": "Opdaterer…",
+    "move_item_up": "Flyt {name} op",
+    "move_item_down": "Flyt {name} ned"
   },
   "notifications": {
     "email_sent": "E-mail sendt",

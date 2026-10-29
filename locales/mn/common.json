@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} илүү баталгаажуулсан хүсэлт илгээхийн өмнө серверийн хөргөлт дуусахыг хүлээж байна. {seconds}-ээр дахин оролдоно уу.",
     "pull_to_refresh": "Шинэчлэхийн тулд татна уу",
     "release_to_refresh": "Шинэчлэхийн тулд суллана уу",
-    "refreshing": "Шинэчилж байна…"
+    "refreshing": "Шинэчилж байна…",
+    "move_item_up": "{name}-г дээш зөөх",
+    "move_item_down": "{name}-г доош зөөх"
   },
   "notifications": {
     "email_sent": "Имэйл илгээгдсэн",

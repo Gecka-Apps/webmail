@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} čaká na ukončenie doby blokovania servera. Skúste to znova za {seconds} s.",
     "pull_to_refresh": "Potiahnutím obnovíte",
     "release_to_refresh": "Uvoľnením obnovíte",
-    "refreshing": "Obnovuje sa…"
+    "refreshing": "Obnovuje sa…",
+    "move_item_up": "Posunúť {name} nahor",
+    "move_item_down": "Posunúť {name} nadol"
   },
   "notifications": {
     "email_sent": "E-mail bol odoslaný",

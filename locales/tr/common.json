@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName}, daha fazla kimlik doğrulama isteği göndermeden önce sunucunun soğuma süresinin bitmesini bekliyor. {seconds} saniye içinde tekrar deneyin.",
     "pull_to_refresh": "Yenilemek için çekin",
     "release_to_refresh": "Yenilemek için bırakın",
-    "refreshing": "Yenileniyor…"
+    "refreshing": "Yenileniyor…",
+    "move_item_up": "{name} öğesini yukarı taşı",
+    "move_item_down": "{name} öğesini aşağı taşı"
   },
   "notifications": {
     "email_sent": "E-posta gönderildi",

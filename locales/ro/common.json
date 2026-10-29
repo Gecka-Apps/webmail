@@ -1032,7 +1032,9 @@
     "rate_limited_action_detail": "{appName} Așteaptă încheierea perioadei de așteptare a serverului înainte de a trimite alte cereri autentificate. Încercați din nou în câteva {seconds}.",
     "pull_to_refresh": "Trageți pentru a reîmprospăta",
     "release_to_refresh": "Eliberați pentru a reîmprospăta",
-    "refreshing": "Se reîmprospătează…"
+    "refreshing": "Se reîmprospătează…",
+    "move_item_up": "Mută {name} în sus",
+    "move_item_down": "Mută {name} în jos"
   },
   "notifications": {
     "email_sent": "E-mailul a fost trimis",
