@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Die Regeländerung konnte nicht rückgängig gemacht werden",
     "rule_undo_conflict": "Ihre Filter wurden inzwischen geändert. Machen Sie die Änderung in den Filter-Einstellungen rückgängig.",
     "rule_folder_failed": "Der Ordner konnte nicht erstellt werden",
-    "vacation_filters_save_failed": "Abwesenheits-Einstellungen gespeichert, Weiterleitung und Antwortempfänger konnten aber nicht gespeichert werden"
+    "vacation_filters_save_failed": "Abwesenheits-Einstellungen gespeichert, Weiterleitung und Antwortempfänger konnten aber nicht gespeichert werden",
+    "nothing_to_undo": "Nichts rückgängig zu machen",
+    "undo_hint": "Mit {keys} machen Sie das rückgängig.",
+    "undone": "Rückgängig gemacht"
   },
   "third_party": {
     "push_needs_relay": "Push-Benachrichtigungen brauchen ein Push-Relay Ihrer Organisation, und es ist keines eingerichtet. Neue E-Mails werden weiterhin angezeigt, solange die App geöffnet ist.",
@@ -3486,7 +3489,8 @@
       "delete": "Löschen",
       "mark_unread": "Als ungelesen markieren",
       "mark_read": "Als gelesen markieren",
-      "toggle_spam": "Spam melden / Kein Spam"
+      "toggle_spam": "Spam melden / Kein Spam",
+      "undo": "Letzte Aktion rückgängig machen"
     },
     "global": {
       "compose": "Neue E-Mail verfassen",

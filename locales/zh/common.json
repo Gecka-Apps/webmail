@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "无法撤销规则更改",
     "rule_undo_conflict": "过滤器在此之后已更改。请在过滤器设置中撤销该更改。",
     "rule_folder_failed": "无法创建文件夹",
-    "vacation_filters_save_failed": "外出设置已保存，但转发和回复对象设置未能保存"
+    "vacation_filters_save_failed": "外出设置已保存，但转发和回复对象设置未能保存",
+    "nothing_to_undo": "没有可撤销的操作",
+    "undo_hint": "按 {keys} 撤销。",
+    "undone": "已撤销"
   },
   "third_party": {
     "push_needs_relay": "推送通知需要由您的组织运行的推送中继，但尚未设置。应用打开时，新邮件仍会显示。",
@@ -3486,7 +3489,8 @@
       "delete": "删除",
       "mark_unread": "标记为未读",
       "mark_read": "标记为已读",
-      "toggle_spam": "举报垃圾邮件/非垃圾邮件"
+      "toggle_spam": "举报垃圾邮件/非垃圾邮件",
+      "undo": "撤销上一个操作"
     },
     "global": {
       "compose": "撰写新邮件",

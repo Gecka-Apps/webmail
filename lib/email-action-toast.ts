@@ -2,6 +2,8 @@ import { toast } from "@/stores/toast-store";
 import { useEmailStore, type EmailRestoreBatch, type CrossAccountMoveReceipt } from "@/stores/email-store";
 import type { ToastAction } from "@/components/ui/toast";
 import type { IJMAPClient } from "@/lib/jmap/client-interface";
+import { linkUndoToast, recordUndo, runUndo } from "@/lib/undo-history";
+import { formatShortcutCombo } from "@/lib/shortcut-keys";
 
 /** How long a toast with Undo stays, so there is time to reach the button. */
 export const UNDO_TOAST_DURATION = 8000;
@@ -11,11 +13,28 @@ export interface UndoLabels {
   undo: string;
   done: string;
   failed: string;
+  /** "Press Ctrl+Z to undo.", read out after the toast. */
+  hint?: string;
+}
+
+/** An Undo for a toast, with the words a screen reader hears about it. */
+export interface UndoToastAction extends ToastAction {
+  hint?: string;
+}
+
+/** The undo shortcut as this platform writes it (Ctrl+Z, ⌘Z). */
+export function undoShortcutLabel(): string {
+  return formatShortcutCombo("Mod+Z");
 }
 
 /** `t` of the `notifications` namespace → UndoLabels. */
-export function undoLabels(t: (key: string) => string): UndoLabels {
-  return { undo: t("undo"), done: t("undo_done"), failed: t("undo_failed") };
+export function undoLabels(t: (key: string, values?: Record<string, string>) => string): UndoLabels {
+  return {
+    undo: t("undo"),
+    done: t("undo_done"),
+    failed: t("undo_failed"),
+    hint: t("undo_hint", { keys: undoShortcutLabel() }),
+  };
 }
 
 /**
@@ -32,10 +51,11 @@ export function undoMoveAction(
   batches: EmailRestoreBatch[] | null | undefined,
   labels: UndoLabels,
   receipts?: CrossAccountMoveReceipt[],
-): ToastAction | undefined {
+): UndoToastAction | undefined {
   if (!client || !batches || !batches.some(b => b.points.length > 0)) return undefined;
   return {
     label: labels.undo,
+    hint: labels.hint,
     onClick: () => {
       void (async () => {
         try {
@@ -50,13 +70,25 @@ export function undoMoveAction(
   };
 }
 
-/** A success toast, with Undo when the action can be undone. */
-export function toastWithUndo(title: string, undo: ToastAction | undefined, message?: string): void {
+/**
+ * A success toast, with Undo when the action can be undone. The Undo also
+ * goes into the undo history (lib/undo-history), so Ctrl+Z reaches it after
+ * the toast is gone or another one took its place.
+ */
+export function toastWithUndo(title: string, undo: UndoToastAction | undefined, message?: string): void {
   if (!undo) {
     toast.success(title, message);
     return;
   }
-  toast.success(title, { message, action: undo, duration: UNDO_TOAST_DURATION });
+  const entry = recordUndo(title, undo.onClick);
+  const toastId = toast.success(title, {
+    message,
+    // The toast closes itself after its action ran.
+    action: { label: undo.label, onClick: () => { runUndo(entry.id); } },
+    duration: UNDO_TOAST_DURATION,
+    srHint: undo.hint,
+  });
+  linkUndoToast(entry.id, toastId);
 }
 
 /**

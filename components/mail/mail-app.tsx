@@ -62,6 +62,7 @@ import { useDeviceDetection } from "@/hooks/use-media-query";
 import { usePaneSize } from "@/hooks/use-pane-size";
 import { usePaneId } from "@/hooks/use-pane-context";
 import { useKeyboardShortcuts, type GoToMailboxTarget } from "@/hooks/use-keyboard-shortcuts";
+import { useUndoShortcut } from "@/hooks/use-undo-shortcut";
 import { findNextUnreadIndex } from "@/lib/next-unread-email";
 import { useRefreshGesture } from "@/hooks/use-refresh-gesture";
 import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
@@ -1149,6 +1150,8 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     mountainViewKeys: mvShell,
     handlers: keyboardHandlers,
   });
+  // Ctrl+Z / z: undo the last mail actions, newest first.
+  useUndoShortcut({ enabled: isAuthenticated && !showComposer, signedIn: isAuthenticated });
 
   // Compose and search from the command palette (components/command-palette);
   // the tour closes the phone's folder drawer and reader to point at the list

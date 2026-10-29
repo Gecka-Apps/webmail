@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "No se pudo deshacer el cambio de la regla",
     "rule_undo_conflict": "Tus filtros han cambiado desde entonces. Deshaz el cambio en la configuración de filtros.",
     "rule_folder_failed": "No se pudo crear la carpeta",
-    "vacation_filters_save_failed": "Configuración de ausencia guardada, pero no se pudieron guardar el reenvío ni los destinatarios de la respuesta"
+    "vacation_filters_save_failed": "Configuración de ausencia guardada, pero no se pudieron guardar el reenvío ni los destinatarios de la respuesta",
+    "nothing_to_undo": "No hay nada que deshacer",
+    "undo_hint": "Pulsa {keys} para deshacer.",
+    "undone": "Deshecho"
   },
   "third_party": {
     "push_needs_relay": "Las notificaciones push necesitan un relay push gestionado por tu organización, y no hay ninguno configurado. El correo nuevo se sigue mostrando mientras la aplicación está abierta.",
@@ -3486,7 +3489,8 @@
       "delete": "Eliminar",
       "mark_unread": "Marcar como no leído",
       "mark_read": "Marcar como leído",
-      "toggle_spam": "Reportar spam / No es spam"
+      "toggle_spam": "Reportar spam / No es spam",
+      "undo": "Deshacer la última acción"
     },
     "global": {
       "compose": "Redactar nuevo correo",

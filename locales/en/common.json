@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Could not undo the rule change",
     "rule_undo_conflict": "Your filters have changed since. Undo the change in Filters settings.",
     "rule_folder_failed": "Could not create the folder",
-    "vacation_filters_save_failed": "Out of office settings saved, but the forwarding and reply recipients could not be saved"
+    "vacation_filters_save_failed": "Out of office settings saved, but the forwarding and reply recipients could not be saved",
+    "nothing_to_undo": "Nothing to undo",
+    "undo_hint": "Press {keys} to undo.",
+    "undone": "Undone"
   },
   "third_party": {
     "push_needs_relay": "Push notifications need a push relay run by your organisation, and none is set up. New mail still shows while the app is open.",
@@ -3486,7 +3489,8 @@
       "delete": "Delete",
       "mark_unread": "Mark as unread",
       "mark_read": "Mark as read",
-      "toggle_spam": "Report spam / Not spam"
+      "toggle_spam": "Report spam / Not spam",
+      "undo": "Undo the last action"
     },
     "global": {
       "compose": "Compose new email",

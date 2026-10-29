@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Impossible d'annuler la modification de la règle",
     "rule_undo_conflict": "Vos filtres ont changé entre-temps. Annulez la modification dans les réglages des filtres.",
     "rule_folder_failed": "Impossible de créer le dossier",
-    "vacation_filters_save_failed": "Paramètres d'absence enregistrés, mais le transfert et les destinataires de la réponse n'ont pas pu être enregistrés"
+    "vacation_filters_save_failed": "Paramètres d'absence enregistrés, mais le transfert et les destinataires de la réponse n'ont pas pu être enregistrés",
+    "nothing_to_undo": "Rien à annuler",
+    "undo_hint": "Appuyez sur {keys} pour annuler.",
+    "undone": "Annulé"
   },
   "third_party": {
     "push_needs_relay": "Les notifications push nécessitent un relais push géré par votre organisation, et aucun n'est configuré. Les nouveaux messages s'affichent toujours tant que l'application est ouverte.",
@@ -3486,7 +3489,8 @@
       "delete": "Supprimer",
       "mark_unread": "Marquer comme non lu",
       "mark_read": "Marquer comme lu",
-      "toggle_spam": "Signaler / Pas un spam"
+      "toggle_spam": "Signaler / Pas un spam",
+      "undo": "Annuler la dernière action"
     },
     "global": {
       "compose": "Composer un email",

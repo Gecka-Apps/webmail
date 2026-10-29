@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "無法復原規則變更",
     "rule_undo_conflict": "篩選規則在那之後已變更。請在篩選規則設定中復原該變更。",
     "rule_folder_failed": "無法建立資料夾",
-    "vacation_filters_save_failed": "外出設定已儲存，但轉寄和回覆對象設定未能儲存"
+    "vacation_filters_save_failed": "外出設定已儲存，但轉寄和回覆對象設定未能儲存",
+    "nothing_to_undo": "沒有可復原的動作",
+    "undo_hint": "按 {keys} 復原。",
+    "undone": "已復原"
   },
   "third_party": {
     "push_needs_relay": "推送通知需要由您的組織執行的推送中繼，但尚未設定。應用程式開啟時，新郵件仍會顯示。",
@@ -3486,7 +3489,8 @@
       "delete": "刪除",
       "mark_unread": "標示為未讀",
       "mark_read": "標示為已讀",
-      "toggle_spam": "回報垃圾郵件／非垃圾郵件"
+      "toggle_spam": "回報垃圾郵件／非垃圾郵件",
+      "undo": "復原上一個動作"
     },
     "global": {
       "compose": "撰寫新郵件",

@@ -48,6 +48,11 @@ export interface Toast {
    * countdown has to match the time that is left.
    */
   pauseOnHover?: boolean;
+  /**
+   * Read out after the title and message but not shown, e.g. "Press Ctrl+Z
+   * to undo." for a toast whose Undo has a shortcut.
+   */
+  srHint?: string;
 }
 
 interface ToastProps {

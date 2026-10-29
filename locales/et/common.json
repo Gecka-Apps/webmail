@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Reegli muudatust ei õnnestunud tagasi võtta",
     "rule_undo_conflict": "Sinu filtreid on vahepeal muudetud. Võta muudatus tagasi filtriseadetes.",
     "rule_folder_failed": "Kausta loomine ebaõnnestus",
-    "vacation_filters_save_failed": "Äraolekuteate seaded salvestati, kuid edastus- ja vastuse adressaate ei õnnestunud salvestada"
+    "vacation_filters_save_failed": "Äraolekuteate seaded salvestati, kuid edastus- ja vastuse adressaate ei õnnestunud salvestada",
+    "nothing_to_undo": "Pole midagi tagasi võtta",
+    "undo_hint": "Tagasivõtmiseks vajuta {keys}.",
+    "undone": "Tagasi võetud"
   },
   "third_party": {
     "push_needs_relay": "Tõuketeavitused vajavad sinu organisatsiooni hallatavat push-releed, kuid ühtegi pole seadistatud. Uued kirjad kuvatakse endiselt, kuni rakendus on avatud.",
@@ -3486,7 +3489,8 @@
       "delete": "Kustuta",
       "mark_unread": "Märgi lugemata",
       "mark_read": "Märgi loetuks",
-      "toggle_spam": "Märgi rämpspostiks / Pole rämpspost"
+      "toggle_spam": "Märgi rämpspostiks / Pole rämpspost",
+      "undo": "Võta viimane toiming tagasi"
     },
     "global": {
       "compose": "Kirjuta uus e-kiri",

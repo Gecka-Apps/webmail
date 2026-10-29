@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "De regelwijziging kon niet ongedaan worden gemaakt",
     "rule_undo_conflict": "Je filters zijn intussen gewijzigd. Maak de wijziging ongedaan in de filterinstellingen.",
     "rule_folder_failed": "De map kon niet worden gemaakt",
-    "vacation_filters_save_failed": "Afwezigheidsinstellingen opgeslagen, maar het doorsturen en de ontvangers van het antwoord konden niet worden opgeslagen"
+    "vacation_filters_save_failed": "Afwezigheidsinstellingen opgeslagen, maar het doorsturen en de ontvangers van het antwoord konden niet worden opgeslagen",
+    "nothing_to_undo": "Niets om ongedaan te maken",
+    "undo_hint": "Druk op {keys} om ongedaan te maken.",
+    "undone": "Ongedaan gemaakt"
   },
   "third_party": {
     "push_needs_relay": "Pushmeldingen hebben een pushrelay van je organisatie nodig, en er is er geen ingesteld. Nieuwe e-mail wordt nog steeds getoond zolang de app open is.",
@@ -3486,7 +3489,8 @@
       "delete": "Verwijderen",
       "mark_unread": "Markeren als ongelezen",
       "mark_read": "Markeren als gelezen",
-      "toggle_spam": "Spam melden / Geen spam"
+      "toggle_spam": "Spam melden / Geen spam",
+      "undo": "Laatste actie ongedaan maken"
     },
     "global": {
       "compose": "Nieuw bericht opstellen",

@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Nem sikerült visszavonni a szabálymódosítást",
     "rule_undo_conflict": "A szűrőid azóta megváltoztak. A módosítást a szűrőbeállításokban vond vissza.",
     "rule_folder_failed": "Nem sikerült létrehozni a mappát",
-    "vacation_filters_save_failed": "Távolléti beállítások elmentve, de a továbbítást és a válasz címzettjeit nem sikerült menteni"
+    "vacation_filters_save_failed": "Távolléti beállítások elmentve, de a továbbítást és a válasz címzettjeit nem sikerült menteni",
+    "nothing_to_undo": "Nincs mit visszavonni",
+    "undo_hint": "Visszavonáshoz nyomd meg: {keys}.",
+    "undone": "Visszavonva"
   },
   "third_party": {
     "push_needs_relay": "A push-értesítésekhez a szervezeted által üzemeltetett push relé kell, és nincs beállítva egy sem. Az új levelek továbbra is megjelennek, amíg az alkalmazás nyitva van.",
@@ -3486,7 +3489,8 @@
       "delete": "Törlés",
       "mark_unread": "Olvasatlannak jelölés",
       "mark_read": "Olvasottnak jelölés",
-      "toggle_spam": "Spam / Nem spam"
+      "toggle_spam": "Spam / Nem spam",
+      "undo": "Az utolsó művelet visszavonása"
     },
     "global": {
       "compose": "Új e-mail írása",

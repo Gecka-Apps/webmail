@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "ルールの変更を元に戻せませんでした",
     "rule_undo_conflict": "その後フィルターが変更されています。フィルター設定で変更を元に戻してください。",
     "rule_folder_failed": "フォルダを作成できませんでした",
-    "vacation_filters_save_failed": "不在の設定を保存しましたが、転送と返信する相手の保存に失敗しました"
+    "vacation_filters_save_failed": "不在の設定を保存しましたが、転送と返信する相手の保存に失敗しました",
+    "nothing_to_undo": "元に戻す操作はありません",
+    "undo_hint": "{keys} で元に戻せます。",
+    "undone": "元に戻しました"
   },
   "third_party": {
     "push_needs_relay": "プッシュ通知には組織が運用するプッシュリレーが必要ですが、設定されていません。アプリを開いている間は、新着メールが引き続き表示されます。",
@@ -3486,7 +3489,8 @@
       "delete": "削除",
       "mark_unread": "未読にする",
       "mark_read": "既読にする",
-      "toggle_spam": "迷惑メールを報告 / 迷惑メールでない"
+      "toggle_spam": "迷惑メールを報告 / 迷惑メールでない",
+      "undo": "直前の操作を元に戻す"
     },
     "global": {
       "compose": "新規メールを作成",

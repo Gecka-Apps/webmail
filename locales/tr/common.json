@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Kural değişikliği geri alınamadı",
     "rule_undo_conflict": "Filtreleriniz o zamandan beri değişti. Değişikliği filtre ayarlarından geri alın.",
     "rule_folder_failed": "Klasör oluşturulamadı",
-    "vacation_filters_save_failed": "Ofis dışında ayarları kaydedildi, ancak iletme ve yanıt alıcıları kaydedilemedi"
+    "vacation_filters_save_failed": "Ofis dışında ayarları kaydedildi, ancak iletme ve yanıt alıcıları kaydedilemedi",
+    "nothing_to_undo": "Geri alınacak bir şey yok",
+    "undo_hint": "Geri almak için {keys} tuşlarına basın.",
+    "undone": "Geri alındı"
   },
   "third_party": {
     "push_needs_relay": "Anlık bildirimler için kuruluşunuzun işlettiği bir push rölesi gerekir ve hiçbiri ayarlanmamış. Uygulama açıkken yeni postalar yine de görünür.",
@@ -3486,7 +3489,8 @@
       "delete": "Sil",
       "mark_unread": "Okunmadı olarak işaretle",
       "mark_read": "Okundu olarak işaretle",
-      "toggle_spam": "Spam bildir / Spam değil"
+      "toggle_spam": "Spam bildir / Spam değil",
+      "undo": "Son işlemi geri al"
     },
     "global": {
       "compose": "Yeni e-posta oluştur",

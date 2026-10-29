@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Změnu pravidla se nepodařilo vrátit",
     "rule_undo_conflict": "Vaše filtry se mezitím změnily. Vraťte změnu v nastavení filtrů.",
     "rule_folder_failed": "Složku se nepodařilo vytvořit",
-    "vacation_filters_save_failed": "Nastavení nepřítomnosti bylo uloženo, ale přeposílání a příjemce odpovědi se uložit nepodařilo"
+    "vacation_filters_save_failed": "Nastavení nepřítomnosti bylo uloženo, ale přeposílání a příjemce odpovědi se uložit nepodařilo",
+    "nothing_to_undo": "Není co vrátit",
+    "undo_hint": "Stisknutím {keys} akci vrátíte.",
+    "undone": "Vráceno"
   },
   "third_party": {
     "push_needs_relay": "Push oznámení potřebují push relay provozovaný vaší organizací a žádný není nastaven. Nová pošta se dál zobrazuje, dokud je aplikace otevřená.",
@@ -3486,7 +3489,8 @@
       "delete": "Odstranit",
       "mark_unread": "Označit jako nepřečtené",
       "mark_read": "Označit jako přečtené",
-      "toggle_spam": "Nahlásit spam / Není spam"
+      "toggle_spam": "Nahlásit spam / Není spam",
+      "undo": "Vrátit poslední akci"
     },
     "global": {
       "compose": "Napsat novou zprávu",

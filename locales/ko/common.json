@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "규칙 변경을 취소하지 못했어요",
     "rule_undo_conflict": "그 사이에 필터가 바뀌었어요. 필터 설정에서 변경을 취소하세요.",
     "rule_folder_failed": "폴더를 만들지 못했어요",
-    "vacation_filters_save_failed": "부재중 설정은 저장되었지만 전달 및 응답 대상 설정을 저장하지 못했어요"
+    "vacation_filters_save_failed": "부재중 설정은 저장되었지만 전달 및 응답 대상 설정을 저장하지 못했어요",
+    "nothing_to_undo": "실행 취소할 작업이 없어요",
+    "undo_hint": "{keys}를 누르면 실행 취소돼요.",
+    "undone": "실행 취소했어요"
   },
   "third_party": {
     "push_needs_relay": "푸시 알림을 받으려면 조직에서 운영하는 푸시 릴레이가 필요한데, 설정된 릴레이가 없어요. 앱이 열려 있는 동안에는 새 메일이 계속 표시돼요.",
@@ -3486,7 +3489,8 @@
       "delete": "삭제",
       "mark_unread": "읽지 않음으로 표시",
       "mark_read": "읽음으로 표시",
-      "toggle_spam": "스팸 신고 / 정상 표시"
+      "toggle_spam": "스팸 신고 / 정상 표시",
+      "undo": "마지막 작업 실행 취소"
     },
     "global": {
       "compose": "새 메일 쓰기",

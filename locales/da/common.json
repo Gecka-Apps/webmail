@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Regelændringen kunne ikke fortrydes",
     "rule_undo_conflict": "Dine filtre er ændret siden. Fortryd ændringen i filterindstillingerne.",
     "rule_folder_failed": "Mappen kunne ikke oprettes",
-    "vacation_filters_save_failed": "Fraværsindstillinger gemt, men videresendelse og svarmodtagere kunne ikke gemmes"
+    "vacation_filters_save_failed": "Fraværsindstillinger gemt, men videresendelse og svarmodtagere kunne ikke gemmes",
+    "nothing_to_undo": "Intet at fortryde",
+    "undo_hint": "Tryk på {keys} for at fortryde.",
+    "undone": "Fortrudt"
   },
   "third_party": {
     "push_needs_relay": "Push-notifikationer kræver et push-relæ, som din organisation driver, og der er ikke sat noget op. Ny mail vises stadig, mens appen er åben.",
@@ -3486,7 +3489,8 @@
       "delete": "Slet",
       "mark_unread": "Markér som ulæst",
       "mark_read": "Markér som læst",
-      "toggle_spam": "Rapportér spam / Ikke spam"
+      "toggle_spam": "Rapportér spam / Ikke spam",
+      "undo": "Fortryd den seneste handling"
     },
     "global": {
       "compose": "Ny e-mail",

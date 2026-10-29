@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Kunne ikke angre regelendringen",
     "rule_undo_conflict": "Filtrene dine er endret siden. Angre endringen i filterinnstillingene.",
     "rule_folder_failed": "Kunne ikke opprette mappen",
-    "vacation_filters_save_failed": "Fraværsinnstillinger er lagret, men videresending og svarmottakere kunne ikke lagres"
+    "vacation_filters_save_failed": "Fraværsinnstillinger er lagret, men videresending og svarmottakere kunne ikke lagres",
+    "nothing_to_undo": "Ingenting å angre",
+    "undo_hint": "Trykk {keys} for å angre.",
+    "undone": "Angret"
   },
   "third_party": {
     "push_needs_relay": "Push-varsler trenger et push-relé som organisasjonen din driver, og det er ikke satt opp noe. Ny e-post vises fortsatt mens appen er åpen.",
@@ -3486,7 +3489,8 @@
       "delete": "Slett",
       "mark_unread": "Merk som ulest",
       "mark_read": "Merk som lest",
-      "toggle_spam": "Rapporter som søppelpost / Ikke søppelpost"
+      "toggle_spam": "Rapporter som søppelpost / Ikke søppelpost",
+      "undo": "Angre siste handling"
     },
     "global": {
       "compose": "Skriv ny e-post",

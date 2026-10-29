@@ -11,12 +11,14 @@ import { effectiveToastDuration } from "@/lib/toast-duration";
  * one sentence. The toast container is not a live region itself (its buttons
  * would be read too, and errors need the assertive region).
  */
-export function toastAnnouncement(toast: Pick<Toast, "title" | "message">): string {
-  const title = toast.title.trim();
-  const message = toast.message?.trim();
-  if (!message) return title;
-  if (!title) return message;
-  return /[.!?…:]$/.test(title) ? `${title} ${message}` : `${title}. ${message}`;
+export function toastAnnouncement(toast: Pick<Toast, "title" | "message" | "srHint">): string {
+  const sentence = (a: string, b: string | undefined) => {
+    const next = b?.trim();
+    if (!next) return a;
+    if (!a) return next;
+    return /[.!?…:]$/.test(a) ? `${a} ${next}` : `${a}. ${next}`;
+  };
+  return sentence(sentence(toast.title.trim(), toast.message), toast.srHint);
 }
 
 interface ToastStore {
@@ -85,6 +87,7 @@ interface ToastOptions {
   tertiaryAction?: ToastAction;
   duration?: number;
   pauseOnHover?: boolean;
+  srHint?: string;
 }
 
 function showToast(type: Toast["type"], title: string, options?: string | ToastOptions, defaultDuration?: number): string {
@@ -98,6 +101,7 @@ function showToast(type: Toast["type"], title: string, options?: string | ToastO
     tertiaryAction: opts?.tertiaryAction,
     duration: opts?.duration ?? defaultDuration,
     pauseOnHover: opts?.pauseOnHover,
+    srHint: opts?.srHint,
   });
 }
 

@@ -20,6 +20,8 @@ export const MAIL_SHORTCUTS = {
     { key: "u", description: "shortcuts.actions.mark_unread" },
     { key: "Shift + I", description: "shortcuts.actions.mark_read" },
     { key: "!", description: "shortcuts.actions.toggle_spam" },
+    // hooks/use-undo-shortcut.ts; `z` only with single-key shortcuts on.
+    { key: "Mod + Z / z", description: "shortcuts.actions.undo" },
   ],
   // Shown under "Global" together with GENERAL_SHORTCUTS (./index.ts).
   global: [

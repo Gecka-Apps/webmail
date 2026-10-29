@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Zmenu pravidla sa nepodarilo vrátiť",
     "rule_undo_conflict": "Vaše filtre sa medzitým zmenili. Vráťte zmenu v nastaveniach filtrov.",
     "rule_folder_failed": "Priečinok sa nepodarilo vytvoriť",
-    "vacation_filters_save_failed": "Nastavenia neprítomnosti boli uložené, ale preposielanie a príjemcov odpovede sa nepodarilo uložiť"
+    "vacation_filters_save_failed": "Nastavenia neprítomnosti boli uložené, ale preposielanie a príjemcov odpovede sa nepodarilo uložiť",
+    "nothing_to_undo": "Nie je čo vrátiť",
+    "undo_hint": "Stlačením {keys} akciu vrátite.",
+    "undone": "Vrátené"
   },
   "third_party": {
     "push_needs_relay": "Push oznámenia potrebujú push relay prevádzkovaný vašou organizáciou a žiadny nie je nastavený. Nová pošta sa naďalej zobrazuje, kým je aplikácia otvorená.",
@@ -3486,7 +3489,8 @@
       "delete": "Odstrániť",
       "mark_unread": "Označiť ako neprečítané",
       "mark_read": "Označiť ako prečítané",
-      "toggle_spam": "Nahlásiť spam / Nie je spam"
+      "toggle_spam": "Nahlásiť spam / Nie je spam",
+      "undo": "Vrátiť poslednú akciu"
     },
     "global": {
       "compose": "Napísať nový e-mail",

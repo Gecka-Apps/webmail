@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Nie udało się cofnąć zmiany reguły",
     "rule_undo_conflict": "Twoje filtry zmieniły się w międzyczasie. Cofnij zmianę w ustawieniach filtrów.",
     "rule_folder_failed": "Nie udało się utworzyć folderu",
-    "vacation_filters_save_failed": "Ustawienia nieobecności zapisane, ale nie udało się zapisać przekazywania ani odbiorców odpowiedzi"
+    "vacation_filters_save_failed": "Ustawienia nieobecności zapisane, ale nie udało się zapisać przekazywania ani odbiorców odpowiedzi",
+    "nothing_to_undo": "Nie ma czego cofnąć",
+    "undo_hint": "Naciśnij {keys}, aby cofnąć.",
+    "undone": "Cofnięto"
   },
   "third_party": {
     "push_needs_relay": "Powiadomienia push wymagają przekaźnika push prowadzonego przez Twoją organizację, a żaden nie jest skonfigurowany. Nowe wiadomości nadal pojawiają się, gdy aplikacja jest otwarta.",
@@ -3486,7 +3489,8 @@
       "delete": "Usuń",
       "mark_unread": "Oznacz jako nieprzeczytane",
       "mark_read": "Oznacz jako przeczytane",
-      "toggle_spam": "Zgłoś spam / To nie spam"
+      "toggle_spam": "Zgłoś spam / To nie spam",
+      "undo": "Cofnij ostatnią czynność"
     },
     "global": {
       "compose": "Napisz nową wiadomość",

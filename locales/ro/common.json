@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Modificarea regulii nu a putut fi anulată",
     "rule_undo_conflict": "Filtrele dvs. s-au schimbat între timp. Anulați modificarea din setările filtrelor.",
     "rule_folder_failed": "Dosarul nu a putut fi creat",
-    "vacation_filters_save_failed": "Setările de absență au fost salvate, dar redirecționarea și destinatarii răspunsului nu au putut fi salvați"
+    "vacation_filters_save_failed": "Setările de absență au fost salvate, dar redirecționarea și destinatarii răspunsului nu au putut fi salvați",
+    "nothing_to_undo": "Nu e nimic de anulat",
+    "undo_hint": "Apasă {keys} pentru a anula.",
+    "undone": "Anulat"
   },
   "third_party": {
     "push_needs_relay": "Notificările push au nevoie de un releu push administrat de organizația dvs., iar niciunul nu este configurat. E-mailurile noi apar în continuare cât timp aplicația este deschisă.",
@@ -3486,7 +3489,8 @@
       "delete": "Șterge",
       "mark_unread": "Marcați ca necitit",
       "mark_read": "Marcați ca citit",
-      "toggle_spam": "Raportează spam / Nu este spam"
+      "toggle_spam": "Raportează spam / Nu este spam",
+      "undo": "Anulează ultima acțiune"
     },
     "global": {
       "compose": "Redactați un e-mail nou",

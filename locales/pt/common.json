@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Não foi possível desfazer a alteração da regra",
     "rule_undo_conflict": "Seus filtros mudaram desde então. Desfaça a alteração nas configurações de filtros.",
     "rule_folder_failed": "Não foi possível criar a pasta",
-    "vacation_filters_save_failed": "Configurações de ausência salvas, mas não foi possível salvar o encaminhamento e os destinatários da resposta"
+    "vacation_filters_save_failed": "Configurações de ausência salvas, mas não foi possível salvar o encaminhamento e os destinatários da resposta",
+    "nothing_to_undo": "Nada para desfazer",
+    "undo_hint": "Pressione {keys} para desfazer.",
+    "undone": "Desfeito"
   },
   "third_party": {
     "push_needs_relay": "As notificações push precisam de um relay push mantido pela sua organização, e nenhum está configurado. Os novos e-mails continuam aparecendo enquanto o app estiver aberto.",
@@ -3486,7 +3489,8 @@
       "delete": "Excluir",
       "mark_unread": "Marcar como não lido",
       "mark_read": "Marcar como lido",
-      "toggle_spam": "Reportar spam / Não é spam"
+      "toggle_spam": "Reportar spam / Não é spam",
+      "undo": "Desfazer a última ação"
     },
     "global": {
       "compose": "Escrever novo e-mail",

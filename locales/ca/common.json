@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "No s'ha pogut desfer el canvi de la regla",
     "rule_undo_conflict": "Els teus filtres han canviat des d'aleshores. Desfés el canvi a la configuració dels filtres.",
     "rule_folder_failed": "No s'ha pogut crear la carpeta",
-    "vacation_filters_save_failed": "S'ha desat la configuració d'absència, però no s'han pogut desar el reenviament ni els destinataris de la resposta"
+    "vacation_filters_save_failed": "S'ha desat la configuració d'absència, però no s'han pogut desar el reenviament ni els destinataris de la resposta",
+    "nothing_to_undo": "No hi ha res per desfer",
+    "undo_hint": "Premeu {keys} per desfer-ho.",
+    "undone": "S'ha desfet"
   },
   "third_party": {
     "push_needs_relay": "Les notificacions push necessiten un repetidor push gestionat per la vostra organització, i no n'hi ha cap de configurat. El correu nou es continua mostrant mentre l'aplicació està oberta.",
@@ -3486,7 +3489,8 @@
       "delete": "Suprimeix",
       "mark_unread": "Marca com a no llegit",
       "mark_read": "Marca com a llegit",
-      "toggle_spam": "Denuncia com a brossa / No és brossa"
+      "toggle_spam": "Denuncia com a brossa / No és brossa",
+      "undo": "Desfés l'última acció"
     },
     "global": {
       "compose": "Redacta un correu nou",

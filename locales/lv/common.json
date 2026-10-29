@@ -1151,7 +1151,10 @@
     "rule_undo_failed": "Neizdevās atsaukt noteikuma izmaiņu",
     "rule_undo_conflict": "Jūsu filtri kopš tā laika ir mainījušies. Atsauciet izmaiņu filtru iestatījumos.",
     "rule_folder_failed": "Neizdevās izveidot mapi",
-    "vacation_filters_save_failed": "Prombūtnes iestatījumi saglabāti, taču pārsūtīšanu un atbildes saņēmējus neizdevās saglabāt"
+    "vacation_filters_save_failed": "Prombūtnes iestatījumi saglabāti, taču pārsūtīšanu un atbildes saņēmējus neizdevās saglabāt",
+    "nothing_to_undo": "Nav ko atsaukt",
+    "undo_hint": "Nospiediet {keys}, lai atsauktu.",
+    "undone": "Atsaukts"
   },
   "third_party": {
     "push_needs_relay": "Push paziņojumiem vajadzīgs jūsu organizācijas uzturēts push relejs, un neviens nav iestatīts. Jauns pasts joprojām tiek rādīts, kamēr lietotne ir atvērta.",
@@ -3486,7 +3489,8 @@
       "delete": "Dzēst",
       "mark_unread": "Atzīmēt kā nelasītu",
       "mark_read": "Atzīmēt kā izlasītu",
-      "toggle_spam": "Mēstule / Nav mēstule"
+      "toggle_spam": "Mēstule / Nav mēstule",
+      "undo": "Atsaukt pēdējo darbību"
     },
     "global": {
       "compose": "Rakstīt jaunu vēstuli",
