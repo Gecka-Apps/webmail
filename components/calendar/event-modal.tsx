@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo, useId } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { toast } from "@/stores/toast-store";
 import { Button } from "@/components/ui/button";
@@ -269,6 +269,9 @@ export function EventModal({
 }: EventModalProps) {
   const t = useTranslations("calendar");
   const paint = useCvdColor();
+  // Ids that tie each visible label to its field.
+  const labelIdBase = useId();
+  const labelFor = (key: string) => `${labelIdBase}-${key}`;
   const tCommon = useTranslations("common");
   const locale = useLocale();
   const timeFormat = useSettingsStore((s) => s.timeFormat);
@@ -1218,8 +1221,8 @@ export function EventModal({
       <div className="flex-1 overflow-y-auto">
         <div className="px-6 py-4 space-y-4">
           <div>
-            <label className="text-sm font-medium mb-1 block">{t("form.title")}</label>
-            <Input
+            <label htmlFor={labelFor("title")} className="text-sm font-medium mb-1 block">{t("form.title")}</label>
+            <Input id={labelFor("title")}
               ref={titleRef}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -1229,8 +1232,8 @@ export function EventModal({
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1 block">{t("form.description")}</label>
-            <textarea
+            <label htmlFor={labelFor("description")} className="text-sm font-medium mb-1 block">{t("form.description")}</label>
+            <textarea id={labelFor("description")}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder={t("form.description")}
@@ -1241,8 +1244,8 @@ export function EventModal({
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1 block">{t("form.location")}</label>
-            <Input
+            <label htmlFor={labelFor("location")} className="text-sm font-medium mb-1 block">{t("form.location")}</label>
+            <Input id={labelFor("location")}
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder={t("form.location")}
@@ -1251,13 +1254,14 @@ export function EventModal({
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1 block">
+            <label htmlFor={labelFor("meeting_link")} className="text-sm font-medium mb-1 block">
               <span className="flex items-center gap-1.5">
-                <Video className="w-4 h-4" />
+                <Video className="w-4 h-4" aria-hidden="true" />
                 {t("form.meeting_link")}
               </span>
             </label>
             <Input
+              id={labelFor("meeting_link")}
               type="url"
               value={virtualLocation}
               onChange={(e) => setVirtualLocation(e.target.value)}
@@ -1286,15 +1290,16 @@ export function EventModal({
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1 block">
+            <label htmlFor={labelFor("participants")} className="text-sm font-medium mb-1 block">
               <span className="flex items-center gap-1.5">
-                <Users className="w-4 h-4" />
+                <Users className="w-4 h-4" aria-hidden="true" />
                 {t("participants.title")}
               </span>
             </label>
             {/* The organizer decides who is invited; an attendee's save
                 keeps the list as it came. */}
             <ParticipantInput
+              id={labelFor("participants")}
               ref={participantInputRef}
               participants={attendees}
               onAdd={handleAddAttendee}
@@ -1338,8 +1343,8 @@ export function EventModal({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <label className="text-sm font-medium mb-1 block">{t("form.start_date")}</label>
-              <input
+              <label htmlFor={labelFor("start_date")} className="text-sm font-medium mb-1 block">{t("form.start_date")}</label>
+              <input id={labelFor("start_date")}
                 type="date"
                 value={startDate}
                 onChange={(e) => handleStartDateChange(e.target.value)}
@@ -1348,8 +1353,8 @@ export function EventModal({
             </div>
             {!allDay && (
               <div>
-                <label className="text-sm font-medium mb-1 block">{t("form.start_time")}</label>
-                <input
+                <label htmlFor={labelFor("start_time")} className="text-sm font-medium mb-1 block">{t("form.start_time")}</label>
+                <input id={labelFor("start_time")}
                   type="time"
                   value={startTime}
                   onChange={(e) => handleStartTimeChange(e.target.value)}
@@ -1358,8 +1363,8 @@ export function EventModal({
               </div>
             )}
             <div>
-              <label className="text-sm font-medium mb-1 block">{t("form.end_date")}</label>
-              <input
+              <label htmlFor={labelFor("end_date")} className="text-sm font-medium mb-1 block">{t("form.end_date")}</label>
+              <input id={labelFor("end_date")}
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
@@ -1368,8 +1373,8 @@ export function EventModal({
             </div>
             {!allDay && (
               <div>
-                <label className="text-sm font-medium mb-1 block">{t("form.end_time")}</label>
-                <input
+                <label htmlFor={labelFor("end_time")} className="text-sm font-medium mb-1 block">{t("form.end_time")}</label>
+                <input id={labelFor("end_time")}
                   type="time"
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
@@ -1401,8 +1406,8 @@ export function EventModal({
 
           {selectableCalendars.length > 1 && (
             <div>
-              <label className="text-sm font-medium mb-1 block">{t("form.calendar_select")}</label>
-              <select
+              <label htmlFor={labelFor("calendar_select")} className="text-sm font-medium mb-1 block">{t("form.calendar_select")}</label>
+              <select id={labelFor("calendar_select")}
                 value={calendarId}
                 onChange={(e) => setCalendarId(e.target.value)}
                 className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
@@ -1417,9 +1422,9 @@ export function EventModal({
           )}
 
           <div>
-            <label className="text-sm font-medium mb-1 block">{t("recurrence.title")}</label>
+            <label htmlFor={labelFor("title-1")} className="text-sm font-medium mb-1 block">{t("recurrence.title")}</label>
             <div className="flex items-center gap-2">
-              <select
+              <select id={labelFor("title-1")}
                 value={recurrence}
                 onChange={(e) => {
                   const value = e.target.value as RecurrenceOption;

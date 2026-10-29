@@ -18,6 +18,8 @@ interface ParticipantInputProps {
   onAdd: (participant: Participant) => void;
   onRemove: (email: string) => void;
   disabled?: boolean;
+  /** The field's id, for the label above it. */
+  id?: string;
 }
 
 export interface ParticipantInputHandle {
@@ -26,7 +28,7 @@ export interface ParticipantInputHandle {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const ParticipantInput = forwardRef<ParticipantInputHandle, ParticipantInputProps>(function ParticipantInput({ participants, onAdd, onRemove, disabled }, ref) {
+export const ParticipantInput = forwardRef<ParticipantInputHandle, ParticipantInputProps>(function ParticipantInput({ participants, onAdd, onRemove, disabled, id }, ref) {
   const t = useTranslations("calendar.participants");
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState<Participant[]>([]);
@@ -143,6 +145,7 @@ export const ParticipantInput = forwardRef<ParticipantInputHandle, ParticipantIn
             otherwise offered logins for the e-mail placeholder. */}
         <Input
           ref={inputRef}
+          id={id}
           type="search"
           autoComplete="off"
           enterKeyHint="enter"
