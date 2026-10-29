@@ -360,12 +360,12 @@ function OtherDefaults({ policy, scopeId, onChange }: { policy: SettingsPolicy; 
       })}
       <div className="mt-3 flex flex-wrap items-end gap-2">
         <label className="block">
-          <span className="mb-1 block text-[11px] font-medium text-muted-foreground">Setting key</span>
+          <span className="mb-1 block text-[0.6875rem] font-medium text-muted-foreground">Setting key</span>
           <input type="text" value={key} onChange={(e) => setKey(e.target.value)} placeholder="dateFormat" autoComplete="off" spellCheck={false}
             className={cn(inputClass, 'w-48 font-mono')} />
         </label>
         <label className="block">
-          <span className="mb-1 block text-[11px] font-medium text-muted-foreground">Value</span>
+          <span className="mb-1 block text-[0.6875rem] font-medium text-muted-foreground">Value</span>
           <input type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="iso" autoComplete="off" spellCheck={false}
             className={cn(inputClass, 'w-40')} />
         </label>
