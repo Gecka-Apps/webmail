@@ -471,3 +471,57 @@ describe('FileBrowser', () => {
     expect(screen.getByRole('button', { name: 'details' })).toHaveAttribute('aria-pressed', 'false');
   });
 });
+
+describe('FileBrowser keyboard focus (SR-15)', () => {
+  beforeEach(() => {
+    localStorage.clear();
+    act(() => { useSettingsStore.setState({ filesSettings: DEFAULT_FILES_SETTINGS }); });
+  });
+  afterEach(() => {
+    act(() => { useFileStore.setState({ client: null, sharedRoots: [], allFolders: [] }); });
+  });
+
+  const rowOf = (name: string) => within(list()).getByText(name).closest('[role="row"]') as HTMLElement;
+
+  it('gives the list one tab stop, on the first item', () => {
+    renderBrowser();
+    expect(rowOf('Documents')).toHaveAttribute('tabindex', '0');
+    expect(rowOf('notes.txt')).toHaveAttribute('tabindex', '-1');
+  });
+
+  it('moves real focus with the arrow keys, so screen readers follow', () => {
+    renderBrowser();
+    fireEvent.keyDown(window, { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(rowOf('Documents'));
+    fireEvent.keyDown(document.activeElement!, { key: 'ArrowDown' });
+    expect(document.activeElement).toBe(rowOf('notes.txt'));
+    // The tab stop follows, so Tab out and back returns to the same item.
+    expect(rowOf('notes.txt')).toHaveAttribute('tabindex', '0');
+    expect(rowOf('Documents')).toHaveAttribute('tabindex', '-1');
+    fireEvent.keyDown(document.activeElement!, { key: 'Home' });
+    expect(document.activeElement).toBe(rowOf('Documents'));
+  });
+
+  it('nests the card view as grid, row group, row, cell', () => {
+    act(() => { useSettingsStore.setState({ filesSettings: { ...DEFAULT_FILES_SETTINGS, defaultViewMode: 'grid' } }); });
+    renderBrowser();
+    const grid = list();
+    expect(grid.querySelector('section')).toBeNull();
+    const groups = within(grid).getAllByRole('rowgroup');
+    expect(groups.map((g) => g.getAttribute('aria-label'))).toEqual(['folders', 'files_heading']);
+    for (const group of groups) {
+      expect(within(group).getByRole('row')).toBeInTheDocument();
+    }
+    const tile = within(grid).getByText('notes.txt').closest('[role="gridcell"]') as HTMLElement;
+    expect(tile.parentElement).toHaveAttribute('role', 'row');
+    fireEvent.keyDown(window, { key: 'End' });
+    expect(document.activeElement).toBe(tile);
+  });
+
+  it('shows an item\'s select box while the keyboard is in the item, not only on hover', () => {
+    renderBrowser();
+    const box = within(rowOf('notes.txt')).getByRole('checkbox');
+    expect(box.className).toContain('group-focus-within:opacity-100');
+    expect(box.className).toContain('pointer-coarse:opacity-100');
+  });
+});

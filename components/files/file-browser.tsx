@@ -704,7 +704,11 @@ export function FileBrowser({
       anchorName.current = name;
       onSetSelection(new Set([name]));
     }
-    scrollAreaRef.current?.querySelector(`[data-resource="${CSS.escape(name)}"]`)?.scrollIntoView?.({ block: "nearest" });
+    // Real focus, not just a ring: screen readers follow DOM focus and read
+    // the item (WCAG 4.1.2). Each item is a roving tab stop.
+    const el = scrollAreaRef.current?.querySelector<HTMLElement>(`[data-resource="${CSS.escape(name)}"]`);
+    el?.focus({ preventScroll: true });
+    el?.scrollIntoView?.({ block: "nearest" });
   }, [displayResources, focusedName, selectRange, onSetSelection]);
 
   // Columns in the grid's file section, for Up/Down.
@@ -967,6 +971,8 @@ export function FileBrowser({
     onShare: (r) => setShareTargetId(r.id),
     canShare,
     dragProps: itemDragProps,
+    // Tab onto an item: the arrows go on from there.
+    onFocusItem: (r) => setFocusedName(r.name),
   }), [handleSelectClick, handleToggleSelect, openResource, openItemMenu, onDownload, canShare, itemDragProps]);
 
   const handleSort = useCallback((key: SortKey) => {
@@ -1087,6 +1093,10 @@ export function FileBrowser({
       resources: displayResources,
       selected: selectedResources,
       focusedName: focusedName && (keyboardNav || selectedResources.has(focusedName)) ? focusedName : null,
+      // The one item Tab lands on: the last one moved to, else the first.
+      tabStopName: focusedName && displayResources.some((r) => r.name === focusedName)
+        ? focusedName
+        : displayResources[0]?.name ?? null,
       dropTarget,
       cutNames,
       starredPaths,

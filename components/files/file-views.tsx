@@ -22,12 +22,16 @@ export interface FileItemHandlers {
   onShare: (resource: FileResource) => void;
   canShare: (resource: FileResource) => boolean;
   dragProps: (resource: FileResource) => React.HTMLAttributes<HTMLElement> & { draggable?: boolean };
+  /** The item itself (not a button in it) took focus. */
+  onFocusItem: (resource: FileResource) => void;
 }
 
 export interface FileViewProps {
   resources: FileResource[];
   selected: Set<string>;
   focusedName: string | null;
+  /** The item that takes Tab; the arrow keys move focus from there. */
+  tabStopName: string | null;
   dropTarget: string | null;
   cutNames: Set<string>;
   starredPaths: Set<string>;
@@ -108,7 +112,9 @@ function SelectBox({ checked, visible, onToggle, label }: {
         // A 44px hit area on touch, as every Button has (R1).
         "relative pointer-coarse:after:absolute pointer-coarse:after:top-1/2 pointer-coarse:after:left-1/2 pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11 pointer-coarse:after:-translate-x-1/2 pointer-coarse:after:-translate-y-1/2",
         checked ? "bg-primary border-primary text-primary-foreground" : "border-muted-foreground/50 bg-background",
-        visible || checked ? "opacity-100" : "opacity-0 group-hover:opacity-100 focus-visible:opacity-100",
+        // Shown on hover, and also when the keyboard is in the item or on a
+        // touch screen, where there is no hover (WCAG 2.4.7).
+        visible || checked ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 pointer-coarse:opacity-100",
       )}
     >
       {checked && <Check className="w-3 h-3" strokeWidth={3} />}
@@ -142,7 +148,7 @@ function SortHeader({ label, column, sortKey, sortDir, onSort, className }: {
 const LIST_COLUMNS = "grid grid-cols-[auto_minmax(0,1fr)_auto] sm:grid-cols-[auto_minmax(0,1fr)_5.5rem_auto] md:grid-cols-[auto_minmax(0,1fr)_9rem_5.5rem_auto] items-center gap-x-3";
 
 export function FileListView({
-  resources, selected, focusedName, dropTarget, cutNames, starredPaths, pathOf, touch, iconOptions, getImageUrl, handlers,
+  resources, selected, focusedName, tabStopName, dropTarget, cutNames, starredPaths, pathOf, touch, iconOptions, getImageUrl, handlers,
   sortKey, sortDir, onSort, allSelected, someSelected, onToggleAll, itemNote, dateLabel,
 }: FileViewProps & {
   sortKey: SortKey;
@@ -182,6 +188,7 @@ export function FileListView({
           resource={resource}
           isSelected={selected.has(resource.name)}
           isFocused={focusedName === resource.name}
+          isTabStop={tabStopName === resource.name}
           isDropTarget={dropTarget === resource.name}
           isCut={cutNames.has(resource.name)}
           isStarred={resource.isDirectory && starredPaths.has(pathOf(resource))}
@@ -197,10 +204,11 @@ export function FileListView({
   );
 }
 
-function FileListRow({ resource, isSelected, isFocused, isDropTarget, isCut, isStarred, selecting, touch, iconOptions, getImageUrl, handlers, note }: {
+function FileListRow({ resource, isSelected, isFocused, isTabStop, isDropTarget, isCut, isStarred, selecting, touch, iconOptions, getImageUrl, handlers, note }: {
   resource: FileResource;
   isSelected: boolean;
   isFocused: boolean;
+  isTabStop: boolean;
   isDropTarget: boolean;
   isCut: boolean;
   isStarred: boolean;
@@ -219,7 +227,8 @@ function FileListRow({ resource, isSelected, isFocused, isDropTarget, isCut, isS
       role="row"
       aria-selected={isSelected}
       data-resource={resource.name}
-      tabIndex={-1}
+      tabIndex={isTabStop ? 0 : -1}
+      onFocus={(e) => { if (e.target === e.currentTarget) handlers.onFocusItem(resource); }}
       {...handlers.dragProps(resource)}
       onClick={(e) => handlers.onSelectClick(resource, e)}
       onDoubleClick={() => handlers.onOpen(resource)}
@@ -319,7 +328,7 @@ function RowAction({ icon: Icon, label, onClick }: { icon: React.ComponentType<{
 }
 
 export function FileGridView({
-  resources, selected, focusedName, dropTarget, cutNames, starredPaths, pathOf, touch, iconOptions, getImageUrl, handlers,
+  resources, selected, focusedName, tabStopName, dropTarget, cutNames, starredPaths, pathOf, touch, iconOptions, getImageUrl, handlers,
 }: FileViewProps) {
   const t = useTranslations("files");
   const folders = resources.filter((r) => r.isDirectory);
@@ -329,8 +338,11 @@ export function FileGridView({
   return (
     <div role="grid" aria-label={t("file_list")} aria-multiselectable className="p-4 space-y-5">
       {folders.length > 0 && (
-        <section aria-label={t("folders")}>
-          <h2 className="text-xs font-medium text-muted-foreground mb-2 px-0.5">{t("folders")}</h2>
+        // A row group, not a <section>: a grid holds rows and row groups only.
+        // The group carries the name, so the visible heading is hidden from
+        // screen readers rather than read twice.
+        <div role="rowgroup" aria-label={t("folders")}>
+          <h3 aria-hidden="true" className="text-xs font-medium text-muted-foreground mb-2 px-0.5">{t("folders")}</h3>
           <div role="row" className="grid grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-2">
             {folders.map((resource) => (
               <FolderTile
@@ -338,6 +350,7 @@ export function FileGridView({
                 resource={resource}
                 isSelected={selected.has(resource.name)}
                 isFocused={focusedName === resource.name}
+                isTabStop={tabStopName === resource.name}
                 isDropTarget={dropTarget === resource.name}
                 isCut={cutNames.has(resource.name)}
                 isStarred={starredPaths.has(pathOf(resource))}
@@ -345,11 +358,11 @@ export function FileGridView({
               />
             ))}
           </div>
-        </section>
+        </div>
       )}
       {files.length > 0 && (
-        <section aria-label={t("files_heading")}>
-          {folders.length > 0 && <h2 className="text-xs font-medium text-muted-foreground mb-2 px-0.5">{t("files_heading")}</h2>}
+        <div role="rowgroup" aria-label={t("files_heading")}>
+          {folders.length > 0 && <h3 aria-hidden="true" className="text-xs font-medium text-muted-foreground mb-2 px-0.5">{t("files_heading")}</h3>}
           <div role="row" className="grid grid-cols-[repeat(auto-fill,minmax(9.5rem,1fr))] gap-3">
             {files.map((resource) => (
               <FileTile
@@ -357,12 +370,13 @@ export function FileGridView({
                 resource={resource}
                 isSelected={selected.has(resource.name)}
                 isFocused={focusedName === resource.name}
+                isTabStop={tabStopName === resource.name}
                 isCut={cutNames.has(resource.name)}
                 {...common}
               />
             ))}
           </div>
-        </section>
+        </div>
       )}
     </div>
   );
@@ -372,6 +386,7 @@ interface TileProps {
   resource: FileResource;
   isSelected: boolean;
   isFocused: boolean;
+  isTabStop: boolean;
   isCut: boolean;
   selecting: boolean;
   touch: boolean;
@@ -380,7 +395,7 @@ interface TileProps {
   handlers: FileItemHandlers;
 }
 
-function FolderTile({ resource, isSelected, isFocused, isDropTarget, isCut, isStarred, selecting, touch, iconOptions, handlers }: TileProps & { isDropTarget: boolean; isStarred: boolean }) {
+function FolderTile({ resource, isSelected, isFocused, isTabStop, isDropTarget, isCut, isStarred, selecting, touch, iconOptions, handlers }: TileProps & { isDropTarget: boolean; isStarred: boolean }) {
   const t = useTranslations("files");
   const touchProps = useTouchPress(touch, selecting, resource, handlers);
   return (
@@ -388,6 +403,8 @@ function FolderTile({ resource, isSelected, isFocused, isDropTarget, isCut, isSt
       role="gridcell"
       aria-selected={isSelected}
       data-resource={resource.name}
+      tabIndex={isTabStop ? 0 : -1}
+      onFocus={(e) => { if (e.target === e.currentTarget) handlers.onFocusItem(resource); }}
       {...handlers.dragProps(resource)}
       onClick={(e) => handlers.onSelectClick(resource, e)}
       onDoubleClick={() => handlers.onOpen(resource)}
@@ -401,7 +418,7 @@ function FolderTile({ resource, isSelected, isFocused, isDropTarget, isCut, isSt
       )}
     >
       {(selecting || !touch) && (
-        <span className={cn("absolute -top-1.5 -start-1.5", !(selecting || isSelected) && "opacity-0 group-hover:opacity-100")}>
+        <span className={cn("absolute -top-1.5 -start-1.5", !(selecting || isSelected) && "opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-coarse:opacity-100")}>
           <SelectBox checked={isSelected} visible onToggle={() => handlers.onToggleSelect(resource)} label={t("select_item", { name: resource.name })} />
         </span>
       )}
@@ -431,7 +448,7 @@ function FolderTile({ resource, isSelected, isFocused, isDropTarget, isCut, isSt
   );
 }
 
-function FileTile({ resource, isSelected, isFocused, isCut, selecting, touch, iconOptions, getImageUrl, handlers }: TileProps) {
+function FileTile({ resource, isSelected, isFocused, isTabStop, isCut, selecting, touch, iconOptions, getImageUrl, handlers }: TileProps) {
   const t = useTranslations("files");
   const touchProps = useTouchPress(touch, selecting, resource, handlers);
   const bigIcon = <ResourceIcon resource={resource} size="xl" options={iconOptions} />;
@@ -440,6 +457,8 @@ function FileTile({ resource, isSelected, isFocused, isCut, selecting, touch, ic
       role="gridcell"
       aria-selected={isSelected}
       data-resource={resource.name}
+      tabIndex={isTabStop ? 0 : -1}
+      onFocus={(e) => { if (e.target === e.currentTarget) handlers.onFocusItem(resource); }}
       {...handlers.dragProps(resource)}
       onClick={(e) => handlers.onSelectClick(resource, e)}
       onDoubleClick={() => handlers.onOpen(resource)}
@@ -464,7 +483,7 @@ function FileTile({ resource, isSelected, isFocused, isCut, selecting, touch, ic
         ) : bigIcon}
       </div>
       {(selecting || !touch) && (
-        <span className={cn("absolute top-2 start-2", !(selecting || isSelected) && "opacity-0 group-hover:opacity-100")}>
+        <span className={cn("absolute top-2 start-2", !(selecting || isSelected) && "opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 pointer-coarse:opacity-100")}>
           <SelectBox checked={isSelected} visible onToggle={() => handlers.onToggleSelect(resource)} label={t("select_item", { name: resource.name })} />
         </span>
       )}
