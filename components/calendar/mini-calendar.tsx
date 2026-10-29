@@ -252,7 +252,7 @@ export function MiniCalendar({
                 {showWeekNumbers && (
                   <th
                     scope="row"
-                    className="w-5 p-0 text-center text-[9px] text-muted-foreground/60 font-medium"
+                    className="w-5 p-0 text-center text-[9px] text-muted-foreground font-medium"
                   >
                     <span aria-hidden="true">{weekNumberOf(week[0])}</span>
                     <span className="sr-only">{t("mini_week_number", { week: weekNumberOf(week[0]) })}</span>
@@ -281,7 +281,9 @@ export function MiniCalendar({
                         <span
                           className={cn(
                             "relative flex items-center justify-center w-7 h-7 rounded-full transition-colors",
-                            !inMonth && "text-muted-foreground/40",
+                            // Other months' days in the muted text colour, which
+                            // still reads at 4.5:1 (a faded one did not).
+                            !inMonth && "text-muted-foreground",
                             // Today is the filled circle; the selected day is tinted.
                             today && "bg-primary text-primary-foreground font-semibold",
                             selected && !today && "bg-primary/15 text-primary font-semibold",
@@ -350,7 +352,7 @@ export function MiniCalendar({
                   "py-2 text-xs rounded-md transition-colors",
                   isSelected && "bg-primary text-primary-foreground",
                   !isSelected && isCurrentYear && "font-bold text-primary",
-                  !isSelected && !isCurrentYear && !inDecade && "text-muted-foreground/40",
+                  !isSelected && !isCurrentYear && !inDecade && "text-muted-foreground",
                   !isSelected && !isCurrentYear && "hover:bg-muted"
                 )}
               >

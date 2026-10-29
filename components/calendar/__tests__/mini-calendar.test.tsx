@@ -85,6 +85,13 @@ describe('MiniCalendar', () => {
     expect(document.activeElement).toBe(day(/October 5, 2026/));
   });
 
+  it("draws other months' days in a colour that keeps text contrast, not a faded one", () => {
+    render(<Harness />);
+    const circle = day(/September 28, 2026/).firstElementChild!;
+    expect(circle.className).toContain('text-muted-foreground');
+    expect(circle.className).not.toMatch(/text-muted-foreground\/\d+/);
+  });
+
   it('tells which month is selected in the month picker', () => {
     render(<Harness />);
     fireEvent.click(screen.getByRole('button', { name: /October 2026/ }));

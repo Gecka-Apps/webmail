@@ -433,7 +433,7 @@ export function CalendarMonthView({
                 >
                   <div className="flex items-center justify-center gap-1 mb-0.5">
                     {firstOfMonth && (
-                      <span className={cn("text-[10px] font-medium", inMonth ? "text-muted-foreground" : "text-muted-foreground/60")}>
+                      <span className="text-[10px] font-medium text-muted-foreground">
                         {t(`months.${monthLabelKeys[getMonth(day)]}`)}
                       </span>
                     )}
@@ -456,7 +456,9 @@ export function CalendarMonthView({
                         isMobile ? "w-7 h-7 text-xs" : "w-6 h-6 text-xs",
                         today && "bg-primary text-primary-foreground font-bold",
                         selected && !today && "bg-primary/15 text-primary font-bold",
-                        !inMonth && !selected && !today && "text-muted-foreground/50",
+                        // Readable at 4.5:1 like any text; the muted colour
+                        // still sets other months apart.
+                        !inMonth && !selected && !today && "text-muted-foreground",
                         inMonth && !selected && !today && "font-medium",
                         !today && !isMobile && "hover:bg-muted"
                       )}
