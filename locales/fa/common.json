@@ -1032,7 +1032,11 @@
     "body_label": "پیام",
     "attachment_uploading": "در حال بارگذاری",
     "attachment_upload_failed": "بارگذاری ناموفق بود",
-    "attachment_progress": "{percent}٪ بارگذاری شد"
+    "attachment_progress": "{percent}٪ بارگذاری شد",
+    "send_confirm": {
+      "title": "این پیام ارسال شود؟",
+      "message": "برای {count, plural, one {# گیرنده} other {# گیرنده}} فرستاده می‌شود."
+    }
   },
   "confirm_dialog": {
     "confirm": "تأیید",

@@ -1032,7 +1032,11 @@
     "body_label": "Bericht",
     "attachment_uploading": "Uploaden",
     "attachment_upload_failed": "Uploaden mislukt",
-    "attachment_progress": "{percent}% geüpload"
+    "attachment_progress": "{percent}% geüpload",
+    "send_confirm": {
+      "title": "Dit bericht versturen?",
+      "message": "Het gaat naar {count, plural, one {# ontvanger} other {# ontvangers}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Bevestigen",

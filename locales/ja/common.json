@@ -1032,7 +1032,11 @@
     "body_label": "メッセージ",
     "attachment_uploading": "アップロード中",
     "attachment_upload_failed": "アップロードに失敗しました",
-    "attachment_progress": "{percent}% アップロード済み"
+    "attachment_progress": "{percent}% アップロード済み",
+    "send_confirm": {
+      "title": "このメッセージを送信しますか？",
+      "message": "{count, plural, other {# 件の宛先}}に送信されます。"
+    }
   },
   "confirm_dialog": {
     "confirm": "確認",

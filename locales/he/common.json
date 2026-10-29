@@ -997,7 +997,11 @@
     "body_label": "הודעה",
     "attachment_uploading": "מעלה",
     "attachment_upload_failed": "ההעלאה נכשלה",
-    "attachment_progress": "{percent}% הועלו"
+    "attachment_progress": "{percent}% הועלו",
+    "send_confirm": {
+      "title": "לשלוח את ההודעה?",
+      "message": "היא תישלח אל {count, plural, one {נמען אחד} two {שני נמענים} other {# נמענים}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "אשר",

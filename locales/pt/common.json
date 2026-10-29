@@ -1032,7 +1032,11 @@
     "body_label": "Mensagem",
     "attachment_uploading": "Enviando",
     "attachment_upload_failed": "Falha no envio",
-    "attachment_progress": "{percent}% enviado"
+    "attachment_progress": "{percent}% enviado",
+    "send_confirm": {
+      "title": "Enviar esta mensagem?",
+      "message": "Ela vai para {count, plural, one {# destinatário} other {# destinatários}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Confirmar",

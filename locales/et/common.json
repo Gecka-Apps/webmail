@@ -1032,7 +1032,11 @@
     "body_label": "Sõnum",
     "attachment_uploading": "Üleslaadimine",
     "attachment_upload_failed": "Üleslaadimine ebaõnnestus",
-    "attachment_progress": "{percent}% üles laaditud"
+    "attachment_progress": "{percent}% üles laaditud",
+    "send_confirm": {
+      "title": "Kas saata see sõnum?",
+      "message": "See läheb {count, plural, one {# saajale} other {# saajale}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Kinnita",

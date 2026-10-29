@@ -1032,7 +1032,11 @@
     "body_label": "Besked",
     "attachment_uploading": "Uploader",
     "attachment_upload_failed": "Upload mislykkedes",
-    "attachment_progress": "{percent} % uploadet"
+    "attachment_progress": "{percent} % uploadet",
+    "send_confirm": {
+      "title": "Send denne besked?",
+      "message": "Den sendes til {count, plural, one {# modtager} other {# modtagere}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Bekræft",

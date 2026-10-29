@@ -1032,7 +1032,11 @@
     "body_label": "Melding",
     "attachment_uploading": "Laster opp",
     "attachment_upload_failed": "Opplastingen mislyktes",
-    "attachment_progress": "{percent} % lastet opp"
+    "attachment_progress": "{percent} % lastet opp",
+    "send_confirm": {
+      "title": "Vil du sende denne meldingen?",
+      "message": "Den sendes til {count, plural, one {# mottaker} other {# mottakere}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Bekreft",

@@ -1032,7 +1032,11 @@
     "body_label": "邮件正文",
     "attachment_uploading": "正在上传",
     "attachment_upload_failed": "上传失败",
-    "attachment_progress": "已上传 {percent}%"
+    "attachment_progress": "已上传 {percent}%",
+    "send_confirm": {
+      "title": "发送这封邮件？",
+      "message": "将发送给 {count, plural, other {# 位收件人}}。"
+    }
   },
   "confirm_dialog": {
     "confirm": "确认",

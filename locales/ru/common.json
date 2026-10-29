@@ -1032,7 +1032,11 @@
     "body_label": "Сообщение",
     "attachment_uploading": "Загрузка",
     "attachment_upload_failed": "Не удалось загрузить",
-    "attachment_progress": "Загружено {percent}%"
+    "attachment_progress": "Загружено {percent}%",
+    "send_confirm": {
+      "title": "Отправить это сообщение?",
+      "message": "Его получат {count, plural, one {# получатель} few {# получателя} many {# получателей} other {# получателя}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Подтвердить",

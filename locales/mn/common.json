@@ -1032,7 +1032,11 @@
     "body_label": "Мессеж",
     "attachment_uploading": "Байршуулж байна",
     "attachment_upload_failed": "Байршуулж чадсангүй",
-    "attachment_progress": "{percent}% байршуулсан"
+    "attachment_progress": "{percent}% байршуулсан",
+    "send_confirm": {
+      "title": "Энэ мессежийг илгээх үү?",
+      "message": "{count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} руу илгээгдэнэ."
+    }
   },
   "confirm_dialog": {
     "confirm": "Баталгаажуулах",

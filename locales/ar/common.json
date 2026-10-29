@@ -1032,7 +1032,11 @@
     "body_label": "الرسالة",
     "attachment_uploading": "جارٍ الرفع",
     "attachment_upload_failed": "فشل الرفع",
-    "attachment_progress": "تم رفع {percent}%"
+    "attachment_progress": "تم رفع {percent}%",
+    "send_confirm": {
+      "title": "هل تريد إرسال هذه الرسالة؟",
+      "message": "ستُرسل إلى {count, plural, zero {لا أحد} one {مستلم واحد} two {مستلمَين} few {# مستلمين} many {# مستلمًا} other {# مستلم}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "تأكيد",

@@ -1032,7 +1032,11 @@
     "body_label": "İleti",
     "attachment_uploading": "Yükleniyor",
     "attachment_upload_failed": "Yükleme başarısız",
-    "attachment_progress": "%{percent} yüklendi"
+    "attachment_progress": "%{percent} yüklendi",
+    "send_confirm": {
+      "title": "Bu ileti gönderilsin mi?",
+      "message": "{count, plural, one {# alıcıya} other {# alıcıya}} gidecek."
+    }
   },
   "confirm_dialog": {
     "confirm": "Onayla",

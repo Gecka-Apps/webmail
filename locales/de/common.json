@@ -1032,7 +1032,11 @@
     "body_label": "Nachricht",
     "attachment_uploading": "Wird hochgeladen",
     "attachment_upload_failed": "Hochladen fehlgeschlagen",
-    "attachment_progress": "{percent} % hochgeladen"
+    "attachment_progress": "{percent} % hochgeladen",
+    "send_confirm": {
+      "title": "Diese Nachricht senden?",
+      "message": "Sie geht an {count, plural, one {# Empfänger} other {# Empfänger}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Bestätigen",

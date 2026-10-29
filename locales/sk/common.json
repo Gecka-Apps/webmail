@@ -1032,7 +1032,11 @@
     "body_label": "Správa",
     "attachment_uploading": "Nahráva sa",
     "attachment_upload_failed": "Nahrávanie zlyhalo",
-    "attachment_progress": "Nahraté {percent} %"
+    "attachment_progress": "Nahraté {percent} %",
+    "send_confirm": {
+      "title": "Odoslať túto správu?",
+      "message": "Pôjde {count, plural, one {# príjemcovi} few {# príjemcom} many {# príjemcom} other {# príjemcom}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Potvrdiť",

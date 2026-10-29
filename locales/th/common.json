@@ -1280,7 +1280,11 @@
     "body_label": "ข้อความ",
     "attachment_uploading": "กำลังอัปโหลด",
     "attachment_upload_failed": "อัปโหลดไม่สำเร็จ",
-    "attachment_progress": "อัปโหลดแล้ว {percent}%"
+    "attachment_progress": "อัปโหลดแล้ว {percent}%",
+    "send_confirm": {
+      "title": "ส่งข้อความนี้หรือไม่",
+      "message": "จะส่งถึงผู้รับ {count, plural, other {# คน}}"
+    }
   },
   "email_viewer": {
     "read_receipt": {

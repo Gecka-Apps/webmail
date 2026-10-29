@@ -1032,7 +1032,11 @@
     "body_label": "Mesaj",
     "attachment_uploading": "Se încarcă",
     "attachment_upload_failed": "Încărcarea a eșuat",
-    "attachment_progress": "{percent}% încărcat"
+    "attachment_progress": "{percent}% încărcat",
+    "send_confirm": {
+      "title": "Trimiteți acest mesaj?",
+      "message": "Va fi trimis către {count, plural, one {# destinatar} few {# destinatari} other {# de destinatari}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Confirmare",

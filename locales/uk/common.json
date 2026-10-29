@@ -1032,7 +1032,11 @@
     "body_label": "Повідомлення",
     "attachment_uploading": "Завантаження",
     "attachment_upload_failed": "Не вдалося завантажити",
-    "attachment_progress": "Завантажено {percent}%"
+    "attachment_progress": "Завантажено {percent}%",
+    "send_confirm": {
+      "title": "Надіслати це повідомлення?",
+      "message": "Його отримають {count, plural, one {# одержувач} few {# одержувачі} many {# одержувачів} other {# одержувача}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Підтвердити",

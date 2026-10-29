@@ -1032,7 +1032,11 @@
     "body_label": "Messaggio",
     "attachment_uploading": "Caricamento",
     "attachment_upload_failed": "Caricamento non riuscito",
-    "attachment_progress": "{percent}% caricato"
+    "attachment_progress": "{percent}% caricato",
+    "send_confirm": {
+      "title": "Inviare questo messaggio?",
+      "message": "Verrà inviato a {count, plural, one {# destinatario} other {# destinatari}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Conferma",

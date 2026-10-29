@@ -1032,7 +1032,11 @@
     "body_label": "Üzenet",
     "attachment_uploading": "Feltöltés",
     "attachment_upload_failed": "A feltöltés nem sikerült",
-    "attachment_progress": "{percent}% feltöltve"
+    "attachment_progress": "{percent}% feltöltve",
+    "send_confirm": {
+      "title": "Elküldi ezt az üzenetet?",
+      "message": "{count, plural, one {# címzett} other {# címzett}} kapja meg."
+    }
   },
   "confirm_dialog": {
     "confirm": "Megerősítés",

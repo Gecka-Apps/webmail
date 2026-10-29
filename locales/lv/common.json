@@ -1032,7 +1032,11 @@
     "body_label": "Ziņojums",
     "attachment_uploading": "Augšupielādē",
     "attachment_upload_failed": "Augšupielāde neizdevās",
-    "attachment_progress": "Augšupielādēti {percent}%"
+    "attachment_progress": "Augšupielādēti {percent}%",
+    "send_confirm": {
+      "title": "Vai sūtīt šo ziņojumu?",
+      "message": "Tas tiks nosūtīts {count, plural, zero {# adresātiem} one {# adresātam} other {# adresātiem}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Apstiprināt",

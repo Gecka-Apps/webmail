@@ -1032,7 +1032,11 @@
     "body_label": "Wiadomość",
     "attachment_uploading": "Przesyłanie",
     "attachment_upload_failed": "Przesyłanie nie powiodło się",
-    "attachment_progress": "Przesłano {percent}%"
+    "attachment_progress": "Przesłano {percent}%",
+    "send_confirm": {
+      "title": "Wysłać tę wiadomość?",
+      "message": "Trafi do {count, plural, one {# odbiorcy} few {# odbiorców} many {# odbiorców} other {# odbiorcy}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Potwierdź",

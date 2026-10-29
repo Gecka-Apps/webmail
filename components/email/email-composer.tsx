@@ -494,6 +494,8 @@ export function EmailComposer({
   const attachmentReminderKeywords = useSettingsStore((state) => state.attachmentReminderKeywords);
   const emptySubjectWarningEnabled = useSettingsStore((state) => state.emptySubjectWarningEnabled);
   const placeholderWarningEnabled = useSettingsStore((state) => state.placeholderWarningEnabled);
+  // "Confirm before sending" (an admin can lock it; the store applies the lock).
+  const sendConfirmation = useSettingsStore((state) => state.sendConfirmation);
   const recipientMentionsEnabled = useSettingsStore((state) => state.recipientMentionsEnabled);
   const mentionAddsRecipientTo = useSettingsStore((state) => state.mentionAddsRecipientTo);
   const updateSetting = useSettingsStore((state) => state.updateSetting);
@@ -1027,6 +1029,7 @@ export function EmailComposer({
   const [showScheduleDialog, setShowScheduleDialog] = useState(false);
   // Asks before sending at once when the account can't hold a message back.
   const { dialogProps: noDelayDialogProps, confirm: confirmNoDelay } = useConfirmDialog();
+  const { dialogProps: sendConfirmDialogProps, confirm: confirmSend } = useConfirmDialog();
   // Send's menu (schedule, plugins): the ContextMenu, as every menu (R6).
   const sendMenu = useContextMenu<null>();
   const showSendMenu = sendMenu.contextMenu.isOpen;
@@ -3362,6 +3365,26 @@ export function EmailComposer({
     }
     if (!checksPassed) return;
 
+    // The last question before it goes: "Send this message?" when the user
+    // (or the admin) turned that on. Asked after every other check, so a
+    // warning answered first doesn't ask it twice. Clicks meanwhile do nothing.
+    if (sendConfirmation) {
+      preSendCheckingRef.current = true;
+      let confirmed = false;
+      try {
+        confirmed = await confirmSend({
+          title: t('send_confirm.title'),
+          message: t('send_confirm.message', {
+            count: toAddresses.length + ccAddresses.length + expandRecipients(withInput(bcc, bccInput)).length,
+          }),
+          confirmText: t('send'),
+        });
+      } finally {
+        preSendCheckingRef.current = false;
+      }
+      if (!confirmed) return;
+    }
+
     // Past every "don't send" early return - mark the send in flight so a
     // second click is a no-op until this resolves (reset in the finally below).
     isSendingRef.current = true;
@@ -4967,6 +4990,7 @@ export function EmailComposer({
       </Dialog>
 
       <ConfirmDialog {...noDelayDialogProps} />
+      <ConfirmDialog {...sendConfirmDialogProps} />
 
       <Dialog
         isOpen={showPlaceholderWarning}

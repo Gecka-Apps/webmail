@@ -1032,7 +1032,11 @@
     "body_label": "Missatge",
     "attachment_uploading": "S'està pujant",
     "attachment_upload_failed": "No s'ha pogut pujar",
-    "attachment_progress": "{percent}% pujat"
+    "attachment_progress": "{percent}% pujat",
+    "send_confirm": {
+      "title": "Voleu enviar aquest missatge?",
+      "message": "S'enviarà a {count, plural, one {# destinatari} other {# destinataris}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Confirma",

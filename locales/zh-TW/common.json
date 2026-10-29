@@ -1032,7 +1032,11 @@
     "body_label": "郵件內容",
     "attachment_uploading": "正在上傳",
     "attachment_upload_failed": "上傳失敗",
-    "attachment_progress": "已上傳 {percent}%"
+    "attachment_progress": "已上傳 {percent}%",
+    "send_confirm": {
+      "title": "要傳送這封郵件嗎？",
+      "message": "將傳送給 {count, plural, other {# 位收件者}}。"
+    }
   },
   "confirm_dialog": {
     "confirm": "確認",

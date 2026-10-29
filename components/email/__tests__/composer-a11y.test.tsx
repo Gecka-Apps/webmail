@@ -404,3 +404,43 @@ describe('attachment uploads (SR-16)', () => {
     expect(liveRegion()).toHaveTextContent('upload_failed:report.pdf');
   });
 });
+
+describe('confirm before sending (MO-16)', () => {
+  const READY = { ...DRAFT, to: 'bob@example.com, carol@example.com' };
+
+  it('sends straight away while the setting is off', async () => {
+    const onSend = vi.fn();
+    render(<EmailComposer initialData={READY} onSend={onSend} />);
+    fireEvent.click(screen.getAllByTestId('composer-send')[0]);
+    await waitFor(() => expect(onSend).toHaveBeenCalledTimes(1));
+    expect(screen.queryByRole('alertdialog')).toBeNull();
+  });
+
+  it('asks first when it is on, and sends only after the user confirms', async () => {
+    settings.sendConfirmation = true;
+    const onSend = vi.fn();
+    render(<EmailComposer initialData={READY} onSend={onSend} />);
+    fireEvent.click(screen.getAllByTestId('composer-send')[0]);
+
+    const dialog = await screen.findByRole('alertdialog');
+    expect(dialog).toHaveTextContent('send_confirm.title');
+    expect(dialog).toHaveTextContent('send_confirm.message:2');
+    expect(onSend).not.toHaveBeenCalled();
+
+    fireEvent.click(within(dialog).getByRole('button', { name: 'send' }));
+    await waitFor(() => expect(onSend).toHaveBeenCalledTimes(1));
+  });
+
+  it('asks on Ctrl+Enter too, and does not send when cancelled', async () => {
+    settings.sendConfirmation = true;
+    const onSend = vi.fn();
+    render(<EmailComposer initialData={READY} onSend={onSend} />);
+    fireEvent.keyDown(screen.getByTestId('composer-subject'), { key: 'Enter', ctrlKey: true });
+
+    const dialog = await screen.findByRole('alertdialog');
+    fireEvent.keyDown(dialog, { key: 'Escape' });
+    await waitFor(() => expect(screen.queryByRole('alertdialog')).toBeNull());
+    await act(async () => {});
+    expect(onSend).not.toHaveBeenCalled();
+  });
+});

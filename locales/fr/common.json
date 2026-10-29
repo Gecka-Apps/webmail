@@ -1032,7 +1032,11 @@
     "body_label": "Message",
     "attachment_uploading": "Téléversement",
     "attachment_upload_failed": "Échec du téléversement",
-    "attachment_progress": "{percent} % téléversé"
+    "attachment_progress": "{percent} % téléversé",
+    "send_confirm": {
+      "title": "Envoyer ce message ?",
+      "message": "Il sera envoyé à {count, plural, one {# destinataire} other {# destinataires}}."
+    }
   },
   "confirm_dialog": {
     "confirm": "Confirmer",
