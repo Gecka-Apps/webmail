@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo, useId } from "react";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { useTranslations } from "next-intl";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
@@ -971,32 +972,63 @@ export function FilesApp({ linkSegments: routeSegments }: FilesAppProps = {}) {
 
       {/* Legacy file migration progress (issue #379) */}
       {migrationProgress && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="w-[22rem] max-w-[90vw] rounded-lg border border-border bg-background p-6 shadow-xl">
-            <div className="flex items-center gap-3">
-              <Loader2 className="w-5 h-5 text-primary animate-spin shrink-0" />
-              <div>
-                <p className="text-sm font-medium">{t("migration_title")}</p>
-                <p className="text-xs text-muted-foreground">{t("migration_description")}</p>
-              </div>
-            </div>
-            <div className="mt-4 h-1.5 bg-primary/20 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-primary rounded-full transition-all duration-300"
-                style={{ width: migrationProgress.total > 0
-                  ? `${(migrationProgress.current / migrationProgress.total) * 100}%`
-                  : '0%' }}
-              />
-            </div>
-            <p className="mt-2 text-xs text-muted-foreground tabular-nums text-end">
-              {migrationProgress.current} / {migrationProgress.total}
-            </p>
-          </div>
-        </div>
+        <MigrationOverlay
+          title={t("migration_title")}
+          description={t("migration_description")}
+          current={migrationProgress.current}
+          total={migrationProgress.total}
+        />
       )}
 
       <SidebarAppsModal isOpen={showAppsModal} onClose={closeAppsModal} />
       <ConfirmDialog {...confirmDialogProps} />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * The legacy file migration (#379) blocks the Files app until it is done: a
+ * modal with no buttons that holds the focus, so a screen reader reads its
+ * title, and a progress bar it can follow.
+ */
+function MigrationOverlay({ title, description, current, total }: { title: string; description: string; current: number; total: number }) {
+  const id = useId();
+  const panelRef = useFocusTrap({ isActive: true, restoreFocus: true, initialFocus: () => panelRef.current });
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+      <div
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`${id}-title`}
+        aria-describedby={`${id}-description`}
+        className="w-[22rem] max-w-[90vw] rounded-lg border border-border bg-background p-6 shadow-xl outline-none"
+      >
+        <div className="flex items-center gap-3">
+          <Loader2 className="w-5 h-5 text-primary animate-spin shrink-0" aria-hidden="true" />
+          <div>
+            <p id={`${id}-title`} className="text-sm font-medium">{title}</p>
+            <p id={`${id}-description`} className="text-xs text-muted-foreground">{description}</p>
+          </div>
+        </div>
+        <div
+          role="progressbar"
+          aria-labelledby={`${id}-title`}
+          aria-valuemin={0}
+          aria-valuemax={total}
+          aria-valuenow={current}
+          aria-valuetext={`${current} / ${total}`}
+          className="mt-4 h-1.5 bg-primary/20 rounded-full overflow-hidden"
+        >
+          <div
+            className="h-full bg-primary rounded-full transition-all duration-300"
+            style={{ width: total > 0 ? `${(current / total) * 100}%` : '0%' }}
+          />
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground tabular-nums text-end" aria-hidden="true">
+          {current} / {total}
+        </p>
       </div>
     </div>
   );

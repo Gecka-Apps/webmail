@@ -4,6 +4,7 @@ import { useEffect, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { ChevronLeft, ChevronRight, Download, X } from "@/components/icons";
 import { IconButton } from "@/components/ui/icon-button";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 
 export interface PreviewNeighbours {
   /** The previous and next previewable file of the folder, if any. */
@@ -31,6 +32,9 @@ interface PreviewShellProps {
  */
 export function PreviewShell({ name, onClose, onDownload, actions, neighbours, closeOnBackdrop = true, children }: PreviewShellProps) {
   const t = useTranslations("files");
+  // Tab stays in the preview and the focus goes back to the file that was
+  // opened when it closes. Escape is the listener below.
+  const shellRef = useFocusTrap({ isActive: true, restoreFocus: true });
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -67,6 +71,7 @@ export function PreviewShell({ name, onClose, onDownload, actions, neighbours, c
 
   return (
     <div
+      ref={shellRef}
       role="dialog"
       aria-modal="true"
       aria-label={name}

@@ -102,6 +102,7 @@ import {
 import { useLiteLinkSegments } from "@/hooks/use-lite-link-segments";
 import { findMeetingLink } from "@/lib/event-links";
 import { useDocumentTitle } from "@/hooks/use-document-title";
+import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { MvTopBar } from "@/components/layout/mv-top-bar";
 import { useMountainViewShell } from "@/hooks/use-mountain-view-shell";
 import { calendarHooks } from "@/lib/plugin-hooks";
@@ -955,6 +956,10 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
   // that renders while Pro takes over a route stays silent.
   const isFocusedProTab = useIsFocusedProTab();
   const isPaneScoped = useIsPaneScoped();
+  // The phone's full-screen task editor: Tab stays in it and the focus goes
+  // back to the button that opened it. Escape is the editor's own (it asks
+  // about unsaved changes).
+  const mobileTaskEditorRef = useFocusTrap({ isActive: showTaskModal && isMobile, restoreFocus: true });
   const eventLinkId = showEventModal && editEvent ? editEvent.id : null;
   const calendarLinkPath = appPath(buildCalendarPath({
     view: normalizedViewMode,
@@ -2434,6 +2439,7 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
       {/* Mobile task editor: full screen, like the event editor. */}
       {showTaskModal && isMobile && (
         <div
+          ref={mobileTaskEditorRef}
           role="dialog"
           aria-modal="true"
           aria-label={editTask ? t("tasks.edit") : t("tasks.create")}
