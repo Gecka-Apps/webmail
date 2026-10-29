@@ -62,6 +62,13 @@ export interface PaletteResultRowProps {
   hit: GlobalSearchHit;
   onOpen: (hit: GlobalSearchHit) => void;
   className?: string;
+  /** DOM id, for a listbox's aria-activedescendant. */
+  id?: string;
+  /** The highlighted option of the palette's listbox. */
+  selected?: boolean;
+  /** -1 in the palette, where the focus stays in the search field. */
+  tabIndex?: number;
+  onMouseMove?: () => void;
 }
 
 /**
@@ -69,7 +76,7 @@ export interface PaletteResultRowProps {
  * context subtitle, and the server snippet with its `<mark>`ed terms when
  * mail search returned one. Used by both the palette and the search tab.
  */
-export function PaletteResultRow({ hit, onOpen, className }: PaletteResultRowProps) {
+export function PaletteResultRow({ hit, onOpen, className, id, selected = false, tabIndex, onMouseMove }: PaletteResultRowProps) {
   const t = useTranslations('global_search');
   const title = hit.title || (hit.kind === 'mail' ? t('no_subject') : hit.id);
   const subtitle = [hit.accountLabel, hit.subtitle].filter(Boolean).join(' · ');
@@ -77,8 +84,11 @@ export function PaletteResultRow({ hit, onOpen, className }: PaletteResultRowPro
   return (
     <button
       type="button"
+      id={id}
       role="option"
-      aria-selected={false}
+      aria-selected={selected}
+      tabIndex={tabIndex}
+      onMouseMove={onMouseMove}
       onClick={() => onOpen(hit)}
       data-hit-kind={hit.kind}
       className={cn(
