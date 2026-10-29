@@ -5911,5 +5911,14 @@
         "text": "CORS ir pārlūka noteikums. Serverim vispirms ir jāatļauj vietne, un tikai tad pārlūks ļauj šai vietnei sazināties ar serveri."
       }
     }
+  },
+  "help_links": {
+    "label": "Pieejamība un palīdzība",
+    "statement": "Pieejamības paziņojums",
+    "feedback": "Ziņot par šķērsli",
+    "help": "Palīdzība",
+    "easy_read": "Vieglā valoda",
+    "sign_language": "Zīmju valoda",
+    "new_tab": "atveras jaunā cilnē"
   }
 }

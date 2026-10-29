@@ -5911,5 +5911,14 @@
         "text": "CORS je pravidlo prehliadača. Server musí webovú stránku najprv povoliť, až potom ju prehliadač nechá komunikovať so serverom."
       }
     }
+  },
+  "help_links": {
+    "label": "Prístupnosť a nápoveda",
+    "statement": "Vyhlásenie o prístupnosti",
+    "feedback": "Nahlásiť bariéru",
+    "help": "Nápoveda",
+    "easy_read": "Ľahké čítanie",
+    "sign_language": "Posunkový jazyk",
+    "new_tab": "otvorí sa na novej karte"
   }
 }

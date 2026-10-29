@@ -35,6 +35,7 @@ import { toAsciiDomain } from "@/lib/idn";
 import { usePrefetchMailView } from "@/hooks/use-prefetch-mail-view";
 import { buildMobileHandoffUrl, mobileHandoffTarget, signedInLoginAction } from "@/lib/auth/mobile-handoff";
 import { MobileHandoffConsent } from "@/components/auth/mobile-handoff-consent";
+import { HelpLinks } from "@/components/layout/help-links";
 import { consumeSessionEnd, type SessionEndReason } from "@/lib/session-policy/sign-out-reason";
 
 /** The domain of a complete address (`user@example.com`), or '' while it is still being typed. */
@@ -1222,6 +1223,7 @@ function LoginPageContent() {
                 )}
               </div>
             )}
+            <HelpLinks listClassName="justify-center" />
             {loginShowVersion && <VersionBadge />}
           </div>
         </div>
@@ -1845,6 +1847,7 @@ function LoginPageContent() {
               )}
             </div>
           )}
+          <HelpLinks listClassName="justify-center" />
           {loginShowVersion && <VersionBadge />}
         </div>
       </div>

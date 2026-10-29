@@ -47,6 +47,7 @@ import { CalendarManagementSettings } from '@/components/settings/calendar-manag
 import { AddressBookManagementSettings } from '@/components/settings/address-book-management-settings';
 import { FilterSettings } from '@/components/settings/filter-settings';
 import { AboutDataSettings, AboutFooter } from '@/components/settings/about-data-settings';
+import { HelpLinks } from '@/components/layout/help-links';
 import { OrganizeSettings } from '@/components/settings/organize-settings';
 import { AccountSecuritySettings } from '@/components/settings/account-security-settings';
 import { FilesSettingsComponent } from '@/components/settings/files-settings';
@@ -1032,6 +1033,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
           </div>
 
           <div className="border-t border-border px-2 py-2">
+            <HelpLinks className="px-3 py-2" />
             {showAdvanced && <AboutFooter />}
             <AdvancedSettingsSwitch />
           </div>
@@ -1188,6 +1190,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
           </div>
         </nav>
         <div className="border-t border-border px-1 py-1">
+          <HelpLinks className="px-3 py-2" />
           {showAdvanced && <AboutFooter />}
           <AdvancedSettingsSwitch />
         </div>

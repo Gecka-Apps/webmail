@@ -5911,5 +5911,14 @@
         "text": "CORS on brauseri reegel. Server peab veebisaidi esmalt lubama, alles siis laseb brauser sellel veebisaidil serveriga suhelda."
       }
     }
+  },
+  "help_links": {
+    "label": "Juurdepääsetavus ja abi",
+    "statement": "Juurdepääsetavuse teatis",
+    "feedback": "Teata takistusest",
+    "help": "Abi",
+    "easy_read": "Lihtne keel",
+    "sign_language": "Viipekeel",
+    "new_tab": "avaneb uuel vahekaardil"
   }
 }

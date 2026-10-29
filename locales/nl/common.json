@@ -5911,5 +5911,14 @@
         "text": "CORS is een regel in de browser. Een server moet een website eerst toestaan voordat de browser die website met de server laat praten."
       }
     }
+  },
+  "help_links": {
+    "label": "Toegankelijkheid en help",
+    "statement": "Toegankelijkheidsverklaring",
+    "feedback": "Meld een drempel",
+    "help": "Help",
+    "easy_read": "Makkelijk lezen",
+    "sign_language": "Gebarentaal",
+    "new_tab": "opent in een nieuw tabblad"
   }
 }

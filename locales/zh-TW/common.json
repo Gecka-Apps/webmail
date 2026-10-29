@@ -5911,5 +5911,14 @@
         "text": "CORS 是瀏覽器的一條規則。伺服器必須先允許某個網站，瀏覽器才會讓這個網站與伺服器溝通。"
       }
     }
+  },
+  "help_links": {
+    "label": "無障礙與說明",
+    "statement": "無障礙聲明",
+    "feedback": "回報障礙",
+    "help": "說明",
+    "easy_read": "易讀版",
+    "sign_language": "手語",
+    "new_tab": "在新分頁中開啟"
   }
 }

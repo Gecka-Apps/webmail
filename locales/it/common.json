@@ -5911,5 +5911,14 @@
         "text": "CORS è una regola del browser. Un server deve autorizzare un sito web prima che il browser permetta a quel sito di comunicare con il server."
       }
     }
+  },
+  "help_links": {
+    "label": "Accessibilità e aiuto",
+    "statement": "Dichiarazione di accessibilità",
+    "feedback": "Segnala una barriera",
+    "help": "Aiuto",
+    "easy_read": "Facile da leggere",
+    "sign_language": "Lingua dei segni",
+    "new_tab": "si apre in una nuova scheda"
   }
 }

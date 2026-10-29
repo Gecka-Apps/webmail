@@ -5911,5 +5911,14 @@
         "text": "CORS este o regulă a browserului. Un server trebuie mai întâi să permită un site, apoi browserul lasă acel site să comunice cu serverul."
       }
     }
+  },
+  "help_links": {
+    "label": "Accesibilitate și ajutor",
+    "statement": "Declarație de accesibilitate",
+    "feedback": "Raportează o barieră",
+    "help": "Ajutor",
+    "easy_read": "Ușor de citit",
+    "sign_language": "Limbaj mimico-gestual",
+    "new_tab": "se deschide într-o filă nouă"
   }
 }

@@ -5911,5 +5911,14 @@
         "text": "CORS bir tarayıcı kuralıdır. Tarayıcının bir web sitesinin sunucuyla konuşmasına izin vermesi için önce sunucunun o siteye izin vermesi gerekir."
       }
     }
+  },
+  "help_links": {
+    "label": "Erişilebilirlik ve yardım",
+    "statement": "Erişilebilirlik beyanı",
+    "feedback": "Engel bildir",
+    "help": "Yardım",
+    "easy_read": "Kolay okunur",
+    "sign_language": "İşaret dili",
+    "new_tab": "yeni sekmede açılır"
   }
 }

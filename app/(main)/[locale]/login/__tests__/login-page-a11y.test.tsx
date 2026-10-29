@@ -31,6 +31,8 @@ vi.mock('@/hooks/use-config', () => ({
     loginShowVersion: false,
     loginShowTotp: true,
     loginShowRememberMe: true,
+    accessibilityStatementUrl: 'https://example.org/accessibility',
+    accessibilityFeedbackUrl: 'mailto:barriers@example.org',
   }),
 }));
 
@@ -53,6 +55,13 @@ describe('login form accessibility', () => {
     expect(username).toHaveAttribute('autocomplete', 'username');
     expect(screen.getByLabelText('password_label')).toHaveAttribute('autocomplete', 'current-password');
     expect(document.title).toBe('sign_in - Webmail');
+  }, 30_000);
+
+  it('links the operator\'s accessibility statement and barrier report in the footer (OP-01)', async () => {
+    await renderForm();
+    const nav = screen.getByRole('navigation', { name: 'label' });
+    expect(nav.querySelector('a[href="https://example.org/accessibility"]')).not.toBeNull();
+    expect(nav.querySelector('a[href="mailto:barriers@example.org"]')).not.toBeNull();
   }, 30_000);
 
   it('puts the show-password toggle in the tab order with its state', async () => {

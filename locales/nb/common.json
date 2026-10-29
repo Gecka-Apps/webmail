@@ -5911,5 +5911,14 @@
         "text": "CORS er en regel i nettleseren. En server må tillate et nettsted før nettleseren lar det nettstedet snakke med serveren."
       }
     }
+  },
+  "help_links": {
+    "label": "Tilgjengelighet og hjelp",
+    "statement": "Tilgjengelighetserklæring",
+    "feedback": "Meld fra om en barriere",
+    "help": "Hjelp",
+    "easy_read": "Lettlest",
+    "sign_language": "Tegnspråk",
+    "new_tab": "åpnes i en ny fane"
   }
 }

@@ -9,6 +9,7 @@ import { useAccountStore, type AccountEntry } from "@/stores/account-store";
 import { useAuthStore } from "@/stores/auth-store";
 import { useEmailStore } from "@/stores/email-store";
 import { useSettingsStore } from "@/stores/settings-store";
+import { HelpMenuItems } from "@/components/layout/help-links";
 import { getMaxAccounts, sortDefaultFirst, reorderNonDefaultIds } from "@/lib/account-utils";
 import { inboxUnread, totalInboxUnread } from "@/lib/account-inbox-unread";
 import { isDocumentRTL } from "@/i18n/direction";
@@ -564,6 +565,11 @@ export function AccountSwitcher({
                   })}
                 </div>
               )}
+              <HelpMenuItems
+                onSelect={() => setOpen(false)}
+                className="mt-2 rounded-3xl bg-background py-1"
+                itemClassName="w-full flex items-center px-5 py-3 text-sm text-start hover:bg-muted transition-colors"
+              />
             </>
           )}
 
@@ -580,6 +586,15 @@ export function AccountSwitcher({
                 {t("add_account")}
               </button>
             </div>
+          )}
+
+          {/* Accessibility and help links the operator set (lib/help-links.ts). */}
+          {!mvPopover && (
+            <HelpMenuItems
+              onSelect={() => setOpen(false)}
+              className="border-t border-border py-1"
+              itemClassName="w-full flex items-center px-3 py-2 pointer-coarse:min-h-11 text-sm text-start text-foreground hover:bg-muted transition-colors"
+            />
           )}
 
           {/* Separator + Actions. Under Mountain View a single login signs out

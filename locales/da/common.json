@@ -5911,5 +5911,14 @@
         "text": "CORS er en regel i browseren. En server skal først tillade en hjemmeside, før browseren lader den hjemmeside tale med serveren."
       }
     }
+  },
+  "help_links": {
+    "label": "Tilgængelighed og hjælp",
+    "statement": "Tilgængelighedserklæring",
+    "feedback": "Rapportér en barriere",
+    "help": "Hjælp",
+    "easy_read": "Let læst",
+    "sign_language": "Tegnsprog",
+    "new_tab": "åbner i en ny fane"
   }
 }

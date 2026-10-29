@@ -5911,5 +5911,14 @@
         "text": "A CORS egy böngészőszabály. A szervernek először engedélyeznie kell egy weboldalt, csak utána engedi a böngésző, hogy az a weboldal a szerverrel kommunikáljon."
       }
     }
+  },
+  "help_links": {
+    "label": "Kisegítő lehetőségek és súgó",
+    "statement": "Akadálymentességi nyilatkozat",
+    "feedback": "Akadály bejelentése",
+    "help": "Súgó",
+    "easy_read": "Könnyen érthető",
+    "sign_language": "Jelnyelv",
+    "new_tab": "új lapon nyílik meg"
   }
 }
