@@ -6,10 +6,12 @@ import { cn } from "@/lib/utils";
 import { useKeywordFormat } from "@/hooks/use-keyword-format";
 import type { TagScope } from "@/hooks/use-account-tags";
 import { useShortenedText } from "@/hooks/use-shortened-text";
+import { useSettingsStore } from "@/stores/settings-store";
 
 /**
  * How much room the surface has for a tag.
- * - `badge` names the tag; `dot` only identifies it by colour.
+ * - `badge` names the tag; `dot` shows its colour and first letter (and the
+ *   whole name with "Show colour names" on).
  */
 export type TagBadgeVariant = "badge" | "dot";
 
@@ -61,13 +63,27 @@ export function TagBadge({
   const [labelRef, shortenedName] = useShortenedText(tagNameCandidates(tagId));
   const color = tagColor(tagId);
   const name = tagName(tagId);
+  const showColorNames = useSettingsStore((st) => st.showColorNames);
 
-  if (variant === "dot") {
+  // "Show colour names" (Settings > Accessibility): the named form even where
+  // only a dot fits, so no tag is told apart by its colour alone.
+  if (variant === "dot" && !showColorNames) {
+    // Not colour alone either way: the dot carries the tag's first letter,
+    // in the lozenge's own colours (WCAG 1.4.1).
+    const initial = [...name.trim()][0]?.toLocaleUpperCase() ?? "";
     return (
       <span
-        className={cn("h-2.5 w-2.5 shrink-0 rounded-full", color.dot, className)}
+        className={cn(
+          "inline-flex h-4 min-w-4 shrink-0 items-center justify-center rounded-full border px-0.5 text-[9px] font-bold leading-none",
+          color.fill,
+          color.border,
+          color.text,
+          className,
+        )}
         title={name}
+        data-tag-dot=""
       >
+        <span aria-hidden="true">{initial}</span>
         <span className="sr-only">{name}</span>
       </span>
     );
