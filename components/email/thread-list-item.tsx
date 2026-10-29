@@ -136,9 +136,47 @@ function mvHoverBackground(checked: boolean, unread: boolean, selected: boolean)
 }
 
 /**
+ * The strip the sender avatar sits in, from the row's leading edge to the
+ * text and over the row's full height. A click anywhere in it ticks the row
+ * instead of opening it, so a slightly missed avatar doesn't open the mail
+ * (#1381). It is for pointers only: the avatar inside stays the checkbox
+ * keyboards and screen readers use.
+ */
+function AvatarGutter({
+  onToggle,
+  children,
+}: {
+  onToggle: (e: React.MouseEvent) => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      data-select-gutter=""
+      onClick={(e) => {
+        e.stopPropagation();
+        onToggle(e);
+      }}
+      // Two quick clicks tick and untick; they must not open the message too.
+      onDoubleClick={(e) => e.stopPropagation()}
+      // Hovering the strip shows the avatar's check, as hovering the avatar does.
+      className="group/select -ms-3 flex flex-shrink-0 cursor-pointer items-center self-stretch ps-3"
+      style={{
+        marginBlock: 'calc(var(--density-item-py) * -1)',
+        paddingBlock: 'var(--density-item-py)',
+        marginInlineEnd: 'calc(var(--density-item-gap) * -1)',
+        paddingInlineEnd: 'var(--density-item-gap)',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/**
  * Mountain View's leading controls: a checkbox and a star, both always
  * visible and both acting on the row without opening it. They take the slot
- * the default layout gives to the sender avatar.
+ * the default layout gives to the sender avatar. The checkbox reaches from
+ * the row's leading edge over its full height, as in Gmail (#1381).
  */
 function MvRowLead({
   checked,
@@ -156,43 +194,52 @@ function MvRowLead({
   starLabel: string;
 }) {
   return (
-    <div className="flex h-10 items-center gap-0.5 flex-shrink-0 self-start">
+    <div className="flex flex-shrink-0 items-start self-stretch">
       <button
         type="button"
         role="checkbox"
         aria-checked={checked}
         aria-label={selectLabel}
         onClick={onToggleChecked}
-        className={cn(
-          "p-1 rounded-full transition-colors hover:bg-foreground/10",
-          checked && "text-primary"
-        )}
+        onDoubleClick={(e) => e.stopPropagation()}
+        className="group/check -ms-3 flex items-start self-stretch ps-3 pe-0.5"
       >
-        {checked ? (
-          <CheckSquare className="w-[18px] h-[18px]" />
-        ) : (
-          <Square className="w-[18px] h-[18px] text-muted-foreground" />
-        )}
+        <span className="flex h-10 items-center">
+          <span
+            className={cn(
+              "p-1 rounded-full transition-colors group-hover/check:bg-foreground/10",
+              checked && "text-primary"
+            )}
+          >
+            {checked ? (
+              <CheckSquare className="w-[18px] h-[18px]" />
+            ) : (
+              <Square className="w-[18px] h-[18px] text-muted-foreground" />
+            )}
+          </span>
+        </span>
       </button>
       {onToggleStar && (
-        <button
-          type="button"
-          aria-label={starLabel}
-          aria-pressed={starred}
-          title={starLabel}
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleStar();
-          }}
-          className="p-1 rounded-full transition-colors hover:bg-foreground/10"
-        >
-          <Star
-            className={cn(
-              "w-[18px] h-[18px]",
-              starred ? "fill-amber-400 text-amber-400" : "text-muted-foreground/60"
-            )}
-          />
-        </button>
+        <span className="flex h-10 items-center">
+          <button
+            type="button"
+            aria-label={starLabel}
+            aria-pressed={starred}
+            title={starLabel}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleStar();
+            }}
+            className="p-1 rounded-full transition-colors hover:bg-foreground/10"
+          >
+            <Star
+              className={cn(
+                "w-[18px] h-[18px]",
+                starred ? "fill-amber-400 text-amber-400" : "text-muted-foreground/60"
+              )}
+            />
+          </button>
+        </span>
       )}
     </div>
   );
@@ -686,19 +733,21 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
           )}
 
           {!mvRow && density !== 'extra-compact' && (
-            <div className="relative flex flex-shrink-0 self-center">
-              <SelectableAvatar
-                name={sender?.name}
-                email={sender?.email}
-                size={oneLineRow ? "sm" : "md"}
-                className="shadow-sm"
-                disableImages={hideJunkAvatarImages}
-                checked={isChecked}
-                onToggle={handleCheckboxClick}
-                selectLabel={selectRowLabel}
-              />
-              {isUnread && <UnreadDot besideAvatar />}
-            </div>
+            <AvatarGutter onToggle={handleCheckboxClick}>
+              <div className="relative flex flex-shrink-0">
+                <SelectableAvatar
+                  name={sender?.name}
+                  email={sender?.email}
+                  size={oneLineRow ? "sm" : "md"}
+                  className="shadow-sm"
+                  disableImages={hideJunkAvatarImages}
+                  checked={isChecked}
+                  onToggle={handleCheckboxClick}
+                  selectLabel={selectRowLabel}
+                />
+                {isUnread && <UnreadDot besideAvatar />}
+              </div>
+            </AvatarGutter>
           )}
 
           {isUnread && !mvRow && density === 'extra-compact' && (
@@ -1385,46 +1434,48 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
             )}
 
             {!mvRow && density !== 'extra-compact' && (
-              <div className="relative flex-shrink-0 self-center">
-                <SelectableAvatar
-                  name={avatarPerson?.name}
-                  email={avatarPerson?.email}
-                  size={oneLineRow ? "sm" : "md"}
-                  className="shadow-sm"
-                  disableImages={hideJunkAvatarImages}
-                  checked={isChecked}
-                  onToggle={handleThreadCheckboxClick}
-                  selectLabel={selectRowLabel}
-                />
-                {hasUnread && <UnreadDot besideAvatar />}
-                {!isMobile && !columns && (
-                  <button
-                    data-expand-toggle
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onToggleExpand();
-                    }}
-                    className={cn(
-                      "absolute -bottom-2.5 left-1/2 -translate-x-1/2 p-0.5 rounded-full",
-                      "transition-all duration-200",
-                      "hover:bg-muted/50 hover:scale-110",
-                      "active:scale-95",
-                      "text-muted-foreground hover:text-foreground",
-                      "bg-background border border-border"
-                    )}
-                    aria-expanded={isExpanded}
-                    aria-label={isExpanded ? t('collapse_named', { subject: threadSubject }) : t('expand_named', { subject: threadSubject })}
-                  >
-                    {isLoading ? (
-                      <Loader2 className="w-3 h-3 animate-spin" />
-                    ) : isExpanded ? (
-                      <ChevronDown className="w-3 h-3" />
-                    ) : (
-                      <ChevronRight className="w-3 h-3" />
-                    )}
-                  </button>
-                )}
-              </div>
+              <AvatarGutter onToggle={handleThreadCheckboxClick}>
+                <div className="relative flex-shrink-0">
+                  <SelectableAvatar
+                    name={avatarPerson?.name}
+                    email={avatarPerson?.email}
+                    size={oneLineRow ? "sm" : "md"}
+                    className="shadow-sm"
+                    disableImages={hideJunkAvatarImages}
+                    checked={isChecked}
+                    onToggle={handleThreadCheckboxClick}
+                    selectLabel={selectRowLabel}
+                  />
+                  {hasUnread && <UnreadDot besideAvatar />}
+                  {!isMobile && !columns && (
+                    <button
+                      data-expand-toggle
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onToggleExpand();
+                      }}
+                      className={cn(
+                        "absolute -bottom-2.5 left-1/2 -translate-x-1/2 p-0.5 rounded-full",
+                        "transition-all duration-200",
+                        "hover:bg-muted/50 hover:scale-110",
+                        "active:scale-95",
+                        "text-muted-foreground hover:text-foreground",
+                        "bg-background border border-border"
+                      )}
+                      aria-expanded={isExpanded}
+                      aria-label={isExpanded ? t('collapse_named', { subject: threadSubject }) : t('expand_named', { subject: threadSubject })}
+                    >
+                      {isLoading ? (
+                        <Loader2 className="w-3 h-3 animate-spin" />
+                      ) : isExpanded ? (
+                        <ChevronDown className="w-3 h-3" />
+                      ) : (
+                        <ChevronRight className="w-3 h-3" />
+                      )}
+                    </button>
+                  )}
+                </div>
+              </AvatarGutter>
             )}
 
             {hasUnread && !mvRow && density === 'extra-compact' && (

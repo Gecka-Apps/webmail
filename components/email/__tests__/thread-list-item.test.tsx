@@ -436,6 +436,65 @@ describe('ThreadListItem whole row toggles in selection mode', () => {
   });
 });
 
+describe('ThreadListItem avatar gutter (#1381)', () => {
+  function setup(emails: Email[]) {
+    useSettingsStore.setState({ interfaceLayout: 'default', mailLayout: 'split', density: 'regular' } as never);
+    useEmailStore.setState({ selectedEmailKeys: new Set<string>(), selectedMailbox: 'inbox' });
+    const onEmailSelect = vi.fn();
+    const onEmailDoubleClick = vi.fn();
+    const onToggleExpand = vi.fn();
+    const [thread] = groupEmailsByThread(emails);
+    const utils = render(
+      <ThreadListItem
+        thread={thread}
+        isExpanded={false}
+        onToggleExpand={onToggleExpand}
+        onEmailSelect={onEmailSelect}
+        onEmailDoubleClick={onEmailDoubleClick}
+      />,
+    );
+    const gutter = utils.container.querySelector<HTMLElement>('[data-select-gutter]')!;
+    return { ...utils, gutter, onEmailSelect, onEmailDoubleClick, onToggleExpand };
+  }
+  const selection = () => [...useEmailStore.getState().selectedEmailKeys].sort();
+
+  it('ticks a message from beside its avatar instead of opening it', () => {
+    const { gutter, onEmailSelect } = setup([makeEmail()]);
+    fireEvent.click(gutter);
+    expect(onEmailSelect).not.toHaveBeenCalled();
+    expect(selection()).toEqual(['email-1']);
+    fireEvent.click(gutter);
+    expect(selection()).toEqual([]);
+  });
+
+  it('does not open the message on a double click there', () => {
+    const { gutter, onEmailDoubleClick } = setup([makeEmail()]);
+    fireEvent.doubleClick(gutter);
+    expect(onEmailDoubleClick).not.toHaveBeenCalled();
+  });
+
+  it('ticks a thread from beside its avatar, and its chevron still only unfolds it', () => {
+    const { gutter, container, onEmailSelect, onToggleExpand } = setup([
+      makeEmail({ id: 'older', receivedAt: '2024-01-14T10:00:00Z' }),
+      makeEmail({ id: 'newer', receivedAt: '2024-01-15T10:00:00Z' }),
+    ]);
+    fireEvent.click(gutter);
+    expect(onEmailSelect).not.toHaveBeenCalled();
+    expect(selection()).toEqual(['newer', 'older']);
+
+    fireEvent.click(container.querySelector('[data-expand-toggle]')!);
+    expect(onToggleExpand).toHaveBeenCalledTimes(1);
+    expect(selection()).toEqual(['newer', 'older']);
+  });
+
+  it('ticks the row once from the avatar itself', () => {
+    const { onEmailSelect } = setup([makeEmail()]);
+    fireEvent.click(screen.getByRole('checkbox'));
+    expect(onEmailSelect).not.toHaveBeenCalled();
+    expect(selection()).toEqual(['email-1']);
+  });
+});
+
 describe('ThreadListItem Mountain View phone row layout', () => {
   it('sets the star at the end of the preview line, not under the time', () => {
     useSettingsStore.setState({ interfaceLayout: 'mountain-view', mailLayout: 'split', showPreview: true, density: 'regular' } as never);
@@ -693,6 +752,22 @@ describe('ThreadListItem Mountain View desktop row', () => {
       interfaceLayout: 'mountain-view',
     } as never);
     useEmailStore.setState({ selectedEmailKeys: new Set<string>(), selectedMailbox: 'inbox' });
+  });
+
+  it('ticks the row from its checkbox without opening it, even on a double click (#1381)', () => {
+    const onEmailSelect = vi.fn();
+    const onEmailDoubleClick = vi.fn();
+    const [thread] = groupEmailsByThread([makeEmail()]);
+    render(
+      <ThreadListItem thread={thread} isExpanded={false} onToggleExpand={() => {}} onEmailSelect={onEmailSelect} onEmailDoubleClick={onEmailDoubleClick} />,
+    );
+    const checkbox = screen.getByRole('checkbox');
+    fireEvent.click(checkbox);
+    fireEvent.click(checkbox);
+    fireEvent.doubleClick(checkbox);
+    expect(onEmailSelect).not.toHaveBeenCalled();
+    expect(onEmailDoubleClick).not.toHaveBeenCalled();
+    expect(useEmailStore.getState().selectedEmailKeys.size).toBe(0);
   });
 
   it('runs the snippet on from the subject after a dash', () => {
