@@ -2,6 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import { describe, expect, it } from 'vitest';
+import { parse, TYPE, type MessageFormatElement } from '@formatjs/icu-messageformat-parser';
 import { PLAIN_LANGUAGE_LOADERS } from '@/i18n/plain-language';
 
 // locales/<code>/plain.json holds simpler versions of common.json strings for
@@ -23,10 +24,20 @@ function leaves(node: unknown, prefix = ''): Array<[string, unknown]> {
 const load = (locale: string, file: string): Tree =>
   JSON.parse(fs.readFileSync(path.join(localesDir, locale, file), 'utf-8'));
 
-// ICU argument names ({name}, {count, plural, ...}); plural selectors are not arguments.
+// The arguments a message needs, from its parsed ICU form.
+// Parsing also fails on a plain string that isn't valid ICU.
 function icuArgs(text: string): string[] {
-  const names = [...text.matchAll(/\{\s*(\w+)/g)].map((m) => m[1]);
-  return [...new Set(names)].filter((n) => !['zero', 'one', 'two', 'few', 'many', 'other'].includes(n)).sort();
+  const names = new Set<string>();
+  const walk = (elements: MessageFormatElement[]) => {
+    for (const el of elements) {
+      if ('value' in el && typeof el.value === 'string' && el.type !== TYPE.literal) names.add(el.value);
+      if ('options' in el) Object.values(el.options).forEach((option) => walk(option.value));
+      if ('children' in el) walk(el.children);
+    }
+  };
+  // Tags stay literal: some strings hold HTML that is rendered raw.
+  walk(parse(text, { ignoreTag: true }));
+  return [...names].sort();
 }
 
 const plainLocales = fs.readdirSync(localesDir).filter((l) => fs.existsSync(path.join(localesDir, l, 'plain.json')));
