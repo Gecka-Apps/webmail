@@ -771,7 +771,10 @@
     "frame_title": "Mesaj: {subject}",
     "frame_title_from": "Mesaj de la {sender}",
     "download_named": "Descărcați {name}",
-    "preview_named": "Previzualizați {name}"
+    "preview_named": "Previzualizați {name}",
+    "show_as_plain_text": "Afișați ca text simplu",
+    "show_formatted": "Afișați formatat",
+    "shown_as_plain_text": "Acest mesaj este afișat ca text simplu."
   },
   "external_mail": {
     "sender_label": "Extern",

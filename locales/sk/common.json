@@ -771,7 +771,10 @@
     "frame_title": "Správa: {subject}",
     "frame_title_from": "Správa od {sender}",
     "download_named": "Stiahnuť {name}",
-    "preview_named": "Náhľad {name}"
+    "preview_named": "Náhľad {name}",
+    "show_as_plain_text": "Zobraziť ako obyčajný text",
+    "show_formatted": "Zobraziť formátovane",
+    "shown_as_plain_text": "Táto správa sa zobrazuje ako obyčajný text."
   },
   "external_mail": {
     "sender_label": "Externé",

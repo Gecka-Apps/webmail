@@ -771,7 +771,10 @@
     "frame_title": "Лист: {subject}",
     "frame_title_from": "Лист від {sender}",
     "download_named": "Завантажити {name}",
-    "preview_named": "Переглянути {name}"
+    "preview_named": "Переглянути {name}",
+    "show_as_plain_text": "Показати як звичайний текст",
+    "show_formatted": "Показати з форматуванням",
+    "shown_as_plain_text": "Цей лист показано як звичайний текст."
   },
   "external_mail": {
     "sender_label": "Зовнішнє",

@@ -771,7 +771,10 @@
     "frame_title": "郵件：{subject}",
     "frame_title_from": "來自 {sender} 的郵件",
     "download_named": "下載 {name}",
-    "preview_named": "預覽 {name}"
+    "preview_named": "預覽 {name}",
+    "show_as_plain_text": "以純文字顯示",
+    "show_formatted": "以格式顯示",
+    "shown_as_plain_text": "此郵件以純文字顯示。"
   },
   "external_mail": {
     "sender_label": "外部",

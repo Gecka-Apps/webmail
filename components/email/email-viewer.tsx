@@ -7,6 +7,7 @@ import { EML_IMPORT_ACCEPT, expandImportableEmails } from "@/lib/eml-import";
 import { TRANSPARENT_BLOCKED_PIXEL, applyNewTabToAnchor, emailIframeCsp, escapeHtml, isExternalResourceUrl, isOpenableLinkHref, plainTextToSafeHtml, sanitizeEmailBodyForIframe, sanitizeEmailHtml, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
 import { getRenderableHtmlBody } from "@/lib/email-body-selection";
 import { mailLanguage } from "@/lib/mail-language";
+import { htmlToReadableText } from "@/lib/html-to-readable-text";
 import { applyMailTextSize, mailFitOptions } from "@/lib/mail-reading";
 import { useMailReading } from "@/hooks/use-mail-reading";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
@@ -102,6 +103,7 @@ import {
   CalendarX,
   Maximize2,
   Minimize2,
+  Type,
   ArrowLeft,
   Pencil,
 } from "@/components/icons";
@@ -2217,6 +2219,7 @@ export function EmailViewer({
     setIsQuickReplyFocused(false);
     setShowSourceModal(false);
     setEmailViewDarkOverride(null);
+    setPlainViewOverride(null);
     setPluginRenderedHtml(null);
     setPluginRenderedText(null);
     setPluginRenderedAttachments(NO_POSTAL_ATTACHMENTS);
@@ -2796,7 +2799,7 @@ export function EmailViewer({
   }, [email, shouldBlockExternal, cidBlobUrls, t]);
 
   // Override email content with S/MIME decrypted content when available
-  const effectiveEmailContent = useMemo(() => {
+  const decodedEmailContent = useMemo(() => {
     const plainToHtml = (text: string) =>
       collapsePlainTextQuotes(plainTextToSafeHtml(text), {
         show: t('show_quoted_text'),
@@ -2844,6 +2847,32 @@ export function EmailViewer({
     // it would re-run the whole sanitize pass the moment the banner appears.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cidBlobUrls, emailContent, shouldBlockExternal, pluginRenderedHtml, pluginRenderedText, tnefHtml, tnefText, embeddedEmailHtml, embeddedEmailText, t]);
+
+  // HTML mail as plain text: Settings > Accessibility for every message, or
+  // the reader's per-message switch. The message's own text/plain part when
+  // it has one, otherwise a readable conversion that keeps link targets and
+  // image alt text.
+  const mailViewMode = useSettingsStore((state) => state.mailViewMode);
+  const [plainViewOverride, setPlainViewOverride] = useState<boolean | null>(null);
+  const plainView = plainViewOverride ?? mailViewMode === 'plain';
+  const hasHtmlBody = decodedEmailContent.isHtml;
+  const effectiveEmailContent = useMemo(() => {
+    if (!plainView || !decodedEmailContent.isHtml) return decodedEmailContent;
+    let text: string | null = null;
+    if (decodedEmailContent === emailContent && email) {
+      const textPart = email.textBody?.[0];
+      if (textPart?.partId && textPart.partId !== email.htmlBody?.[0]?.partId && (textPart.type || 'text/plain').toLowerCase() === 'text/plain') {
+        text = email.bodyValues?.[textPart.partId]?.value ?? null;
+      }
+    }
+    if (!text?.trim()) text = htmlToReadableText(decodedEmailContent.html);
+    return {
+      html: collapsePlainTextQuotes(plainTextToSafeHtml(text), { show: t('show_quoted_text'), hide: t('hide_quoted_text') }),
+      isHtml: false,
+      hasStyleTag: false,
+      externalBlocked: false,
+    };
+  }, [plainView, decodedEmailContent, emailContent, email, t]);
 
   const resolveAttachmentName = useCallback(
     (attachment: EffectiveAttachment) => {
@@ -4121,6 +4150,9 @@ export function EmailViewer({
   // The reader's own entries after the message's: the view toggle, Import
   // (into the open folder) and, with a keyboard, the shortcuts.
   const readerExtras: MessageActionEntry[] = [
+    ...(hasHtmlBody
+      ? [{ kind: 'item' as const, key: 'extra:plain_text' as const, icon: plainView ? Type : FileText, label: plainView ? t('show_formatted') : t('show_as_plain_text'), run: () => setPlainViewOverride(!plainView) }]
+      : []),
     ...(effectiveEmailContent.isHtml
       ? [{ kind: 'item' as const, key: 'extra:view_mode' as const, icon: isDark ? Sun : Moon, label: isDark ? t('view_in_light_mode') : t('view_in_dark_mode'), run: toggleViewMode }]
       : []),
@@ -5701,7 +5733,7 @@ export function EmailViewer({
 
         {/* Unified Notification Banner - External Content + Calendar Invitation + Read Receipt */}
         {(senderVerification ||
-          (hasBlockedContent && (remoteBlockedByOrg || (!allowExternalContent && externalContentPolicy !== 'allow'))) ||
+          (!plainView && hasBlockedContent && (remoteBlockedByOrg || (!allowExternalContent && externalContentPolicy !== 'allow'))) ||
           hasCalendarInvitation ||
           (readReceiptResponse === 'ask' && shouldOfferReadReceipt)) && (
           <div className="border-b border-border bg-muted/30 isolate">
@@ -5731,7 +5763,7 @@ export function EmailViewer({
                 )}
 
                 {/* External Content Controls */}
-                {hasBlockedContent && (remoteBlockedByOrg || (!allowExternalContent && externalContentPolicy !== 'allow')) && (
+                {!plainView && hasBlockedContent && (remoteBlockedByOrg || (!allowExternalContent && externalContentPolicy !== 'allow')) && (
                   <div className="flex items-start gap-3 py-1" data-testid="external-content-notice">
                     <div className="w-10 h-10 rounded-full bg-info/15 text-info flex items-center justify-center flex-shrink-0 shadow-sm">
                       <Image className="w-5 h-5" />
@@ -6181,6 +6213,14 @@ export function EmailViewer({
             !isDark && resolvedTheme === 'dark' ? "bg-white email-content-light" : "bg-background"
           )}
           style={isDark ? { backgroundColor: '#121212' } : undefined}>
+            {!isBodyLoading && plainView && hasHtmlBody && (
+              <div className="flex flex-wrap items-center gap-x-2 px-6 pt-3 text-sm text-muted-foreground" data-testid="plain-view-note">
+                <span>{t('shown_as_plain_text')}</span>
+                <button type="button" className="text-primary underline underline-offset-2" onClick={() => setPlainViewOverride(false)}>
+                  {t('show_formatted')}
+                </button>
+              </div>
+            )}
             {isBodyLoading ? (
               <div
                 className="space-y-3 px-6 py-4 animate-pulse"

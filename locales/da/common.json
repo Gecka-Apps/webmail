@@ -771,7 +771,10 @@
     "frame_title": "Besked: {subject}",
     "frame_title_from": "Besked fra {sender}",
     "download_named": "Download {name}",
-    "preview_named": "Forhåndsvis {name}"
+    "preview_named": "Forhåndsvis {name}",
+    "show_as_plain_text": "Vis som almindelig tekst",
+    "show_formatted": "Vis formateret",
+    "shown_as_plain_text": "Denne besked vises som almindelig tekst."
   },
   "external_mail": {
     "sender_label": "Ekstern",

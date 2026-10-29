@@ -771,7 +771,10 @@
     "frame_title": "Письмо: {subject}",
     "frame_title_from": "Письмо от {sender}",
     "download_named": "Скачать {name}",
-    "preview_named": "Предпросмотр {name}"
+    "preview_named": "Предпросмотр {name}",
+    "show_as_plain_text": "Показать как обычный текст",
+    "show_formatted": "Показать с форматированием",
+    "shown_as_plain_text": "Это письмо показано как обычный текст."
   },
   "external_mail": {
     "sender_label": "Внешнее",

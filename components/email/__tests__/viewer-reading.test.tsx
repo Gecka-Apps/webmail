@@ -223,3 +223,34 @@ describe('reading width', () => {
     expect(container.querySelector('iframe')!.getAttribute('srcdoc')).not.toContain('80ch');
   });
 });
+
+describe('HTML mail as plain text', () => {
+  it('shows the text part instead of the frame when plain text is the default', async () => {
+    useSettingsStore.setState({ mailViewMode: 'plain' } as never);
+    const { container } = await show(message({ html: '<p>Fancy <b>HTML</b> version</p>', text: 'The plain version' }));
+    expect(container.querySelector('iframe')).toBeNull();
+    expect(screen.getByText('The plain version')).toBeInTheDocument();
+    expect(screen.getByTestId('plain-view-note')).toHaveTextContent('shown_as_plain_text');
+  });
+
+  it('converts the HTML, keeping link targets and alt text, when there is no text part', async () => {
+    useSettingsStore.setState({ mailViewMode: 'plain' } as never);
+    const { container } = await show(message({ html: '<p>Read <a href="https://ex.com/r">the report</a></p><img src="data:image/png;base64,AA==" alt="Chart">' }));
+    const body = container.querySelector('.email-content-text')!;
+    expect(body.textContent).toContain('Read the report (https://ex.com/r)');
+    expect(body.textContent).toContain('[Chart]');
+  });
+
+  it('switches one message back to formatted', async () => {
+    useSettingsStore.setState({ mailViewMode: 'plain' } as never);
+    const { container } = await show(message({ html: '<p>Fancy <b>HTML</b> version</p>', text: 'The plain version' }));
+    await act(async () => { screen.getByRole('button', { name: 'show_formatted' }).click(); });
+    expect(container.querySelector('iframe')).not.toBeNull();
+    expect(screen.queryByTestId('plain-view-note')).toBeNull();
+  });
+
+  it('shows HTML mail formatted by default', async () => {
+    const { container } = await show(message({ html: '<p>Fancy <b>HTML</b> version</p>', text: 'The plain version' }));
+    expect(container.querySelector('iframe')).not.toBeNull();
+  });
+});

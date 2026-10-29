@@ -771,7 +771,10 @@
     "frame_title": "Ziņojums: {subject}",
     "frame_title_from": "Ziņojums no {sender}",
     "download_named": "Lejupielādēt {name}",
-    "preview_named": "Priekšskatīt {name}"
+    "preview_named": "Priekšskatīt {name}",
+    "show_as_plain_text": "Rādīt kā vienkāršu tekstu",
+    "show_formatted": "Rādīt formatētu",
+    "shown_as_plain_text": "Šis ziņojums tiek rādīts kā vienkāršs teksts."
   },
   "external_mail": {
     "sender_label": "Ārējs",

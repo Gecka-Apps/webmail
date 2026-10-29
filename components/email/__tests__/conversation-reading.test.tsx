@@ -79,3 +79,12 @@ describe('conversation message text size', () => {
     expect(body.style.fontSize).toMatch(/0\.8125rem \* 2|1\.625rem/);
   });
 });
+
+describe('conversation messages as plain text', () => {
+  it('show HTML mail as text when plain text is the default', () => {
+    useSettingsStore.setState({ mailViewMode: 'plain' } as never);
+    const { container } = show([mail('a', { bodyValues: { '1': { value: '<p>Visit <a href="https://ex.com/x">our site</a></p>' } } })]);
+    expect(container.querySelector('iframe')).toBeNull();
+    expect(container.querySelector('[data-plugin-source="email-body"]')!.textContent).toContain('Visit our site (https://ex.com/x)');
+  });
+});

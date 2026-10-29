@@ -771,7 +771,10 @@
     "frame_title": "Missatge: {subject}",
     "frame_title_from": "Missatge de {sender}",
     "download_named": "Baixa {name}",
-    "preview_named": "Previsualitza {name}"
+    "preview_named": "Previsualitza {name}",
+    "show_as_plain_text": "Mostra com a text sense format",
+    "show_formatted": "Mostra amb format",
+    "shown_as_plain_text": "Aquest missatge es mostra com a text sense format."
   },
   "external_mail": {
     "sender_label": "Extern",

@@ -771,7 +771,10 @@
     "frame_title": "Wiadomość: {subject}",
     "frame_title_from": "Wiadomość od {sender}",
     "download_named": "Pobierz {name}",
-    "preview_named": "Podgląd {name}"
+    "preview_named": "Podgląd {name}",
+    "show_as_plain_text": "Pokaż jako zwykły tekst",
+    "show_formatted": "Pokaż z formatowaniem",
+    "shown_as_plain_text": "Ta wiadomość jest wyświetlana jako zwykły tekst."
   },
   "external_mail": {
     "sender_label": "Zewnętrzny",

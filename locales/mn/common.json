@@ -771,7 +771,10 @@
     "frame_title": "Захидал: {subject}",
     "frame_title_from": "{sender}-с ирсэн захидал",
     "download_named": "{name}-г татаж авах",
-    "preview_named": "{name}-г урьдчилан харах"
+    "preview_named": "{name}-г урьдчилан харах",
+    "show_as_plain_text": "Энгийн текстээр харуулах",
+    "show_formatted": "Форматтайгаар харуулах",
+    "shown_as_plain_text": "Энэ захидлыг энгийн текстээр харуулж байна."
   },
   "external_mail": {
     "sender_label": "Гадаад",

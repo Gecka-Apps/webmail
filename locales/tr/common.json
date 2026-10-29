@@ -771,7 +771,10 @@
     "frame_title": "İleti: {subject}",
     "frame_title_from": "{sender} adlı kişiden ileti",
     "download_named": "{name} dosyasını indir",
-    "preview_named": "{name} önizlemesi"
+    "preview_named": "{name} önizlemesi",
+    "show_as_plain_text": "Düz metin olarak göster",
+    "show_formatted": "Biçimli göster",
+    "shown_as_plain_text": "Bu ileti düz metin olarak gösteriliyor."
   },
   "external_mail": {
     "sender_label": "Harici",

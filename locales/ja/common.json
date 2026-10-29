@@ -771,7 +771,10 @@
     "frame_title": "メッセージ: {subject}",
     "frame_title_from": "{sender} からのメッセージ",
     "download_named": "{name} をダウンロード",
-    "preview_named": "{name} をプレビュー"
+    "preview_named": "{name} をプレビュー",
+    "show_as_plain_text": "プレーンテキストで表示",
+    "show_formatted": "書式付きで表示",
+    "shown_as_plain_text": "このメッセージはプレーンテキストで表示されています。"
   },
   "external_mail": {
     "sender_label": "外部",

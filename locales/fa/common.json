@@ -771,7 +771,10 @@
     "frame_title": "پیام: {subject}",
     "frame_title_from": "پیام از {sender}",
     "download_named": "دانلود {name}",
-    "preview_named": "پیش‌نمایش {name}"
+    "preview_named": "پیش‌نمایش {name}",
+    "show_as_plain_text": "نمایش به‌صورت متن ساده",
+    "show_formatted": "نمایش قالب‌بندی‌شده",
+    "shown_as_plain_text": "این پیام به‌صورت متن ساده نمایش داده می‌شود."
   },
   "external_mail": {
     "sender_label": "خارجی",

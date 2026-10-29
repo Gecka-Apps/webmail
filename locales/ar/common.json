@@ -771,7 +771,10 @@
     "frame_title": "الرسالة: {subject}",
     "frame_title_from": "رسالة من {sender}",
     "download_named": "تنزيل {name}",
-    "preview_named": "معاينة {name}"
+    "preview_named": "معاينة {name}",
+    "show_as_plain_text": "العرض كنص عادي",
+    "show_formatted": "العرض منسقًا",
+    "shown_as_plain_text": "تُعرض هذه الرسالة كنص عادي."
   },
   "external_mail": {
     "sender_label": "خارجي",

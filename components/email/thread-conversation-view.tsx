@@ -16,6 +16,7 @@ import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidRefere
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { fitEmailBodyWidth } from "@/lib/email-fit-width";
 import { mailLanguage } from "@/lib/mail-language";
+import { htmlToReadableText } from "@/lib/html-to-readable-text";
 import { applyMailTextSize, mailFitOptions } from "@/lib/mail-reading";
 import { useMailReading } from "@/hooks/use-mail-reading";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailDarkModeCss } from "@/lib/email-dark-mode";
@@ -652,7 +653,7 @@ export function ConversationEmailBody({
   }, [cidRequest, blobClient, accountId]);
 
   // Sanitize and prepare email HTML content
-  const emailContent = useMemo(() => {
+  const formattedContent = useMemo(() => {
     if (!email) return { html: "", isHtml: false };
 
     // Plugin-rendered bodies get the reader's sanitizer and remote-content
@@ -748,6 +749,25 @@ export function ConversationEmailBody({
   // dependency it would re-run the sanitizer once the banner shows.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [email, allowExternal, cidBlobUrls, pluginBody, t]);
+
+  // "Show mail as plain text" (Settings > Accessibility): the message's own
+  // text/plain part, or a readable conversion of the HTML.
+  const mailViewMode = useSettingsStore((state) => state.mailViewMode);
+  const emailContent = useMemo(() => {
+    if (mailViewMode !== 'plain' || !formattedContent.isHtml) return formattedContent;
+    const textPart = !pluginBody.html ? email.textBody?.[0] : undefined;
+    let text = textPart?.partId && textPart.partId !== email.htmlBody?.[0]?.partId && (textPart.type || 'text/plain').toLowerCase() === 'text/plain'
+      ? email.bodyValues?.[textPart.partId]?.value ?? null
+      : null;
+    if (!text?.trim()) text = htmlToReadableText(formattedContent.html);
+    return {
+      html: collapsePlainTextQuotes(plainTextToSafeHtml(text, 'text-primary hover:underline'), {
+        show: t('email_viewer.show_quoted_text'),
+        hide: t('email_viewer.hide_quoted_text'),
+      }),
+      isHtml: false,
+    };
+  }, [mailViewMode, formattedContent, pluginBody.html, email, t]);
 
   // Parts the body embeds via cid: stay out of the attachment row while the
   // user hides inline images - the desktop viewer's rule, shared through
@@ -887,7 +907,7 @@ export function ConversationEmailBody({
   return (
     <div className={className}>
       {/* External content warning */}
-      {hasBlockedContent && !allowExternal && (
+      {hasBlockedContent && !allowExternal && emailContent.isHtml && (
         <div className="px-4 py-2 bg-muted/50 flex items-center justify-between text-sm" data-testid="external-content-notice">
           <span className="text-muted-foreground">
             {remoteBlockedByOrg ? t("third_party.remote_content_blocked") : t("email_viewer.external_content_warning")}

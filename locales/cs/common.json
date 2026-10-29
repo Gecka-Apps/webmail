@@ -771,7 +771,10 @@
     "frame_title": "Zpráva: {subject}",
     "frame_title_from": "Zpráva od {sender}",
     "download_named": "Stáhnout {name}",
-    "preview_named": "Náhled {name}"
+    "preview_named": "Náhled {name}",
+    "show_as_plain_text": "Zobrazit jako prostý text",
+    "show_formatted": "Zobrazit formátovaně",
+    "shown_as_plain_text": "Tato zpráva se zobrazuje jako prostý text."
   },
   "external_mail": {
     "sender_label": "Externí",

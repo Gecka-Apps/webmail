@@ -771,7 +771,10 @@
     "frame_title": "Kiri: {subject}",
     "frame_title_from": "Kiri saatjalt {sender}",
     "download_named": "Laadi alla {name}",
-    "preview_named": "Eelvaade: {name}"
+    "preview_named": "Eelvaade: {name}",
+    "show_as_plain_text": "Näita lihttekstina",
+    "show_formatted": "Näita vormindatult",
+    "shown_as_plain_text": "Seda kirja näidatakse lihttekstina."
   },
   "external_mail": {
     "sender_label": "Väline",
