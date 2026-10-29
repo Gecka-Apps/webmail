@@ -208,7 +208,7 @@ describe('phone touch targets (MAIL-18)', () => {
     expect(close.className).toContain('w-11');
     const star = screen.getByTestId('subject-star');
     expect(star).toHaveAccessibleName('star');
-    expect(star.className).toContain('pointer-coarse:after:min-h-11');
+    expect(star.className).toContain('large-targets:after:min-h-11');
   });
 });
 

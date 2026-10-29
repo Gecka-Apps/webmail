@@ -3,6 +3,18 @@
    Tailwind colours, so both generate the same utilities. */
 
 @custom-variant dark (&:where(.dark, .dark *));
+/* Settings > Accessibility > Large targets: on a touch screen (System), or
+   everywhere when it is On. TOUCH_HIT_AREA (components/ui/button.tsx) uses it.
+   Plugin frames (app/(sandbox)/plugin-kit.css) have no data-large-targets,
+   so there it is the touch-screen half only. */
+@custom-variant large-targets {
+  @media (pointer: coarse) {
+    @slot;
+  }
+  :root[data-large-targets="on"] & {
+    @slot;
+  }
+}
 
 @theme inline {
   --color-border: var(--color-border);

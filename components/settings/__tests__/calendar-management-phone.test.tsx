@@ -50,8 +50,8 @@ describe('Settings > Calendar on a phone', () => {
   it('gives the colour dot a 44px hit area on touch', () => {
     render(<CalendarManagementSettings />);
     const dot = screen.getByRole('button', { name: 'change_color' });
-    expect(dot.className).toContain('pointer-coarse:after:min-h-11');
-    expect(dot.className).toContain('pointer-coarse:after:min-w-11');
+    expect(dot.className).toContain('large-targets:after:min-h-11');
+    expect(dot.className).toContain('large-targets:after:min-w-11');
   });
 
   it('offers Import and Subscribe only outside the demo', () => {

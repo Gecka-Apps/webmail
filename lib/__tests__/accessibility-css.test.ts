@@ -133,3 +133,30 @@ describe('forced colours', () => {
     expect(block).toContain(':is(span, div, i):empty[style*="background"] {\n    forced-color-adjust: none;');
   });
 });
+
+describe('large targets', () => {
+  const tall = selectorsOf('min-height: 44px;').join(', ');
+  const wide = selectorsOf('min-width: 44px;').join(', ');
+  const strip = (sel: string) => sel.replace(/:root\[data-large-targets="on"\]\s*/g, '');
+
+  it.each([
+    ['a button', '<button>Reply</button>'],
+    ['a menu item', '<div role="menuitem">Archive</div>'],
+    ['an option', '<div role="option">Inbox</div>'],
+    ['a tab', '<button role="tab">All</button>'],
+    ['a custom checkbox', '<button role="checkbox" aria-checked="false"></button>'],
+  ])('makes %s 44px tall when On', (_name, html) => {
+    expect(el(html).matches(strip(tall))).toBe(true);
+  });
+
+  it('keeps the switch at its drawn size and gives it a 44px hit area instead', () => {
+    const sw = el('<button role="switch" aria-checked="true"><span></span></button>');
+    expect(sw.matches(strip(tall))).toBe(false);
+    expect(sw.matches(strip(wide))).toBe(false);
+    expect(css).toMatch(/:root\[data-large-targets="on"\] \[role="switch"\]::after \{[^}]*width: max\(100%, 44px\);[^}]*height: max\(100%, 44px\);/);
+  });
+
+  it('applies only when the setting is On; System is left to the touch-screen styles', () => {
+    for (const s of selectorsOf('min-height: 44px;')) expect(s.startsWith(':root[data-large-targets="on"]')).toBe(true);
+  });
+});

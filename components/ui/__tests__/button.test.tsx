@@ -46,7 +46,7 @@ describe('Button', () => {
   it('keeps the drawn size and adds a 44px hit area on coarse pointers only', () => {
     render(<Button size="icon-sm" aria-label="Hit" />);
     const button = screen.getByLabelText('Hit');
-    expect(button).toHaveClass('relative', 'pointer-coarse:after:min-h-11', 'pointer-coarse:after:min-w-11');
+    expect(button).toHaveClass('relative', 'large-targets:after:min-h-11', 'large-targets:after:min-w-11');
     expect(button.className).not.toMatch(/(^|\s)after:/);
   });
 

@@ -5,7 +5,7 @@ import { SectionNav, Select, SettingItem, SettingsSection, ToggleSwitch } from '
 // SET-22: on the phone, settings switches (44x24), jump chips (28px) and
 // selects (29px) were smaller than the 44px a finger needs (R1).
 
-const HIT = 'pointer-coarse:after:min-h-11';
+const HIT = 'large-targets:after:min-h-11';
 
 describe('settings touch targets', () => {
   it('switches keep their size and get a 44px hit area', () => {

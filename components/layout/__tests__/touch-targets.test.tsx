@@ -19,7 +19,7 @@ const { useSettingsStore } = await import('@/stores/settings-store');
 const { useAccountStore } = await import('@/stores/account-store');
 const { useAuthStore } = await import('@/stores/auth-store');
 
-const HIT = 'pointer-coarse:after:min-h-11';
+const HIT = 'large-targets:after:min-h-11';
 
 describe('touch targets', () => {
   it('notification sheet header buttons', () => {

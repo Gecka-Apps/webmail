@@ -11,6 +11,7 @@ import {
   type IconOptions,
 } from "@/components/files/file-item-parts";
 import type { SortDir, SortKey } from "@/components/files/files-header";
+import { TOUCH_HIT_AREA } from "@/components/ui/button";
 
 export interface FileItemHandlers {
   /** Selection click (plain, Ctrl/Cmd, Shift) on the item body. */
@@ -110,7 +111,7 @@ function SelectBox({ checked, visible, onToggle, label }: {
       className={cn(
         "w-4 h-4 rounded border flex items-center justify-center shrink-0 transition-opacity",
         // A 44px hit area on touch, as every Button has (R1).
-        "relative pointer-coarse:after:absolute pointer-coarse:after:top-1/2 pointer-coarse:after:left-1/2 pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11 pointer-coarse:after:-translate-x-1/2 pointer-coarse:after:-translate-y-1/2",
+        TOUCH_HIT_AREA,
         checked ? "bg-primary border-primary text-primary-foreground" : "border-muted-foreground/50 bg-background",
         // Shown on hover, and also when the keyboard is in the item or on a
         // touch screen, where there is no hover (WCAG 2.4.7).

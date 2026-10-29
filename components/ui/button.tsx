@@ -22,15 +22,17 @@ const SIZES: Record<ButtonSize, string> = {
   "icon-lg": "h-11 w-11 [:where(&)_svg]:size-5",
 };
 
-// On a touch screen every button can be hit within 44x44 px, whatever size
-// it is drawn at: a transparent ::after, centred on the button, at least
-// that big. `relative` gives it something to centre on; a className with
-// another position (absolute, fixed, sticky) replaces it through
-// tailwind-merge and still holds the ::after.
+// On a touch screen, and with a mouse when Settings > Accessibility > Large
+// targets is On, every button can be hit within 44x44 px, whatever size it
+// is drawn at: a transparent ::after, centred on the button, at least that
+// big. `relative` gives it something to centre on; a className with another
+// position (absolute, fixed, sticky) replaces it through tailwind-merge and
+// still holds the ::after. The large-targets variant is defined in
+// app/theme-inline.css (and as plain pointer: coarse in the plugin kit).
 export const TOUCH_HIT_AREA =
-  "relative pointer-coarse:after:absolute pointer-coarse:after:top-1/2 pointer-coarse:after:left-1/2 " +
-  "pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11 " +
-  "pointer-coarse:after:-translate-x-1/2 pointer-coarse:after:-translate-y-1/2";
+  "relative large-targets:after:absolute large-targets:after:top-1/2 large-targets:after:left-1/2 " +
+  "large-targets:after:size-full large-targets:after:min-h-11 large-targets:after:min-w-11 " +
+  "large-targets:after:-translate-x-1/2 large-targets:after:-translate-y-1/2";
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "md", ...props }, ref) => {

@@ -7,7 +7,7 @@ import {
   PanelRight, Download, Trash2, Scissors, Copy, Pencil, Share2, Clipboard,
   MoreHorizontal, FolderOpen, Folder, ArrowUp, ArrowDown, RefreshCw, RotateCcw, FolderInput,
 } from "@/components/icons";
-import { Button } from "@/components/ui/button";
+import { Button, TOUCH_HIT_AREA } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { ToolbarButton, ToolbarSearch, TOOLBAR_ACTIVE } from "@/components/ui/toolbar";
 import { ContextMenu, ContextMenuItem, ContextMenuSeparator } from "@/components/ui/context-menu";
@@ -346,7 +346,7 @@ export function FilesHeader({
                 className={cn(
                   "h-full w-7 flex items-center justify-center rounded transition-colors",
                   // A 44px hit area on touch, as every Button has (R1).
-                  "relative pointer-coarse:after:absolute pointer-coarse:after:top-1/2 pointer-coarse:after:left-1/2 pointer-coarse:after:size-full pointer-coarse:after:min-h-11 pointer-coarse:after:min-w-11 pointer-coarse:after:-translate-x-1/2 pointer-coarse:after:-translate-y-1/2",
+                  TOUCH_HIT_AREA,
                   viewMode === mode ? TOOLBAR_ACTIVE : "text-muted-foreground hover:text-foreground hover:bg-muted",
                 )}
               >

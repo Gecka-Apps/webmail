@@ -79,7 +79,7 @@ describe('folder list on touch', () => {
     const withChild = [...mailboxes, { ...box('trips', 'Trips', null), parentId: 'travel' } as Mailbox];
     render(<Sidebar mailboxes={withChild} selectedMailbox="inbox" />);
     const toggle = row('travel').querySelector('[data-testid="folder-expand-toggle"]')!;
-    expect(toggle.className).toContain('pointer-coarse:after:min-h-11');
+    expect(toggle.className).toContain('large-targets:after:min-h-11');
     expect(toggle.getAttribute('aria-label')).toBeTruthy();
   });
 

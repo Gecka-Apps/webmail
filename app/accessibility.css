@@ -239,6 +239,42 @@ html.dark[data-contrast="more"] {
   background-color: var(--color-background) !important;
 }
 
+/* ---------- Large targets (WCAG 2.5.5) ----------
+ *
+ * On a touch screen the components already size themselves (TOUCH_HIT_AREA
+ * and the pointer-coarse: utilities, through the large-targets variant in
+ * theme-inline.css). With "On" and a mouse, the rules below do the same
+ * for controls that carry no such class: buttons, menu items, options,
+ * tabs, tree items and list rows grow to 44px, switches keep their drawn
+ * size and get a 44px hit area around them, checkboxes and radios grow to
+ * 24px and take the rest from their label.
+ */
+:root[data-large-targets="on"] {
+  --touch-row-min-h: 44px;
+}
+:root[data-large-targets="on"] :is(button, [role="button"], [role="menuitem"], [role="menuitemradio"], [role="menuitemcheckbox"], [role="option"], [role="tab"], [role="treeitem"], [role="row"], [role="checkbox"]:not(input), summary, select):not([role="switch"], [role="separator"], [aria-hidden="true"], [disabled]) {
+  min-height: 44px;
+}
+:root[data-large-targets="on"] :is(button, [role="button"], [role="checkbox"]:not(input)):not([role="switch"], [role="separator"], [aria-hidden="true"]) {
+  min-width: 44px;
+}
+:root[data-large-targets="on"] [role="switch"] {
+  position: relative;
+}
+:root[data-large-targets="on"] [role="switch"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100%, 44px);
+  height: max(100%, 44px);
+  transform: translate(-50%, -50%);
+}
+:root[data-large-targets="on"] input:is([type="checkbox"], [type="radio"]) {
+  min-width: 24px;
+  min-height: 24px;
+}
+
 /* ---------- Large cursor ---------- */
 
 :root[data-large-cursor="on"],
