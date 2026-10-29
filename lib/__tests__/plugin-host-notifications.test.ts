@@ -64,6 +64,19 @@ describe('api.notifications.show', () => {
     expect(toastInfo).not.toHaveBeenCalled();
   });
 
+  // Do not disturb: no system notification from the page, only the quiet toast.
+  it('shows a toast instead of a system notification with Do not disturb on', async () => {
+    const { useSettingsStore } = await import('@/stores/settings-store');
+    useSettingsStore.setState({ doNotDisturb: true });
+    try {
+      expect(await call(RSS, { title: 'Synced' })).toBe('toast');
+      expect(FakeNotification.shown).toHaveLength(0);
+      expect(toastInfo).toHaveBeenCalledWith('Synced', { message: 'RSS Reader' });
+    } finally {
+      useSettingsStore.setState({ doNotDisturb: false });
+    }
+  });
+
   it('falls back to a toast without notification permission', async () => {
     FakeNotification.permission = 'default';
     expect(await call(RSS, { title: 'Synced' })).toBe('toast');

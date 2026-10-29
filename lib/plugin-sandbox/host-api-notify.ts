@@ -14,6 +14,7 @@ import { toastHooks } from '../plugin-hooks';
 import { readObject, readString, withinRate } from './host-api-input';
 import { recordNotification } from '@/stores/notification-center-store';
 import { credentialOverview } from './connect-dialog';
+import { useSettingsStore } from '@/stores/settings-store';
 
 export const MAX_NOTIFICATION_TITLE = 120;
 export const MAX_NOTIFICATION_BODY = 300;
@@ -56,7 +57,10 @@ export async function doNotificationsShow(plugin: InstalledPlugin, input: unknow
   // Also listed in the app's notification panel (the bell), where a click
   // reaches the plugin the same way as a click on the system notification.
   recordNotification({ level: 'info', title, body, pluginId: plugin.id, pluginName: source, ...(tag ? { tag } : {}), ...(action ? { action } : {}) });
-  if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+  // Do not disturb: no system notification (with its sound) from the page;
+  // the quiet toast below and the bell's list still have it.
+  const doNotDisturb = useSettingsStore.getState().doNotDisturb;
+  if (!doNotDisturb && typeof Notification !== 'undefined' && Notification.permission === 'granted') {
     try {
       const notification = new Notification(title, {
         body: body ? `${body}\n${source}` : source,
