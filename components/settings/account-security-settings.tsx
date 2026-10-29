@@ -24,8 +24,15 @@ import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { IconButton } from '@/components/ui/icon-button';
 import { useConfirmDialog } from '@/hooks/use-confirm-dialog';
 
+/** Ids that tie a visible label to its field: labelFor("key"). */
+function useLabelIds() {
+  const base = useId();
+  return (key: string) => `${base}-${key}`;
+}
+
 function PasswordChangeSection() {
   const t = useTranslations('settings.security');
+  const labelFor = useLabelIds();
   const tLogin = useTranslations('login');
   const { changePassword, isSaving, otpEnabled } = useAccountSecurityStore();
   const [currentPassword, setCurrentPassword] = useState('');
@@ -78,9 +85,9 @@ function PasswordChangeSection() {
       </div>
       <form onSubmit={handleSubmit} className="space-y-3">
         <div>
-          <label className="text-xs text-muted-foreground mb-1 block">{t('password.current')}</label>
+          <label htmlFor={labelFor("current")} className="text-xs text-muted-foreground mb-1 block">{t('password.current')}</label>
           <div className="relative">
-            <Input
+            <Input id={labelFor("current")}
               type={showCurrent ? 'text' : 'password'}
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
@@ -100,8 +107,8 @@ function PasswordChangeSection() {
         </div>
         {otpEnabled && (
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">{t('totp.verification_code')}</label>
-            <Input
+            <label htmlFor={labelFor("verification_code")} className="text-xs text-muted-foreground mb-1 block">{t('totp.verification_code')}</label>
+            <Input id={labelFor("verification_code")}
               value={otpCode}
               onChange={(e) => setOtpCode(e.target.value)}
               required
@@ -112,9 +119,9 @@ function PasswordChangeSection() {
           </div>
         )}
         <div>
-          <label className="text-xs text-muted-foreground mb-1 block">{t('password.new')}</label>
+          <label htmlFor={labelFor("new")} className="text-xs text-muted-foreground mb-1 block">{t('password.new')}</label>
           <div className="relative">
-            <Input
+            <Input id={labelFor("new")}
               type={showNew ? 'text' : 'password'}
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
@@ -134,8 +141,8 @@ function PasswordChangeSection() {
           </div>
         </div>
         <div>
-          <label className="text-xs text-muted-foreground mb-1 block">{t('password.confirm')}</label>
-          <Input
+          <label htmlFor={labelFor("confirm")} className="text-xs text-muted-foreground mb-1 block">{t('password.confirm')}</label>
+          <Input id={labelFor("confirm")}
             type="password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -228,6 +235,7 @@ function generateTotp(accountLabel: string, issuer: string): { totp: OTPAuth.TOT
 
 function TotpSection() {
   const t = useTranslations('settings.security');
+  const labelFor = useLabelIds();
   const { otpEnabled, enableTotp, disableTotp, isSaving, isLoadingAuth } = useAccountSecurityStore();
   const { client } = useAuthStore();
   const { appName } = useConfig();
@@ -345,12 +353,12 @@ function TotpSection() {
             <code dir="ltr" className="text-xs bg-background px-2 py-1 rounded border border-border flex-1 truncate">{setupUrl}</code>
           </div>
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">{t('password.current')}</label>
-            <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
+            <label htmlFor={labelFor("current-1")} className="text-xs text-muted-foreground mb-1 block">{t('password.current')}</label>
+            <Input id={labelFor("current-1")} type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
           </div>
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">{t('totp.verification_code')}</label>
-            <Input value={otpCode} onChange={(e) => setOtpCode(e.target.value)} inputMode="numeric" maxLength={6} />
+            <label htmlFor={labelFor("verification_code-1")} className="text-xs text-muted-foreground mb-1 block">{t('totp.verification_code')}</label>
+            <Input id={labelFor("verification_code-1")} value={otpCode} onChange={(e) => setOtpCode(e.target.value)} inputMode="numeric" maxLength={6} />
           </div>
           {setupError && <p className="text-xs text-destructive">{setupError}</p>}
           <div className="flex gap-2">
@@ -371,12 +379,14 @@ function TotpSection() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder={t('password.current')}
+            aria-label={t('password.current')}
             autoComplete="current-password"
           />
           <Input
             value={otpCode}
             onChange={(e) => setOtpCode(e.target.value)}
             placeholder={t('totp.verification_code')}
+            aria-label={t('totp.verification_code')}
             inputMode="numeric"
             autoComplete="one-time-code"
             maxLength={6}
@@ -450,6 +460,7 @@ interface CredentialSectionProps {
 
 function CredentialSection({ icon: Icon, i18nNamespace, entries, onCreate, onRemove }: CredentialSectionProps) {
   const t = useTranslations('settings.security');
+  const labelFor = useLabelIds();
   const tCommon = useTranslations('common');
   const tk = (key: string) => t(`${i18nNamespace}.${key}`);
   const { isSaving, isLoadingAuth } = useAccountSecurityStore();
@@ -555,8 +566,8 @@ function CredentialSection({ icon: Icon, i18nNamespace, entries, onCreate, onRem
       {showAdd && (
         <form onSubmit={handleAdd} className="p-3 bg-muted rounded-md space-y-2">
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">{tk('name_label')}</label>
-            <Input
+            <label htmlFor={labelFor("field6")} className="text-xs text-muted-foreground mb-1 block">{tk('name_label')}</label>
+            <Input id={labelFor("field6")}
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
               placeholder={tk('name_placeholder')}
@@ -564,12 +575,12 @@ function CredentialSection({ icon: Icon, i18nNamespace, entries, onCreate, onRem
             />
           </div>
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">{t('app_passwords.expires_label')}</label>
-            <Input type="date" value={expiresAt} onChange={(e) => setExpiresAt(e.target.value)} />
+            <label htmlFor={labelFor("expires_label")} className="text-xs text-muted-foreground mb-1 block">{t('app_passwords.expires_label')}</label>
+            <Input id={labelFor("expires_label")} type="date" value={expiresAt} onChange={(e) => setExpiresAt(e.target.value)} />
           </div>
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">{t('app_passwords.allowed_ips_label')}</label>
-            <textarea
+            <label htmlFor={labelFor("allowed_ips_label")} className="text-xs text-muted-foreground mb-1 block">{t('app_passwords.allowed_ips_label')}</label>
+            <textarea id={labelFor("allowed_ips_label")}
               value={allowedIpsRaw}
               onChange={(e) => setAllowedIpsRaw(e.target.value)}
               placeholder={t('app_passwords.allowed_ips_placeholder')}
@@ -632,6 +643,7 @@ function ApiKeysSection() {
 
 function PublicKeysSection() {
   const t = useTranslations('settings.security');
+  const labelFor = useLabelIds();
   const tCommon = useTranslations('common');
   const tk = (key: string) => t(`public_keys.${key}`);
   const {
@@ -766,8 +778,8 @@ function PublicKeysSection() {
       {showAdd && (
         <form onSubmit={handleAdd} className="p-3 bg-muted rounded-md space-y-2">
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">{tk('name_label')}</label>
-            <Input
+            <label htmlFor={labelFor("field9")} className="text-xs text-muted-foreground mb-1 block">{tk('name_label')}</label>
+            <Input id={labelFor("field9")}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder={tk('name_placeholder')}
@@ -775,8 +787,8 @@ function PublicKeysSection() {
             />
           </div>
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">{tk('key_label')}</label>
-            <textarea
+            <label htmlFor={labelFor("field10")} className="text-xs text-muted-foreground mb-1 block">{tk('key_label')}</label>
+            <textarea id={labelFor("field10")}
               value={publicKey}
               onChange={(e) => setPublicKey(e.target.value)}
               placeholder={tk('key_placeholder')}
@@ -802,8 +814,8 @@ function PublicKeysSection() {
           <h5 className="text-xs font-semibold text-foreground">{t('encryption.configure_title')}</h5>
           
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">{t('encryption.algorithm_label')}</label>
-            <select
+            <label htmlFor={labelFor("algorithm_label")} className="text-xs text-muted-foreground mb-1 block">{t('encryption.algorithm_label')}</label>
+            <select id={labelFor("algorithm_label")}
               value={selectedAlgorithm}
               onChange={(e) => setSelectedAlgorithm(e.target.value as 'Aes128' | 'Aes256')}
               className="w-full text-xs px-3 py-1.5 rounded-md border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
@@ -916,6 +928,7 @@ function PublicKeysSection() {
 
 function EmailClientSection() {
   const t = useTranslations('settings.security');
+  const labelFor = useLabelIds();
   const { client } = useAuthStore();
   const [copied, setCopied] = useState(false);
 
@@ -937,11 +950,12 @@ function EmailClientSection() {
       <p className="text-xs text-muted-foreground">{t('email_client.description')}</p>
       <div className="p-3 bg-muted/70 dark:bg-muted/40 rounded-md space-y-2">
         <div>
-          <label className="text-xs text-muted-foreground mb-1 block">
+          <label htmlFor={labelFor('jmap-username')} className="text-xs text-muted-foreground mb-1 block">
             {t('email_client.jmap_username_label')}
           </label>
           <div className="flex rounded-lg">
             <input
+              id={labelFor('jmap-username')}
               type="text"
               readOnly
               value={jmapUsername}

@@ -221,9 +221,29 @@ interface SettingItemProps {
   nested?: boolean;
 }
 
+/** A field that has a name of its own: aria-label, aria-labelledby or a <label>. */
+function hasOwnName(el: HTMLElement): boolean {
+  if (el.getAttribute('aria-label') || el.getAttribute('aria-labelledby')) return true;
+  if (el.closest('label')) return true;
+  return !!el.id && !!el.ownerDocument.querySelector(`label[for="${CSS.escape(el.id)}"]`);
+}
+
 export function SettingItem({ label, description, children, locked, advanced, nested }: SettingItemProps) {
   const labelId = useId();
   const visible = useAdvancedVisible(advanced);
+  // A row with one text field, select or textarea and nothing naming it
+  // (an <Input> dropped into the row) borrows the row's label, like the
+  // toggles do through SettingLabelContext. Rows with several fields name
+  // them one by one.
+  const controlsRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const box = controlsRef.current;
+    if (!box) return;
+    const fields = box.querySelectorAll<HTMLElement>('input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]), select, textarea');
+    if (fields.length !== 1) return;
+    const field = fields[0];
+    if (!hasOwnName(field)) field.setAttribute('aria-labelledby', labelId);
+  });
   if (!visible) return null;
   return (
     <div
@@ -245,7 +265,7 @@ export function SettingItem({ label, description, children, locked, advanced, ne
       </div>
       <SettingLabelContext.Provider value={labelId}>
         {/* The admin's value stays readable; inert keeps mouse and keyboard off it. */}
-        <div className={cn("flex-shrink-0", locked && "opacity-60")} inert={locked || undefined}>{children}</div>
+        <div ref={controlsRef} className={cn("flex-shrink-0", locked && "opacity-60")} inert={locked || undefined}>{children}</div>
       </SettingLabelContext.Provider>
     </div>
   );
