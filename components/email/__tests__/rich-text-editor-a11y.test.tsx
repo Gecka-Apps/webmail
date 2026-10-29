@@ -126,3 +126,11 @@ describe('RichTextEditor formatting toolbar (SR-08)', () => {
     expect(document.activeElement).toBe(item('font-size'));
   });
 });
+
+describe('RichTextEditor default text style (CO-16)', () => {
+  it('shows the text in the chosen font and size', async () => {
+    const { editor } = await setup({ defaultTextStyle: { fontFamily: 'monospace', fontSize: '20px' } });
+    expect(editor.view.dom.style.fontFamily).toBe('monospace');
+    expect(editor.view.dom.style.fontSize).toBe('20px');
+  });
+});

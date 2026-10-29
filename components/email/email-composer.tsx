@@ -138,6 +138,7 @@ import {
 import type { ComposePrefill } from "@/lib/plugin-compose-gate";
 import { composerContextMode, composerMounted, composerUnmounted, draftSaved } from "@/lib/plugin-composer-hooks";
 import { isValidEmail } from "@/lib/validation";
+import { composeTextStyle, composeTextStyleCss } from "@/components/email/font-size";
 import { buildMentionCandidates, type MentionCandidate } from "@/lib/recipient-mentions";
 import { describeRecipientChanges, recipientDisplayName, type RecipientChange, type RecipientFields } from "@/lib/recipient-announcements";
 import { normalizeCid } from "@/lib/attachment-visibility";
@@ -496,6 +497,11 @@ export function EmailComposer({
   const placeholderWarningEnabled = useSettingsStore((state) => state.placeholderWarningEnabled);
   // "Confirm before sending" (an admin can lock it; the store applies the lock).
   const sendConfirmation = useSettingsStore((state) => state.sendConfirmation);
+  // The font and size messages start in (Settings > Accessibility); the
+  // sent HTML carries them, so recipients see them too.
+  const composeFontFamily = useSettingsStore((state) => state.composeFontFamily);
+  const composeFontSize = useSettingsStore((state) => state.composeFontSize);
+  const composeStyle = useMemo(() => composeTextStyle(composeFontFamily, composeFontSize), [composeFontFamily, composeFontSize]);
   const recipientMentionsEnabled = useSettingsStore((state) => state.recipientMentionsEnabled);
   const mentionAddsRecipientTo = useSettingsStore((state) => state.mentionAddsRecipientTo);
   const updateSetting = useSettingsStore((state) => state.updateSetting);
@@ -3475,11 +3481,12 @@ export function EmailComposer({
     }
 
     const rewritten = plainTextMode ? null : rewriteInlineImages(body);
+    const composeStyleCss = composeTextStyleCss(composeStyle);
     // What the send-pipeline finalisers add (organisation signature) goes in
     // here, on the send only: drafts never get it. The `last` stage (the
     // disclaimer) runs on what goes out once plugins had their say, below.
     const { html: finalHtmlBody, text: finalBody } = finalizeOutgoing({
-      html: plainTextMode ? undefined : `<div>${rewritten!.html}</div>${buildSignatureHtml()}`,
+      html: plainTextMode ? undefined : `${composeStyleCss ? `<div style="${composeStyleCss}">` : '<div>'}${rewritten!.html}</div>${buildSignatureHtml()}`,
       text: builtTextBody,
     }, outgoingContext);
     const lastStage = (html: string | undefined, text: string) =>
@@ -4453,6 +4460,7 @@ export function EmailComposer({
               ariaLabel={t('body_label')}
               ariaInvalid={validationErrors.body}
               ariaDescribedBy={`${fieldIdBase}-body-error`}
+              defaultTextStyle={composeStyle}
               collapseToolbarOnMobile={!showFormattingOnMobile}
               toolbarPlacement={mvWindow ? (mvShowFormatting ? 'bottom' : 'hidden') : 'top'}
               onEditorReady={handleEditorReady}

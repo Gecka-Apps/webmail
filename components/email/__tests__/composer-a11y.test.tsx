@@ -444,3 +444,30 @@ describe('confirm before sending (MO-16)', () => {
     expect(onSend).not.toHaveBeenCalled();
   });
 });
+
+describe('default compose font (CO-16)', () => {
+  const READY = { ...DRAFT, to: 'bob@example.com' };
+
+  it('starts the editor in the chosen font and sends it with the mail', async () => {
+    settings.composeFontFamily = 'serif';
+    settings.composeFontSize = '18px';
+    const onSend = vi.fn();
+    render(<EmailComposer initialData={READY} onSend={onSend} />);
+    expect(JSON.parse(screen.getByTestId('rich-text-editor').getAttribute('data-default-style')!))
+      .toEqual({ fontFamily: 'serif', fontSize: '18px' });
+
+    fireEvent.click(screen.getAllByTestId('composer-send')[0]);
+    await waitFor(() => expect(onSend).toHaveBeenCalledTimes(1));
+    const sent = onSend.mock.calls[0][0] as { htmlBody?: string };
+    expect(sent.htmlBody).toMatch(/^<div style="font-family: serif; font-size: 18px">/);
+  });
+
+  it('leaves the mail as it was without the setting, and ignores values that are not a font', async () => {
+    settings.composeFontFamily = 'serif"><script>';
+    const onSend = vi.fn();
+    render(<EmailComposer initialData={READY} onSend={onSend} />);
+    fireEvent.click(screen.getAllByTestId('composer-send')[0]);
+    await waitFor(() => expect(onSend).toHaveBeenCalledTimes(1));
+    expect((onSend.mock.calls[0][0] as { htmlBody?: string }).htmlBody).toMatch(/^<div>/);
+  });
+});

@@ -15,7 +15,7 @@ import { PlainTextPaste } from "@/components/email/plain-text-paste";
 import { pastedImageFiles } from "@/components/email/paste-images";
 import { TextStyle, BackgroundColor } from "@tiptap/extension-text-style";
 import Color from "@tiptap/extension-color";
-import { FontSize, FONT_SIZES } from "@/components/email/font-size";
+import { FontSize, FONT_SIZES, composeTextStyleCss, type ComposeTextStyle } from "@/components/email/font-size";
 import { ResizableImage } from "@/components/email/resizable-image";
 import Placeholder from "@tiptap/extension-placeholder";
 import { Table } from "@tiptap/extension-table";
@@ -132,12 +132,16 @@ interface RichTextEditorProps {
   ariaInvalid?: boolean;
   /** The id of the text that explains the error. */
   ariaDescribedBy?: string;
+  /** The font and size the text starts in (the sent mail carries them too). */
+  defaultTextStyle?: ComposeTextStyle;
 }
 
 /** What the editing area tells assistive technology, besides TipTap's role=textbox. */
-export function editorA11yAttributes({ ariaLabel, ariaInvalid, ariaDescribedBy }: Pick<RichTextEditorProps, 'ariaLabel' | 'ariaInvalid' | 'ariaDescribedBy'>): Record<string, string> {
+export function editorA11yAttributes({ ariaLabel, ariaInvalid, ariaDescribedBy, defaultTextStyle }: Pick<RichTextEditorProps, 'ariaLabel' | 'ariaInvalid' | 'ariaDescribedBy' | 'defaultTextStyle'>): Record<string, string> {
+  const style = defaultTextStyle ? composeTextStyleCss(defaultTextStyle) : "";
   return {
     class: "tiptap min-h-[100px] px-4 py-3 text-sm text-foreground",
+    ...(style ? { style } : {}),
     role: "textbox",
     "aria-multiline": "true",
     ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
@@ -362,6 +366,7 @@ export function RichTextEditor({
   ariaLabel,
   ariaInvalid,
   ariaDescribedBy,
+  defaultTextStyle,
 }: RichTextEditorProps) {
   const rtlEditingSupport = useSettingsStore((st) => st.rtlEditingSupport);
   const tComposer = useTranslations("email_composer");
@@ -470,7 +475,7 @@ export function RichTextEditor({
     },
     content,
     editorProps: {
-      attributes: editorA11yAttributes({ ariaLabel, ariaInvalid, ariaDescribedBy }),
+      attributes: editorA11yAttributes({ ariaLabel, ariaInvalid, ariaDescribedBy, defaultTextStyle }),
       handleKeyDown: (_view, event) => {
         if (event.altKey && event.key === "F10" && focusToolbarRef.current?.()) {
           event.preventDefault();
@@ -550,10 +555,10 @@ export function RichTextEditor({
     editor.setOptions({
       editorProps: {
         ...editor.options.editorProps,
-        attributes: editorA11yAttributes({ ariaLabel, ariaInvalid, ariaDescribedBy }),
+        attributes: editorA11yAttributes({ ariaLabel, ariaInvalid, ariaDescribedBy, defaultTextStyle }),
       },
     });
-  }, [editor, ariaLabel, ariaInvalid, ariaDescribedBy]);
+  }, [editor, ariaLabel, ariaInvalid, ariaDescribedBy, defaultTextStyle]);
 
   // Expose the editor instance once it's ready so parents can target
   // specific nodes (e.g. swap the embedded signature on identity change).
