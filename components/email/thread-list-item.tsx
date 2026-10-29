@@ -254,7 +254,7 @@ function describeAccount(label: string | undefined, account: AccountEntry | unde
 function SourceFolderTag({ name }: { name: string }) {
   return (
     <span
-      className="inline-flex max-w-[8rem] shrink-0 items-center gap-1 truncate rounded-full border border-border bg-muted/40 px-1.5 py-0.5 text-[11px] text-muted-foreground"
+      className="inline-flex max-w-[8rem] shrink-0 items-center gap-1 truncate rounded-full border border-border bg-muted/40 px-1.5 py-0.5 text-[0.6875rem] text-muted-foreground"
       title={name}
     >
       <Folder className="h-3 w-3 shrink-0" />
@@ -862,7 +862,7 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
                     {showSourceFolder && <SourceFolderTag name={email.sourceFolder!} />}
                     {scheduledSendLabel ? (
                       <span
-                        className="inline-flex max-w-[11rem] shrink-0 items-center gap-1 truncate rounded-full border border-sky-500/20 bg-sky-500/10 px-2 py-0.5 text-[11px] font-medium tabular-nums text-sky-700 dark:text-sky-300"
+                        className="inline-flex max-w-[11rem] shrink-0 items-center gap-1 truncate rounded-full border border-sky-500/20 bg-sky-500/10 px-2 py-0.5 text-[0.6875rem] font-medium tabular-nums text-sky-700 dark:text-sky-300"
                         title={scheduledSendLabel}
                       >
                         <CalendarClock className="h-3 w-3 shrink-0" />
@@ -914,7 +914,7 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
                       mvMobileRow ? "line-clamp-1 min-w-0 flex-1" : "line-clamp-2",
                       isUnread
                         ? "text-muted-foreground"
-                        : "text-muted-foreground/80"
+                        : "text-muted-foreground"
                     )}>
                       {previewSnippet ? <SearchSnippetText snippet={previewSnippet} /> : (trimmedPreview || t('no_preview_available'))}
                     </p>
@@ -1456,7 +1456,7 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
                             e.stopPropagation();
                             onToggleExpand();
                           }}
-                          className="-m-0.5 shrink-0 rounded p-0.5 text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                          className="-m-[5px] shrink-0 rounded p-[5px] text-muted-foreground hover:bg-muted/50 hover:text-foreground"
                           aria-expanded={isExpanded}
                           aria-label={isExpanded ? t('collapse_named', { subject: threadSubject }) : t('expand_named', { subject: threadSubject })}
                         >
@@ -1636,7 +1636,7 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
                       {showSourceFolder && <SourceFolderTag name={latestEmail.sourceFolder!} />}
                       {scheduledSendLabel ? (
                         <span
-                          className="inline-flex max-w-[11rem] shrink-0 items-center gap-1 truncate rounded-full border border-sky-500/20 bg-sky-500/10 px-2 py-0.5 text-[11px] font-medium tabular-nums text-sky-700 dark:text-sky-300"
+                          className="inline-flex max-w-[11rem] shrink-0 items-center gap-1 truncate rounded-full border border-sky-500/20 bg-sky-500/10 px-2 py-0.5 text-[0.6875rem] font-medium tabular-nums text-sky-700 dark:text-sky-300"
                           title={scheduledSendLabel}
                         >
                           <CalendarClock className="h-3 w-3 shrink-0" />
@@ -1688,7 +1688,7 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
                         mvMobileRow ? "line-clamp-1 min-w-0 flex-1" : "line-clamp-2",
                         hasUnread
                           ? "text-muted-foreground"
-                          : "text-muted-foreground/80"
+                          : "text-muted-foreground"
                       )}>
                         {previewSnippet ? <SearchSnippetText snippet={previewSnippet} /> : (trimmedPreview || tEmailViewer('no_preview_available'))}
                       </p>
