@@ -1134,7 +1134,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
               autoComplete="off"
             />
           </div>
-          <div className="px-2 space-y-0.5">
+          <div className="px-3 space-y-0.5">
             {filteredGroupedTabs.length === 0 && (
               <div className="px-3 py-6 text-sm text-muted-foreground text-center">
                 {t('search_no_results')}
