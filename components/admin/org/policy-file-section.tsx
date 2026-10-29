@@ -8,11 +8,17 @@ import { apiFetch } from '@/lib/browser-navigation';
 import type { KeyChanges, PolicyChangeSummary } from '@/lib/admin/policy-diff';
 import type { OrgPolicyDraft } from './use-org-policy-draft';
 
+/** "contrast, fontSize and 3 more": which keys, so an admin can tell what the file does. */
+function names(keys: string[]): string {
+  const shown = keys.slice(0, 5).join(', ');
+  return keys.length > 5 ? `${shown} and ${keys.length - 5} more` : shown;
+}
+
 function describe(label: string, changes: KeyChanges): string | null {
   const parts = [
-    changes.added.length ? `${changes.added.length} added` : null,
-    changes.changed.length ? `${changes.changed.length} changed` : null,
-    changes.removed.length ? `${changes.removed.length} removed` : null,
+    changes.added.length ? `${changes.added.length} added (${names(changes.added)})` : null,
+    changes.changed.length ? `${changes.changed.length} changed (${names(changes.changed)})` : null,
+    changes.removed.length ? `${changes.removed.length} removed (${names(changes.removed)})` : null,
   ].filter(Boolean);
   return parts.length ? `${label}: ${parts.join(', ')}` : null;
 }
@@ -21,9 +27,9 @@ function summaryLines(summary: PolicyChangeSummary): string[] {
   return [
     describe('Domains and groups', summary.scopes),
     describe('Organisation settings', summary.organisation),
-    describe('Locked and hidden settings', summary.restrictions),
+    describe('Locked, limited and hidden settings', summary.restrictions),
     describe('Features', summary.features),
-    describe('Defaults for new users', summary.defaults),
+    describe('Defaults', summary.defaults),
     summary.other.length ? `Also: ${summary.other.join(', ')}` : null,
   ].filter((line): line is string => !!line);
 }

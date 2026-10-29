@@ -17,9 +17,9 @@ vi.mock('@/lib/browser-navigation', () => ({
         summary: {
           scopes: { added: ['Two (two)'], changed: [], removed: [] },
           organisation: { added: [], changed: ['session'], removed: [] },
-          restrictions: { added: [], changed: [], removed: [] },
+          restrictions: { added: [], changed: ['singleKeyShortcuts'], removed: [] },
           features: { added: [], changed: [], removed: [] },
-          defaults: { added: [], changed: [], removed: [] },
+          defaults: { added: ['fontSize', 'contrast'], changed: [], removed: ['reduceMotion'] },
           other: [], unchanged: false,
         },
       }));
@@ -119,6 +119,9 @@ describe('OrganisationPage', () => {
     const preview = await screen.findByTestId('policy-import-preview');
     expect(preview.textContent).toContain('Domains and groups: 1 added');
     expect(preview.textContent).toContain('Organisation settings: 1 changed');
+    // Locks with values and defaults say which settings they touch.
+    expect(preview.textContent).toContain('Locked, limited and hidden settings: 1 changed (singleKeyShortcuts)');
+    expect(preview.textContent).toContain('Defaults: 2 added (fontSize, contrast), 1 removed (reduceMotion)');
     expect(filePosts).toEqual(['/api/admin/policy/file?preview=1']);
 
     fireEvent.click(screen.getByRole('button', { name: 'Replace the current policy' }));
