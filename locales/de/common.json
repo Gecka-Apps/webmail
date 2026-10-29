@@ -381,7 +381,13 @@
     },
     "category_tabs": "Posteingangskategorien",
     "listbox_label": "Nachrichten",
-    "row_actions": "Aktionen"
+    "row_actions": "Aktionen",
+    "pages": {
+      "label": "Seiten der Nachrichtenliste",
+      "previous": "Vorherige Seite",
+      "next": "Nächste Seite",
+      "position": "{more, select, yes {Seite {page} von {pages} oder mehr} other {Seite {page} von {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Geteilte Labels",

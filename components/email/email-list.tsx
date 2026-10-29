@@ -143,6 +143,9 @@ function LoadingSkeleton() {
   );
 }
 
+/** Rows per page in simple mode's paged list. */
+const LIST_PAGE_SIZE = 50;
+
 export function EmailList({
   emails,
   selectedEmailKey,
@@ -503,13 +506,6 @@ export function EmailList({
       entry?.borderBoxSize?.[0]?.blockSize ?? element.getBoundingClientRect().height,
   });
 
-  // One Tab stop in the list, and the focus going along with j/k (SR-01/02).
-  const renderedRows = virtualizer.getVirtualItems();
-  useListboxFocus(
-    parentRef,
-    selectedEmailKey,
-    `${items.length}:${renderedRows[0]?.index ?? -1}-${renderedRows[renderedRows.length - 1]?.index ?? -1}:${expandedThreadIds.size}`,
-  );
 
   // Another folder, tag, account, unified view or plugin tab - or another
   // search - opens at the top. The scroll container outlives the switch, so
@@ -892,6 +888,104 @@ export function EmailList({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [density, isFocusedMailLayout, showPreview]);
 
+  // One list item's content, for the virtual list and the paged one.
+  const renderItemContent = (index: number) => {
+    const listItem = items[index];
+    const thread = listItem?.kind === 'row' ? listItem.thread : null;
+    return (
+      <>
+        {listItem?.kind === 'header' && unreadSection && (
+          listItem.section === 'unread' ? (
+            <MvListSectionHeader
+              title={t('sections.unread')}
+              collapsed={unreadCollapsed}
+              onToggle={() => updateSetting('mvUnreadSectionCollapsed', !unreadCollapsed)}
+              shown={sectionRowCount}
+              total={unreadSection.total}
+            />
+          ) : (
+            <MvListSectionHeader
+              title={t('sections.everything_else')}
+              collapsed={restCollapsed}
+              onToggle={() => updateSetting('mvEverythingElseCollapsed', !restCollapsed)}
+              shown={emails.length - sectionRowCount}
+              total={totalEmails}
+            />
+          )
+        )}
+        {listItem?.kind === 'unread-empty' && (
+          <p className="flex h-12 items-center border-b border-border px-6 text-sm text-muted-foreground">
+            {t('sections.unread_empty')}
+          </p>
+        )}
+        {thread && <MemoizedThreadListItem
+          thread={thread}
+          isExpanded={expandedThreadIds.has(thread.threadKey)}
+          selectedEmailKey={selectedEmailKey}
+          isLoading={isLoadingThread === thread.threadKey}
+          expandedEmails={threadEmailsCache.get(thread.threadKey)}
+          onToggleExpand={toggleExpandFor(thread.threadKey)}
+          onCollapseAllThreads={rowHandlers.onCollapseAllThreads}
+          onEmailSelect={rowHandlers.onEmailSelect}
+          onEmailDoubleClick={rowHandlers.onEmailDoubleClick}
+          onPrefetch={rowHandlers.onPrefetch}
+          onContextMenu={rowHandlers.onContextMenu}
+          onOpenConversation={rowHandlers.onOpenConversation}
+          onToggleStar={rowHandlers.onToggleStar}
+          onMarkAsRead={rowHandlers.onMarkAsRead}
+          onDelete={rowHandlers.onDelete}
+          onArchive={rowHandlers.onArchive}
+          onSetTag={rowHandlers.onSetTag}
+          onMarkAsSpam={rowHandlers.onMarkAsSpam}
+          onUndoSpam={rowHandlers.onUndoSpam}
+          onOpenAttachment={rowHandlers.onOpenAttachment}
+          loadAttachments={loadAttachments}
+        />}
+      </>
+    );
+  };
+
+  // Simple mode's paged list (SR-21): pages of 50 rows with Previous and
+  // Next instead of endless scrolling, which a screen reader handles better.
+  const paged = useSettingsStore((state) => state.simpleMode && state.simpleModePagedList);
+  const [page, setPage] = useState(0);
+  const pageCount = Math.max(1, Math.ceil(itemOfThread.length / LIST_PAGE_SIZE));
+  const pageItems = useMemo(
+    () => (paged ? itemOfThread.slice(page * LIST_PAGE_SIZE, (page + 1) * LIST_PAGE_SIZE) : []),
+    [paged, page, itemOfThread],
+  );
+  const canGoNext = (page + 1) * LIST_PAGE_SIZE < itemOfThread.length || footerHasMore;
+  const pendingNextPage = useRef(false);
+  const goToNextPage = useCallback(() => {
+    if ((page + 1) * LIST_PAGE_SIZE < itemOfThread.length) setPage(page + 1);
+    else if (footerHasMore) { pendingNextPage.current = true; handleLoadMore(); }
+  }, [page, itemOfThread.length, footerHasMore, handleLoadMore]);
+  // The next page arrives from the server: show it.
+  useEffect(() => {
+    if (!pendingNextPage.current || (page + 1) * LIST_PAGE_SIZE >= itemOfThread.length) return;
+    pendingNextPage.current = false;
+    setPage(page + 1);
+  }, [itemOfThread.length, page]);
+  // Another folder or search starts on its first page.
+  useEffect(() => { setPage(0); }, [viewKey]);
+  // j/k past the end of a page turn the page.
+  useEffect(() => {
+    if (!paged || !selectedEmailKey) return;
+    const index = threadGroups.findIndex((thread) => thread.emails.some((e) => emailKeyFor(e) === selectedEmailKey));
+    if (index < 0) return;
+    const target = Math.floor(index / LIST_PAGE_SIZE);
+    if (target !== page) setPage(target);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paged, selectedEmailKey]);
+
+  // One Tab stop in the list, and the focus going along with j/k (SR-01/02).
+  const renderedRows = virtualizer.getVirtualItems();
+  useListboxFocus(
+    parentRef,
+    selectedEmailKey,
+    `${items.length}:${renderedRows[0]?.index ?? -1}-${renderedRows[renderedRows.length - 1]?.index ?? -1}:${expandedThreadIds.size}:${paged ? page : -1}`,
+  );
+
   return (
     <TagDisplayContext.Provider value={tagDisplay}>
     <div className={cn("flex flex-col min-h-0", className)}>
@@ -1128,6 +1222,32 @@ export function EmailList({
             <PluginSlot name="message-list-empty" className="mt-4 w-full max-w-md px-4" extraProps={emptySlotProps} />
           </div>
         ) : (
+          paged ? (
+            <>
+              <div
+                role="treegrid"
+                aria-label={t('listbox_label')}
+                aria-multiselectable
+                aria-busy={isLoading || undefined}
+                data-setsize={footerHasMore ? -1 : itemOfThread.length}
+              >
+                {pageItems.map((index) => (
+                  <div key={items[index]?.kind === 'row' ? (items[index] as { thread: ThreadGroup }).thread.threadKey : `item-${index}`} role="presentation" data-pos={rowPosOfItem.get(index)}>
+                    {renderItemContent(index)}
+                  </div>
+                ))}
+              </div>
+              <nav aria-label={t('pages.label')} className="flex items-center justify-between gap-3 border-t border-border px-4 py-3 text-sm">
+                <Button variant="outline" size="sm" onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0}>
+                  {t('pages.previous')}
+                </Button>
+                <span aria-live="polite">{t('pages.position', { page: page + 1, pages: pageCount, more: footerHasMore ? 'yes' : 'no' })}</span>
+                <Button variant="outline" size="sm" onClick={goToNextPage} disabled={!canGoNext}>
+                  {footerIsLoadingMore ? t('loading_more') : t('pages.next')}
+                </Button>
+              </nav>
+            </>
+          ) : (
           <>
             <div
               role="treegrid"
@@ -1163,53 +1283,7 @@ export function EmailList({
                       width: '100%',
                     }}
                   >
-                    {listItem?.kind === 'header' && unreadSection && (
-                      listItem.section === 'unread' ? (
-                        <MvListSectionHeader
-                          title={t('sections.unread')}
-                          collapsed={unreadCollapsed}
-                          onToggle={() => updateSetting('mvUnreadSectionCollapsed', !unreadCollapsed)}
-                          shown={sectionRowCount}
-                          total={unreadSection.total}
-                        />
-                      ) : (
-                        <MvListSectionHeader
-                          title={t('sections.everything_else')}
-                          collapsed={restCollapsed}
-                          onToggle={() => updateSetting('mvEverythingElseCollapsed', !restCollapsed)}
-                          shown={emails.length - sectionRowCount}
-                          total={totalEmails}
-                        />
-                      )
-                    )}
-                    {listItem?.kind === 'unread-empty' && (
-                      <p className="flex h-12 items-center border-b border-border px-6 text-sm text-muted-foreground">
-                        {t('sections.unread_empty')}
-                      </p>
-                    )}
-                    {thread && <MemoizedThreadListItem
-                      thread={thread}
-                      isExpanded={expandedThreadIds.has(thread.threadKey)}
-                      selectedEmailKey={selectedEmailKey}
-                      isLoading={isLoadingThread === thread.threadKey}
-                      expandedEmails={threadEmailsCache.get(thread.threadKey)}
-                      onToggleExpand={toggleExpandFor(thread.threadKey)}
-                      onCollapseAllThreads={rowHandlers.onCollapseAllThreads}
-                      onEmailSelect={rowHandlers.onEmailSelect}
-                      onEmailDoubleClick={rowHandlers.onEmailDoubleClick}
-                      onPrefetch={rowHandlers.onPrefetch}
-                      onContextMenu={rowHandlers.onContextMenu}
-                      onOpenConversation={rowHandlers.onOpenConversation}
-                      onToggleStar={rowHandlers.onToggleStar}
-                      onMarkAsRead={rowHandlers.onMarkAsRead}
-                      onDelete={rowHandlers.onDelete}
-                      onArchive={rowHandlers.onArchive}
-                      onSetTag={rowHandlers.onSetTag}
-                      onMarkAsSpam={rowHandlers.onMarkAsSpam}
-                      onUndoSpam={rowHandlers.onUndoSpam}
-                      onOpenAttachment={rowHandlers.onOpenAttachment}
-                      loadAttachments={loadAttachments}
-                    />}
+                    {renderItemContent(virtualItem.index)}
                   </div>
                 );
               })}
@@ -1229,6 +1303,7 @@ export function EmailList({
               )}
             </div>}
           </>
+          )
         )}
       </div>
 

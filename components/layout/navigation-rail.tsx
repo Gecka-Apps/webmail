@@ -239,6 +239,7 @@ export function NavigationRail({
   const supportsContacts = client?.supportsContacts() ?? false;
   const showRailAccountList = useSettingsStore((s) => s.showRailAccountList);
   const showAccessibilityButton = useSettingsStore((s) => s.showAccessibilityButton);
+  const simpleMode = useSettingsStore((s) => s.simpleMode);
   const mountainView = useSettingsStore((s) => s.interfaceLayout === 'mountain-view');
   const sidebarAppsEnabled = usePolicyStore((s) => s.isFeatureEnabled('sidebarAppsEnabled'));
   const filesEnabled = usePolicyStore((s) => s.isFeatureEnabled('filesEnabled'));
@@ -836,7 +837,7 @@ export function NavigationRail({
           </div>
         )}
 
-        {onLogout && showRailAccountList && accounts.length > 0 && (
+        {onLogout && showRailAccountList && !simpleMode && accounts.length > 0 && (
           <>
             <div className="w-8 border-t my-1" style={{ borderColor: 'rgba(128, 128, 128, 0.3)' }} />
 

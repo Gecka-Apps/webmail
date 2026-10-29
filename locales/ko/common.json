@@ -381,7 +381,13 @@
     },
     "category_tabs": "받은편지함 카테고리",
     "listbox_label": "메시지",
-    "row_actions": "작업"
+    "row_actions": "작업",
+    "pages": {
+      "label": "메시지 목록 페이지",
+      "previous": "이전 페이지",
+      "next": "다음 페이지",
+      "position": "{more, select, yes {{pages}페이지 이상 중 {page}페이지} other {{pages}페이지 중 {page}페이지}}"
+    }
   },
   "shared_tags": {
     "title": "공유 태그",

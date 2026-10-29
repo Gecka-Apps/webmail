@@ -381,7 +381,13 @@
     },
     "category_tabs": "Ирсэн шуудангийн ангиллууд",
     "listbox_label": "Зурвасууд",
-    "row_actions": "Үйлдлүүд"
+    "row_actions": "Үйлдлүүд",
+    "pages": {
+      "label": "Мессежийн жагсаалтын хуудсууд",
+      "previous": "Өмнөх хуудас",
+      "next": "Дараагийн хуудас",
+      "position": "{more, select, yes {{pages} буюу түүнээс олон хуудасны {page}-р хуудас} other {{pages} хуудасны {page}-р хуудас}}"
+    }
   },
   "shared_tags": {
     "title": "Хуваалцсан тагууд",

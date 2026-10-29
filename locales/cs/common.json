@@ -381,7 +381,13 @@
     },
     "category_tabs": "Kategorie doručené pošty",
     "listbox_label": "Zprávy",
-    "row_actions": "Akce"
+    "row_actions": "Akce",
+    "pages": {
+      "label": "Stránky seznamu zpráv",
+      "previous": "Předchozí stránka",
+      "next": "Další stránka",
+      "position": "{more, select, yes {Stránka {page} z {pages} nebo více} other {Stránka {page} z {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Sdílené štítky",

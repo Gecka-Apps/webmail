@@ -381,7 +381,13 @@
     },
     "category_tabs": "دسته‌های صندوق ورودی",
     "listbox_label": "پیام‌ها",
-    "row_actions": "اقدامات"
+    "row_actions": "اقدامات",
+    "pages": {
+      "label": "صفحه‌های فهرست پیام‌ها",
+      "previous": "صفحه قبلی",
+      "next": "صفحه بعدی",
+      "position": "{more, select, yes {صفحه {page} از {pages} یا بیشتر} other {صفحه {page} از {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "برچسب‌های مشترک",

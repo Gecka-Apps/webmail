@@ -253,3 +253,9 @@ html.dark[data-contrast="more"] {
     outline-color: Highlight !important;
   }
 }
+
+/* ---------- Simple mode: no side panels ---------- */
+
+:root[data-simple-mode="on"] [data-simple-hide] {
+  display: none !important;
+}

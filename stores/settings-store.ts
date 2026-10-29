@@ -320,8 +320,10 @@ export type MailLayout = 'split' | 'focus' | 'horizontal';
  * decides what is drawn; read `mailLayout` itself only where the saved
  * preference is being shown or edited.
  */
-export function effectiveMailLayout(mailLayout: MailLayout, interfaceLayout: InterfaceLayout): MailLayout {
-  return interfaceLayout === 'mountain-view' ? 'focus' : mailLayout;
+export function effectiveMailLayout(mailLayout: MailLayout, interfaceLayout: InterfaceLayout, simpleMode = false): MailLayout {
+  // Simple mode (Settings > Accessibility) is one column: the list, then the
+  // message in its place.
+  return interfaceLayout === 'mountain-view' || simpleMode ? 'focus' : mailLayout;
 }
 
 /**

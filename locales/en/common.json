@@ -381,7 +381,13 @@
     },
     "category_tabs": "Inbox categories",
     "listbox_label": "Messages",
-    "row_actions": "Actions"
+    "row_actions": "Actions",
+    "pages": {
+      "label": "Pages of the message list",
+      "previous": "Previous page",
+      "next": "Next page",
+      "position": "{more, select, yes {Page {page} of {pages} or more} other {Page {page} of {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Shared tags",

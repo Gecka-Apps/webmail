@@ -381,7 +381,13 @@
     },
     "category_tabs": "Kategorie skrzynki odbiorczej",
     "listbox_label": "Wiadomości",
-    "row_actions": "Akcje"
+    "row_actions": "Akcje",
+    "pages": {
+      "label": "Strony listy wiadomości",
+      "previous": "Poprzednia strona",
+      "next": "Następna strona",
+      "position": "{more, select, yes {Strona {page} z {pages} lub więcej} other {Strona {page} z {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Wspólne etykiety",

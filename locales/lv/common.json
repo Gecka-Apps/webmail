@@ -381,7 +381,13 @@
     },
     "category_tabs": "Iesūtnes kategorijas",
     "listbox_label": "Vēstules",
-    "row_actions": "Darbības"
+    "row_actions": "Darbības",
+    "pages": {
+      "label": "Ziņojumu saraksta lapas",
+      "previous": "Iepriekšējā lapa",
+      "next": "Nākamā lapa",
+      "position": "{more, select, yes {{page}. lapa no {pages} vai vairāk} other {{page}. lapa no {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Kopīgotie tagi",

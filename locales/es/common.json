@@ -381,7 +381,13 @@
     },
     "category_tabs": "Categorías de la bandeja de entrada",
     "listbox_label": "Mensajes",
-    "row_actions": "Acciones"
+    "row_actions": "Acciones",
+    "pages": {
+      "label": "Páginas de la lista de correos",
+      "previous": "Página anterior",
+      "next": "Página siguiente",
+      "position": "{more, select, yes {Página {page} de {pages} o más} other {Página {page} de {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Etiquetas compartidas",

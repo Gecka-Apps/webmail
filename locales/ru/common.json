@@ -381,7 +381,13 @@
     },
     "category_tabs": "Категории входящих",
     "listbox_label": "Сообщения",
-    "row_actions": "Действия"
+    "row_actions": "Действия",
+    "pages": {
+      "label": "Страницы списка сообщений",
+      "previous": "Предыдущая страница",
+      "next": "Следующая страница",
+      "position": "{more, select, yes {Страница {page} из {pages} или больше} other {Страница {page} из {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Общие теги",

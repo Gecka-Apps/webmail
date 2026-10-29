@@ -381,7 +381,13 @@
     },
     "category_tabs": "Categories de la safata d'entrada",
     "listbox_label": "Missatges",
-    "row_actions": "Accions"
+    "row_actions": "Accions",
+    "pages": {
+      "label": "Pàgines de la llista de correus",
+      "previous": "Pàgina anterior",
+      "next": "Pàgina següent",
+      "position": "{more, select, yes {Pàgina {page} de {pages} o més} other {Pàgina {page} de {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Etiquetes compartides",

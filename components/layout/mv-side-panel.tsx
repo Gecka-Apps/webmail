@@ -64,6 +64,7 @@ export function MvSidePanel() {
     <>
       {active && (
         <aside
+          data-simple-hide=""
           data-mv-side-panel={active}
           className="mb-4 me-2 flex w-[300px] shrink-0 flex-col overflow-hidden rounded-2xl bg-background"
           aria-label={buttons.find((b) => b.id === active)?.label}

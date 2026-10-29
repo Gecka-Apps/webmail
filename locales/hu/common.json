@@ -381,7 +381,13 @@
     },
     "category_tabs": "Beérkezett üzenetek kategóriái",
     "listbox_label": "Üzenetek",
-    "row_actions": "Műveletek"
+    "row_actions": "Műveletek",
+    "pages": {
+      "label": "Az üzenetlista oldalai",
+      "previous": "Előző oldal",
+      "next": "Következő oldal",
+      "position": "{more, select, yes {{page}. oldal, összesen {pages} vagy több} other {{page}. oldal, összesen {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Megosztott címkék",

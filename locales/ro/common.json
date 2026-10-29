@@ -381,7 +381,13 @@
     },
     "category_tabs": "Categoriile căsuței de primire",
     "listbox_label": "Mesaje",
-    "row_actions": "Acțiuni"
+    "row_actions": "Acțiuni",
+    "pages": {
+      "label": "Paginile listei de mesaje",
+      "previous": "Pagina anterioară",
+      "next": "Pagina următoare",
+      "position": "{more, select, yes {Pagina {page} din {pages} sau mai multe} other {Pagina {page} din {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Etichete partajate",

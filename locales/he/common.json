@@ -346,7 +346,13 @@
     },
     "category_tabs": "קטגוריות של תיבת הדואר הנכנס",
     "listbox_label": "הודעות",
-    "row_actions": "פעולות"
+    "row_actions": "פעולות",
+    "pages": {
+      "label": "עמודי רשימת ההודעות",
+      "previous": "העמוד הקודם",
+      "next": "העמוד הבא",
+      "position": "{more, select, yes {עמוד {page} מתוך {pages} או יותר} other {עמוד {page} מתוך {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "תגים משותפים",

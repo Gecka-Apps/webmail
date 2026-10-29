@@ -381,7 +381,13 @@
     },
     "category_tabs": "受信トレイのカテゴリ",
     "listbox_label": "メッセージ",
-    "row_actions": "アクション"
+    "row_actions": "アクション",
+    "pages": {
+      "label": "メッセージ一覧のページ",
+      "previous": "前のページ",
+      "next": "次のページ",
+      "position": "{more, select, yes {{pages} ページ以上中 {page} ページ目} other {{pages} ページ中 {page} ページ目}}"
+    }
   },
   "shared_tags": {
     "title": "共有タグ",

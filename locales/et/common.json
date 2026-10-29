@@ -381,7 +381,13 @@
     },
     "category_tabs": "Postkasti kategooriad",
     "listbox_label": "Sõnumid",
-    "row_actions": "Toimingud"
+    "row_actions": "Toimingud",
+    "pages": {
+      "label": "Kirjade loendi lehed",
+      "previous": "Eelmine leht",
+      "next": "Järgmine leht",
+      "position": "{more, select, yes {Leht {page} / {pages} või rohkem} other {Leht {page} / {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Jagatud sildid",

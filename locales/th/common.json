@@ -645,7 +645,13 @@
     },
     "category_tabs": "หมวดหมู่กล่องจดหมายเข้า",
     "listbox_label": "ข้อความ",
-    "row_actions": "การดำเนินการ"
+    "row_actions": "การดำเนินการ",
+    "pages": {
+      "label": "หน้าของรายการข้อความ",
+      "previous": "หน้าก่อนหน้า",
+      "next": "หน้าถัดไป",
+      "position": "{more, select, yes {หน้า {page} จาก {pages} หรือมากกว่า} other {หน้า {page} จาก {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "ป้ายกำกับที่แชร์",

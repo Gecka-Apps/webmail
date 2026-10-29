@@ -381,7 +381,13 @@
     },
     "category_tabs": "فئات البريد الوارد",
     "listbox_label": "الرسائل",
-    "row_actions": "الإجراءات"
+    "row_actions": "الإجراءات",
+    "pages": {
+      "label": "صفحات قائمة الرسائل",
+      "previous": "الصفحة السابقة",
+      "next": "الصفحة التالية",
+      "position": "{more, select, yes {الصفحة {page} من {pages} أو أكثر} other {الصفحة {page} من {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "الوسوم المشتركة",

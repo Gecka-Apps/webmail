@@ -381,7 +381,13 @@
     },
     "category_tabs": "Categorie della posta in arrivo",
     "listbox_label": "Messaggi",
-    "row_actions": "Azioni"
+    "row_actions": "Azioni",
+    "pages": {
+      "label": "Pagine dell'elenco dei messaggi",
+      "previous": "Pagina precedente",
+      "next": "Pagina successiva",
+      "position": "{more, select, yes {Pagina {page} di {pages} o più} other {Pagina {page} di {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Etichette condivise",

@@ -381,7 +381,13 @@
     },
     "category_tabs": "Gelen kutusu kategorileri",
     "listbox_label": "Mesajlar",
-    "row_actions": "Eylemler"
+    "row_actions": "Eylemler",
+    "pages": {
+      "label": "İleti listesi sayfaları",
+      "previous": "Önceki sayfa",
+      "next": "Sonraki sayfa",
+      "position": "{more, select, yes {Sayfa {page} / {pages} veya daha fazla} other {Sayfa {page} / {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Paylaşılan etiketler",

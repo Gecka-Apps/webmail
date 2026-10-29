@@ -381,7 +381,13 @@
     },
     "category_tabs": "Inboxcategorieën",
     "listbox_label": "Berichten",
-    "row_actions": "Acties"
+    "row_actions": "Acties",
+    "pages": {
+      "label": "Pagina's van de e-maillijst",
+      "previous": "Vorige pagina",
+      "next": "Volgende pagina",
+      "position": "{more, select, yes {Pagina {page} van {pages} of meer} other {Pagina {page} van {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Gedeelde labels",

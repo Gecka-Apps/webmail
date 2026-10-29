@@ -381,7 +381,13 @@
     },
     "category_tabs": "Indbakkekategorier",
     "listbox_label": "Beskeder",
-    "row_actions": "Handlinger"
+    "row_actions": "Handlinger",
+    "pages": {
+      "label": "Sider i e-mail-listen",
+      "previous": "Forrige side",
+      "next": "Næste side",
+      "position": "{more, select, yes {Side {page} af {pages} eller flere} other {Side {page} af {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Delte tags",

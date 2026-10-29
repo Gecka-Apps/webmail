@@ -1504,7 +1504,9 @@ export function EmailViewer({
     />
   );
   // Mountain View's toolbars are icon-only, on the phone as on the desktop.
-  const showToolbarLabels = showToolbarLabelsSetting && interfaceLayout !== 'mountain-view';
+  const simpleMode = useSettingsStore((state) => state.simpleMode);
+  // Simple mode always names the toolbar's buttons in words.
+  const showToolbarLabels = (showToolbarLabelsSetting || simpleMode) && interfaceLayout !== 'mountain-view';
   // Inside a Pro pane, `isMobile` above is pane-width based: overlays that
   // would go viewport-fixed must instead cover just the pane (via
   // PaneOverlay + absolute positioning), and viewport CSS breakpoints like

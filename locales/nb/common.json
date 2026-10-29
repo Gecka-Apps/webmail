@@ -381,7 +381,13 @@
     },
     "category_tabs": "Innbokskategorier",
     "listbox_label": "Meldinger",
-    "row_actions": "Handlinger"
+    "row_actions": "Handlinger",
+    "pages": {
+      "label": "Sider i e-postlisten",
+      "previous": "Forrige side",
+      "next": "Neste side",
+      "position": "{more, select, yes {Side {page} av {pages} eller flere} other {Side {page} av {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Delte etiketter",

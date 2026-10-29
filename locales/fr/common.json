@@ -381,7 +381,13 @@
     },
     "category_tabs": "Catégories de la boîte de réception",
     "listbox_label": "Messages",
-    "row_actions": "Actions"
+    "row_actions": "Actions",
+    "pages": {
+      "label": "Pages de la liste des messages",
+      "previous": "Page précédente",
+      "next": "Page suivante",
+      "position": "{more, select, yes {Page {page} sur {pages} ou plus} other {Page {page} sur {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Étiquettes partagées",

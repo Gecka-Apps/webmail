@@ -18,7 +18,7 @@ export interface ListRowShape {
  * are shaped after Gmail and never take them.
  */
 export function useListRowShape(): ListRowShape {
-  const mailLayout = useSettingsStore((state) => effectiveMailLayout(state.mailLayout, state.interfaceLayout));
+  const mailLayout = useSettingsStore((state) => effectiveMailLayout(state.mailLayout, state.interfaceLayout, state.simpleMode));
   const mountainView = useSettingsStore((state) => state.interfaceLayout === 'mountain-view');
   const listColumns = useSettingsStore((state) => state.listColumns);
   const isMobile = useUIStore((state) => state.isMobile);

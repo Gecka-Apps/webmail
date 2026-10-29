@@ -381,7 +381,13 @@
     },
     "category_tabs": "Категорії вхідних",
     "listbox_label": "Повідомлення",
-    "row_actions": "Дії"
+    "row_actions": "Дії",
+    "pages": {
+      "label": "Сторінки списку повідомлень",
+      "previous": "Попередня сторінка",
+      "next": "Наступна сторінка",
+      "position": "{more, select, yes {Сторінка {page} з {pages} або більше} other {Сторінка {page} з {pages}}}"
+    }
   },
   "shared_tags": {
     "title": "Спільні теги",
