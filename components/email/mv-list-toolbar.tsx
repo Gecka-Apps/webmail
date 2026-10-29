@@ -24,6 +24,7 @@ import { useAuthStore } from "@/stores/auth-store";
 import { useShallow } from "zustand/react/shallow";
 import { useEmailStore, ArchiveMailboxNotFoundError, resolveSelectedEmails, bulkDeleteIsPermanent, shouldConfirmBulkDelete, removalFolder, canRemoveFromFolder, restoreBatchesForSelection , type CrossAccountMoveReceipt } from "@/stores/email-store";
 import { useRemoveFromFolder } from "@/hooks/use-remove-from-folder";
+import { confirmMailRemoval } from "@/lib/mail-removal-confirm";
 import { markSelectionReadWithUndo, runBatchEmailAction, setSelectionTagWithUndo, toastWithUndo, undoLabels, undoMoveAction } from "@/lib/email-action-toast";
 import { toast } from "@/stores/toast-store";
 import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
@@ -119,6 +120,7 @@ export function MvListToolbar({
   const tNotifications = useTranslations("notifications");
   const tSpam = useTranslations("email_viewer.spam");
   const undo = undoLabels(tNotifications);
+  const tRemove = useTranslations("email_list.confirm_remove");
 
   const client = useAuthStore((s) => s.client);
   const {
@@ -252,6 +254,8 @@ export function MvListToolbar({
           variant: "destructive",
         });
         if (!confirmed) return;
+      } else if (!(await confirmMailRemoval("delete", selectionCount, confirmDialog, tRemove))) {
+        return;
       }
       const restore = permanent ? null : restoreBatchesForSelection(client);
       await runBatchEmailAction(() => batchDelete(client, permanent), {
@@ -478,7 +482,11 @@ export function MvListToolbar({
             <ToolbarButton
               icon={Archive}
               label={tMenu("archive")}
-              onClick={() => run(async () => (client ? batchArchive(client) : false), {
+              onClick={() => run(async () => (
+                client && await confirmMailRemoval("archive", selectionCount, confirmDialog, tRemove)
+                  ? batchArchive(client)
+                  : false
+              ), {
                 success: tNotifications("emails_archived", { count: selectionCount }),
                 error: tNotifications("error_archiving"),
                 describeError: (error) => error instanceof ArchiveMailboxNotFoundError

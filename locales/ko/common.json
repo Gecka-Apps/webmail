@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "보내기 취소",
     "reschedule_send": "다시 예약",
     "cancel_and_edit": "취소하고 편집",
-    "cancel_and_compose_again": "취소하고 다시 작성"
+    "cancel_and_compose_again": "취소하고 다시 작성",
+    "confirm_remove": {
+      "delete_title": "{count, plural, other {메일 #개를 삭제할까요?}}",
+      "delete_message": "{count, plural, other {휴지통으로 이동해요.}}",
+      "archive_title": "{count, plural, other {메일 #개를 보관할까요?}}",
+      "archive_message": "{count, plural, other {보관함으로 이동해요.}}",
+      "delete": "삭제",
+      "archive": "보관"
+    }
   },
   "shared_tags": {
     "title": "공유 태그",

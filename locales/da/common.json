@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Annuller afsendelse",
     "reschedule_send": "Planlæg om",
     "cancel_and_edit": "Annuller og redigér",
-    "cancel_and_compose_again": "Annuller og skriv igen"
+    "cancel_and_compose_again": "Annuller og skriv igen",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Slet denne e-mail?} other {Slet # e-mails?}}",
+      "delete_message": "{count, plural, one {Den flyttes til papirkurven.} other {De flyttes til papirkurven.}}",
+      "archive_title": "{count, plural, one {Arkivér denne e-mail?} other {Arkivér # e-mails?}}",
+      "archive_message": "{count, plural, one {Den flyttes til dit arkiv.} other {De flyttes til dit arkiv.}}",
+      "delete": "Slet",
+      "archive": "Arkivér"
+    }
   },
   "shared_tags": {
     "title": "Delte tags",

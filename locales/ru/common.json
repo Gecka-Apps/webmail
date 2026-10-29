@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Отменить отправку",
     "reschedule_send": "Перенести",
     "cancel_and_edit": "Отменить и изменить",
-    "cancel_and_compose_again": "Отменить и написать заново"
+    "cancel_and_compose_again": "Отменить и написать заново",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Удалить это письмо?} few {Удалить # письма?} many {Удалить # писем?} other {Удалить # письма?}}",
+      "delete_message": "{count, plural, one {Оно будет перемещено в корзину.} other {Они будут перемещены в корзину.}}",
+      "archive_title": "{count, plural, one {Архивировать это письмо?} few {Архивировать # письма?} many {Архивировать # писем?} other {Архивировать # письма?}}",
+      "archive_message": "{count, plural, one {Оно будет перемещено в архив.} other {Они будут перемещены в архив.}}",
+      "delete": "Удалить",
+      "archive": "Архивировать"
+    }
   },
   "shared_tags": {
     "title": "Общие теги",

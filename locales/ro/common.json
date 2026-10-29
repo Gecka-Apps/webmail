@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Anulează trimiterea",
     "reschedule_send": "Reprogramare",
     "cancel_and_edit": "Anulează și editează",
-    "cancel_and_compose_again": "Anulează și redactează din nou"
+    "cancel_and_compose_again": "Anulează și redactează din nou",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Ștergi acest e-mail?} few {Ștergi # e-mailuri?} other {Ștergi # de e-mailuri?}}",
+      "delete_message": "{count, plural, one {Va fi mutat în coșul de gunoi.} other {Vor fi mutate în coșul de gunoi.}}",
+      "archive_title": "{count, plural, one {Arhivezi acest e-mail?} few {Arhivezi # e-mailuri?} other {Arhivezi # de e-mailuri?}}",
+      "archive_message": "{count, plural, one {Va fi mutat în arhiva ta.} other {Vor fi mutate în arhiva ta.}}",
+      "delete": "Șterge",
+      "archive": "Arhivează"
+    }
   },
   "shared_tags": {
     "title": "Etichete partajate",

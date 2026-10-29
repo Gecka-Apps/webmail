@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Göndermeyi iptal et",
     "reschedule_send": "Yeniden zamanla",
     "cancel_and_edit": "İptal et ve düzenle",
-    "cancel_and_compose_again": "İptal et ve yeniden yaz"
+    "cancel_and_compose_again": "İptal et ve yeniden yaz",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Bu e-posta silinsin mi?} other {# e-posta silinsin mi?}}",
+      "delete_message": "{count, plural, other {Çöp kutusuna taşınır.}}",
+      "archive_title": "{count, plural, one {Bu e-posta arşivlensin mi?} other {# e-posta arşivlensin mi?}}",
+      "archive_message": "{count, plural, other {Arşivinize taşınır.}}",
+      "delete": "Sil",
+      "archive": "Arşivle"
+    }
   },
   "shared_tags": {
     "title": "Paylaşılan etiketler",

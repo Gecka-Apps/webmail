@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Verzenden annuleren",
     "reschedule_send": "Opnieuw plannen",
     "cancel_and_edit": "Annuleren en bewerken",
-    "cancel_and_compose_again": "Annuleren en opnieuw opstellen"
+    "cancel_and_compose_again": "Annuleren en opnieuw opstellen",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Deze e-mail verwijderen?} other {# e-mails verwijderen?}}",
+      "delete_message": "{count, plural, one {Hij gaat naar de prullenbak.} other {Ze gaan naar de prullenbak.}}",
+      "archive_title": "{count, plural, one {Deze e-mail archiveren?} other {# e-mails archiveren?}}",
+      "archive_message": "{count, plural, one {Hij gaat naar uw archief.} other {Ze gaan naar uw archief.}}",
+      "delete": "Verwijderen",
+      "archive": "Archiveren"
+    }
   },
   "shared_tags": {
     "title": "Gedeelde labels",

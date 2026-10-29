@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Cancel·la l'enviament",
     "reschedule_send": "Reprograma",
     "cancel_and_edit": "Cancel·la i edita",
-    "cancel_and_compose_again": "Cancel·la i torna a redactar"
+    "cancel_and_compose_again": "Cancel·la i torna a redactar",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Vols suprimir aquest correu?} other {Vols suprimir # correus?}}",
+      "delete_message": "{count, plural, one {Es mourà a la paperera.} other {Es mouran a la paperera.}}",
+      "archive_title": "{count, plural, one {Vols arxivar aquest correu?} other {Vols arxivar # correus?}}",
+      "archive_message": "{count, plural, one {Es mourà al teu arxiu.} other {Es mouran al teu arxiu.}}",
+      "delete": "Suprimeix",
+      "archive": "Arxiva"
+    }
   },
   "shared_tags": {
     "title": "Etiquetes compartides",

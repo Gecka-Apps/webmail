@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Zrušiť odoslanie",
     "reschedule_send": "Prenaplánovať",
     "cancel_and_edit": "Zrušiť a upraviť",
-    "cancel_and_compose_again": "Zrušiť a napísať znova"
+    "cancel_and_compose_again": "Zrušiť a napísať znova",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Odstrániť tento e-mail?} few {Odstrániť # e-maily?} other {Odstrániť # e-mailov?}}",
+      "delete_message": "{count, plural, one {Presunie sa do koša.} other {Presunú sa do koša.}}",
+      "archive_title": "{count, plural, one {Archivovať tento e-mail?} few {Archivovať # e-maily?} other {Archivovať # e-mailov?}}",
+      "archive_message": "{count, plural, one {Presunie sa do archívu.} other {Presunú sa do archívu.}}",
+      "delete": "Odstrániť",
+      "archive": "Archivovať"
+    }
   },
   "shared_tags": {
     "title": "Zdieľané štítky",

@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Küldés megszakítása",
     "reschedule_send": "Átütemezés",
     "cancel_and_edit": "Mégse és szerkesztés",
-    "cancel_and_compose_again": "Mégse és újraírás"
+    "cancel_and_compose_again": "Mégse és újraírás",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Törlöd ezt az e-mailt?} other {Törölsz # e-mailt?}}",
+      "delete_message": "{count, plural, one {A kukába kerül.} other {A kukába kerülnek.}}",
+      "archive_title": "{count, plural, one {Archiválod ezt az e-mailt?} other {Archiválsz # e-mailt?}}",
+      "archive_message": "{count, plural, one {Az archívumodba kerül.} other {Az archívumodba kerülnek.}}",
+      "delete": "Törlés",
+      "archive": "Archiválás"
+    }
   },
   "shared_tags": {
     "title": "Megosztott címkék",

@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Anuluj wysyłkę",
     "reschedule_send": "Przełóż",
     "cancel_and_edit": "Anuluj i edytuj",
-    "cancel_and_compose_again": "Anuluj i napisz ponownie"
+    "cancel_and_compose_again": "Anuluj i napisz ponownie",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Usunąć tę wiadomość?} few {Usunąć # wiadomości?} many {Usunąć # wiadomości?} other {Usunąć # wiadomości?}}",
+      "delete_message": "{count, plural, one {Zostanie przeniesiona do kosza.} other {Zostaną przeniesione do kosza.}}",
+      "archive_title": "{count, plural, one {Zarchiwizować tę wiadomość?} few {Zarchiwizować # wiadomości?} many {Zarchiwizować # wiadomości?} other {Zarchiwizować # wiadomości?}}",
+      "archive_message": "{count, plural, one {Zostanie przeniesiona do archiwum.} other {Zostaną przeniesione do archiwum.}}",
+      "delete": "Usuń",
+      "archive": "Archiwizuj"
+    }
   },
   "shared_tags": {
     "title": "Wspólne etykiety",

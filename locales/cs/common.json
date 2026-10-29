@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Zrušit odeslání",
     "reschedule_send": "Přeplánovat",
     "cancel_and_edit": "Zrušit a upravit",
-    "cancel_and_compose_again": "Zrušit a napsat znovu"
+    "cancel_and_compose_again": "Zrušit a napsat znovu",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Odstranit tuto zprávu?} few {Odstranit # zprávy?} other {Odstranit # zpráv?}}",
+      "delete_message": "{count, plural, one {Přesune se do koše.} other {Přesunou se do koše.}}",
+      "archive_title": "{count, plural, one {Archivovat tuto zprávu?} few {Archivovat # zprávy?} other {Archivovat # zpráv?}}",
+      "archive_message": "{count, plural, one {Přesune se do archivu.} other {Přesunou se do archivu.}}",
+      "delete": "Odstranit",
+      "archive": "Archivovat"
+    }
   },
   "shared_tags": {
     "title": "Sdílené štítky",

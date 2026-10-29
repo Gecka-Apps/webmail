@@ -63,6 +63,7 @@ import { usePaneSize } from "@/hooks/use-pane-size";
 import { usePaneId } from "@/hooks/use-pane-context";
 import { useKeyboardShortcuts, type GoToMailboxTarget } from "@/hooks/use-keyboard-shortcuts";
 import { useUndoShortcut } from "@/hooks/use-undo-shortcut";
+import { confirmMailRemoval } from "@/lib/mail-removal-confirm";
 import { findNextUnreadIndex } from "@/lib/next-unread-email";
 import { useRefreshGesture } from "@/hooks/use-refresh-gesture";
 import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
@@ -225,6 +226,8 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
   const tNotifications = useTranslations('notifications');
   // The toasts' Undo after a delete to Trash, archive, move or spam report.
   const undo = undoLabels(tNotifications);
+  // "Confirm before deleting / archiving" (lib/mail-removal-confirm).
+  const tRemove = useTranslations('email_list.confirm_remove');
   const tCommon = useTranslations('common');
   const appName = productName(useConfig().appName);
   const tQuote = useTranslations('quote_header');
@@ -958,6 +961,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
       if (isScheduledView) return;
       if (shortcutsTargetSelection && client) {
         const count = selectedEmailKeys.size;
+        if (!(await confirmMailRemoval('archive', count, confirmDialog, tRemove))) return;
         const restore = restoreBatchesForSelection(client);
         await runBatchEmailAction(() => batchArchive(client), {
           success: t('notifications.emails_archived', { count }),
@@ -994,6 +998,8 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
             variant: "destructive",
           });
           if (!confirmed) return;
+        } else if (!(await confirmMailRemoval('delete', selectedEmailKeys.size, confirmDialog, tRemove))) {
+          return;
         }
         const count = selectedEmailKeys.size;
         const restore = permanent ? null : restoreBatchesForSelection(client);
@@ -2955,6 +2961,8 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
         variant: "destructive",
       });
       if (!confirmed) return;
+    } else if (!(await confirmMailRemoval('delete', 1, confirmDialog, tRemove))) {
+      return;
     }
 
     // The store's delete reads the "Delete action" setting: move to the
@@ -2976,6 +2984,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
 
   const handleArchive = async (emailToArchive: Email | null = selectedEmail) => {
     if (!client || !emailToArchive || !isArchiveActionEnabled()) return;
+    if (!(await confirmMailRemoval('archive', 1, confirmDialog, tRemove))) return;
 
     // In a list that mixes accounts (the unified views, a tag view) the archive
     // folder (and any year/month subfolders we create) must live in the email's

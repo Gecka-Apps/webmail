@@ -34,6 +34,7 @@ import { useContextMenu } from "@/hooks/use-context-menu";
 import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
 import { useTranslations } from "next-intl";
 import { toast } from "@/stores/toast-store";
+import { confirmMailRemoval } from "@/lib/mail-removal-confirm";
 import { markSelectionReadWithUndo, runBatchEmailAction, setSelectionTagWithUndo, toastWithUndo, undoLabels, undoMoveAction } from "@/lib/email-action-toast";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { TagDisplayContext, useMeasuredTagDisplay } from "@/hooks/use-tag-display";
@@ -188,6 +189,7 @@ export function EmailList({
   const tSidebar = useTranslations('sidebar');
   const mountainViewList = useSettingsStore((state) => state.interfaceLayout === 'mountain-view');
   const undo = undoLabels(tNotifications);
+  const tRemove = useTranslations('email_list.confirm_remove');
   const { client } = useAuthStore(useShallow((state) => ({ client: state.client })));
   const {
     selectedEmailKeys,
@@ -644,6 +646,7 @@ export function EmailList({
 
   const handleBatchArchive = async () => {
     if (!client || isProcessing) return;
+    if (!(await confirmMailRemoval('archive', selectedEmailKeys.size, confirmDialog, tRemove))) return;
     setIsProcessing(true);
     const count = selectedEmailKeys.size;
     const restore = restoreBatchesForSelection(client);
@@ -700,6 +703,8 @@ export function EmailList({
         variant: "destructive",
       });
       if (!confirmed) return;
+    } else if (!(await confirmMailRemoval('delete', selectedEmailKeys.size, confirmDialog, tRemove))) {
+      return;
     }
 
     setIsProcessing(true);

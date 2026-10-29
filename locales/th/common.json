@@ -617,7 +617,15 @@
     "cancel_scheduled_send": "ยกเลิกการส่ง",
     "reschedule_send": "เปลี่ยนเวลาส่งใหม่",
     "cancel_and_edit": "ยกเลิกและแก้ไข",
-    "cancel_and_compose_again": "ยกเลิกและเขียนใหม่"
+    "cancel_and_compose_again": "ยกเลิกและเขียนใหม่",
+    "confirm_remove": {
+      "delete_title": "{count, plural, other {ลบอีเมล # ฉบับหรือไม่}}",
+      "delete_message": "{count, plural, other {อีเมลจะถูกย้ายไปที่ถังขยะ}}",
+      "archive_title": "{count, plural, other {เก็บอีเมล # ฉบับถาวรหรือไม่}}",
+      "archive_message": "{count, plural, other {อีเมลจะถูกย้ายไปที่ที่เก็บถาวร}}",
+      "delete": "ลบ",
+      "archive": "เก็บถาวร"
+    }
   },
   "shared_tags": {
     "title": "ป้ายกำกับที่แชร์",

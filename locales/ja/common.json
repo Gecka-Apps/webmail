@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "送信をキャンセル",
     "reschedule_send": "再予約",
     "cancel_and_edit": "キャンセルして編集",
-    "cancel_and_compose_again": "キャンセルして新規作成"
+    "cancel_and_compose_again": "キャンセルして新規作成",
+    "confirm_remove": {
+      "delete_title": "{count, plural, other {#件のメールを削除しますか？}}",
+      "delete_message": "{count, plural, other {ゴミ箱に移動します。}}",
+      "archive_title": "{count, plural, other {#件のメールをアーカイブしますか？}}",
+      "archive_message": "{count, plural, other {アーカイブに移動します。}}",
+      "delete": "削除",
+      "archive": "アーカイブ"
+    }
   },
   "shared_tags": {
     "title": "共有タグ",

@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Илгээхийг цуцлах",
     "reschedule_send": "Хуваарь солих",
     "cancel_and_edit": "Цуцлах, засах",
-    "cancel_and_compose_again": "Цуцлаад дахин бичих"
+    "cancel_and_compose_again": "Цуцлаад дахин бичих",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Энэ имэйлийг устгах уу?} other {# имэйлийг устгах уу?}}",
+      "delete_message": "{count, plural, other {Хогийн сав руу шилжинэ.}}",
+      "archive_title": "{count, plural, one {Энэ имэйлийг архивлах уу?} other {# имэйлийг архивлах уу?}}",
+      "archive_message": "{count, plural, other {Таны архив руу шилжинэ.}}",
+      "delete": "Устгах",
+      "archive": "Архивлах"
+    }
   },
   "shared_tags": {
     "title": "Хуваалцсан тагууд",

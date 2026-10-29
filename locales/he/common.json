@@ -328,7 +328,15 @@
     "cancel_scheduled_send": "ביטול שליחה",
     "reschedule_send": "תזמן מחדש",
     "cancel_and_edit": "בטל וערוך",
-    "cancel_and_compose_again": "בטל והרכיב שוב"
+    "cancel_and_compose_again": "בטל והרכיב שוב",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {למחוק את ההודעה הזו?} other {למחוק # הודעות?}}",
+      "delete_message": "{count, plural, one {היא תועבר לאשפה.} other {הן יועברו לאשפה.}}",
+      "archive_title": "{count, plural, one {להעביר את ההודעה הזו לארכיון?} other {להעביר # הודעות לארכיון?}}",
+      "archive_message": "{count, plural, one {היא תועבר לארכיון שלך.} other {הן יועברו לארכיון שלך.}}",
+      "delete": "מחק",
+      "archive": "העבר לארכיון"
+    }
   },
   "shared_tags": {
     "title": "תגים משותפים",

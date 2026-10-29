@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Скасувати надсилання",
     "reschedule_send": "Перенести",
     "cancel_and_edit": "Скасувати й редагувати",
-    "cancel_and_compose_again": "Скасувати й написати знову"
+    "cancel_and_compose_again": "Скасувати й написати знову",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Видалити цей лист?} few {Видалити # листи?} many {Видалити # листів?} other {Видалити # листа?}}",
+      "delete_message": "{count, plural, one {Його буде переміщено в кошик.} other {Їх буде переміщено в кошик.}}",
+      "archive_title": "{count, plural, one {Архівувати цей лист?} few {Архівувати # листи?} many {Архівувати # листів?} other {Архівувати # листа?}}",
+      "archive_message": "{count, plural, one {Його буде переміщено в архів.} other {Їх буде переміщено в архів.}}",
+      "delete": "Видалити",
+      "archive": "Архівувати"
+    }
   },
   "shared_tags": {
     "title": "Спільні теги",

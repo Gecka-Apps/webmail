@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Atcelt sūtīšanu",
     "reschedule_send": "Pārplānot",
     "cancel_and_edit": "Atcelt un rediģēt",
-    "cancel_and_compose_again": "Atcelt un rakstīt no jauna"
+    "cancel_and_compose_again": "Atcelt un rakstīt no jauna",
+    "confirm_remove": {
+      "delete_title": "{count, plural, zero {Dzēst # vēstules?} one {Dzēst šo vēstuli?} other {Dzēst # vēstules?}}",
+      "delete_message": "{count, plural, zero {Tās tiks pārvietotas uz atkritni.} one {Tā tiks pārvietota uz atkritni.} other {Tās tiks pārvietotas uz atkritni.}}",
+      "archive_title": "{count, plural, zero {Arhivēt # vēstules?} one {Arhivēt šo vēstuli?} other {Arhivēt # vēstules?}}",
+      "archive_message": "{count, plural, zero {Tās tiks pārvietotas uz jūsu arhīvu.} one {Tā tiks pārvietota uz jūsu arhīvu.} other {Tās tiks pārvietotas uz jūsu arhīvu.}}",
+      "delete": "Dzēst",
+      "archive": "Arhivēt"
+    }
   },
   "shared_tags": {
     "title": "Kopīgotie tagi",

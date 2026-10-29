@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "取消傳送",
     "reschedule_send": "重新排程",
     "cancel_and_edit": "取消並編輯",
-    "cancel_and_compose_again": "取消並重新撰寫"
+    "cancel_and_compose_again": "取消並重新撰寫",
+    "confirm_remove": {
+      "delete_title": "{count, plural, other {要刪除 # 封郵件嗎？}}",
+      "delete_message": "{count, plural, other {郵件將移到垃圾桶。}}",
+      "archive_title": "{count, plural, other {要封存 # 封郵件嗎？}}",
+      "archive_message": "{count, plural, other {郵件將移到封存。}}",
+      "delete": "刪除",
+      "archive": "封存"
+    }
   },
   "shared_tags": {
     "title": "共用標籤",

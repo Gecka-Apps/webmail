@@ -24,6 +24,9 @@ import { cn } from "@/lib/utils";
 import { getDraftTextBody } from '@/lib/email-body-selection';
 import { messagePriorityFromHeaders } from '@/lib/message-priority';
 import { useArchiveActionEnabled } from '@/lib/archive-gate';
+import { confirmMailRemoval } from '@/lib/mail-removal-confirm';
+import { useConfirmDialog } from '@/hooks/use-confirm-dialog';
+import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { saveQuickReplyDraft } from '@/lib/outgoing/quick-reply-envelope';
 
 interface ProEmailTabBodyProps {
@@ -91,6 +94,8 @@ function buildReplyContext(email: Email): ProReplyContext {
 export function ProEmailView({ emailId, client: clientOverride, clientAccountId, accountId, onLoaded, onClose, className }: ProEmailViewProps) {
   const t = useTranslations();
   const tNotifications = useTranslations('notifications');
+  const tRemove = useTranslations('email_list.confirm_remove');
+  const { dialogProps: confirmDialogProps, confirm: confirmDialog } = useConfirmDialog();
   const archiveActionEnabled = useArchiveActionEnabled();
 
   const activeClient = useAuthStore((s) => s.client);
@@ -295,6 +300,7 @@ export function ProEmailView({ emailId, client: clientOverride, clientAccountId,
 
   const handleDelete = useCallback(async () => {
     if (!client || !email) return;
+    if (!(await confirmMailRemoval('delete', 1, confirmDialog, tRemove))) return;
     try {
       // false: not deleted (a plugin stopped it), so the tab stays open.
       if (await deleteEmail(client, email.id)) onClose();
@@ -302,12 +308,13 @@ export function ProEmailView({ emailId, client: clientOverride, clientAccountId,
       console.error('Delete failed:', err);
       toast.error(tNotifications('error_deleting'));
     }
-  }, [client, email, deleteEmail, onClose, tNotifications]);
+  }, [client, email, deleteEmail, onClose, tNotifications, confirmDialog, tRemove]);
 
   const handleArchive = useCallback(async () => {
     if (!client || !email) return;
     const archiveMb = mailboxes.find((m) => m.role === 'archive');
     if (!archiveMb) return;
+    if (!(await confirmMailRemoval('archive', 1, confirmDialog, tRemove))) return;
     try {
       if (!(await moveToMailbox(client, email.id, archiveMb.id, emailKeyFor(email)))) return;
       toast.success(tNotifications('email_archived'));
@@ -315,7 +322,7 @@ export function ProEmailView({ emailId, client: clientOverride, clientAccountId,
     } catch (err) {
       console.error('Archive failed:', err);
     }
-  }, [client, email, mailboxes, moveToMailbox, onClose, tNotifications]);
+  }, [client, email, mailboxes, moveToMailbox, onClose, tNotifications, confirmDialog, tRemove]);
 
   const handleToggleStar = useCallback(async () => {
     if (!client || !email) return;
@@ -490,6 +497,7 @@ export function ProEmailView({ emailId, client: clientOverride, clientAccountId,
           className="flex-1"
         />
       </ErrorBoundary>
+      <ConfirmDialog {...confirmDialogProps} />
     </div>
   );
 }

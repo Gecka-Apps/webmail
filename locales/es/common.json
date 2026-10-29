@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Cancelar envío",
     "reschedule_send": "Reprogramar",
     "cancel_and_edit": "Cancelar y editar",
-    "cancel_and_compose_again": "Cancelar y redactar de nuevo"
+    "cancel_and_compose_again": "Cancelar y redactar de nuevo",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {¿Eliminar este correo?} other {¿Eliminar # correos?}}",
+      "delete_message": "{count, plural, one {Se moverá a la papelera.} other {Se moverán a la papelera.}}",
+      "archive_title": "{count, plural, one {¿Archivar este correo?} other {¿Archivar # correos?}}",
+      "archive_message": "{count, plural, one {Se moverá a tu archivo.} other {Se moverán a tu archivo.}}",
+      "delete": "Eliminar",
+      "archive": "Archivar"
+    }
   },
   "shared_tags": {
     "title": "Etiquetas compartidas",

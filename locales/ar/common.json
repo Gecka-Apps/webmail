@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "إلغاء الإرسال",
     "reschedule_send": "إعادة الجدولة",
     "cancel_and_edit": "إلغاء والتعديل",
-    "cancel_and_compose_again": "إلغاء وإعادة الكتابة"
+    "cancel_and_compose_again": "إلغاء وإعادة الكتابة",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {حذف هذه الرسالة؟} other {حذف # رسائل؟}}",
+      "delete_message": "{count, plural, one {ستُنقل إلى سلة المهملات.} other {ستُنقل إلى سلة المهملات.}}",
+      "archive_title": "{count, plural, one {أرشفة هذه الرسالة؟} other {أرشفة # رسائل؟}}",
+      "archive_message": "{count, plural, one {ستُنقل إلى الأرشيف.} other {ستُنقل إلى الأرشيف.}}",
+      "delete": "حذف",
+      "archive": "أرشفة"
+    }
   },
   "shared_tags": {
     "title": "الوسوم المشتركة",

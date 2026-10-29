@@ -282,3 +282,60 @@ describe('MvListToolbar delete prompt', () => {
     expect(batchDelete).not.toHaveBeenCalled();
   });
 });
+
+// Settings > Accessibility: "Confirm before deleting" and "Confirm before
+// archiving" ask before the selection goes, also when the bulk-delete prompt
+// is off (WCAG 3.3.4).
+describe('MvListToolbar removal confirmations', () => {
+  const batchDelete = vi.fn().mockResolvedValue(true);
+  const batchArchive = vi.fn().mockResolvedValue(true);
+
+  beforeEach(() => {
+    batchDelete.mockClear();
+    batchArchive.mockClear();
+    useAuthStore.setState({ client: {} as never } as never);
+    useEmailStore.setState({
+      emails: [message('a'), message('b')],
+      mailboxes,
+      selectedMailbox: 'inbox',
+      selectedEmailKeys: new Set(['a', 'b']),
+      isUnifiedView: false,
+      unifiedRole: null,
+      error: null,
+      batchDelete,
+      batchArchive,
+    } as never);
+  });
+
+  it('asks before deleting with "Confirm before deleting" on, and deletes after Delete', async () => {
+    useSettingsStore.setState({ confirmBulkDelete: false, permanentlyDeleteJunk: false, confirmDelete: true } as never);
+    render(<MvListToolbar loadedCount={2} onRefresh={() => {}} />);
+    fireEvent.click(screen.getByLabelText('delete'));
+
+    const dialog = await screen.findByRole('alertdialog');
+    expect(dialog).toHaveTextContent('delete_title');
+    expect(batchDelete).not.toHaveBeenCalled();
+    fireEvent.click(screen.getAllByRole('button', { name: 'delete' }).at(-1)!);
+    await waitFor(() => expect(batchDelete).toHaveBeenCalledTimes(1));
+  });
+
+  it('asks before archiving with "Confirm before archiving" on, and keeps the mail on Cancel', async () => {
+    useSettingsStore.setState({ confirmArchive: true } as never);
+    render(<MvListToolbar loadedCount={2} onRefresh={() => {}} />);
+    fireEvent.click(screen.getByLabelText('archive'));
+
+    const dialog = await screen.findByRole('alertdialog');
+    expect(dialog).toHaveTextContent('archive_title');
+    fireEvent.click(screen.getByRole('button', { name: 'cancel' }));
+    await waitFor(() => expect(screen.queryByRole('alertdialog')).toBeNull());
+    expect(batchArchive).not.toHaveBeenCalled();
+  });
+
+  it('archives straight away with the setting off', async () => {
+    useSettingsStore.setState({ confirmArchive: false } as never);
+    render(<MvListToolbar loadedCount={2} onRefresh={() => {}} />);
+    fireEvent.click(screen.getByLabelText('archive'));
+    await waitFor(() => expect(batchArchive).toHaveBeenCalledTimes(1));
+    expect(screen.queryByRole('alertdialog')).toBeNull();
+  });
+});

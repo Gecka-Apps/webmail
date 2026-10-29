@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "لغو ارسال",
     "reschedule_send": "باززمان‌بندی",
     "cancel_and_edit": "لغو و ویرایش",
-    "cancel_and_compose_again": "لغو و نوشتن مجدد"
+    "cancel_and_compose_again": "لغو و نوشتن مجدد",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {این ایمیل حذف شود؟} other {# ایمیل حذف شوند؟}}",
+      "delete_message": "{count, plural, one {به سطل زباله منتقل می‌شود.} other {به سطل زباله منتقل می‌شوند.}}",
+      "archive_title": "{count, plural, one {این ایمیل بایگانی شود؟} other {# ایمیل بایگانی شوند؟}}",
+      "archive_message": "{count, plural, one {به بایگانی شما منتقل می‌شود.} other {به بایگانی شما منتقل می‌شوند.}}",
+      "delete": "حذف",
+      "archive": "بایگانی"
+    }
   },
   "shared_tags": {
     "title": "برچسب‌های مشترک",

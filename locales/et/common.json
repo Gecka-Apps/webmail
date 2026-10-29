@@ -363,7 +363,15 @@
     "cancel_scheduled_send": "Tühista saatmine",
     "reschedule_send": "Ajasta uuesti",
     "cancel_and_edit": "Tühista ja muuda",
-    "cancel_and_compose_again": "Tühista ja koosta uuesti"
+    "cancel_and_compose_again": "Tühista ja koosta uuesti",
+    "confirm_remove": {
+      "delete_title": "{count, plural, one {Kas kustutada see kiri?} other {Kas kustutada # kirja?}}",
+      "delete_message": "{count, plural, one {See viiakse prügikasti.} other {Need viiakse prügikasti.}}",
+      "archive_title": "{count, plural, one {Kas arhiveerida see kiri?} other {Kas arhiveerida # kirja?}}",
+      "archive_message": "{count, plural, one {See viiakse sinu arhiivi.} other {Need viiakse sinu arhiivi.}}",
+      "delete": "Kustuta",
+      "archive": "Arhiveeri"
+    }
   },
   "shared_tags": {
     "title": "Jagatud sildid",
