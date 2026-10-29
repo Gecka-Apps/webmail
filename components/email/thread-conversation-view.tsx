@@ -15,6 +15,7 @@ import { ExternalSenderChip } from "./external-sender-chip";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { fitEmailBodyWidth } from "@/lib/email-fit-width";
+import { mailLanguage } from "@/lib/mail-language";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailDarkModeCss } from "@/lib/email-dark-mode";
 import { useThemeStore } from "@/stores/theme-store";
 import { useShallow } from "zustand/react/shallow";
@@ -756,13 +757,20 @@ export function ConversationEmailBody({
   // the host page. CSP <meta> is defense-in-depth in case the sanitizer ever
   // emits a <script> tag through a parser quirk.
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  // The body's language for screen readers (see mailLanguage), and a frame
+  // title that tells this message from the others in the conversation.
+  const bodyLanguage = useMemo(() => mailLanguage(email, getRenderableHtmlBody(email)), [email]);
+  const frameSender = email.from?.[0];
+  const frameTitle = email.subject
+    ? t('email_viewer.frame_title', { subject: email.subject })
+    : t('email_viewer.frame_title_from', { sender: frameSender?.name || frameSender?.email || t('email_viewer.unknown_sender') });
   const emailIframeSrcDoc = useMemo(() => {
     if (!emailContent.isHtml || !emailContent.html) return '';
     // Strict while external content is blocked: the network-level backstop
     // for whatever the DOM walk above cannot see.
     const csp = emailIframeCsp(!allowExternal);
     // Colours are rewritten after load (applyEmailDarkMode in handleIframeLoad).
-    return `<!DOCTYPE html><html class="${isDark ? DARK_PENDING_CLASS : ''}"><head>
+    return `<!DOCTYPE html><html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} class="${isDark ? DARK_PENDING_CLASS : ''}"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="${csp}">
@@ -794,7 +802,7 @@ export function ConversationEmailBody({
   pre { white-space: pre-wrap; word-wrap: break-word; }
   ${isDark ? emailDarkModeCss() : ''}
 </style></head><body dir="auto">${emailContent.html}</body></html>`;
-  }, [emailContent.isHtml, emailContent.html, allowExternal, isDark]);
+  }, [emailContent.isHtml, emailContent.html, allowExternal, isDark, bodyLanguage]);
   useLayoutEffect(() => { setHtmlBodyEl(null); }, [emailIframeSrcDoc]);
   // One object per body: React writes innerHTML again whenever this object
   // changes, dropping whatever was mounted in the body.
@@ -911,7 +919,7 @@ export function ConversationEmailBody({
             ref={iframeRef}
             srcDoc={emailIframeSrcDoc}
             sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-            title="Email content"
+            title={frameTitle}
             className="w-full border-0 block"
             scrolling="no"
             style={{ minHeight: '60px' }}
@@ -923,6 +931,7 @@ export function ConversationEmailBody({
             // Its own direction, as in the reader: English text in an Arabic
             // UI read "1+" and ".change".
             dir="auto"
+            lang={bodyLanguage ?? undefined}
             className={cn(
               "prose prose-sm max-w-none",
               !emailAlwaysLightMode && "dark:prose-invert",

@@ -767,7 +767,9 @@
       "saved_to": "在 {folder} 中",
       "failed": "無法儲存到檔案",
       "load_failed": "無法載入資料夾。請再試一次。"
-    }
+    },
+    "frame_title": "郵件：{subject}",
+    "frame_title_from": "來自 {sender} 的郵件"
   },
   "external_mail": {
     "sender_label": "外部",

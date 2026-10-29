@@ -767,7 +767,9 @@
       "saved_to": "{folder}에 저장",
       "failed": "파일에 저장하지 못했어요",
       "load_failed": "폴더를 불러오지 못했어요. 다시 시도하세요."
-    }
+    },
+    "frame_title": "메시지: {subject}",
+    "frame_title_from": "{sender}님의 메시지"
   },
   "external_mail": {
     "sender_label": "외부",

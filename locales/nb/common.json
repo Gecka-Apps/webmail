@@ -767,7 +767,9 @@
       "saved_to": "I {folder}",
       "failed": "Kunne ikke lagre i Filer",
       "load_failed": "Kunne ikke laste inn mappene. Prøv igjen."
-    }
+    },
+    "frame_title": "Melding: {subject}",
+    "frame_title_from": "Melding fra {sender}"
   },
   "external_mail": {
     "sender_label": "Ekstern",

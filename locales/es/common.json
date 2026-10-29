@@ -767,7 +767,9 @@
       "saved_to": "En {folder}",
       "failed": "No se pudo guardar en Archivos",
       "load_failed": "No se pudieron cargar tus carpetas. Vuelve a intentarlo."
-    }
+    },
+    "frame_title": "Mensaje: {subject}",
+    "frame_title_from": "Mensaje de {sender}"
   },
   "external_mail": {
     "sender_label": "Externo",

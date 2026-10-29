@@ -767,7 +767,9 @@
       "saved_to": "Do priečinka {folder}",
       "failed": "Nepodarilo sa uložiť do Súborov",
       "load_failed": "Priečinky sa nepodarilo načítať. Skúste to znova."
-    }
+    },
+    "frame_title": "Správa: {subject}",
+    "frame_title_from": "Správa od {sender}"
   },
   "external_mail": {
     "sender_label": "Externé",

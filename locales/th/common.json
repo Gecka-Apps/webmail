@@ -1697,7 +1697,9 @@
       "load_failed": "ไม่สามารถโหลดโฟลเดอร์ได้ ลองอีกครั้ง"
     },
     "plugin_panel_show": "แสดงแถบปลั๊กอิน",
-    "plugin_panel_hide": "ซ่อนแถบปลั๊กอิน"
+    "plugin_panel_hide": "ซ่อนแถบปลั๊กอิน",
+    "frame_title": "ข้อความ: {subject}",
+    "frame_title_from": "ข้อความจาก {sender}"
   },
   "external_mail": {
     "sender_label": "ภายนอก",

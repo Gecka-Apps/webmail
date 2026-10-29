@@ -767,7 +767,9 @@
       "saved_to": "A {folder}",
       "failed": "No s'ha pogut desar a Fitxers",
       "load_failed": "No s'han pogut carregar les carpetes. Torna-ho a provar."
-    }
+    },
+    "frame_title": "Missatge: {subject}",
+    "frame_title_from": "Missatge de {sender}"
   },
   "external_mail": {
     "sender_label": "Extern",

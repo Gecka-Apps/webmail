@@ -767,7 +767,9 @@
       "saved_to": "In {folder}",
       "failed": "Impossibile salvare in File",
       "load_failed": "Impossibile caricare le cartelle. Riprova."
-    }
+    },
+    "frame_title": "Messaggio: {subject}",
+    "frame_title_from": "Messaggio da {sender}"
   },
   "external_mail": {
     "sender_label": "Esterno",

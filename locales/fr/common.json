@@ -767,7 +767,9 @@
       "saved_to": "Dans {folder}",
       "failed": "Impossible d'enregistrer dans Fichiers",
       "load_failed": "Impossible de charger vos dossiers. Réessayez."
-    }
+    },
+    "frame_title": "Message : {subject}",
+    "frame_title_from": "Message de {sender}"
   },
   "external_mail": {
     "sender_label": "Externe",

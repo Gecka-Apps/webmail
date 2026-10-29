@@ -767,7 +767,9 @@
       "saved_to": "در {folder}",
       "failed": "ذخیره در فایل‌ها ممکن نشد",
       "load_failed": "پوشه‌ها بارگذاری نشدند. دوباره امتحان کنید."
-    }
+    },
+    "frame_title": "پیام: {subject}",
+    "frame_title_from": "پیام از {sender}"
   },
   "external_mail": {
     "sender_label": "خارجی",

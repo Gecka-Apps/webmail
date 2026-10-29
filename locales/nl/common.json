@@ -767,7 +767,9 @@
       "saved_to": "In {folder}",
       "failed": "Kon niet opslaan in Bestanden",
       "load_failed": "Kon je mappen niet laden. Probeer het opnieuw."
-    }
+    },
+    "frame_title": "Bericht: {subject}",
+    "frame_title_from": "Bericht van {sender}"
   },
   "external_mail": {
     "sender_label": "Extern",

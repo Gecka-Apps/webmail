@@ -767,7 +767,9 @@
       "saved_to": "У теку {folder}",
       "failed": "Не вдалося зберегти у «Файли»",
       "load_failed": "Не вдалося завантажити теки. Спробуйте ще раз."
-    }
+    },
+    "frame_title": "Лист: {subject}",
+    "frame_title_from": "Лист від {sender}"
   },
   "external_mail": {
     "sender_label": "Зовнішнє",

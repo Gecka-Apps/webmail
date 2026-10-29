@@ -767,7 +767,9 @@
       "saved_to": "Kausta {folder}",
       "failed": "Failidesse salvestamine ei õnnestunud",
       "load_failed": "Kaustu ei õnnestunud laadida. Proovige uuesti."
-    }
+    },
+    "frame_title": "Kiri: {subject}",
+    "frame_title_from": "Kiri saatjalt {sender}"
   },
   "external_mail": {
     "sender_label": "Väline",

@@ -767,7 +767,9 @@
       "saved_to": "{folder} içine",
       "failed": "Dosyalar'a kaydedilemedi",
       "load_failed": "Klasörler yüklenemedi. Yeniden deneyin."
-    }
+    },
+    "frame_title": "İleti: {subject}",
+    "frame_title_from": "{sender} adlı kişiden ileti"
   },
   "external_mail": {
     "sender_label": "Harici",

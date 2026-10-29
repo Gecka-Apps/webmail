@@ -767,7 +767,9 @@
       "saved_to": "Ide: {folder}",
       "failed": "Nem sikerült menteni a Fájlokba",
       "load_failed": "Nem sikerült betölteni a mappákat. Próbálja újra."
-    }
+    },
+    "frame_title": "Üzenet: {subject}",
+    "frame_title_from": "Üzenet tőle: {sender}"
   },
   "external_mail": {
     "sender_label": "Külső",

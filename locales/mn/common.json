@@ -767,7 +767,9 @@
       "saved_to": "{folder}-д",
       "failed": "Файлд хадгалж чадсангүй",
       "load_failed": "Хавтсуудыг ачаалж чадсангүй. Дахин оролдоно уу."
-    }
+    },
+    "frame_title": "Захидал: {subject}",
+    "frame_title_from": "{sender}-с ирсэн захидал"
   },
   "external_mail": {
     "sender_label": "Гадаад",

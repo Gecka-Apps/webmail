@@ -767,7 +767,9 @@
       "saved_to": "在 {folder} 中",
       "failed": "无法保存到文件",
       "load_failed": "无法加载文件夹。请重试。"
-    }
+    },
+    "frame_title": "邮件：{subject}",
+    "frame_title_from": "来自 {sender} 的邮件"
   },
   "external_mail": {
     "sender_label": "外部",

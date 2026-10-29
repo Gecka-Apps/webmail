@@ -767,7 +767,9 @@
       "saved_to": "Do složky {folder}",
       "failed": "Nepodařilo se uložit do Souborů",
       "load_failed": "Složky se nepodařilo načíst. Zkuste to znovu."
-    }
+    },
+    "frame_title": "Zpráva: {subject}",
+    "frame_title_from": "Zpráva od {sender}"
   },
   "external_mail": {
     "sender_label": "Externí",

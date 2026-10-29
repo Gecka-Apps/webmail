@@ -767,7 +767,9 @@
       "load_failed": "Couldn't load your folders. Try again."
     },
     "plugin_panel_show": "Show plugin panel",
-    "plugin_panel_hide": "Hide plugin panel"
+    "plugin_panel_hide": "Hide plugin panel",
+    "frame_title": "Message: {subject}",
+    "frame_title_from": "Message from {sender}"
   },
   "external_mail": {
     "sender_label": "External",

@@ -732,7 +732,9 @@
       "saved_to": "ב{folder}",
       "failed": "לא ניתן היה לשמור בקבצים",
       "load_failed": "לא ניתן היה לטעון את התיקיות. נסו שוב."
-    }
+    },
+    "frame_title": "הודעה: {subject}",
+    "frame_title_from": "הודעה מאת {sender}"
   },
   "external_mail": {
     "sender_label": "חיצוני",

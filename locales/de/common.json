@@ -767,7 +767,9 @@
       "saved_to": "In {folder}",
       "failed": "Konnte nicht in Dateien gespeichert werden",
       "load_failed": "Ihre Ordner konnten nicht geladen werden. Versuchen Sie es erneut."
-    }
+    },
+    "frame_title": "Nachricht: {subject}",
+    "frame_title_from": "Nachricht von {sender}"
   },
   "external_mail": {
     "sender_label": "Extern",

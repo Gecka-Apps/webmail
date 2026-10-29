@@ -6,6 +6,7 @@ import { attachmentDownloadFilename, attachmentsBundleFilename, DEFAULT_ATTACHME
 import { EML_IMPORT_ACCEPT, expandImportableEmails } from "@/lib/eml-import";
 import { TRANSPARENT_BLOCKED_PIXEL, applyNewTabToAnchor, emailIframeCsp, escapeHtml, isExternalResourceUrl, isOpenableLinkHref, plainTextToSafeHtml, sanitizeEmailBodyForIframe, sanitizeEmailHtml, sanitizePlainTextRenderedHtml } from "@/lib/email-sanitization";
 import { getRenderableHtmlBody } from "@/lib/email-body-selection";
+import { mailLanguage } from "@/lib/mail-language";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailColorScheme, emailDarkModeCss, emailHasNativeDarkMode as htmlHasNativeDarkMode, resolveColorSchemeMedia } from "@/lib/email-dark-mode";
@@ -3153,6 +3154,14 @@ export function EmailViewer({
     ? emailViewDarkOverride
     : (emailAlwaysLightMode ? false : resolvedTheme === 'dark');
 
+  // The body's language (Content-Language or the HTML's own lang), so a
+  // screen reader switches voice for it; none when the mail doesn't say.
+  const bodyLanguage = useMemo(() => mailLanguage(email, email ? getRenderableHtmlBody(email) : null), [email]);
+  const frameSender = email?.from?.[0];
+  const frameTitle = email?.subject
+    ? t('frame_title', { subject: email.subject })
+    : t('frame_title_from', { sender: frameSender?.name || frameSender?.email || t('unknown_sender') });
+
   const emailIframeSrcDoc = useMemo(() => {
     if (!effectiveEmailContent.isHtml) return '';
 
@@ -3195,7 +3204,7 @@ export function EmailViewer({
     const iframeCsp = emailIframeCsp(effectiveEmailContent.externalBlocked);
 
     return `<!DOCTYPE html>
-<html class="${isDark ? DARK_PENDING_CLASS : ''}" style="color-scheme: ${colorScheme};"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} class="${isDark ? DARK_PENDING_CLASS : ''}" style="color-scheme: ${colorScheme};"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="${iframeCsp}">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="x-dns-prefetch-control" content="off">
@@ -3247,7 +3256,7 @@ export function EmailViewer({
   ${wordHtmlCSS}
   ${darkModeCSS}
 </style></head><body dir="auto">${resolveColorSchemeMedia(effectiveEmailContent.html, isDark)}<style>html,body{height:auto!important;min-height:0!important;max-height:none!important}</style></body></html>`;
-  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, isDark, emailHasNativeDarkMode, messageSpacing]);
+  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, isDark, emailHasNativeDarkMode, messageSpacing, bodyLanguage]);
 
   // Unblocking external content is handled by rebuilding the iframe srcDoc:
   // toggling allowExternalContent (both "Load images" and "Trust sender" set
@@ -6156,7 +6165,7 @@ export function EmailViewer({
                 ref={iframeRef}
                 srcDoc={emailIframeSrcDoc}
                 sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-                title="Email content"
+                title={frameTitle}
                 className="w-full border-0 block"
                 scrolling="no"
                 style={{ minHeight: '100px', colorScheme: emailColorScheme(isDark, emailHasNativeDarkMode) }}
@@ -6167,6 +6176,7 @@ export function EmailViewer({
                 ref={setPlainBodyEl}
                 className="email-content-text text-foreground"
                 dir="auto"
+                lang={bodyLanguage ?? undefined}
                 data-plugin-source="email-body"
                 data-email-id={email?.id}
                 onContextMenu={(e) => selectionMenu.onElementContextMenu(e, email?.id)}

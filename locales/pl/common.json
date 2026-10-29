@@ -767,7 +767,9 @@
       "saved_to": "W folderze {folder}",
       "failed": "Nie udało się zapisać w Plikach",
       "load_failed": "Nie udało się wczytać folderów. Spróbuj ponownie."
-    }
+    },
+    "frame_title": "Wiadomość: {subject}",
+    "frame_title_from": "Wiadomość od {sender}"
   },
   "external_mail": {
     "sender_label": "Zewnętrzny",

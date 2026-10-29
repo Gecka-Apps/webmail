@@ -767,7 +767,9 @@
       "saved_to": "În {folder}",
       "failed": "Nu s-a putut salva în Fișiere",
       "load_failed": "Dosarele nu au putut fi încărcate. Încearcă din nou."
-    }
+    },
+    "frame_title": "Mesaj: {subject}",
+    "frame_title_from": "Mesaj de la {sender}"
   },
   "external_mail": {
     "sender_label": "Extern",

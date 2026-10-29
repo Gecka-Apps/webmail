@@ -767,7 +767,9 @@
       "saved_to": "Mapē {folder}",
       "failed": "Neizdevās saglabāt failos",
       "load_failed": "Neizdevās ielādēt mapes. Mēģiniet vēlreiz."
-    }
+    },
+    "frame_title": "Ziņojums: {subject}",
+    "frame_title_from": "Ziņojums no {sender}"
   },
   "external_mail": {
     "sender_label": "Ārējs",

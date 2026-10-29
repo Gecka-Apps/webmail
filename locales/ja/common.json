@@ -767,7 +767,9 @@
       "saved_to": "{folder} に保存",
       "failed": "ファイルに保存できませんでした",
       "load_failed": "フォルダを読み込めませんでした。もう一度お試しください。"
-    }
+    },
+    "frame_title": "メッセージ: {subject}",
+    "frame_title_from": "{sender} からのメッセージ"
   },
   "external_mail": {
     "sender_label": "外部",

@@ -767,7 +767,9 @@
       "saved_to": "В папку {folder}",
       "failed": "Не удалось сохранить в «Файлы»",
       "load_failed": "Не удалось загрузить папки. Повторите попытку."
-    }
+    },
+    "frame_title": "Письмо: {subject}",
+    "frame_title_from": "Письмо от {sender}"
   },
   "external_mail": {
     "sender_label": "Внешнее",

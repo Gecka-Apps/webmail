@@ -767,7 +767,9 @@
       "saved_to": "I {folder}",
       "failed": "Kunne ikke gemme i Filer",
       "load_failed": "Mapperne kunne ikke indlæses. Prøv igen."
-    }
+    },
+    "frame_title": "Besked: {subject}",
+    "frame_title_from": "Besked fra {sender}"
   },
   "external_mail": {
     "sender_label": "Ekstern",
