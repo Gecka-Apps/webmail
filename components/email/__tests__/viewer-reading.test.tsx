@@ -306,3 +306,18 @@ describe('reader toolbar actions', () => {
     expect(document.activeElement === more || more.contains(document.activeElement)).toBe(true);
   });
 });
+
+describe('reading mask', () => {
+  it('is drawn over the message only when turned on', async () => {
+    await show(message({ text: 'Plain words here' }));
+    expect(screen.queryByTestId('reading-mask')).toBeNull();
+  });
+
+  it('covers the body when on', async () => {
+    useSettingsStore.setState({ readingMask: true } as never);
+    await show(message({ text: 'Plain words here' }));
+    await act(async () => { await new Promise((r) => requestAnimationFrame(() => r(null))); });
+    const mask = screen.getByTestId('reading-mask');
+    expect(mask.closest('.email-content-wrapper')).not.toBeNull();
+  });
+});

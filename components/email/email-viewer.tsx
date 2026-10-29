@@ -14,6 +14,7 @@ import { useMailReading } from "@/hooks/use-mail-reading";
 import { useReadAloud } from "@/hooks/use-read-aloud";
 import { ReadAloudBar } from "./read-aloud-bar";
 import { ReaderViewDialog } from "./reader-view-dialog";
+import { ReadingMask } from "./reading-mask";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailColorScheme, emailDarkModeCss, emailHasNativeDarkMode as htmlHasNativeDarkMode, resolveColorSchemeMedia } from "@/lib/email-dark-mode";
@@ -2885,6 +2886,9 @@ export function EmailViewer({
   }, [plainView, decodedEmailContent, readableText, t]);
   // Reader view: the message full screen in the app's own look.
   const [readerViewOpen, setReaderViewOpen] = useState(false);
+  // Reading mask: dims the body except a band that follows pointer and caret.
+  const readingMaskOn = useSettingsStore((state) => state.readingMask);
+  const bodyWrapRef = useRef<HTMLDivElement>(null);
   const readerViewHtml = useMemo(() => {
     if (!readerViewOpen) return '';
     return decodedEmailContent.isHtml ? plainTextToSafeHtml(readableText()) : decodedEmailContent.html;
@@ -6237,7 +6241,7 @@ export function EmailViewer({
         <div className="grow shrink-0 flex flex-col">
 
           {/* Email Body */}
-          <div className={cn(
+          <div ref={bodyWrapRef} className={cn(
             "email-content-wrapper overflow-x-auto relative",
             // Folded, the body stays mounted so unfolding does not reload it.
             (mvOpenFolded || mvAwaitingConversation) && "hidden",
@@ -6247,6 +6251,13 @@ export function EmailViewer({
           )}
           style={isDark ? { backgroundColor: '#121212' } : undefined}>
             <ReadAloudBar state={readAloud.state} onPause={readAloud.pause} onResume={readAloud.resume} onStop={readAloud.stop} />
+            {readingMaskOn && !isBodyLoading && (
+              <ReadingMask
+                containerRef={bodyWrapRef}
+                frame={effectiveEmailContent.isHtml && iframeReady ? iframeRef.current : null}
+                bandHeight={Math.round(14 * reading.textFactor * 1.7 * 3)}
+              />
+            )}
             {readerViewOpen && (
               <ReaderViewDialog
                 isOpen
