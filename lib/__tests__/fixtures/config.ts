@@ -40,6 +40,11 @@ export function createConfig(overrides: Partial<ConfigData> = {}): ConfigData {
     embeddedMode: false,
     parentOrigin: '',
     sourceCodeUrl: '',
+    accessibilityStatementUrl: '',
+    accessibilityFeedbackUrl: '',
+    helpUrl: '',
+    easyReadUrl: '',
+    signLanguageUrl: '',
     noThirdPartyTraffic: false,
     ...overrides,
   };

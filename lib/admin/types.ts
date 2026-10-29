@@ -267,6 +267,15 @@ export const CONFIG_ENV_MAP: Record<string, { envVar: string; fileEnvVar?: strin
   // Operators of a modified build point it at their fork; the About card then
   // links there instead of the upstream repository (#1161). Empty = upstream.
   sourceCodeUrl: { envVar: 'SOURCE_CODE_URL', type: 'url', defaultValue: '' },
+  // Accessibility and help links (OP-01; WCAG 3.2.6, BITV 2.0 §4 and §7):
+  // shown in the same place on every page, on the login page, in the
+  // settings sidebar and in the account menu. Empty hides a link. Only
+  // http(s) URLs are used; the feedback link may also be an email address.
+  accessibilityStatementUrl: { envVar: 'ACCESSIBILITY_STATEMENT_URL', type: 'url', defaultValue: '' },
+  accessibilityFeedbackUrl: { envVar: 'ACCESSIBILITY_FEEDBACK_URL', type: 'string', defaultValue: '' },
+  helpUrl: { envVar: 'HELP_URL', type: 'url', defaultValue: '' },
+  easyReadUrl: { envVar: 'EASY_READ_URL', type: 'url', defaultValue: '' },
+  signLanguageUrl: { envVar: 'SIGN_LANGUAGE_URL', type: 'url', defaultValue: '' },
   // Login header customization. The logo box is otherwise a fixed 64×64
   // (w-16/h-16), which fits a wide wordmark to ~13px tall; set a max height
   // and/or width (any CSS length, e.g. "230px" or "3rem") to size it. The

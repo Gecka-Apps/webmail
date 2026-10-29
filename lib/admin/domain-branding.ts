@@ -27,6 +27,11 @@ export const BRANDING_OVERRIDE_KEYS = [
   'loginImprintUrl',
   'loginPrivacyPolicyUrl',
   'loginWebsiteUrl',
+  'accessibilityStatementUrl',
+  'accessibilityFeedbackUrl',
+  'helpUrl',
+  'easyReadUrl',
+  'signLanguageUrl',
 ] as const;
 
 export type BrandingOverrideKey = (typeof BRANDING_OVERRIDE_KEYS)[number];
@@ -56,6 +61,11 @@ export interface DomainBrandingEntry {
   loginImprintUrl?: string;
   loginPrivacyPolicyUrl?: string;
   loginWebsiteUrl?: string;
+  accessibilityStatementUrl?: string;
+  accessibilityFeedbackUrl?: string;
+  helpUrl?: string;
+  easyReadUrl?: string;
+  signLanguageUrl?: string;
 }
 
 // Accepts plain hostnames (foo, foo.bar, foo.bar.baz) and one-level wildcards

@@ -4,7 +4,7 @@ import { configManager } from '@/lib/admin/config-manager';
 import { parseJmapServers, redactJmapServers } from '@/lib/admin/jmap-servers';
 import { hasSessionSecret } from '@/lib/auth/session-secret';
 import { getOauthScopes } from '@/lib/oauth/tokens';
-import { httpUrlOrEmpty } from '@/lib/config-validation';
+import { httpOrMailtoOrEmpty, httpUrlOrEmpty } from '@/lib/config-validation';
 import {
   matchDomainBranding,
   parseDomainBranding,
@@ -99,6 +99,12 @@ export async function GET(request: NextRequest) {
       embeddedMode: !!allowedFrameAncestors && allowedFrameAncestors !== "'none'",
       parentOrigin: configManager.get<string>('parentOrigin', ''),
       sourceCodeUrl: httpUrlOrEmpty(configManager.get<string>('sourceCodeUrl', '')),
+      // Accessibility and help links, per domain like the legal links.
+      accessibilityStatementUrl: httpUrlOrEmpty(branded<string>('accessibilityStatementUrl', '')),
+      accessibilityFeedbackUrl: httpOrMailtoOrEmpty(branded<string>('accessibilityFeedbackUrl', '')),
+      helpUrl: httpUrlOrEmpty(branded<string>('helpUrl', '')),
+      easyReadUrl: httpUrlOrEmpty(branded<string>('easyReadUrl', '')),
+      signLanguageUrl: httpUrlOrEmpty(branded<string>('signLanguageUrl', '')),
       // Browser-side switches of lib/outgoing-hosts.ts read this (#903).
       noThirdPartyTraffic: await isNoThirdPartyTrafficOn(),
     },

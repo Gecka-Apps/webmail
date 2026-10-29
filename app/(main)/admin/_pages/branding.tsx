@@ -45,6 +45,16 @@ const TEXT_FIELDS = [
   { key: 'loginWebsiteUrl', label: 'Company website URL' },
 ] as const;
 
+// Accessibility and help links (OP-01): the app shows them on the login
+// page, in the settings sidebar and in the account menu (lib/help-links.ts).
+const HELP_FIELDS = [
+  { key: 'accessibilityStatementUrl', label: 'Accessibility statement URL', placeholder: 'https://...' },
+  { key: 'accessibilityFeedbackUrl', label: 'Report a barrier (URL or email)', placeholder: 'https://... or barriers@example.com' },
+  { key: 'helpUrl', label: 'Help URL', placeholder: 'https://...' },
+  { key: 'easyReadUrl', label: 'Easy Read (Leichte Sprache) URL', placeholder: 'https://...' },
+  { key: 'signLanguageUrl', label: 'Sign language (DGS) URL', placeholder: 'https://...' },
+] as const;
+
 const PWA_IMAGE_FIELDS = [
   { key: 'pwaIconUrl', label: 'Icon', accept: '.svg,.png,.jpg,.webp' },
   { key: 'pwaScreenshotMobileUrl', label: 'Screenshot (mobile)', accept: '.png,.jpg,.webp' },
@@ -556,6 +566,14 @@ export function BrandingPage() {
 
         <SettingsSection id="company" title="Company information">
           {TEXT_FIELDS.map(field => textRow(field, field.key.includes('Url') ? 'https://...' : 'Enter value'))}
+        </SettingsSection>
+
+        <SettingsSection
+          id="accessibility-links"
+          title="Accessibility and help links"
+          description="Shown on the login page, in the settings sidebar and in the account menu, in the same place on every page. Leave a field empty to hide its link. Only http and https links are used; the barrier report can also be an email address."
+        >
+          {HELP_FIELDS.map(field => textRow(field, field.placeholder))}
         </SettingsSection>
       </div>
 

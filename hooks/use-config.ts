@@ -47,6 +47,12 @@ export interface ConfigData {
   embeddedMode: boolean;
   parentOrigin: string;
   sourceCodeUrl: string;
+  /** Accessibility and help links (lib/help-links.ts); '' hides a link. */
+  accessibilityStatementUrl: string;
+  accessibilityFeedbackUrl: string;
+  helpUrl: string;
+  easyReadUrl: string;
+  signLanguageUrl: string;
   /** Stay off every built-in outside host (#903; lib/outgoing-hosts.ts). */
   noThirdPartyTraffic: boolean;
 }
@@ -192,6 +198,11 @@ export function useConfig(): AppConfig {
     embeddedMode: configCache?.embeddedMode || false,
     parentOrigin: configCache?.parentOrigin || '',
     sourceCodeUrl: configCache?.sourceCodeUrl || '',
+    accessibilityStatementUrl: configCache?.accessibilityStatementUrl || '',
+    accessibilityFeedbackUrl: configCache?.accessibilityFeedbackUrl || '',
+    helpUrl: configCache?.helpUrl || '',
+    easyReadUrl: configCache?.easyReadUrl || '',
+    signLanguageUrl: configCache?.signLanguageUrl || '',
     noThirdPartyTraffic: configCache?.noThirdPartyTraffic ?? false,
     isLoading: !configCache,
     error: null,
@@ -238,6 +249,11 @@ export function useConfig(): AppConfig {
         embeddedMode: configCache.embeddedMode,
         parentOrigin: configCache.parentOrigin,
         sourceCodeUrl: configCache.sourceCodeUrl,
+        accessibilityStatementUrl: configCache.accessibilityStatementUrl,
+        accessibilityFeedbackUrl: configCache.accessibilityFeedbackUrl,
+        helpUrl: configCache.helpUrl,
+        easyReadUrl: configCache.easyReadUrl,
+        signLanguageUrl: configCache.signLanguageUrl,
         noThirdPartyTraffic: configCache.noThirdPartyTraffic,
         isLoading: false,
         error: null,
@@ -285,6 +301,11 @@ export function useConfig(): AppConfig {
           embeddedMode: data.embeddedMode,
           parentOrigin: data.parentOrigin,
           sourceCodeUrl: data.sourceCodeUrl,
+          accessibilityStatementUrl: data.accessibilityStatementUrl,
+          accessibilityFeedbackUrl: data.accessibilityFeedbackUrl,
+          helpUrl: data.helpUrl,
+          easyReadUrl: data.easyReadUrl,
+          signLanguageUrl: data.signLanguageUrl,
           noThirdPartyTraffic: data.noThirdPartyTraffic,
           isLoading: false,
           error: null,

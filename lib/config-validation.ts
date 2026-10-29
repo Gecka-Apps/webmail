@@ -64,6 +64,11 @@ const configValidators = {
   embeddedMode: isBoolean,
   parentOrigin: isString,
   sourceCodeUrl: isString,
+  accessibilityStatementUrl: isString,
+  accessibilityFeedbackUrl: isString,
+  helpUrl: isString,
+  easyReadUrl: isString,
+  signLanguageUrl: isString,
   noThirdPartyTraffic: isBoolean,
 } satisfies Validators<ConfigData>;
 
@@ -80,6 +85,24 @@ export function httpUrlOrEmpty(value: unknown): string {
   } catch {
     return '';
   }
+}
+
+const EMAIL_RE = /^[^\s@<>()"',;:\\/?#]+@[^\s@<>()"',;:\\/?#]+\.[^\s@<>()"',;:\\/?#]+$/;
+
+/**
+ * An absolute http(s) URL, a mailto: link, or an email address made into
+ * one; '' for anything else. For links that may point at a mailbox, such
+ * as the accessibility feedback address.
+ */
+export function httpOrMailtoOrEmpty(value: unknown): string {
+  const url = httpUrlOrEmpty(value);
+  if (url || typeof value !== 'string') return url;
+  const trimmed = value.trim();
+  if (/^mailto:/i.test(trimmed)) {
+    const address = trimmed.slice('mailto:'.length).split('?')[0];
+    return EMAIL_RE.test(address) ? trimmed : '';
+  }
+  return EMAIL_RE.test(trimmed) ? `mailto:${trimmed}` : '';
 }
 
 /** Validate the server's complete response without rewriting configured values. */

@@ -71,6 +71,20 @@ describe('applyLiteConfig (config.json for the static build)', () => {
     expect(applyLiteConfig({ sourceCodeUrl: 'javascript:alert(1)' }).sourceCodeUrl).toBe('');
   });
 
+  it('reads the accessibility and help links and drops other schemes', () => {
+    const config = applyLiteConfig({
+      accessibilityStatementUrl: 'https://acme.example/accessibility',
+      accessibilityFeedbackUrl: 'barriers@acme.example',
+      helpUrl: 'javascript:alert(1)',
+      easyReadUrl: 'https://acme.example/leichte-sprache',
+    });
+    expect(config.accessibilityStatementUrl).toBe('https://acme.example/accessibility');
+    expect(config.accessibilityFeedbackUrl).toBe('mailto:barriers@acme.example');
+    expect(config.helpUrl).toBe('');
+    expect(config.easyReadUrl).toBe('https://acme.example/leichte-sprache');
+    expect(config.signLanguageUrl).toBe('');
+  });
+
   it('keeps deployer-facing branding and login toggles', () => {
     const config = applyLiteConfig({
       appName: 'Acme Mail',
