@@ -776,7 +776,13 @@
     "show_formatted": "Biçimli göster",
     "shown_as_plain_text": "Bu ileti düz metin olarak gösteriliyor.",
     "play_animation": "Animasyonu oynat",
-    "pause_animation": "Animasyonu duraklat"
+    "pause_animation": "Animasyonu duraklat",
+    "read_aloud": "Sesli oku",
+    "read_aloud_reading": "Sesli okunuyor",
+    "read_aloud_paused": "Okuma duraklatıldı",
+    "read_aloud_pause": "Duraklat",
+    "read_aloud_resume": "Devam et",
+    "read_aloud_stop": "Okumayı durdur"
   },
   "external_mail": {
     "sender_label": "Harici",
@@ -3154,6 +3160,11 @@
         "description": "Bu sayfadaki tüm ayarları varsayılana veya kuruluşunuzun belirlediği değere döndürür. Konuşma görünümü gibi ortak ayarlar olduğu gibi kalır.",
         "button": "Sıfırla",
         "done": "Erişilebilirlik ayarları sıfırlandı."
+      },
+      "read_aloud_voice": {
+        "label": "Sesli okuma sesi",
+        "description": "İletileri sesli okuyan ses. Liste, tarayıcınızda arayüz dili için bulunan sesleri gösterir.",
+        "default": "Tarayıcı varsayılanı"
       }
     }
   },

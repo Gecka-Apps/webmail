@@ -776,7 +776,13 @@
     "show_formatted": "以格式显示",
     "shown_as_plain_text": "此邮件以纯文本显示。",
     "play_animation": "播放动画",
-    "pause_animation": "暂停动画"
+    "pause_animation": "暂停动画",
+    "read_aloud": "朗读",
+    "read_aloud_reading": "正在朗读",
+    "read_aloud_paused": "朗读已暂停",
+    "read_aloud_pause": "暂停",
+    "read_aloud_resume": "继续",
+    "read_aloud_stop": "停止朗读"
   },
   "external_mail": {
     "sender_label": "外部",
@@ -3154,6 +3160,11 @@
         "description": "把此页面的所有设置恢复为默认值，或恢复为您所在组织设定的值。会话视图等共享设置保持不变。",
         "button": "重置",
         "done": "无障碍设置已重置。"
+      },
+      "read_aloud_voice": {
+        "label": "朗读语音",
+        "description": "朗读邮件所用的语音。列表显示浏览器为界面语言提供的语音。",
+        "default": "浏览器默认"
       }
     }
   },

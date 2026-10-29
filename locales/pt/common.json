@@ -776,7 +776,13 @@
     "show_formatted": "Mostrar formatado",
     "shown_as_plain_text": "Esta mensagem é mostrada como texto simples.",
     "play_animation": "Reproduzir animação",
-    "pause_animation": "Pausar animação"
+    "pause_animation": "Pausar animação",
+    "read_aloud": "Ler em voz alta",
+    "read_aloud_reading": "A ler em voz alta",
+    "read_aloud_paused": "Leitura em pausa",
+    "read_aloud_pause": "Pausar",
+    "read_aloud_resume": "Retomar",
+    "read_aloud_stop": "Parar a leitura"
   },
   "external_mail": {
     "sender_label": "Externo",
@@ -3154,6 +3160,11 @@
         "description": "Volta todas as configurações desta página ao padrão ou ao valor definido pela sua organização. Configurações compartilhadas, como a visualização por conversa, não mudam.",
         "button": "Redefinir",
         "done": "Configurações de acessibilidade redefinidas."
+      },
+      "read_aloud_voice": {
+        "label": "Voz da leitura em voz alta",
+        "description": "A voz que lê as mensagens em voz alta. A lista mostra as vozes que o navegador tem para o idioma da interface.",
+        "default": "Padrão do navegador"
       }
     }
   },

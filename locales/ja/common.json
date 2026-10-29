@@ -776,7 +776,13 @@
     "show_formatted": "書式付きで表示",
     "shown_as_plain_text": "このメッセージはプレーンテキストで表示されています。",
     "play_animation": "アニメーションを再生",
-    "pause_animation": "アニメーションを一時停止"
+    "pause_animation": "アニメーションを一時停止",
+    "read_aloud": "読み上げ",
+    "read_aloud_reading": "読み上げ中",
+    "read_aloud_paused": "読み上げを一時停止中",
+    "read_aloud_pause": "一時停止",
+    "read_aloud_resume": "再開",
+    "read_aloud_stop": "読み上げを停止"
   },
   "external_mail": {
     "sender_label": "外部",
@@ -3154,6 +3160,11 @@
         "description": "このページのすべての設定を、既定値または組織が設定した値に戻します。会話表示などの共有設定は変わりません。",
         "button": "リセット",
         "done": "アクセシビリティ設定をリセットしました。"
+      },
+      "read_aloud_voice": {
+        "label": "読み上げの音声",
+        "description": "メッセージを読み上げる音声です。一覧には、ブラウザーが画面の言語用に持っている音声が表示されます。",
+        "default": "ブラウザーの既定"
       }
     }
   },

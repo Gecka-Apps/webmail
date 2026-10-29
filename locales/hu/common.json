@@ -776,7 +776,13 @@
     "show_formatted": "Megjelenítés formázva",
     "shown_as_plain_text": "Ez az üzenet egyszerű szövegként jelenik meg.",
     "play_animation": "Animáció lejátszása",
-    "pause_animation": "Animáció szüneteltetése"
+    "pause_animation": "Animáció szüneteltetése",
+    "read_aloud": "Felolvasás",
+    "read_aloud_reading": "Felolvasás folyamatban",
+    "read_aloud_paused": "Felolvasás szüneteltetve",
+    "read_aloud_pause": "Szünet",
+    "read_aloud_resume": "Folytatás",
+    "read_aloud_stop": "Felolvasás leállítása"
   },
   "external_mail": {
     "sender_label": "Külső",
@@ -3154,6 +3160,11 @@
         "description": "Az oldal minden beállítását visszaállítja az alapértelmezettre, vagy arra, amelyet a szervezete megadott. A közös beállítások, például a beszélgetésnézet, változatlanok maradnak.",
         "button": "Visszaállítás",
         "done": "A kisegítő beállítások visszaállítva."
+      },
+      "read_aloud_voice": {
+        "label": "Felolvasási hang",
+        "description": "A hang, amely felolvassa az üzeneteket. A lista a böngésző által a felület nyelvéhez kínált hangokat mutatja.",
+        "default": "A böngésző alapértelmezése"
       }
     }
   },

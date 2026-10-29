@@ -776,7 +776,13 @@
     "show_formatted": "Näita vormindatult",
     "shown_as_plain_text": "Seda kirja näidatakse lihttekstina.",
     "play_animation": "Esita animatsioon",
-    "pause_animation": "Peata animatsioon"
+    "pause_animation": "Peata animatsioon",
+    "read_aloud": "Loe ette",
+    "read_aloud_reading": "Loen ette",
+    "read_aloud_paused": "Ettelugemine on peatatud",
+    "read_aloud_pause": "Peata",
+    "read_aloud_resume": "Jätka",
+    "read_aloud_stop": "Lõpeta ettelugemine"
   },
   "external_mail": {
     "sender_label": "Väline",
@@ -3154,6 +3160,11 @@
         "description": "Taastab kõik selle lehe seaded vaikeväärtustele või need, mille sinu organisatsioon on määranud. Ühised seaded, nagu vestlusvaade, jäävad samaks.",
         "button": "Lähtesta",
         "done": "Juurdepääsetavuse seaded on lähtestatud."
+      },
+      "read_aloud_voice": {
+        "label": "Ettelugemise hääl",
+        "description": "Hääl, mis kirju ette loeb. Loendis on hääled, mis brauseril liidese keele jaoks on.",
+        "default": "Brauseri vaikeväärtus"
       }
     }
   },

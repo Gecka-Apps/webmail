@@ -11,6 +11,8 @@ import { htmlToReadableText } from "@/lib/html-to-readable-text";
 import { pauseAnimatedImages } from "@/lib/animated-images";
 import { applyMailTextSize, mailFitOptions } from "@/lib/mail-reading";
 import { useMailReading } from "@/hooks/use-mail-reading";
+import { useReadAloud } from "@/hooks/use-read-aloud";
+import { ReadAloudBar } from "./read-aloud-bar";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailColorScheme, emailDarkModeCss, emailHasNativeDarkMode as htmlHasNativeDarkMode, resolveColorSchemeMedia } from "@/lib/email-dark-mode";
@@ -105,6 +107,7 @@ import {
   Maximize2,
   Minimize2,
   Type,
+  Volume2,
   ArrowLeft,
   Pencil,
 } from "@/components/icons";
@@ -3333,6 +3336,12 @@ export function EmailViewer({
   const iframeReady = iframeReadyFor !== null && iframeReadyFor === emailIframeSrcDoc;
   // The plain-text body, where reader-above-quote mounts between text and quote.
   const [plainBodyEl, setPlainBodyEl] = useState<HTMLDivElement | null>(null);
+  // Read aloud (browser speech): the body as shown, HTML frame or plain text.
+  const getReadAloudRoot = useCallback(
+    () => (effectiveEmailContent.isHtml ? iframeRef.current?.contentDocument?.body ?? null : plainBodyEl),
+    [effectiveEmailContent.isHtml, plainBodyEl],
+  );
+  const readAloud = useReadAloud({ getRoot: getReadAloudRoot, lang: bodyLanguage, resetKey: effectiveEmailContent.isHtml ? emailIframeSrcDoc : effectiveEmailContent.html });
   // A plain-text body sits in the page: watch the page's selection for it.
   useEffect(() => {
     if (!plainBodyEl || !hasDetailSidebar) return;
@@ -4156,6 +4165,9 @@ export function EmailViewer({
   // The reader's own entries after the message's: the view toggle, Import
   // (into the open folder) and, with a keyboard, the shortcuts.
   const readerExtras: MessageActionEntry[] = [
+    ...(readAloud.supported && !isBodyLoading
+      ? [{ kind: 'item' as const, key: 'extra:read_aloud' as const, icon: Volume2, label: t('read_aloud'), run: readAloud.start }]
+      : []),
     ...(hasHtmlBody
       ? [{ kind: 'item' as const, key: 'extra:plain_text' as const, icon: plainView ? Type : FileText, label: plainView ? t('show_formatted') : t('show_as_plain_text'), run: () => setPlainViewOverride(!plainView) }]
       : []),
@@ -6219,6 +6231,7 @@ export function EmailViewer({
             !isDark && resolvedTheme === 'dark' ? "bg-white email-content-light" : "bg-background"
           )}
           style={isDark ? { backgroundColor: '#121212' } : undefined}>
+            <ReadAloudBar state={readAloud.state} onPause={readAloud.pause} onResume={readAloud.resume} onStop={readAloud.stop} />
             {!isBodyLoading && plainView && hasHtmlBody && (
               <div className="flex flex-wrap items-center gap-x-2 px-6 pt-3 text-sm text-muted-foreground" data-testid="plain-view-note">
                 <span>{t('shown_as_plain_text')}</span>

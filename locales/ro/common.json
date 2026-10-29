@@ -776,7 +776,13 @@
     "show_formatted": "Afișați formatat",
     "shown_as_plain_text": "Acest mesaj este afișat ca text simplu.",
     "play_animation": "Redați animația",
-    "pause_animation": "Întrerupeți animația"
+    "pause_animation": "Întrerupeți animația",
+    "read_aloud": "Citire cu voce tare",
+    "read_aloud_reading": "Se citește cu voce tare",
+    "read_aloud_paused": "Citire întreruptă",
+    "read_aloud_pause": "Pauză",
+    "read_aloud_resume": "Reluați",
+    "read_aloud_stop": "Opriți citirea"
   },
   "external_mail": {
     "sender_label": "Extern",
@@ -3154,6 +3160,11 @@
         "description": "Readuce toate setările de pe această pagină la valorile implicite sau la cele stabilite de organizația dvs. Setările comune, precum vizualizarea pe conversații, rămân neschimbate.",
         "button": "Resetează",
         "done": "Setările de accesibilitate au fost resetate."
+      },
+      "read_aloud_voice": {
+        "label": "Vocea pentru citire cu voce tare",
+        "description": "Vocea care citește mesajele. Lista arată vocile pe care browserul le are pentru limba interfeței.",
+        "default": "Implicită a browserului"
       }
     }
   },

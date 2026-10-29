@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useSettingsStore } from '@/stores/settings-store';
 import { usePolicyStore } from '@/stores/policy-store';
 import { SettingsSection, SettingItem, RadioGroup, Select, ToggleSwitch } from './settings-section';
@@ -10,6 +10,8 @@ import { ChevronRight, Keyboard, Volume2 } from '@/components/icons';
 import { IS_LITE } from '@/lib/lite';
 import { useNoThirdPartyTraffic } from '@/hooks/use-third-party-mode';
 import { openKeyboardShortcuts } from '@/lib/app-commands';
+import { voicesForLocale } from '@/lib/read-aloud';
+import { useSpeechVoices } from '@/hooks/use-read-aloud';
 import { NOTIFICATION_SOUNDS, playNotificationSound, type NotificationSoundChoice } from '@/lib/notification-sound';
 import {
   ACCESSIBILITY_DEFAULTS,
@@ -66,6 +68,8 @@ export function AccessibilitySettings() {
   const faviconsAllowed = !useNoThirdPartyTraffic();
   const [applied, setApplied] = useState<{ id: AccessibilityPresetId; changes: PresetChange[] } | null>(null);
   const [resetDone, setResetDone] = useState(false);
+  const locale = useLocale();
+  const speechVoices = useSpeechVoices();
 
   const toastMin = getRestriction('toastDuration')?.min;
   const allowsValue = (key: string, value: unknown) =>
@@ -107,6 +111,17 @@ export function AccessibilitySettings() {
       ]}
     />
   );
+
+  // Voices for the interface language, plus the one already chosen even if
+  // this browser doesn't have it (another device may).
+  const localeVoices = voicesForLocale(speechVoices, locale);
+  const readAloudVoiceOptions = [
+    { value: '', label: t('read_aloud_voice.default') },
+    ...localeVoices.map((voice) => ({ value: voice.voiceURI, label: voice.name })),
+    ...(settings.readAloudVoice && !localeVoices.some((voice) => voice.voiceURI === settings.readAloudVoice)
+      ? [{ value: settings.readAloudVoice, label: speechVoices.find((voice) => voice.voiceURI === settings.readAloudVoice)?.name ?? settings.readAloudVoice }]
+      : []),
+  ];
 
   const toastOptions = TOAST_DURATIONS
     .filter((value) => allowsValue('toastDuration', value))
@@ -424,6 +439,13 @@ export function AccessibilitySettings() {
             value={String(settings.readAloudRate)}
             onChange={(value) => set('readAloudRate', Number(value))}
             options={READ_ALOUD_RATES.map((rate) => ({ value: String(rate), label: `${rate}×` }))}
+          />
+        </SettingItem>
+        <SettingItem label={t('read_aloud_voice.label')} description={t('read_aloud_voice.description')}>
+          <Select
+            value={settings.readAloudVoice}
+            onChange={(value) => set('readAloudVoice', value)}
+            options={readAloudVoiceOptions}
           />
         </SettingItem>
         <SettingItem label={t('compose_font.label')} description={t('compose_font.description')}>

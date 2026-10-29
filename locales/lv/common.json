@@ -776,7 +776,13 @@
     "show_formatted": "Rādīt formatētu",
     "shown_as_plain_text": "Šis ziņojums tiek rādīts kā vienkāršs teksts.",
     "play_animation": "Atskaņot animāciju",
-    "pause_animation": "Pauzēt animāciju"
+    "pause_animation": "Pauzēt animāciju",
+    "read_aloud": "Nolasīt",
+    "read_aloud_reading": "Notiek nolasīšana",
+    "read_aloud_paused": "Nolasīšana pauzēta",
+    "read_aloud_pause": "Pauzēt",
+    "read_aloud_resume": "Turpināt",
+    "read_aloud_stop": "Beigt nolasīšanu"
   },
   "external_mail": {
     "sender_label": "Ārējs",
@@ -3154,6 +3160,11 @@
         "description": "Atgriež visus šīs lapas iestatījumus noklusējuma vērtībās vai tajās, ko iestatījusi jūsu organizācija. Koplietojami iestatījumi, piemēram, sarunu skats, paliek, kā bijuši.",
         "button": "Atiestatīt",
         "done": "Pieejamības iestatījumi atiestatīti."
+      },
+      "read_aloud_voice": {
+        "label": "Nolasīšanas balss",
+        "description": "Balss, kas nolasa ziņas. Sarakstā ir balsis, kas pārlūkam ir saskarnes valodai.",
+        "default": "Pārlūka noklusējums"
       }
     }
   },

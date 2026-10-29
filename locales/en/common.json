@@ -776,7 +776,13 @@
     "show_formatted": "Show formatted",
     "shown_as_plain_text": "This message is shown as plain text.",
     "play_animation": "Play animation",
-    "pause_animation": "Pause animation"
+    "pause_animation": "Pause animation",
+    "read_aloud": "Read aloud",
+    "read_aloud_reading": "Reading aloud",
+    "read_aloud_paused": "Reading paused",
+    "read_aloud_pause": "Pause",
+    "read_aloud_resume": "Resume",
+    "read_aloud_stop": "Stop reading"
   },
   "external_mail": {
     "sender_label": "External",
@@ -3154,6 +3160,11 @@
         "description": "Puts every setting on this page back to its default, or to the one your organisation set. Shared settings such as conversation view stay as they are.",
         "button": "Reset",
         "done": "Accessibility settings reset."
+      },
+      "read_aloud_voice": {
+        "label": "Read aloud voice",
+        "description": "The voice that reads messages aloud. The list shows the voices your browser has for the interface language.",
+        "default": "Browser default"
       }
     }
   },

@@ -776,7 +776,13 @@
     "show_formatted": "Mostra amb format",
     "shown_as_plain_text": "Aquest missatge es mostra com a text sense format.",
     "play_animation": "Reprodueix l'animació",
-    "pause_animation": "Posa en pausa l'animació"
+    "pause_animation": "Posa en pausa l'animació",
+    "read_aloud": "Llegeix en veu alta",
+    "read_aloud_reading": "S'està llegint en veu alta",
+    "read_aloud_paused": "Lectura en pausa",
+    "read_aloud_pause": "Pausa",
+    "read_aloud_resume": "Reprèn",
+    "read_aloud_stop": "Atura la lectura"
   },
   "external_mail": {
     "sender_label": "Extern",
@@ -3154,6 +3160,11 @@
         "description": "Torna totes les opcions d'aquesta pàgina al valor per defecte, o al que hagi fixat la teva organització. Les opcions compartides, com la vista de converses, no canvien.",
         "button": "Restableix",
         "done": "S'han restablert les opcions d'accessibilitat."
+      },
+      "read_aloud_voice": {
+        "label": "Veu de la lectura en veu alta",
+        "description": "La veu que llegeix els missatges. La llista mostra les veus que té el navegador per a la llengua de la interfície.",
+        "default": "Predeterminada del navegador"
       }
     }
   },

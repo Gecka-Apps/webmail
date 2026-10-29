@@ -776,7 +776,13 @@
     "show_formatted": "Formatiert anzeigen",
     "shown_as_plain_text": "Diese Nachricht wird als reiner Text angezeigt.",
     "play_animation": "Animation abspielen",
-    "pause_animation": "Animation anhalten"
+    "pause_animation": "Animation anhalten",
+    "read_aloud": "Vorlesen",
+    "read_aloud_reading": "Wird vorgelesen",
+    "read_aloud_paused": "Vorlesen angehalten",
+    "read_aloud_pause": "Anhalten",
+    "read_aloud_resume": "Fortsetzen",
+    "read_aloud_stop": "Vorlesen beenden"
   },
   "external_mail": {
     "sender_label": "Extern",
@@ -3154,6 +3160,11 @@
         "description": "Setzt alle Einstellungen auf dieser Seite auf den Standard zurück, oder auf den Wert, den Ihre Organisation festgelegt hat. Gemeinsame Einstellungen wie die Konversationsansicht bleiben, wie sie sind.",
         "button": "Zurücksetzen",
         "done": "Barrierefreiheit zurückgesetzt."
+      },
+      "read_aloud_voice": {
+        "label": "Vorlesestimme",
+        "description": "Die Stimme, die Nachrichten vorliest. Die Liste zeigt die Stimmen, die Ihr Browser für die Sprache der Oberfläche hat.",
+        "default": "Standard des Browsers"
       }
     }
   },

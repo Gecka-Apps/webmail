@@ -171,6 +171,8 @@ export {
   IconLayoutSidebarRightCollapse as PanelRightClose,
   IconLayoutSidebarRightExpand as PanelRightOpen,
   IconPaperclip as Paperclip,
+  IconPlayerPause as Pause,
+  IconPlayerStop as Stop,
   IconPencil as PenLine,
   IconEdit as PenSquare,
   IconVector as PenTool,

@@ -776,7 +776,13 @@
     "show_formatted": "서식 있게 보기",
     "shown_as_plain_text": "이 메시지는 일반 텍스트로 표시됩니다.",
     "play_animation": "애니메이션 재생",
-    "pause_animation": "애니메이션 일시 중지"
+    "pause_animation": "애니메이션 일시 중지",
+    "read_aloud": "소리 내어 읽기",
+    "read_aloud_reading": "소리 내어 읽는 중",
+    "read_aloud_paused": "읽기 일시 중지됨",
+    "read_aloud_pause": "일시 중지",
+    "read_aloud_resume": "다시 시작",
+    "read_aloud_stop": "읽기 중지"
   },
   "external_mail": {
     "sender_label": "외부",
@@ -3154,6 +3160,11 @@
         "description": "이 페이지의 모든 설정을 기본값 또는 조직에서 정한 값으로 되돌려요. 대화 보기처럼 공유되는 설정은 그대로 유지돼요.",
         "button": "초기화",
         "done": "접근성 설정을 초기화했어요."
+      },
+      "read_aloud_voice": {
+        "label": "소리 내어 읽기 음성",
+        "description": "메시지를 읽어 주는 음성이에요. 목록에는 브라우저에 있는 인터페이스 언어용 음성이 표시돼요.",
+        "default": "브라우저 기본값"
       }
     }
   },

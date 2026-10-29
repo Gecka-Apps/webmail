@@ -776,7 +776,13 @@
     "show_formatted": "Opgemaakt weergeven",
     "shown_as_plain_text": "Dit bericht wordt als platte tekst weergegeven.",
     "play_animation": "Animatie afspelen",
-    "pause_animation": "Animatie pauzeren"
+    "pause_animation": "Animatie pauzeren",
+    "read_aloud": "Voorlezen",
+    "read_aloud_reading": "Wordt voorgelezen",
+    "read_aloud_paused": "Voorlezen gepauzeerd",
+    "read_aloud_pause": "Pauzeren",
+    "read_aloud_resume": "Hervatten",
+    "read_aloud_stop": "Voorlezen stoppen"
   },
   "external_mail": {
     "sender_label": "Extern",
@@ -3154,6 +3160,11 @@
         "description": "Zet elke instelling op deze pagina terug naar de standaardwaarde, of naar de waarde die je organisatie heeft ingesteld. Gedeelde instellingen zoals de gespreksweergave blijven zoals ze zijn.",
         "button": "Herstellen",
         "done": "Toegankelijkheidsinstellingen hersteld."
+      },
+      "read_aloud_voice": {
+        "label": "Voorleesstem",
+        "description": "De stem die berichten voorleest. De lijst toont de stemmen die je browser heeft voor de taal van de interface.",
+        "default": "Standaard van de browser"
       }
     }
   },

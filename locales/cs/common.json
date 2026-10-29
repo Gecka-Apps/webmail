@@ -776,7 +776,13 @@
     "show_formatted": "Zobrazit formátovaně",
     "shown_as_plain_text": "Tato zpráva se zobrazuje jako prostý text.",
     "play_animation": "Přehrát animaci",
-    "pause_animation": "Pozastavit animaci"
+    "pause_animation": "Pozastavit animaci",
+    "read_aloud": "Předčítat",
+    "read_aloud_reading": "Předčítá se",
+    "read_aloud_paused": "Předčítání pozastaveno",
+    "read_aloud_pause": "Pozastavit",
+    "read_aloud_resume": "Pokračovat",
+    "read_aloud_stop": "Ukončit předčítání"
   },
   "external_mail": {
     "sender_label": "Externí",
@@ -3154,6 +3160,11 @@
         "description": "Vrátí všechna nastavení na této stránce na výchozí hodnoty nebo na hodnoty, které nastavila vaše organizace. Sdílená nastavení, například zobrazení konverzací, zůstanou beze změny.",
         "button": "Obnovit",
         "done": "Nastavení přístupnosti bylo obnoveno."
+      },
+      "read_aloud_voice": {
+        "label": "Hlas předčítání",
+        "description": "Hlas, který předčítá zprávy. Seznam ukazuje hlasy, které má prohlížeč pro jazyk rozhraní.",
+        "default": "Výchozí v prohlížeči"
       }
     }
   },

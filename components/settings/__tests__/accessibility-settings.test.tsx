@@ -10,6 +10,7 @@ import { presetChanges } from '@/lib/accessibility-presets';
 vi.mock('next-intl', () => ({
   useTranslations: (ns?: string) => (key: string, values?: Record<string, unknown>) =>
     `${ns ? `${ns}.` : ''}${key}${values ? ` ${JSON.stringify(values)}` : ''}`,
+  useLocale: () => 'de',
 }));
 
 const settings = () => useSettingsStore.getState();
@@ -97,5 +98,24 @@ describe('toast duration', () => {
     ) as HTMLSelectElement;
     const values = Array.from(select.options).map((o) => o.value);
     expect(values).toEqual(['20', '60', '0']);
+  });
+});
+
+describe('read aloud voice', () => {
+  const voice = (name: string, lang: string) => ({ name, lang, voiceURI: `uri:${name}`, default: false, localService: true });
+
+  it('offers the browser default and the voices for the interface language', () => {
+    const voices = [voice('Anna', 'de-DE'), voice('Daniel', 'en-GB'), voice('Markus', 'de-AT')];
+    vi.stubGlobal('SpeechSynthesisUtterance', class {});
+    vi.stubGlobal('speechSynthesis', { getVoices: () => voices, addEventListener() {}, removeEventListener() {} });
+    try {
+      render(<AccessibilitySettings />);
+      const select = screen.getByRole('combobox', { name: 'settings.accessibility.read_aloud_voice.label' }) as HTMLSelectElement;
+      expect(Array.from(select.options).map((o) => o.textContent)).toEqual(['settings.accessibility.read_aloud_voice.default', 'Anna', 'Markus']);
+      fireEvent.change(select, { target: { value: 'uri:Markus' } });
+      expect(settings().readAloudVoice).toBe('uri:Markus');
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });

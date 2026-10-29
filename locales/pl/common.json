@@ -776,7 +776,13 @@
     "show_formatted": "Pokaż z formatowaniem",
     "shown_as_plain_text": "Ta wiadomość jest wyświetlana jako zwykły tekst.",
     "play_animation": "Odtwórz animację",
-    "pause_animation": "Wstrzymaj animację"
+    "pause_animation": "Wstrzymaj animację",
+    "read_aloud": "Czytaj na głos",
+    "read_aloud_reading": "Czytanie na głos",
+    "read_aloud_paused": "Czytanie wstrzymane",
+    "read_aloud_pause": "Wstrzymaj",
+    "read_aloud_resume": "Wznów",
+    "read_aloud_stop": "Zakończ czytanie"
   },
   "external_mail": {
     "sender_label": "Zewnętrzny",
@@ -3154,6 +3160,11 @@
         "description": "Przywraca wszystkie ustawienia na tej stronie do domyślnych lub do wartości ustawionych przez Twoją organizację. Ustawienia wspólne, takie jak widok konwersacji, pozostają bez zmian.",
         "button": "Zresetuj",
         "done": "Ustawienia dostępności zresetowano."
+      },
+      "read_aloud_voice": {
+        "label": "Głos czytania na głos",
+        "description": "Głos, który czyta wiadomości. Lista pokazuje głosy, które przeglądarka ma dla języka interfejsu.",
+        "default": "Domyślny przeglądarki"
       }
     }
   },

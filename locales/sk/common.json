@@ -776,7 +776,13 @@
     "show_formatted": "Zobraziť formátovane",
     "shown_as_plain_text": "Táto správa sa zobrazuje ako obyčajný text.",
     "play_animation": "Prehrať animáciu",
-    "pause_animation": "Pozastaviť animáciu"
+    "pause_animation": "Pozastaviť animáciu",
+    "read_aloud": "Čítať nahlas",
+    "read_aloud_reading": "Číta sa nahlas",
+    "read_aloud_paused": "Čítanie pozastavené",
+    "read_aloud_pause": "Pozastaviť",
+    "read_aloud_resume": "Pokračovať",
+    "read_aloud_stop": "Zastaviť čítanie"
   },
   "external_mail": {
     "sender_label": "Externé",
@@ -3154,6 +3160,11 @@
         "description": "Vráti všetky nastavenia na tejto stránke na predvolené hodnoty alebo na hodnoty, ktoré určila vaša organizácia. Spoločné nastavenia, napríklad zobrazenie konverzácií, zostanú nezmenené.",
         "button": "Obnoviť",
         "done": "Nastavenia prístupnosti boli obnovené."
+      },
+      "read_aloud_voice": {
+        "label": "Hlas čítania nahlas",
+        "description": "Hlas, ktorý číta správy nahlas. Zoznam ukazuje hlasy, ktoré má prehliadač pre jazyk rozhrania.",
+        "default": "Predvolený v prehliadači"
       }
     }
   },

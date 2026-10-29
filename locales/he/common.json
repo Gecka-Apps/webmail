@@ -741,7 +741,13 @@
     "show_formatted": "הצגה מעוצבת",
     "shown_as_plain_text": "הודעה זו מוצגת כטקסט פשוט.",
     "play_animation": "הפעלת האנימציה",
-    "pause_animation": "השהיית האנימציה"
+    "pause_animation": "השהיית האנימציה",
+    "read_aloud": "הקראה",
+    "read_aloud_reading": "מקריא",
+    "read_aloud_paused": "ההקראה מושהית",
+    "read_aloud_pause": "השהיה",
+    "read_aloud_resume": "המשך",
+    "read_aloud_stop": "עצירת ההקראה"
   },
   "external_mail": {
     "sender_label": "חיצוני",
@@ -3120,6 +3126,11 @@
         "description": "מחזיר את כל ההגדרות בעמוד זה לברירת המחדל, או לערך שהארגון שלכם קבע. הגדרות משותפות, כמו תצוגת שיחות, נשארות כמו שהן.",
         "button": "איפוס",
         "done": "הגדרות הנגישות אופסו."
+      },
+      "read_aloud_voice": {
+        "label": "קול ההקראה",
+        "description": "הקול שמקריא הודעות. הרשימה מציגה את הקולות שיש לדפדפן שלך לשפת הממשק.",
+        "default": "ברירת המחדל של הדפדפן"
       }
     }
   },

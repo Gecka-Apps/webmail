@@ -776,7 +776,13 @@
     "show_formatted": "Vis formatert",
     "shown_as_plain_text": "Denne meldingen vises som ren tekst.",
     "play_animation": "Spill av animasjon",
-    "pause_animation": "Sett animasjon på pause"
+    "pause_animation": "Sett animasjon på pause",
+    "read_aloud": "Les opp",
+    "read_aloud_reading": "Leser opp",
+    "read_aloud_paused": "Opplesning satt på pause",
+    "read_aloud_pause": "Pause",
+    "read_aloud_resume": "Fortsett",
+    "read_aloud_stop": "Stopp opplesning"
   },
   "external_mail": {
     "sender_label": "Ekstern",
@@ -3154,6 +3160,11 @@
         "description": "Setter alle innstillinger på denne siden tilbake til standard, eller til det organisasjonen din har satt. Delte innstillinger, som samtalevisning, blir som de er.",
         "button": "Tilbakestill",
         "done": "Tilgjengelighetsinnstillingene er tilbakestilt."
+      },
+      "read_aloud_voice": {
+        "label": "Opplesningsstemme",
+        "description": "Stemmen som leser opp meldinger. Listen viser stemmene nettleseren har for språket i grensesnittet.",
+        "default": "Nettleserens standard"
       }
     }
   },

@@ -776,7 +776,13 @@
     "show_formatted": "以格式顯示",
     "shown_as_plain_text": "此郵件以純文字顯示。",
     "play_animation": "播放動畫",
-    "pause_animation": "暫停動畫"
+    "pause_animation": "暫停動畫",
+    "read_aloud": "朗讀",
+    "read_aloud_reading": "正在朗讀",
+    "read_aloud_paused": "朗讀已暫停",
+    "read_aloud_pause": "暫停",
+    "read_aloud_resume": "繼續",
+    "read_aloud_stop": "停止朗讀"
   },
   "external_mail": {
     "sender_label": "外部",
@@ -3154,6 +3160,11 @@
         "description": "將此頁面的所有設定還原為預設值，或還原為您所屬組織設定的值。對話檢視等共用設定維持不變。",
         "button": "重設",
         "done": "無障礙設定已重設。"
+      },
+      "read_aloud_voice": {
+        "label": "朗讀語音",
+        "description": "朗讀郵件所用的語音。清單顯示瀏覽器為介面語言提供的語音。",
+        "default": "瀏覽器預設"
       }
     }
   },
