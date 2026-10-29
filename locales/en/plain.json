@@ -724,20 +724,65 @@
       "invalid_tag": "Use only letters, numbers and dashes (-) in the tag"
     }
   },
+  "calendar": {
+    "import": {
+      "url_description": "Enter the web address of a calendar file (.ics) to add its events."
+    },
+    "management": {
+      "description": "Make new calendars, rename them and change their colour. You can also right-click a calendar in the side bar to change its colour.",
+      "description_touch": "Make new calendars, rename them and change their colour.",
+      "confirm_delete": "Delete \"{name}\"? All appointments in this calendar are deleted too.",
+      "confirm_clear": "Delete all appointments in \"{name}\"? You can't undo this.",
+      "kind_hint": "This decides which apps on your other devices show this calendar. You can't change it later.",
+      "default_alerts_hint": "New appointments in this calendar get these reminders, unless you change them in the appointment. A change here does not change appointments you already have. The mail server sends reminders by email."
+    },
+    "subscription": {
+      "description": "Follow a calendar from the internet, for example public holidays. Its appointments are updated by themselves and shown in their own calendar. The address starts with https:// or webcal://.",
+      "confirm_delete": "Stop following \"{name}\"? The calendar and all its appointments are removed."
+    }
+  },
   "sharing": {
+    "description": "Let other people or groups on this server use this. The change works at once.",
+    "directory_restricted": "Your server does not show a list of all its users. So you only see your groups and people who share something with you. Your administrator can change this.",
+    "directory_not_browsable": "Your server does not show a list of all its users.",
     "directory_failed": "The list of people and groups could not be loaded. Try again.",
     "share_failed": "Sharing could not be changed. Try again."
   },
   "delegates": {
+    "description": "Let someone use your mail, calendars and contacts, all in one step. See who can use what.",
     "read_failed": "Some of your sharing could not be loaded. You can change or remove access when it has loaded.",
+    "remove_message": "{name} can no longer use anything you shared from your account: mail, calendars, contacts and files.",
+    "not_found": "There is nobody with the address {address} on this server.",
     "lookup_failed": "This address could not be found. Check it and try again.",
-    "directory_failed": "The list of people and groups could not be loaded. Try again."
+    "known_only": "You only see your groups and people who shared something with you.",
+    "directory_off_note": "To add someone new, your administrator first has to allow searching for users on the server.",
+    "directory_failed": "The list of people and groups could not be loaded. Try again.",
+    "nothing_to_change": "Nothing has changed. Choose what the person should get, or click Remove access.",
+    "change_note": "Folders, calendars and address books that you don't choose are no longer shared. Shared files stay shared. Remove access takes them away too.",
+    "rights_keep_hint": "What they already have stays the same. Anything new gets the same rights as the rest of its kind, or read only.",
+    "send_note": "People you give access can read and sort your mail and calendar. They can't send mail as you or for you. If several people need one address, ask your administrator for a shared mailbox.",
+    "partial_title": "Some things could not be changed. Everything else is done."
   },
   "smime": {
+    "your_certificates_desc": "Add and manage your certificates. You need one to sign or encrypt mail with S/MIME.",
+    "recipient_certificates_desc": "Certificates of other people. With them, you can send encrypted mail to these people.",
+    "identity_bindings_desc": "Choose which certificate belongs to which of your sender addresses",
+    "defaults_desc": "Choose if new messages are signed or encrypted from the start",
+    "encrypt_by_default_desc": "Encrypt a message by itself when you have a certificate for every recipient",
+    "remember_unlocked_desc": "Keep your keys unlocked until you close this browser",
+    "p12_passphrase_desc": "Enter the password of this certificate file",
+    "storage_passphrase_desc": "Choose a password. It protects this key while it is saved in your browser.",
+    "unlock_key_desc": "Enter the password of this key to sign or open messages",
     "cert_expired": "This certificate is no longer valid",
+    "status_encrypted_no_key": "This message is encrypted, but you don't have the key to open it",
     "status_encrypted_failed": "This message is locked, and it could not be unlocked. You may not have the right key.",
     "status_signed_invalid": "The signature is not valid. The message may have been changed.",
-    "status_signed_expired_cert": "Signed with a certificate that is no longer valid"
+    "status_signed_expired_cert": "Signed with a certificate that is no longer valid",
+    "status_signed_self_signed": "The signature is valid. But the sender made the certificate themselves, so nobody has checked who they are.",
+    "status_signed_mismatch": "The signature is valid, but it belongs to someone other than the sender",
+    "auto_import_signer_certs_desc": "When a signed message is checked, save the sender's certificate. Then you can send them encrypted mail later.",
+    "export_passphrase_desc": "Choose a password to protect the file you save",
+    "export_storage_desc": "Enter the password of this key to save it as a file"
   },
   "recover_deleted": {
     "load_failed": "Deleted mail could not be loaded. Try again."

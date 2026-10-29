@@ -719,20 +719,65 @@
       "invalid_tag": "Verwenden Sie im Stichwort nur Buchstaben, Ziffern und Bindestriche (-)"
     }
   },
+  "calendar": {
+    "import": {
+      "url_description": "Geben Sie die Webadresse einer Kalenderdatei (.ics) ein, um ihre Termine hinzuzufügen."
+    },
+    "management": {
+      "description": "Erstellen Sie neue Kalender, benennen Sie sie um und ändern Sie ihre Farbe. Sie können auch mit der rechten Maustaste auf einen Kalender in der Seitenleiste klicken, um die Farbe zu ändern.",
+      "description_touch": "Erstellen Sie neue Kalender, benennen Sie sie um und ändern Sie ihre Farbe.",
+      "confirm_delete": "„{name}“ löschen? Alle Termine in diesem Kalender werden auch gelöscht.",
+      "confirm_clear": "Alle Termine in „{name}“ löschen? Das können Sie nicht rückgängig machen.",
+      "kind_hint": "Das legt fest, welche Apps auf Ihren anderen Geräten diesen Kalender zeigen. Sie können es später nicht ändern.",
+      "default_alerts_hint": "Neue Termine in diesem Kalender bekommen diese Erinnerungen, außer Sie ändern sie im Termin. Eine Änderung hier ändert keine Termine, die Sie schon haben. Erinnerungen per E-Mail schickt der Mailserver."
+    },
+    "subscription": {
+      "description": "Folgen Sie einem Kalender aus dem Internet, zum Beispiel mit Feiertagen. Seine Termine werden von selbst aktualisiert und in einem eigenen Kalender gezeigt. Die Adresse beginnt mit https:// oder webcal://.",
+      "confirm_delete": "„{name}“ nicht mehr folgen? Der Kalender und alle seine Termine werden entfernt."
+    }
+  },
   "sharing": {
+    "description": "Erlauben Sie anderen Personen oder Gruppen auf diesem Server den Zugriff. Die Änderung gilt sofort.",
+    "directory_restricted": "Ihr Server zeigt keine Liste aller Benutzer. Deshalb sehen Sie nur Ihre Gruppen und Personen, die etwas mit Ihnen teilen. Ihre Administration kann das ändern.",
+    "directory_not_browsable": "Ihr Server zeigt keine Liste aller Benutzer.",
     "directory_failed": "Die Liste der Personen und Gruppen konnte nicht geladen werden. Versuchen Sie es noch einmal.",
     "share_failed": "Die Freigabe konnte nicht geändert werden. Versuchen Sie es noch einmal."
   },
   "delegates": {
+    "description": "Erlauben Sie jemandem in einem Schritt den Zugriff auf Ihre E-Mails, Kalender und Kontakte. Sehen Sie, wer worauf Zugriff hat.",
     "read_failed": "Ein Teil Ihrer Freigaben konnte nicht geladen werden. Sie können Zugriffe ändern oder entfernen, sobald alles geladen ist.",
+    "remove_message": "{name} hat dann keinen Zugriff mehr auf alles, was Sie aus Ihrem Konto geteilt haben: E-Mails, Kalender, Kontakte und Dateien.",
+    "not_found": "Auf diesem Server gibt es niemanden mit der Adresse {address}.",
     "lookup_failed": "Diese Adresse wurde nicht gefunden. Prüfen Sie sie und versuchen Sie es noch einmal.",
-    "directory_failed": "Die Liste der Personen und Gruppen konnte nicht geladen werden. Versuchen Sie es noch einmal."
+    "known_only": "Sie sehen nur Ihre Gruppen und Personen, die etwas mit Ihnen geteilt haben.",
+    "directory_off_note": "Um jemand Neues hinzuzufügen, muss Ihre Administration zuerst die Suche nach Benutzern auf dem Server erlauben.",
+    "directory_failed": "Die Liste der Personen und Gruppen konnte nicht geladen werden. Versuchen Sie es noch einmal.",
+    "nothing_to_change": "Es hat sich nichts geändert. Wählen Sie, was die Person bekommen soll, oder klicken Sie auf „Zugriff entfernen“.",
+    "change_note": "Ordner, Kalender und Adressbücher, die Sie nicht auswählen, sind nicht mehr geteilt. Geteilte Dateien bleiben geteilt. „Zugriff entfernen“ nimmt auch diese weg.",
+    "rights_keep_hint": "Was die Person schon hat, bleibt gleich. Alles Neue bekommt dieselben Rechte wie der Rest dieser Art, oder nur Lesen.",
+    "send_note": "Personen mit Zugriff können Ihre E-Mails und Ihren Kalender lesen und ordnen. Sie können keine E-Mails als Sie oder für Sie senden. Wenn mehrere Personen eine Adresse brauchen, fragen Sie Ihre Administration nach einem geteilten Postfach.",
+    "partial_title": "Einiges konnte nicht geändert werden. Alles andere ist erledigt."
   },
   "smime": {
+    "your_certificates_desc": "Fügen Sie Ihre Zertifikate hinzu und verwalten Sie sie. Sie brauchen eines, um E-Mails mit S/MIME zu signieren oder zu verschlüsseln.",
+    "recipient_certificates_desc": "Zertifikate anderer Personen. Damit können Sie diesen Personen verschlüsselte E-Mails senden.",
+    "identity_bindings_desc": "Wählen Sie, welches Zertifikat zu welcher Ihrer Absenderadressen gehört",
+    "defaults_desc": "Wählen Sie, ob neue E-Mails von Anfang an signiert oder verschlüsselt werden",
+    "encrypt_by_default_desc": "Eine E-Mail von selbst verschlüsseln, wenn Sie für jeden Empfänger ein Zertifikat haben",
+    "remember_unlocked_desc": "Ihre Schlüssel entsperrt lassen, bis Sie diesen Browser schließen",
+    "p12_passphrase_desc": "Geben Sie das Passwort dieser Zertifikatsdatei ein",
+    "storage_passphrase_desc": "Wählen Sie ein Passwort. Es schützt diesen Schlüssel, solange er in Ihrem Browser gespeichert ist.",
+    "unlock_key_desc": "Geben Sie das Passwort dieses Schlüssels ein, um E-Mails zu signieren oder zu öffnen",
     "cert_expired": "Dieses Zertifikat ist nicht mehr gültig",
+    "status_encrypted_no_key": "Diese E-Mail ist verschlüsselt, aber Ihnen fehlt der Schlüssel, um sie zu öffnen",
     "status_encrypted_failed": "Diese E-Mail ist verschlüsselt und konnte nicht entschlüsselt werden. Vielleicht fehlt Ihnen der passende Schlüssel.",
     "status_signed_invalid": "Die Signatur ist ungültig. Die E-Mail wurde vielleicht verändert.",
-    "status_signed_expired_cert": "Mit einem Zertifikat signiert, das nicht mehr gültig ist"
+    "status_signed_expired_cert": "Mit einem Zertifikat signiert, das nicht mehr gültig ist",
+    "status_signed_self_signed": "Die Signatur ist gültig. Der Absender hat das Zertifikat aber selbst erstellt, also hat niemand geprüft, wer er ist.",
+    "status_signed_mismatch": "Die Signatur ist gültig, gehört aber zu jemand anderem als dem Absender",
+    "auto_import_signer_certs_desc": "Wenn eine signierte E-Mail geprüft ist, das Zertifikat des Absenders speichern. Dann können Sie ihm später verschlüsselte E-Mails senden.",
+    "export_passphrase_desc": "Wählen Sie ein Passwort, um die gespeicherte Datei zu schützen",
+    "export_storage_desc": "Geben Sie das Passwort dieses Schlüssels ein, um ihn als Datei zu speichern"
   },
   "recover_deleted": {
     "load_failed": "Gelöschte E-Mails konnten nicht geladen werden. Versuchen Sie es noch einmal."
