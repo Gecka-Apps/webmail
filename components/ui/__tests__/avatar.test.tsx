@@ -244,4 +244,24 @@ describe('Avatar', () => {
       setNoThirdPartyTraffic(false);
     }
   });
+
+  // #1439: a forged From must not get the real sender's logo or photo.
+  describe('sender warning', () => {
+    it('shows a shield instead of the favicon and the initials', () => {
+      useFaviconRefreshStore.setState({ refreshedAt: 0 });
+      const { container } = render(<Avatar name="PayPal" email="billing@paypal.com" senderWarning="Sender check failed" />);
+      expect(container.querySelector('img')).toBeNull();
+      expect(container.textContent).toBe('');
+      expect(container.querySelector('svg')).not.toBeNull();
+      expect((container.firstChild as HTMLElement).getAttribute('title')).toBe('PayPal (Sender check failed)');
+    });
+
+    it('downloads no contact photo for the claimed sender', () => {
+      const fetchBlob = vi.fn();
+      useAuthStore.setState({ client: { fetchBlob } as never });
+      const { container } = render(<Avatar name="Ann" email="ann@example.com" contactPhoto={{ blobId: 'dbcAnn' }} senderWarning="Unverified sender" />);
+      expect(container.querySelector('img')).toBeNull();
+      expect(fetchBlob).not.toHaveBeenCalled();
+    });
+  });
 });

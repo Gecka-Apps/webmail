@@ -169,6 +169,7 @@ import { useAttachmentDrag, isDragOutSupported, type AttachmentDragSource } from
 import type { IJMAPClient } from "@/lib/jmap/client-interface";
 import { useArchiveActionEnabled } from "@/lib/archive-gate";
 import { useNoThirdPartyTraffic } from "@/hooks/use-third-party-mode";
+import { useSenderWarning } from "@/hooks/use-sender-warning";
 
 /** The More menu's two drill-downs: a folder list and a tag list. */
 type MoreMenuSub = MessageSubmenuKey;
@@ -740,6 +741,7 @@ function mvSenderDate(date: Date | string, timeFormat: '12h' | '24h'): string {
 function MvConversationCard({ email, onOpen, timeFormat, compact }: { email: Email; onOpen?: (email: Email) => void; timeFormat: '12h' | '24h'; compact?: boolean }) {
   const tSidebar = useTranslations('sidebar');
   const sender = email.from?.[0];
+  const senderWarning = useSenderWarning(email);
   const unread = !email.keywords?.$seen;
   return (
     <button
@@ -749,7 +751,7 @@ function MvConversationCard({ email, onOpen, timeFormat, compact }: { email: Ema
       data-email-id={email.id}
       className={cn("w-full flex items-start py-3 border-t border-border text-start hover:bg-muted/40 transition-colors", compact ? "gap-3 px-4" : "gap-4 px-6")}
     >
-      <Avatar name={sender?.name} email={sender?.email} size="md" className="w-10 h-10 flex-shrink-0" />
+      <Avatar name={sender?.name} email={sender?.email} size="md" className="w-10 h-10 flex-shrink-0" senderWarning={senderWarning} />
       <span className="flex-1 min-w-0">
         <span className="flex items-baseline gap-2">
           <span dir="auto" className={cn("text-sm truncate", unread ? "font-bold" : "font-semibold")}>
@@ -840,6 +842,7 @@ export function MvExpandedConversationCard({
   const tSidebar = useTranslations('sidebar');
   const externalContent = useConversationExternalContent();
   const sender = email.from?.[0];
+  const senderWarning = useSenderWarning(email);
   const hasBody = !!email.bodyValues;
   const [showDetails, setShowDetails] = useState(false);
   const loadRequested = useRef(false);
@@ -872,7 +875,7 @@ export function MvExpandedConversationCard({
         data-mv-conversation-header=""
         className={cn("flex items-start pt-3 pb-2 cursor-pointer", compact ? "gap-3 px-4" : "gap-4 px-6")}
       >
-        <Avatar name={sender?.name} email={sender?.email} size="md" className="w-10 h-10 flex-shrink-0" />
+        <Avatar name={sender?.name} email={sender?.email} size="md" className="w-10 h-10 flex-shrink-0" senderWarning={senderWarning} />
         <span className="flex-1 min-w-0">
           <span className="flex items-baseline gap-2">
             <span dir="auto" className="text-sm font-semibold truncate">{sender?.name || sender?.email || ''}</span>
@@ -4926,6 +4929,7 @@ export function EmailViewer({
                 email={sender?.email}
                 size="lg"
                 className="shadow-sm w-10 h-10 group-hover:ring-2 group-hover:ring-primary/30 transition-all"
+                senderWarning={senderVerification ? senderVerificationLabel : undefined}
               />
             </button>
 
@@ -5234,6 +5238,7 @@ export function EmailViewer({
                 email={sender?.email}
                 size="lg"
                 className="shadow-sm w-10 h-10 group-hover:ring-2 group-hover:ring-primary/30 transition-all"
+                senderWarning={senderVerification ? senderVerificationLabel : undefined}
               />
             </button>
             <div className="flex-1 min-w-0">

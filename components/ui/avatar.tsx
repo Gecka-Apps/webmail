@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { ShieldAlert } from "@/components/icons";
 import { getLuminance, parseColor } from "@/lib/color-transform";
 import { useSettingsStore } from "@/stores/settings-store";
 import { useContactStore, getContactPhotoIndex, type ContactPhotoRef } from "@/stores/contact-store";
@@ -155,6 +156,12 @@ interface AvatarProps {
   disableFavicon?: boolean;
   /** Background color used when no image source resolves. Overrides the hash-based default. */
   fallbackColor?: string;
+  /**
+   * The message's sender check failed (see useSenderWarning): show a warning
+   * shield with this label instead of any image or the initials, so a forged
+   * From doesn't get the real sender's logo or photo (#1439).
+   */
+  senderWarning?: string;
 }
 
 /**
@@ -169,7 +176,7 @@ function initialsColor(background: string): string {
   return 1.05 / (l + 0.05) >= (l + 0.05) / 0.05 ? '#ffffff' : '#000000';
 }
 
-export function Avatar({ name, email, contactPhoto, size = "md", className, disableImages = false, disableFavicon = false, fallbackColor }: AvatarProps) {
+export function Avatar({ name, email, contactPhoto, size = "md", className, disableImages = false, disableFavicon = false, fallbackColor, senderWarning }: AvatarProps) {
   const [imgError, setImgError] = useState(false);
   const [pluginAvatarUrl, setPluginAvatarUrl] = useState<string | null>(null);
   const [pluginAvatarFailed, setPluginAvatarFailed] = useState(false);
@@ -252,6 +259,11 @@ export function Avatar({ name, email, contactPhoto, size = "md", className, disa
     md: "w-10 h-10 text-sm",
     lg: "w-12 h-12 text-base",
   };
+  const warningIconClasses = {
+    sm: "w-4 h-4",
+    md: "w-5 h-5",
+    lg: "w-6 h-6",
+  };
 
   const profilePic = email && domain ? getProfilePictureUrl(email, domain, devMode, name) : null;
   // Sender favicons come from the /api/favicon proxy, absent in the static
@@ -286,6 +298,22 @@ export function Avatar({ name, email, contactPhoto, size = "md", className, disa
   }, [imgSrc, pluginAvatar, faviconDomain, resolvedContactPhoto, customAvatar, profilePic]);
 
   const initialsBackground = fallbackColor ?? getBackgroundColor();
+
+  if (senderWarning) {
+    return (
+      <div
+        className={cn(
+          "rounded-full flex items-center justify-center overflow-hidden bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300",
+          sizeClasses[size],
+          className
+        )}
+        title={`${name || email || ""} (${senderWarning})`}
+        data-sender-warning=""
+      >
+        <ShieldAlert className={warningIconClasses[size]} aria-hidden />
+      </div>
+    );
+  }
 
   return (
     <div

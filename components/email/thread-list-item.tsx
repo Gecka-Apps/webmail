@@ -36,6 +36,7 @@ import { EmailHoverActions } from "./email-hover-actions";
 import { SearchSnippetText } from "./search-snippet-text";
 import { PluginRowBadges } from "./plugin-row-badges";
 import { useOwnDomainAddress } from "@/hooks/use-own-domain-address";
+import { useSenderWarning } from "@/hooks/use-sender-warning";
 import { useTranslations } from "next-intl";
 
 /**
@@ -449,6 +450,7 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
     const showAvatarsInJunk = useSettingsStore((state) => state.showAvatarsInJunk);
     const interfaceLayout = useSettingsStore((state) => state.interfaceLayout);
     const hideJunkAvatarImages = currentMailboxRole === 'junk' && !showAvatarsInJunk;
+    const senderWarning = useSenderWarning(showRecipient ? undefined : email);
     // Show the originating folder in the aggregate "All …" views.
     const showSourceFolder = useShowSourceFolder(email.sourceFolder);
     const getAccountById = useAccountStore((state) => state.getAccountById);
@@ -741,6 +743,7 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
                   size={oneLineRow ? "sm" : "md"}
                   className="shadow-sm"
                   disableImages={hideJunkAvatarImages}
+                  senderWarning={senderWarning}
                   checked={isChecked}
                   onToggle={handleCheckboxClick}
                   selectLabel={selectRowLabel}
@@ -1097,6 +1100,7 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
       subject: latestEmail.subject || tEmailViewer('no_subject'),
     });
     const hideJunkAvatarImages = currentMailboxRole === 'junk' && !showAvatarsInJunk;
+    const senderWarning = useSenderWarning(showRecipient ? undefined : latestEmail);
 
     const { dragHandlers, isDragging: isThreadDragging } = useEmailDrag({
       email: latestEmail,
@@ -1442,6 +1446,7 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
                     size={oneLineRow ? "sm" : "md"}
                     className="shadow-sm"
                     disableImages={hideJunkAvatarImages}
+                    senderWarning={senderWarning}
                     checked={isChecked}
                     onToggle={handleThreadCheckboxClick}
                     selectLabel={selectRowLabel}

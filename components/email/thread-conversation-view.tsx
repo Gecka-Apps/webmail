@@ -25,6 +25,7 @@ import { DARK_PENDING_CLASS, applyEmailDarkMode, emailDarkModeCss } from "@/lib/
 import { useThemeStore } from "@/stores/theme-store";
 import { useShallow } from "zustand/react/shallow";
 import { Avatar } from "@/components/ui/avatar";
+import { useSenderWarning } from "@/hooks/use-sender-warning";
 import { Button } from "@/components/ui/button";
 import { formatDate, formatFileSize, cn, cleanPreview } from "@/lib/utils";
 import { IconButton } from "@/components/ui/icon-button";
@@ -342,6 +343,7 @@ function EmailCard({
   const timeFormat = useSettingsStore((state) => state.timeFormat);
   const plugin = useConversationPluginProps(email);
   const sender = email.from?.[0];
+  const senderWarning = useSenderWarning(email);
   const formatAddress = useOwnDomainAddress();
   const isUnread = !email.keywords?.$seen;
   const isStarred = email.keywords?.$flagged;
@@ -372,6 +374,7 @@ function EmailCard({
             email={sender?.email}
             size="md"
             className="flex-shrink-0"
+            senderWarning={senderWarning}
           />
         )}
         <div className="flex-1 min-w-0">

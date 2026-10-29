@@ -40,6 +40,7 @@ import type { AccountInfo } from "./types";
 import { stalwartChangeId } from "./stalwart-state";
 import { downloadNameSegment } from "./download-name";
 import { toInertBlob } from "@/lib/file-preview";
+import { parseAuthenticationResults } from "@/lib/email-headers";
 import { IS_LITE_STALWART } from "@/lib/lite";
 import { toStorageQuota, type JMAPQuota, type StorageQuota } from "@/lib/quota";
 import { messagePriorityHeaders, type MessagePriority } from "@/lib/message-priority";
@@ -454,7 +455,27 @@ const EMAIL_LIST_PROPERTIES = [
   // Needed so list rows can serve drag-out to the file system as .eml.
   // Served from stored metadata, so it costs nothing.
   "blobId",
+  // The sender check, so list avatars can drop the favicon of a forged From
+  // (#1439). Stalwart answers header properties from the stored raw headers,
+  // not the message blob.
+  "header:Authentication-Results:all",
 ] as const;
+
+/**
+ * Parse the Authentication-Results headers a list fetch asked for, as the
+ * full message fetch does from `headers`, and drop the raw property.
+ */
+function applyListAuthenticationResults(emails: Email[]): Email[] {
+  for (const email of emails) {
+    const record = email as unknown as Record<string, unknown>;
+    const raw = record["header:Authentication-Results:all"];
+    delete record["header:Authentication-Results:all"];
+    if (!Array.isArray(raw)) continue;
+    const headers = raw.filter((value): value is string => typeof value === "string");
+    if (headers.length > 0) email.authenticationResults = parseAuthenticationResults(headers);
+  }
+  return emails;
+}
 
 // Body-part fields an attachment chip needs (see components/email/attachment-chips.tsx).
 const LIST_ATTACHMENT_BODY_PROPERTIES = [
@@ -1595,7 +1616,7 @@ export class JMAPClient implements IJMAPClient {
       if (response.methodResponses?.[0]?.[0] !== "Email/get" || !getResponse) {
         throw new Error(methodErrorMessage(response, 'Failed to get emails'));
       }
-      emails.push(...((getResponse.list || []) as Email[]));
+      emails.push(...applyListAuthenticationResults((getResponse.list || []) as Email[]));
     }
 
     emails.sort((a: Email, b: Email) =>
@@ -2584,7 +2605,7 @@ export class JMAPClient implements IJMAPClient {
     const getResponse = response.methodResponses?.[1]?.[1];
 
     if (response.methodResponses?.[1]?.[0] === "Email/get" && getResponse) {
-      const emails = (getResponse.list || []) as Email[];
+      const emails = applyListAuthenticationResults((getResponse.list || []) as Email[]);
       if (hasTextLevels(order) && this.keepsServerTextOrder(targetAccountId)) {
         // Stalwart 1.0's sender or subject collation, which the client
         // comparator would only disturb (see keepsServerTextOrder). Keep
@@ -4110,7 +4131,7 @@ export class JMAPClient implements IJMAPClient {
       assertQuerySucceeded(response, 'Search');
 
       const queryResponse = response.methodResponses?.[0]?.[1];
-      const emails = (response.methodResponses?.[1]?.[1]?.list || []) as Email[];
+      const emails = applyListAuthenticationResults((response.methodResponses?.[1]?.[1]?.list || []) as Email[]);
       emails.sort((a: Email, b: Email) =>
         new Date(b.receivedAt).getTime() - new Date(a.receivedAt).getTime()
       );
@@ -4223,7 +4244,7 @@ export class JMAPClient implements IJMAPClient {
       assertQuerySucceeded(response, 'Search');
 
       const queryResponse = response.methodResponses?.[0]?.[1];
-      const emails = (response.methodResponses?.[1]?.[1]?.list || []) as Email[];
+      const emails = applyListAuthenticationResults((response.methodResponses?.[1]?.[1]?.list || []) as Email[]);
       emails.sort((a: Email, b: Email) =>
         new Date(b.receivedAt).getTime() - new Date(a.receivedAt).getTime()
       );
@@ -4433,7 +4454,7 @@ export class JMAPClient implements IJMAPClient {
         ]);
 
         if (response.methodResponses?.[0]?.[0] === "Email/get") {
-          emails.push(...(response.methodResponses[0][1].list || []));
+          emails.push(...applyListAuthenticationResults(response.methodResponses[0][1].list || []));
         }
       }
 

@@ -3,20 +3,24 @@
 import { CalendarDays, FileText, Folder, Repeat } from "@/components/icons";
 import { useTranslations } from "next-intl";
 import { Avatar } from "@/components/ui/avatar";
+import { useSenderWarning } from "@/hooks/use-sender-warning";
 import { parseSearchSnippet, type SnippetSegment } from "@/lib/search-snippet";
 import type { GlobalSearchHit } from "@/lib/global-search/types";
 import { getContactDisplayName, getContactPhotoRef, getContactPrimaryEmail } from "@/stores/contact-store";
 import { cn } from "@/lib/utils";
+
+function MailSenderAvatar({ email }: { email: Extract<GlobalSearchHit, { kind: 'mail' }>['email'] }) {
+  const from = email.from?.[0];
+  const senderWarning = useSenderWarning(email);
+  return <Avatar name={from?.name || undefined} email={from?.email || undefined} size="sm" className="mt-0.5 shrink-0" senderWarning={senderWarning} />;
+}
 
 /**
  * Leading visual, mirroring the mail list's identity language: real avatars
  * for people (sender / contact), kind-tinted icon chips for events and files.
  */
 function LeadingVisual({ hit }: { hit: GlobalSearchHit }) {
-  if (hit.kind === 'mail') {
-    const from = hit.email.from?.[0];
-    return <Avatar name={from?.name || undefined} email={from?.email || undefined} size="sm" className="mt-0.5 shrink-0" />;
-  }
+  if (hit.kind === 'mail') return <MailSenderAvatar email={hit.email} />;
   if (hit.kind === 'contacts') {
     return (
       <Avatar

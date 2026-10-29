@@ -7,6 +7,7 @@ import { cleanPreview, formatDate } from "@/lib/utils";
 import { Email } from "@/lib/jmap/types";
 import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/ui/avatar";
+import { useSenderWarning } from "@/hooks/use-sender-warning";
 import { Paperclip, Star, Circle, CheckSquare, Square, Reply, Forward, CalendarClock } from "@/components/icons";
 import { useEmailDrag } from "@/hooks/use-email-drag";
 import { useLongPress } from "@/hooks/use-long-press";
@@ -54,6 +55,7 @@ export function ThreadEmailItem({
   // header pools them, so without this they disappear on the way in.
   const tagIds = sortTagIds(getEmailTagIds(email.keywords));
   const sender = email.from?.[0];
+  const senderWarning = useSenderWarning(email);
   const { selectedMailbox, selectedEmailKeys, toggleEmailSelection, selectRangeEmails } = useEmailStore(useShallow((state) => ({
     selectedMailbox: state.selectedMailbox,
     selectedEmailKeys: state.selectedEmailKeys,
@@ -293,6 +295,7 @@ export function ThreadEmailItem({
             email={sender?.email}
             size="sm"
             className="flex-shrink-0"
+            senderWarning={senderWarning}
           />
         )}
 
