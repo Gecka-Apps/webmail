@@ -1973,6 +1973,7 @@
         "confirm": "Confirmar nova senha",
         "submit": "Alterar senha",
         "success": "Senha alterada com sucesso",
+        "sign_in_again": "Inicie sessão novamente com a sua nova palavra-passe.",
         "error_title": "Falha ao alterar a senha",
         "error_mismatch": "As novas senhas não coincidem",
         "error_min_length": "A senha deve ter pelo menos 8 caracteres",

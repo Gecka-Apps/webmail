@@ -1973,6 +1973,7 @@
         "confirm": "Potvrdit nové heslo",
         "submit": "Změnit heslo",
         "success": "Heslo bylo změněno",
+        "sign_in_again": "Přihlaste se znovu pomocí nového hesla.",
         "error_title": "Změna hesla selhala",
         "error_mismatch": "Nová hesla se neshodují",
         "error_min_length": "Heslo musí obsahovat alespoň 8 znaků",

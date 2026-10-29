@@ -1980,6 +1980,7 @@
         "confirm": "Confirm new password",
         "submit": "Change password",
         "success": "Password changed successfully",
+        "sign_in_again": "Sign in again with your new password.",
         "error_title": "Password change failed",
         "error_mismatch": "New passwords do not match",
         "error_min_length": "Password must be at least 8 characters",

@@ -1973,6 +1973,7 @@
         "confirm": "确认新密码",
         "submit": "更改密码",
         "success": "密码修改成功",
+        "sign_in_again": "请使用新密码重新登录。",
         "error_title": "密码修改失败",
         "error_mismatch": "新密码不匹配",
         "error_min_length": "密码必须至少为 8 个字符",

@@ -1973,6 +1973,7 @@
         "confirm": "Confirmar nueva contraseña",
         "submit": "Cambiar contraseña",
         "success": "Contraseña cambiada exitosamente",
+        "sign_in_again": "Vuelve a iniciar sesión con tu nueva contraseña.",
         "error_title": "Error al cambiar la contraseña",
         "error_mismatch": "Las nuevas contraseñas no coinciden",
         "error_min_length": "La contraseña debe tener al menos 8 caracteres",

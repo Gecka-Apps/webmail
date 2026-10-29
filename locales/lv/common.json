@@ -1973,6 +1973,7 @@
         "confirm": "Apstipriniet jauno paroli",
         "submit": "Mainīt paroli",
         "success": "Parole veiksmīgi mainīta",
+        "sign_in_again": "Piesakieties vēlreiz ar savu jauno paroli.",
         "error_title": "Neizdevās mainīt paroli",
         "error_mismatch": "Jaunās paroles nesakrīt",
         "error_min_length": "Parolei jābūt vismaz 8 rakstzīmes garai",

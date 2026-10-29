@@ -1973,6 +1973,7 @@
         "confirm": "Confirmer le nouveau mot de passe",
         "submit": "Changer le mot de passe",
         "success": "Mot de passe changé avec succès",
+        "sign_in_again": "Reconnectez-vous avec votre nouveau mot de passe.",
         "error_title": "Échec du changement de mot de passe",
         "error_mismatch": "Les nouveaux mots de passe ne correspondent pas",
         "error_min_length": "Le mot de passe doit comporter au moins 8 caractères",

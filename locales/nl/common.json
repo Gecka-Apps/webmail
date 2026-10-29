@@ -1973,6 +1973,7 @@
         "confirm": "Bevestig nieuw wachtwoord",
         "submit": "Wachtwoord wijzigen",
         "success": "Wachtwoord succesvol gewijzigd",
+        "sign_in_again": "Meld je opnieuw aan met je nieuwe wachtwoord.",
         "error_title": "Wachtwoord wijzigen mislukt",
         "error_mismatch": "Nieuwe wachtwoorden komen niet overeen",
         "error_min_length": "Wachtwoord moet minimaal 8 tekens bevatten",

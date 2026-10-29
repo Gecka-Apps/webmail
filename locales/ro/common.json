@@ -1980,6 +1980,7 @@
         "confirm": "Confirmă noua parolă",
         "submit": "Schimbă parola",
         "success": "Parola a fost modificată cu succes",
+        "sign_in_again": "Conectează-te din nou cu parola nouă.",
         "error_title": "Schimbarea parolei a eșuat",
         "error_mismatch": "Noile parole nu se potrivesc",
         "error_min_length": "Parola trebuie să conțină cel puțin 8 caractere",

@@ -1980,6 +1980,7 @@
         "confirm": "Bekreft nytt passord",
         "submit": "Endre passord",
         "success": "Passordet ble endret",
+        "sign_in_again": "Logg inn på nytt med det nye passordet ditt.",
         "error_title": "Passordendring mislyktes",
         "error_mismatch": "De nye passordene er ikke like",
         "error_min_length": "Passordet må inneholde minst 8 tegn",

@@ -1980,6 +1980,7 @@
         "confirm": "Kinnita uus parool",
         "submit": "Muuda parooli",
         "success": "Parool muudeti edukalt",
+        "sign_in_again": "Logi uuesti sisse oma uue parooliga.",
         "error_title": "Parooli muutmine ebaõnnestus",
         "error_mismatch": "Uued paroolid ei kattu",
         "error_min_length": "Parool peab olema vähemalt 8 tähemärki pikk",

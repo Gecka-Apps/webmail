@@ -1973,6 +1973,7 @@
         "confirm": "새 비밀번호 확인",
         "submit": "비밀번호 변경",
         "success": "비밀번호가 성공적으로 변경되었어요",
+        "sign_in_again": "새 비밀번호로 다시 로그인하세요.",
         "error_title": "비밀번호 변경 실패",
         "error_mismatch": "새 비밀번호가 서로 일치하지 않아요",
         "error_min_length": "비밀번호는 최소 8자 이상이어야 해요",

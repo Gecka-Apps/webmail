@@ -17,6 +17,7 @@ import { toast } from '@/stores/toast-store';
 import { cn } from '@/lib/utils';
 import { sanitizeI18nHtml } from '@/lib/email-sanitization';
 import { IS_LITE } from '@/lib/lite';
+import { isPasswordSession } from '@/lib/auth/password-session';
 import { useConfig } from '@/hooks/use-config';
 import { totpIssuer } from '@/lib/totp-issuer';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
@@ -54,6 +55,13 @@ function PasswordChangeSection() {
       setOtpCode('');
       setNewPassword('');
       setConfirmPassword('');
+      // Stalwart revokes the account's tokens with the old password, refresh
+      // token included, so a password plus TOTP session ends here (#1432).
+      if (useAuthStore.getState().authMode !== 'basic') {
+        toast.success(t('password.success'), t('password.sign_in_again'));
+        void useAuthStore.getState().logout({ endProviderSession: false });
+        return;
+      }
       toast.success(t('password.success'));
     } catch (err) {
       const msg = err instanceof Error ? err.message : t('password.error_generic');
@@ -1475,9 +1483,10 @@ export function AccountSecuritySettings() {
   const t = useTranslations('settings.security');
   const { isStalwart, isProbing, probe, fetchAll, fetchAuthInfo, fetchPublicKeys, fetchCryptoInfo } = useAccountSecurityStore();
   const { isAuthenticated, authMode, client } = useAuthStore();
-  // OAuth and access-token sign-ins hold no password to change, and mail
-  // apps need an app password instead.
-  const withoutPassword = authMode === 'oauth' || authMode === 'token';
+  const activeAccount = useAccountStore((s) => s.getActiveAccount());
+  // Identity-provider and access-token sign-ins hold no password to change
+  // here, and mail apps need an app password instead.
+  const withoutPassword = !isPasswordSession(authMode, activeAccount);
 
   // Wait for `client` before probing. On reload the persisted `isAuthenticated`
   // flips true before the async OAuth reconnect sets `client`; probing in that
@@ -1541,8 +1550,9 @@ export function AccountSecuritySettings() {
 
   return (
     <div className="space-y-8">
-      {/* Sign-in: password and two-factor. OAuth and token sessions have
-          neither here, so the page opens with the apps and devices section. */}
+      {/* Sign-in: password and two-factor. Identity-provider and token
+          sessions have neither here, so the page opens with the apps and
+          devices section. */}
       {!withoutPassword && (
         <SettingsSection id="signin" title={t('title')} description={t('description')}>
           <div className="space-y-6">

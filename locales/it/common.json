@@ -1973,6 +1973,7 @@
         "confirm": "Conferma nuova password",
         "submit": "Cambia password",
         "success": "Password cambiata con successo",
+        "sign_in_again": "Accedi di nuovo con la nuova password.",
         "error_title": "Cambio password fallito",
         "error_mismatch": "Le nuove password non corrispondono",
         "error_min_length": "La password deve contenere almeno 8 caratteri",

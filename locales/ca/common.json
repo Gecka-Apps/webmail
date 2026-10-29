@@ -1980,6 +1980,7 @@
         "confirm": "Confirma la contrasenya nova",
         "submit": "Canvia la contrasenya",
         "success": "Contrasenya canviada correctament",
+        "sign_in_again": "Torna a iniciar la sessió amb la contrasenya nova.",
         "error_title": "No s'ha pogut canviar la contrasenya",
         "error_mismatch": "Les contrasenyes noves no coincideixen",
         "error_min_length": "La contrasenya ha de tenir com a mínim 8 caràcters",

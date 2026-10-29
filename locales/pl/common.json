@@ -1973,6 +1973,7 @@
         "confirm": "Potwierdź nowe hasło",
         "submit": "Zmień hasło",
         "success": "Hasło zostało zmienione",
+        "sign_in_again": "Zaloguj się ponownie, używając nowego hasła.",
         "error_title": "Zmiana hasła nie powiodła się",
         "error_mismatch": "Nowe hasła nie są zgodne",
         "error_min_length": "Hasło musi mieć co najmniej 8 znaków",

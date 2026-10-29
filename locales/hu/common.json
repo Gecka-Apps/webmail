@@ -1976,6 +1976,7 @@
         "confirm": "Új jelszó megerősítése",
         "submit": "Jelszó módosítása",
         "success": "Jelszó sikeresen módosítva",
+        "sign_in_again": "Jelentkezz be újra az új jelszavaddal.",
         "error_title": "Jelszó módosítás sikertelen",
         "error_mismatch": "Az új jelszavak nem egyeznek",
         "error_min_length": "A jelszónak legalább 8 karakter hosszúnak kell lennie",

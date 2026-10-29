@@ -1980,6 +1980,7 @@
         "confirm": "確認新密碼",
         "submit": "變更密碼",
         "success": "已成功變更密碼",
+        "sign_in_again": "請使用新密碼重新登入。",
         "error_title": "變更密碼失敗",
         "error_mismatch": "兩次輸入的新密碼不相符",
         "error_min_length": "密碼必須至少為 8 個字元",

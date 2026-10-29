@@ -16,6 +16,7 @@ import { getMaxAccounts } from '@/lib/account-utils';
 import { formatFileSize, cn } from '@/lib/utils';
 import { toUnicodeDomain, toUnicodeEmail } from '@/lib/idn';
 import { IS_LITE } from '@/lib/lite';
+import { isPasswordSession } from '@/lib/auth/password-session';
 import { usePolicyStore } from '@/stores/policy-store';
 import { AccountArchiveSettings } from './account-archive-settings';
 import { DisplayNameSection } from './account-security-settings';
@@ -48,9 +49,11 @@ export function AccountSettings() {
   const archiveEnabled = usePolicyStore((s) => s.isFeatureEnabled('accountArchiveEnabled')) && !IS_LITE && !isDemoMode;
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   // The display name is editable on Stalwart (the principal's name) for
-  // password sign-ins; OAuth and token sessions cannot manage the principal.
+  // password sign-ins; identity-provider and token sessions cannot manage
+  // the principal.
   const { isStalwart, probe, fetchPrincipal } = useAccountSecurityStore();
-  const canEditDisplayName = isStalwart === true && authMode !== 'oauth' && authMode !== 'token';
+  const activeAccount = useAccountStore((s) => (activeAccountId ? s.getAccountById(activeAccountId) : undefined));
+  const canEditDisplayName = isStalwart === true && isPasswordSession(authMode, activeAccount);
   // Wait for `client` before probing, as the Security page does: on reload
   // the persisted session flips authenticated before the client reconnects.
   useEffect(() => {

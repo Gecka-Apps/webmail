@@ -1973,6 +1973,7 @@
         "confirm": "Yeni Parolayı Onayla",
         "submit": "Parolayı Değiştir",
         "success": "Parola başarıyla değiştirildi",
+        "sign_in_again": "Yeni şifrenizle tekrar oturum açın.",
         "error_title": "Parola değiştirme başarısız",
         "error_mismatch": "Yeni parolalar eşleşmiyor",
         "error_min_length": "Parola en az 8 karakter olmalıdır",

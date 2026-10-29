@@ -1980,6 +1980,7 @@
         "confirm": "تأیید رمز جدید",
         "submit": "تغییر رمز",
         "success": "رمز تغییر کرد",
+        "sign_in_again": "با گذرواژه جدید دوباره وارد شوید.",
         "error_title": "خطا",
         "error_mismatch": "مطابقت ندارد",
         "error_min_length": "حداقل ۸ کاراکتر",
