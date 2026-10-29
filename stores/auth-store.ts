@@ -31,6 +31,7 @@ import type { Identity } from '@/lib/jmap/types';
 import { authHooks } from '@/lib/plugin-hooks';
 import { IS_LITE, IS_LITE_STALWART } from '@/lib/lite';
 import { toAsciiEmail } from '@/lib/idn';
+import { flushComposers } from '@/lib/compose-flush-registry';
 import { sortIdentities } from '@/lib/identity-order';
 import {
   LiteLoginError,
@@ -936,6 +937,36 @@ function navigateToLogin(): void {
   const loginPath = getLocaleLoginPath();
   if (window.location.pathname === loginPath) return;
   replaceWindowLocation(loginPath);
+}
+
+/** How long an expired session waits for the open composers to save. */
+const EXPIRY_DRAFT_FLUSH_MS = 3000;
+/** Set when an expired session couldn't save every open message; the login page says so. */
+export const SESSION_EXPIRED_DRAFTS_UNSAVED_KEY = 'session_expired_drafts_unsaved';
+
+/**
+ * The server refused to renew the session. The access token in hand usually
+ * still works for a while (renewal runs before it expires), so the open
+ * composers save their drafts with it before the sign-out throws their
+ * state away, as the organisation's idle timeout does (WCAG 2.2.5). The
+ * slot counts as closing meanwhile: a save that needs a new token gets none
+ * at once instead of waiting on this refresh. Bounded, so a hung save never
+ * keeps an expired session open.
+ */
+async function saveDraftsBeforeExpiry(slot: number): Promise<void> {
+  closingSlots.add(slot);
+  try {
+    const result = await flushComposers(EXPIRY_DRAFT_FLUSH_MS);
+    if (result.failed > 0 || result.timedOut) {
+      try {
+        sessionStorage.setItem(SESSION_EXPIRED_DRAFTS_UNSAVED_KEY, 'true');
+      } catch {
+        /* noop */
+      }
+    }
+  } catch {
+    /* the sign-out goes on */
+  }
 }
 
 function markSessionExpired(): void {
@@ -2126,6 +2157,7 @@ export const useAuthStore = create<AuthState>()(
                   get().removeAccount(accountId);
                   return null;
                 }
+                await saveDraftsBeforeExpiry(slot);
                 notifyParent('sso:session-expired');
                 markSessionExpired();
                 get().logout({ endProviderSession: false });
@@ -2141,7 +2173,10 @@ export const useAuthStore = create<AuthState>()(
                 markSessionExpired();
                 // removeAccount() on the active account would sign out as if the user asked to.
                 if (accountId && accountId !== get().activeAccountId) get().removeAccount(accountId);
-                else get().logout({ endProviderSession: false });
+                else {
+                  await saveDraftsBeforeExpiry(slot);
+                  get().logout({ endProviderSession: false });
+                }
                 return null;
               }
               if (shouldRetryRefresh(slot, accountId ?? undefined)) {

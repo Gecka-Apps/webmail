@@ -117,4 +117,13 @@ describe('login form accessibility', () => {
     expect(username.value).toBe('ann@example.org');
     expect(username).toHaveAttribute('aria-expanded', 'false');
   }, 30_000);
+
+  // CO-07: an expired session tried to save the open messages; one failed.
+  it('says when an expired session could not save a draft', async () => {
+    sessionStorage.setItem('session_expired', 'true');
+    sessionStorage.setItem('session_expired_drafts_unsaved', 'true');
+    await renderForm();
+    expect(screen.getByText('drafts_not_saved')).toBeInTheDocument();
+    expect(sessionStorage.getItem('session_expired_drafts_unsaved')).toBeNull();
+  }, 30_000);
 });

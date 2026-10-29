@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { Input } from "@/components/ui/input";
-import { useAuthStore, consumeSignedOut } from "@/stores/auth-store";
+import { useAuthStore, consumeSignedOut, SESSION_EXPIRED_DRAFTS_UNSAVED_KEY } from "@/stores/auth-store";
 import { useAccountStore } from "@/stores/account-store";
 import { useThemeStore } from "@/stores/theme-store";
 import { usePolicyStore } from "@/stores/policy-store";
@@ -251,6 +251,7 @@ function LoginPageContent() {
   const [sessionExpired, setSessionExpired] = useState(false);
   // Signed out by the organisation's idle timeout or maximum session length.
   const [sessionEnd, setSessionEnd] = useState<SessionEndReason | null>(null);
+  const [expiredDraftsUnsaved, setExpiredDraftsUnsaved] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [shakeError, setShakeError] = useState(false);
   const [showThemeMenu, setShowThemeMenu] = useState(false);
@@ -393,6 +394,11 @@ function LoginPageContent() {
       if (sessionStorage.getItem('session_expired') === 'true') {
         setSessionExpired(true);
         sessionStorage.removeItem('session_expired');
+      }
+      // The expired session tried to save the open messages first (auth store).
+      if (sessionStorage.getItem(SESSION_EXPIRED_DRAFTS_UNSAVED_KEY) === 'true') {
+        setExpiredDraftsUnsaved(true);
+        sessionStorage.removeItem(SESSION_EXPIRED_DRAFTS_UNSAVED_KEY);
       }
     } catch { /* sessionStorage unavailable */ }
     const ended = consumeSessionEnd();
@@ -1332,7 +1338,7 @@ function LoginPageContent() {
                       : sessionEnd?.kind === "max"
                         ? tSessionLimits("reason_max", { hours: sessionEnd.hours })
                         : t("session_expired")}
-                    {sessionEnd?.draftsUnsaved && (
+                    {(sessionEnd?.draftsUnsaved || expiredDraftsUnsaved) && (
                       <span className="block mt-1" data-testid="session-drafts-not-saved">{tSessionLimits("drafts_not_saved")}</span>
                     )}
                   </p>
