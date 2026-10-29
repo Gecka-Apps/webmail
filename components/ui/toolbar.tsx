@@ -25,6 +25,7 @@ export const ToolbarButton = React.forwardRef<HTMLButtonElement, ToolbarButtonPr
   ({ active, className, ...props }, ref) => (
     <IconButton
       ref={ref}
+      data-active={active || undefined}
       className={cn("shrink-0", active ? TOOLBAR_ACTIVE : "text-muted-foreground hover:text-foreground", className)}
       {...props}
     />
@@ -38,6 +39,7 @@ export const ToolbarSearchAction = React.forwardRef<HTMLButtonElement, React.But
     <button
       ref={ref}
       type={type}
+      data-active={active || undefined}
       className={cn(
         "p-1 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed",
         TOUCH_HIT_AREA,

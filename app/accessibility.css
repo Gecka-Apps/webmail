@@ -252,11 +252,110 @@ html.dark[data-contrast="more"] {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath d='M14 4 h12 M20 4 V36 M14 36 h12' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M14 4 h12 M20 4 V36 M14 36 h12' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") 20 20, text;
 }
 
-/* ---------- Forced colours (Windows contrast themes) ---------- */
-
+/* ---------- Forced colours (Windows contrast themes) ----------
+ *
+ * Forced colours replace every background with Canvas and drop box-shadows,
+ * so state drawn only as a tint or a ring disappears. Each state gets a
+ * system colour here instead: selected, pressed and current items take
+ * Highlight with HighlightText (and so does everything inside them, whose own
+ * colours would otherwise be forced back to CanvasText on Highlight), today
+ * gets a frame, switches a border and a solid knob, dots CanvasText. A colour
+ * swatch keeps its own colour (forced-color-adjust on the swatch only),
+ * because the colour is what it shows.
+ */
 @media (forced-colors: active) {
   :focus-visible:not([tabindex="-1"]:not(a[href], button, input, select, textarea, summary, [contenteditable="true"], [role="button"], [role="link"], [role="menuitem"], [role="menuitemradio"], [role="menuitemcheckbox"], [role="option"], [role="gridcell"], [role="row"], [role="treeitem"], [role="tab"], [role="radio"], [role="checkbox"], [role="switch"], [role="slider"], [role="spinbutton"], [role="columnheader"], [role="rowheader"])) {
     outline-color: Highlight !important;
+  }
+
+  :is(
+    [aria-selected="true"]:not([role="gridcell"]:has(> button)),
+    [role="gridcell"][aria-selected="true"] > button,
+    [aria-pressed="true"],
+    [aria-current="page"],
+    [aria-current="true"],
+    [aria-current="step"],
+    [aria-current="location"],
+    [data-selected="true"],
+    [data-active="true"],
+    [role="menuitemradio"][aria-checked="true"],
+    [role="radio"][aria-checked="true"]:not(input)
+  ) {
+    /* Not forced, so text inside gets no Canvas backplate; the rules here
+       and below set every colour instead. */
+    forced-color-adjust: none;
+    background-color: Highlight !important;
+    color: HighlightText !important;
+    border-color: HighlightText !important;
+  }
+  :is(
+    [aria-selected="true"]:not([role="gridcell"]:has(> button)),
+    [role="gridcell"][aria-selected="true"] > button,
+    [aria-pressed="true"],
+    [aria-current="page"],
+    [aria-current="true"],
+    [aria-current="step"],
+    [aria-current="location"],
+    [data-selected="true"],
+    [data-active="true"],
+    [role="menuitemradio"][aria-checked="true"],
+    [role="radio"][aria-checked="true"]:not(input)
+  ) *:not(svg *) {
+    color: HighlightText !important;
+    background-color: transparent !important;
+    border-color: HighlightText !important;
+    fill: currentColor;
+  }
+
+  /* Today, this month, this year: a frame, so it stays apart from the
+     selection. */
+  [aria-current="date"] {
+    outline: 2px solid CanvasText;
+    outline-offset: -2px;
+  }
+
+  /* Switches: a track border, and a knob that keeps its fill. On is
+     Highlight with a HighlightText knob on the far side. */
+  [role="switch"] {
+    border: 1px solid ButtonText !important;
+  }
+  [role="switch"] > span {
+    forced-color-adjust: none;
+    background-color: ButtonText !important;
+  }
+  [role="switch"][aria-checked="true"] {
+    background-color: Highlight !important;
+    border-color: Highlight !important;
+  }
+  [role="switch"][aria-checked="true"] > span {
+    background-color: HighlightText !important;
+  }
+
+  /* Unread and status dots, drawn as an empty tinted circle or a filled
+     icon. */
+  .rounded-full:empty:is(.bg-primary, .bg-unread, .bg-success, .bg-destructive, .bg-warning, .bg-info, [class*="bg-red-"], [class*="bg-green-"], [class*="bg-amber-"], [class*="bg-emerald-"], [class*="bg-blue-"], [class*="bg-yellow-"], [class*="bg-orange-"]) {
+    forced-color-adjust: none;
+    background-color: CanvasText !important;
+  }
+  :is(.fill-unread, .fill-primary, .fill-current) {
+    fill: CanvasText;
+  }
+
+  /* Colour swatches: an empty element whose colour is set inline (calendar,
+     tag and theme colours). */
+  :is(span, div, i):empty[style*="background"] {
+    forced-color-adjust: none;
+  }
+
+  /* Calendar events lose their fill; a frame keeps each one apart. */
+  [data-calendar-event] {
+    outline: 1px solid CanvasText;
+    outline-offset: -1px;
+  }
+
+  /* Count badges drawn as a tinted pill (the rail's unread count). */
+  .rounded-full:not(:empty):is(.bg-primary, .bg-destructive, [class*="bg-red-"]) {
+    border: 1px solid CanvasText;
   }
 }
 

@@ -91,4 +91,24 @@
   :is(.bk, .bk *):focus-visible {
     outline-color: Highlight !important;
   }
+  /* Forced colours drop the switch's tint and ring; a border and a solid
+     knob keep on and off apart (as app/accessibility.css does). */
+  [role="switch"].bk {
+    border: 1px solid ButtonText !important;
+  }
+  [role="switch"].bk > span {
+    forced-color-adjust: none;
+    background-color: ButtonText !important;
+  }
+  [role="switch"].bk[aria-checked="true"] {
+    background-color: Highlight !important;
+    border-color: Highlight !important;
+  }
+  [role="switch"].bk[aria-checked="true"] > span {
+    background-color: HighlightText !important;
+  }
+  :is(.bk [aria-pressed="true"], .bk [role="radio"][aria-checked="true"], .bk [role="tab"][aria-selected="true"]) {
+    background-color: Highlight !important;
+    color: HighlightText !important;
+  }
 }

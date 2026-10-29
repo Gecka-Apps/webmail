@@ -178,6 +178,7 @@ const ToolbarButton = React.forwardRef<HTMLButtonElement, {
       title={title}
       aria-label={title}
       aria-pressed={pressed === undefined ? undefined : pressed}
+      data-active={active || undefined}
       aria-haspopup={popup}
       aria-expanded={popup ? !!expanded : undefined}
       className={cn(

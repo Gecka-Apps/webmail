@@ -9,7 +9,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
 import path from 'path';
 
-const css = readFileSync(path.join(process.cwd(), 'app', 'accessibility.css'), 'utf8');
+const css = readFileSync(path.join(process.cwd(), 'app', 'accessibility.css'), 'utf8').replace(/\r\n/g, '\n');
 
 /** Selectors of the first top-level rule whose body contains `declaration`. */
 function selectorsOf(declaration: string): string[] {
@@ -71,5 +71,65 @@ describe('global focus outline', () => {
 
   it('takes its colour from the ring token, which themes keep at 3:1', () => {
     expect(css).toMatch(/--focus-ring-color:\s*var\(--color-ring\)/);
+  });
+});
+
+/** The body of the top-level `@media (forced-colors: active)` block. */
+function forcedBlock(): string {
+  const at = css.indexOf('@media (forced-colors: active) {');
+  expect(at).toBeGreaterThan(-1);
+  const open = css.indexOf('{', at);
+  let depth = 0;
+  let end = open;
+  for (; end < css.length; end++) {
+    if (css[end] === '{') depth++;
+    if (css[end] === '}' && --depth === 0) break;
+  }
+  return css.slice(open + 1, end).replace(/\/\*[\s\S]*?\*\//g, '');
+}
+
+/** The selector of the rule in `block` whose body contains `declaration`. */
+function ruleSelector(block: string, declaration: string): string {
+  const at = block.indexOf(declaration);
+  expect(at).toBeGreaterThan(-1);
+  const open = block.lastIndexOf('{', at);
+  return block.slice(block.lastIndexOf('}', open) + 1, open).trim();
+}
+
+describe('forced colours', () => {
+  const block = forcedBlock();
+  const selected = ruleSelector(block, 'background-color: Highlight !important;\n    color: HighlightText');
+
+  it.each([
+    ['a pressed segment (settings radio group, formatting toggle)', '<button aria-pressed="true">Light</button>'],
+    ['the selected tab', '<button role="tab" aria-selected="true">All</button>'],
+    ['the open message row', '<div aria-current="true"></div>'],
+    ['the current folder or page', '<button aria-current="page">Inbox</button>'],
+    ['an active toolbar button', '<button data-active="true"></button>'],
+    ['a checked view-mode radio', '<button role="radio" aria-checked="true"></button>'],
+    ['a selected option', '<div role="option" aria-selected="true"></div>'],
+  ])('maps %s to Highlight', (_name, html) => {
+    expect(el(html).matches(selected)).toBe(true);
+  });
+
+  it.each([
+    ['an unpressed segment', '<button aria-pressed="false">Dark</button>'],
+    ['an unselected tab', '<button role="tab" aria-selected="false">Unread</button>'],
+    ['today without selection', '<button aria-current="date">29</button>'],
+    ['a native radio', '<input type="radio" role="radio" aria-checked="true">'],
+  ])('leaves %s alone', (_name, html) => {
+    expect(el(html).matches(selected)).toBe(false);
+  });
+
+  it('gives switches a border and a knob that keeps its fill', () => {
+    expect(ruleSelector(block, 'border: 1px solid ButtonText')).toBe('[role="switch"]');
+    const knob = block.slice(block.indexOf('[role="switch"] > span'));
+    expect(knob).toMatch(/^\[role="switch"\] > span \{\s*forced-color-adjust: none;\s*background-color: ButtonText/);
+    expect(block).toMatch(/\[role="switch"\]\[aria-checked="true"\] > span \{\s*background-color: HighlightText/);
+  });
+
+  it('lets a colour swatch keep its colour, and only the swatch', () => {
+    expect(el('<span style="background-color: rgb(1, 2, 3)"></span>').matches(':is(span, div, i):empty[style*="background"]')).toBe(true);
+    expect(block).toContain(':is(span, div, i):empty[style*="background"] {\n    forced-color-adjust: none;');
   });
 });
