@@ -138,8 +138,9 @@ vi.mock('@/stores/template-store', () => {
   return { useTemplateStore: hook };
 });
 
+const toastError = vi.hoisted(() => vi.fn());
 vi.mock('@/stores/toast-store', () => ({
-  toast: { info: () => {}, error: () => {}, success: () => {} },
+  toast: { info: () => {}, error: toastError, success: () => {} },
 }));
 
 vi.mock('@/lib/plugin-hooks', () => ({
@@ -394,14 +395,17 @@ describe('attachment uploads (SR-16)', () => {
     expect(bar).toHaveAttribute('aria-valuetext', 'attachment_progress:45');
   });
 
-  it('says in words that an upload failed and announces it', async () => {
+  // The error toast is a live region of its own; the composer saying it
+  // too would read the failure twice.
+  it('says in words that an upload failed and reports it once', async () => {
     uploadClient(() => Promise.reject(new Error('boom')));
     render(<EmailComposer initialData={DRAFT} />);
     await attach(new File(['%PDF'], 'report.pdf', { type: 'application/pdf' }));
 
     await waitFor(() => expect(screen.getByText('attachment_upload_failed')).toBeInTheDocument());
     expect(screen.queryByRole('progressbar')).toBeNull();
-    expect(liveRegion()).toHaveTextContent('upload_failed:report.pdf');
+    expect(toastError).toHaveBeenCalledWith('upload_failed:report.pdf');
+    expect(liveRegion()).not.toHaveTextContent('upload_failed');
   });
 });
 

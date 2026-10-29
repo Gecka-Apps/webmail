@@ -3,6 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 import React from 'react';
 import { EmailComposer } from '../email-composer';
 import { useAuthStore } from '@/stores/auth-store';
+import { LIVE_REGION_IDS } from '@/lib/announce';
 
 // ─── Heavy component mocks (mirrors reply-addressing.test.tsx) ────────────────
 
@@ -320,6 +321,28 @@ describe('composer close guard with a follow-up', () => {
     fireEvent.click(within(dialog).getByText('save'));
 
     await waitFor(() => expect(afterClose).toHaveBeenCalledTimes(1));
+  });
+
+  it('tells screen readers the draft was saved when the user saves, not on autosave', async () => {
+    const createDraft = vi.fn().mockResolvedValue('draft-9');
+    useAuthStore.setState({
+      client: { createDraft, getEmail: vi.fn(), hasDelayedSend: () => false, getMaxDelayedSend: () => 0 } as never,
+    });
+    const polite = () => document.getElementById(LIVE_REGION_IDS.polite);
+    try {
+      const { requestCloseRef, afterClose } = renderWithCloseRef();
+      await waitFor(() => expect(createDraft).toHaveBeenCalledTimes(1), { timeout: 4000 });
+      await new Promise((r) => setTimeout(r, 200));
+      expect(polite()?.textContent ?? '').not.toContain('draft_saved');
+
+      fireEvent.change(screen.getByDisplayValue('Half-written more'), { target: { value: 'Half-written more and more' } });
+      act(() => requestCloseRef.current!(afterClose));
+      fireEvent.click(within(await screen.findByRole('alertdialog')).getByText('save'));
+
+      await waitFor(() => expect(polite()?.textContent).toContain('draft_saved'));
+    } finally {
+      useAuthStore.setState({ client: null });
+    }
   });
 
   it('drops the follow-up when the save fails and the rescue takes over', async () => {

@@ -141,6 +141,7 @@ import { isValidEmail } from "@/lib/validation";
 import { composeTextStyle, composeTextStyleCss } from "@/components/email/font-size";
 import { buildMentionCandidates, type MentionCandidate } from "@/lib/recipient-mentions";
 import { describeRecipientChanges, recipientDisplayName, type RecipientChange, type RecipientFields } from "@/lib/recipient-announcements";
+import { announce as announceStatus } from "@/lib/announce";
 import { normalizeCid } from "@/lib/attachment-visibility";
 import { RichTextEditor } from "@/components/email/rich-text-editor";
 import { isRecipientMentionActive } from "@/components/email/recipient-mention";
@@ -2277,8 +2278,8 @@ export function EmailComposer({
       } catch (error) {
         if (controller?.signal.aborted) continue;
         debug.error(`Failed to upload ${file.name}:`, error);
+        // The error toast reads itself out (components/ui/toast.tsx).
         toast.error(t('upload_failed', { filename: file.name }));
-        announce(t('upload_failed', { filename: file.name }));
 
         setAttachments(prev =>
           prev.map(att =>
@@ -2289,7 +2290,7 @@ export function EmailComposer({
         );
       }
     }
-  }, [client, t, plainTextMode, announce]);
+  }, [client, t, plainTextMode]);
 
   const handleImageUpload = useCallback(async (
     file: File,
@@ -2745,13 +2746,17 @@ export function EmailComposer({
   // racing two `Email/set { destroy, create }` requests against the same
   // draftId, which left orphan drafts and (when EmailSubmission failed)
   // looked like "send didn't happen" (#303).
-  const saveDraft = (opts: { auto?: boolean } = {}): Promise<string | null> => {
+  const saveDraft = (opts: { auto?: boolean; announce?: boolean } = {}): Promise<string | null> => {
     const previous = inflightSaveRef.current;
     const promise = (async (): Promise<string | null> => {
       if (previous) {
         try { await previous; } catch { /* prior failure already reported */ }
       }
-      return saveDraftOnce(!!opts.auto);
+      const id = await saveDraftOnce(!!opts.auto);
+      // Only the save the user asked for is read out: autosave would say it
+      // every minute, and the save before sending is followed by "Sent".
+      if (opts.announce && id && !saveFailedRef.current) announceStatus(t('draft_saved'));
+      return id;
     })();
     inflightSaveRef.current = promise;
     promise.finally(() => {
@@ -3777,7 +3782,7 @@ export function EmailComposer({
     // close attempt just re-opened this dialog - Discard was the only way out
     // (#702). Requests carry a deadline now, so a broken save resolves.
     try {
-      await saveDraft();
+      await saveDraft({ announce: true });
       if (saveFailedRef.current) {
         // The server never took the draft. Clearing stateRef here would drop the
         // message on the floor with nothing but a toast, so leave the text in
