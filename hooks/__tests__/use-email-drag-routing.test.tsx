@@ -133,7 +133,7 @@ beforeEach(async () => {
   requests = [];
   startDrag.mockClear();
   endDrag.mockClear();
-  vi.spyOn(toast, 'error').mockImplementation(() => {});
+  vi.spyOn(toast, 'error').mockImplementation(() => '');
   revoke = vi.fn<(url: string) => void>();
   vi.spyOn(URL, 'createObjectURL').mockImplementation((blob) => {
     const url = `blob:synthetic-${objects.size}`;

@@ -11,6 +11,7 @@ function Toasts() {
   return <ToastContainer toasts={toasts} onClose={removeToast} />;
 }
 
+const toastContainer = () => document.querySelector('[data-toast-container]') as HTMLElement;
 const card = (title: string) => screen.getByText(title).closest('.toast-item') as HTMLElement;
 
 describe('toast layout', () => {
@@ -27,7 +28,7 @@ describe('toast layout', () => {
     render(<Toasts />);
     act(() => { toast.info('First'); });
     act(() => { toast.info('Second'); });
-    const container = screen.getByRole('status');
+    const container = toastContainer();
     expect(container).toHaveClass('flex-col', 'end-5', 'max-sm:inset-x-3');
     expect(container).not.toHaveClass('flex-col-reverse');
     expect(container.className).not.toMatch(/\bright-5\b/);
@@ -37,14 +38,14 @@ describe('toast layout', () => {
 
   it('sits above the bottom controls on a phone, and over an open composer', () => {
     render(<Toasts />);
-    const container = screen.getByRole('status');
+    const container = toastContainer();
     expect(container.className).toContain('max-sm:bottom-[calc(var(--bottom-controls-height,3.75rem)+0.75rem)]');
     expect(container).toHaveClass('[html[data-composer-open]_&]:bottom-20');
   });
 
   it('sits above a registered bottom bar on the desktop too, such as a form footer', () => {
     render(<Toasts />);
-    const container = screen.getByRole('status');
+    const container = toastContainer();
     expect(container).toHaveClass('bottom-[max(1.25rem,calc(var(--bottom-controls-height,0px)+0.75rem))]');
     expect(container).not.toHaveClass('bottom-5');
   });
@@ -146,7 +147,7 @@ describe('toasts and open menus', () => {
   it('hides a phone toast while a menu is open and keeps it until the menu closes', () => {
     const { rerender } = render(<Screen menu={false} />);
     act(() => { toast.success('Moved to Trash'); });
-    const container = screen.getByRole('status');
+    const container = toastContainer();
     expect(container).not.toHaveClass('invisible');
 
     rerender(<Screen menu />);
@@ -164,6 +165,6 @@ describe('toasts and open menus', () => {
     phone = false;
     render(<Screen menu />);
     act(() => { toast.success('Saved'); });
-    expect(screen.getByRole('status')).not.toHaveClass('invisible');
+    expect(toastContainer()).not.toHaveClass('invisible');
   });
 });

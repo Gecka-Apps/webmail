@@ -158,4 +158,9 @@ export function resetAnnouncerForTests(): void {
   for (const timer of debounced.values()) clearTimeout(timer);
   debounced.clear();
   lastSaid.clear();
+  if (typeof document === 'undefined') return;
+  for (const id of Object.values(LIVE_REGION_IDS)) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '';
+  }
 }

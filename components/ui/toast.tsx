@@ -310,6 +310,7 @@ export function ToastItem({ toast, onClose, held = false }: ToastProps) {
 }
 
 export function ToastContainer({ toasts, onClose }: { toasts: Toast[]; onClose: (id: string) => void }) {
+  const tCenter = useTranslations("notification_center");
   const [mounted, setMounted] = useState(false);
   // On a phone the toasts span the screen and covered a long-press menu's
   // last items. While a menu is open they step aside, and their countdown
@@ -337,8 +338,12 @@ export function ToastContainer({ toasts, onClose }: { toasts: Toast[]; onClose: 
         "max-sm:[html[data-composer-open]_&]:bottom-[max(5rem,calc(var(--bottom-controls-height,3.75rem)+0.75rem))]",
         held && "invisible"
       )}
-      role="status"
-      aria-live="polite"
+      // Not a live region: the toast store reads each toast out through
+      // lib/announce (errors assertively). A labelled region while toasts
+      // are up, so screen reader users can find them.
+      data-toast-container=""
+      role={toasts.length > 0 ? "region" : undefined}
+      aria-label={toasts.length > 0 ? tCenter("title") : undefined}
       style={{ pointerEvents: "none" }}
     >
       {toasts.map((toast) => (

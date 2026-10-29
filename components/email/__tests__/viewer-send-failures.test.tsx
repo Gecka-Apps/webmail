@@ -79,7 +79,7 @@ let toastError: ReturnType<typeof vi.spyOn>;
 
 beforeEach(() => {
   useSettingsStore.setState({ quickReplyEnabled: true });
-  toastError = vi.spyOn(toast, 'error').mockImplementation(() => {});
+  toastError = vi.spyOn(toast, 'error').mockImplementation(() => '');
   vi.spyOn(console, 'error').mockImplementation(() => {});
 });
 
