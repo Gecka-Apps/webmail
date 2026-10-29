@@ -134,7 +134,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTML
   return (
     <textarea
       ref={ref}
-      className={cn('bk flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground transition-all duration-200 placeholder:text-muted-foreground hover:border-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-ring disabled:cursor-not-allowed disabled:opacity-50', className)}
+      className={cn('bk flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground transition-all duration-200 placeholder:text-muted-foreground hover:border-muted-foreground focus-visible:outline-hidden focus-visible:border-ring disabled:cursor-not-allowed disabled:opacity-50', className)}
       {...rest}
     />
   );
@@ -153,7 +153,7 @@ export function Select({ options, children, onChange, disabled, block = false, c
   return (
     <select
       className={cn(
-        'bk px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-hidden focus:ring-2 focus:ring-ring transition-colors duration-150',
+        'bk px-3 py-1.5 text-sm rounded-md bg-muted border border-border text-foreground focus:outline-hidden transition-colors duration-150',
         disabled ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer hover:border-muted-foreground',
         block && 'w-full',
         className,
@@ -567,7 +567,7 @@ export function Combobox({
           onKeyDown={handleKeyDown}
           className={cn(
             multiple
-              ? 'flex-1 min-w-[80px] bg-transparent border-0 p-0 text-sm text-foreground placeholder:text-muted-foreground outline-none focus:ring-0'
+              ? 'flex-1 min-w-[80px] bg-transparent border-0 p-0 text-sm text-foreground placeholder:text-muted-foreground outline-none'
               : cn(
                   'w-full rounded-md border-0 bg-transparent ps-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground outline-none',
                   clearable && hasValue ? 'pe-14' : 'pe-8',
@@ -679,7 +679,7 @@ export function Checkbox({ checked, onChange, label, hint, disabled = false, id,
       disabled={disabled}
       onClick={() => onChange?.(!checked)}
       className={cn(
-        'bk mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50',
+        'bk mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border transition-colors focus-visible:outline-hidden disabled:opacity-50',
         checked ? 'border-primary bg-primary text-primary-foreground' : 'border-muted-foreground/50 bg-background',
       )}
     >
@@ -710,7 +710,7 @@ export function Switch({ checked, onChange, disabled = false, label, id }: { che
       disabled={disabled}
       onClick={() => onChange?.(!checked)}
       className={cn(
-        'bk relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-150 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring',
+        'bk relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-150 focus-visible:outline-hidden',
         checked ? 'bg-primary' : 'bg-muted ring-1 ring-inset ring-muted-foreground',
         disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer',
       )}
@@ -737,7 +737,7 @@ export function Segmented({ value, options, onChange, label }: { value: string; 
           aria-checked={o.value === value}
           onClick={() => onChange?.(o.value)}
           className={cn(
-            'px-3 py-1.5 text-xs rounded-md transition-colors duration-150 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring',
+            'px-3 py-1.5 text-xs rounded-md transition-colors duration-150 focus-visible:outline-hidden',
             o.value === value ? 'bg-primary text-primary-foreground font-medium' : 'bg-muted hover:bg-accent text-foreground',
           )}
         >
@@ -793,7 +793,7 @@ export function SearchInput({ value, onChange, placeholder, label, className }: 
         placeholder={placeholder}
         aria-label={label ?? placeholder}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full h-8 rounded-md border border-input bg-background ps-8 pe-8 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-search-cancel-button]:hidden"
+        className="w-full h-8 rounded-md border border-input bg-background ps-8 pe-8 text-sm outline-none placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden"
       />
       {value && (
         <button type="button" onClick={() => onChange('')} aria-label={kitString('clear_search')} className="absolute end-1.5 top-1/2 -translate-y-1/2 p-1 rounded text-muted-foreground hover:text-foreground">
@@ -945,7 +945,7 @@ export function Tabs({ value, tabs, onChange, label }: { value: string; tabs: { 
             aria-selected={active}
             onClick={() => onChange(tab.id)}
             className={cn(
-              'flex items-center gap-1.5 px-4 py-2 text-sm font-medium border-b-2 -mb-px whitespace-nowrap transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset',
+              'flex items-center gap-1.5 px-4 py-2 text-sm font-medium border-b-2 -mb-px whitespace-nowrap transition-colors focus-visible:outline-hidden focus-inset',
               active ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground',
             )}
           >
@@ -1081,7 +1081,7 @@ export function ListRow({ title, subtitle, meta, icon, folder = false, selected 
       onDoubleClick={disabled ? undefined : onDoubleClick}
       onKeyDown={clickable ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick?.(); } } : undefined}
       className={cn(
-        'bk group flex items-center gap-x-3 px-4 border-b border-border/60 select-none transition-colors outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-ring/60',
+        'bk group flex items-center gap-x-3 px-4 border-b border-border/60 select-none transition-colors outline-none focus-inset',
         subtitle ? 'min-h-[52px] py-1.5' : 'h-10',
         selected ? 'bg-primary/10' : clickable && 'hover:bg-muted/60',
         clickable ? 'cursor-pointer' : 'cursor-default',
@@ -1116,7 +1116,7 @@ export function RowAction({ icon, label, onClick, danger = false }: { icon: stri
       onClick={onClick}
       title={label}
       aria-label={label}
-      className={cn('bk p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-all focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring', danger && 'hover:text-destructive')}
+      className={cn('bk p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-all focus-visible:outline-hidden', danger && 'hover:text-destructive')}
     >
       <Icon name={icon} />
     </button>
@@ -1152,7 +1152,7 @@ export function Chip({ icon, label, detail, onClick, onRemove, removeLabel, titl
   );
   const box = 'bk inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-muted/60 rounded-md border border-border/50 flex-shrink-0 max-w-full';
   if (onClick && !onRemove) {
-    return <button type="button" title={title} onClick={onClick} className={cn(box, 'hover:bg-muted transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring')}>{body}</button>;
+    return <button type="button" title={title} onClick={onClick} className={cn(box, 'hover:bg-muted transition-colors focus-visible:outline-hidden')}>{body}</button>;
   }
   return (
     <span className={box} title={title}>
@@ -1226,7 +1226,7 @@ export function BarButton({ icon, children, onClick, active = false, busy = fals
       disabled={disabled || busy}
       aria-pressed={active || undefined}
       className={cn(
-        'bk inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-md border transition-colors min-h-[36px] disabled:opacity-50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring',
+        'bk inline-flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-md border transition-colors min-h-[36px] disabled:opacity-50 focus-visible:outline-hidden',
         active ? 'bg-primary/10 text-primary border-primary/30 font-medium' : 'text-muted-foreground hover:text-foreground border-border hover:bg-muted',
       )}
     >

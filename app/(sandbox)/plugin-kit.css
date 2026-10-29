@@ -74,3 +74,21 @@
     color-scheme: dark;
   }
 }
+
+/* The app's focus outline (app/accessibility.css) for the kit's own
+   elements: a real outline instead of a box-shadow ring, so it also shows in
+   forced colours. Kit components carry no focus ring of their own. Only
+   containers focused from script (tabindex="-1" without a control role) skip
+   it. */
+:is(.bk, .bk *):focus-visible:not([tabindex="-1"]:not(a[href], button, input, select, textarea, [role="button"], [role="menuitem"], [role="option"], [role="tab"], [role="row"], [role="gridcell"], [role="checkbox"], [role="switch"], [role="radio"])) {
+  outline: 2px solid var(--color-ring) !important;
+  outline-offset: 2px !important;
+}
+:is(.bk [role="option"], .bk [role="row"], .bk [role="tab"], .bk .focus-inset, .bk.focus-inset):focus-visible {
+  outline-offset: -2px !important;
+}
+@media (forced-colors: active) {
+  :is(.bk, .bk *):focus-visible {
+    outline-color: Highlight !important;
+  }
+}

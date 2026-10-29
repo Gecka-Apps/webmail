@@ -442,4 +442,13 @@ describe('plugin-kit.css', () => {
     expect(reset).toMatch(/button\.bk/);
     expect(reset).toMatch(/\.bk button/);
   }, 60_000);
+
+  it('draws the focus outline on kit controls, since the kit has no focus rings', () => {
+    const css = readFileSync(path.join(ROOT, 'app/(sandbox)/plugin-kit.css'), 'utf8');
+    const rule = css.split('}').find((r) => r.includes(':focus-visible') && /outline:\s*2px solid var\(--color-ring\)/.test(r));
+    expect(rule).toBeDefined();
+    expect(rule).toMatch(/\.bk \*/);
+    expect(source('lib/plugin-sandbox/ui-kit/components.tsx')).not.toMatch(/focus(-visible)?:ring/);
+    expect(source('components/ui/button.tsx')).not.toMatch(/focus(-visible)?:ring/);
+  });
 });
