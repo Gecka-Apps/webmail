@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { Check, CheckCircle2, AlertTriangle, AlertCircle, Server, ShieldCheck, KeyRound, FileText, Palette, Lock, ShieldAlert } from '@/components/icons';
@@ -1330,6 +1330,7 @@ function BrandingAsset({
         >
           <input
             type="file"
+            aria-label={label}
             accept="image/svg+xml,image/png,image/jpeg,image/webp,image/x-icon,image/vnd.microsoft.icon"
             disabled={uploading}
             className="sr-only"
@@ -1386,6 +1387,7 @@ function BrandingAsset({
             value={value}
             onChange={onChange}
             placeholder={t('branding.url_placeholder')}
+            aria-label={label}
           />
         </div>
       )}
@@ -1403,6 +1405,7 @@ function ReviewStep({ config, onBack, onFinish }: { config: WizardConfig; onBack
   const t = useTranslations('setup');
   const [adminPassword, setAdminPassword] = useState('');
   const [adminConfirm, setAdminConfirm] = useState('');
+  const passwordFieldId = useId();
   const [lockConfig, setLockConfig] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -1526,15 +1529,15 @@ function ReviewStep({ config, onBack, onFinish }: { config: WizardConfig; onBack
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs text-muted-foreground mb-1">{t('review.new_password')}</label>
-            <Input value={adminPassword} onChange={setAdminPassword} type="password" required />
+            <label htmlFor={`${passwordFieldId}-new`} className="block text-xs text-muted-foreground mb-1">{t('review.new_password')}</label>
+            <Input id={`${passwordFieldId}-new`} value={adminPassword} onChange={setAdminPassword} type="password" required />
             {passwordTooShort && (
               <p className="text-xs text-warning mt-1">{t('review.too_short')}</p>
             )}
           </div>
           <div>
-            <label className="block text-xs text-muted-foreground mb-1">{t('review.confirm')}</label>
-            <Input value={adminConfirm} onChange={setAdminConfirm} type="password" required />
+            <label htmlFor={`${passwordFieldId}-confirm`} className="block text-xs text-muted-foreground mb-1">{t('review.confirm')}</label>
+            <Input id={`${passwordFieldId}-confirm`} value={adminConfirm} onChange={setAdminConfirm} type="password" required />
             {adminConfirm.length > 0 && !passwordsMatch && (
               <p className="text-xs text-destructive mt-1">{t('review.mismatch')}</p>
             )}
@@ -1617,12 +1620,18 @@ function StepHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   );
 }
 
+// The Field's label points at the Input or Select inside it, and its hint
+// is read with that control.
+const FieldContext = createContext<{ id: string; hintId?: string } | null>(null);
+
 function Field({ label, hint, children }: { label: string; hint?: string; children: ReactNode }) {
+  const id = useId();
+  const hintId = hint ? `${id}-hint` : undefined;
   return (
     <div>
-      <label className="block text-sm font-medium mb-1">{label}</label>
-      {children}
-      {hint && <p className="text-xs text-muted-foreground mt-1">{hint}</p>}
+      <label htmlFor={id} className="block text-sm font-medium mb-1">{label}</label>
+      <FieldContext.Provider value={{ id, hintId }}>{children}</FieldContext.Provider>
+      {hint && <p id={hintId} className="text-xs text-muted-foreground mt-1">{hint}</p>}
     </div>
   );
 }
@@ -1634,6 +1643,8 @@ function Input({
   placeholder,
   required,
   autoFocus,
+  id,
+  'aria-label': ariaLabel,
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -1641,9 +1652,15 @@ function Input({
   placeholder?: string;
   required?: boolean;
   autoFocus?: boolean;
+  id?: string;
+  'aria-label'?: string;
 }) {
+  const field = useContext(FieldContext);
   return (
     <input
+      id={id ?? field?.id}
+      aria-label={ariaLabel}
+      aria-describedby={field?.hintId}
       type={type}
       value={value}
       onChange={(e) => onChange(e.target.value)}
@@ -1656,8 +1673,11 @@ function Input({
 }
 
 function Select({ value, onChange, options }: { value: string; onChange: (v: string) => void; options: { value: string; label: string }[] }) {
+  const field = useContext(FieldContext);
   return (
     <select
+      id={field?.id}
+      aria-describedby={field?.hintId}
       value={value}
       onChange={(e) => onChange(e.target.value)}
       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
