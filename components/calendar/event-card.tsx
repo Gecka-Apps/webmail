@@ -191,6 +191,21 @@ export function EventCard({ event, calendar, variant, onClick, onMouseEnter, onM
       preventDefault: () => {}, stopPropagation: () => {},
     } as unknown as React.MouseEvent, event);
   }, !!onContextMenu);
+  // Shift+F10 opens the same menu from the keyboard (the menu key already
+  // fires contextmenu by itself). Prevented here, so a browser that also
+  // turns Shift+F10 into a contextmenu event doesn't open it twice.
+  const handleKeyDown = onContextMenu ? (e: React.KeyboardEvent<HTMLElement>) => {
+    if (!(e.shiftKey && e.key === "F10")) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const target = e.currentTarget;
+    const rect = target.getBoundingClientRect();
+    onContextMenu({
+      type: "contextmenu", clientX: rect.left, clientY: rect.bottom, detail: 0, currentTarget: target, target,
+      preventDefault: () => {}, stopPropagation: () => {},
+    } as unknown as React.MouseEvent, event);
+  } : undefined;
+
   const touchProps = onContextMenu ? {
     onTouchStart: (e: React.TouchEvent<HTMLElement>) => { pressedRef.current = e.currentTarget; longPress.onTouchStart(e); },
     onTouchMove: longPress.onTouchMove,
@@ -205,6 +220,7 @@ export function EventCard({ event, calendar, variant, onClick, onMouseEnter, onM
         onMouseEnter={(e) => onMouseEnter?.(e.currentTarget.getBoundingClientRect())}
         onMouseLeave={() => onMouseLeave?.()}
         onContextMenu={handleContextMenu}
+        onKeyDown={handleKeyDown}
         {...touchProps}
         aria-label={ariaLabel}
         tabIndex={tabbable ? undefined : -1}
@@ -236,6 +252,7 @@ export function EventCard({ event, calendar, variant, onClick, onMouseEnter, onM
         onMouseEnter={(e) => onMouseEnter?.(e.currentTarget.getBoundingClientRect())}
         onMouseLeave={() => onMouseLeave?.()}
         onContextMenu={handleContextMenu}
+        onKeyDown={handleKeyDown}
         {...touchProps}
         aria-label={ariaLabel}
         tabIndex={tabbable ? undefined : -1}
@@ -270,6 +287,7 @@ export function EventCard({ event, calendar, variant, onClick, onMouseEnter, onM
       onMouseEnter={(e) => onMouseEnter?.(e.currentTarget.getBoundingClientRect())}
       onMouseLeave={() => onMouseLeave?.()}
       onContextMenu={handleContextMenu}
+      onKeyDown={handleKeyDown}
       {...touchProps}
       aria-label={ariaLabel}
       tabIndex={tabbable ? undefined : -1}

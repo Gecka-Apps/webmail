@@ -1,5 +1,5 @@
-import { render, screen, cleanup } from '@testing-library/react';
-import { describe, it, expect, afterEach, beforeEach } from 'vitest';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
 import { EventCard } from '../event-card';
 import { useSettingsStore } from '@/stores/settings-store';
 import type { Calendar, CalendarEvent, CalendarParticipant } from '@/lib/jmap/types';
@@ -137,5 +137,22 @@ describe('EventCard colour settings', () => {
     // #009E73, the palette's bluish green
     expect(screen.getByRole('button').style.backgroundColor).toBe('rgb(0, 158, 115)');
     expect(calendar.color).toBe('#22c55e');
+  });
+});
+
+describe('EventCard from the keyboard (MA-05)', () => {
+  afterEach(cleanup);
+
+  it.each(['chip', 'span', 'block'] as const)('opens the event menu with Shift+F10 on the %s', (variant) => {
+    const onContextMenu = vi.fn();
+    const event = makeOccurrence('a', 'accepted');
+    render(<EventCard event={event} variant={variant} onContextMenu={onContextMenu} currentUserEmails={me} />);
+    const card = screen.getByRole('button');
+    fireEvent.keyDown(card, { key: 'F10' });
+    expect(onContextMenu).not.toHaveBeenCalled();
+    fireEvent.keyDown(card, { key: 'F10', shiftKey: true });
+    expect(onContextMenu).toHaveBeenCalledOnce();
+    expect(onContextMenu.mock.calls[0][1]).toBe(event);
+    expect(onContextMenu.mock.calls[0][0].currentTarget).toBe(card);
   });
 });
