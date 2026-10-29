@@ -3282,8 +3282,10 @@ export function EmailViewer({
      (see below): the email's own <style> is injected inside our <body> and so
      lands later in source order, where - at equal specificity and !important -
      it would otherwise win the cascade. */
-  /* overflow-y stays hidden so our scrollHeight-based height measurement works;
-     overflow-x is auto on the body so an intrinsically wide table (e.g. a
+  /* overflow-y stays hidden so our scrollHeight-based height measurement works,
+     and the trailing <style> repeats it: a mail's own body { overflow-y: scroll }
+     would otherwise put a second scrollbar inside the frame, next to the
+     reader's. overflow-x is auto on the body so an intrinsically wide table (e.g. a
      20-column data table) can scroll horizontally instead of being crushed to
      fit - the latter wraps header text to one character per line, which reads
      as 90deg-rotated vertical headers (issue #409). On a phone that scroll is
@@ -3321,7 +3323,7 @@ export function EmailViewer({
   pre { white-space: pre-wrap; word-wrap: break-word; }
   ${wordHtmlCSS}
   ${darkModeCSS}
-</style></head><body dir="auto">${resolveColorSchemeMedia(effectiveEmailContent.html, recolorDark)}<style>html,body{height:auto!important;min-height:0!important;max-height:none!important}</style>${reading.frameCss ? `<style>${reading.frameCss}</style>` : ''}</body></html>`;
+</style></head><body dir="auto">${resolveColorSchemeMedia(effectiveEmailContent.html, recolorDark)}<style>html,body{height:auto!important;min-height:0!important;max-height:none!important}body{overflow-y:hidden!important}</style>${reading.frameCss ? `<style>${reading.frameCss}</style>` : ''}</body></html>`;
   }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, recolorDark, emailHasNativeDarkMode, messageSpacing, bodyLanguage, reading.frameKey, reading.frameCss, appFontSources]);
 
   // Unblocking external content is handled by rebuilding the iframe srcDoc:

@@ -94,6 +94,14 @@ describe('message body frame', () => {
     expect(iframe.getAttribute('srcdoc')).not.toMatch(/<html[^>]*\slang=/);
   });
 
+  it('keeps a mail that scrolls its own body from adding a second scrollbar', async () => {
+    const { container } = await show(message({ html: '<style>body { overflow-y: scroll; }</style><p>Hi there, <b>friend</b></p>' }));
+    const srcdoc = container.querySelector('iframe')!.getAttribute('srcdoc')!;
+    // The mail's style sits inside our body, so only a rule after it wins.
+    expect(srcdoc.indexOf('overflow-y: scroll')).toBeGreaterThan(-1);
+    expect(srcdoc.lastIndexOf('body{overflow-y:hidden!important}')).toBeGreaterThan(srcdoc.indexOf('overflow-y: scroll'));
+  });
+
   it('marks a plain-text body with its Content-Language', async () => {
     await show(message({ text: 'Hallo zusammen', textBody: [{ partId: 't', type: 'text/plain', language: ['de'] }] as never }));
     expect(screen.getByText('Hallo zusammen').closest('[lang]')?.getAttribute('lang')).toBe('de');
