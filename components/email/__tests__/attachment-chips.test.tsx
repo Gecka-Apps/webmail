@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen, act, renderHook } from "@testing-library/react";
-import { realAttachments, ListAttachmentChips, useListHasAttachment } from "../attachment-chips";
+import { realAttachments, ListAttachmentChips, useListHasAttachment, attachmentIcon } from "../attachment-chips";
 import type { Attachment, Email } from "@/lib/jmap/types";
 import type { LoadListAttachments } from "@/lib/list-attachments";
 
@@ -181,5 +181,23 @@ describe("useListHasAttachment", () => {
     const { result } = renderHook(() => useListHasAttachment(row({ hasAttachment: false }), load));
     expect(result.current).toBe(false);
     expect(load).not.toHaveBeenCalled();
+  });
+});
+
+describe("attachmentIcon", () => {
+  it("takes the type from the MIME type", () => {
+    expect(attachmentIcon("application/tlsrpt+gzip", "report.json.gz").className).toContain("text-amber-600");
+    expect(attachmentIcon("application/pdf", "scan").className).toContain("text-red-600");
+  });
+
+  it("falls back to the extension for octet-stream parts", () => {
+    expect(attachmentIcon("application/octet-stream", "invoice.PDF").className).toContain("text-red-600");
+    expect(attachmentIcon(undefined, "photos.zip").className).toContain("text-amber-600");
+  });
+
+  it("matches the extension only, not words inside the name", () => {
+    // "startup" contains "tar" and "pdf-notes" contains "pdf".
+    expect(attachmentIcon("application/octet-stream", "startup.docx").className).toContain("text-sky-600");
+    expect(attachmentIcon("", "pdf-notes.bin").className).toBe("text-muted-foreground");
   });
 });

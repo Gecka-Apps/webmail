@@ -11,6 +11,7 @@ import { emailDisplayDate } from "@/lib/email-date";
 import { getRenderableHtmlBody } from "@/lib/email-body-selection";
 import { findVerificationCode, verificationCodeBodyText } from "@/lib/verification-code";
 import { VerificationCodeChip } from "./verification-code-chip";
+import { attachmentIcon } from "./attachment-chips";
 import { ExternalSenderChip } from "./external-sender-chip";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
 import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collapse";
@@ -38,12 +39,6 @@ import {
   Paperclip,
   Star,
   Download,
-  FileText,
-  FileImage,
-  FileVideo,
-  FileAudio,
-  FileArchive,
-  File,
   Eye,
   CalendarClock,
 } from "@/components/icons";
@@ -92,29 +87,6 @@ interface ThreadConversationViewProps {
    */
   actions?: ConversationActions;
 }
-
-// Helper function to get file icon based on mime type or extension
-const getFileIcon = (name?: string, type?: string) => {
-  const ext = name?.split('.').pop()?.toLowerCase();
-  const mimeType = type?.toLowerCase();
-
-  if (mimeType?.startsWith('image/') || ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'].includes(ext || '')) {
-    return FileImage;
-  }
-  if (mimeType?.startsWith('video/') || ['mp4', 'avi', 'mov', 'wmv'].includes(ext || '')) {
-    return FileVideo;
-  }
-  if (mimeType?.startsWith('audio/') || ['mp3', 'wav', 'ogg', 'flac'].includes(ext || '')) {
-    return FileAudio;
-  }
-  if (mimeType === 'application/pdf' || ext === 'pdf') {
-    return FileText;
-  }
-  if (['zip', 'rar', '7z', 'tar', 'gz'].includes(ext || '')) {
-    return FileArchive;
-  }
-  return File;
-};
 
 /**
  * Whether a conversation message may load remote content: the user's policy,
@@ -1001,7 +973,7 @@ export function ConversationEmailBody({
         <div className="px-4 pb-4">
           <div className="flex flex-wrap gap-2">
             {visibleAttachments.map((attachment, idx) => {
-              const Icon = getFileIcon(attachment.name, attachment.type);
+              const { icon: Icon, className: iconClass } = attachmentIcon(attachment.type, attachment.name);
               const isPreviewable = isFilePreviewable(attachment.name, attachment.type)
                 || (!!attachment.blobId && canWopiOpen(wopiStatus, attachment.name));
               const opensPreview = isPreviewable && mailAttachmentAction === 'preview';
@@ -1015,7 +987,7 @@ export function ConversationEmailBody({
                   title={opensPreview ? t('files.preview') : t('email_viewer.download')}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors text-sm"
                 >
-                  <Icon className="w-4 h-4 text-muted-foreground" />
+                  <Icon className={cn("w-4 h-4", iconClass)} />
                   {/* The action, for screen readers: the visible name alone
                       doesn't say whether the button previews or downloads. */}
                   <span className="sr-only">{opensPreview ? t('files.preview') : t('email_viewer.download')}</span>{' '}

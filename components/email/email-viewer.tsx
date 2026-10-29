@@ -13,6 +13,7 @@ import { applyMailTextSize, mailFitOptions } from "@/lib/mail-reading";
 import { useMailReading } from "@/hooks/use-mail-reading";
 import { useReadAloud } from "@/hooks/use-read-aloud";
 import { ReadAloudBar } from "./read-aloud-bar";
+import { attachmentIcon } from "./attachment-chips";
 import { ReaderViewDialog } from "./reader-view-dialog";
 import { ReadingMask } from "./reading-mask";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
@@ -73,9 +74,6 @@ import {
   Loader2,
   Printer,
   FileText,
-  FileImage,
-  FileVideo,
-  FileAudio,
   FileArchive,
   File,
   Eye,
@@ -273,32 +271,6 @@ interface EmailViewerProps {
   selectedMailbox?: string;
   className?: string;
 }
-
-// Helper function to get file icon based on mime type or extension
-const getFileIcon = (name?: string, type?: string) => {
-  const ext = name?.split('.').pop()?.toLowerCase();
-  const mimeType = type?.toLowerCase();
-
-  if (mimeType?.startsWith('image/') || ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp'].includes(ext || '')) {
-    return FileImage;
-  }
-  if (mimeType?.startsWith('video/') || ['mp4', 'avi', 'mov', 'wmv'].includes(ext || '')) {
-    return FileVideo;
-  }
-  if (mimeType?.startsWith('audio/') || ['mp3', 'wav', 'ogg', 'flac'].includes(ext || '')) {
-    return FileAudio;
-  }
-  if (mimeType === 'application/pdf' || ext === 'pdf') {
-    return FileText;
-  }
-  if (['zip', 'rar', '7z', 'tar', 'gz'].includes(ext || '')) {
-    return FileArchive;
-  }
-  if (['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'].includes(ext || '')) {
-    return FileText;
-  }
-  return File;
-};
 
 const MIME_TYPE_LABELS: Record<string, string> = {
   'application/pdf': 'Document.pdf',
@@ -5092,7 +5064,7 @@ export function EmailViewer({
               {attachmentPosition === 'beside-sender' && effectiveAttachments.length > 0 && (
                 <div className="relative flex flex-col items-end justify-start gap-1 flex-shrink-0 max-w-[50%]">
                   {effectiveAttachments.slice(0, 2).map((attachment) => {
-                    const FileIcon = getFileIcon(attachment.name || undefined, attachment.type);
+                    const { icon: FileIcon, className: fileIconClass } = attachmentIcon(attachment.type, attachment.name);
                     const isPreviewable = isAttachmentPreviewable(attachment);
                     const opensPreview = isPreviewable && mailAttachmentAction === 'preview';
                     const thumbUrl = imageThumbUrls[attachment.id];
@@ -5124,7 +5096,7 @@ export function EmailViewer({
                           "flex items-center gap-1.5",
                           thumbUrl && "px-2 py-1 border-t border-border/50 w-full",
                         )}>
-                          <FileIcon className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                          <FileIcon className={cn("w-3.5 h-3.5 flex-shrink-0", fileIconClass)} />
                           <span className={cn(
                             "text-xs text-foreground truncate",
                             thumbUrl ? "flex-1 min-w-0" : "max-w-[140px]",
@@ -5181,7 +5153,7 @@ export function EmailViewer({
                       <div className="fixed inset-0 z-40" onClick={() => setShowAllBesideAttachments(false)} />
                       <div className="absolute top-full end-0 mt-1 z-50 bg-background border border-border rounded-lg shadow-lg p-2 flex flex-col gap-1 min-w-[220px]">
                         {effectiveAttachments.slice(2).map((attachment) => {
-                          const FileIcon = getFileIcon(attachment.name || undefined, attachment.type);
+                          const { icon: FileIcon, className: fileIconClass } = attachmentIcon(attachment.type, attachment.name);
                           const isPreviewable = isAttachmentPreviewable(attachment);
                           const opensPreview = isPreviewable && mailAttachmentAction === 'preview';
                           return (
@@ -5196,7 +5168,7 @@ export function EmailViewer({
                               onDragStart={dragProps.onDragStart}
                               onDragEnd={dragProps.onDragEnd}
                             >
-                              <FileIcon className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                              <FileIcon className={cn("w-3.5 h-3.5 flex-shrink-0", fileIconClass)} />
                               <span className="text-xs text-foreground truncate max-w-[180px]">
                                 {getAttachmentDisplayName(attachment.name, attachment.type)}
                               </span>
@@ -5894,7 +5866,7 @@ export function EmailViewer({
               className="absolute inset-0 flex items-center gap-2 invisible pointer-events-none whitespace-nowrap"
             >
               {effectiveAttachments.map((attachment) => {
-                const FileIcon = getFileIcon(attachment.name || undefined, attachment.type);
+                const { icon: FileIcon } = attachmentIcon(attachment.type, attachment.name);
                 const hasThumb = !!imageThumbUrls[attachment.id];
                 if (hasThumb) {
                   // Image chip is a fixed-width vertical card; only its width
@@ -5926,7 +5898,7 @@ export function EmailViewer({
             {effectiveAttachments
               .slice(0, visibleBelowHeaderCount ?? effectiveAttachments.length)
               .map((attachment) => {
-              const FileIcon = getFileIcon(attachment.name || undefined, attachment.type);
+              const { icon: FileIcon, className: fileIconClass } = attachmentIcon(attachment.type, attachment.name);
               const isPreviewable = isAttachmentPreviewable(attachment);
               const opensPreview = isPreviewable && mailAttachmentAction === 'preview';
               const thumbUrl = imageThumbUrls[attachment.id];
@@ -5963,7 +5935,7 @@ export function EmailViewer({
                     "flex items-center gap-1.5",
                     thumbUrl && "px-2 py-1.5 border-t border-border/50 w-full",
                   )}>
-                    <FileIcon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                    <FileIcon className={cn("w-4 h-4 flex-shrink-0", fileIconClass)} />
                     <span className={cn(
                       "text-sm text-foreground truncate",
                       thumbUrl ? "flex-1 min-w-0" : "max-w-[200px]",
@@ -6024,7 +5996,7 @@ export function EmailViewer({
                 <div className="fixed inset-0 z-40" onClick={() => setShowAllBelowHeaderAttachments(false)} />
                 <div className="absolute top-full end-0 mt-1 z-50 bg-background border border-border rounded-lg shadow-lg p-2 flex flex-col gap-1 min-w-[260px] max-h-[60vh] overflow-y-auto">
                   {effectiveAttachments.slice(visibleBelowHeaderCount).map((attachment) => {
-                    const FileIcon = getFileIcon(attachment.name || undefined, attachment.type);
+                    const { icon: FileIcon, className: fileIconClass } = attachmentIcon(attachment.type, attachment.name);
                     const isPreviewable = isAttachmentPreviewable(attachment);
                     const opensPreview = isPreviewable && mailAttachmentAction === 'preview';
                     return (
@@ -6039,7 +6011,7 @@ export function EmailViewer({
                         onDragStart={dragProps.onDragStart}
                         onDragEnd={dragProps.onDragEnd}
                       >
-                        <FileIcon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                        <FileIcon className={cn("w-4 h-4 flex-shrink-0", fileIconClass)} />
                         <span className="text-sm text-foreground truncate max-w-[220px]">
                           {getAttachmentDisplayName(attachment.name, attachment.type)}
                         </span>
@@ -6090,7 +6062,7 @@ export function EmailViewer({
           <div className="lg:hidden bg-background border-b border-border px-4 py-2">
             <div className="relative flex items-center gap-1.5 flex-wrap">
               {effectiveAttachments.slice(0, 2).map((attachment) => {
-                const FileIcon = getFileIcon(attachment.name || undefined, attachment.type);
+                const { icon: FileIcon, className: fileIconClass } = attachmentIcon(attachment.type, attachment.name);
                 const isPreviewable = isAttachmentPreviewable(attachment);
                 const opensPreview = isPreviewable && mailAttachmentAction === 'preview';
                 const thumbUrl = imageThumbUrls[attachment.id];
@@ -6122,7 +6094,7 @@ export function EmailViewer({
                       "flex items-center gap-1.5",
                       thumbUrl && "px-2 py-1.5 border-t border-border/50 w-full",
                     )}>
-                      <FileIcon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                      <FileIcon className={cn("w-4 h-4 flex-shrink-0", fileIconClass)} />
                       <span className={cn(
                         "text-sm text-foreground truncate",
                         thumbUrl ? "flex-1 min-w-0" : "max-w-[200px]",
@@ -6183,7 +6155,7 @@ export function EmailViewer({
                   <div className="fixed inset-0 z-40" onClick={() => setShowAllMobileAttachments(false)} />
                   <div className="absolute top-full start-0 mt-1 z-50 bg-background border border-border rounded-lg shadow-lg p-2 flex flex-col gap-1 min-w-[220px]">
                     {effectiveAttachments.slice(2).map((attachment) => {
-                      const FileIcon = getFileIcon(attachment.name || undefined, attachment.type);
+                      const { icon: FileIcon, className: fileIconClass } = attachmentIcon(attachment.type, attachment.name);
                       const isPreviewable = isAttachmentPreviewable(attachment);
                       const opensPreview = isPreviewable && mailAttachmentAction === 'preview';
                       return (
@@ -6198,7 +6170,7 @@ export function EmailViewer({
                           onDragStart={dragProps.onDragStart}
                           onDragEnd={dragProps.onDragEnd}
                         >
-                          <FileIcon className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                          <FileIcon className={cn("w-3.5 h-3.5 flex-shrink-0", fileIconClass)} />
                           <span className="text-xs text-foreground truncate max-w-[180px]">
                             {getAttachmentDisplayName(attachment.name, attachment.type)}
                           </span>

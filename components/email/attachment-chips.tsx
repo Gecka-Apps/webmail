@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import { FileText, FileSpreadsheet, FileImage, FileArchive, File as FileIcon } from "@/components/icons";
+import { FileText, FileSpreadsheet, FileImage, FileVideo, FileAudio, FileArchive, File as FileIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { stripBidiControls } from "@/lib/bidi";
 import type { Attachment, Email } from "@/lib/jmap/types";
@@ -22,17 +22,28 @@ export function realAttachments(attachments?: Attachment[]): Attachment[] {
 }
 
 // `badge` fills the square Mountain View draws behind a white glyph, as Gmail does.
-const ICON_BY_TYPE: { match: RegExp; icon: typeof FileIcon; className: string; badge: string }[] = [
-  { match: /^image\//, icon: FileImage, className: "text-violet-600 dark:text-violet-400", badge: "bg-red-600" },
-  { match: /pdf/, icon: FileText, className: "text-red-600 dark:text-red-400", badge: "bg-red-600" },
-  { match: /sheet|excel|csv/, icon: FileSpreadsheet, className: "text-emerald-600 dark:text-emerald-400", badge: "bg-emerald-600" },
-  { match: /zip|compress|tar|rar|7z/, icon: FileArchive, className: "text-amber-600 dark:text-amber-400", badge: "bg-zinc-500" },
-  { match: /word|document|rtf|text\//, icon: FileText, className: "text-sky-600 dark:text-sky-400", badge: "bg-blue-600" },
+// The MIME type decides first; the extension catches parts sent as
+// application/octet-stream. Only the extension is matched, so a name like
+// "startup.docx" is not taken for a tar archive.
+const ICON_BY_TYPE: { mime: RegExp; ext: string[]; icon: typeof FileIcon; className: string; badge: string }[] = [
+  { mime: /^image\//, ext: ["jpg", "jpeg", "png", "gif", "svg", "webp", "bmp", "heic", "avif"], icon: FileImage, className: "text-violet-600 dark:text-violet-400", badge: "bg-red-600" },
+  { mime: /^video\//, ext: ["mp4", "avi", "mov", "wmv", "mkv", "webm"], icon: FileVideo, className: "text-pink-600 dark:text-pink-400", badge: "bg-red-600" },
+  { mime: /^audio\//, ext: ["mp3", "wav", "ogg", "flac", "m4a", "aac", "opus"], icon: FileAudio, className: "text-purple-600 dark:text-purple-400", badge: "bg-red-600" },
+  { mime: /pdf/, ext: ["pdf"], icon: FileText, className: "text-red-600 dark:text-red-400", badge: "bg-red-600" },
+  { mime: /sheet|excel|csv/, ext: ["xls", "xlsx", "ods", "csv", "tsv", "numbers"], icon: FileSpreadsheet, className: "text-emerald-600 dark:text-emerald-400", badge: "bg-emerald-600" },
+  { mime: /zip|compress|x-tar|rar|7z|bzip|xz|zstd/, ext: ["zip", "rar", "7z", "tar", "gz", "tgz", "bz2", "xz", "zst"], icon: FileArchive, className: "text-amber-600 dark:text-amber-400", badge: "bg-zinc-500" },
+  { mime: /word|presentation|powerpoint|opendocument|rtf|^text\//, ext: ["doc", "docx", "odt", "rtf", "ppt", "pptx", "odp", "txt", "md"], icon: FileText, className: "text-sky-600 dark:text-sky-400", badge: "bg-blue-600" },
 ];
 
-function iconFor(type: string, name: string) {
-  const probe = `${type || ""} ${name || ""}`.toLowerCase();
-  return ICON_BY_TYPE.find((e) => e.match.test(probe)) ?? { icon: FileIcon, className: "text-muted-foreground", badge: "bg-zinc-500" };
+const OTHER_ICON = { icon: FileIcon, className: "text-muted-foreground", badge: "bg-zinc-500" };
+
+/** The icon and its colours for an attachment, shared by the list chips and the reader. */
+export function attachmentIcon(type?: string | null, name?: string | null): { icon: typeof FileIcon; className: string; badge: string } {
+  const mime = (type || "").toLowerCase();
+  const dot = (name || "").lastIndexOf(".");
+  const ext = dot >= 0 ? (name || "").slice(dot + 1).toLowerCase() : "";
+  const byMime = mime && mime !== "application/octet-stream" ? ICON_BY_TYPE.find((e) => e.mime.test(mime)) : undefined;
+  return byMime ?? ICON_BY_TYPE.find((e) => e.ext.includes(ext)) ?? OTHER_ICON;
 }
 
 /** Long names are unreadable truncated at the tail — the extension is the
@@ -81,7 +92,7 @@ export function AttachmentChips({ attachments, onOpen, max = 2, leading, variant
     <div className={cn("flex items-center flex-wrap", mv ? "gap-2" : "gap-1.5", className)}>
       {leading}
       {shown.map((a) => {
-        const { icon: Icon, className: iconClass, badge } = iconFor(a.type, a.name ?? "");
+        const { icon: Icon, className: iconClass, badge } = attachmentIcon(a.type, a.name);
         return (
           <button
             key={a.blobId + a.partId}
