@@ -5221,7 +5221,8 @@
       "readWrite": "Čtení a zápis",
       "manager": "Správce",
       "custom": "Vlastní"
-    }
+    },
+    "access_for": "Přístup pro {name}"
   },
   "delegates": {
     "tab": "Sdílení",

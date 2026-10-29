@@ -190,6 +190,7 @@ export function ComposingSettings() {
               }}
             >
               <input
+                aria-label={t('attachment_reminder.add_placeholder')}
                 type="text"
                 value={newKeyword}
                 onChange={(e) => setNewKeyword(e.target.value)}

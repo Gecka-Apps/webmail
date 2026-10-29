@@ -242,6 +242,7 @@ function KeywordEditForm({
           {t("label_field")}
         </label>
         <input
+          aria-label={t("label_field")}
           type="text"
           value={label}
           onChange={(e) => setLabel(e.target.value)}

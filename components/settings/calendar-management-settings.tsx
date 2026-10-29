@@ -132,6 +132,7 @@ export function CalendarEditForm({
           {t('name')}
         </label>
         <input
+          aria-label={t('name')}
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}

@@ -529,6 +529,7 @@ export function FolderSettings() {
             </span>
           )}
           <input
+            aria-label={parentId ? t('subfolder_name') : t('new_folder_name')}
             type="text"
             value={newFolderName}
             onChange={(e) => setNewFolderName(e.target.value)}
@@ -583,6 +584,7 @@ export function FolderSettings() {
         <div className="flex items-center gap-2 py-2 px-3" style={{ paddingInlineStart: 12 + depth * 16 }}>
           <Icon className="w-4 h-4 text-muted-foreground flex-shrink-0" />
           <input
+            aria-label={t('new_folder_name')}
             type="text"
             value={editingName}
             onChange={(e) => setEditingName(e.target.value)}

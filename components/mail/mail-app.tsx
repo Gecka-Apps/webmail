@@ -4640,6 +4640,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
   // is running; Mountain View's form waits for its Search button instead.
   const renderSearchFolderSelect = (className: string, rerun: boolean) => (
     <select
+      aria-label={t('advanced_search.search_in')}
       value={searchMailboxId}
       onChange={(e) => {
         setSearchMailboxId(e.target.value);

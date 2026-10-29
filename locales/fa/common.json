@@ -4781,7 +4781,8 @@
       "readWrite": "خواندن و نوشتن",
       "manager": "مدیر",
       "custom": "سفارشی"
-    }
+    },
+    "access_for": "دسترسی برای {name}"
   },
   "delegates": {
     "tab": "اشتراک‌گذاری",

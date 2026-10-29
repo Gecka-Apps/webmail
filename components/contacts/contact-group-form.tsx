@@ -106,6 +106,7 @@ export function ContactGroupForm({
             {t("groups.name_label")}
           </label>
           <Input
+            aria-label={t("groups.name_label")}
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={t("groups.name_placeholder")}
@@ -120,6 +121,7 @@ export function ContactGroupForm({
           <div className="relative mb-2">
             <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
+              aria-label={t("groups.search_members")}
               placeholder={t("groups.search_members")}
               value={memberSearch}
               onChange={(e) => setMemberSearch(e.target.value)}

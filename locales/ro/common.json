@@ -4781,7 +4781,8 @@
       "readWrite": "Citire și scriere",
       "manager": "Manager",
       "custom": "Personalizat"
-    }
+    },
+    "access_for": "Acces pentru {name}"
   },
   "delegates": {
     "tab": "Partajare",

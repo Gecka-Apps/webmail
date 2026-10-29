@@ -4781,7 +4781,8 @@
       "readWrite": "Lectura i escriptura",
       "manager": "Gestor",
       "custom": "Personalitzat"
-    }
+    },
+    "access_for": "Accés per a {name}"
   },
   "delegates": {
     "tab": "Compartició",

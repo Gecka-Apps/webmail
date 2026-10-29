@@ -475,6 +475,7 @@ export function FilterRuleModal({
               {t("rule_name")}
             </label>
             <Input
+              aria-label={t("rule_name")}
               ref={nameRef}
               value={name}
               onChange={(e) => setName(e.target.value)}

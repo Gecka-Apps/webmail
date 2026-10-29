@@ -4781,7 +4781,8 @@
       "readWrite": "Læs & skriv",
       "manager": "Administrator",
       "custom": "Brugerdefineret"
-    }
+    },
+    "access_for": "Adgang for {name}"
   },
   "delegates": {
     "tab": "Deling",

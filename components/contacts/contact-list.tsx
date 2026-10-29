@@ -477,6 +477,7 @@ export function ContactList({
               <div>
                 <label className="text-xs text-muted-foreground mb-1 block">{t("filters.organization")}</label>
                 <Input
+                  aria-label={t("filters.organization")}
                   value={filters.organization}
                   onChange={(e) => setFilters((f) => ({ ...f, organization: e.target.value }))}
                   placeholder={t("filters.organization_placeholder")}
@@ -486,6 +487,7 @@ export function ContactList({
               <div>
                 <label className="text-xs text-muted-foreground mb-1 block">{t("filters.job_title")}</label>
                 <Input
+                  aria-label={t("filters.job_title")}
                   value={filters.jobTitle}
                   onChange={(e) => setFilters((f) => ({ ...f, jobTitle: e.target.value }))}
                   placeholder={t("filters.job_title_placeholder")}
@@ -498,6 +500,7 @@ export function ContactList({
               <div>
                 <label className="text-xs text-muted-foreground mb-1 block">{t("filters.location")}</label>
                 <Input
+                  aria-label={t("filters.location")}
                   value={filters.location}
                   onChange={(e) => setFilters((f) => ({ ...f, location: e.target.value }))}
                   placeholder={t("filters.location_placeholder")}
@@ -507,6 +510,7 @@ export function ContactList({
               <div>
                 <label className="text-xs text-muted-foreground mb-1 block">{t("filters.email_domain")}</label>
                 <Input
+                  aria-label={t("filters.email_domain")}
                   value={filters.emailDomain}
                   onChange={(e) => setFilters((f) => ({ ...f, emailDomain: e.target.value }))}
                   placeholder={t("filters.email_domain_placeholder")}

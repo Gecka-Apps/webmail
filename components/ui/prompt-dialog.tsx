@@ -122,6 +122,7 @@ export function PromptDialog({
       }
     >
       <Input
+        aria-label={title}
         ref={inputRef}
         type="text"
         value={value}

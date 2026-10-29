@@ -5221,7 +5221,8 @@
       "readWrite": "读写",
       "manager": "管理员",
       "custom": "自定义"
-    }
+    },
+    "access_for": "{name} 的访问权限"
   },
   "delegates": {
     "tab": "共享",

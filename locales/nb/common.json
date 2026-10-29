@@ -4781,7 +4781,8 @@
       "readWrite": "Kan lese og skrive",
       "manager": "Kan administrere",
       "custom": "Egendefinert"
-    }
+    },
+    "access_for": "Tilgang for {name}"
   },
   "delegates": {
     "tab": "Deling",

@@ -5221,7 +5221,8 @@
       "readWrite": "Lettura e scrittura",
       "manager": "Gestore",
       "custom": "Personalizzato"
-    }
+    },
+    "access_for": "Accesso per {name}"
   },
   "delegates": {
     "tab": "Condivisione",

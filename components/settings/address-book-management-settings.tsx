@@ -42,6 +42,7 @@ function AddressBookEditRow({
           {t("name_label")}
         </label>
         <input
+          aria-label={t("name_label")}
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}

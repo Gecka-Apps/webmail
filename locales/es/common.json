@@ -5221,7 +5221,8 @@
       "readWrite": "Lectura y escritura",
       "manager": "Administrador",
       "custom": "Personalizado"
-    }
+    },
+    "access_for": "Acceso para {name}"
   },
   "delegates": {
     "tab": "Uso compartido",

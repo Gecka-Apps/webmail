@@ -4781,7 +4781,8 @@
       "readWrite": "讀取與寫入",
       "manager": "管理員",
       "custom": "自訂"
-    }
+    },
+    "access_for": "{name} 的存取權限"
   },
   "delegates": {
     "tab": "共用",

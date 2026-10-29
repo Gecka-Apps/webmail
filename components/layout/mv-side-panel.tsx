@@ -379,6 +379,7 @@ function ContactsPanel({ onClose }: { onClose: () => void }) {
       {searching && (
         <div className="px-4 pb-2">
           <input
+            aria-label={tContacts("search_placeholder")}
             autoFocus
             type="search"
             value={query}

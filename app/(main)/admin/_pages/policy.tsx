@@ -345,6 +345,7 @@ export function PolicyPage() {
                   <div className="sm:col-span-4">
                     <label className={fieldLabelClass}>Name</label>
                     <input
+                      aria-label="Name"
                       type="text"
                       autoComplete="off"
                       spellCheck={false}
@@ -358,6 +359,7 @@ export function PolicyPage() {
                     <label className={fieldLabelClass}>Relay URL</label>
                     <div className="flex items-center gap-2">
                       <input
+                        aria-label="Relay URL"
                         type="url"
                         inputMode="url"
                         autoComplete="off"
@@ -439,6 +441,7 @@ export function PolicyPage() {
                     <div className="sm:col-span-4">
                       <label className={fieldLabelClass}>Name</label>
                       <input
+                        aria-label="Name"
                         type="text"
                         autoComplete="off"
                         spellCheck={false}
@@ -452,6 +455,7 @@ export function PolicyPage() {
                     <div className="sm:col-span-5">
                       <label className={fieldLabelClass}>URL</label>
                       <input
+                        aria-label="URL"
                         type="url"
                         inputMode="url"
                         autoComplete="off"
@@ -474,6 +478,7 @@ export function PolicyPage() {
                       </label>
                       <div className="flex items-center gap-2">
                         <input
+                          aria-label="Icon"
                           type="text"
                           autoComplete="off"
                           spellCheck={false}

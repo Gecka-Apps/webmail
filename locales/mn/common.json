@@ -4781,7 +4781,8 @@
       "readWrite": "Унших, бичих",
       "manager": "Менежер",
       "custom": "Захиалгат"
-    }
+    },
+    "access_for": "{name}-н хандалт"
   },
   "delegates": {
     "tab": "Хуваалцах",

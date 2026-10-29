@@ -194,6 +194,7 @@ export function ShareCollectionDialog({
                     </div>
                     <div className="relative">
                       <select
+                        aria-label={t("access_for", { name: principal?.name || principal?.email || principalId })}
                         value={preset}
                         onChange={(e) => handleSetRights(principalId, e.target.value as RolePreset)}
                         disabled={savingId === principalId}
@@ -240,6 +241,7 @@ export function ShareCollectionDialog({
           {showAdd && (
             <div className="space-y-2 border border-border rounded-md p-3">
               <input
+                aria-label={t("search_placeholder")}
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

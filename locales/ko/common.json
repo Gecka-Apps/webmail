@@ -5221,7 +5221,8 @@
       "readWrite": "읽기 및 쓰기",
       "manager": "관리자",
       "custom": "사용자 지정"
-    }
+    },
+    "access_for": "{name}의 액세스 권한"
   },
   "delegates": {
     "tab": "공유",

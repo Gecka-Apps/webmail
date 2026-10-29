@@ -84,6 +84,7 @@ function AppForm({
       <div>
         <label className="text-sm font-medium">{t("name_label")}</label>
         <Input
+          aria-label={t("name_label")}
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           placeholder={t("name_placeholder")}
@@ -95,6 +96,7 @@ function AppForm({
       <div>
         <label className="text-sm font-medium">{t("url_label")}</label>
         <Input
+          aria-label={t("url_label")}
           value={formData.url}
           onChange={(e) => setFormData({ ...formData, url: e.target.value })}
           placeholder="https://example.com"

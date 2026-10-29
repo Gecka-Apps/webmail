@@ -4781,7 +4781,8 @@
       "readWrite": "قراءة وكتابة",
       "manager": "مدير",
       "custom": "مخصص"
-    }
+    },
+    "access_for": "صلاحية الوصول لـ {name}"
   },
   "delegates": {
     "tab": "المشاركة",

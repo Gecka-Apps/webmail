@@ -5221,7 +5221,8 @@
       "readWrite": "Lezen en schrijven",
       "manager": "Beheerder",
       "custom": "Aangepast"
-    }
+    },
+    "access_for": "Toegang voor {name}"
   },
   "delegates": {
     "tab": "Delen",

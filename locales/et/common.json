@@ -4781,7 +4781,8 @@
       "readWrite": "Lugemine ja kirjutamine",
       "manager": "Haldur",
       "custom": "Kohandatud"
-    }
+    },
+    "access_for": "Juurdepääs: {name}"
   },
   "delegates": {
     "tab": "Jagamine",

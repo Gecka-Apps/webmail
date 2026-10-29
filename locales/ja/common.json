@@ -5221,7 +5221,8 @@
       "readWrite": "読み取り・書き込み",
       "manager": "管理者",
       "custom": "カスタム"
-    }
+    },
+    "access_for": "{name} のアクセス権"
   },
   "delegates": {
     "tab": "共有",

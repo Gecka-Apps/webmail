@@ -4781,7 +4781,8 @@
       "readWrite": "Čítanie a zápis",
       "manager": "Správca",
       "custom": "Vlastné"
-    }
+    },
+    "access_for": "Prístup pre {name}"
   },
   "delegates": {
     "tab": "Zdieľanie",

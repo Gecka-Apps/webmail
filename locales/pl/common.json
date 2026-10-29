@@ -5221,7 +5221,8 @@
       "readWrite": "Odczyt i zapis",
       "manager": "Menedżer",
       "custom": "Niestandardowe"
-    }
+    },
+    "access_for": "Dostęp dla {name}"
   },
   "delegates": {
     "tab": "Udostępnianie",

@@ -4781,7 +4781,8 @@
       "readWrite": "Okuma ve yazma",
       "manager": "Yönetici",
       "custom": "Özel"
-    }
+    },
+    "access_for": "{name} için erişim"
   },
   "delegates": {
     "tab": "Paylaşım",

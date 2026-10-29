@@ -5193,7 +5193,8 @@
       "readWrite": "קרא וכתוב",
       "manager": "מנהל",
       "custom": "מותאם אישית"
-    }
+    },
+    "access_for": "גישה עבור {name}"
   },
   "delegates": {
     "tab": "שיתוף",

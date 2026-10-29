@@ -7,6 +7,8 @@ import { TemplateForm } from '@/components/templates/template-form';
 import { MvSearchForm } from '@/components/search/mv-search-form';
 import { DEFAULT_SEARCH_FILTERS } from '@/lib/jmap/search-utils';
 import { JmapServersSection } from '@/app/(main)/admin/_pages/_jmap-servers-section';
+import { ContactGroupForm } from '@/components/contacts/contact-group-form';
+import { PromptDialog } from '@/components/ui/prompt-dialog';
 
 // Every field of the big forms has a name a screen reader reads out (WCAG
 // 1.3.1, 3.3.2, 4.1.2): a <label> tied to it or an aria-label, never just
@@ -61,6 +63,16 @@ describe('form fields have labels', () => {
       />,
     );
     expect(document.querySelectorAll('input').length).toBeGreaterThanOrEqual(8);
+    expect(unnamedFields()).toEqual([]);
+  });
+
+  it('contact group form', () => {
+    render(<ContactGroupForm individuals={[]} onSave={vi.fn()} onCancel={vi.fn()} />);
+    expect(unnamedFields()).toEqual([]);
+  });
+
+  it('the shared one-field prompt', () => {
+    render(<PromptDialog isOpen onClose={vi.fn()} onSubmit={vi.fn()} title="Rename" placeholder="New name" />);
     expect(unnamedFields()).toEqual([]);
   });
 });

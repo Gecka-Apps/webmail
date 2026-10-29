@@ -237,6 +237,7 @@ export function TemplatePicker({ isOpen, onClose, onSelect, accountId }: Templat
             <div className="relative">
               <Search className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
+                aria-label={t('search_placeholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder={t('search_placeholder')}

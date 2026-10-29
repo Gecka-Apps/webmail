@@ -4781,7 +4781,8 @@
       "readWrite": "Olvasás és írás",
       "manager": "Kezelő",
       "custom": "Egyéni"
-    }
+    },
+    "access_for": "Hozzáférés: {name}"
   },
   "delegates": {
     "tab": "Megosztás",

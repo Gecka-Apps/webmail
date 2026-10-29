@@ -77,6 +77,7 @@ function TemplateEditor({
       <div className="flex flex-col gap-2">
         <div className="flex items-stretch gap-2">
           <input
+            aria-label={label}
             ref={inputRef}
             type="text"
             value={value}

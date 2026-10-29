@@ -4781,7 +4781,8 @@
       "readWrite": "Read & write",
       "manager": "Manager",
       "custom": "Custom"
-    }
+    },
+    "access_for": "Access for {name}"
   },
   "delegates": {
     "tab": "Sharing",
