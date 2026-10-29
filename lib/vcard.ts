@@ -204,12 +204,12 @@ function decodeQuotedPrintable(input: string, charset?: string): string {
   }
 }
 
+// One pass, so an escaped backslash can't pair up with the next character.
+// \: isn't a vCard escape, but Google Contacts writes it.
 function decodeValue(raw: string): string {
-  return raw
-    .replace(/\\n/gi, "\n")
-    .replace(/\\,/g, ",")
-    .replace(/\\;/g, ";")
-    .replace(/\\\\/g, "\\");
+  return raw.replace(/\\([\\,;:nN])/g, (_, c: string) =>
+    c === "n" || c === "N" ? "\n" : c
+  );
 }
 
 function encodeValue(val: string): string {

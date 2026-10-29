@@ -220,6 +220,34 @@ describe("parseVCard", () => {
     );
   });
 
+  it("decodes the escaped colons Google Contacts writes (#1438)", () => {
+    const vcf = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "FN:Test Example",
+      "NOTE:Reference\\: fictional value\\nSecond line\\, with comma\\; and semicolon",
+      "END:VCARD",
+    ].join("\r\n");
+
+    const result = parseVCard(vcf);
+    expect(result[0].notes?.n0?.note).toBe(
+      "Reference: fictional value\nSecond line, with comma; and semicolon"
+    );
+  });
+
+  it("keeps an escaped backslash literal when an escapable character follows", () => {
+    const vcf = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "FN:Paths",
+      "NOTE:C:\\\\new\\\\:dir\\\\\\:x\\\\\\\\",
+      "END:VCARD",
+    ].join("\r\n");
+
+    const result = parseVCard(vcf);
+    expect(result[0].notes?.n0?.note).toBe("C:\\new\\:dir\\:x\\\\");
+  });
+
   it("allows group kind without name or email", () => {
     const vcf = [
       "BEGIN:VCARD",
