@@ -774,7 +774,9 @@
     "preview_named": "Forhåndsvis {name}",
     "show_as_plain_text": "Vis som ren tekst",
     "show_formatted": "Vis formatert",
-    "shown_as_plain_text": "Denne meldingen vises som ren tekst."
+    "shown_as_plain_text": "Denne meldingen vises som ren tekst.",
+    "play_animation": "Spill av animasjon",
+    "pause_animation": "Sett animasjon på pause"
   },
   "external_mail": {
     "sender_label": "Ekstern",

@@ -774,7 +774,9 @@
     "preview_named": "Náhled {name}",
     "show_as_plain_text": "Zobrazit jako prostý text",
     "show_formatted": "Zobrazit formátovaně",
-    "shown_as_plain_text": "Tato zpráva se zobrazuje jako prostý text."
+    "shown_as_plain_text": "Tato zpráva se zobrazuje jako prostý text.",
+    "play_animation": "Přehrát animaci",
+    "pause_animation": "Pozastavit animaci"
   },
   "external_mail": {
     "sender_label": "Externí",

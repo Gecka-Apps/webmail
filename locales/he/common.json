@@ -739,7 +739,9 @@
     "preview_named": "תצוגה מקדימה של {name}",
     "show_as_plain_text": "הצגה כטקסט פשוט",
     "show_formatted": "הצגה מעוצבת",
-    "shown_as_plain_text": "הודעה זו מוצגת כטקסט פשוט."
+    "shown_as_plain_text": "הודעה זו מוצגת כטקסט פשוט.",
+    "play_animation": "הפעלת האנימציה",
+    "pause_animation": "השהיית האנימציה"
   },
   "external_mail": {
     "sender_label": "חיצוני",

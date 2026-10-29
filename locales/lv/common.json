@@ -774,7 +774,9 @@
     "preview_named": "Priekšskatīt {name}",
     "show_as_plain_text": "Rādīt kā vienkāršu tekstu",
     "show_formatted": "Rādīt formatētu",
-    "shown_as_plain_text": "Šis ziņojums tiek rādīts kā vienkāršs teksts."
+    "shown_as_plain_text": "Šis ziņojums tiek rādīts kā vienkāršs teksts.",
+    "play_animation": "Atskaņot animāciju",
+    "pause_animation": "Pauzēt animāciju"
   },
   "external_mail": {
     "sender_label": "Ārējs",

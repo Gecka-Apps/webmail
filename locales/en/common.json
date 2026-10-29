@@ -774,7 +774,9 @@
     "preview_named": "Preview {name}",
     "show_as_plain_text": "Show as plain text",
     "show_formatted": "Show formatted",
-    "shown_as_plain_text": "This message is shown as plain text."
+    "shown_as_plain_text": "This message is shown as plain text.",
+    "play_animation": "Play animation",
+    "pause_animation": "Pause animation"
   },
   "external_mail": {
     "sender_label": "External",

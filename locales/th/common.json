@@ -1704,7 +1704,9 @@
     "preview_named": "ดูตัวอย่าง {name}",
     "show_as_plain_text": "แสดงเป็นข้อความธรรมดา",
     "show_formatted": "แสดงแบบมีรูปแบบ",
-    "shown_as_plain_text": "ข้อความนี้แสดงเป็นข้อความธรรมดา"
+    "shown_as_plain_text": "ข้อความนี้แสดงเป็นข้อความธรรมดา",
+    "play_animation": "เล่นภาพเคลื่อนไหว",
+    "pause_animation": "หยุดภาพเคลื่อนไหวชั่วคราว"
   },
   "external_mail": {
     "sender_label": "ภายนอก",

@@ -774,7 +774,9 @@
     "preview_named": "Pré-visualizar {name}",
     "show_as_plain_text": "Mostrar como texto simples",
     "show_formatted": "Mostrar formatado",
-    "shown_as_plain_text": "Esta mensagem é mostrada como texto simples."
+    "shown_as_plain_text": "Esta mensagem é mostrada como texto simples.",
+    "play_animation": "Reproduzir animação",
+    "pause_animation": "Pausar animação"
   },
   "external_mail": {
     "sender_label": "Externo",

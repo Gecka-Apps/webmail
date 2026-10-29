@@ -8,6 +8,7 @@ import { TRANSPARENT_BLOCKED_PIXEL, applyNewTabToAnchor, emailIframeCsp, escapeH
 import { getRenderableHtmlBody } from "@/lib/email-body-selection";
 import { mailLanguage } from "@/lib/mail-language";
 import { htmlToReadableText } from "@/lib/html-to-readable-text";
+import { pauseAnimatedImages } from "@/lib/animated-images";
 import { applyMailTextSize, mailFitOptions } from "@/lib/mail-reading";
 import { useMailReading } from "@/hooks/use-mail-reading";
 import { collectReferencedCids, isEmbeddedInBody, normalizeCid, rewriteCidReferences } from "@/lib/attachment-visibility";
@@ -3443,6 +3444,11 @@ export function EmailViewer({
           unjustify: readingRef.current.overrideStyles,
           sizesFromCss: readingRef.current.overrideStyles,
         });
+        // Animated images as a still frame with a Play button. Before the
+        // link wiring below: its click listener has to see the button first.
+        if (readingRef.current.pauseImages) {
+          pauseAnimatedImages(doc, { play: t('play_animation'), pause: t('pause_animation') });
+        }
 
         // Before the height wiring and after the quote toggle exists, so the
         // toggle is converted too. Reads the mail's computed colours and

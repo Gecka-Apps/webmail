@@ -254,3 +254,23 @@ describe('HTML mail as plain text', () => {
     expect(container.querySelector('iframe')).not.toBeNull();
   });
 });
+
+describe('pausing animated images', () => {
+  const frameKey = async () => {
+    const { container } = await show(message({ html: '<p>Look <img src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="x"></p>' }));
+    return /data-reading="([^"]*)"/.exec(container.querySelector('iframe')!.getAttribute('srcdoc')!)?.[1];
+  };
+
+  it('follows reduce motion by default', async () => {
+    expect(await frameKey()).not.toContain('/p');
+    media.matches.add('(prefers-reduced-motion: reduce)');
+    expect(await frameKey()).toContain('/p');
+  });
+
+  it('can be turned on or off on its own', async () => {
+    useSettingsStore.setState({ pauseAnimatedImages: 'on' } as never);
+    expect(await frameKey()).toContain('/p');
+    useSettingsStore.setState({ pauseAnimatedImages: 'off', reduceMotion: 'on' } as never);
+    expect(await frameKey()).not.toContain('/p');
+  });
+});

@@ -31,6 +31,8 @@ export interface MailReading {
   forcedColors: boolean;
   /** Reduce motion, resolved: stop animations inside the mail too. */
   reduceMotion: boolean;
+  /** Show animated images as a still frame with a Play button. */
+  pauseImages: boolean;
   /** The sender's fonts, sizes and colours give way to the app's. */
   overrideStyles: boolean;
   /** Reading width "comfortable": lines of about 80 characters. */
@@ -76,6 +78,7 @@ export function useMailReading(): MailReading {
     underlineLinks: state.underlineLinks,
     readingWidth: state.readingWidth,
     mailFitWidth: state.mailFitWidth,
+    pauseAnimatedImages: state.pauseAnimatedImages,
   })));
   // The theme's colours are read from the page, so a theme change re-reads them.
   const theme = useThemeStore((state) => `${state.resolvedTheme}/${state.activeThemeId ?? ''}`);
@@ -87,6 +90,8 @@ export function useMailReading(): MailReading {
     const textFactor = mailTextFactor(s.mailTextScale, s.fontSize);
     const minFontSize = s.mailMinFontSize || 0;
     const reduceMotion = resolveSystemToggle(s.reduceMotion, systemReducedMotion);
+    // "System" follows reduce motion, which itself may follow the OS.
+    const pauseImages = resolveSystemToggle(s.pauseAnimatedImages, reduceMotion);
     const overrideStyles = mailOverrideActive(s.mailOverrideStyles, s.contrast, systemMoreContrast);
     let override: MailOverride | null = null;
     let fontFaces = { css: '', sources: [] as string[] };
@@ -111,11 +116,12 @@ export function useMailReading(): MailReading {
       fitWidth: s.mailFitWidth,
       forcedColors,
       reduceMotion,
+      pauseImages,
       overrideStyles,
       plainFontSize: (basePx: number) => plainBodyFontSize(basePx, s.mailTextScale, s.fontSize, minFontSize),
       frameCss: mailFrameCss({ reduceMotion, underlineLinks: s.underlineLinks, comfortableWidth, override, fontFaceCss: fontFaces.css }),
       fontSources: fontFaces.sources,
-      frameKey: `${textFactor}/${minFontSize}${overrideStyles ? '/o' : ''}${s.mailFitWidth ? '/f' : ''}`,
+      frameKey: `${textFactor}/${minFontSize}${overrideStyles ? '/o' : ''}${s.mailFitWidth ? '/f' : ''}${pauseImages ? '/p' : ''}`,
     };
     // `theme` only marks that the page's colours changed.
     // eslint-disable-next-line react-hooks/exhaustive-deps

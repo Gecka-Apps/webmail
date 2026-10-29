@@ -774,7 +774,9 @@
     "preview_named": "Voorbeeld van {name}",
     "show_as_plain_text": "Als platte tekst weergeven",
     "show_formatted": "Opgemaakt weergeven",
-    "shown_as_plain_text": "Dit bericht wordt als platte tekst weergegeven."
+    "shown_as_plain_text": "Dit bericht wordt als platte tekst weergegeven.",
+    "play_animation": "Animatie afspelen",
+    "pause_animation": "Animatie pauzeren"
   },
   "external_mail": {
     "sender_label": "Extern",

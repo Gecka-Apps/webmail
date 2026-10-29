@@ -774,7 +774,9 @@
     "preview_named": "{name} előnézete",
     "show_as_plain_text": "Megjelenítés egyszerű szövegként",
     "show_formatted": "Megjelenítés formázva",
-    "shown_as_plain_text": "Ez az üzenet egyszerű szövegként jelenik meg."
+    "shown_as_plain_text": "Ez az üzenet egyszerű szövegként jelenik meg.",
+    "play_animation": "Animáció lejátszása",
+    "pause_animation": "Animáció szüneteltetése"
   },
   "external_mail": {
     "sender_label": "Külső",

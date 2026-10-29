@@ -17,6 +17,7 @@ import { collapsePlainTextQuotes, setupQuoteCollapse } from "@/lib/quote-collaps
 import { fitEmailBodyWidth } from "@/lib/email-fit-width";
 import { mailLanguage } from "@/lib/mail-language";
 import { htmlToReadableText } from "@/lib/html-to-readable-text";
+import { pauseAnimatedImages } from "@/lib/animated-images";
 import { applyMailTextSize, mailFitOptions } from "@/lib/mail-reading";
 import { useMailReading } from "@/hooks/use-mail-reading";
 import { DARK_PENDING_CLASS, applyEmailDarkMode, emailDarkModeCss } from "@/lib/email-dark-mode";
@@ -857,6 +858,10 @@ export function ConversationEmailBody({
         unjustify: reading.overrideStyles,
         sizesFromCss: reading.overrideStyles,
       });
+      // Before the link handling: a Play button inside a link must not open it.
+      if (reading.pauseImages) {
+        pauseAnimatedImages(doc, { play: t('email_viewer.play_animation'), pause: t('email_viewer.pause_animation') });
+      }
       if (isDark) applyEmailDarkMode(doc, { remoteContentAllowed: allowExternal });
       const resize = () => {
         // Fit desktop-width mail to the screen before measuring: the transform
@@ -902,7 +907,7 @@ export function ConversationEmailBody({
     } catch {
       // contentDocument may be inaccessible under stricter sandboxes; ignore.
     }
-  }, [t, isDark, allowExternal, email.id, selectionMenu.openRef, reading.textFactor, reading.minFontSize, reading.overrideStyles, reading.fitWidth]);
+  }, [t, isDark, allowExternal, email.id, selectionMenu.openRef, reading.textFactor, reading.minFontSize, reading.overrideStyles, reading.fitWidth, reading.pauseImages]);
 
   return (
     <div className={className}>

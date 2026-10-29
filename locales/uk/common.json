@@ -774,7 +774,9 @@
     "preview_named": "Переглянути {name}",
     "show_as_plain_text": "Показати як звичайний текст",
     "show_formatted": "Показати з форматуванням",
-    "shown_as_plain_text": "Цей лист показано як звичайний текст."
+    "shown_as_plain_text": "Цей лист показано як звичайний текст.",
+    "play_animation": "Відтворити анімацію",
+    "pause_animation": "Призупинити анімацію"
   },
   "external_mail": {
     "sender_label": "Зовнішнє",

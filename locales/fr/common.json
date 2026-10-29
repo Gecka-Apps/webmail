@@ -774,7 +774,9 @@
     "preview_named": "Aperçu de {name}",
     "show_as_plain_text": "Afficher en texte brut",
     "show_formatted": "Afficher la mise en forme",
-    "shown_as_plain_text": "Ce message est affiché en texte brut."
+    "shown_as_plain_text": "Ce message est affiché en texte brut.",
+    "play_animation": "Lire l'animation",
+    "pause_animation": "Mettre l'animation en pause"
   },
   "external_mail": {
     "sender_label": "Externe",

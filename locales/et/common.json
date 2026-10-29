@@ -774,7 +774,9 @@
     "preview_named": "Eelvaade: {name}",
     "show_as_plain_text": "Näita lihttekstina",
     "show_formatted": "Näita vormindatult",
-    "shown_as_plain_text": "Seda kirja näidatakse lihttekstina."
+    "shown_as_plain_text": "Seda kirja näidatakse lihttekstina.",
+    "play_animation": "Esita animatsioon",
+    "pause_animation": "Peata animatsioon"
   },
   "external_mail": {
     "sender_label": "Väline",

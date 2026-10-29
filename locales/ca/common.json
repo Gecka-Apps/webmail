@@ -774,7 +774,9 @@
     "preview_named": "Previsualitza {name}",
     "show_as_plain_text": "Mostra com a text sense format",
     "show_formatted": "Mostra amb format",
-    "shown_as_plain_text": "Aquest missatge es mostra com a text sense format."
+    "shown_as_plain_text": "Aquest missatge es mostra com a text sense format.",
+    "play_animation": "Reprodueix l'animació",
+    "pause_animation": "Posa en pausa l'animació"
   },
   "external_mail": {
     "sender_label": "Extern",

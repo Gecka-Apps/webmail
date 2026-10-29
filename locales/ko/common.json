@@ -774,7 +774,9 @@
     "preview_named": "{name} 미리보기",
     "show_as_plain_text": "일반 텍스트로 보기",
     "show_formatted": "서식 있게 보기",
-    "shown_as_plain_text": "이 메시지는 일반 텍스트로 표시됩니다."
+    "shown_as_plain_text": "이 메시지는 일반 텍스트로 표시됩니다.",
+    "play_animation": "애니메이션 재생",
+    "pause_animation": "애니메이션 일시 중지"
   },
   "external_mail": {
     "sender_label": "외부",

@@ -774,7 +774,9 @@
     "preview_named": "Podgląd {name}",
     "show_as_plain_text": "Pokaż jako zwykły tekst",
     "show_formatted": "Pokaż z formatowaniem",
-    "shown_as_plain_text": "Ta wiadomość jest wyświetlana jako zwykły tekst."
+    "shown_as_plain_text": "Ta wiadomość jest wyświetlana jako zwykły tekst.",
+    "play_animation": "Odtwórz animację",
+    "pause_animation": "Wstrzymaj animację"
   },
   "external_mail": {
     "sender_label": "Zewnętrzny",

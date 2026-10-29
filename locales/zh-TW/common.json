@@ -774,7 +774,9 @@
     "preview_named": "預覽 {name}",
     "show_as_plain_text": "以純文字顯示",
     "show_formatted": "以格式顯示",
-    "shown_as_plain_text": "此郵件以純文字顯示。"
+    "shown_as_plain_text": "此郵件以純文字顯示。",
+    "play_animation": "播放動畫",
+    "pause_animation": "暫停動畫"
   },
   "external_mail": {
     "sender_label": "外部",

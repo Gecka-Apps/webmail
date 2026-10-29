@@ -774,7 +774,9 @@
     "preview_named": "معاينة {name}",
     "show_as_plain_text": "العرض كنص عادي",
     "show_formatted": "العرض منسقًا",
-    "shown_as_plain_text": "تُعرض هذه الرسالة كنص عادي."
+    "shown_as_plain_text": "تُعرض هذه الرسالة كنص عادي.",
+    "play_animation": "تشغيل الرسوم المتحركة",
+    "pause_animation": "إيقاف الرسوم المتحركة مؤقتًا"
   },
   "external_mail": {
     "sender_label": "خارجي",

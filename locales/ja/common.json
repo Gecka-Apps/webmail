@@ -774,7 +774,9 @@
     "preview_named": "{name} をプレビュー",
     "show_as_plain_text": "プレーンテキストで表示",
     "show_formatted": "書式付きで表示",
-    "shown_as_plain_text": "このメッセージはプレーンテキストで表示されています。"
+    "shown_as_plain_text": "このメッセージはプレーンテキストで表示されています。",
+    "play_animation": "アニメーションを再生",
+    "pause_animation": "アニメーションを一時停止"
   },
   "external_mail": {
     "sender_label": "外部",

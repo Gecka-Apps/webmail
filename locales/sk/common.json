@@ -774,7 +774,9 @@
     "preview_named": "Náhľad {name}",
     "show_as_plain_text": "Zobraziť ako obyčajný text",
     "show_formatted": "Zobraziť formátovane",
-    "shown_as_plain_text": "Táto správa sa zobrazuje ako obyčajný text."
+    "shown_as_plain_text": "Táto správa sa zobrazuje ako obyčajný text.",
+    "play_animation": "Prehrať animáciu",
+    "pause_animation": "Pozastaviť animáciu"
   },
   "external_mail": {
     "sender_label": "Externé",

@@ -774,7 +774,9 @@
     "preview_named": "Previzualizați {name}",
     "show_as_plain_text": "Afișați ca text simplu",
     "show_formatted": "Afișați formatat",
-    "shown_as_plain_text": "Acest mesaj este afișat ca text simplu."
+    "shown_as_plain_text": "Acest mesaj este afișat ca text simplu.",
+    "play_animation": "Redați animația",
+    "pause_animation": "Întrerupeți animația"
   },
   "external_mail": {
     "sender_label": "Extern",

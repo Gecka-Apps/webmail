@@ -774,7 +774,9 @@
     "preview_named": "Предпросмотр {name}",
     "show_as_plain_text": "Показать как обычный текст",
     "show_formatted": "Показать с форматированием",
-    "shown_as_plain_text": "Это письмо показано как обычный текст."
+    "shown_as_plain_text": "Это письмо показано как обычный текст.",
+    "play_animation": "Воспроизвести анимацию",
+    "pause_animation": "Приостановить анимацию"
   },
   "external_mail": {
     "sender_label": "Внешнее",
