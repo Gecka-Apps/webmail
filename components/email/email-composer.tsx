@@ -51,7 +51,7 @@ import { cn, formatFileSize, formatDateTime, generateUUID } from "@/lib/utils";
 import { ScheduleSendDialog } from "./schedule-send-dialog";
 import { debug } from "@/lib/debug";
 import { toast } from "@/stores/toast-store";
-import { useContextMenu } from "@/hooks/use-context-menu";
+import { useContextMenu, isContextMenuKey } from "@/hooks/use-context-menu";
 import { ContextMenu, ContextMenuItem, ContextMenuSeparator } from "@/components/ui/context-menu";
 import { sanitizeSignatureHtml, sanitizeSignatureHtmlForDisplay, sanitizeEmailHtml, escapeHtml, sanitizePluginBodyHtml } from "@/lib/email-sanitization";
 import { buildReplySubject, buildForwardSubject } from "@/lib/subject-prefix";
@@ -139,6 +139,7 @@ import type { ComposePrefill } from "@/lib/plugin-compose-gate";
 import { composerContextMode, composerMounted, composerUnmounted, draftSaved } from "@/lib/plugin-composer-hooks";
 import { isValidEmail } from "@/lib/validation";
 import { buildMentionCandidates, type MentionCandidate } from "@/lib/recipient-mentions";
+import { describeRecipientChanges, recipientDisplayName, type RecipientChange, type RecipientFields } from "@/lib/recipient-announcements";
 import { normalizeCid } from "@/lib/attachment-visibility";
 import { RichTextEditor } from "@/components/email/rich-text-editor";
 import { isRecipientMentionActive } from "@/components/email/recipient-mention";
@@ -828,6 +829,34 @@ export function EmailComposer({
   const [toInput, setToInput] = useState('');
   const [ccInput, setCcInput] = useState('');
   const [bccInput, setBccInput] = useState('');
+
+  // The composer's polite live region: recipients added, removed or moved,
+  // uploads that failed. `n` makes a repeated message a new node, so it is
+  // read again.
+  const [liveMessage, setLiveMessage] = useState<{ text: string; n: number } | null>(null);
+  const announce = useCallback((text: string) => {
+    setLiveMessage((prev) => ({ text, n: (prev?.n ?? 0) + 1 }));
+  }, []);
+  const fieldIdBase = React.useId();
+  const fieldLabelId = (field: 'to' | 'cc' | 'bcc') => `${fieldIdBase}-${field}-label`;
+  const recipientFieldsRef = useRef<RecipientFields>({ to, cc, bcc });
+  useEffect(() => {
+    const changes = describeRecipientChanges(recipientFieldsRef.current, { to, cc, bcc });
+    recipientFieldsRef.current = { to, cc, bcc };
+    if (changes.length === 0) return;
+    const fieldName = (field: 'to' | 'cc' | 'bcc') => t(field);
+    const sentence = (change: RecipientChange) => {
+      const field = fieldName(change.field);
+      if (change.names.length > 3) {
+        const key = change.kind === 'added' ? 'recipients_added_count' : change.kind === 'removed' ? 'recipients_removed_count' : 'recipients_moved_count';
+        return t(key, { count: change.names.length, field });
+      }
+      const name = change.names.join(', ');
+      const key = change.kind === 'added' ? 'recipient_added' : change.kind === 'removed' ? 'recipient_removed' : 'recipient_moved';
+      return t(key, { name, field });
+    };
+    announce(changes.map(sentence).join('. '));
+  }, [to, cc, bcc, t, announce]);
   const [subject, setSubject] = useState(() => initialData?.subject ?? prefill?.subject ?? getInitialSubject());
   const [body, setBody] = useState(() =>
     initialData?.body != null ? withSignatureEmbedded(initialData.body) : getInitialBody()
@@ -3856,6 +3885,9 @@ export function EmailComposer({
       className={cn("flex h-full bg-background relative", className)}
       onKeyDownCapture={handleComposerKeyDown}
     >
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only" data-testid="composer-live-region">
+        {liveMessage && <span key={liveMessage.n}>{liveMessage.text}</span>}
+      </div>
       <ComposerPluginSidebar side="left" mode={pluginSidebars.modes.left} onOpen={() => pluginSidebars.open('left')} onClose={() => pluginSidebars.close('left')} extraProps={pluginSidebarLeftProps} width={pluginSidebars.widths.left} onWidthChange={(w) => pluginSidebars.setSideWidth('left', w)} />
       {/* Right-side composer sidebar slot is rendered after the main content div below. */}
     <div
@@ -4175,8 +4207,9 @@ export function EmailComposer({
 
           {/* To field */}
           <div data-testid="composer-to" className={cn("flex items-center gap-2 px-4 py-2.5 border-b border-border/50 relative", shakeField === 'to' && "animate-shake")}>
-            <span className="text-sm text-muted-foreground w-12 md:w-16 shrink-0">{t('to')}:</span>
+            <span id={fieldLabelId('to')} className="text-sm text-muted-foreground w-12 md:w-16 shrink-0">{t('to')}:</span>
             <RecipientChipInput
+              labelId={fieldLabelId('to')}
               chips={to}
               onChipsChange={(next) => {
                 setTo(next);
@@ -4274,8 +4307,9 @@ export function EmailComposer({
           {/* Cc field */}
           {showCc && (
             <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border/50 relative">
-              <span className="text-sm text-muted-foreground w-12 md:w-16 shrink-0">{t('cc_label')}</span>
+              <span id={fieldLabelId('cc')} className="text-sm text-muted-foreground w-12 md:w-16 shrink-0">{t('cc_label')}</span>
               <RecipientChipInput
+                labelId={fieldLabelId('cc')}
                 chips={cc}
                 onChipsChange={setCc}
                 inputText={ccInput}
@@ -4304,8 +4338,9 @@ export function EmailComposer({
           {/* Bcc field */}
           {showBcc && (
             <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border/50 relative">
-              <span className="text-sm text-muted-foreground w-12 md:w-16 shrink-0">{t('bcc_label')}</span>
+              <span id={fieldLabelId('bcc')} className="text-sm text-muted-foreground w-12 md:w-16 shrink-0">{t('bcc_label')}</span>
               <RecipientChipInput
+                labelId={fieldLabelId('bcc')}
                 chips={bcc}
                 onChipsChange={setBcc}
                 inputText={bccInput}
@@ -4333,8 +4368,9 @@ export function EmailComposer({
 
           {/* Subject field */}
           <div className="flex items-center gap-2 px-4 py-2.5">
-            <span className="text-sm text-muted-foreground w-12 md:w-16 shrink-0">{t('subject_label')}</span>
+            <label htmlFor={`${fieldIdBase}-subject`} className="text-sm text-muted-foreground w-12 md:w-16 shrink-0">{t('subject_label')}</label>
             <Input
+              id={`${fieldIdBase}-subject`}
               ref={subjectInputRef}
               data-testid="composer-subject"
               type="text"
@@ -5075,7 +5111,8 @@ const AutocompleteDropdown = React.forwardRef<HTMLDivElement, {
   );
 });
 
-function RecipientChipInput({
+export function RecipientChipInput({
+  labelId,
   chips,
   onChipsChange,
   inputText,
@@ -5101,6 +5138,8 @@ function RecipientChipInput({
   onTab,
   onMoveChip,
 }: {
+  /** The id of the field's visible label ("To:"), which names the input and the chip list. */
+  labelId: string;
   chips: Recipient[];
   onChipsChange: (chips: Recipient[]) => void;
   inputText: string;
@@ -5127,8 +5166,68 @@ function RecipientChipInput({
   onMoveChip: (recipient: Recipient, fromField: 'to' | 'cc' | 'bcc', toField: 'to' | 'cc' | 'bcc', toIndex?: number) => void;
 }) {
   const t = useTranslations('email_composer');
-  const { contextMenu, openContextMenu, closeContextMenu, menuRef } = useContextMenu<{ index: number; recipient: Recipient }>();
+  const { contextMenu, openContextMenu, openContextMenuFrom, closeContextMenu, menuRef } = useContextMenu<{ index: number; recipient: Recipient }>();
   const [editingChip, setEditingChip] = useState<{ index: number; editType: 'email' | 'name' } | null>(null);
+  // The chip that holds the list's one Tab stop (roving tabindex). The last
+  // one by default: Shift+Tab from the input lands next to it.
+  const [rovingChip, setRovingChip] = useState<number | null>(null);
+  const chipRefs = useRef<Array<HTMLElement | null>>([]);
+  const errorId = `${labelId}-error`;
+  const chipHintId = `${labelId}-chip-hint`;
+  const tabChip = chips.length === 0 ? -1 : Math.min(rovingChip ?? chips.length - 1, chips.length - 1);
+
+  const focusChip = (index: number) => {
+    if (index < 0 || index >= chips.length) return;
+    setRovingChip(index);
+    chipRefs.current[index]?.focus();
+  };
+
+  // A chip removed by keyboard hands the focus to the one that took its
+  // place, else the one before it, else the input.
+  const removeChipAndRefocus = (index: number) => {
+    const remaining = chips.length - 1;
+    onChipsChange(chips.filter((_, i) => i !== index));
+    if (remaining <= 0) {
+      setRovingChip(null);
+      setTimeout(() => inputRef.current?.focus(), 0);
+      return;
+    }
+    const next = Math.min(index, remaining - 1);
+    setRovingChip(next);
+    setTimeout(() => chipRefs.current[next]?.focus(), 0);
+  };
+
+  const openChipMenu = (index: number) => {
+    const el = chipRefs.current[index];
+    if (el) openContextMenuFrom(el, { index, recipient: chips[index] });
+  };
+
+  const handleChipKeyDown = (e: React.KeyboardEvent<HTMLElement>, index: number) => {
+    if (e.target !== e.currentTarget) return;
+    const rtl = typeof window !== 'undefined' && getComputedStyle(e.currentTarget).direction === 'rtl';
+    const back = rtl ? 'ArrowRight' : 'ArrowLeft';
+    const forward = rtl ? 'ArrowLeft' : 'ArrowRight';
+    if (e.key === back || e.key === 'ArrowUp') {
+      e.preventDefault();
+      focusChip(Math.max(0, index - 1));
+    } else if (e.key === forward || e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (index + 1 < chips.length) focusChip(index + 1);
+      else inputRef.current?.focus();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      focusChip(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      focusChip(chips.length - 1);
+    } else if (e.key === 'Delete' || e.key === 'Backspace') {
+      e.preventDefault();
+      removeChipAndRefocus(index);
+    } else if (e.key === 'Enter' || e.key === ' ' || e.key === 'F2' || isContextMenuKey(e)) {
+      e.preventDefault();
+      openChipMenu(index);
+    }
+  };
   const [editValue, setEditValue] = useState('');
   const [isDragOver, setIsDragOver] = useState(false);
   const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
@@ -5270,6 +5369,17 @@ function RecipientChipInput({
     if (e.key === 'Tab' && !e.shiftKey && onTab) {
       e.preventDefault();
       onTab();
+      return;
+    }
+
+    // ← at the start of the input steps onto the last chip (→ in RTL).
+    const caretAtStart = e.target instanceof HTMLInputElement
+      && e.target.selectionStart === 0 && e.target.selectionEnd === 0;
+    const rtl = typeof window !== 'undefined' && e.target instanceof Element
+      && getComputedStyle(e.target).direction === 'rtl';
+    if (e.key === (rtl ? 'ArrowRight' : 'ArrowLeft') && caretAtStart && chips.length > 0) {
+      e.preventDefault();
+      focusChip(chips.length - 1);
       return;
     }
 
@@ -5423,6 +5533,12 @@ function RecipientChipInput({
         onDragLeave={handleContainerDragLeave}
         onDrop={handleContainerDrop}
       >
+        {/* The chips are a list with one Tab stop: arrows move between them,
+            Delete removes one, Enter opens its menu. `contents` keeps them
+            flowing with the input in the one wrapping row. */}
+        {chips.length > 0 && <span id={chipHintId} hidden>{t('recipient_chip_hint')}</span>}
+        {chips.length > 0 && (
+        <div role="list" aria-labelledby={labelId} className="contents" data-testid={`recipient-chips-${field}`}>
         {chips.map((chip, i) => {
           const isEditing = editingChip?.index === i;
           const chipDisplay = formatChipDisplay(chip);
@@ -5469,7 +5585,16 @@ function RecipientChipInput({
               onContextMenu={isEditing ? undefined : (e) => handleContextMenu(e, i, chip)}
               data-invalid={isInvalid || undefined}
               title={isInvalid ? t('invalid_recipient') : undefined}
+              role="listitem"
+              ref={(el) => { chipRefs.current[i] = el; }}
+              tabIndex={isEditing ? undefined : i === tabChip ? 0 : -1}
+              aria-describedby={isEditing ? undefined : chipHintId}
+              onFocus={(e) => { if (e.target === e.currentTarget) setRovingChip(i); }}
+              onKeyDown={isEditing ? undefined : (e) => handleChipKeyDown(e, i)}
             >
+              {isInvalid && !IconComponent && (
+                <AlertCircle className="w-3.5 h-3.5 shrink-0 text-destructive" aria-hidden />
+              )}
               {IconComponent ? (
                                 <IconComponent
                    className={cn(
@@ -5519,12 +5644,13 @@ function RecipientChipInput({
                 >
                   {chip.group && <Users className="w-3 h-3 shrink-0" aria-hidden />}
                   <span className="truncate">{chipDisplay}</span>
+                  {isInvalid && <span className="sr-only">{`, ${t('invalid_recipient')}`}</span>}
                 </span>
               )}
               <button
                 type="button"
                 className={cn("flex items-center justify-center w-4 h-4 rounded-full hover:bg-muted-foreground/20 transition-colors", TOUCH_HIT_AREA)}
-                aria-label={t('recipient_remove')}
+                aria-label={isEditing ? t('recipient_remove') : t('recipient_remove_named', { name: recipientDisplayName(chip) })}
                 onClick={(e) => {
                   e.stopPropagation();
                   if (isEditing) {
@@ -5545,6 +5671,8 @@ function RecipientChipInput({
             </React.Fragment>
           );
         })}
+        </div>
+        )}
         {dropIndex === chips.length && chips.length > 0 && (
           <span
             aria-hidden
@@ -5574,7 +5702,9 @@ function RecipientChipInput({
             aria-autocomplete="list"
             aria-controls={activeAutoField === field ? `autocomplete-${field}` : undefined}
             aria-activedescendant={highlightIndex >= 0 ? `autocomplete-option-${highlightIndex}` : undefined}
+            aria-labelledby={labelId}
             aria-invalid={validationError || undefined}
+            aria-describedby={validationError && validationMessage ? errorId : undefined}
             data-bwignore="true"
             data-1p-ignore
             data-op-ignore
@@ -5584,7 +5714,10 @@ function RecipientChipInput({
         )}
       </div>
       {validationError && validationMessage && (
-        <p className="text-xs text-red-600 dark:text-red-400 mt-0.5">{validationMessage}</p>
+        <p id={errorId} className="flex items-center gap-1 text-xs text-red-600 dark:text-red-400 mt-0.5">
+          <AlertCircle className="w-3.5 h-3.5 shrink-0" aria-hidden />
+          {validationMessage}
+        </p>
       )}
       {activeAutoField === field &&
         (autocompleteResults.length > 0 || (canSearchServer && serverSearchQuery.length > 0)) && (
@@ -5603,6 +5736,7 @@ function RecipientChipInput({
         position={contextMenu.position}
         onClose={closeContextMenu}
         ref={menuRef}
+        label={contextMenu.data ? recipientDisplayName(contextMenu.data.recipient) : undefined}
       >
         {contextMenu.data && (
           <>
@@ -5620,6 +5754,8 @@ function RecipientChipInput({
                 handleChipRemove(contextMenu.data.index, { stopPropagation: () => {} } as React.MouseEvent);
               }
               closeContextMenu();
+              setRovingChip(null);
+              setTimeout(() => inputRef.current?.focus(), 0);
             }} destructive />
           </>
         )}

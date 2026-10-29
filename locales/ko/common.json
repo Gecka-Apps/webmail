@@ -1000,7 +1000,15 @@
     "pop_out": "답장을 별도 창에서 열기",
     "send_guard_failed": "보내지 않았습니다 - 보내기 전에 메시지를 확인하는 플러그인이 실패했거나 응답하지 않았습니다.",
     "cut": "잘라내기",
-    "copy": "복사"
+    "copy": "복사",
+    "recipient_remove_named": "{name} 제거",
+    "recipient_chip_hint": "Delete 키로 제거하고 Enter 키로 다른 옵션을 열 수 있어요",
+    "recipient_added": "{name}을(를) {field}에 추가했어요",
+    "recipient_removed": "{name}을(를) {field}에서 제거했어요",
+    "recipient_moved": "{name}을(를) {field}(으)로 옮겼어요",
+    "recipients_added_count": "{field}에 {count, plural, other {받는 사람 #명}}을 추가했어요",
+    "recipients_removed_count": "{field}에서 {count, plural, other {받는 사람 #명}}을 제거했어요",
+    "recipients_moved_count": "{field}(으)로 {count, plural, other {받는 사람 #명}}을 옮겼어요"
   },
   "confirm_dialog": {
     "confirm": "확인",

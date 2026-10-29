@@ -1000,7 +1000,15 @@
     "pop_out": "Atvērt atbildi atsevišķā logā",
     "send_guard_failed": "Nav nosūtīts - spraudnis, kas pārbauda ziņojumus pirms sūtīšanas, neizdevās vai neatbildēja.",
     "cut": "Izgriezt",
-    "copy": "Kopēt"
+    "copy": "Kopēt",
+    "recipient_remove_named": "Noņemt {name}",
+    "recipient_chip_hint": "Delete to noņem, Enter atver citas iespējas",
+    "recipient_added": "{name} pievienots laukam {field}",
+    "recipient_removed": "{name} noņemts no lauka {field}",
+    "recipient_moved": "{name} pārvietots uz {field}",
+    "recipients_added_count": "Laukam {field} {count, plural, zero {pievienoti # adresāti} one {pievienots # adresāts} other {pievienoti # adresāti}}",
+    "recipients_removed_count": "No lauka {field} {count, plural, zero {noņemti # adresāti} one {noņemts # adresāts} other {noņemti # adresāti}}",
+    "recipients_moved_count": "Uz {field} {count, plural, zero {pārvietoti # adresāti} one {pārvietots # adresāts} other {pārvietoti # adresāti}}"
   },
   "confirm_dialog": {
     "confirm": "Apstiprināt",

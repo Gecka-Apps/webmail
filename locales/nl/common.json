@@ -1000,7 +1000,15 @@
     "pop_out": "Antwoord in een apart venster openen",
     "send_guard_failed": "Niet verzonden - een plug-in die berichten controleert voor het verzenden is mislukt of reageerde niet.",
     "cut": "Knippen",
-    "copy": "Kopiëren"
+    "copy": "Kopiëren",
+    "recipient_remove_named": "{name} verwijderen",
+    "recipient_chip_hint": "Delete verwijdert de ontvanger, Enter opent meer opties",
+    "recipient_added": "{name} toegevoegd aan {field}",
+    "recipient_removed": "{name} verwijderd uit {field}",
+    "recipient_moved": "{name} verplaatst naar {field}",
+    "recipients_added_count": "{count, plural, one {# ontvanger} other {# ontvangers}} toegevoegd aan {field}",
+    "recipients_removed_count": "{count, plural, one {# ontvanger} other {# ontvangers}} verwijderd uit {field}",
+    "recipients_moved_count": "{count, plural, one {# ontvanger} other {# ontvangers}} verplaatst naar {field}"
   },
   "confirm_dialog": {
     "confirm": "Bevestigen",

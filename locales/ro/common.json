@@ -1000,7 +1000,15 @@
     "pop_out": "Deschide răspunsul într-o fereastră",
     "send_guard_failed": "Nu s-a trimis - un plugin care verifică mesajele înainte de trimitere a eșuat sau nu a răspuns.",
     "cut": "Decupează",
-    "copy": "Copiază"
+    "copy": "Copiază",
+    "recipient_remove_named": "Elimină {name}",
+    "recipient_chip_hint": "Delete îl elimină, Enter deschide mai multe opțiuni",
+    "recipient_added": "{name} a fost adăugat la {field}",
+    "recipient_removed": "{name} a fost eliminat din {field}",
+    "recipient_moved": "{name} a fost mutat la {field}",
+    "recipients_added_count": "{count, plural, one {A fost adăugat # destinatar} few {Au fost adăugați # destinatari} other {Au fost adăugați # de destinatari}} la {field}",
+    "recipients_removed_count": "{count, plural, one {A fost eliminat # destinatar} few {Au fost eliminați # destinatari} other {Au fost eliminați # de destinatari}} din {field}",
+    "recipients_moved_count": "{count, plural, one {A fost mutat # destinatar} few {Au fost mutați # destinatari} other {Au fost mutați # de destinatari}} la {field}"
   },
   "confirm_dialog": {
     "confirm": "Confirmare",

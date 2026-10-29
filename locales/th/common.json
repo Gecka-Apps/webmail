@@ -1248,7 +1248,15 @@
     "reply_all_to": "ตอบกลับทั้งหมด",
     "reply_to": "ตอบกลับ",
     "send": "ส่ง",
-    "signature_edit_hint": "ดับเบิลคลิกเพื่อแก้ไขลายเซ็น"
+    "signature_edit_hint": "ดับเบิลคลิกเพื่อแก้ไขลายเซ็น",
+    "recipient_remove_named": "นำ {name} ออก",
+    "recipient_chip_hint": "กด Delete เพื่อนำออก กด Enter เพื่อเปิดตัวเลือกเพิ่มเติม",
+    "recipient_added": "เพิ่ม {name} ใน {field} แล้ว",
+    "recipient_removed": "นำ {name} ออกจาก {field} แล้ว",
+    "recipient_moved": "ย้าย {name} ไปที่ {field} แล้ว",
+    "recipients_added_count": "เพิ่มผู้รับ {count, plural, other {# คน}} ใน {field} แล้ว",
+    "recipients_removed_count": "นำผู้รับ {count, plural, other {# คน}} ออกจาก {field} แล้ว",
+    "recipients_moved_count": "ย้ายผู้รับ {count, plural, other {# คน}} ไปที่ {field} แล้ว"
   },
   "email_viewer": {
     "read_receipt": {

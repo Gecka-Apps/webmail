@@ -1000,7 +1000,15 @@
     "pop_out": "Відкрити відповідь в окремому вікні",
     "send_guard_failed": "Не надіслано: плагін, що перевіряє листи перед надсиланням, завершився з помилкою або не відповів.",
     "cut": "Вирізати",
-    "copy": "Копіювати"
+    "copy": "Копіювати",
+    "recipient_remove_named": "Прибрати {name}",
+    "recipient_chip_hint": "Delete прибирає одержувача, Enter відкриває інші дії",
+    "recipient_added": "{name}: додано в «{field}»",
+    "recipient_removed": "{name}: прибрано з «{field}»",
+    "recipient_moved": "{name}: переміщено в «{field}»",
+    "recipients_added_count": "У «{field}» {count, plural, one {додано # одержувача} few {додано # одержувачі} many {додано # одержувачів} other {додано # одержувача}}",
+    "recipients_removed_count": "З «{field}» {count, plural, one {прибрано # одержувача} few {прибрано # одержувачі} many {прибрано # одержувачів} other {прибрано # одержувача}}",
+    "recipients_moved_count": "У «{field}» {count, plural, one {переміщено # одержувача} few {переміщено # одержувачі} many {переміщено # одержувачів} other {переміщено # одержувача}}"
   },
   "confirm_dialog": {
     "confirm": "Підтвердити",

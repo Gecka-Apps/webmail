@@ -1000,7 +1000,15 @@
     "pop_out": "Válasz megnyitása külön ablakban",
     "send_guard_failed": "Nem lett elküldve - egy bővítmény, amely küldés előtt ellenőrzi az üzeneteket, hibát jelzett vagy nem válaszolt.",
     "cut": "Kivágás",
-    "copy": "Másolás"
+    "copy": "Másolás",
+    "recipient_remove_named": "{name} eltávolítása",
+    "recipient_chip_hint": "A Delete eltávolítja, az Enter további lehetőségeket nyit meg",
+    "recipient_added": "{name} hozzáadva ide: {field}",
+    "recipient_removed": "{name} eltávolítva innen: {field}",
+    "recipient_moved": "{name} áthelyezve ide: {field}",
+    "recipients_added_count": "{count, plural, one {# címzett} other {# címzett}} hozzáadva ide: {field}",
+    "recipients_removed_count": "{count, plural, one {# címzett} other {# címzett}} eltávolítva innen: {field}",
+    "recipients_moved_count": "{count, plural, one {# címzett} other {# címzett}} áthelyezve ide: {field}"
   },
   "confirm_dialog": {
     "confirm": "Megerősítés",

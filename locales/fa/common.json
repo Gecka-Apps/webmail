@@ -1000,7 +1000,15 @@
     "pop_out": "باز کردن پاسخ در پنجره جدا",
     "send_guard_failed": "ارسال نشد - افزونه‌ای که پیام‌ها را پیش از ارسال بررسی می‌کند ناموفق بود یا پاسخ نداد.",
     "cut": "برش",
-    "copy": "کپی"
+    "copy": "کپی",
+    "recipient_remove_named": "حذف {name}",
+    "recipient_chip_hint": "کلید Delete آن را حذف می‌کند و Enter گزینه‌های بیشتری باز می‌کند",
+    "recipient_added": "{name} به {field} افزوده شد",
+    "recipient_removed": "{name} از {field} حذف شد",
+    "recipient_moved": "{name} به {field} منتقل شد",
+    "recipients_added_count": "{count, plural, one {# گیرنده} other {# گیرنده}} به {field} افزوده شد",
+    "recipients_removed_count": "{count, plural, one {# گیرنده} other {# گیرنده}} از {field} حذف شد",
+    "recipients_moved_count": "{count, plural, one {# گیرنده} other {# گیرنده}} به {field} منتقل شد"
   },
   "confirm_dialog": {
     "confirm": "تأیید",

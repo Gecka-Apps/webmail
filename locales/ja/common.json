@@ -1000,7 +1000,15 @@
     "pop_out": "返信を別ウィンドウで開く",
     "send_guard_failed": "送信されませんでした - 送信前にメッセージを確認するプラグインが失敗したか、応答しませんでした。",
     "cut": "切り取り",
-    "copy": "コピー"
+    "copy": "コピー",
+    "recipient_remove_named": "{name} を削除",
+    "recipient_chip_hint": "Delete キーで削除、Enter キーでその他のオプション",
+    "recipient_added": "{name} を {field} に追加しました",
+    "recipient_removed": "{name} を {field} から削除しました",
+    "recipient_moved": "{name} を {field} に移動しました",
+    "recipients_added_count": "{count, plural, other {# 件の宛先}}を {field} に追加しました",
+    "recipients_removed_count": "{count, plural, other {# 件の宛先}}を {field} から削除しました",
+    "recipients_moved_count": "{count, plural, other {# 件の宛先}}を {field} に移動しました"
   },
   "confirm_dialog": {
     "confirm": "確認",

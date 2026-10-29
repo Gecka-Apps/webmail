@@ -1000,7 +1000,15 @@
     "pop_out": "Åbn svaret i et vindue",
     "send_guard_failed": "Ikke sendt - et plugin, der kontrollerer beskeder før afsendelse, fejlede eller svarede ikke.",
     "cut": "Klip",
-    "copy": "Kopiér"
+    "copy": "Kopiér",
+    "recipient_remove_named": "Fjern {name}",
+    "recipient_chip_hint": "Delete fjerner modtageren, Enter åbner flere muligheder",
+    "recipient_added": "{name} tilføjet til {field}",
+    "recipient_removed": "{name} fjernet fra {field}",
+    "recipient_moved": "{name} flyttet til {field}",
+    "recipients_added_count": "{count, plural, one {# modtager} other {# modtagere}} tilføjet til {field}",
+    "recipients_removed_count": "{count, plural, one {# modtager} other {# modtagere}} fjernet fra {field}",
+    "recipients_moved_count": "{count, plural, one {# modtager} other {# modtagere}} flyttet til {field}"
   },
   "confirm_dialog": {
     "confirm": "Bekræft",

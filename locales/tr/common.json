@@ -1000,7 +1000,15 @@
     "pop_out": "Yanıtı ayrı pencerede aç",
     "send_guard_failed": "Gönderilmedi - iletileri göndermeden önce denetleyen bir eklenti başarısız oldu veya yanıt vermedi.",
     "cut": "Kes",
-    "copy": "Kopyala"
+    "copy": "Kopyala",
+    "recipient_remove_named": "{name} kişisini kaldır",
+    "recipient_chip_hint": "Delete kaldırır, Enter diğer seçenekleri açar",
+    "recipient_added": "{name}, {field} alanına eklendi",
+    "recipient_removed": "{name}, {field} alanından kaldırıldı",
+    "recipient_moved": "{name}, {field} alanına taşındı",
+    "recipients_added_count": "{field} alanına {count, plural, one {# alıcı} other {# alıcı}} eklendi",
+    "recipients_removed_count": "{field} alanından {count, plural, one {# alıcı} other {# alıcı}} kaldırıldı",
+    "recipients_moved_count": "{field} alanına {count, plural, one {# alıcı} other {# alıcı}} taşındı"
   },
   "confirm_dialog": {
     "confirm": "Onayla",

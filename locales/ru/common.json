@@ -1000,7 +1000,15 @@
     "pop_out": "Открыть ответ в отдельном окне",
     "send_guard_failed": "Не отправлено: плагин, проверяющий письма перед отправкой, завершился с ошибкой или не ответил.",
     "cut": "Вырезать",
-    "copy": "Копировать"
+    "copy": "Копировать",
+    "recipient_remove_named": "Убрать {name}",
+    "recipient_chip_hint": "Delete убирает получателя, Enter открывает другие действия",
+    "recipient_added": "{name}: добавлен в «{field}»",
+    "recipient_removed": "{name}: убран из «{field}»",
+    "recipient_moved": "{name}: перемещён в «{field}»",
+    "recipients_added_count": "В «{field}» {count, plural, one {добавлен # получатель} few {добавлено # получателя} many {добавлено # получателей} other {добавлено # получателя}}",
+    "recipients_removed_count": "Из «{field}» {count, plural, one {убран # получатель} few {убрано # получателя} many {убрано # получателей} other {убрано # получателя}}",
+    "recipients_moved_count": "В «{field}» {count, plural, one {перемещён # получатель} few {перемещено # получателя} many {перемещено # получателей} other {перемещено # получателя}}"
   },
   "confirm_dialog": {
     "confirm": "Подтвердить",

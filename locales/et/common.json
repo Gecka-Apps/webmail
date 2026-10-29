@@ -1000,7 +1000,15 @@
     "pop_out": "Ava vastus eraldi aknas",
     "send_guard_failed": "Ei saadetud - kirju enne saatmist kontrolliv pistikprogramm ebaõnnestus või ei vastanud.",
     "cut": "Lõika",
-    "copy": "Kopeeri"
+    "copy": "Kopeeri",
+    "recipient_remove_named": "Eemalda {name}",
+    "recipient_chip_hint": "Delete eemaldab saaja, Enter avab rohkem valikuid",
+    "recipient_added": "{name} lisati väljale {field}",
+    "recipient_removed": "{name} eemaldati väljalt {field}",
+    "recipient_moved": "{name} teisaldati väljale {field}",
+    "recipients_added_count": "Väljale {field} lisati {count, plural, one {# saaja} other {# saajat}}",
+    "recipients_removed_count": "Väljalt {field} eemaldati {count, plural, one {# saaja} other {# saajat}}",
+    "recipients_moved_count": "Väljale {field} teisaldati {count, plural, one {# saaja} other {# saajat}}"
   },
   "confirm_dialog": {
     "confirm": "Kinnita",

@@ -1000,7 +1000,15 @@
     "pop_out": "Ouvrir la réponse dans une fenêtre",
     "send_guard_failed": "Non envoyé - un plugin qui vérifie les messages avant l'envoi a échoué ou n'a pas répondu.",
     "cut": "Couper",
-    "copy": "Copier"
+    "copy": "Copier",
+    "recipient_remove_named": "Retirer {name}",
+    "recipient_chip_hint": "Suppr le retire, Entrée ouvre d'autres options",
+    "recipient_added": "{name} ajouté à {field}",
+    "recipient_removed": "{name} retiré de {field}",
+    "recipient_moved": "{name} déplacé vers {field}",
+    "recipients_added_count": "{count, plural, one {# destinataire ajouté} other {# destinataires ajoutés}} à {field}",
+    "recipients_removed_count": "{count, plural, one {# destinataire retiré} other {# destinataires retirés}} de {field}",
+    "recipients_moved_count": "{count, plural, one {# destinataire déplacé} other {# destinataires déplacés}} vers {field}"
   },
   "confirm_dialog": {
     "confirm": "Confirmer",

@@ -1000,7 +1000,15 @@
     "pop_out": "Obre la resposta en una finestra",
     "send_guard_failed": "No s'ha enviat: un connector que revisa els missatges abans d'enviar-los ha fallat o no ha respost.",
     "cut": "Retalla",
-    "copy": "Copia"
+    "copy": "Copia",
+    "recipient_remove_named": "Treu {name}",
+    "recipient_chip_hint": "Supr el treu, Retorn obre més opcions",
+    "recipient_added": "S'ha afegit {name} a {field}",
+    "recipient_removed": "S'ha tret {name} de {field}",
+    "recipient_moved": "S'ha mogut {name} a {field}",
+    "recipients_added_count": "{count, plural, one {S'ha afegit # destinatari} other {S'han afegit # destinataris}} a {field}",
+    "recipients_removed_count": "{count, plural, one {S'ha tret # destinatari} other {S'han tret # destinataris}} de {field}",
+    "recipients_moved_count": "{count, plural, one {S'ha mogut # destinatari} other {S'han mogut # destinataris}} a {field}"
   },
   "confirm_dialog": {
     "confirm": "Confirma",

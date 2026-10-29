@@ -1000,7 +1000,15 @@
     "pop_out": "فتح الرد في نافذة منفصلة",
     "send_guard_failed": "لم يُرسَل - فشلت إضافة تفحص الرسائل قبل الإرسال أو لم تستجب.",
     "cut": "قص",
-    "copy": "نسخ"
+    "copy": "نسخ",
+    "recipient_remove_named": "إزالة {name}",
+    "recipient_chip_hint": "يزيله مفتاح Delete، ويفتح Enter خيارات أخرى",
+    "recipient_added": "تمت إضافة {name} إلى {field}",
+    "recipient_removed": "تمت إزالة {name} من {field}",
+    "recipient_moved": "تم نقل {name} إلى {field}",
+    "recipients_added_count": "{count, plural, zero {لم تتم إضافة أي مستلم} one {تمت إضافة مستلم واحد} two {تمت إضافة مستلمَين} few {تمت إضافة # مستلمين} many {تمت إضافة # مستلمًا} other {تمت إضافة # مستلم}} إلى {field}",
+    "recipients_removed_count": "{count, plural, zero {لم تتم إزالة أي مستلم} one {تمت إزالة مستلم واحد} two {تمت إزالة مستلمَين} few {تمت إزالة # مستلمين} many {تمت إزالة # مستلمًا} other {تمت إزالة # مستلم}} من {field}",
+    "recipients_moved_count": "{count, plural, zero {لم يتم نقل أي مستلم} one {تم نقل مستلم واحد} two {تم نقل مستلمَين} few {تم نقل # مستلمين} many {تم نقل # مستلمًا} other {تم نقل # مستلم}} إلى {field}"
   },
   "confirm_dialog": {
     "confirm": "تأكيد",

@@ -1000,7 +1000,15 @@
     "pop_out": "在单独窗口中打开回复",
     "send_guard_failed": "未发送 - 发送前检查邮件的插件出错或没有响应。",
     "cut": "剪切",
-    "copy": "复制"
+    "copy": "复制",
+    "recipient_remove_named": "移除 {name}",
+    "recipient_chip_hint": "按 Delete 移除，按 Enter 打开更多选项",
+    "recipient_added": "已将 {name} 添加到{field}",
+    "recipient_removed": "已将 {name} 从{field}移除",
+    "recipient_moved": "已将 {name} 移到{field}",
+    "recipients_added_count": "已将 {count, plural, other {# 位收件人}}添加到{field}",
+    "recipients_removed_count": "已将 {count, plural, other {# 位收件人}}从{field}移除",
+    "recipients_moved_count": "已将 {count, plural, other {# 位收件人}}移到{field}"
   },
   "confirm_dialog": {
     "confirm": "确认",

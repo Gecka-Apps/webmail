@@ -1000,7 +1000,15 @@
     "pop_out": "Хариуг тусдаа цонхонд нээх",
     "send_guard_failed": "Илгээгдсэнгүй - илгээхийн өмнө мессежийг шалгадаг залгаас алдаа гаргасан эсвэл хариу өгсөнгүй.",
     "cut": "Таслах",
-    "copy": "Хуулах"
+    "copy": "Хуулах",
+    "recipient_remove_named": "{name}-г хасах",
+    "recipient_chip_hint": "Delete товч хасна, Enter товч бусад сонголтыг нээнэ",
+    "recipient_added": "{name}-г {field}-д нэмлээ",
+    "recipient_removed": "{name}-г {field}-ээс хаслаа",
+    "recipient_moved": "{name}-г {field} руу зөөлөө",
+    "recipients_added_count": "{field}-д {count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} нэмлээ",
+    "recipients_removed_count": "{field}-ээс {count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} хаслаа",
+    "recipients_moved_count": "{field} руу {count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} зөөлөө"
   },
   "confirm_dialog": {
     "confirm": "Баталгаажуулах",

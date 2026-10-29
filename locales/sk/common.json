@@ -1000,7 +1000,15 @@
     "pop_out": "Otvoriť odpoveď v okne",
     "send_guard_failed": "Neodoslané - doplnok, ktorý kontroluje správy pred odoslaním, zlyhal alebo neodpovedal.",
     "cut": "Vystrihnúť",
-    "copy": "Kopírovať"
+    "copy": "Kopírovať",
+    "recipient_remove_named": "Odstrániť {name}",
+    "recipient_chip_hint": "Delete príjemcu odstráni, Enter otvorí ďalšie možnosti",
+    "recipient_added": "{name} pridaný do {field}",
+    "recipient_removed": "{name} odstránený z {field}",
+    "recipient_moved": "{name} presunutý do {field}",
+    "recipients_added_count": "Do {field} {count, plural, one {pridaný # príjemca} few {pridaní # príjemcovia} many {pridaných # príjemcov} other {pridaných # príjemcov}}",
+    "recipients_removed_count": "Z {field} {count, plural, one {odstránený # príjemca} few {odstránení # príjemcovia} many {odstránených # príjemcov} other {odstránených # príjemcov}}",
+    "recipients_moved_count": "Do {field} {count, plural, one {presunutý # príjemca} few {presunutí # príjemcovia} many {presunutých # príjemcov} other {presunutých # príjemcov}}"
   },
   "confirm_dialog": {
     "confirm": "Potvrdiť",

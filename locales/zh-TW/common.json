@@ -1000,7 +1000,15 @@
     "pop_out": "在獨立視窗中開啟回覆",
     "send_guard_failed": "未傳送 - 傳送前檢查郵件的外掛程式發生錯誤或沒有回應。",
     "cut": "剪下",
-    "copy": "複製"
+    "copy": "複製",
+    "recipient_remove_named": "移除 {name}",
+    "recipient_chip_hint": "按 Delete 移除，按 Enter 開啟更多選項",
+    "recipient_added": "已將 {name} 新增到{field}",
+    "recipient_removed": "已將 {name} 從{field}移除",
+    "recipient_moved": "已將 {name} 移到{field}",
+    "recipients_added_count": "已將 {count, plural, other {# 位收件者}}新增到{field}",
+    "recipients_removed_count": "已將 {count, plural, other {# 位收件者}}從{field}移除",
+    "recipients_moved_count": "已將 {count, plural, other {# 位收件者}}移到{field}"
   },
   "confirm_dialog": {
     "confirm": "確認",

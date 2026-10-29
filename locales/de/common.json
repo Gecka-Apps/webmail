@@ -1000,7 +1000,15 @@
     "pop_out": "Antwort in eigenem Fenster öffnen",
     "send_guard_failed": "Nicht gesendet - ein Plugin, das Nachrichten vor dem Senden prüft, ist fehlgeschlagen oder hat nicht geantwortet.",
     "cut": "Ausschneiden",
-    "copy": "Kopieren"
+    "copy": "Kopieren",
+    "recipient_remove_named": "{name} entfernen",
+    "recipient_chip_hint": "Entf entfernt den Empfänger, Eingabe öffnet weitere Optionen",
+    "recipient_added": "{name} zu {field} hinzugefügt",
+    "recipient_removed": "{name} aus {field} entfernt",
+    "recipient_moved": "{name} nach {field} verschoben",
+    "recipients_added_count": "{count, plural, one {# Empfänger} other {# Empfänger}} zu {field} hinzugefügt",
+    "recipients_removed_count": "{count, plural, one {# Empfänger} other {# Empfänger}} aus {field} entfernt",
+    "recipients_moved_count": "{count, plural, one {# Empfänger} other {# Empfänger}} nach {field} verschoben"
   },
   "confirm_dialog": {
     "confirm": "Bestätigen",

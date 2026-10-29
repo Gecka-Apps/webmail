@@ -965,7 +965,15 @@
     "pop_out": "פתיחת התשובה בחלון נפרד",
     "send_guard_failed": "לא נשלח - תוסף שבודק הודעות לפני השליחה נכשל או לא הגיב.",
     "cut": "גזור",
-    "copy": "העתק"
+    "copy": "העתק",
+    "recipient_remove_named": "הסרת {name}",
+    "recipient_chip_hint": "Delete מסיר את הנמען, Enter פותח אפשרויות נוספות",
+    "recipient_added": "{name} נוסף אל {field}",
+    "recipient_removed": "{name} הוסר מ{field}",
+    "recipient_moved": "{name} הועבר אל {field}",
+    "recipients_added_count": "{count, plural, one {נמען אחד נוסף} two {שני נמענים נוספו} other {# נמענים נוספו}} אל {field}",
+    "recipients_removed_count": "{count, plural, one {נמען אחד הוסר} two {שני נמענים הוסרו} other {# נמענים הוסרו}} מ{field}",
+    "recipients_moved_count": "{count, plural, one {נמען אחד הועבר} two {שני נמענים הועברו} other {# נמענים הועברו}} אל {field}"
   },
   "confirm_dialog": {
     "confirm": "אשר",

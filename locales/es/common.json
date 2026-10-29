@@ -1000,7 +1000,15 @@
     "pop_out": "Abrir la respuesta en una ventana",
     "send_guard_failed": "No enviado: un complemento que revisa los mensajes antes de enviarlos falló o no respondió.",
     "cut": "Cortar",
-    "copy": "Copiar"
+    "copy": "Copiar",
+    "recipient_remove_named": "Quitar a {name}",
+    "recipient_chip_hint": "Supr lo quita, Intro abre más opciones",
+    "recipient_added": "Se añadió a {name} en {field}",
+    "recipient_removed": "Se quitó a {name} de {field}",
+    "recipient_moved": "Se movió a {name} a {field}",
+    "recipients_added_count": "{count, plural, one {Se añadió # destinatario} other {Se añadieron # destinatarios}} en {field}",
+    "recipients_removed_count": "{count, plural, one {Se quitó # destinatario} other {Se quitaron # destinatarios}} de {field}",
+    "recipients_moved_count": "{count, plural, one {Se movió # destinatario} other {Se movieron # destinatarios}} a {field}"
   },
   "confirm_dialog": {
     "confirm": "Confirmar",

@@ -1000,7 +1000,15 @@
     "pop_out": "Abrir a resposta numa janela",
     "send_guard_failed": "Não enviado - um plugin que verifica as mensagens antes do envio falhou ou não respondeu.",
     "cut": "Cortar",
-    "copy": "Copiar"
+    "copy": "Copiar",
+    "recipient_remove_named": "Remover {name}",
+    "recipient_chip_hint": "Delete remove o destinatário, Enter abre mais opções",
+    "recipient_added": "{name} adicionado a {field}",
+    "recipient_removed": "{name} removido de {field}",
+    "recipient_moved": "{name} movido para {field}",
+    "recipients_added_count": "{count, plural, one {# destinatário adicionado} other {# destinatários adicionados}} a {field}",
+    "recipients_removed_count": "{count, plural, one {# destinatário removido} other {# destinatários removidos}} de {field}",
+    "recipients_moved_count": "{count, plural, one {# destinatário movido} other {# destinatários movidos}} para {field}"
   },
   "confirm_dialog": {
     "confirm": "Confirmar",

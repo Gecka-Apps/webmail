@@ -1000,7 +1000,15 @@
     "pop_out": "Otevřít odpověď v okně",
     "send_guard_failed": "Neodesláno - plugin, který kontroluje zprávy před odesláním, selhal nebo neodpověděl.",
     "cut": "Vyjmout",
-    "copy": "Kopírovat"
+    "copy": "Kopírovat",
+    "recipient_remove_named": "Odebrat {name}",
+    "recipient_chip_hint": "Delete příjemce odebere, Enter otevře další možnosti",
+    "recipient_added": "{name} přidán do {field}",
+    "recipient_removed": "{name} odebrán z {field}",
+    "recipient_moved": "{name} přesunut do {field}",
+    "recipients_added_count": "Do {field} {count, plural, one {přidán # příjemce} few {přidáni # příjemci} many {přidáno # příjemce} other {přidáno # příjemců}}",
+    "recipients_removed_count": "Z {field} {count, plural, one {odebrán # příjemce} few {odebráni # příjemci} many {odebráno # příjemce} other {odebráno # příjemců}}",
+    "recipients_moved_count": "Do {field} {count, plural, one {přesunut # příjemce} few {přesunuti # příjemci} many {přesunuto # příjemce} other {přesunuto # příjemců}}"
   },
   "confirm_dialog": {
     "confirm": "Potvrdit",
