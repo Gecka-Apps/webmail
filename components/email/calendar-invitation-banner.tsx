@@ -41,7 +41,7 @@ import {
   type InvitationTrustAssessment,
 } from '@/lib/calendar-invitation';
 import { participantsAskedAgain } from '@/lib/calendar-participants';
-import { isValidTimeZone, moveLocalDateTime } from '@/lib/timezone';
+import { planCancellationRemoval, sameRecurrenceId, type CancellationRemoval } from '@/lib/calendar-cancellation';
 import { cn } from '@/lib/utils';
 import { getEventStartDate } from '@/lib/calendar-utils';
 import { sanitizeColor } from '@/components/calendar/event-card';
@@ -221,17 +221,6 @@ function getViewActionLabel(
   }
 
   return t('view_in_calendar');
-}
-
-/** Whether two events name the same occurrence: their recurrence ids at the same moment, each in its own zone. */
-function sameRecurrenceId(a: Partial<CalendarEvent>, b: Partial<CalendarEvent>): boolean {
-  if (!a.recurrenceId || !b.recurrenceId) return false;
-  const zoneA = a.recurrenceIdTimeZone ?? a.timeZone ?? null;
-  const zoneB = b.recurrenceIdTimeZone ?? b.timeZone ?? null;
-  const bInA = zoneA && zoneB && isValidTimeZone(zoneA) && isValidTimeZone(zoneB)
-    ? moveLocalDateTime(b.recurrenceId.slice(0, 19), zoneB, zoneA)
-    : b.recurrenceId;
-  return a.recurrenceId.slice(0, 19) === bInA.slice(0, 19);
 }
 
 /**
@@ -439,12 +428,13 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
   }));
   const calendarInvitationParsingEnabled = useSettingsStore((s) => s.calendarInvitationParsingEnabled);
   const timeFormat = useSettingsStore((s) => s.timeFormat);
-  const { calendars, supportsCalendar, importEvents, rsvpEvent, updateEvent, events: storeEvents, setSelectedDate } = useCalendarStore(useShallow((state) => ({
+  const { calendars, supportsCalendar, importEvents, rsvpEvent, updateEvent, deleteEvent, events: storeEvents, setSelectedDate } = useCalendarStore(useShallow((state) => ({
     calendars: state.calendars,
     supportsCalendar: state.supportsCalendar,
     importEvents: state.importEvents,
     rsvpEvent: state.rsvpEvent,
     updateEvent: state.updateEvent,
+    deleteEvent: state.deleteEvent,
     events: state.events,
     setSelectedDate: state.setSelectedDate,
   })));
@@ -464,6 +454,9 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
   // Underlying failure shown under the generic parse error, so "wrong account"
   // or a network failure is distinguishable from an unparsable file.
   const [parseError, setParseError] = useState<string | null>(null);
+  // What removing a cancelled meeting from the calendar takes, read from the
+  // events stored with its uid; null until known.
+  const [cancelRemoval, setCancelRemoval] = useState<CancellationRemoval | null>(null);
 
   const attachment = findCalendarAttachment(email);
 
@@ -555,12 +548,25 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
     };
   }, [showCalendarPicker]);
 
+  const detectedMethod = parsedEvent && attachment ? getInvitationMethod(parsedEvent, { email, attachment }) : 'unknown';
+  const method = detectedMethod !== 'unknown' ? detectedMethod : rawIcsMethod;
+  const isCancellation = method === 'cancel';
+
+  useEffect(() => {
+    setCancelRemoval(null);
+    if (!client || !supportsCalendar || !isCancellation || !parsedEvent?.uid) return;
+    let current = true;
+    client.queryCalendarEvents({ uid: parsedEvent.uid })
+      .then((stored) => {
+        if (current) setCancelRemoval(planCancellationRemoval(stored, parsedEvent));
+      })
+      .catch(() => { /* no remove action then */ });
+    return () => { current = false; };
+  }, [client, supportsCalendar, isCancellation, parsedEvent]);
+
   if (!attachment || !calendarInvitationParsingEnabled) return null;
 
-  const detectedMethod = parsedEvent ? getInvitationMethod(parsedEvent, { email, attachment }) : 'unknown';
-  const method = detectedMethod !== 'unknown' ? detectedMethod : rawIcsMethod;
   const summary = parsedEvent ? formatEventSummary(parsedEvent) : null;
-  const isCancellation = method === 'cancel';
   const isResponseOnly = method === 'reply' || method === 'refresh' || method === 'counter' || method === 'declinecounter';
   const showDetails = !isCollapsed;
   const allowsRsvp = method === 'request';
@@ -616,6 +622,17 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
   const proposalFromParticipant = Boolean(
     proposalTarget && senderAddress && findParticipantByEmails(proposalTarget, [senderAddress]),
   );
+  // A cancellation that fails authentication, or comes from someone other
+  // than the organizer without passing it, does not get to remove anything.
+  const canRemoveCancelled = Boolean(
+    client
+    && supportsCalendar
+    && isCancellation
+    && !userIsSender
+    && trustAssessment?.level !== 'warning'
+    && (cancelRemoval?.kind === 'delete' || cancelRemoval?.kind === 'exclude')
+  );
+  const cancellationOutdated = isCancellation && cancelRemoval?.kind === 'outdated';
 
   const resolveExistingEventForRsvp = async () => {
     if (!client || !existingEvent) {
@@ -804,6 +821,42 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
       setActionNotice(t('proposal_applied'));
       setState('parsed');
       setRsvpStatus(null);
+    } catch (err) {
+      setActionError(describeError(err, t('action_failed')));
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleRemoveCancelled = async () => {
+    const cancel = parsedEvent;
+    if (!client || !cancel?.uid || isProcessing) return;
+    setActionNotice(null);
+    setActionError(null);
+    setIsProcessing(true);
+    try {
+      // Planned again on the events as they are now: the calendar may have
+      // changed since the mail was opened.
+      const removal = planCancellationRemoval(await client.queryCalendarEvents({ uid: cancel.uid }), cancel);
+      setCancelRemoval(removal);
+      // No scheduling messages: the organizer cancelled it, there is no one
+      // to tell.
+      if (removal.kind === 'delete') {
+        for (const id of removal.ids) {
+          if (!(await deleteEvent(client, id, false))) return;
+        }
+      } else if (removal.kind === 'exclude') {
+        if (!(await updateEvent(client, removal.id, removal.patch, false))) return;
+      } else {
+        return;
+      }
+      // Occurrences of it in view go as well.
+      useCalendarStore.setState((s) => ({
+        events: s.events.filter((event) => event.uid !== cancel.uid
+          || (Boolean(cancel.recurrenceId) && !sameRecurrenceId(event, cancel))),
+      }));
+      setCancelRemoval({ kind: 'none' });
+      setActionNotice(t('removed_from_calendar'));
     } catch (err) {
       setActionError(describeError(err, t('action_failed')));
     } finally {
@@ -1010,6 +1063,7 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
         {showDetails && (bannerInfo || actorMessage || actorSummary?.participationComment) && (
           <div className="space-y-0.5 text-xs text-muted-foreground">
             {bannerInfo && <p className="leading-relaxed">{bannerInfo}</p>}
+            {cancellationOutdated && <p className="leading-relaxed">{t('cancel_outdated')}</p>}
             {actorMessage && <p>{actorMessage}</p>}
             {actorSummary?.participationComment && (
               <p className="italic">{t('actor_note', { comment: actorSummary.participationComment })}</p>
@@ -1163,6 +1217,17 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
                 document.body,
               )}
             </>
+          )}
+
+          {canRemoveCancelled && (
+            <button
+              onClick={handleRemoveCancelled}
+              disabled={isProcessing}
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-destructive px-3 py-1.5 rounded-md border border-border hover:border-destructive/30 hover:bg-destructive/10 transition-colors min-h-[36px] disabled:opacity-50"
+            >
+              <CalendarX className="w-3.5 h-3.5" />
+              {t('remove_from_calendar')}
+            </button>
           )}
 
           {canApplyProposal && (

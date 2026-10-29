@@ -11,7 +11,7 @@ const mocks = vi.hoisted(() => {
     getAccountId: vi.fn(() => 'mail-account'),
     getCalendarsAccountId: vi.fn(() => 'calendar-account'),
     getCalendarEvent: vi.fn(),
-    queryCalendarEvents: vi.fn(async () => []),
+    queryCalendarEvents: vi.fn(async (): Promise<unknown[]> => []),
   };
 
   const sourceClientMock = {
@@ -45,6 +45,7 @@ const mocks = vi.hoisted(() => {
     importEvents: vi.fn(),
     rsvpEvent: vi.fn(),
     updateEvent: vi.fn(),
+    deleteEvent: vi.fn(),
     events: [] as Array<Record<string, unknown>>,
     setSelectedDate: vi.fn(),
   };
@@ -186,6 +187,7 @@ describe('CalendarInvitationBanner', () => {
     mocks.calendarState.importEvents.mockReset();
     mocks.calendarState.rsvpEvent.mockReset();
     mocks.calendarState.updateEvent.mockReset();
+    mocks.calendarState.deleteEvent.mockReset();
     mocks.calendarState.setSelectedDate.mockReset();
     mocks.calendarState.events = [];
     mocks.sourceClientMock.parseCalendarEvents.mockReset();
@@ -1092,6 +1094,101 @@ describe('CalendarInvitationBanner', () => {
       await waitFor(() => {
         expect(screen.getByText('The server allows at most 20 participants per event.')).toBeInTheDocument();
       });
+    });
+  });
+  describe('cancellations (#1425)', () => {
+    const ORGANIZER = {
+      '@type': 'Participant', email: 'boss@example.com', calendarAddress: 'mailto:boss@example.com',
+      roles: { owner: true }, participationStatus: 'accepted',
+    };
+    const ME = {
+      '@type': 'Participant', email: 'user@example.com', calendarAddress: 'mailto:user@example.com',
+      roles: { attendee: true }, participationStatus: 'accepted',
+    };
+    const cancelEmail = (overrides: Partial<Email> = {}) => makeEmail({
+      id: 'email-cancel',
+      from: [{ email: 'boss@example.com', name: 'Boss' }],
+      attachments: [{ partId: '1', blobId: 'blob-c', size: 256, type: 'text/calendar; method=CANCEL', name: 'cancel.ics' }],
+      ...overrides,
+    });
+    const parsedCancel = (overrides: Record<string, unknown> = {}) => ({
+      uid: 'uid-c', title: 'Planning', start: '2026-11-02T10:00:00', timeZone: 'Europe/Berlin', duration: 'PT1H',
+      status: 'cancelled', sequence: 2, organizerCalendarAddress: 'mailto:boss@example.com',
+      participants: { organizer: ORGANIZER, me: ME },
+      ...overrides,
+    });
+    const storedEvent = (overrides: Record<string, unknown> = {}) => ({
+      id: 'ev-c', uid: 'uid-c', title: 'Planning', start: '2026-11-02T10:00:00', timeZone: 'Europe/Berlin',
+      duration: 'PT1H', sequence: 2, status: 'cancelled', recurrenceId: null, recurrenceRules: null,
+      recurrenceOverrides: null, participants: { organizer: ORGANIZER, me: ME },
+      ...overrides,
+    });
+
+    it('removes the cancelled meeting from the calendar without telling anyone', async () => {
+      mocks.clientMock.parseCalendarEvents.mockResolvedValue([parsedCancel()]);
+      mocks.clientMock.queryCalendarEvents.mockResolvedValue([storedEvent()]);
+      mocks.calendarState.events = [storedEvent()];
+      mocks.calendarState.deleteEvent.mockResolvedValue(true);
+
+      render(<CalendarInvitationBanner email={cancelEmail()} />);
+      fireEvent.click(await screen.findByText('remove_from_calendar'));
+
+      await waitFor(() => expect(screen.getByText('removed_from_calendar')).toBeInTheDocument());
+      expect(mocks.clientMock.queryCalendarEvents).toHaveBeenCalledWith({ uid: 'uid-c' });
+      expect(mocks.calendarState.deleteEvent).toHaveBeenCalledWith(mocks.clientMock, 'ev-c', false);
+      expect(mocks.calendarState.events).toEqual([]);
+      expect(screen.queryByText('remove_from_calendar')).not.toBeInTheDocument();
+    });
+
+    it('takes only the cancelled occurrence out of a series', async () => {
+      const series = storedEvent({ recurrenceRules: [{ '@type': 'RecurrenceRule', frequency: 'weekly' }], status: 'confirmed' });
+      mocks.clientMock.parseCalendarEvents.mockResolvedValue([parsedCancel({
+        start: '2026-11-09T10:00:00', recurrenceId: '2026-11-09T10:00:00', recurrenceIdTimeZone: 'Europe/Berlin',
+      })]);
+      mocks.clientMock.queryCalendarEvents.mockResolvedValue([series]);
+      mocks.calendarState.events = [series];
+      mocks.calendarState.updateEvent.mockResolvedValue(true);
+
+      render(<CalendarInvitationBanner email={cancelEmail()} />);
+      fireEvent.click(await screen.findByText('remove_from_calendar'));
+
+      await waitFor(() => expect(screen.getByText('removed_from_calendar')).toBeInTheDocument());
+      expect(mocks.calendarState.updateEvent).toHaveBeenCalledWith(
+        mocks.clientMock, 'ev-c', { recurrenceOverrides: { '2026-11-09T10:00:00': { excluded: true } } }, false,
+      );
+      expect(mocks.calendarState.deleteEvent).not.toHaveBeenCalled();
+    });
+
+    it('does not offer to remove a meeting the calendar holds a newer version of', async () => {
+      mocks.clientMock.parseCalendarEvents.mockResolvedValue([parsedCancel({ sequence: 1 })]);
+      mocks.clientMock.queryCalendarEvents.mockResolvedValue([storedEvent({ sequence: 3, status: 'confirmed' })]);
+
+      render(<CalendarInvitationBanner email={cancelEmail()} />);
+
+      expect(await screen.findByText('cancel_outdated')).toBeInTheDocument();
+      expect(screen.queryByText('remove_from_calendar')).not.toBeInTheDocument();
+    });
+
+    it('does not offer it for an unverified cancellation from someone other than the organizer', async () => {
+      mocks.clientMock.parseCalendarEvents.mockResolvedValue([parsedCancel()]);
+      mocks.clientMock.queryCalendarEvents.mockResolvedValue([storedEvent()]);
+
+      render(<CalendarInvitationBanner email={cancelEmail({ from: [{ email: 'mallory@evil.example', name: 'Mallory' }] })} />);
+
+      await screen.findByText(/could not be verified/);
+      await waitFor(() => expect(mocks.clientMock.queryCalendarEvents).toHaveBeenCalledWith({ uid: 'uid-c' }));
+      expect(screen.queryByText('remove_from_calendar')).not.toBeInTheDocument();
+    });
+
+    it('does not offer it when the meeting is not in the calendar', async () => {
+      mocks.clientMock.parseCalendarEvents.mockResolvedValue([parsedCancel()]);
+      mocks.clientMock.queryCalendarEvents.mockResolvedValue([]);
+
+      render(<CalendarInvitationBanner email={cancelEmail()} />);
+
+      await screen.findByRole('heading', { name: 'Planning' });
+      await waitFor(() => expect(mocks.clientMock.queryCalendarEvents).toHaveBeenCalledWith({ uid: 'uid-c' }));
+      expect(screen.queryByText('remove_from_calendar')).not.toBeInTheDocument();
     });
   });
 });
