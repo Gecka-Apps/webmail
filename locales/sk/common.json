@@ -1003,6 +1003,7 @@
     "copy": "Kopírovať",
     "recipient_remove_named": "Odstrániť {name}",
     "recipient_chip_hint": "Delete príjemcu odstráni, Enter otvorí ďalšie možnosti",
+    "recipient_move_to": "Presunúť do {field}",
     "recipient_added": "{name} pridaný do {field}",
     "recipient_removed": "{name} odstránený z {field}",
     "recipient_moved": "{name} presunutý do {field}",

@@ -1003,6 +1003,7 @@
     "copy": "Копировать",
     "recipient_remove_named": "Убрать {name}",
     "recipient_chip_hint": "Delete убирает получателя, Enter открывает другие действия",
+    "recipient_move_to": "Переместить в {field}",
     "recipient_added": "{name}: добавлен в «{field}»",
     "recipient_removed": "{name}: убран из «{field}»",
     "recipient_moved": "{name}: перемещён в «{field}»",

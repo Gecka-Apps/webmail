@@ -1003,6 +1003,7 @@
     "copy": "نسخ",
     "recipient_remove_named": "إزالة {name}",
     "recipient_chip_hint": "يزيله مفتاح Delete، ويفتح Enter خيارات أخرى",
+    "recipient_move_to": "نقل إلى {field}",
     "recipient_added": "تمت إضافة {name} إلى {field}",
     "recipient_removed": "تمت إزالة {name} من {field}",
     "recipient_moved": "تم نقل {name} إلى {field}",

@@ -1003,6 +1003,7 @@
     "copy": "Kopēt",
     "recipient_remove_named": "Noņemt {name}",
     "recipient_chip_hint": "Delete to noņem, Enter atver citas iespējas",
+    "recipient_move_to": "Pārvietot uz {field}",
     "recipient_added": "{name} pievienots laukam {field}",
     "recipient_removed": "{name} noņemts no lauka {field}",
     "recipient_moved": "{name} pārvietots uz {field}",

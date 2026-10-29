@@ -1003,6 +1003,7 @@
     "copy": "Kopieren",
     "recipient_remove_named": "{name} entfernen",
     "recipient_chip_hint": "Entf entfernt den Empfänger, Eingabe öffnet weitere Optionen",
+    "recipient_move_to": "Nach {field} verschieben",
     "recipient_added": "{name} zu {field} hinzugefügt",
     "recipient_removed": "{name} aus {field} entfernt",
     "recipient_moved": "{name} nach {field} verschoben",

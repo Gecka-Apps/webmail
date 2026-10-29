@@ -1003,6 +1003,7 @@
     "copy": "Copia",
     "recipient_remove_named": "Treu {name}",
     "recipient_chip_hint": "Supr el treu, Retorn obre més opcions",
+    "recipient_move_to": "Mou a {field}",
     "recipient_added": "S'ha afegit {name} a {field}",
     "recipient_removed": "S'ha tret {name} de {field}",
     "recipient_moved": "S'ha mogut {name} a {field}",

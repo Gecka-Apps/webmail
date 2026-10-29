@@ -1003,6 +1003,7 @@
     "send_guard_failed": "Not sent - a plugin that checks messages before sending failed or did not answer.",
     "recipient_remove_named": "Remove {name}",
     "recipient_chip_hint": "Delete removes it, Enter opens more options",
+    "recipient_move_to": "Move to {field}",
     "recipient_added": "Added {name} to {field}",
     "recipient_removed": "Removed {name} from {field}",
     "recipient_moved": "Moved {name} to {field}",

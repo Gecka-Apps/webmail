@@ -1003,6 +1003,7 @@
     "copy": "Хуулах",
     "recipient_remove_named": "{name}-г хасах",
     "recipient_chip_hint": "Delete товч хасна, Enter товч бусад сонголтыг нээнэ",
+    "recipient_move_to": "{field} руу зөөх",
     "recipient_added": "{name}-г {field}-д нэмлээ",
     "recipient_removed": "{name}-г {field}-ээс хаслаа",
     "recipient_moved": "{name}-г {field} руу зөөлөө",

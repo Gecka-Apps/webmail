@@ -1003,6 +1003,7 @@
     "copy": "Copiază",
     "recipient_remove_named": "Elimină {name}",
     "recipient_chip_hint": "Delete îl elimină, Enter deschide mai multe opțiuni",
+    "recipient_move_to": "Mută la {field}",
     "recipient_added": "{name} a fost adăugat la {field}",
     "recipient_removed": "{name} a fost eliminat din {field}",
     "recipient_moved": "{name} a fost mutat la {field}",

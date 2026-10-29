@@ -1003,6 +1003,7 @@
     "copy": "Kopier",
     "recipient_remove_named": "Fjern {name}",
     "recipient_chip_hint": "Delete fjerner mottakeren, Enter åpner flere valg",
+    "recipient_move_to": "Flytt til {field}",
     "recipient_added": "{name} lagt til i {field}",
     "recipient_removed": "{name} fjernet fra {field}",
     "recipient_moved": "{name} flyttet til {field}",

@@ -1003,6 +1003,7 @@
     "copy": "Copiar",
     "recipient_remove_named": "Remover {name}",
     "recipient_chip_hint": "Delete remove o destinatário, Enter abre mais opções",
+    "recipient_move_to": "Mover para {field}",
     "recipient_added": "{name} adicionado a {field}",
     "recipient_removed": "{name} removido de {field}",
     "recipient_moved": "{name} movido para {field}",

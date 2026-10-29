@@ -1003,6 +1003,7 @@
     "copy": "Kopyala",
     "recipient_remove_named": "{name} kişisini kaldır",
     "recipient_chip_hint": "Delete kaldırır, Enter diğer seçenekleri açar",
+    "recipient_move_to": "{field} alanına taşı",
     "recipient_added": "{name}, {field} alanına eklendi",
     "recipient_removed": "{name}, {field} alanından kaldırıldı",
     "recipient_moved": "{name}, {field} alanına taşındı",

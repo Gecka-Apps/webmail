@@ -5174,6 +5174,7 @@ export function RecipientChipInput({
   const chipRefs = useRef<Array<HTMLElement | null>>([]);
   const errorId = `${labelId}-error`;
   const chipHintId = `${labelId}-chip-hint`;
+  const fieldNames: Record<'to' | 'cc' | 'bcc', string> = { to: t('to'), cc: t('cc'), bcc: t('bcc') };
   const tabChip = chips.length === 0 ? -1 : Math.min(rovingChip ?? chips.length - 1, chips.length - 1);
 
   const focusChip = (index: number) => {
@@ -5748,6 +5749,21 @@ export function RecipientChipInput({
               <ContextMenuItem label={t('recipient_edit_email')} onClick={handleEditEmail} />
             )}
             <ContextMenuItem label={t('recipient_edit_name')} onClick={handleEditName} />
+            <ContextMenuSeparator />
+            {/* Moving between fields without dragging (WCAG 2.5.7). */}
+            {(['to', 'cc', 'bcc'] as const).filter((target) => target !== field).map((target) => (
+              <ContextMenuItem
+                key={target}
+                testId={`recipient-move-${target}`}
+                label={t('recipient_move_to', { field: fieldNames[target] })}
+                onClick={() => {
+                  if (contextMenu.data) onMoveChip(contextMenu.data.recipient, field, target);
+                  closeContextMenu();
+                  setRovingChip(null);
+                  setTimeout(() => inputRef.current?.focus(), 0);
+                }}
+              />
+            ))}
             <ContextMenuSeparator />
             <ContextMenuItem label={t('recipient_remove')} onClick={() => {
               if (contextMenu.data) {

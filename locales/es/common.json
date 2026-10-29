@@ -1003,6 +1003,7 @@
     "copy": "Copiar",
     "recipient_remove_named": "Quitar a {name}",
     "recipient_chip_hint": "Supr lo quita, Intro abre más opciones",
+    "recipient_move_to": "Mover a {field}",
     "recipient_added": "Se añadió a {name} en {field}",
     "recipient_removed": "Se quitó a {name} de {field}",
     "recipient_moved": "Se movió a {name} a {field}",

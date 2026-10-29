@@ -1003,6 +1003,7 @@
     "copy": "복사",
     "recipient_remove_named": "{name} 제거",
     "recipient_chip_hint": "Delete 키로 제거하고 Enter 키로 다른 옵션을 열 수 있어요",
+    "recipient_move_to": "{field}(으)로 이동",
     "recipient_added": "{name}을(를) {field}에 추가했어요",
     "recipient_removed": "{name}을(를) {field}에서 제거했어요",
     "recipient_moved": "{name}을(를) {field}(으)로 옮겼어요",

@@ -1003,6 +1003,7 @@
     "copy": "Kopeeri",
     "recipient_remove_named": "Eemalda {name}",
     "recipient_chip_hint": "Delete eemaldab saaja, Enter avab rohkem valikuid",
+    "recipient_move_to": "Teisalda väljale {field}",
     "recipient_added": "{name} lisati väljale {field}",
     "recipient_removed": "{name} eemaldati väljalt {field}",
     "recipient_moved": "{name} teisaldati väljale {field}",

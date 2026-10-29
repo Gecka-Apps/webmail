@@ -1003,6 +1003,7 @@
     "copy": "Копіювати",
     "recipient_remove_named": "Прибрати {name}",
     "recipient_chip_hint": "Delete прибирає одержувача, Enter відкриває інші дії",
+    "recipient_move_to": "Перемістити в {field}",
     "recipient_added": "{name}: додано в «{field}»",
     "recipient_removed": "{name}: прибрано з «{field}»",
     "recipient_moved": "{name}: переміщено в «{field}»",

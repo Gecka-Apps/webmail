@@ -968,6 +968,7 @@
     "copy": "העתק",
     "recipient_remove_named": "הסרת {name}",
     "recipient_chip_hint": "Delete מסיר את הנמען, Enter פותח אפשרויות נוספות",
+    "recipient_move_to": "העברה אל {field}",
     "recipient_added": "{name} נוסף אל {field}",
     "recipient_removed": "{name} הוסר מ{field}",
     "recipient_moved": "{name} הועבר אל {field}",

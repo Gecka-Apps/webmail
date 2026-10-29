@@ -299,3 +299,29 @@ describe('recipient fields (SR-06, CV-02)', () => {
     expect(chip).toHaveTextContent('invalid_recipient');
   });
 });
+
+describe('moving a recipient by keyboard (MO-07)', () => {
+  it('moves a chip to Cc from its menu and announces it', async () => {
+    render(<EmailComposer initialData={{ ...DRAFT, to: 'Anna Berg <anna@example.com>' }} />);
+    const chip = within(screen.getByRole('list', { name: 'to:' })).getByRole('listitem');
+    chip.focus();
+    fireEvent.keyDown(chip, { key: 'Enter' });
+
+    const move = await screen.findByTestId('recipient-move-cc');
+    expect(move).toHaveTextContent('recipient_move_to:cc');
+    expect(screen.queryByTestId('recipient-move-to')).toBeNull();
+    fireEvent.click(move);
+
+    await waitFor(() => expect(screen.queryByRole('list', { name: 'to:' })).toBeNull());
+    expect(within(screen.getByRole('list', { name: 'cc_label' })).getByRole('listitem')).toHaveTextContent('Anna Berg');
+    expect(liveRegion()).toHaveTextContent('recipient_moved:Anna Berg|cc');
+  });
+
+  it('opens the chip menu with Shift+F10 too', async () => {
+    render(<EmailComposer initialData={{ ...DRAFT, to: 'anna@example.com' }} />);
+    const chip = within(screen.getByRole('list', { name: 'to:' })).getByRole('listitem');
+    chip.focus();
+    fireEvent.keyDown(chip, { key: 'F10', shiftKey: true });
+    expect(await screen.findByTestId('recipient-move-bcc')).toBeInTheDocument();
+  });
+});

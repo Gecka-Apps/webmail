@@ -1003,6 +1003,7 @@
     "copy": "複製",
     "recipient_remove_named": "移除 {name}",
     "recipient_chip_hint": "按 Delete 移除，按 Enter 開啟更多選項",
+    "recipient_move_to": "移到{field}",
     "recipient_added": "已將 {name} 新增到{field}",
     "recipient_removed": "已將 {name} 從{field}移除",
     "recipient_moved": "已將 {name} 移到{field}",
