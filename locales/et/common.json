@@ -5634,7 +5634,10 @@
     "skip_to_content": "Liigu sisu juurde",
     "heading": "{place} – {app}",
     "message_list": "Kirjade loend",
-    "reading_pane": "Lugemispaan"
+    "reading_pane": "Lugemispaan",
+    "name_unread": "{name}, Lugemata: {count}",
+    "expand_folder": "Laienda {name}",
+    "collapse_folder": "Ahenda {name}"
   },
   "plugin_pages": {
     "loading": "Lehe laadimine",

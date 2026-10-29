@@ -5634,7 +5634,10 @@
     "skip_to_content": "Агуулга руу шилжих",
     "heading": "{place} – {app}",
     "message_list": "Захидлын жагсаалт",
-    "reading_pane": "Унших хэсэг"
+    "reading_pane": "Унших хэсэг",
+    "name_unread": "{name}, {count} уншаагүй",
+    "expand_folder": "{name}-г дэлгэх",
+    "collapse_folder": "{name}-г хураах"
   },
   "plugin_pages": {
     "loading": "Хуудсыг ачаалж байна",

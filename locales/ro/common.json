@@ -5634,7 +5634,10 @@
     "skip_to_content": "Salt la conținut",
     "heading": "{place} – {app}",
     "message_list": "Lista de mesaje",
-    "reading_pane": "Panoul de citire"
+    "reading_pane": "Panoul de citire",
+    "name_unread": "{name}, {count} necitite",
+    "expand_folder": "Extinde {name}",
+    "collapse_folder": "Restrânge {name}"
   },
   "plugin_pages": {
     "loading": "Se încarcă pagina",

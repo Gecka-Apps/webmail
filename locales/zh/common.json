@@ -5634,7 +5634,10 @@
     "skip_to_content": "跳到内容",
     "heading": "{place} – {app}",
     "message_list": "邮件列表",
-    "reading_pane": "阅读窗格"
+    "reading_pane": "阅读窗格",
+    "name_unread": "{name}，{count} 封未读",
+    "expand_folder": "展开 {name}",
+    "collapse_folder": "折叠 {name}"
   },
   "plugin_pages": {
     "loading": "正在加载页面",

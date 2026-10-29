@@ -5634,7 +5634,10 @@
     "skip_to_content": "Zum Inhalt springen",
     "heading": "{place} – {app}",
     "message_list": "Nachrichtenliste",
-    "reading_pane": "Lesebereich"
+    "reading_pane": "Lesebereich",
+    "name_unread": "{name}, {count} ungelesen",
+    "expand_folder": "{name} aufklappen",
+    "collapse_folder": "{name} zuklappen"
   },
   "plugin_pages": {
     "loading": "Seite wird geladen",

@@ -5634,7 +5634,10 @@
     "skip_to_content": "Перейти до вмісту",
     "heading": "{place} – {app}",
     "message_list": "Список листів",
-    "reading_pane": "Область читання"
+    "reading_pane": "Область читання",
+    "name_unread": "{name}, Непрочитаних: {count}",
+    "expand_folder": "Розгорнути {name}",
+    "collapse_folder": "Згорнути {name}"
   },
   "plugin_pages": {
     "loading": "Завантаження сторінки",

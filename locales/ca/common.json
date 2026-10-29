@@ -5634,7 +5634,10 @@
     "skip_to_content": "Salta al contingut",
     "heading": "{place} – {app}",
     "message_list": "Llista de missatges",
-    "reading_pane": "Panell de lectura"
+    "reading_pane": "Panell de lectura",
+    "name_unread": "{name}, {count} sense llegir",
+    "expand_folder": "Desplega {name}",
+    "collapse_folder": "Plega {name}"
   },
   "plugin_pages": {
     "loading": "S'està carregant la pàgina",

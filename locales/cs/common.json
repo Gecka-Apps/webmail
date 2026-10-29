@@ -5634,7 +5634,10 @@
     "skip_to_content": "Přejít na obsah",
     "heading": "{place} – {app}",
     "message_list": "Seznam zpráv",
-    "reading_pane": "Podokno čtení"
+    "reading_pane": "Podokno čtení",
+    "name_unread": "{name}, Nepřečteno: {count}",
+    "expand_folder": "Rozbalit {name}",
+    "collapse_folder": "Sbalit {name}"
   },
   "plugin_pages": {
     "loading": "Načítání stránky",

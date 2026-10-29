@@ -5634,7 +5634,10 @@
     "skip_to_content": "콘텐츠로 건너뛰기",
     "heading": "{place} – {app}",
     "message_list": "메시지 목록",
-    "reading_pane": "읽기 창"
+    "reading_pane": "읽기 창",
+    "name_unread": "{name}, 읽지 않음 {count}개",
+    "expand_folder": "{name} 펼치기",
+    "collapse_folder": "{name} 접기"
   },
   "plugin_pages": {
     "loading": "페이지를 불러오는 중",

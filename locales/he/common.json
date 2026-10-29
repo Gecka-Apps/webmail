@@ -5635,7 +5635,10 @@
     "skip_to_content": "דילוג לתוכן",
     "heading": "{place} – {app}",
     "message_list": "רשימת הודעות",
-    "reading_pane": "חלונית קריאה"
+    "reading_pane": "חלונית קריאה",
+    "name_unread": "{name}, {count} שלא נקראו",
+    "expand_folder": "הרחב את {name}",
+    "collapse_folder": "כווץ את {name}"
   },
   "plugin_pages": {
     "loading": "טוען את הדף",

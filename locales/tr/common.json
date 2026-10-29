@@ -5634,7 +5634,10 @@
     "skip_to_content": "İçeriğe atla",
     "heading": "{place} – {app}",
     "message_list": "İleti listesi",
-    "reading_pane": "Okuma bölmesi"
+    "reading_pane": "Okuma bölmesi",
+    "name_unread": "{name}, {count} okunmamış",
+    "expand_folder": "Genişlet: {name}",
+    "collapse_folder": "Daralt: {name}"
   },
   "plugin_pages": {
     "loading": "Sayfa yükleniyor",

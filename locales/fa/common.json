@@ -5634,7 +5634,10 @@
     "skip_to_content": "رفتن به محتوا",
     "heading": "{place} – {app}",
     "message_list": "فهرست پیام‌ها",
-    "reading_pane": "قاب خواندن"
+    "reading_pane": "قاب خواندن",
+    "name_unread": "{name}، {count} خوانده‌نشده",
+    "expand_folder": "باز کردن {name}",
+    "collapse_folder": "بستن {name}"
   },
   "plugin_pages": {
     "loading": "در حال بارگذاری صفحه",

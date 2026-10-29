@@ -204,7 +204,9 @@ export function FilesSidebar({
     const active = folder.id === currentParentId;
     const Icon = isOpen && children.length > 0 ? FolderOpen : Folder;
     return (
-      <div key={folder.id} role="treeitem" aria-expanded={children.length > 0 ? isOpen : undefined} aria-selected={active}>
+      // Plain buttons, not a tree: a tree promises arrow-key navigation, and
+      // these rows are Tab stops like the mail folder list.
+      <div key={folder.id}>
         <div
           className={rowClass(active, dropTarget === folder.id)}
           style={{ ...ROW_STYLE, paddingInlineStart: `${12 + depth * 14}px` }}
@@ -217,6 +219,7 @@ export function FilesSidebar({
               onClick={() => toggleExpanded(folder.id)}
               className="p-0.5 -ms-1 rounded hover:bg-foreground/10 text-muted-foreground shrink-0"
               aria-label={isOpen ? t("collapse_folder", { name: folder.name }) : t("expand_folder", { name: folder.name })}
+              aria-expanded={isOpen}
             >
               {isOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
             </button>
@@ -226,6 +229,7 @@ export function FilesSidebar({
           <button
             type="button"
             onClick={() => onNavigate(path, folder.id)}
+            aria-current={active ? "page" : undefined}
             className="flex items-center gap-2 flex-1 min-w-0 text-start"
             title={folder.ownerName ? t("shared_by", { name: folder.ownerName }) : folder.name}
           >
@@ -234,7 +238,7 @@ export function FilesSidebar({
           </button>
         </div>
         {isOpen && children.length > 0 && (
-          <div role="group">{children.map((child) => renderFolder(child, path, depth + 1))}</div>
+          <div>{children.map((child) => renderFolder(child, path, depth + 1))}</div>
         )}
       </div>
     );
@@ -302,7 +306,7 @@ export function FilesSidebar({
       </div>
 
       <nav className="flex-1 overflow-y-auto py-1" aria-label={t("folders")}>
-        <div role="tree" aria-label={t("my_files")}>
+        <div>
           <div
             className={rowClass(currentPath === "/" && currentParentId === null, dropTarget === "__root__")}
             style={{ ...ROW_STYLE, paddingInlineStart: "12px" }}
@@ -315,6 +319,7 @@ export function FilesSidebar({
                 onClick={() => toggleSection("tree")}
                 className="p-0.5 -ms-1 rounded hover:bg-foreground/10 text-muted-foreground shrink-0"
                 aria-label={collapsed.tree ? t("expand_folder", { name: t("my_files") }) : t("collapse_folder", { name: t("my_files") })}
+                aria-expanded={!collapsed.tree}
               >
                 {collapsed.tree ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </button>
@@ -324,6 +329,7 @@ export function FilesSidebar({
             <button
               type="button"
               onClick={() => onNavigate("/", null)}
+              aria-current={currentPath === "/" && currentParentId === null ? "page" : undefined}
               className="flex items-center gap-2 flex-1 min-w-0 text-start"
             >
               <HardDrive className="w-4 h-4 shrink-0" />
@@ -342,6 +348,7 @@ export function FilesSidebar({
                 type="button"
                 onClick={() => onNavigate(path)}
                 onContextMenu={(e) => itemMenu.openContextMenu(e, { kind: "favorite", path })}
+                aria-current={currentPath === path ? "page" : undefined}
                 className={rowClass(currentPath === path, false)}
                 style={{ ...ROW_STYLE, paddingInlineStart: "26px" }}
                 title={path}
@@ -376,19 +383,20 @@ export function FilesSidebar({
         )}
 
         {(sharedFolders.length > 0 || sharedPages.length > 0) && (
-          <div className="mt-3" role="tree" aria-label={t("shared_with_me")}>
+          <div className="mt-3">
             {sectionHeader("shared", t("shared_with_me"), <Share2 className="w-3 h-3 text-muted-foreground" />)}
             {!collapsed.shared && sharedFolders.map((folder) => renderFolder(folder, "/", 1))}
             {!collapsed.shared && sharedPages.map((page) => {
               const name = t("shared_files_from", { name: page.ownerName });
               const active = page.id === currentParentId;
               return (
-                <div key={page.id} role="treeitem" aria-selected={active}>
+                <div key={page.id}>
                   <div className={rowClass(active, false)} style={{ ...ROW_STYLE, paddingInlineStart: "26px" }}>
                     <span className="w-3.5 -ms-1 shrink-0" />
                     <button
                       type="button"
                       onClick={() => onNavigate(`/${name}`, page.id)}
+                      aria-current={active ? "page" : undefined}
                       className="flex items-center gap-2 flex-1 min-w-0 text-start"
                       title={t("shared_by", { name: page.ownerName })}
                     >

@@ -51,7 +51,10 @@
     "skip_to_content": "ข้ามไปยังเนื้อหา",
     "heading": "{place} – {app}",
     "message_list": "รายการข้อความ",
-    "reading_pane": "บานหน้าต่างอ่าน"
+    "reading_pane": "บานหน้าต่างอ่าน",
+    "name_unread": "{name}, ยังไม่ได้อ่าน {count}",
+    "expand_folder": "ขยาย {name}",
+    "collapse_folder": "ย่อ {name}"
   },
   "date": {
     "today": "วันนี้",

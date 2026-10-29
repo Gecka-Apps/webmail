@@ -5634,7 +5634,10 @@
     "skip_to_content": "Gå til innhold",
     "heading": "{place} – {app}",
     "message_list": "Meldingsliste",
-    "reading_pane": "Leserute"
+    "reading_pane": "Leserute",
+    "name_unread": "{name}, {count} uleste",
+    "expand_folder": "Utvid {name}",
+    "collapse_folder": "Skjul {name}"
   },
   "plugin_pages": {
     "loading": "Laster inn siden",

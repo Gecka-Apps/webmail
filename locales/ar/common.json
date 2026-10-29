@@ -5634,7 +5634,10 @@
     "skip_to_content": "انتقل إلى المحتوى",
     "heading": "{place} – {app}",
     "message_list": "قائمة الرسائل",
-    "reading_pane": "جزء القراءة"
+    "reading_pane": "جزء القراءة",
+    "name_unread": "{name}، {count} غير مقروءة",
+    "expand_folder": "توسيع {name}",
+    "collapse_folder": "طي {name}"
   },
   "plugin_pages": {
     "loading": "جارٍ تحميل الصفحة",

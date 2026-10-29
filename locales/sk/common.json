@@ -5634,7 +5634,10 @@
     "skip_to_content": "Prejsť na obsah",
     "heading": "{place} – {app}",
     "message_list": "Zoznam správ",
-    "reading_pane": "Tabla na čítanie"
+    "reading_pane": "Tabla na čítanie",
+    "name_unread": "{name}, Neprečítané: {count}",
+    "expand_folder": "Rozbaliť {name}",
+    "collapse_folder": "Zbaliť {name}"
   },
   "plugin_pages": {
     "loading": "Načítava sa stránka",

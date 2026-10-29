@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState, useEffect, useMemo, useCallback, useRef, Fragment, ReactNode } from "react";
+import { memo, useState, useEffect, useMemo, useCallback, useRef, useId, Fragment, ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { PluginSlot } from "@/components/plugins/plugin-slot";
@@ -237,10 +237,16 @@ function SidebarRowCounts({
   const mountainView = useSettingsStore(s => s.interfaceLayout === 'mountain-view');
   // Per-folder override from the folder settings (#982).
   const countMode = useSettingsStore(s => (mailboxId ? s.folderCountModes?.[mailboxId] : undefined));
-  const counts = resolveFolderCounts({
+  // Settings > Accessibility: unread counts as numbers, as a dot, or hidden.
+  const unreadCountStyle = useSettingsStore(s => s.unreadCountStyle);
+  const resolved = resolveFolderCounts({
     unread, total, role, mode: countMode,
     showTotalGlobally: showFolderTotalCount, mountainView,
   });
+  const counts = unreadCountStyle === 'hidden' ? { ...resolved, unread: 0 } : resolved;
+  const unreadDot = (
+    <span aria-hidden="true" data-testid="folder-unread-dot" className="inline-block w-2 h-2 rounded-full bg-primary" />
+  );
   // Mountain View counts one thing per row: what is unread, or for Drafts,
   // how many there are, since a draft is never unread.
   if (mountainView) {
@@ -253,8 +259,10 @@ function SidebarRowCounts({
         data-testid="folder-counts"
         data-unread={unread ?? 0}
         data-total={counts.total}
+        // An unread count is said with the folder's name.
+        aria-hidden={showsTotal ? undefined : true}
       >
-        {count.toLocaleString()}
+        {!showsTotal && unreadCountStyle === 'dot' ? unreadDot : count.toLocaleString()}
       </span>
     );
   }
@@ -278,10 +286,11 @@ function SidebarRowCounts({
         title={t('unread_filter', { count: unreadCount })}
         aria-label={t('unread_filter', { count: unreadCount })}
       >
-        {unreadCount}
+        {unreadCountStyle === 'dot' ? unreadDot : unreadCount}
       </button>
     ) : (
-      <span className={unreadClass}>{unreadCount}</span>
+      // Said with the folder's name already.
+      <span className={unreadClass} aria-hidden="true">{unreadCountStyle === 'dot' ? unreadDot : unreadCount}</span>
     )
   ) : null;
 
@@ -295,7 +304,7 @@ function SidebarRowCounts({
     >
       {unreadNode}
       {unreadCount > 0 && totalCount > 0 && (
-        <span className="text-xs text-muted-foreground/60">/</span>
+        <span className="text-xs text-muted-foreground/60" aria-hidden="true">/</span>
       )}
       {totalCount > 0 && <span className={totalClass}>{totalCount}</span>}
     </span>
@@ -384,7 +393,20 @@ function SidebarRow({
   testShared,
 }: SidebarRowProps) {
   const t = useTranslations('sidebar');
+  const tShell = useTranslations('shell');
   const leftPad = isCollapsed ? 0 : ROW_PX_BASE + depth * INDENT_STEP;
+  const mutedId = useId();
+  // The unread count is part of the folder's name ("Inbox, 3 unread"), also
+  // with the sidebar collapsed, where no count is drawn. Hidden counts are
+  // not said either; a dot still says the number.
+  const unreadCountStyle = useSettingsStore(s => s.unreadCountStyle);
+  const showFolderTotalCount = useSettingsStore(s => s.showFolderTotalCount);
+  const mountainView = useSettingsStore(s => s.interfaceLayout === 'mountain-view');
+  const countMode = useSettingsStore(s => (testMailboxId ? s.folderCountModes?.[testMailboxId] : undefined));
+  const unreadForName = unreadCountStyle === 'hidden' ? 0 : resolveFolderCounts({
+    unread, total, role: testRole, mode: countMode, showTotalGlobally: showFolderTotalCount, mountainView,
+  }).unread;
+  const accessibleName = unreadForName > 0 ? tShell('name_unread', { name: label, count: unreadForName }) : undefined;
   const [labelRef, shortenedLabel] = useShortenedText(labelCandidates ?? [label]);
   // Touch has no right-click: a long-press opens the same menu (R7), and a
   // ⋮ shows it too.
@@ -438,7 +460,7 @@ function SidebarRow({
                 onExpandToggle();
               }}
               data-testid="folder-expand-toggle"
-              aria-label={isExpanded ? t('collapse_tooltip') : t('expand_tooltip')}
+              aria-label={isExpanded ? tShell('collapse_folder', { name: label }) : tShell('expand_folder', { name: label })}
               aria-expanded={isExpanded}
               className={cn("flex items-center justify-center rounded hover:bg-muted active:bg-accent transition-colors", TOUCH_HIT_AREA)}
               style={{ width: CHEVRON_SLOT, height: CHEVRON_SLOT }}
@@ -459,6 +481,9 @@ function SidebarRow({
       <button
         onClick={() => !isVirtual && onClick?.()}
         disabled={isVirtual}
+        aria-current={isSelected ? 'page' : undefined}
+        aria-label={accessibleName ?? (isCollapsed ? label : undefined)}
+        aria-describedby={muted && !isCollapsed ? mutedId : undefined}
         className={cn(
           "flex items-center gap-2 min-w-0 transition-colors",
           isCollapsed ? "justify-center" : "flex-1 text-start",
@@ -481,6 +506,7 @@ function SidebarRow({
             </span>
             {muted && (
               <BellOff
+                id={mutedId}
                 className="w-3.5 h-3.5 flex-shrink-0 text-muted-foreground"
                 aria-label={t('notifications_muted')}
                 data-testid="folder-muted"

@@ -5634,7 +5634,10 @@
     "skip_to_content": "跳到內容",
     "heading": "{place} – {app}",
     "message_list": "郵件清單",
-    "reading_pane": "閱讀窗格"
+    "reading_pane": "閱讀窗格",
+    "name_unread": "{name}，{count} 封未讀",
+    "expand_folder": "展開 {name}",
+    "collapse_folder": "收合 {name}"
   },
   "plugin_pages": {
     "loading": "正在載入頁面",

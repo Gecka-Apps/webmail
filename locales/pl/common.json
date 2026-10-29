@@ -5634,7 +5634,10 @@
     "skip_to_content": "Przejdź do treści",
     "heading": "{place} – {app}",
     "message_list": "Lista wiadomości",
-    "reading_pane": "Okienko odczytu"
+    "reading_pane": "Okienko odczytu",
+    "name_unread": "{name}, Nieprzeczytane: {count}",
+    "expand_folder": "Rozwiń {name}",
+    "collapse_folder": "Zwiń {name}"
   },
   "plugin_pages": {
     "loading": "Wczytywanie strony",

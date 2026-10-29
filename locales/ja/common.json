@@ -5634,7 +5634,10 @@
     "skip_to_content": "コンテンツへスキップ",
     "heading": "{place} – {app}",
     "message_list": "メッセージ一覧",
-    "reading_pane": "閲覧ウィンドウ"
+    "reading_pane": "閲覧ウィンドウ",
+    "name_unread": "{name}、未読 {count} 件",
+    "expand_folder": "{name}を展開",
+    "collapse_folder": "{name}を折りたたむ"
   },
   "plugin_pages": {
     "loading": "ページを読み込んでいます",

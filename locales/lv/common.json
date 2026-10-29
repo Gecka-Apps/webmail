@@ -5634,7 +5634,10 @@
     "skip_to_content": "Pāriet uz saturu",
     "heading": "{place} – {app}",
     "message_list": "Ziņojumu saraksts",
-    "reading_pane": "Lasīšanas rūts"
+    "reading_pane": "Lasīšanas rūts",
+    "name_unread": "{name}, Nelasīti: {count}",
+    "expand_folder": "Izvērst {name}",
+    "collapse_folder": "Sakļaut {name}"
   },
   "plugin_pages": {
     "loading": "Ielādē lapu",

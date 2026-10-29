@@ -5634,7 +5634,10 @@
     "skip_to_content": "Naar inhoud",
     "heading": "{place} – {app}",
     "message_list": "Berichtenlijst",
-    "reading_pane": "Leesvenster"
+    "reading_pane": "Leesvenster",
+    "name_unread": "{name}, {count} ongelezen",
+    "expand_folder": "{name} uitvouwen",
+    "collapse_folder": "{name} samenvouwen"
   },
   "plugin_pages": {
     "loading": "Pagina laden",

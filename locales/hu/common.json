@@ -5634,7 +5634,10 @@
     "skip_to_content": "Ugrás a tartalomhoz",
     "heading": "{place} – {app}",
     "message_list": "Üzenetlista",
-    "reading_pane": "Olvasóablak"
+    "reading_pane": "Olvasóablak",
+    "name_unread": "{name}, {count} olvasatlan",
+    "expand_folder": "{name} kibontása",
+    "collapse_folder": "{name} összecsukása"
   },
   "plugin_pages": {
     "loading": "Oldal betöltése",

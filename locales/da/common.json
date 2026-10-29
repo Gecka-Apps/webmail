@@ -5634,7 +5634,10 @@
     "skip_to_content": "Gå til indhold",
     "heading": "{place} – {app}",
     "message_list": "Beskedliste",
-    "reading_pane": "Læserude"
+    "reading_pane": "Læserude",
+    "name_unread": "{name}, {count} ulæste",
+    "expand_folder": "Udvid {name}",
+    "collapse_folder": "Skjul {name}"
   },
   "plugin_pages": {
     "loading": "Indlæser side",
