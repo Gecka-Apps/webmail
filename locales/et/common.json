@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name} teisaldati väljale {field}",
     "recipients_added_count": "Väljale {field} lisati {count, plural, one {# saaja} other {# saajat}}",
     "recipients_removed_count": "Väljalt {field} eemaldati {count, plural, one {# saaja} other {# saajat}}",
-    "recipients_moved_count": "Väljale {field} teisaldati {count, plural, one {# saaja} other {# saajat}}"
+    "recipients_moved_count": "Väljale {field} teisaldati {count, plural, one {# saaja} other {# saajat}}",
+    "body_label": "Sõnum"
   },
   "confirm_dialog": {
     "confirm": "Kinnita",

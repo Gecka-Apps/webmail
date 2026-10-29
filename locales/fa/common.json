@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name} به {field} منتقل شد",
     "recipients_added_count": "{count, plural, one {# گیرنده} other {# گیرنده}} به {field} افزوده شد",
     "recipients_removed_count": "{count, plural, one {# گیرنده} other {# گیرنده}} از {field} حذف شد",
-    "recipients_moved_count": "{count, plural, one {# گیرنده} other {# گیرنده}} به {field} منتقل شد"
+    "recipients_moved_count": "{count, plural, one {# گیرنده} other {# گیرنده}} به {field} منتقل شد",
+    "body_label": "پیام"
   },
   "confirm_dialog": {
     "confirm": "تأیید",

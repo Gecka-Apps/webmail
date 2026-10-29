@@ -1009,7 +1009,8 @@
     "recipient_moved": "تم نقل {name} إلى {field}",
     "recipients_added_count": "{count, plural, zero {لم تتم إضافة أي مستلم} one {تمت إضافة مستلم واحد} two {تمت إضافة مستلمَين} few {تمت إضافة # مستلمين} many {تمت إضافة # مستلمًا} other {تمت إضافة # مستلم}} إلى {field}",
     "recipients_removed_count": "{count, plural, zero {لم تتم إزالة أي مستلم} one {تمت إزالة مستلم واحد} two {تمت إزالة مستلمَين} few {تمت إزالة # مستلمين} many {تمت إزالة # مستلمًا} other {تمت إزالة # مستلم}} من {field}",
-    "recipients_moved_count": "{count, plural, zero {لم يتم نقل أي مستلم} one {تم نقل مستلم واحد} two {تم نقل مستلمَين} few {تم نقل # مستلمين} many {تم نقل # مستلمًا} other {تم نقل # مستلم}} إلى {field}"
+    "recipients_moved_count": "{count, plural, zero {لم يتم نقل أي مستلم} one {تم نقل مستلم واحد} two {تم نقل مستلمَين} few {تم نقل # مستلمين} many {تم نقل # مستلمًا} other {تم نقل # مستلم}} إلى {field}",
+    "body_label": "الرسالة"
   },
   "confirm_dialog": {
     "confirm": "تأكيد",

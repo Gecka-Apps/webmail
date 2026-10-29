@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name} verplaatst naar {field}",
     "recipients_added_count": "{count, plural, one {# ontvanger} other {# ontvangers}} toegevoegd aan {field}",
     "recipients_removed_count": "{count, plural, one {# ontvanger} other {# ontvangers}} verwijderd uit {field}",
-    "recipients_moved_count": "{count, plural, one {# ontvanger} other {# ontvangers}} verplaatst naar {field}"
+    "recipients_moved_count": "{count, plural, one {# ontvanger} other {# ontvangers}} verplaatst naar {field}",
+    "body_label": "Bericht"
   },
   "confirm_dialog": {
     "confirm": "Bevestigen",

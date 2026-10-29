@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name} を {field} に移動しました",
     "recipients_added_count": "{count, plural, other {# 件の宛先}}を {field} に追加しました",
     "recipients_removed_count": "{count, plural, other {# 件の宛先}}を {field} から削除しました",
-    "recipients_moved_count": "{count, plural, other {# 件の宛先}}を {field} に移動しました"
+    "recipients_moved_count": "{count, plural, other {# 件の宛先}}を {field} に移動しました",
+    "body_label": "メッセージ"
   },
   "confirm_dialog": {
     "confirm": "確認",

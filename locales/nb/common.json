@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name} flyttet til {field}",
     "recipients_added_count": "{count, plural, one {# mottaker} other {# mottakere}} lagt til i {field}",
     "recipients_removed_count": "{count, plural, one {# mottaker} other {# mottakere}} fjernet fra {field}",
-    "recipients_moved_count": "{count, plural, one {# mottaker} other {# mottakere}} flyttet til {field}"
+    "recipients_moved_count": "{count, plural, one {# mottaker} other {# mottakere}} flyttet til {field}",
+    "body_label": "Melding"
   },
   "confirm_dialog": {
     "confirm": "Bekreft",

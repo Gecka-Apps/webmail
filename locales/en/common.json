@@ -1009,7 +1009,8 @@
     "recipient_moved": "Moved {name} to {field}",
     "recipients_added_count": "Added {count, plural, one {# recipient} other {# recipients}} to {field}",
     "recipients_removed_count": "Removed {count, plural, one {# recipient} other {# recipients}} from {field}",
-    "recipients_moved_count": "Moved {count, plural, one {# recipient} other {# recipients}} to {field}"
+    "recipients_moved_count": "Moved {count, plural, one {# recipient} other {# recipients}} to {field}",
+    "body_label": "Message"
   },
   "confirm_dialog": {
     "confirm": "Confirm",

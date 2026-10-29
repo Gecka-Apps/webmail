@@ -1009,7 +1009,8 @@
     "recipient_moved": "S'ha mogut {name} a {field}",
     "recipients_added_count": "{count, plural, one {S'ha afegit # destinatari} other {S'han afegit # destinataris}} a {field}",
     "recipients_removed_count": "{count, plural, one {S'ha tret # destinatari} other {S'han tret # destinataris}} de {field}",
-    "recipients_moved_count": "{count, plural, one {S'ha mogut # destinatari} other {S'han mogut # destinataris}} a {field}"
+    "recipients_moved_count": "{count, plural, one {S'ha mogut # destinatari} other {S'han mogut # destinataris}} a {field}",
+    "body_label": "Missatge"
   },
   "confirm_dialog": {
     "confirm": "Confirma",

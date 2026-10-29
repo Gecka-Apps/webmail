@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name} áthelyezve ide: {field}",
     "recipients_added_count": "{count, plural, one {# címzett} other {# címzett}} hozzáadva ide: {field}",
     "recipients_removed_count": "{count, plural, one {# címzett} other {# címzett}} eltávolítva innen: {field}",
-    "recipients_moved_count": "{count, plural, one {# címzett} other {# címzett}} áthelyezve ide: {field}"
+    "recipients_moved_count": "{count, plural, one {# címzett} other {# címzett}} áthelyezve ide: {field}",
+    "body_label": "Üzenet"
   },
   "confirm_dialog": {
     "confirm": "Megerősítés",

@@ -4394,7 +4394,10 @@ export function EmailComposer({
         )}
         {/* Body */}
         {plainTextMode ? (
+          <>
+          <label htmlFor={`${fieldIdBase}-body`} className="sr-only">{t('body_label')}</label>
           <textarea
+            id={`${fieldIdBase}-body`}
             ref={bodyRef}
             value={body}
             onChange={(e) => {
@@ -4408,8 +4411,10 @@ export function EmailComposer({
             )}
             style={{ height: 'calc(100vh - 350px)' }}
             aria-invalid={validationErrors.body || undefined}
+            aria-describedby={validationErrors.body ? `${fieldIdBase}-body-error` : undefined}
             onContextMenu={onBodyContextMenu}
           />
+          </>
         ) : (
           <div ref={editorContainerRef} onContextMenu={onBodyContextMenu}>
             <RichTextEditor
@@ -4421,6 +4426,9 @@ export function EmailComposer({
               onImageUpload={handleImageUpload}
               placeholder={t('body_placeholder')}
               hasError={validationErrors.body}
+              ariaLabel={t('body_label')}
+              ariaInvalid={validationErrors.body}
+              ariaDescribedBy={`${fieldIdBase}-body-error`}
               collapseToolbarOnMobile={!showFormattingOnMobile}
               toolbarPlacement={mvWindow ? (mvShowFormatting ? 'bottom' : 'hidden') : 'top'}
               onEditorReady={handleEditorReady}
@@ -4430,6 +4438,12 @@ export function EmailComposer({
               onMentionAdd={addMentionedRecipient}
             />
           </div>
+        )}
+        {validationErrors.body && (
+          <p id={`${fieldIdBase}-body-error`} className="flex items-center gap-1 px-4 py-1 text-xs text-red-600 dark:text-red-400">
+            <AlertCircle className="w-3.5 h-3.5 shrink-0" aria-hidden />
+            {t('validation.body_required')}
+          </p>
         )}
 
         {/* Hide the visual signature preview when the signature has already been

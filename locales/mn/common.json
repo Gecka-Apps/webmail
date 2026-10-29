@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name}-г {field} руу зөөлөө",
     "recipients_added_count": "{field}-д {count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} нэмлээ",
     "recipients_removed_count": "{field}-ээс {count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} хаслаа",
-    "recipients_moved_count": "{field} руу {count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} зөөлөө"
+    "recipients_moved_count": "{field} руу {count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} зөөлөө",
+    "body_label": "Мессеж"
   },
   "confirm_dialog": {
     "confirm": "Баталгаажуулах",

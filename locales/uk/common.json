@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name}: переміщено в «{field}»",
     "recipients_added_count": "У «{field}» {count, plural, one {додано # одержувача} few {додано # одержувачі} many {додано # одержувачів} other {додано # одержувача}}",
     "recipients_removed_count": "З «{field}» {count, plural, one {прибрано # одержувача} few {прибрано # одержувачі} many {прибрано # одержувачів} other {прибрано # одержувача}}",
-    "recipients_moved_count": "У «{field}» {count, plural, one {переміщено # одержувача} few {переміщено # одержувачі} many {переміщено # одержувачів} other {переміщено # одержувача}}"
+    "recipients_moved_count": "У «{field}» {count, plural, one {переміщено # одержувача} few {переміщено # одержувачі} many {переміщено # одержувачів} other {переміщено # одержувача}}",
+    "body_label": "Повідомлення"
   },
   "confirm_dialog": {
     "confirm": "Підтвердити",

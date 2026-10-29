@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name}, {field} alanına taşındı",
     "recipients_added_count": "{field} alanına {count, plural, one {# alıcı} other {# alıcı}} eklendi",
     "recipients_removed_count": "{field} alanından {count, plural, one {# alıcı} other {# alıcı}} kaldırıldı",
-    "recipients_moved_count": "{field} alanına {count, plural, one {# alıcı} other {# alıcı}} taşındı"
+    "recipients_moved_count": "{field} alanına {count, plural, one {# alıcı} other {# alıcı}} taşındı",
+    "body_label": "İleti"
   },
   "confirm_dialog": {
     "confirm": "Onayla",

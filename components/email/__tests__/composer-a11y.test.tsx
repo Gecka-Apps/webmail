@@ -325,3 +325,24 @@ describe('moving a recipient by keyboard (MO-07)', () => {
     expect(await screen.findByTestId('recipient-move-bcc')).toBeInTheDocument();
   });
 });
+
+describe('message body (SR-07)', () => {
+  it('labels the plain-text body', () => {
+    settings.plainTextMode = true;
+    render(<EmailComposer initialData={DRAFT} />);
+    expect(screen.getByLabelText('body_label').tagName).toBe('TEXTAREA');
+  });
+
+  it('marks an empty body invalid and links the error text', async () => {
+    render(<EmailComposer initialData={{ ...DRAFT, to: 'bob@example.com', body: '' }} />);
+    const editor = screen.getByTestId('rich-text-editor');
+    expect(editor).not.toHaveAttribute('data-invalid');
+
+    fireEvent.keyDown(screen.getByTestId('composer-subject'), { key: 'Enter', ctrlKey: true });
+    await act(async () => {});
+
+    expect(editor).toHaveAttribute('data-invalid', 'true');
+    const error = document.getElementById(editor.getAttribute('data-describedby')!);
+    expect(error).toHaveTextContent('validation.body_required');
+  });
+});

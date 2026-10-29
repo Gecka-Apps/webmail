@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name} pārvietots uz {field}",
     "recipients_added_count": "Laukam {field} {count, plural, zero {pievienoti # adresāti} one {pievienots # adresāts} other {pievienoti # adresāti}}",
     "recipients_removed_count": "No lauka {field} {count, plural, zero {noņemti # adresāti} one {noņemts # adresāts} other {noņemti # adresāti}}",
-    "recipients_moved_count": "Uz {field} {count, plural, zero {pārvietoti # adresāti} one {pārvietots # adresāts} other {pārvietoti # adresāti}}"
+    "recipients_moved_count": "Uz {field} {count, plural, zero {pārvietoti # adresāti} one {pārvietots # adresāts} other {pārvietoti # adresāti}}",
+    "body_label": "Ziņojums"
   },
   "confirm_dialog": {
     "confirm": "Apstiprināt",

@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name}: перемещён в «{field}»",
     "recipients_added_count": "В «{field}» {count, plural, one {добавлен # получатель} few {добавлено # получателя} many {добавлено # получателей} other {добавлено # получателя}}",
     "recipients_removed_count": "Из «{field}» {count, plural, one {убран # получатель} few {убрано # получателя} many {убрано # получателей} other {убрано # получателя}}",
-    "recipients_moved_count": "В «{field}» {count, plural, one {перемещён # получатель} few {перемещено # получателя} many {перемещено # получателей} other {перемещено # получателя}}"
+    "recipients_moved_count": "В «{field}» {count, plural, one {перемещён # получатель} few {перемещено # получателя} many {перемещено # получателей} other {перемещено # получателя}}",
+    "body_label": "Сообщение"
   },
   "confirm_dialog": {
     "confirm": "Подтвердить",

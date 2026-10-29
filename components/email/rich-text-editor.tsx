@@ -126,6 +126,24 @@ interface RichTextEditorProps {
    * away entirely.
    */
   toolbarPlacement?: 'top' | 'bottom' | 'hidden';
+  /** The editing area's accessible name ("Message"). */
+  ariaLabel?: string;
+  /** The body failed validation: exposed as aria-invalid on the editing area. */
+  ariaInvalid?: boolean;
+  /** The id of the text that explains the error. */
+  ariaDescribedBy?: string;
+}
+
+/** What the editing area tells assistive technology, besides TipTap's role=textbox. */
+export function editorA11yAttributes({ ariaLabel, ariaInvalid, ariaDescribedBy }: Pick<RichTextEditorProps, 'ariaLabel' | 'ariaInvalid' | 'ariaDescribedBy'>): Record<string, string> {
+  return {
+    class: "tiptap min-h-[100px] px-4 py-3 text-sm text-foreground",
+    role: "textbox",
+    "aria-multiline": "true",
+    ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
+    ...(ariaInvalid ? { "aria-invalid": "true" } : {}),
+    ...(ariaInvalid && ariaDescribedBy ? { "aria-describedby": ariaDescribedBy } : {}),
+  };
 }
 
 function ToolbarButton({
@@ -223,6 +241,9 @@ export function RichTextEditor({
   onMentionAdd,
   collapseToolbarOnMobile = false,
   toolbarPlacement = 'top',
+  ariaLabel,
+  ariaInvalid,
+  ariaDescribedBy,
 }: RichTextEditorProps) {
   const rtlEditingSupport = useSettingsStore((st) => st.rtlEditingSupport);
   const tComposer = useTranslations("email_composer");
@@ -329,9 +350,7 @@ export function RichTextEditor({
     },
     content,
     editorProps: {
-      attributes: {
-        class: "tiptap min-h-[100px] px-4 py-3 text-sm text-foreground",
-      },
+      attributes: editorA11yAttributes({ ariaLabel, ariaInvalid, ariaDescribedBy }),
       handleDrop: (view, event) => {
         if (!event.dataTransfer?.files?.length) return false;
         const upload = onImageUploadRef.current;
@@ -396,6 +415,18 @@ export function RichTextEditor({
       editor.commands.setContent(loaded, { emitUpdate: false });
     }
   }, [content, editor]);
+
+  // The name and error state change after the editor is built (a failed
+  // send marks the body invalid): hand them to the editing area.
+  useEffect(() => {
+    if (!editor || editor.isDestroyed) return;
+    editor.setOptions({
+      editorProps: {
+        ...editor.options.editorProps,
+        attributes: editorA11yAttributes({ ariaLabel, ariaInvalid, ariaDescribedBy }),
+      },
+    });
+  }, [editor, ariaLabel, ariaInvalid, ariaDescribedBy]);
 
   // Expose the editor instance once it's ready so parents can target
   // specific nodes (e.g. swap the embedded signature on identity change).

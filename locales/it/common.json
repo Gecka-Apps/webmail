@@ -1009,7 +1009,8 @@
     "recipient_moved": "{name} spostato in {field}",
     "recipients_added_count": "{count, plural, one {# destinatario aggiunto} other {# destinatari aggiunti}} a {field}",
     "recipients_removed_count": "{count, plural, one {# destinatario rimosso} other {# destinatari rimossi}} da {field}",
-    "recipients_moved_count": "{count, plural, one {# destinatario spostato} other {# destinatari spostati}} in {field}"
+    "recipients_moved_count": "{count, plural, one {# destinatario spostato} other {# destinatari spostati}} in {field}",
+    "body_label": "Messaggio"
   },
   "confirm_dialog": {
     "confirm": "Conferma",

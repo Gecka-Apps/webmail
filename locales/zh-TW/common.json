@@ -1009,7 +1009,8 @@
     "recipient_moved": "已將 {name} 移到{field}",
     "recipients_added_count": "已將 {count, plural, other {# 位收件者}}新增到{field}",
     "recipients_removed_count": "已將 {count, plural, other {# 位收件者}}從{field}移除",
-    "recipients_moved_count": "已將 {count, plural, other {# 位收件者}}移到{field}"
+    "recipients_moved_count": "已將 {count, plural, other {# 位收件者}}移到{field}",
+    "body_label": "郵件內容"
   },
   "confirm_dialog": {
     "confirm": "確認",
