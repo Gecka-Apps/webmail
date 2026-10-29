@@ -3163,8 +3163,10 @@ export function EmailViewer({
     : (emailAlwaysLightMode ? false : resolvedTheme === 'dark');
   // Our dark recolouring stays out of a forced-colours mode (Windows contrast
   // themes): the browser maps the mail to the user's colours itself, and
-  // inline colours written by our pass would only fight it.
-  const recolorDark = isDark && !reading.forcedColors;
+  // inline colours written by our pass would only fight it. With the mail
+  // shown in the app's own colours there is nothing left to recolour either.
+  const recolorDark = isDark && !reading.forcedColors && !reading.overrideStyles;
+  const appFontSources = reading.fontSources.join(' ');
 
   // The body's language (Content-Language or the HTML's own lang), so a
   // screen reader switches voice for it; none when the mail doesn't say.
@@ -3213,7 +3215,7 @@ export function EmailViewer({
     // Defense-in-depth CSP inside srcDoc (see emailIframeCsp). When the user
     // loads/trusts the sender the srcDoc is rebuilt (see emailContent) with
     // the permissive variant so real images, web fonts and media load.
-    const iframeCsp = emailIframeCsp(effectiveEmailContent.externalBlocked);
+    const iframeCsp = emailIframeCsp(effectiveEmailContent.externalBlocked, appFontSources ? appFontSources.split(' ') : []);
 
     return `<!DOCTYPE html>
 <html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} data-reading="${reading.frameKey}" class="${recolorDark ? DARK_PENDING_CLASS : ''}" style="color-scheme: ${colorScheme};"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -3268,7 +3270,7 @@ export function EmailViewer({
   ${wordHtmlCSS}
   ${darkModeCSS}
 </style></head><body dir="auto">${resolveColorSchemeMedia(effectiveEmailContent.html, recolorDark)}<style>html,body{height:auto!important;min-height:0!important;max-height:none!important}</style>${reading.frameCss ? `<style>${reading.frameCss}</style>` : ''}</body></html>`;
-  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, recolorDark, emailHasNativeDarkMode, messageSpacing, bodyLanguage, reading.frameKey, reading.frameCss]);
+  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, recolorDark, emailHasNativeDarkMode, messageSpacing, bodyLanguage, reading.frameKey, reading.frameCss, appFontSources]);
 
   // Unblocking external content is handled by rebuilding the iframe srcDoc:
   // toggling allowExternalContent (both "Load images" and "Trust sender" set
@@ -3403,7 +3405,14 @@ export function EmailViewer({
 
         // Text size and minimum size (Settings > Accessibility), before the
         // height wiring so the first measurement is already at the new size.
-        applyMailTextSize(doc, { factor: readingRef.current.textFactor, minPx: readingRef.current.minFontSize });
+        // With the app's styles in charge, sizes come from that stylesheet
+        // and the pass only takes out justified text.
+        applyMailTextSize(doc, {
+          factor: readingRef.current.textFactor,
+          minPx: readingRef.current.minFontSize,
+          unjustify: readingRef.current.overrideStyles,
+          sizesFromCss: readingRef.current.overrideStyles,
+        });
 
         // Before the height wiring and after the quote toggle exists, so the
         // toggle is converted too. Reads the mail's computed colours and

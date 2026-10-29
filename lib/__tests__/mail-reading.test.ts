@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyMailTextSize, mailFrameCss, mailTextFactor, plainBodyFontSize, resolveSystemToggle, scaledTextSize } from '@/lib/mail-reading';
+import { applyMailTextSize, mailFrameCss, mailOverrideActive, mailOverrideCss, mailTextFactor, plainBodyFontSize, resolveSystemToggle, scaledTextSize } from '@/lib/mail-reading';
 
 describe('mailTextFactor', () => {
   it('follows the app text size when the mail size is 0', () => {
@@ -92,5 +92,64 @@ describe('mailFrameCss', () => {
   });
   it('stops animations and transitions for reduce motion', () => {
     expect(mailFrameCss({ reduceMotion: true })).toMatch(/animation-duration:0\.01ms!important.*transition-duration:0\.01ms!important/);
+  });
+});
+
+describe('mailOverrideActive', () => {
+  it('always, never, or only with more contrast', () => {
+    expect(mailOverrideActive('always', 'normal', false)).toBe(true);
+    expect(mailOverrideActive('never', 'more', true)).toBe(false);
+    expect(mailOverrideActive('high-contrast', 'more', false)).toBe(true);
+    expect(mailOverrideActive('high-contrast', 'system', true)).toBe(true);
+    expect(mailOverrideActive('high-contrast', 'system', false)).toBe(false);
+    expect(mailOverrideActive('high-contrast', 'normal', true)).toBe(false);
+  });
+});
+
+describe('mailOverrideCss', () => {
+  const base = {
+    fontFamily: '"Lexend", sans-serif', foreground: '#111111', background: '#fafafa', link: '#1d4ed8',
+    lineSpacing: 'normal', letterSpacing: 'normal', wordSpacing: 'normal', paragraphSpacing: 'normal',
+    textFactor: 1.25, minPx: 0,
+  } as const;
+
+  it('puts the app font, size and colours on the mail', () => {
+    const css = mailOverrideCss(base);
+    expect(css).toContain('html,body{background:#fafafa!important;color:#111111!important}');
+    expect(css).toContain('font-family:"Lexend", sans-serif!important;font-size:calc(0.875rem * 1.25)!important');
+    expect(css).toMatch(/body \*:not\([^)]*\)\{font-family:inherit!important;font-size:1em!important[^}]*color:#111111!important;background-color:transparent!important;background-image:none!important/);
+    expect(css).toContain('a[href],a[href] *{color:#1d4ed8!important}');
+    expect(css).not.toContain('letter-spacing');
+  });
+
+  it('carries the spacing settings and the minimum size', () => {
+    const css = mailOverrideCss({ ...base, lineSpacing: 'loose', letterSpacing: 'wider', wordSpacing: 'wide', paragraphSpacing: 'wide', minPx: 18 });
+    expect(css).toContain('line-height:1.9!important');
+    expect(css).toContain('letter-spacing:0.12em!important');
+    expect(css).toContain('word-spacing:0.16em!important');
+    expect(css).toContain('body p{margin-block-end:1.5em!important}');
+    expect(css).toContain('font-size:max(calc(0.875rem * 1.25), 18px)!important');
+  });
+
+  it('cannot be broken out of by a hostile value', () => {
+    const css = mailOverrideCss({ ...base, fontFamily: 'x}</style><img src=x>{' });
+    expect(css).not.toContain('</style>');
+    expect(css).not.toMatch(/font-family:x\}/);
+  });
+});
+
+describe('mailFrameCss underline', () => {
+  it('underlines links when asked', () => {
+    expect(mailFrameCss({ reduceMotion: false, underlineLinks: true })).toBe('a[href]{text-decoration-line:underline!important}');
+  });
+});
+
+describe('applyMailTextSize with the override stylesheet', () => {
+  it('leaves sizes to the stylesheet and only takes out justified text', () => {
+    const doc = mailDoc('<p style="font-size: 9px; text-align: justify">x</p>');
+    applyMailTextSize(doc, { factor: 2, minPx: 16, unjustify: true, sizesFromCss: true });
+    const p = doc.querySelector('p')!;
+    expect(p.style.getPropertyValue('font-size')).toBe('9px');
+    expect(p.style.getPropertyValue('text-align')).toBe('start');
   });
 });

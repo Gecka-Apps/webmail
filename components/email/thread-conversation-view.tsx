@@ -570,7 +570,8 @@ export function ConversationEmailBody({
   const reading = useMailReading();
   // No dark recolouring in a forced-colours mode: the browser maps the mail
   // to the user's colours itself.
-  const isDark = resolvedTheme === 'dark' && !emailAlwaysLightMode && !reading.forcedColors;
+  const isDark = resolvedTheme === 'dark' && !emailAlwaysLightMode && !reading.forcedColors && !reading.overrideStyles;
+  const appFontSources = reading.fontSources.join(' ');
   const showVerificationCodes = useSettingsStore((state) => state.showVerificationCodes);
   const verificationCode = useMemo(
     () => (showVerificationCodes ? findVerificationCode(email.subject, verificationCodeBodyText(email)) : null),
@@ -774,7 +775,7 @@ export function ConversationEmailBody({
     if (!emailContent.isHtml || !emailContent.html) return '';
     // Strict while external content is blocked: the network-level backstop
     // for whatever the DOM walk above cannot see.
-    const csp = emailIframeCsp(!allowExternal);
+    const csp = emailIframeCsp(!allowExternal, appFontSources ? appFontSources.split(' ') : []);
     // Colours are rewritten after load (applyEmailDarkMode in handleIframeLoad).
     return `<!DOCTYPE html><html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} data-reading="${reading.frameKey}" class="${isDark ? DARK_PENDING_CLASS : ''}"><head>
 <meta charset="utf-8">
@@ -808,7 +809,7 @@ export function ConversationEmailBody({
   pre { white-space: pre-wrap; word-wrap: break-word; }
   ${isDark ? emailDarkModeCss() : ''}
 </style></head><body dir="auto">${emailContent.html}${reading.frameCss ? `<style>${reading.frameCss}</style>` : ''}</body></html>`;
-  }, [emailContent.isHtml, emailContent.html, allowExternal, isDark, bodyLanguage, reading.frameKey, reading.frameCss]);
+  }, [emailContent.isHtml, emailContent.html, allowExternal, isDark, bodyLanguage, reading.frameKey, reading.frameCss, appFontSources]);
   useLayoutEffect(() => { setHtmlBodyEl(null); }, [emailIframeSrcDoc]);
   // One object per body: React writes innerHTML again whenever this object
   // changes, dropping whatever was mounted in the body.
@@ -830,7 +831,12 @@ export function ConversationEmailBody({
         hide: t('email_viewer.hide_quoted_text'),
       });
       // Text size and minimum size, before the first resize.
-      applyMailTextSize(doc, { factor: reading.textFactor, minPx: reading.minFontSize });
+      applyMailTextSize(doc, {
+        factor: reading.textFactor,
+        minPx: reading.minFontSize,
+        unjustify: reading.overrideStyles,
+        sizesFromCss: reading.overrideStyles,
+      });
       if (isDark) applyEmailDarkMode(doc, { remoteContentAllowed: allowExternal });
       const resize = () => {
         // Fit desktop-width mail to the screen before measuring: the transform
@@ -875,7 +881,7 @@ export function ConversationEmailBody({
     } catch {
       // contentDocument may be inaccessible under stricter sandboxes; ignore.
     }
-  }, [t, isDark, allowExternal, email.id, selectionMenu.openRef, reading.textFactor, reading.minFontSize]);
+  }, [t, isDark, allowExternal, email.id, selectionMenu.openRef, reading.textFactor, reading.minFontSize, reading.overrideStyles]);
 
   return (
     <div className={className}>

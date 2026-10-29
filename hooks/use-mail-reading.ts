@@ -3,8 +3,18 @@
 import { useMemo } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { useSettingsStore } from "@/stores/settings-store";
+import { useThemeStore } from "@/stores/theme-store";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { mailFrameCss, mailTextFactor, plainBodyFontSize, resolveSystemToggle } from "@/lib/mail-reading";
+import {
+  appFontFamilyName,
+  collectFontFaces,
+  mailFrameCss,
+  mailOverrideActive,
+  mailTextFactor,
+  plainBodyFontSize,
+  resolveSystemToggle,
+  type MailOverride,
+} from "@/lib/mail-reading";
 
 /**
  * The reading settings as they apply to the message open right now: "follow
@@ -19,14 +29,31 @@ export interface MailReading {
   minFontSize: number;
   /** Windows contrast themes and the like: the browser picks the colours. */
   forcedColors: boolean;
-  /** Font size for a plain-text body of `basePx` at 100 %. */
-  plainFontSize: (basePx: number) => string;
   /** Reduce motion, resolved: stop animations inside the mail too. */
   reduceMotion: boolean;
+  /** The sender's fonts, sizes and colours give way to the app's. */
+  overrideStyles: boolean;
+  /** Font size for a plain-text body of `basePx` at 100 %. */
+  plainFontSize: (basePx: number) => string;
   /** CSS appended to the mail document for the settings above; may be empty. */
   frameCss: string;
+  /** Folders of app fonts the mail document may load (its CSP font-src). */
+  fontSources: string[];
   /** Changes whenever the body frame has to be built again. */
   frameKey: string;
+}
+
+/** The app's colours and font right now, read from the page's own styles. */
+function readAppTheme(): Pick<MailOverride, 'fontFamily' | 'foreground' | 'background' | 'link'> {
+  if (typeof document === 'undefined') return { fontFamily: '', foreground: '', background: '', link: '' };
+  const root = getComputedStyle(document.documentElement);
+  const body = document.body ? getComputedStyle(document.body) : null;
+  return {
+    fontFamily: body?.fontFamily || root.getPropertyValue('--font-sans'),
+    foreground: root.getPropertyValue('--color-foreground') || body?.color || '',
+    background: root.getPropertyValue('--color-background') || '',
+    link: root.getPropertyValue('--color-primary') || '',
+  };
 }
 
 export function useMailReading(): MailReading {
@@ -35,22 +62,53 @@ export function useMailReading(): MailReading {
     mailTextScale: state.mailTextScale,
     mailMinFontSize: state.mailMinFontSize,
     reduceMotion: state.reduceMotion,
+    mailOverrideStyles: state.mailOverrideStyles,
+    contrast: state.contrast,
+    appFont: state.appFont,
+    lineSpacing: state.lineSpacing,
+    letterSpacing: state.letterSpacing,
+    wordSpacing: state.wordSpacing,
+    paragraphSpacing: state.paragraphSpacing,
+    underlineLinks: state.underlineLinks,
   })));
+  // The theme's colours are read from the page, so a theme change re-reads them.
+  const theme = useThemeStore((state) => `${state.resolvedTheme}/${state.activeThemeId ?? ''}`);
   const forcedColors = useMediaQuery("(forced-colors: active)");
   const systemReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const systemMoreContrast = useMediaQuery("(prefers-contrast: more)");
 
   return useMemo(() => {
     const textFactor = mailTextFactor(s.mailTextScale, s.fontSize);
     const minFontSize = s.mailMinFontSize || 0;
     const reduceMotion = resolveSystemToggle(s.reduceMotion, systemReducedMotion);
+    const overrideStyles = mailOverrideActive(s.mailOverrideStyles, s.contrast, systemMoreContrast);
+    let override: MailOverride | null = null;
+    let fontFaces = { css: '', sources: [] as string[] };
+    if (overrideStyles) {
+      override = {
+        ...readAppTheme(),
+        lineSpacing: s.lineSpacing,
+        letterSpacing: s.letterSpacing,
+        wordSpacing: s.wordSpacing,
+        paragraphSpacing: s.paragraphSpacing,
+        textFactor,
+        minPx: minFontSize,
+      };
+      const family = appFontFamilyName(s.appFont);
+      if (family && typeof document !== 'undefined') fontFaces = collectFontFaces(document, family);
+    }
     return {
       textFactor,
       minFontSize,
       forcedColors,
       reduceMotion,
-      frameCss: mailFrameCss({ reduceMotion }),
+      overrideStyles,
       plainFontSize: (basePx: number) => plainBodyFontSize(basePx, s.mailTextScale, s.fontSize, minFontSize),
-      frameKey: `${textFactor}/${minFontSize}`,
+      frameCss: mailFrameCss({ reduceMotion, underlineLinks: s.underlineLinks, override, fontFaceCss: fontFaces.css }),
+      fontSources: fontFaces.sources,
+      frameKey: `${textFactor}/${minFontSize}${overrideStyles ? '/o' : ''}`,
     };
-  }, [s.mailTextScale, s.fontSize, s.mailMinFontSize, s.reduceMotion, forcedColors, systemReducedMotion]);
+    // `theme` only marks that the page's colours changed.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [s, forcedColors, systemReducedMotion, systemMoreContrast, theme]);
 }

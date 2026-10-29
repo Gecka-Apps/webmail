@@ -106,10 +106,15 @@ export function sanitizeEmailHtmlForIframe(html: string): string {
  * `@font-face`). cid: parts are rewritten to blob: URLs beforehand, so they
  * survive the strict variant.
  */
-export function emailIframeCsp(externalBlocked: boolean): string {
+export function emailIframeCsp(externalBlocked: boolean, appFontSources: readonly string[] = []): string {
+  // The folders of the app's own bundled fonts (Settings > Accessibility, mail
+  // in the app's font). A path, never the whole origin: a mail must not be able
+  // to make requests to the app's other URLs.
+  const appFonts = appFontSources.filter((src) => /^https?:\/\/[^\s;,'"]+\/$/.test(src));
+  const fontSrc = ['data:', ...appFonts].join(' ');
   return externalBlocked
-    ? "default-src 'none'; img-src data: blob:; style-src 'unsafe-inline'; font-src data:; media-src data: blob:; base-uri 'none'; form-action 'none'; frame-src 'none'"
-    : "default-src 'none'; img-src data: blob: http: https:; style-src 'unsafe-inline'; font-src data: http: https:; media-src data: blob: http: https:; base-uri 'none'; form-action 'none'; frame-src 'none'";
+    ? `default-src 'none'; img-src data: blob:; style-src 'unsafe-inline'; font-src ${fontSrc}; media-src data: blob:; base-uri 'none'; form-action 'none'; frame-src 'none'`
+    : `default-src 'none'; img-src data: blob: http: https:; style-src 'unsafe-inline'; font-src ${fontSrc} http: https:; media-src data: blob: http: https:; base-uri 'none'; form-action 'none'; frame-src 'none'`;
 }
 
 /** Outcome of {@link sanitizeEmailBodyForIframe}. */

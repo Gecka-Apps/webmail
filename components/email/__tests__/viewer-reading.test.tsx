@@ -171,3 +171,36 @@ describe('reduce motion inside the mail', () => {
     expect(await srcdoc()).not.toContain('animation-duration:0.01ms');
   });
 });
+
+describe('mail in the app font and colours', () => {
+  const html = '<p style="font-family: Comic Sans MS; color: #ff0; background: #00f">Loud <b>mail</b></p>';
+  const srcdoc = async () => (await show(message({ html }))).container.querySelector('iframe')!.getAttribute('srcdoc')!;
+
+  it('leaves the sender styles alone by default', async () => {
+    expect(await srcdoc()).not.toContain('background-image:none!important');
+  });
+
+  it('replaces them when set to always, and skips the dark recolouring', async () => {
+    useThemeStore.setState({ resolvedTheme: 'dark' });
+    useSettingsStore.setState({ mailOverrideStyles: 'always' } as never);
+    const doc = await srcdoc();
+    expect(doc).toContain('background-image:none!important');
+    expect(doc).not.toContain(DARK_PENDING_CLASS);
+  });
+
+  it('in high contrast mode only, following the system', async () => {
+    useSettingsStore.setState({ mailOverrideStyles: 'high-contrast' } as never);
+    expect(await srcdoc()).not.toContain('background-image:none!important');
+  });
+
+  it('in high contrast mode when the system asks for more contrast', async () => {
+    useSettingsStore.setState({ mailOverrideStyles: 'high-contrast' } as never);
+    media.matches.add('(prefers-contrast: more)');
+    expect(await srcdoc()).toContain('background-image:none!important');
+  });
+
+  it('underlines links inside the mail when links are underlined', async () => {
+    useSettingsStore.setState({ underlineLinks: true } as never);
+    expect(await srcdoc()).toContain('a[href]{text-decoration-line:underline!important}');
+  });
+});
