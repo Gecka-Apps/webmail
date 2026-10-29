@@ -200,12 +200,15 @@ function LockRow({ def, policy, scopeId, onChange }: { def: RestrictionKeyDef; p
             </label>
           )}
           {modes.includes('locked') && current.locked && setting && current.value !== undefined && (
-            <SettingValueInput
-              setting={setting}
-              value={current.value}
-              ariaLabel={`Value users get for ${def.label}`}
-              onChange={(v) => set({ value: v })}
-            />
+            <span className="flex items-center gap-1.5">
+              <span className="text-xs text-muted-foreground" aria-hidden="true">Users get</span>
+              <SettingValueInput
+                setting={setting}
+                value={current.value}
+                ariaLabel={`Value users get for ${def.label}`}
+                onChange={(v) => set({ value: v })}
+              />
+            </span>
           )}
           {modes.includes('min') && (
             <Select
