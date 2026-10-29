@@ -67,7 +67,7 @@ describe('conversation controls name their target', () => {
       hasAttachment: true,
       attachments: [{ partId: '2', blobId: 'blob2', name: 'report.pdf', type: 'application/pdf', size: 2048 }],
     })]);
-    expect(screen.getByRole('button', { name: /^email_viewer\.(download|preview)_named \{"name":"report\.pdf"\}$/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /^(email_viewer\.download|files\.preview) report\.pdf/ })).toBeInTheDocument();
   });
 });
 

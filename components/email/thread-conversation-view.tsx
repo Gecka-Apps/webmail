@@ -1013,10 +1013,12 @@ export function ConversationEmailBody({
                     onDownloadAttachment?.(attachment.blobId, attachment.name || 'attachment', attachment.type, source);
                   }}
                   title={opensPreview ? t('files.preview') : t('email_viewer.download')}
-                  aria-label={t(opensPreview ? 'email_viewer.preview_named' : 'email_viewer.download_named', { name: attachment.name ? stripBidiControls(attachment.name) : 'Attachment' })}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors text-sm"
                 >
                   <Icon className="w-4 h-4 text-muted-foreground" />
+                  {/* The action, for screen readers: the visible name alone
+                      doesn't say whether the button previews or downloads. */}
+                  <span className="sr-only">{opensPreview ? t('files.preview') : t('email_viewer.download')}</span>{' '}
                   <span className="truncate max-w-[150px]">{attachment.name ? stripBidiControls(attachment.name) : 'Attachment'}</span>
                   <span className="text-muted-foreground text-xs">
                     {formatFileSize(attachment.size)}
