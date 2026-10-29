@@ -2218,6 +2218,9 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
         <div
           className="flex flex-1 overflow-hidden relative isolate"
           data-tour="calendar-view"
+          // Where the focus goes after an event is saved or deleted and
+          // what opened its editor is gone (components/layout/focus-rescue).
+          data-focus-fallback=""
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >

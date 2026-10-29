@@ -1068,6 +1068,9 @@ export function EmailList({
         id="message-list"
         tabIndex={-1}
         data-pane="list"
+        // Where the focus goes when the message it was on is deleted,
+        // archived or moved (components/layout/focus-rescue).
+        data-focus-fallback=""
         // Room under the last row for the round Compose button, which would
         // otherwise sit on that row's actions (Mountain View has no such button).
         className={cn("flex-1 overflow-y-auto bg-background relative outline-none", !mountainViewList && "pb-20")}
