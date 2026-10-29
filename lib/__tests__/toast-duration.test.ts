@@ -7,6 +7,7 @@ import { useAuthStore } from '@/stores/auth-store';
 import { useCalendarStore } from '@/stores/calendar-store';
 import { useCalendarNotificationStore } from '@/stores/calendar-notification-store';
 import { useCalendarAlerts } from '@/hooks/use-calendar-alerts';
+import { stopTitleAlert } from '@/lib/title-alert';
 import type { CalendarEvent } from '@/lib/jmap/types';
 
 const playNotificationSound = vi.hoisted(() => vi.fn());
@@ -110,6 +111,8 @@ describe('reminder toasts', () => {
     useCalendarStore.setState({ events: [], calendars: [], supportsCalendar: true });
   });
   afterEach(() => {
+    // A reminder with Visual alerts on may have started the title alert.
+    stopTitleAlert();
     vi.useRealTimers();
   });
 
@@ -131,6 +134,21 @@ describe('reminder toasts', () => {
     expect(showReminder('r3').duration).toBe(0);
     useSettingsStore.setState({ visualAlerts: false, toastDuration: 0 });
     expect(showReminder('r4').duration).toBe(0);
+  });
+
+  it('swaps the tab title to the reminder with Visual alerts on, in the background', () => {
+    const hasFocus = vi.spyOn(document, 'hasFocus').mockReturnValue(false);
+    document.title = 'Calendar';
+    try {
+      useSettingsStore.setState({ visualAlerts: true, doNotDisturb: true });
+      const shown = showReminder('r7');
+      expect(shown?.title).toBe('Meeting r7');
+      expect(document.title).toBe('title_alert');
+    } finally {
+      stopTitleAlert();
+      hasFocus.mockRestore();
+    }
+    expect(document.title).toBe('Calendar');
   });
 
   it('still shows with Do not disturb on, but without a sound', () => {

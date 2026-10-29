@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, other {#件のメールを既読にしました}}",
     "emails_marked_unread": "{count, plural, other {#件のメールを未読にしました}}",
     "tag_removed": "タグを外しました",
-    "tag_removed_count": "{count, plural, other {#件のメールからタグを外しました}}"
+    "tag_removed_count": "{count, plural, other {#件のメールからタグを外しました}}",
+    "new_mail_count": "{count, plural, other {新着メッセージ #件}}"
   },
   "third_party": {
     "push_needs_relay": "プッシュ通知には組織が運用するプッシュリレーが必要ですが、設定されていません。アプリを開いている間は、新着メールが引き続き表示されます。",
@@ -4451,7 +4452,8 @@
       "task_due": "タスクの期限です",
       "event_exported": "イベントをエクスポートしました",
       "title_copied": "タイトルをコピーしました",
-      "link_copied": "リンクをコピーしました"
+      "link_copied": "リンクをコピーしました",
+      "title_alert": "リマインダー: {title}"
     },
     "status": {
       "loading_calendars": "カレンダーを読み込み中...",

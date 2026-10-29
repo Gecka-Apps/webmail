@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# e-mail označený ako prečítaný} few {# e-maily označené ako prečítané} other {# e-mailov označených ako prečítané}}",
     "emails_marked_unread": "{count, plural, one {# e-mail označený ako neprečítaný} few {# e-maily označené ako neprečítané} other {# e-mailov označených ako neprečítané}}",
     "tag_removed": "Štítok odstránený",
-    "tag_removed_count": "{count, plural, one {Štítok odstránený z # e-mailu} few {Štítok odstránený z # e-mailov} other {Štítok odstránený z # e-mailov}}"
+    "tag_removed_count": "{count, plural, one {Štítok odstránený z # e-mailu} few {Štítok odstránený z # e-mailov} other {Štítok odstránený z # e-mailov}}",
+    "new_mail_count": "{count, plural, one {# nová správa} few {# nové správy} other {# nových správ}}"
   },
   "third_party": {
     "push_needs_relay": "Push oznámenia potrebujú push relay prevádzkovaný vašou organizáciou a žiadny nie je nastavený. Nová pošta sa naďalej zobrazuje, kým je aplikácia otvorená.",
@@ -4477,7 +4478,8 @@
       "task_due": "Termín úlohy",
       "event_exported": "Udalosť exportovaná",
       "title_copied": "Názov skopírovaný",
-      "link_copied": "Odkaz skopírovaný"
+      "link_copied": "Odkaz skopírovaný",
+      "title_alert": "Pripomienka: {title}"
     },
     "status": {
       "loading_calendars": "Načítavanie kalendárov...",

@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {تم تمييز رسالة واحدة كمقروءة} other {تم تمييز # رسائل كمقروءة}}",
     "emails_marked_unread": "{count, plural, one {تم تمييز رسالة واحدة كغير مقروءة} other {تم تمييز # رسائل كغير مقروءة}}",
     "tag_removed": "تمت إزالة الوسم",
-    "tag_removed_count": "{count, plural, one {تمت إزالة الوسم من رسالة واحدة} other {تمت إزالة الوسم من # رسائل}}"
+    "tag_removed_count": "{count, plural, one {تمت إزالة الوسم من رسالة واحدة} other {تمت إزالة الوسم من # رسائل}}",
+    "new_mail_count": "{count, plural, one {رسالة جديدة واحدة} other {# رسائل جديدة}}"
   },
   "third_party": {
     "push_needs_relay": "تحتاج الإشعارات الفورية إلى خادم ترحيل تديره مؤسستك، ولم يُعدّ أي خادم. يستمر ظهور البريد الجديد ما دام التطبيق مفتوحًا.",
@@ -4477,7 +4478,8 @@
       "task_due": "موعد استحقاق المهمة",
       "event_exported": "تم تصدير الحدث",
       "title_copied": "تم نسخ العنوان",
-      "link_copied": "تم نسخ الرابط"
+      "link_copied": "تم نسخ الرابط",
+      "title_alert": "تذكير: {title}"
     },
     "status": {
       "loading_calendars": "جارٍ تحميل التقويمات...",

@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, other {# имэйлийг уншсан гэж тэмдэглэлээ}}",
     "emails_marked_unread": "{count, plural, other {# имэйлийг уншаагүй гэж тэмдэглэлээ}}",
     "tag_removed": "Хаяг хасагдлаа",
-    "tag_removed_count": "{count, plural, other {# имэйлээс хаяг хасагдлаа}}"
+    "tag_removed_count": "{count, plural, other {# имэйлээс хаяг хасагдлаа}}",
+    "new_mail_count": "{count, plural, other {# шинэ зурвас}}"
   },
   "third_party": {
     "push_needs_relay": "Push мэдэгдэлд таны байгууллагын ажиллуулдаг push буухиа хэрэгтэй, гэвч нэг ч тохируулагдаагүй байна. Апп нээлттэй байх үед шинэ имэйл харагдсаар байна.",
@@ -4477,7 +4478,8 @@
       "task_due": "Даалгавар дуусах хугацаа",
       "event_exported": "Үйл явдал экспортлогдсон",
       "title_copied": "Гарчиг хуулсан",
-      "link_copied": "Холбоос хуулсан"
+      "link_copied": "Холбоос хуулсан",
+      "title_alert": "Сануулга: {title}"
     },
     "status": {
       "loading_calendars": "Хуанли ачаалж байна...",

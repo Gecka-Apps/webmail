@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, other {# e-posta okundu olarak işaretlendi}}",
     "emails_marked_unread": "{count, plural, other {# e-posta okunmadı olarak işaretlendi}}",
     "tag_removed": "Etiket kaldırıldı",
-    "tag_removed_count": "{count, plural, other {# e-postadan etiket kaldırıldı}}"
+    "tag_removed_count": "{count, plural, other {# e-postadan etiket kaldırıldı}}",
+    "new_mail_count": "{count, plural, other {# yeni ileti}}"
   },
   "third_party": {
     "push_needs_relay": "Anlık bildirimler için kuruluşunuzun işlettiği bir push rölesi gerekir ve hiçbiri ayarlanmamış. Uygulama açıkken yeni postalar yine de görünür.",
@@ -4477,7 +4478,8 @@
       "task_due": "Görev süresi doldu",
       "event_exported": "Etkinlik dışa aktarıldı",
       "title_copied": "Başlık kopyalandı",
-      "link_copied": "Bağlantı kopyalandı"
+      "link_copied": "Bağlantı kopyalandı",
+      "title_alert": "Hatırlatma: {title}"
     },
     "status": {
       "loading_calendars": "Takvimler yükleniyor...",

@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, zero {# vēstules atzīmētas kā izlasītas} one {# vēstule atzīmēta kā izlasīta} other {# vēstules atzīmētas kā izlasītas}}",
     "emails_marked_unread": "{count, plural, zero {# vēstules atzīmētas kā neizlasītas} one {# vēstule atzīmēta kā neizlasīta} other {# vēstules atzīmētas kā neizlasītas}}",
     "tag_removed": "Tags noņemts",
-    "tag_removed_count": "{count, plural, zero {Tags noņemts # vēstulēm} one {Tags noņemts # vēstulei} other {Tags noņemts # vēstulēm}}"
+    "tag_removed_count": "{count, plural, zero {Tags noņemts # vēstulēm} one {Tags noņemts # vēstulei} other {Tags noņemts # vēstulēm}}",
+    "new_mail_count": "{count, plural, zero {# jaunas vēstules} one {# jauna vēstule} other {# jaunas vēstules}}"
   },
   "third_party": {
     "push_needs_relay": "Push paziņojumiem vajadzīgs jūsu organizācijas uzturēts push relejs, un neviens nav iestatīts. Jauns pasts joprojām tiek rādīts, kamēr lietotne ir atvērta.",
@@ -4450,7 +4451,8 @@
       "task_due": "Uzdevuma termiņš",
       "event_exported": "Notikums eksportēts",
       "title_copied": "Nosaukums nokopēts",
-      "link_copied": "Saite nokopēta"
+      "link_copied": "Saite nokopēta",
+      "title_alert": "Atgādinājums: {title}"
     },
     "status": {
       "loading_calendars": "Ielādē kalendārus...",

@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, other {# e-mail olvasottnak jelölve}}",
     "emails_marked_unread": "{count, plural, other {# e-mail olvasatlannak jelölve}}",
     "tag_removed": "Címke eltávolítva",
-    "tag_removed_count": "{count, plural, other {Címke eltávolítva # e-mailről}}"
+    "tag_removed_count": "{count, plural, other {Címke eltávolítva # e-mailről}}",
+    "new_mail_count": "{count, plural, other {# új üzenet}}"
   },
   "third_party": {
     "push_needs_relay": "A push-értesítésekhez a szervezeted által üzemeltetett push relé kell, és nincs beállítva egy sem. Az új levelek továbbra is megjelennek, amíg az alkalmazás nyitva van.",
@@ -4477,7 +4478,8 @@
       "task_due": "Feladat határidős",
       "event_exported": "Esemény exportálva",
       "title_copied": "Cím másolva",
-      "link_copied": "Link másolva"
+      "link_copied": "Link másolva",
+      "title_alert": "Emlékeztető: {title}"
     },
     "status": {
       "loading_calendars": "Naptárak betöltése...",

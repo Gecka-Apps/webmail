@@ -12,6 +12,7 @@ import { useToastStore } from '@/stores/toast-store';
 import { getPendingAlerts, getPendingTaskAlerts, getNextAlertFireTime, buildAlertKey } from '@/lib/calendar-alerts';
 import { playNotificationSound } from '@/lib/notification-sound';
 import { lastingToastDuration } from '@/lib/toast-duration';
+import { startTitleAlert } from '@/lib/title-alert';
 import { getPathPrefix } from '@/lib/browser-navigation';
 import type { CalendarEvent } from '@/lib/jmap/types';
 import { calendarHooks } from '@/lib/plugin-hooks';
@@ -41,6 +42,15 @@ export function reminderToastDuration(): number {
  */
 function reminderSoundOn(soundSetting: boolean): boolean {
   return soundSetting && !useSettingsStore.getState().doNotDisturb;
+}
+
+/**
+ * Visual alerts: the tab title swaps slowly to the reminder while the tab
+ * is in the background. Reminders were asked for, so Do not disturb keeps
+ * this too.
+ */
+function reminderTitleAlert(text: string): void {
+  if (useSettingsStore.getState().visualAlerts) startTitleAlert(text);
 }
 
 export function useCalendarAlerts() {
@@ -107,6 +117,7 @@ export function useCalendarAlerts() {
           ? `${timeLabel} · ${alert.calendarName}`
           : timeLabel;
 
+        reminderTitleAlert(t('title_alert', { title: alert.event.title || t('alert_title') }));
         addToast({
           type: 'info',
           title: alert.event.title || t('alert_title'),
@@ -139,6 +150,7 @@ export function useCalendarAlerts() {
             ? `${t('task_due')} · ${taskAlert.calendarName}`
             : t('task_due');
 
+          reminderTitleAlert(t('title_alert', { title: taskAlert.task.title || t('alert_title') }));
           addToast({
             type: 'info',
             title: taskAlert.task.title || t('alert_title'),

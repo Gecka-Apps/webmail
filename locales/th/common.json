@@ -525,7 +525,8 @@
     "emails_marked_read": "{count, plural, other {ทำเครื่องหมายอีเมล # ฉบับว่าอ่านแล้ว}}",
     "emails_marked_unread": "{count, plural, other {ทำเครื่องหมายอีเมล # ฉบับว่ายังไม่ได้อ่าน}}",
     "tag_removed": "นำป้ายกำกับออกแล้ว",
-    "tag_removed_count": "{count, plural, other {นำป้ายกำกับออกจากอีเมล # ฉบับแล้ว}}"
+    "tag_removed_count": "{count, plural, other {นำป้ายกำกับออกจากอีเมล # ฉบับแล้ว}}",
+    "new_mail_count": "{count, plural, other {ข้อความใหม่ # ฉบับ}}"
   },
   "third_party": {
     "push_needs_relay": "การแจ้งเตือนแบบพุชต้องใช้ push relay ที่องค์กรของคุณดูแล แต่ยังไม่ได้ตั้งค่าไว้ อีเมลใหม่จะยังแสดงขณะที่เปิดแอปอยู่",
@@ -3423,7 +3424,8 @@
       "task_due": "ถึงกำหนดส่งงาน",
       "event_exported": "ส่งออกกิจกรรมแล้ว",
       "title_copied": "คัดลอกชื่อเรื่องแล้ว",
-      "link_copied": "คัดลอกลิงก์แล้ว"
+      "link_copied": "คัดลอกลิงก์แล้ว",
+      "title_alert": "การเตือน: {title}"
     },
     "status": {
       "loading_calendars": "กำลังโหลดปฏิทิน...",

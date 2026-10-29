@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# kiri märgiti loetuks} other {# kirja märgiti loetuks}}",
     "emails_marked_unread": "{count, plural, one {# kiri märgiti lugemata} other {# kirja märgiti lugemata}}",
     "tag_removed": "Silt eemaldati",
-    "tag_removed_count": "{count, plural, one {Silt eemaldati # kirjalt} other {Silt eemaldati # kirjalt}}"
+    "tag_removed_count": "{count, plural, one {Silt eemaldati # kirjalt} other {Silt eemaldati # kirjalt}}",
+    "new_mail_count": "{count, plural, one {# uus kiri} other {# uut kirja}}"
   },
   "third_party": {
     "push_needs_relay": "Tõuketeavitused vajavad sinu organisatsiooni hallatavat push-releed, kuid ühtegi pole seadistatud. Uued kirjad kuvatakse endiselt, kuni rakendus on avatud.",
@@ -4477,7 +4478,8 @@
       "task_due": "Ülesande tähtaeg",
       "event_exported": "Sündmus eksporditud",
       "title_copied": "Pealkiri kopeeritud",
-      "link_copied": "Link kopeeritud"
+      "link_copied": "Link kopeeritud",
+      "title_alert": "Meeldetuletus: {title}"
     },
     "status": {
       "loading_calendars": "Kalendrite laadimine...",

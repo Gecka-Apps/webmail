@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, other {메일 #개를 읽음으로 표시했어요}}",
     "emails_marked_unread": "{count, plural, other {메일 #개를 읽지 않음으로 표시했어요}}",
     "tag_removed": "태그를 뺐어요",
-    "tag_removed_count": "{count, plural, other {메일 #개에서 태그를 뺐어요}}"
+    "tag_removed_count": "{count, plural, other {메일 #개에서 태그를 뺐어요}}",
+    "new_mail_count": "{count, plural, other {새 메시지 #개}}"
   },
   "third_party": {
     "push_needs_relay": "푸시 알림을 받으려면 조직에서 운영하는 푸시 릴레이가 필요한데, 설정된 릴레이가 없어요. 앱이 열려 있는 동안에는 새 메일이 계속 표시돼요.",
@@ -4451,7 +4452,8 @@
       "task_due": "할 일 기한이 다가와요",
       "event_exported": "이벤트 내보내기 완료",
       "title_copied": "제목이 복사되었습니다",
-      "link_copied": "링크가 복사되었습니다"
+      "link_copied": "링크가 복사되었습니다",
+      "title_alert": "알림: {title}"
     },
     "status": {
       "loading_calendars": "캘린더를 불러오는 중...",

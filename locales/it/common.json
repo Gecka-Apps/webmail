@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# email segnata come letta} other {# email segnate come lette}}",
     "emails_marked_unread": "{count, plural, one {# email segnata come non letta} other {# email segnate come non lette}}",
     "tag_removed": "Etichetta rimossa",
-    "tag_removed_count": "{count, plural, one {Etichetta rimossa da # email} other {Etichetta rimossa da # email}}"
+    "tag_removed_count": "{count, plural, one {Etichetta rimossa da # email} other {Etichetta rimossa da # email}}",
+    "new_mail_count": "{count, plural, one {# nuovo messaggio} other {# nuovi messaggi}}"
   },
   "third_party": {
     "push_needs_relay": "Le notifiche push richiedono un relay push gestito dalla tua organizzazione, e non ne è configurato nessuno. La nuova posta compare comunque finché l'app è aperta.",
@@ -4451,7 +4452,8 @@
       "task_due": "Attività in scadenza",
       "event_exported": "Evento esportato",
       "title_copied": "Titolo copiato",
-      "link_copied": "Link copiato"
+      "link_copied": "Link copiato",
+      "title_alert": "Promemoria: {title}"
     },
     "status": {
       "loading_calendars": "Caricamento calendari...",

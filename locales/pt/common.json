@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# e-mail marcado como lido} other {# e-mails marcados como lidos}}",
     "emails_marked_unread": "{count, plural, one {# e-mail marcado como não lido} other {# e-mails marcados como não lidos}}",
     "tag_removed": "Etiqueta removida",
-    "tag_removed_count": "{count, plural, one {Etiqueta removida de # e-mail} other {Etiqueta removida de # e-mails}}"
+    "tag_removed_count": "{count, plural, one {Etiqueta removida de # e-mail} other {Etiqueta removida de # e-mails}}",
+    "new_mail_count": "{count, plural, one {# mensagem nova} other {# mensagens novas}}"
   },
   "third_party": {
     "push_needs_relay": "As notificações push precisam de um relay push mantido pela sua organização, e nenhum está configurado. Os novos e-mails continuam aparecendo enquanto o app estiver aberto.",
@@ -4477,7 +4478,8 @@
       "task_due": "Tarefa vencendo",
       "event_exported": "Evento exportado",
       "title_copied": "Título copiado",
-      "link_copied": "Link copiado"
+      "link_copied": "Link copiado",
+      "title_alert": "Lembrete: {title}"
     },
     "status": {
       "loading_calendars": "Carregando calendários...",

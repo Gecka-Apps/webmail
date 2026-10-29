@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# e-post merket som lest} other {# e-poster merket som lest}}",
     "emails_marked_unread": "{count, plural, one {# e-post merket som ulest} other {# e-poster merket som ulest}}",
     "tag_removed": "Etikett fjernet",
-    "tag_removed_count": "{count, plural, one {Etikett fjernet fra # e-post} other {Etikett fjernet fra # e-poster}}"
+    "tag_removed_count": "{count, plural, one {Etikett fjernet fra # e-post} other {Etikett fjernet fra # e-poster}}",
+    "new_mail_count": "{count, plural, one {# ny melding} other {# nye meldinger}}"
   },
   "third_party": {
     "push_needs_relay": "Push-varsler trenger et push-relé som organisasjonen din driver, og det er ikke satt opp noe. Ny e-post vises fortsatt mens appen er åpen.",
@@ -4477,7 +4478,8 @@
       "task_due": "Oppgaven forfaller",
       "event_exported": "Hendelsen er eksportert",
       "title_copied": "Tittelen er kopiert",
-      "link_copied": "Lenken er kopiert"
+      "link_copied": "Lenken er kopiert",
+      "title_alert": "Påminnelse: {title}"
     },
     "status": {
       "loading_calendars": "Laster inn kalendere...",

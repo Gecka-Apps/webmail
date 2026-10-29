@@ -1131,7 +1131,8 @@
     "emails_marked_read": "{count, plural, one {הודעה אחת סומנה כנקראה} other {# הודעות סומנו כנקראו}}",
     "emails_marked_unread": "{count, plural, one {הודעה אחת סומנה כלא נקראה} other {# הודעות סומנו כלא נקראו}}",
     "tag_removed": "התגית הוסרה",
-    "tag_removed_count": "{count, plural, one {התגית הוסרה מהודעה אחת} other {התגית הוסרה מ-# הודעות}}"
+    "tag_removed_count": "{count, plural, one {התגית הוסרה מהודעה אחת} other {התגית הוסרה מ-# הודעות}}",
+    "new_mail_count": "{count, plural, one {הודעה חדשה אחת} other {# הודעות חדשות}}"
   },
   "third_party": {
     "push_needs_relay": "התראות Push דורשות ממסר Push שהארגון שלך מפעיל, ולא הוגדר אף אחד. דואר חדש עדיין מוצג כל עוד האפליקציה פתוחה.",
@@ -4369,7 +4370,8 @@
       "task_due": "משימה בשל",
       "event_exported": "אירוע ייצא",
       "title_copied": "כותרת הועתקה",
-      "link_copied": "קישור הועתק"
+      "link_copied": "קישור הועתק",
+      "title_alert": "תזכורת: {title}"
     },
     "status": {
       "loading_calendars": "טוען יומנים...",

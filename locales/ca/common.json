@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# correu marcat com a llegit} other {# correus marcats com a llegits}}",
     "emails_marked_unread": "{count, plural, one {# correu marcat com a no llegit} other {# correus marcats com a no llegits}}",
     "tag_removed": "S'ha tret l'etiqueta",
-    "tag_removed_count": "{count, plural, one {S'ha tret l'etiqueta de # correu} other {S'ha tret l'etiqueta de # correus}}"
+    "tag_removed_count": "{count, plural, one {S'ha tret l'etiqueta de # correu} other {S'ha tret l'etiqueta de # correus}}",
+    "new_mail_count": "{count, plural, one {# missatge nou} other {# missatges nous}}"
   },
   "third_party": {
     "push_needs_relay": "Les notificacions push necessiten un repetidor push gestionat per la vostra organització, i no n'hi ha cap de configurat. El correu nou es continua mostrant mentre l'aplicació està oberta.",
@@ -4477,7 +4478,8 @@
       "task_due": "Tasca pendent",
       "event_exported": "Esdeveniment exportat",
       "title_copied": "Títol copiat",
-      "link_copied": "Enllaç copiat"
+      "link_copied": "Enllaç copiat",
+      "title_alert": "Recordatori: {title}"
     },
     "status": {
       "loading_calendars": "Carregant els calendaris...",

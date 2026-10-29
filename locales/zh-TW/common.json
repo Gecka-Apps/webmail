@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, other {已將 # 封郵件標示為已讀}}",
     "emails_marked_unread": "{count, plural, other {已將 # 封郵件標示為未讀}}",
     "tag_removed": "已移除標籤",
-    "tag_removed_count": "{count, plural, other {已從 # 封郵件移除標籤}}"
+    "tag_removed_count": "{count, plural, other {已從 # 封郵件移除標籤}}",
+    "new_mail_count": "{count, plural, other {# 封新郵件}}"
   },
   "third_party": {
     "push_needs_relay": "推送通知需要由您的組織執行的推送中繼，但尚未設定。應用程式開啟時，新郵件仍會顯示。",
@@ -4477,7 +4478,8 @@
       "task_due": "任務到期",
       "event_exported": "活動已匯出",
       "title_copied": "標題已複製",
-      "link_copied": "連結已複製"
+      "link_copied": "連結已複製",
+      "title_alert": "提醒：{title}"
     },
     "status": {
       "loading_calendars": "正在載入行事曆…",

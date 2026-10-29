@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# e-mail markeret som læst} other {# e-mails markeret som læst}}",
     "emails_marked_unread": "{count, plural, one {# e-mail markeret som ulæst} other {# e-mails markeret som ulæst}}",
     "tag_removed": "Tag fjernet",
-    "tag_removed_count": "{count, plural, one {Tag fjernet fra # e-mail} other {Tag fjernet fra # e-mails}}"
+    "tag_removed_count": "{count, plural, one {Tag fjernet fra # e-mail} other {Tag fjernet fra # e-mails}}",
+    "new_mail_count": "{count, plural, one {# ny besked} other {# nye beskeder}}"
   },
   "third_party": {
     "push_needs_relay": "Push-notifikationer kræver et push-relæ, som din organisation driver, og der er ikke sat noget op. Ny mail vises stadig, mens appen er åben.",
@@ -4477,7 +4478,8 @@
       "task_due": "Opgave forfalder",
       "event_exported": "Begivenhed eksporteret",
       "title_copied": "Titel kopieret",
-      "link_copied": "Link kopieret"
+      "link_copied": "Link kopieret",
+      "title_alert": "Påmindelse: {title}"
     },
     "status": {
       "loading_calendars": "Indlæser kalendere...",

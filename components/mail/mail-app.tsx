@@ -70,7 +70,7 @@ import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
 import { usePromptDialog } from "@/hooks/use-prompt-dialog";
 import { useBrowserNavigation, type NavSnapshot } from "@/hooks/use-browser-navigation";
 import { debug } from "@/lib/debug";
-import { playNotificationSound } from "@/lib/notification-sound";
+import { useNewMailAlerts } from "@/hooks/use-new-mail-alerts";
 import { cn, formatDateTime, getMailboxPath } from "@/lib/utils";
 import { localizeMailboxName } from "@/lib/mailbox-label";
 import { KEYWORD_PREFIX, KEYWORD_PREFIX_LEGACY, emailKeyFor, groupEmailsByThread, threadKeyFor } from "@/lib/thread-utils";
@@ -420,7 +420,6 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     selectedMailbox,
     quota,
     isPushConnected,
-    newEmailNotification,
     selectEmail,
     selectMailbox,
     selectedEmailKeys,
@@ -447,7 +446,6 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     finishOpenEmail,
     abandonOpenEmail,
     handleStateChange,
-    clearNewEmailNotification,
     markAsSpam,
     undoSpam,
     searchFilters,
@@ -509,7 +507,6 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     selectedMailbox: state.selectedMailbox,
     quota: state.quota,
     isPushConnected: state.isPushConnected,
-    newEmailNotification: state.newEmailNotification,
     selectEmail: state.selectEmail,
     selectMailbox: state.selectMailbox,
     selectedEmailKeys: state.selectedEmailKeys,
@@ -536,7 +533,6 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     finishOpenEmail: state.finishOpenEmail,
     abandonOpenEmail: state.abandonOpenEmail,
     handleStateChange: state.handleStateChange,
-    clearNewEmailNotification: state.clearNewEmailNotification,
     markAsSpam: state.markAsSpam,
     undoSpam: state.undoSpam,
     searchFilters: state.searchFilters,
@@ -2068,17 +2064,9 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedEmail?.id, isScheduledView, mvShell, cursorOnly]);
 
-  // Handle new email notifications - play sound
-  useEffect(() => {
-    if (newEmailNotification) {
-      const { emailNotificationsEnabled, emailNotificationSound, notificationSoundChoice } = useSettingsStore.getState();
-      if (emailNotificationsEnabled && emailNotificationSound) {
-        playNotificationSound(notificationSoundChoice);
-      }
-      debug.log('email', 'New email received:', newEmailNotification.subject);
-      clearNewEmailNotification();
-    }
-  }, [newEmailNotification, clearNewEmailNotification]);
+  // New mail: the sound, the screen reader count and the visual alert, all
+  // silenced by Do not disturb.
+  useNewMailAlerts();
 
   // Lock body scroll when sidebar is open on mobile/tablet
   useEffect(() => {

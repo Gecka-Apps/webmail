@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# email marked as read} other {# emails marked as read}}",
     "emails_marked_unread": "{count, plural, one {# email marked as unread} other {# emails marked as unread}}",
     "tag_removed": "Tag removed",
-    "tag_removed_count": "{count, plural, one {Tag removed from # email} other {Tag removed from # emails}}"
+    "tag_removed_count": "{count, plural, one {Tag removed from # email} other {Tag removed from # emails}}",
+    "new_mail_count": "{count, plural, one {# new message} other {# new messages}}"
   },
   "third_party": {
     "push_needs_relay": "Push notifications need a push relay run by your organisation, and none is set up. New mail still shows while the app is open.",
@@ -4477,7 +4478,8 @@
       "task_due": "Task due",
       "event_exported": "Event exported",
       "title_copied": "Title copied",
-      "link_copied": "Link copied"
+      "link_copied": "Link copied",
+      "title_alert": "Reminder: {title}"
     },
     "status": {
       "loading_calendars": "Loading calendars…",

@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# wiadomość oznaczona jako przeczytana} few {# wiadomości oznaczone jako przeczytane} many {# wiadomości oznaczonych jako przeczytane} other {# wiadomości oznaczonych jako przeczytane}}",
     "emails_marked_unread": "{count, plural, one {# wiadomość oznaczona jako nieprzeczytana} few {# wiadomości oznaczone jako nieprzeczytane} many {# wiadomości oznaczonych jako nieprzeczytane} other {# wiadomości oznaczonych jako nieprzeczytane}}",
     "tag_removed": "Etykieta usunięta",
-    "tag_removed_count": "{count, plural, one {Usunięto etykietę z # wiadomości} few {Usunięto etykietę z # wiadomości} many {Usunięto etykietę z # wiadomości} other {Usunięto etykietę z # wiadomości}}"
+    "tag_removed_count": "{count, plural, one {Usunięto etykietę z # wiadomości} few {Usunięto etykietę z # wiadomości} many {Usunięto etykietę z # wiadomości} other {Usunięto etykietę z # wiadomości}}",
+    "new_mail_count": "{count, plural, one {# nowa wiadomość} few {# nowe wiadomości} many {# nowych wiadomości} other {# nowych wiadomości}}"
   },
   "third_party": {
     "push_needs_relay": "Powiadomienia push wymagają przekaźnika push prowadzonego przez Twoją organizację, a żaden nie jest skonfigurowany. Nowe wiadomości nadal pojawiają się, gdy aplikacja jest otwarta.",
@@ -4451,7 +4452,8 @@
       "task_due": "Termin zadania",
       "event_exported": "Wydarzenie wyeksportowane",
       "title_copied": "Tytuł skopiowany",
-      "link_copied": "Link skopiowany"
+      "link_copied": "Link skopiowany",
+      "title_alert": "Przypomnienie: {title}"
     },
     "status": {
       "loading_calendars": "Ładowanie kalendarzy...",

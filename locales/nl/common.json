@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# e-mail gemarkeerd als gelezen} other {# e-mails gemarkeerd als gelezen}}",
     "emails_marked_unread": "{count, plural, one {# e-mail gemarkeerd als ongelezen} other {# e-mails gemarkeerd als ongelezen}}",
     "tag_removed": "Label verwijderd",
-    "tag_removed_count": "{count, plural, one {Label verwijderd van # e-mail} other {Label verwijderd van # e-mails}}"
+    "tag_removed_count": "{count, plural, one {Label verwijderd van # e-mail} other {Label verwijderd van # e-mails}}",
+    "new_mail_count": "{count, plural, one {# nieuw bericht} other {# nieuwe berichten}}"
   },
   "third_party": {
     "push_needs_relay": "Pushmeldingen hebben een pushrelay van je organisatie nodig, en er is er geen ingesteld. Nieuwe e-mail wordt nog steeds getoond zolang de app open is.",
@@ -4451,7 +4452,8 @@
       "task_due": "Taak vervalt",
       "event_exported": "Afspraak geëxporteerd",
       "title_copied": "Titel gekopieerd",
-      "link_copied": "Link gekopieerd"
+      "link_copied": "Link gekopieerd",
+      "title_alert": "Herinnering: {title}"
     },
     "status": {
       "loading_calendars": "Agenda's laden...",

@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, one {# E-Mail als gelesen markiert} other {# E-Mails als gelesen markiert}}",
     "emails_marked_unread": "{count, plural, one {# E-Mail als ungelesen markiert} other {# E-Mails als ungelesen markiert}}",
     "tag_removed": "Markierung entfernt",
-    "tag_removed_count": "{count, plural, one {Markierung von # E-Mail entfernt} other {Markierung von # E-Mails entfernt}}"
+    "tag_removed_count": "{count, plural, one {Markierung von # E-Mail entfernt} other {Markierung von # E-Mails entfernt}}",
+    "new_mail_count": "{count, plural, one {# neue Nachricht} other {# neue Nachrichten}}"
   },
   "third_party": {
     "push_needs_relay": "Push-Benachrichtigungen brauchen ein Push-Relay Ihrer Organisation, und es ist keines eingerichtet. Neue E-Mails werden weiterhin angezeigt, solange die App geöffnet ist.",
@@ -4451,7 +4452,8 @@
       "task_due": "Aufgabe fällig",
       "event_exported": "Termin exportiert",
       "title_copied": "Titel kopiert",
-      "link_copied": "Link kopiert"
+      "link_copied": "Link kopiert",
+      "title_alert": "Erinnerung: {title}"
     },
     "status": {
       "loading_calendars": "Kalender werden geladen...",

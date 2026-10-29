@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, other {已将 # 封邮件标记为已读}}",
     "emails_marked_unread": "{count, plural, other {已将 # 封邮件标记为未读}}",
     "tag_removed": "已移除标签",
-    "tag_removed_count": "{count, plural, other {已从 # 封邮件移除标签}}"
+    "tag_removed_count": "{count, plural, other {已从 # 封邮件移除标签}}",
+    "new_mail_count": "{count, plural, other {# 封新邮件}}"
   },
   "third_party": {
     "push_needs_relay": "推送通知需要由您的组织运行的推送中继，但尚未设置。应用打开时，新邮件仍会显示。",
@@ -4451,7 +4452,8 @@
       "task_due": "任务到期",
       "event_exported": "日程已导出",
       "title_copied": "标题已复制",
-      "link_copied": "链接已复制"
+      "link_copied": "链接已复制",
+      "title_alert": "提醒：{title}"
     },
     "status": {
       "loading_calendars": "正在加载日历...",

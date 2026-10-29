@@ -1166,7 +1166,8 @@
     "emails_marked_read": "{count, plural, other {# ایمیل خوانده شده علامت‌گذاری شد}}",
     "emails_marked_unread": "{count, plural, other {# ایمیل خوانده نشده علامت‌گذاری شد}}",
     "tag_removed": "برچسب برداشته شد",
-    "tag_removed_count": "{count, plural, other {برچسب از # ایمیل برداشته شد}}"
+    "tag_removed_count": "{count, plural, other {برچسب از # ایمیل برداشته شد}}",
+    "new_mail_count": "{count, plural, other {# پیام جدید}}"
   },
   "third_party": {
     "push_needs_relay": "اعلان‌های push به یک رلهٔ push نیاز دارند که سازمان شما اداره کند، و هیچ‌کدام راه‌اندازی نشده است. تا وقتی برنامه باز است، ایمیل‌های جدید همچنان نمایش داده می‌شوند.",
@@ -4477,7 +4478,8 @@
       "task_due": "موعد وظیفه",
       "event_exported": "رویداد خروجی گرفته شد",
       "title_copied": "عنوان کپی شد",
-      "link_copied": "لینک کپی شد"
+      "link_copied": "لینک کپی شد",
+      "title_alert": "یادآوری: {title}"
     },
     "status": {
       "loading_calendars": "در حال بارگذاری تقویم‌ها...",
