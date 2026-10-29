@@ -4033,7 +4033,12 @@
       "photo_hint": "JPG alebo PNG, max. 10 MB. Veľkosť sa upraví.",
       "photo_too_large": "Obrázok je príliš veľký (max. 10 MB)",
       "photo_invalid": "Neplatný formát obrázka",
-      "change_photo": "Zmeniť"
+      "change_photo": "Zmeniť",
+      "context_label": "Pracovné alebo súkromné",
+      "online_service_url": "Adresa",
+      "anniversary_date": "Dátum",
+      "anniversary_kind": "Príležitosť",
+      "personal_info_kind": "Druh"
     },
     "groups": {
       "create": "Nová skupina",

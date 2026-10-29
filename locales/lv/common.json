@@ -4023,7 +4023,12 @@
       "photo_hint": "JPG vai PNG, līdz 10 MB. Tiks mainīts izmērs.",
       "photo_too_large": "Attēls ir pārāk liels (maks. 10 MB)",
       "photo_invalid": "Nederīgs attēla fails",
-      "change_photo": "Mainīt"
+      "change_photo": "Mainīt",
+      "context_label": "Darba vai privāts",
+      "online_service_url": "Adrese",
+      "anniversary_date": "Datums",
+      "anniversary_kind": "Notikums",
+      "personal_info_kind": "Veids"
     },
     "groups": {
       "create": "Jauna grupa",

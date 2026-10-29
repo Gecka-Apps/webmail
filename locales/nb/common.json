@@ -4033,7 +4033,12 @@
       "photo_hint": "JPG eller PNG, opptil 10 MB. Bildet skaleres automatisk.",
       "photo_too_large": "Bildet er for stort (maks. 10 MB)",
       "photo_invalid": "Ugyldig bildefil",
-      "change_photo": "Endre"
+      "change_photo": "Endre",
+      "context_label": "Jobb eller privat",
+      "online_service_url": "Adresse",
+      "anniversary_date": "Dato",
+      "anniversary_kind": "Anledning",
+      "personal_info_kind": "Type"
     },
     "groups": {
       "create": "Ny gruppe",

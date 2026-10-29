@@ -4033,7 +4033,12 @@
       "photo_hint": "JPG أو PNG، حتى 10 ميغابايت. سيتم تغيير حجمها.",
       "photo_too_large": "الصورة كبيرة جدًا (الحد الأقصى 10 ميغابايت)",
       "photo_invalid": "ملف صورة غير صالح",
-      "change_photo": "تغيير"
+      "change_photo": "تغيير",
+      "context_label": "عمل أو شخصي",
+      "online_service_url": "العنوان",
+      "anniversary_date": "التاريخ",
+      "anniversary_kind": "المناسبة",
+      "personal_info_kind": "النوع"
     },
     "groups": {
       "create": "مجموعة جديدة",

@@ -4031,7 +4031,12 @@
       "photo_hint": "JPG 또는 PNG, 최도 10MB. 크기가 조정됩니다.",
       "photo_too_large": "이미지가 너무 큽니다 (최대 10MB)",
       "photo_invalid": "잘못된 이미지 파일",
-      "change_photo": "변경"
+      "change_photo": "변경",
+      "context_label": "직장 또는 개인",
+      "online_service_url": "주소",
+      "anniversary_date": "날짜",
+      "anniversary_kind": "기념일 종류",
+      "personal_info_kind": "종류"
     },
     "groups": {
       "create": "새 그룹",

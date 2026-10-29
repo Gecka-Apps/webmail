@@ -4033,7 +4033,12 @@
       "photo_hint": "JPG یا PNG، حداکثر ۱۰ مگابایت. تغییر اندازه داده می‌شود.",
       "photo_too_large": "تصویر بیش از حد بزرگ است (حداکثر ۱۰ مگابایت)",
       "photo_invalid": "فایل تصویر نامعتبر است",
-      "change_photo": "تغییر"
+      "change_photo": "تغییر",
+      "context_label": "کاری یا شخصی",
+      "online_service_url": "نشانی",
+      "anniversary_date": "تاریخ",
+      "anniversary_kind": "مناسبت",
+      "personal_info_kind": "نوع"
     },
     "groups": {
       "create": "گروه جدید",

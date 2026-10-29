@@ -4031,7 +4031,12 @@
       "photo_hint": "JPG 或 PNG, 最大 10MB。将会调整大小。",
       "photo_too_large": "图像过大 (最大 10MB)",
       "photo_invalid": "无效的图像文件",
-      "change_photo": "更改"
+      "change_photo": "更改",
+      "context_label": "工作或私人",
+      "online_service_url": "地址",
+      "anniversary_date": "日期",
+      "anniversary_kind": "场合",
+      "personal_info_kind": "类型"
     },
     "groups": {
       "create": "新建群组",

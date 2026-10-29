@@ -4033,7 +4033,12 @@
       "photo_hint": "JPG o PNG, fins a 10 MB. Es redimensionarà.",
       "photo_too_large": "La imatge és massa gran (màxim 10 MB)",
       "photo_invalid": "Fitxer d'imatge no vàlid",
-      "change_photo": "Canvia"
+      "change_photo": "Canvia",
+      "context_label": "Feina o personal",
+      "online_service_url": "Adreça",
+      "anniversary_date": "Data",
+      "anniversary_kind": "Ocasió",
+      "personal_info_kind": "Tipus"
     },
     "groups": {
       "create": "Grup nou",

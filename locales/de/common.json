@@ -4031,7 +4031,12 @@
       "photo_hint": "JPG oder PNG, bis zu 10 MB. Wird verkleinert.",
       "photo_too_large": "Bild ist zu groß (max. 10 MB)",
       "photo_invalid": "Ungültige Bilddatei",
-      "change_photo": "Ändern"
+      "change_photo": "Ändern",
+      "context_label": "Beruflich oder privat",
+      "online_service_url": "Adresse",
+      "anniversary_date": "Datum",
+      "anniversary_kind": "Anlass",
+      "personal_info_kind": "Art"
     },
     "groups": {
       "create": "Neue Gruppe",

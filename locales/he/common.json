@@ -3935,7 +3935,12 @@
       "photo_hint": "JPG או PNG, עד 10 MB. יוגדל מחדש.",
       "photo_too_large": "התמונה גדולה מדי (מקס 10 MB)",
       "photo_invalid": "קובץ תמונה לא חוקי",
-      "change_photo": "שנה"
+      "change_photo": "שנה",
+      "context_label": "עבודה או פרטי",
+      "online_service_url": "כתובת",
+      "anniversary_date": "תאריך",
+      "anniversary_kind": "אירוע",
+      "personal_info_kind": "סוג"
     },
     "groups": {
       "create": "קבוצה חדשה",

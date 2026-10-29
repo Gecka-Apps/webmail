@@ -4031,7 +4031,12 @@
       "photo_hint": "JPG of PNG, tot 10 MB. Wordt verkleind.",
       "photo_too_large": "Afbeelding is te groot (max 10 MB)",
       "photo_invalid": "Ongeldig afbeeldingsbestand",
-      "change_photo": "Wijzigen"
+      "change_photo": "Wijzigen",
+      "context_label": "Werk of privé",
+      "online_service_url": "Adres",
+      "anniversary_date": "Datum",
+      "anniversary_kind": "Gelegenheid",
+      "personal_info_kind": "Soort"
     },
     "groups": {
       "create": "Nieuwe groep",

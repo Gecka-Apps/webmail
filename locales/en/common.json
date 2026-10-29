@@ -4033,7 +4033,12 @@
       "photo_hint": "JPG or PNG, up to 10 MB. Will be resized.",
       "photo_too_large": "Image is too large (max 10 MB)",
       "photo_invalid": "Invalid image file",
-      "change_photo": "Change"
+      "change_photo": "Change",
+      "context_label": "Work or private",
+      "online_service_url": "Address",
+      "anniversary_date": "Date",
+      "anniversary_kind": "Occasion",
+      "personal_info_kind": "Kind"
     },
     "groups": {
       "create": "New group",

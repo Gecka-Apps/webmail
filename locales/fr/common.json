@@ -4031,7 +4031,12 @@
       "photo_hint": "JPG ou PNG, jusqu’à 10 Mo. Sera redimensionnée.",
       "photo_too_large": "L’image est trop grande (max 10 Mo)",
       "photo_invalid": "Fichier image invalide",
-      "change_photo": "Modifier"
+      "change_photo": "Modifier",
+      "context_label": "Travail ou personnel",
+      "online_service_url": "Adresse",
+      "anniversary_date": "Date",
+      "anniversary_kind": "Occasion",
+      "personal_info_kind": "Type"
     },
     "groups": {
       "create": "Nouveau groupe",

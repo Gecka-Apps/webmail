@@ -4033,7 +4033,12 @@
       "photo_hint": "JPG vagy PNG, max 10 MB. Átméretezésre kerül.",
       "photo_too_large": "A kép túl nagy (max 10 MB)",
       "photo_invalid": "Érvénytelen képfájl",
-      "change_photo": "Módosítás"
+      "change_photo": "Módosítás",
+      "context_label": "Munkahelyi vagy magán",
+      "online_service_url": "Cím",
+      "anniversary_date": "Dátum",
+      "anniversary_kind": "Alkalom",
+      "personal_info_kind": "Fajta"
     },
     "groups": {
       "create": "Új csoport",

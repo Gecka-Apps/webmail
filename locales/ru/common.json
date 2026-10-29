@@ -4031,7 +4031,12 @@
       "photo_hint": "JPG или PNG, до 10 МБ. Будет уменьшено.",
       "photo_too_large": "Изображение слишком большое (макс. 10 МБ)",
       "photo_invalid": "Недопустимый файл изображения",
-      "change_photo": "Изменить"
+      "change_photo": "Изменить",
+      "context_label": "Рабочий или личный",
+      "online_service_url": "Адрес",
+      "anniversary_date": "Дата",
+      "anniversary_kind": "Повод",
+      "personal_info_kind": "Вид"
     },
     "groups": {
       "create": "Новая группа",

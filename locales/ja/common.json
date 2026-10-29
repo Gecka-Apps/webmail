@@ -4031,7 +4031,12 @@
       "photo_hint": "JPGまたはPNG、最大10MB。リサイズされます。",
       "photo_too_large": "画像が大きすぎます (最大10MB)",
       "photo_invalid": "無効な画像ファイル",
-      "change_photo": "変更"
+      "change_photo": "変更",
+      "context_label": "仕事またはプライベート",
+      "online_service_url": "アドレス",
+      "anniversary_date": "日付",
+      "anniversary_kind": "種類",
+      "personal_info_kind": "種類"
     },
     "groups": {
       "create": "新しいグループ",

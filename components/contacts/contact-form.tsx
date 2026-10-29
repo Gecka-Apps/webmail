@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback, useRef, useEffect } from "react";
+import { useState, useMemo, useCallback, useRef, useEffect, useId } from "react";
 import { useTranslations } from "next-intl";
 import { X, Plus, ChevronDown, ChevronRight, User, Building, MapPin, Globe, Cake, Heart, Tag, StickyNote, Mail, Phone, Calendar, UserCircle, Book, Camera, Trash2 } from "@/components/icons";
 import { Button } from "@/components/ui/button";
@@ -191,14 +191,18 @@ async function processImageFile(file: File): Promise<{ uri: string; mediaType: s
   });
 }
 
-function Select({ value, onChange, children, className }: {
+function Select({ value, onChange, children, className, id, "aria-label": ariaLabel }: {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   children: React.ReactNode;
   className?: string;
+  id?: string;
+  "aria-label"?: string;
 }) {
   return (
     <select
+      id={id}
+      aria-label={ariaLabel}
       value={value}
       onChange={onChange}
       className={cn(
@@ -216,6 +220,9 @@ function Select({ value, onChange, children, className }: {
 export function ContactForm({ contact, addressBooks, allKeywords, defaultAddressBookId, prefill, onSave, onCancel, loadCurrentMedia, onDirtyChange }: ContactFormProps) {
   const t = useTranslations("contacts.form");
   const isEditing = !!contact;
+  // Ids that tie each visible label to its field.
+  const fieldIdBase = useId();
+  const fieldId = (key: string) => `${fieldIdBase}-${key}`;
 
   // Split a free-form display name into given/surname for prefill.
   const prefillGivenName = (() => {
@@ -770,6 +777,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
           {addressBooks && addressBooks.length > 1 && (
             <FormSection icon={Book} title={t("section_address_book")}>
               <select
+                aria-label={t("section_address_book")}
                 value={selectedBookId}
                 onChange={(e) => setSelectedBookId(e.target.value)}
                 className="w-full px-3 py-2 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
@@ -815,14 +823,14 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
             {isOrg ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
-                  <label className="text-xs text-muted-foreground mb-1 block">
-                    {t("organization")} <span className="text-destructive">*</span>
+                  <label htmlFor={fieldId("organization-required")} className="text-xs text-muted-foreground mb-1 block">
+                    {t("organization")} <span className="text-destructive" aria-hidden="true">*</span>
                   </label>
-                  <Input value={organization} onChange={(e) => setOrganization(e.target.value)} placeholder={t("organization_placeholder")} autoFocus />
+                  <Input id={fieldId("organization-required")} aria-required value={organization} onChange={(e) => setOrganization(e.target.value)} placeholder={t("organization_placeholder")} autoFocus />
                 </div>
                 <div>
-                  <label className="text-xs text-muted-foreground mb-1 block">{t("nickname")}</label>
-                  <Input value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder={t("nickname_placeholder")} />
+                  <label htmlFor={fieldId("nickname")} className="text-xs text-muted-foreground mb-1 block">{t("nickname")}</label>
+                  <Input id={fieldId("nickname")} value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder={t("nickname_placeholder")} />
                 </div>
               </div>
             ) : (
@@ -831,32 +839,32 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                     suffix), one row once there is room, so no name gets cut. */}
                 <div className="grid grid-cols-2 @lg:grid-cols-[auto_1fr_1fr_auto] gap-2">
                   <div>
-                    <label className="text-xs text-muted-foreground mb-1 block">{t("prefix")}</label>
-                    <Input value={prefix} onChange={(e) => setPrefix(e.target.value)} placeholder={t("prefix_placeholder")} className="@lg:w-20" />
+                    <label htmlFor={fieldId("prefix")} className="text-xs text-muted-foreground mb-1 block">{t("prefix")}</label>
+                    <Input id={fieldId("prefix")} value={prefix} onChange={(e) => setPrefix(e.target.value)} placeholder={t("prefix_placeholder")} className="@lg:w-20" />
                   </div>
                   <div>
-                    <label className="text-xs text-muted-foreground mb-1 block">{t("given_name")}</label>
-                    <Input value={givenName} onChange={(e) => setGivenName(e.target.value)} placeholder={t("given_name")} autoFocus />
+                    <label htmlFor={fieldId("given_name")} className="text-xs text-muted-foreground mb-1 block">{t("given_name")}</label>
+                    <Input id={fieldId("given_name")} value={givenName} onChange={(e) => setGivenName(e.target.value)} placeholder={t("given_name")} autoFocus />
                   </div>
                   <div>
-                    <label className="text-xs text-muted-foreground mb-1 block">{t("surname")}</label>
-                    <Input value={surname} onChange={(e) => setSurname(e.target.value)} placeholder={t("surname")} />
+                    <label htmlFor={fieldId("surname")} className="text-xs text-muted-foreground mb-1 block">{t("surname")}</label>
+                    <Input id={fieldId("surname")} value={surname} onChange={(e) => setSurname(e.target.value)} placeholder={t("surname")} />
                   </div>
                   <div>
-                    <label className="text-xs text-muted-foreground mb-1 block">{t("suffix")}</label>
-                    <Input value={suffix} onChange={(e) => setSuffix(e.target.value)} placeholder={t("suffix_placeholder")} className="@lg:w-20" />
+                    <label htmlFor={fieldId("suffix")} className="text-xs text-muted-foreground mb-1 block">{t("suffix")}</label>
+                    <Input id={fieldId("suffix")} value={suffix} onChange={(e) => setSuffix(e.target.value)} placeholder={t("suffix_placeholder")} className="@lg:w-20" />
                   </div>
                 </div>
                 {/* Either name is enough (or an organization), so neither is starred. */}
                 <p className="text-xs text-muted-foreground -mt-1">{t("name_required")}</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
-                    <label className="text-xs text-muted-foreground mb-1 block">{t("middle_name")}</label>
-                    <Input value={additionalName} onChange={(e) => setAdditionalName(e.target.value)} placeholder={t("middle_name")} />
+                    <label htmlFor={fieldId("middle_name")} className="text-xs text-muted-foreground mb-1 block">{t("middle_name")}</label>
+                    <Input id={fieldId("middle_name")} value={additionalName} onChange={(e) => setAdditionalName(e.target.value)} placeholder={t("middle_name")} />
                   </div>
                   <div>
-                    <label className="text-xs text-muted-foreground mb-1 block">{t("nickname")}</label>
-                    <Input value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder={t("nickname_placeholder")} />
+                    <label htmlFor={fieldId("nickname-1")} className="text-xs text-muted-foreground mb-1 block">{t("nickname")}</label>
+                    <Input id={fieldId("nickname-1")} value={nickname} onChange={(e) => setNickname(e.target.value)} placeholder={t("nickname_placeholder")} />
                   </div>
                 </div>
               </>
@@ -883,6 +891,9 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                       }}
                       onBlur={() => handleEmailBlur(i, entry.address)}
                       placeholder={t("email_placeholder")}
+                      aria-label={t("email")}
+                      aria-invalid={emailErrors[i] ? true : undefined}
+                      aria-describedby={emailErrors[i] ? fieldId(`email-error-${i}`) : undefined}
                       className={cn("flex-1", emailErrors[i] && "border-destructive focus-visible:border-destructive")}
                     />
                     <Select
@@ -892,6 +903,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                         next[i] = { ...next[i], context: e.target.value as EmailEntry["context"] };
                         setEmails(next);
                       }}
+                      aria-label={t("context_label")}
                     >
                       <option value="">-</option>
                       <option value="work">{t("context_work")}</option>
@@ -904,7 +916,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                     )}
                   </div>
                   {emailErrors[i] && (
-                    <p className="text-xs text-destructive mt-1 ms-1">{emailErrors[i]}</p>
+                    <p id={fieldId(`email-error-${i}`)} className="text-xs text-destructive mt-1 ms-1">{emailErrors[i]}</p>
                   )}
                 </div>
               ))}
@@ -930,6 +942,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                       setPhones(next);
                     }}
                     placeholder={t("phone_placeholder")}
+                    aria-label={t("phone")}
                     className="flex-1"
                   />
                   <Select
@@ -940,6 +953,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                       setPhones(next);
                     }}
                     className="w-[5.5rem]"
+                    aria-label={t("phone_type")}
                   >
                     <option value="">{t("phone_type")}</option>
                     <option value="voice">{t("phone_voice")}</option>
@@ -956,6 +970,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                       next[i] = { ...next[i], context: e.target.value as PhoneEntry["context"] };
                       setPhones(next);
                     }}
+                    aria-label={t("context_label")}
                   >
                     <option value="">-</option>
                     <option value="work">{t("context_work")}</option>
@@ -979,21 +994,21 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
               {/* In organization mode the org name is the card's identity, edited above. */}
               {!isOrg && (
                 <div>
-                  <label className="text-xs text-muted-foreground mb-1 block">{t("organization")}</label>
-                  <Input value={organization} onChange={(e) => setOrganization(e.target.value)} placeholder={t("organization_placeholder")} />
+                  <label htmlFor={fieldId("organization")} className="text-xs text-muted-foreground mb-1 block">{t("organization")}</label>
+                  <Input id={fieldId("organization")} value={organization} onChange={(e) => setOrganization(e.target.value)} placeholder={t("organization_placeholder")} />
                 </div>
               )}
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">{t("department")}</label>
-                <Input value={department} onChange={(e) => setDepartment(e.target.value)} placeholder={t("department_placeholder")} />
+                <label htmlFor={fieldId("department")} className="text-xs text-muted-foreground mb-1 block">{t("department")}</label>
+                <Input id={fieldId("department")} value={department} onChange={(e) => setDepartment(e.target.value)} placeholder={t("department_placeholder")} />
               </div>
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">{t("job_title")}</label>
-                <Input value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder={t("job_title_placeholder")} />
+                <label htmlFor={fieldId("job_title")} className="text-xs text-muted-foreground mb-1 block">{t("job_title")}</label>
+                <Input id={fieldId("job_title")} value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder={t("job_title_placeholder")} />
               </div>
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">{t("role")}</label>
-                <Input value={role} onChange={(e) => setRole(e.target.value)} placeholder={t("role_placeholder")} />
+                <label htmlFor={fieldId("role")} className="text-xs text-muted-foreground mb-1 block">{t("role")}</label>
+                <Input id={fieldId("role")} value={role} onChange={(e) => setRole(e.target.value)} placeholder={t("role_placeholder")} />
               </div>
             </div>
           </FormSection>
@@ -1006,17 +1021,18 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                   <IconButton label={t("remove_entry")} onClick={() => setAddresses(addresses.filter((_, j) => j !== i))} className="absolute top-1 end-1">
                     <X />
                   </IconButton>
-                  <Input value={addr.street} onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], street: e.target.value }; setAddresses(n); }} placeholder={t("street")} />
+                  <Input value={addr.street} onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], street: e.target.value }; setAddresses(n); }} placeholder={t("street")} aria-label={t("street")} />
                   <div className="grid grid-cols-2 gap-2">
-                    <Input value={addr.locality} onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], locality: e.target.value }; setAddresses(n); }} placeholder={t("city")} />
-                    <Input value={addr.region} onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], region: e.target.value }; setAddresses(n); }} placeholder={t("region")} />
+                    <Input value={addr.locality} onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], locality: e.target.value }; setAddresses(n); }} placeholder={t("city")} aria-label={t("city")} />
+                    <Input value={addr.region} onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], region: e.target.value }; setAddresses(n); }} placeholder={t("region")} aria-label={t("region")} />
                   </div>
                   <div className="grid grid-cols-3 gap-2">
-                    <Input value={addr.postcode} onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], postcode: e.target.value }; setAddresses(n); }} placeholder={t("postcode")} />
-                    <Input value={addr.country} onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], country: e.target.value }; setAddresses(n); }} placeholder={t("country")} />
+                    <Input value={addr.postcode} onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], postcode: e.target.value }; setAddresses(n); }} placeholder={t("postcode")} aria-label={t("postcode")} />
+                    <Input value={addr.country} onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], country: e.target.value }; setAddresses(n); }} placeholder={t("country")} aria-label={t("country")} />
                     <Select
                       value={addr.context}
                       onChange={(e) => { const n = [...addresses]; n[i] = { ...n[i], context: e.target.value as AddressEntry["context"] }; setAddresses(n); }}
+                      aria-label={t("context_label")}
                     >
                       <option value="">-</option>
                       <option value="work">{t("context_work")}</option>
@@ -1041,12 +1057,14 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                     value={svc.uri}
                     onChange={(e) => { const n = [...onlineServices]; n[i] = { ...n[i], uri: e.target.value }; setOnlineServices(n); }}
                     placeholder={t("url_placeholder")}
+                    aria-label={t("online_service_url")}
                     className="flex-1"
                   />
                   <Input
                     value={svc.service}
                     onChange={(e) => { const n = [...onlineServices]; n[i] = { ...n[i], service: e.target.value }; setOnlineServices(n); }}
                     placeholder={t("service_placeholder")}
+                    aria-label={t("service_placeholder")}
                     className="w-24"
                   />
                   <IconButton label={t("remove_entry")} onClick={() => setOnlineServices(onlineServices.filter((_, j) => j !== i))} className="shrink-0">
@@ -1070,11 +1088,13 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                     type="date"
                     value={ann.date}
                     onChange={(e) => { const n = [...anniversaries]; n[i] = { ...n[i], date: e.target.value }; setAnniversaries(n); }}
+                    aria-label={t("anniversary_date")}
                     className="flex-1"
                   />
                   <Select
                     value={ann.kind}
                     onChange={(e) => { const n = [...anniversaries]; n[i] = { ...n[i], kind: e.target.value as AnniversaryEntry["kind"] }; setAnniversaries(n); }}
+                    aria-label={t("anniversary_kind")}
                   >
                     <option value="birth">{t("anniversary_birth")}</option>
                     <option value="wedding">{t("anniversary_wedding")}</option>
@@ -1102,11 +1122,13 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                     value={pi.value}
                     onChange={(e) => { const n = [...personalInfoEntries]; n[i] = { ...n[i], value: e.target.value }; setPersonalInfoEntries(n); }}
                     placeholder={t("personal_info_placeholder")}
+                    aria-label={t("personal_info")}
                     className="flex-1"
                   />
                   <Select
                     value={pi.kind}
                     onChange={(e) => { const n = [...personalInfoEntries]; n[i] = { ...n[i], kind: e.target.value as PersonalInfoEntry["kind"] }; setPersonalInfoEntries(n); }}
+                    aria-label={t("personal_info_kind")}
                   >
                     <option value="expertise">{t("personal_expertise")}</option>
                     <option value="hobby">{t("personal_hobby")}</option>
@@ -1116,6 +1138,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                   <Select
                     value={pi.level}
                     onChange={(e) => { const n = [...personalInfoEntries]; n[i] = { ...n[i], level: e.target.value as PersonalInfoEntry["level"] }; setPersonalInfoEntries(n); }}
+                    aria-label={t("level")}
                   >
                     <option value="">{t("level")}</option>
                     <option value="high">{t("level_high")}</option>
@@ -1152,8 +1175,8 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
           <FormSection icon={UserCircle} title={t("gender")} collapsible defaultOpen={!!(genderSex || genderIdentity)}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">{t("gender_sex")}</label>
-                <Select value={genderSex} onChange={(e) => setGenderSex(e.target.value)} className="w-full">
+                <label htmlFor={fieldId("gender_sex")} className="text-xs text-muted-foreground mb-1 block">{t("gender_sex")}</label>
+                <Select id={fieldId("gender_sex")} value={genderSex} onChange={(e) => setGenderSex(e.target.value)} className="w-full">
                   <option value="">-</option>
                   <option value="masculine">{t("gender_male")}</option>
                   <option value="feminine">{t("gender_female")}</option>
@@ -1163,8 +1186,8 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                 </Select>
               </div>
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">{t("gender_identity")}</label>
-                <Input value={genderIdentity} onChange={(e) => setGenderIdentity(e.target.value)} placeholder={t("gender_identity_placeholder")} />
+                <label htmlFor={fieldId("gender_identity")} className="text-xs text-muted-foreground mb-1 block">{t("gender_identity")}</label>
+                <Input id={fieldId("gender_identity")} value={genderIdentity} onChange={(e) => setGenderIdentity(e.target.value)} placeholder={t("gender_identity_placeholder")} />
               </div>
             </div>
           </FormSection>
@@ -1173,16 +1196,16 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
           <FormSection icon={Calendar} title={t("calendar")} collapsible defaultOpen={!!(calendarUri || schedulingUri || freeBusyUri)}>
             <div className="space-y-3">
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">{t("calendar_uri")}</label>
-                <Input value={calendarUri} onChange={(e) => setCalendarUri(e.target.value)} placeholder="https://..." />
+                <label htmlFor={fieldId("calendar_uri")} className="text-xs text-muted-foreground mb-1 block">{t("calendar_uri")}</label>
+                <Input id={fieldId("calendar_uri")} value={calendarUri} onChange={(e) => setCalendarUri(e.target.value)} placeholder="https://..." />
               </div>
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">{t("scheduling_uri")}</label>
-                <Input value={schedulingUri} onChange={(e) => setSchedulingUri(e.target.value)} placeholder="https://..." />
+                <label htmlFor={fieldId("scheduling_uri")} className="text-xs text-muted-foreground mb-1 block">{t("scheduling_uri")}</label>
+                <Input id={fieldId("scheduling_uri")} value={schedulingUri} onChange={(e) => setSchedulingUri(e.target.value)} placeholder="https://..." />
               </div>
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">{t("freebusy_uri")}</label>
-                <Input value={freeBusyUri} onChange={(e) => setFreeBusyUri(e.target.value)} placeholder="https://..." />
+                <label htmlFor={fieldId("freebusy_uri")} className="text-xs text-muted-foreground mb-1 block">{t("freebusy_uri")}</label>
+                <Input id={fieldId("freebusy_uri")} value={freeBusyUri} onChange={(e) => setFreeBusyUri(e.target.value)} placeholder="https://..." />
               </div>
             </div>
           </FormSection>
@@ -1193,6 +1216,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
               value={note}
               onChange={(e) => setNote(e.target.value)}
               placeholder={t("note_placeholder")}
+              aria-label={t("note")}
               className="w-full min-h-[100px] rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground resize-y outline-none focus:ring-2 focus:ring-ring"
             />
           </FormSection>
@@ -1237,6 +1261,7 @@ function CategoryComboBox({
   const t = useTranslations("contacts.form");
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const hintId = useId();
 
   // Parse current keywords from comma-separated string
   const currentKeywords = useMemo(() => {
@@ -1316,8 +1341,10 @@ function CategoryComboBox({
         onBlur={() => setIsOpen(false)}
         onKeyDown={handleKeyDown}
         placeholder={currentKeywords.length === 0 ? placeholder : ""}
+        aria-label={t("categories")}
+        aria-describedby={hintId}
       />
-      <p className="text-xs text-muted-foreground mt-1.5">{hint}</p>
+      <p id={hintId} className="text-xs text-muted-foreground mt-1.5">{hint}</p>
 
       {/* Dropdown */}
       {isOpen && (suggestions.length > 0 || canAddNew) && (

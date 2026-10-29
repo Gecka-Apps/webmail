@@ -4033,7 +4033,12 @@
       "photo_hint": "JPG эсвэл PNG, 10 МБ хүртэл. Хэмжээ өөрчлөгдөнө.",
       "photo_too_large": "Зураг хэт том байна (хамгийн ихдээ 10 MB)",
       "photo_invalid": "Зургийн файл буруу",
-      "change_photo": "Өөрчлөлт"
+      "change_photo": "Өөрчлөлт",
+      "context_label": "Ажлын эсвэл хувийн",
+      "online_service_url": "Хаяг",
+      "anniversary_date": "Огноо",
+      "anniversary_kind": "Үйл явдал",
+      "personal_info_kind": "Төрөл"
     },
     "groups": {
       "create": "Шинэ групп",

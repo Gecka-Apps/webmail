@@ -4031,7 +4031,12 @@
       "photo_hint": "JPG veya PNG, en fazla 10 MB. Yeniden boyutlandırılacak.",
       "photo_too_large": "Görüntü çok büyük (maks. 10 MB)",
       "photo_invalid": "Geçersiz görüntü dosyası",
-      "change_photo": "Değiştir"
+      "change_photo": "Değiştir",
+      "context_label": "İş veya kişisel",
+      "online_service_url": "Adres",
+      "anniversary_date": "Tarih",
+      "anniversary_kind": "Vesile",
+      "personal_info_kind": "Tür"
     },
     "groups": {
       "create": "Yeni Grup",

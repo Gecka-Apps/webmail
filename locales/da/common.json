@@ -4031,7 +4031,12 @@
       "photo_hint": "JPG eller PNG, op til 10 MB. Vil blive ændret i størrelse.",
       "photo_too_large": "Billedet er for stort (max 10 MB)",
       "photo_invalid": "Ugyldig billedfil",
-      "change_photo": "Skift"
+      "change_photo": "Skift",
+      "context_label": "Arbejde eller privat",
+      "online_service_url": "Adresse",
+      "anniversary_date": "Dato",
+      "anniversary_kind": "Anledning",
+      "personal_info_kind": "Type"
     },
     "groups": {
       "create": "Ny gruppe",

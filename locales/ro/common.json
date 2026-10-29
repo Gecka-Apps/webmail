@@ -4033,7 +4033,12 @@
       "photo_hint": "JPG sau PNG, până la 10 MB. Dimensiunea imaginii va fi redimensionată.",
       "photo_too_large": "Imaginea este prea mare (max. 10 MB)",
       "photo_invalid": "Fișier imagine nevalid",
-      "change_photo": "Modificare"
+      "change_photo": "Modificare",
+      "context_label": "Serviciu sau personal",
+      "online_service_url": "Adresă",
+      "anniversary_date": "Dată",
+      "anniversary_kind": "Ocazie",
+      "personal_info_kind": "Tip"
     },
     "groups": {
       "create": "Grup nou",

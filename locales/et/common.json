@@ -4033,7 +4033,12 @@
       "photo_hint": "JPG või PNG, kuni 10 MB. Suurust muudetakse vajadusel.",
       "photo_too_large": "Pilt on liiga suur (maksimaalselt 10 MB)",
       "photo_invalid": "Vigane pildifail",
-      "change_photo": "Muuda"
+      "change_photo": "Muuda",
+      "context_label": "Töö või isiklik",
+      "online_service_url": "Aadress",
+      "anniversary_date": "Kuupäev",
+      "anniversary_kind": "Sündmus",
+      "personal_info_kind": "Liik"
     },
     "groups": {
       "create": "Uus grupp",
