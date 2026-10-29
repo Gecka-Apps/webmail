@@ -18,6 +18,7 @@ vi.mock('@/hooks/use-media-query', () => ({
   useDeviceDetection: () => ({ isMobile: false, isTablet: false, isDesktop: true }),
   useMediaQuery: () => false,
   useIsDesktop: () => true,
+  narrowerThan: (px: number) => `(width < ${px / 16}rem)`,
 }));
 vi.mock('@/components/tour/tour-provider', () => ({
   useTour: () => ({ activeTour: null, registerStep: vi.fn() }),

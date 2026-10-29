@@ -89,6 +89,7 @@ export default [
       "benchmark/**",
       "examples/**",
       "integration/**",
+      "scripts/a11y-guard/axe.min.js",
     ],
   },
 ];

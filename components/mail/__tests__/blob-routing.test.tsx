@@ -51,6 +51,7 @@ vi.mock('@/hooks/use-media-query', () => ({
   useDeviceDetection: () => ({ isMobile: device.mobile, isTablet: false, isDesktop: !device.mobile }),
   useMediaQuery: () => false,
   useIsDesktop: () => true,
+  narrowerThan: (px: number) => `(width < ${px / 16}rem)`,
 }));
 vi.mock('@/lib/push-bindings', () => ({ reconcilePushBindings: () => {}, releasePushBindings: () => {} }));
 vi.mock('@/components/email/email-list', async () => {
