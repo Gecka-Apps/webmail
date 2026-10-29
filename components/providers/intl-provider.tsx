@@ -9,6 +9,7 @@ import enMessages from '@/locales/en/common.json';
 import { getLocaleDirection } from '@/i18n/direction';
 import { mergeMessages } from '@/i18n/merge-messages';
 import { detectBrowserLocale } from '@/i18n/detect-locale';
+import { PLAIN_LANGUAGE_LOADERS, hasPlainLanguage, withPlainLanguage } from '@/i18n/plain-language';
 
 type Messages = Record<string, unknown>;
 
@@ -64,6 +65,7 @@ export function IntlProvider({ locale: initialLocale, messages: initialMessages,
   const [browserTimeZone, setBrowserTimeZone] = useState<string>('UTC');
   const timeZoneSetting = useSettingsStore((state) => state.timeZone);
   const timeZone = resolveTimeZone(timeZoneSetting, browserTimeZone);
+  const plainLanguage = useSettingsStore((state) => state.plainLanguage);
 
   // The catalog currently in use. Seeded with the server-provided messages for
   // the SSR-resolved locale, so the first render needs no async work and
@@ -116,6 +118,22 @@ export function IntlProvider({ locale: initialLocale, messages: initialMessages,
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLocale]);
 
+  // Plain-language strings, loaded the first time the setting is on for an
+  // English or German UI. They arrive after the first render, so hydration
+  // always matches the server's normal strings.
+  const [plainCatalogs, setPlainCatalogs] = useState<Record<string, Messages>>({});
+  const plainLocale = plainLanguage && catalog && hasPlainLanguage(catalog.locale) ? catalog.locale : null;
+  useEffect(() => {
+    if (!plainLocale || plainCatalogs[plainLocale]) return;
+    let stale = false;
+    PLAIN_LANGUAGE_LOADERS[plainLocale]()
+      .catch(() => ({} as Messages))
+      .then((plain) => {
+        if (!stale) setPlainCatalogs((prev) => ({ ...prev, [plainLocale]: plain }));
+      });
+    return () => { stale = true; };
+  }, [plainLocale, plainCatalogs]);
+
   // Keep <html> lang/dir in sync with the rendered locale (RTL for he/fa).
   const activeLocale = catalog?.locale;
   useEffect(() => {
@@ -126,12 +144,18 @@ export function IntlProvider({ locale: initialLocale, messages: initialMessages,
 
   // Fall back to English for any key the active locale has not translated, so
   // untranslated strings show English text instead of a raw message key.
-  const messages = useMemo(
+  const baseMessages = useMemo(
     () =>
       !catalog || catalog.locale === 'en'
         ? (enMessages as Messages)
         : mergeMessages(enMessages as Messages, catalog.messages),
     [catalog]
+  );
+  // Plain strings win over the catalog; keys without a plain version keep it.
+  const plainMessages = plainLocale ? plainCatalogs[plainLocale] : undefined;
+  const messages = useMemo(
+    () => withPlainLanguage(baseMessages, plainMessages),
+    [baseMessages, plainMessages]
   );
 
   if (!catalog) return null;

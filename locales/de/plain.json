@@ -1,0 +1,49 @@
+{
+  "login": {
+    "jmap_endpoint_cors_hint": "Der Mailserver muss Anmeldungen von dieser Website erlauben. Ihre Administration kann das einrichten.",
+    "reconnecting": "Die Verbindung ist weg. Wir versuchen, wieder zu verbinden…",
+    "error": {
+      "invalid_credentials": "Die E-Mail-Adresse oder das Passwort ist falsch. Prüfen Sie beides und versuchen Sie es noch einmal.",
+      "invalid_token": "Der Server hat dieses Zugriffstoken nicht angenommen. Vielleicht ist es nicht vollständig oder nicht mehr gültig. Kopieren Sie es noch einmal oder erstellen Sie ein neues.",
+      "connection_failed": "Wir erreichen den Mailserver nicht. Prüfen Sie Ihre Internetverbindung und versuchen Sie es noch einmal.",
+      "cors_blocked": "Der Mailserver läuft, erlaubt aber keine Anmeldung von dieser Website. Bitten Sie Ihre Administration, diese Website auf dem Server zu erlauben.",
+      "server_error": "Der Mailserver hat gerade ein Problem. Versuchen Sie es in ein paar Minuten noch einmal.",
+      "generic": "Etwas ist schiefgelaufen. Versuchen Sie es noch einmal. Wenn das öfter passiert, fragen Sie Ihre Administration.",
+      "totp_required": "Ihr Konto braucht zur Anmeldung einen zweiten Code. Öffnen Sie Ihre Authenticator-App und geben Sie unten den 6-stelligen Code ein.",
+      "totp_invalid": "Dieser Code ist falsch oder zu alt. Geben Sie den Code ein, den Ihre Authenticator-App gerade anzeigt.",
+      "oauth_discovery_failed": "Die Anmeldung über Ihre Organisation funktioniert gerade nicht. Versuchen Sie es später noch einmal oder fragen Sie Ihre Administration.",
+      "token_exchange_failed": "Passwort und Code sind richtig, aber der Mailserver hat diese App nicht hereingelassen. Bitten Sie Ihre Administration, die Anmelde-Einstellungen für diese App zu prüfen."
+    },
+    "totp_toggle": "Ich habe einen Code aus meiner Authenticator-App",
+    "token_hint": "Manche Mailanbieter geben Ihnen ein Token statt eines Passworts. Erstellen Sie es in den Einstellungen Ihres Mailanbieters, kopieren Sie es und fügen Sie es hier ein.",
+    "config_error": {
+      "title": "Das Webmail ist nicht richtig eingerichtet",
+      "fetch_failed": "Das Webmail konnte seine Einstellungen nicht laden. Versuchen Sie es in ein paar Minuten noch einmal.",
+      "server_not_configured": "Es ist noch kein Mailserver eingerichtet. Bitten Sie Ihre Administration, einen einzurichten."
+    },
+    "session_expired": "Sie wurden abgemeldet. Melden Sie sich wieder an, um weiterzumachen.",
+    "oauth_error": {
+      "title": "Die Anmeldung hat nicht geklappt",
+      "invalid_state": "Die Anmeldung wurde unterbrochen. Fangen Sie noch einmal an.",
+      "missing_params": "Es fehlen Anmeldedaten. Fangen Sie noch einmal an.",
+      "token_exchange_failed": "Wir konnten die Anmeldung nicht abschließen. Versuchen Sie es noch einmal.",
+      "access_denied": "Sie dürfen sich hier nicht anmelden. Bitten Sie Ihre Administration um Zugang."
+    }
+  },
+  "totp_reauth": {
+    "title": "Neuen Code eingeben",
+    "description": "Ihr letzter Code gilt nicht mehr. Öffnen Sie Ihre Authenticator-App und geben Sie den neuen Code ein, um weiterzumachen.",
+    "oauth_hint": "Diese Abfrage kommt immer wieder. Ihre Administration kann das abstellen, indem sie eine andere Anmeldeart (OAuth) einschaltet.",
+    "code_label": "Code aus Ihrer Authenticator-App"
+  },
+  "errors": {
+    "page_error_description": "Diese Seite funktioniert gerade nicht. Versuchen Sie es noch einmal oder gehen Sie zurück zum Posteingang.",
+    "sidebar_error": "Ihre Ordner konnten nicht geladen werden",
+    "email_list_error": "Ihre E-Mails konnten nicht geladen werden",
+    "viewer_error_title": "Diese E-Mail kann nicht angezeigt werden",
+    "viewer_error_description": "Etwas in dieser E-Mail verhindert, dass sie hier angezeigt wird. Vielleicht nutzt sie ein Format, das wir nicht unterstützen.",
+    "composer_error": "Das Fenster für neue E-Mails konnte nicht geöffnet werden",
+    "settings_error_title": "Die Einstellungen konnten nicht geöffnet werden",
+    "settings_error_description": "Ihre Einstellungen konnten nicht geladen werden. Was Sie jetzt ändern, wird vielleicht nicht gespeichert."
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "login": {
+    "jmap_endpoint_cors_hint": "The mail server must allow sign-ins from this website. Your administrator can set this up.",
+    "reconnecting": "The connection is lost. We are trying to connect again…",
+    "error": {
+      "invalid_credentials": "The email address or password is wrong. Check both and try again.",
+      "invalid_token": "The server did not accept this access token. Maybe it is not complete, or it is no longer valid. Copy it again or create a new one.",
+      "connection_failed": "We can't reach the mail server. Check your internet connection and try again.",
+      "cors_blocked": "The mail server works, but it does not allow sign-ins from this website. Ask your administrator to allow this website on the server.",
+      "server_error": "The mail server has a problem right now. Try again in a few minutes.",
+      "generic": "Something went wrong. Try again. If it keeps happening, ask your administrator for help.",
+      "totp_required": "Your account needs a second code to sign in. Open your authenticator app and type the 6-digit code below.",
+      "totp_invalid": "This code is wrong or too old. Type the code your authenticator app shows right now.",
+      "oauth_discovery_failed": "Sign-in through your organisation does not work right now. Try again later or ask your administrator.",
+      "token_exchange_failed": "Your password and code are correct, but the mail server did not let this app in. Ask your administrator to check the sign-in settings for this app."
+    },
+    "totp_toggle": "I have a code from my authenticator app",
+    "token_hint": "Some mail providers give you a token instead of a password. Create one in your mail provider's settings, copy it, and paste it here.",
+    "config_error": {
+      "title": "The webmail is not set up correctly",
+      "fetch_failed": "The webmail could not load its settings. Try again in a few minutes.",
+      "server_not_configured": "No mail server is set up yet. Ask your administrator to set one up."
+    },
+    "session_expired": "You were signed out. Sign in again to continue.",
+    "oauth_error": {
+      "title": "Sign-in did not work",
+      "invalid_state": "The sign-in was interrupted. Start again.",
+      "missing_params": "Some sign-in data is missing. Start again.",
+      "token_exchange_failed": "We could not finish signing you in. Try again.",
+      "access_denied": "You are not allowed to sign in here. Ask your administrator for access."
+    }
+  },
+  "totp_reauth": {
+    "title": "Enter a new code",
+    "description": "Your last code is no longer valid. Open your authenticator app and type the new code to continue.",
+    "oauth_hint": "This question comes back from time to time. Your administrator can stop it by turning on a different way to sign in (OAuth).",
+    "code_label": "Code from your authenticator app"
+  },
+  "errors": {
+    "page_error_description": "This page stopped working. Try again, or go back to your inbox.",
+    "sidebar_error": "Your folders could not be loaded",
+    "email_list_error": "Your messages could not be loaded",
+    "viewer_error_title": "This message can't be shown",
+    "viewer_error_description": "Something in this message stops it from being shown here. It may use a format we don't support.",
+    "composer_error": "The editor for new messages could not be opened",
+    "settings_error_title": "Settings could not be opened",
+    "settings_error_description": "Your settings could not be loaded. Changes you make now may not be saved."
+  }
+}

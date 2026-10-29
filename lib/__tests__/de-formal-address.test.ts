@@ -24,4 +24,12 @@ describe('German translations', () => {
       .map(([key]) => key);
     expect(informal).toEqual([]);
   });
+
+  it('use the formal "Sie" in the plain-language strings too', () => {
+    const plain = JSON.parse(readFileSync('locales/de/plain.json', 'utf8'));
+    const informal = strings(plain)
+      .filter(([, text]) => INFORMAL.test(text))
+      .map(([key]) => key);
+    expect(informal).toEqual([]);
+  });
 });
