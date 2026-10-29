@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{count, plural, other {# 件の宛先}}を {field} に追加しました",
     "recipients_removed_count": "{count, plural, other {# 件の宛先}}を {field} から削除しました",
     "recipients_moved_count": "{count, plural, other {# 件の宛先}}を {field} に移動しました",
-    "body_label": "メッセージ"
+    "body_label": "メッセージ",
+    "attachment_uploading": "アップロード中",
+    "attachment_upload_failed": "アップロードに失敗しました",
+    "attachment_progress": "{percent}% アップロード済み"
   },
   "confirm_dialog": {
     "confirm": "確認",

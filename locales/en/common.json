@@ -1029,7 +1029,10 @@
     "recipients_added_count": "Added {count, plural, one {# recipient} other {# recipients}} to {field}",
     "recipients_removed_count": "Removed {count, plural, one {# recipient} other {# recipients}} from {field}",
     "recipients_moved_count": "Moved {count, plural, one {# recipient} other {# recipients}} to {field}",
-    "body_label": "Message"
+    "body_label": "Message",
+    "attachment_uploading": "Uploading",
+    "attachment_upload_failed": "Upload failed",
+    "attachment_progress": "{percent}% uploaded"
   },
   "confirm_dialog": {
     "confirm": "Confirm",

@@ -1029,7 +1029,10 @@
     "recipients_added_count": "Väljale {field} lisati {count, plural, one {# saaja} other {# saajat}}",
     "recipients_removed_count": "Väljalt {field} eemaldati {count, plural, one {# saaja} other {# saajat}}",
     "recipients_moved_count": "Väljale {field} teisaldati {count, plural, one {# saaja} other {# saajat}}",
-    "body_label": "Sõnum"
+    "body_label": "Sõnum",
+    "attachment_uploading": "Üleslaadimine",
+    "attachment_upload_failed": "Üleslaadimine ebaõnnestus",
+    "attachment_progress": "{percent}% üles laaditud"
   },
   "confirm_dialog": {
     "confirm": "Kinnita",

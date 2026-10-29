@@ -1029,7 +1029,10 @@
     "recipients_added_count": "Laukam {field} {count, plural, zero {pievienoti # adresāti} one {pievienots # adresāts} other {pievienoti # adresāti}}",
     "recipients_removed_count": "No lauka {field} {count, plural, zero {noņemti # adresāti} one {noņemts # adresāts} other {noņemti # adresāti}}",
     "recipients_moved_count": "Uz {field} {count, plural, zero {pārvietoti # adresāti} one {pārvietots # adresāts} other {pārvietoti # adresāti}}",
-    "body_label": "Ziņojums"
+    "body_label": "Ziņojums",
+    "attachment_uploading": "Augšupielādē",
+    "attachment_upload_failed": "Augšupielāde neizdevās",
+    "attachment_progress": "Augšupielādēti {percent}%"
   },
   "confirm_dialog": {
     "confirm": "Apstiprināt",

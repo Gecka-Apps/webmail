@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{count, plural, one {# címzett} other {# címzett}} hozzáadva ide: {field}",
     "recipients_removed_count": "{count, plural, one {# címzett} other {# címzett}} eltávolítva innen: {field}",
     "recipients_moved_count": "{count, plural, one {# címzett} other {# címzett}} áthelyezve ide: {field}",
-    "body_label": "Üzenet"
+    "body_label": "Üzenet",
+    "attachment_uploading": "Feltöltés",
+    "attachment_upload_failed": "A feltöltés nem sikerült",
+    "attachment_progress": "{percent}% feltöltve"
   },
   "confirm_dialog": {
     "confirm": "Megerősítés",

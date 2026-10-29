@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{count, plural, one {# destinatário adicionado} other {# destinatários adicionados}} a {field}",
     "recipients_removed_count": "{count, plural, one {# destinatário removido} other {# destinatários removidos}} de {field}",
     "recipients_moved_count": "{count, plural, one {# destinatário movido} other {# destinatários movidos}} para {field}",
-    "body_label": "Mensagem"
+    "body_label": "Mensagem",
+    "attachment_uploading": "Enviando",
+    "attachment_upload_failed": "Falha no envio",
+    "attachment_progress": "{percent}% enviado"
   },
   "confirm_dialog": {
     "confirm": "Confirmar",

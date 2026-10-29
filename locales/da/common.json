@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{count, plural, one {# modtager} other {# modtagere}} tilføjet til {field}",
     "recipients_removed_count": "{count, plural, one {# modtager} other {# modtagere}} fjernet fra {field}",
     "recipients_moved_count": "{count, plural, one {# modtager} other {# modtagere}} flyttet til {field}",
-    "body_label": "Besked"
+    "body_label": "Besked",
+    "attachment_uploading": "Uploader",
+    "attachment_upload_failed": "Upload mislykkedes",
+    "attachment_progress": "{percent} % uploadet"
   },
   "confirm_dialog": {
     "confirm": "Bekræft",

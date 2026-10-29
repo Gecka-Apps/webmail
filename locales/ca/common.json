@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{count, plural, one {S'ha afegit # destinatari} other {S'han afegit # destinataris}} a {field}",
     "recipients_removed_count": "{count, plural, one {S'ha tret # destinatari} other {S'han tret # destinataris}} de {field}",
     "recipients_moved_count": "{count, plural, one {S'ha mogut # destinatari} other {S'han mogut # destinataris}} a {field}",
-    "body_label": "Missatge"
+    "body_label": "Missatge",
+    "attachment_uploading": "S'està pujant",
+    "attachment_upload_failed": "No s'ha pogut pujar",
+    "attachment_progress": "{percent}% pujat"
   },
   "confirm_dialog": {
     "confirm": "Confirma",

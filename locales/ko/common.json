@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{field}에 {count, plural, other {받는 사람 #명}}을 추가했어요",
     "recipients_removed_count": "{field}에서 {count, plural, other {받는 사람 #명}}을 제거했어요",
     "recipients_moved_count": "{field}(으)로 {count, plural, other {받는 사람 #명}}을 옮겼어요",
-    "body_label": "메시지"
+    "body_label": "메시지",
+    "attachment_uploading": "업로드 중",
+    "attachment_upload_failed": "업로드 실패",
+    "attachment_progress": "{percent}% 업로드됨"
   },
   "confirm_dialog": {
     "confirm": "확인",

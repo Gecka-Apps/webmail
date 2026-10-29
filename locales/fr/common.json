@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{count, plural, one {# destinataire ajouté} other {# destinataires ajoutés}} à {field}",
     "recipients_removed_count": "{count, plural, one {# destinataire retiré} other {# destinataires retirés}} de {field}",
     "recipients_moved_count": "{count, plural, one {# destinataire déplacé} other {# destinataires déplacés}} vers {field}",
-    "body_label": "Message"
+    "body_label": "Message",
+    "attachment_uploading": "Téléversement",
+    "attachment_upload_failed": "Échec du téléversement",
+    "attachment_progress": "{percent} % téléversé"
   },
   "confirm_dialog": {
     "confirm": "Confirmer",

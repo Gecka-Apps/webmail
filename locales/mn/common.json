@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{field}-д {count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} нэмлээ",
     "recipients_removed_count": "{field}-ээс {count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} хаслаа",
     "recipients_moved_count": "{field} руу {count, plural, one {# хүлээн авагч} other {# хүлээн авагч}} зөөлөө",
-    "body_label": "Мессеж"
+    "body_label": "Мессеж",
+    "attachment_uploading": "Байршуулж байна",
+    "attachment_upload_failed": "Байршуулж чадсангүй",
+    "attachment_progress": "{percent}% байршуулсан"
   },
   "confirm_dialog": {
     "confirm": "Баталгаажуулах",

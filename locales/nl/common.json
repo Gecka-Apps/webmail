@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{count, plural, one {# ontvanger} other {# ontvangers}} toegevoegd aan {field}",
     "recipients_removed_count": "{count, plural, one {# ontvanger} other {# ontvangers}} verwijderd uit {field}",
     "recipients_moved_count": "{count, plural, one {# ontvanger} other {# ontvangers}} verplaatst naar {field}",
-    "body_label": "Bericht"
+    "body_label": "Bericht",
+    "attachment_uploading": "Uploaden",
+    "attachment_upload_failed": "Uploaden mislukt",
+    "attachment_progress": "{percent}% geüpload"
   },
   "confirm_dialog": {
     "confirm": "Bevestigen",

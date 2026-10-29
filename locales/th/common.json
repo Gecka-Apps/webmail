@@ -1277,7 +1277,10 @@
     "recipients_added_count": "เพิ่มผู้รับ {count, plural, other {# คน}} ใน {field} แล้ว",
     "recipients_removed_count": "นำผู้รับ {count, plural, other {# คน}} ออกจาก {field} แล้ว",
     "recipients_moved_count": "ย้ายผู้รับ {count, plural, other {# คน}} ไปที่ {field} แล้ว",
-    "body_label": "ข้อความ"
+    "body_label": "ข้อความ",
+    "attachment_uploading": "กำลังอัปโหลด",
+    "attachment_upload_failed": "อัปโหลดไม่สำเร็จ",
+    "attachment_progress": "อัปโหลดแล้ว {percent}%"
   },
   "email_viewer": {
     "read_receipt": {

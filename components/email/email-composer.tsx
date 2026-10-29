@@ -2267,6 +2267,7 @@ export function EmailComposer({
         if (controller?.signal.aborted) continue;
         debug.error(`Failed to upload ${file.name}:`, error);
         toast.error(t('upload_failed', { filename: file.name }));
+        announce(t('upload_failed', { filename: file.name }));
 
         setAttachments(prev =>
           prev.map(att =>
@@ -2277,7 +2278,7 @@ export function EmailComposer({
         );
       }
     }
-  }, [client, t, plainTextMode]);
+  }, [client, t, plainTextMode, announce]);
 
   const handleImageUpload = useCallback(async (
     file: File,
@@ -4499,6 +4500,14 @@ export function EmailComposer({
                     <span className="text-xs text-muted-foreground whitespace-nowrap">
                       ({formatFileSize(att.size)})
                     </span>
+                    {/* State in words, not only a tint or a bar. */}
+                    {att.error ? (
+                      <span className="text-xs font-medium whitespace-nowrap">{t('attachment_upload_failed')}</span>
+                    ) : att.uploading ? (
+                      <span className="text-xs text-muted-foreground whitespace-nowrap tabular-nums" aria-hidden>
+                        {typeof att.progress === 'number' ? `${att.progress}%` : t('attachment_uploading')}
+                      </span>
+                    ) : null}
                   </>
                 );
                 return (
@@ -4510,7 +4519,17 @@ export function EmailComposer({
                   )}
                 >
                   {att.uploading && (
-                    <div className="absolute inset-0 pointer-events-none">
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      role="progressbar"
+                      aria-label={att.name}
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-valuenow={typeof att.progress === 'number' ? att.progress : undefined}
+                      aria-valuetext={typeof att.progress === 'number'
+                        ? t('attachment_progress', { percent: att.progress })
+                        : t('attachment_uploading')}
+                    >
                       <div className="h-full bg-primary/10 animate-pulse" />
                       {typeof att.progress === 'number' ? (
                         // Real byte progress from the transport; see

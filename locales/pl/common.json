@@ -1029,7 +1029,10 @@
     "recipients_added_count": "Dodano {count, plural, one {# odbiorcę} few {# odbiorców} many {# odbiorców} other {# odbiorcy}} do {field}",
     "recipients_removed_count": "Usunięto {count, plural, one {# odbiorcę} few {# odbiorców} many {# odbiorców} other {# odbiorcy}} z {field}",
     "recipients_moved_count": "Przeniesiono {count, plural, one {# odbiorcę} few {# odbiorców} many {# odbiorców} other {# odbiorcy}} do {field}",
-    "body_label": "Wiadomość"
+    "body_label": "Wiadomość",
+    "attachment_uploading": "Przesyłanie",
+    "attachment_upload_failed": "Przesyłanie nie powiodło się",
+    "attachment_progress": "Przesłano {percent}%"
   },
   "confirm_dialog": {
     "confirm": "Potwierdź",

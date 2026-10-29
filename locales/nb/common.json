@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{count, plural, one {# mottaker} other {# mottakere}} lagt til i {field}",
     "recipients_removed_count": "{count, plural, one {# mottaker} other {# mottakere}} fjernet fra {field}",
     "recipients_moved_count": "{count, plural, one {# mottaker} other {# mottakere}} flyttet til {field}",
-    "body_label": "Melding"
+    "body_label": "Melding",
+    "attachment_uploading": "Laster opp",
+    "attachment_upload_failed": "Opplastingen mislyktes",
+    "attachment_progress": "{percent} % lastet opp"
   },
   "confirm_dialog": {
     "confirm": "Bekreft",

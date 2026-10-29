@@ -1029,7 +1029,10 @@
     "recipients_added_count": "{count, plural, one {# Empfänger} other {# Empfänger}} zu {field} hinzugefügt",
     "recipients_removed_count": "{count, plural, one {# Empfänger} other {# Empfänger}} aus {field} entfernt",
     "recipients_moved_count": "{count, plural, one {# Empfänger} other {# Empfänger}} nach {field} verschoben",
-    "body_label": "Nachricht"
+    "body_label": "Nachricht",
+    "attachment_uploading": "Wird hochgeladen",
+    "attachment_upload_failed": "Hochladen fehlgeschlagen",
+    "attachment_progress": "{percent} % hochgeladen"
   },
   "confirm_dialog": {
     "confirm": "Bestätigen",

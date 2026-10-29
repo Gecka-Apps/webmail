@@ -1029,7 +1029,10 @@
     "recipients_added_count": "В «{field}» {count, plural, one {добавлен # получатель} few {добавлено # получателя} many {добавлено # получателей} other {добавлено # получателя}}",
     "recipients_removed_count": "Из «{field}» {count, plural, one {убран # получатель} few {убрано # получателя} many {убрано # получателей} other {убрано # получателя}}",
     "recipients_moved_count": "В «{field}» {count, plural, one {перемещён # получатель} few {перемещено # получателя} many {перемещено # получателей} other {перемещено # получателя}}",
-    "body_label": "Сообщение"
+    "body_label": "Сообщение",
+    "attachment_uploading": "Загрузка",
+    "attachment_upload_failed": "Не удалось загрузить",
+    "attachment_progress": "Загружено {percent}%"
   },
   "confirm_dialog": {
     "confirm": "Подтвердить",

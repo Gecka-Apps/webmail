@@ -1029,7 +1029,10 @@
     "recipients_added_count": "Do {field} {count, plural, one {přidán # příjemce} few {přidáni # příjemci} many {přidáno # příjemce} other {přidáno # příjemců}}",
     "recipients_removed_count": "Z {field} {count, plural, one {odebrán # příjemce} few {odebráni # příjemci} many {odebráno # příjemce} other {odebráno # příjemců}}",
     "recipients_moved_count": "Do {field} {count, plural, one {přesunut # příjemce} few {přesunuti # příjemci} many {přesunuto # příjemce} other {přesunuto # příjemců}}",
-    "body_label": "Zpráva"
+    "body_label": "Zpráva",
+    "attachment_uploading": "Nahrává se",
+    "attachment_upload_failed": "Nahrání se nezdařilo",
+    "attachment_progress": "Nahráno {percent} %"
   },
   "confirm_dialog": {
     "confirm": "Potvrdit",

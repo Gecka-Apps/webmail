@@ -68,9 +68,10 @@ vi.mock('@/stores/settings-store', () => {
   return { useSettingsStore: hook };
 });
 
+const auth = vi.hoisted(() => ({ client: null as unknown }));
 vi.mock('@/stores/auth-store', () => {
   const state = {
-    client: null,
+    get client() { return auth.client; },
     identities: [],
     primaryIdentity: null,
     isAuthenticated: false,
@@ -151,6 +152,9 @@ vi.mock('@/lib/plugin-hooks', () => ({
     onTemplateApply: { size: 0, emit: async () => {} },
   },
   emailHooks: {
+    onBeforeAttachmentUpload: { intercept: async () => true },
+    onBeforeBlobUpload: { transform: async (id: unknown) => id },
+    onAfterAttachmentUpload: { emit: () => {} },
     onComposerOpen: { call: async () => [] },
     onRecipientChange: { call: async () => [] },
     getRecipientSuggestions: { call: async () => [] },
@@ -165,6 +169,7 @@ vi.mock('@/lib/plugin-hooks', () => ({
     search: { call: async () => [] },
     onProvideRecipientSuggestions: { transform: async (initial: unknown) => initial },
   },
+  isExternalAttachmentResult: () => false,
 }));
 
 vi.mock('@/lib/email-sanitization', () => ({
@@ -174,6 +179,16 @@ vi.mock('@/lib/email-sanitization', () => ({
   sanitizePluginBodyHtml: (v: string) => v,
   escapeHtml: (v: string) => v,
   parseHtmlSafely: (html: string) => new DOMParser().parseFromString(html, 'text/html'),
+}));
+const progress = vi.hoisted(() => ({ report: null as null | ((loaded: number, total: number) => void) }));
+vi.mock('@/lib/upload-progress', () => ({
+  onUploadProgress: (_id: string, report: (loaded: number, total: number) => void) => {
+    progress.report = report;
+    return () => {};
+  },
+}));
+vi.mock('@/lib/plugin-storage', () => ({
+  fileStorage: { saveFile: async () => {}, getFile: async () => null, deleteFile: async () => {} },
 }));
 vi.mock('@/lib/email-threading', () => ({
   computeReplyThreadingHeaders: () => ({ inReplyTo: [], references: [] }),
@@ -205,7 +220,26 @@ const toInput = () => screen.getByPlaceholderText('to_placeholder') as HTMLInput
 
 beforeEach(() => {
   Object.assign(settings, DEFAULT_SETTINGS);
+  auth.client = null;
 });
+
+/** A client whose upload is held: report progress, then fail or never finish. */
+function uploadClient(upload: () => Promise<{ blobId: string }>) {
+  auth.client = {
+    uploadBlob: vi.fn(upload),
+    hasDelayedSend: () => false,
+    getMaxDelayedSend: () => 0,
+  };
+}
+
+async function attach(file: File) {
+  const input = document.querySelector('input[type="file"]') as HTMLInputElement;
+  await act(async () => {
+    fireEvent.change(input, { target: { files: [file] } });
+    await Promise.resolve();
+    await new Promise((r) => setTimeout(r, 0));
+  });
+}
 
 describe('recipient fields (SR-06, CV-02)', () => {
   it('names the To input by its visible label, also once it holds chips', () => {
@@ -344,5 +378,29 @@ describe('message body (SR-07)', () => {
     expect(editor).toHaveAttribute('data-invalid', 'true');
     const error = document.getElementById(editor.getAttribute('data-describedby')!);
     expect(error).toHaveTextContent('validation.body_required');
+  });
+});
+
+describe('attachment uploads (SR-16)', () => {
+  it('shows upload progress as a named progress bar with a text value', async () => {
+    uploadClient(() => new Promise(() => {}));
+    render(<EmailComposer initialData={DRAFT} />);
+    await attach(new File(['%PDF'], 'report.pdf', { type: 'application/pdf' }));
+
+    const bar = screen.getByRole('progressbar', { name: 'report.pdf' });
+    expect(bar).toHaveAttribute('aria-valuetext', 'attachment_uploading');
+    act(() => progress.report?.(45, 100));
+    expect(bar).toHaveAttribute('aria-valuenow', '45');
+    expect(bar).toHaveAttribute('aria-valuetext', 'attachment_progress:45');
+  });
+
+  it('says in words that an upload failed and announces it', async () => {
+    uploadClient(() => Promise.reject(new Error('boom')));
+    render(<EmailComposer initialData={DRAFT} />);
+    await attach(new File(['%PDF'], 'report.pdf', { type: 'application/pdf' }));
+
+    await waitFor(() => expect(screen.getByText('attachment_upload_failed')).toBeInTheDocument());
+    expect(screen.queryByRole('progressbar')).toBeNull();
+    expect(liveRegion()).toHaveTextContent('upload_failed:report.pdf');
   });
 });

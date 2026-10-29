@@ -994,7 +994,10 @@
     "recipients_added_count": "{count, plural, one {נמען אחד נוסף} two {שני נמענים נוספו} other {# נמענים נוספו}} אל {field}",
     "recipients_removed_count": "{count, plural, one {נמען אחד הוסר} two {שני נמענים הוסרו} other {# נמענים הוסרו}} מ{field}",
     "recipients_moved_count": "{count, plural, one {נמען אחד הועבר} two {שני נמענים הועברו} other {# נמענים הועברו}} אל {field}",
-    "body_label": "הודעה"
+    "body_label": "הודעה",
+    "attachment_uploading": "מעלה",
+    "attachment_upload_failed": "ההעלאה נכשלה",
+    "attachment_progress": "{percent}% הועלו"
   },
   "confirm_dialog": {
     "confirm": "אשר",
