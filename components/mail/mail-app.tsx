@@ -5600,9 +5600,6 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
           />
         )}
 
-        {/* Screen reader live region for dynamic status announcements */}
-        <div className="sr-only" aria-live="polite" aria-atomic="true" id="sr-status" />
-
         <SidebarAppsModal isOpen={showAppsModal} onClose={closeAppsModal} />
         {pendingMailtoAccountChoice && (
           <ProtocolAccountPicker
