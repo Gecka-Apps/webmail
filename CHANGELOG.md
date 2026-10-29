@@ -1,22 +1,134 @@
 # Changelog
 
-## Unreleased
+## 1.19.0 (2026-10-29)
+
+1.19.0 gives admins an Organisation area: signatures, disclaimers and template libraries per domain or group, external mail warnings, idle and session time limits, settings locked to a value, and one switch that stops all traffic to third-party services. On Stalwart 1.0, group mailboxes share tags and templates, a colleague can be made a delegate in one step, and mail deleted for good can be recovered from Stalwart's archive. A new Accessibility page in Settings has presets, text size and spacing, reading aids for mail and keyboard options, and the app was gone through with screen readers, the keyboard, contrast themes and large text. A usability pass made dialogs, menus, wording and phone layouts work the same way in Mail, Calendar, Contacts and Files, and added Undo for most mail actions, a Files trash and printing. Thai is a new language.
+
+Thank you for your donations:
+
+- _You? [Become a sponsor!](https://github.com/sponsors/bulwarkmail)_
+
+**One-time**
+
+- [@systemflair](https://github.com/systemflair)
+- [@bultester](https://github.com/bultester)
+- Anonymous
+- Anonymous
+- Anonymous
+
+**Monthly**
+
+- [@Focus-On-Agency](https://github.com/Focus-On-Agency)
+- Anonymous
+- [@superspacehosting](https://github.com/superspacehosting)
+- [@naokton](https://github.com/naokton)
+- [@yerTools](https://github.com/yerTools)
+- [@jsaathof](https://github.com/jsaathof)
+- [@berkersal](https://github.com/berkersal)
+- [@NABarnes](https://github.com/NABarnes)
+- [@felixzieger](https://github.com/felixzieger)
+- [@pr0ton11](https://github.com/pr0ton11)
+- [@fpauser](https://github.com/fpauser)
+- [@proxforge](https://github.com/proxforge)
+- [@spss20](https://github.com/spss20)
+- [@elgringoYan](https://github.com/elgringoYan)
+- [@pauladams8](https://github.com/pauladams8)
+- [@djpriest](https://github.com/djpriest)
+- [@umakers](https://github.com/umakers)
+- [@zplizzi](https://github.com/zplizzi)
+- [@jeremiah](https://github.com/jeremiah)
+- [@Theoretisch1337](https://github.com/Theoretisch1337)
+- [@svandive](https://github.com/svandive)
+- [@HiltMundell](https://github.com/HiltMundell)
+
+### Changes
+
+- **Accessibility**: Text size is now a share of the text size set in the browser, from 87.5% to 200%, instead of a fixed 14, 16 or 18 px, and small text everywhere follows it. The Animations switch is now Reduce motion, which follows the system unless you set it
 
 ### Features
 
-- **Organisation**: Admins can set an organisation signature with placeholders for each user's name, address, company, job title, department and phone numbers, per domain or group, and lock it so it replaces everyone's own signature. Users fill in their details once under Settings > Account. Lines whose details are empty are left out (#908)
+- **Organisation**: The admin panel has an Organisation area where the user policy applies to everyone, a domain or a group. Admins can lock any setting to a chosen value or only preset it, accessibility options included, and export and import the whole policy as one file; an import names the locks and defaults it changes. Users see "Set by your organisation" next to a locked setting
+- **Organisation**: Admins can set an organisation signature with placeholders for each user's name, address, company, job title, department and phone numbers, per domain or group, and lock it so it replaces everyone's own signature. Users fill in their details once under Settings > Account. Lines whose details are empty are left out (#908, thanks @chutescarabee7)
 - **Organisation**: Admins can add a legal disclaimer that goes below every message when it is sent, never into drafts, and is shown read-only in the composer
 - **Organisation**: Admins can give every user a library of templates, per domain or group, that users pick under "Organisation" in the template picker and can copy but not change
 - **Templates**: On Stalwart 1.0, members of a group mailbox share team templates, and users' own templates are kept in their account so they follow them to every browser. Templates already in a browser move over on the first sign-in. Admins can lock team templates or leave users only the organisation and team templates
-- **Tags**: On Stalwart 1.0, members of a group mailbox see the same tag names and colors on its mail, in the list, the tag picker, the sidebar and the unified inbox. They edit them under Settings > Folders & tags, where tags already on the group's mail can be given a name. Admins can lock the list per domain or group, for example so only team leads change it (#470, #1310)
+- **Tags**: On Stalwart 1.0, members of a group mailbox see the same tag names and colors on its mail, in the list, the tag picker, the sidebar and the unified inbox. They edit them under Settings > Folders & tags, where tags already on the group's mail can be given a name. Admins can lock the list per domain or group, for example so only team leads change it (#470, #1310, thanks @andrei-miron and @HOLOEYE-JZ)
 - **Organisation**: Admins can label mail from outside the organisation with an "External" chip and have users confirm before sending to or inviting external recipients (composer, quick reply and meeting invitations), per domain or group. Partner domains and contacts count as internal. This replaces the External Mail Warning plugin, whose safe domains can be imported. Plugins can read `api.host.features.externalSenderLabel` and `externalRecipientWarning`
 - **Organisation**: Admins can sign users out after a time without activity or a fixed time after sign-in, per domain or group. A countdown with "Stay signed in" comes first, open and minimised messages and quick replies are saved as drafts, and the login page says why
 - **Delegates**: Settings > Sharing gives a colleague read, or read and write, access to all mail folders or just the Inbox, calendars and contacts in one step, lists who has access to what, and removes access everywhere at once. Admins can hide it per domain or group and limit every share dialog to read access on Organisation > Sharing
-- **Recover deleted items**: On Stalwart Enterprise with archiving turned on, users bring back mail they deleted for good under Settings > Recover deleted items, or from a link in Trash when there is something to recover. Restored mail goes back to the Inbox unread. Admins can limit how many days back it lists or hide it per domain or group (#1319)
-- **Privacy**: One switch, `NO_THIRD_PARTY_TRAFFIC` or Organisation > Security, stops every connection to services outside your own servers: telemetry, the version check, the built-in push relay, the official extension directory, sender icons, MyMemory translation, map links, OpenPGP key lookups and remote pictures in mail. Plugins that need network access don't run, and the page's CSP allows only the hosts you configured. Push registrations move to your own relay. The admin page lists what stays reachable (#903)
+- **Recover deleted items**: On Stalwart Enterprise with archiving turned on, users bring back mail they deleted for good under Settings > Recover deleted items, or from a link in Trash when there is something to recover. Restored mail goes back to the Inbox unread. Admins can limit how many days back it lists or hide it per domain or group (#1319, thanks @svandive)
+- **Privacy**: One switch, `NO_THIRD_PARTY_TRAFFIC` or Organisation > Security, stops every connection to services outside your own servers: telemetry, the version check, the built-in push relay, the official extension directory, sender icons, MyMemory translation, map links, OpenPGP key lookups and remote pictures in mail. Plugins that need network access don't run, and the page's CSP allows only the hosts you configured. Push registrations move to your own relay. The admin page lists what stays reachable (#903, thanks @rickgoud)
 - **Team inbox**: The new official Team inbox plugin lets members of a team mailbox assign messages to each other, mark them done, and filter by "Assigned to me" and "Open"
 - **Plugins**: Plugins can add keyword filters to the message list, shown as chips above it, put icons on row badges, show actions only in team mailboxes or for some keywords, change several keywords in one step, see the user's own account and which mailboxes are team mailboxes, and keep a small shared value in a team mailbox on Stalwart 1.0. Looking people up in the directory needs the new `directory:read` permission. Plugins can no longer set `$draft`, `$junk`, `$notjunk` or `$phishing`
-- **Files**: With a document editor configured, "New file" also creates Word, Excel, PowerPoint, OpenDocument and (where the editor edits PDFs) PDF files and opens them in the editor. It offers the formats the editor can edit; admins can narrow the list with `WOPI_NEW_FILE_FORMATS` and add their own blank templates, or other formats, with `WOPI_TEMPLATE_DIR` (#1393)
+- **Plugins**: `api.ui.openPage` moves the tab to one of the plugin's own pages (#1406, thanks @HOLOEYE-JZ). A plugin's search result snippet can mark what matched (#1418, thanks @HOLOEYE-JZ), and the results block holds its place while a plugin is still searching (#1419, thanks @HOLOEYE-JZ)
+- **Accessibility**: Settings has an Accessibility page. Presets for screen readers, low vision, dyslexia, focus, keyboard and motor, motion and seizure safety, and deaf and hard of hearing users change several options at once and can be undone. Alt+Shift+A opens text size, contrast, motion and the presets from anywhere, and a button in the navigation bar can do the same
+- **Accessibility**: Text can use Atkinson Hyperlegible Next, Lexend or OpenDyslexic, with more line, letter, word and paragraph spacing. More contrast works on any theme, and transparency can be reduced, links underlined, the focus outline made thicker and the pointer made larger
+- **Accessibility**: Reading aids for mail: a reader view in the app's font, spacing and colours, read aloud with the browser's voice while highlighting what it reads, a reading mask that dims all but a band of lines, animated images paused behind a play button, HTML mail as plain text by default or per message, lines of about 80 characters, wide mail scaled down to the pane, HTML mail in the app's font and colours, and message bodies at the chosen text size
+- **Accessibility**: Calendar, tag and folder colours can use a colour-blind-safe palette, and names can show next to colours: a tag's letter in its dot and the calendar's name on events
+- **Accessibility**: Large targets make buttons, menu items, rows and switches 44 px. Simple mode shows one column and, if wanted, a paged message list. Submenus, previews and the rail peek can open only on click, and tags, filter rules, apps, accounts and Pro tabs can be reordered without dragging
+- **Accessibility**: Single-key shortcuts can be turned off. Every app has landmarks, a page heading, skip links and F6 to move between panes, and ? opens the keyboard shortcuts of the app you are in
+- **Accessibility**: Screen readers are told when a folder or search has loaded, how much new mail came, when a draft is saved and when the connection drops, and toasts are read out, errors assertively. Toasts stay while focused, Alt+Shift+N jumps to the newest, and the notification duration also covers undo toasts, errors and reminders. Visual alerts flash the tab title slowly, and plugin notifications stay off the desktop during do not disturb
+- **Accessibility**: Plain language gives simpler English and German wording for sign-in, errors and Settings. Technical terms in Settings and the admin area get short explanations that work with keyboard, touch and screen readers
+- **Accessibility**: Optional confirmations before deleting, archiving and sending, a prompt for alt text when an image goes into a message, an accessible example message in the template picker, and a default font and size for new messages
+- **Admin**: Links to an accessibility statement, a barrier report, help, Easy Read and sign language show on the login page, in the settings sidebar and in the account menu when set with `ACCESSIBILITY_STATEMENT_URL`, `ACCESSIBILITY_FEEDBACK_URL`, `HELP_URL`, `EASY_READ_URL` and `SIGN_LANGUAGE_URL`
+- **Admin**: `OAUTH_REVOKE_ON_SIGN_OUT=false` keeps the refresh token valid on sign-out, so Stalwart 1.0 keeps Bulwark in the user's connected applications and doesn't ask for consent again (#1388, thanks @Beckid)
+- **Login**: `LOGIN_USERNAME_PLACEHOLDER` sets the placeholder of the login email field (#1423, thanks @DerFolder)
+- **Login**: The SSO-only login page offers "Remember me", and the box decides for every single sign-on path (#1437, thanks @marketstead-dave)
+- **Setup**: The setup wizard shows in the browser's language, in all 29 languages
+- **Mail**: Ctrl+Z or z undoes the last mail actions, newest first, marking read or unread, stars and tags included. Delete to Trash, archive, move, spam report and remove from folder offer Undo in their toast, also after a move to another account and in lists that mix accounts
+- **Mail**: Scheduled messages can be cancelled back into Drafts and rescheduled in the Schedule send dialog. "This morning" and "This afternoon" are offered as schedule times while they are still ahead (#1390, thanks @PoltoS)
+- **Mail**: Before sending, Bulwark warns about unfilled placeholders such as [Your name], in every app language, and about unfinished text. The warning can be turned off
+- **Mail**: Attachments can be saved to Files from the message, from shared and group mailboxes too
+- **Mail**: The list header has a Sort menu and the folder's actions, and the filter panel is simpler, with on/off toggles, date and size ranges and every field in view
+- **Mail**: A click anywhere beside a row's avatar or checkbox ticks it (#1381, thanks @mmomjian)
+- **Mail**: A message whose sender check failed shows a warning shield instead of the sender icon
+- **Composer**: Quoted reply history collapses behind an ellipsis (#1405, thanks @pcatapan)
+- **Composer**: A recipient chip's menu moves it between To, Cc and Bcc, and the tag and template pickers can make a new tag or open the template manager
+- **Command palette**: Mail's commands (reply, archive, delete, move, read state, spam, go to a folder), Calendar's, Contacts' and Files' commands, plugin pages, account switching and "search everything" are in the palette. Apps can add their own commands
+- **Print**: Print or Ctrl+P prints a clean copy of the page instead of the app shell: the calendar's month, week, day, agenda, tasks and single events, and contact lists, contacts, groups and directory entries
+- **Calendar**: Events can be searched from the toolbar, with / and from the command palette
+- **Calendar**: Light event colours show events tinted with a colour bar, as in Outlook
+- **Calendar**: A cancellation mail offers to remove the cancelled meeting from the calendar (#1425, thanks @chutescarabee7)
+- **Calendar**: Dragging or resizing a repeating event asks which occurrences move, and the move can be undone. A single click on a month day or the all-day row opens the quick editor for an all-day event, and Shift+F10 opens an event's menu
+- **Contacts**: Address books and contact categories can be deleted in Settings, and contacts move with Move to…
+- **Files**: Deleted files go to a trash with Restore, Delete permanently and Empty trash. Files and folders move with Move to… and a folder picker, a folder downloads as a zip built in the browser with progress and cancel, and images and other files open in one preview with ←/→ to the next file
+- **Files**: With a document editor configured, "New file" also creates Word, Excel, PowerPoint, OpenDocument and (where the editor edits PDFs) PDF files and opens them in the editor. It offers the formats the editor can edit; admins can narrow the list with `WOPI_NEW_FILE_FORMATS` and add their own blank templates, or other formats, with `WOPI_TEMPLATE_DIR` (#1393, thanks @Monarobase)
+- **Files**: The Files settings sync with the other settings, with export, reset and a one-time move from this device
+- **Phone**: Every app's phone header has notifications, the command palette and the account avatar, and Contacts gets a create button and long-press menus like Mail and Files
+- **i18n**: Thai (#1379, thanks @phumiphat2201)
+
+### Performance
+
+- **Mail**: Shared accounts' folders load in batched, parallel requests instead of one request per account (#1409, thanks @truesysadmin)
+- **Tags**: Tag counts come from one Keyword/get on servers that count keywords (#1399, thanks @lucamzanon), and a hidden tab recounts once it is shown instead of on every push (#1400, thanks @lucamzanon)
+- **Push**: The keep-alive echo is skipped while the push stream is live (#1401, thanks @lucamzanon)
+
+### Fixes
+
+- **Accessibility**: Every form field, icon button and switch has a name screen readers read out, and password managers can fill the sign-in form. Dialogs, file previews, the document editor, the search palette and plugin dialogs keep the focus inside and give it back when they close
+- **Accessibility**: The message list is one Tab stop that screen readers read row by row. The calendar grid and mini calendar work with arrow keys and read events with their date, the contact and files lists move with the keyboard, and menus, grid cells and other roving-focus controls show the focus outline
+- **Accessibility**: Text contrast is at least 4.5:1 in every built-in theme, light and dark. Switches, selections and pressed buttons stay visible in Windows contrast themes, small controls have at least a 24 px target, and toasts move away from the focused control
+- **Accessibility**: With a large browser text size the message list stays visible next to the reader and cut-off labels wrap, Aurora Glass turns solid when transparency is reduced, and animations inside mail stop with reduce motion
+- **Dialogs**: Dialogs share one shell with the close button at the end, Escape, outside click and a discard prompt for typed changes, and their title stays in view while the content scrolls. The app's own dialogs replace browser prompts and confirm boxes, and leaving an editor or admin page with unsaved changes asks first, also on browser Back
+- **Wording**: The same action has the same word, icon and place across Mail, Calendar, Contacts, Files and Settings, labels use sentence case, delete prompts say what is lost, and German addresses you formally everywhere
+- **Mail**: A message has the same actions in its row menu, the reader's ⋮ and the phone panel. The selection bar has Archive, Report spam and a menu with the rest, the phone conversation view has Archive, Delete, Report spam, Mark as unread and Move, and a swipe archives or deletes a conversation row too
+- **Mail**: Delete follows the Delete action setting, archiving a conversation leaves your sent copy in Sent, Undo after Report spam puts the message back, and View source shows the message's real source
+- **Mail**: Clearing search filters keeps the open folder (#1430, thanks @creyD), system folder names are translated in advanced search (#1429, thanks @creyD), and a rule run on existing messages reads From, To and Cc conditions on Stalwart (#1424, thanks @creyD)
+- **Mail**: A dmarc pass no longer comes with a warning about failed checks (#1403, thanks @Fneufneu), a DKIM pass reported only by `header.i` counts (#1420, thanks @DerFolder), and invitations from users on your own domains aren't flagged as unverified (#1374, thanks @chlw)
+- **Mail**: Failed attachment downloads and partial or failed "Download all" say so (#1426, #1428, thanks @VasilisNtovolos), permanent bulk deletes that partly failed are reconciled (#1384, thanks @VasilisNtovolos), and the attachments of a previewed .eml preview too (#1395, thanks @lucamzanon)
+- **Mail**: Conversations show the scheduled status (#1359, thanks @arnauda-gh), folder counts update as soon as a send removes its draft (#1412, thanks @NobinKhan), and a mail sent right after a proxy outage goes out from the account's identity (#1377, thanks @kisaanu)
+- **Mail**: Attachment icons in the reader are coloured by file type like in the list, a mail's own overflow no longer adds a second scrollbar, and pushed notifications stay silent during do not disturb
+- **Composer**: A send no longer races the autosave (#1394, thanks @lucamzanon), a draft written in another client keeps its paragraph spacing (#1416, thanks @b3rsrk), the footer drops its labels when the composer is narrow (#1375, thanks @rgaliull), and the install card stays off the Send button and remembers "Not now" (#1411, thanks @NobinKhan)
+- **Sign-in**: The two-factor prompt shows as the next step instead of an error (#1422, thanks @DerFolder), password and two-factor settings show after a password and code sign-in (#1432, thanks @JamesJosephFinn), Lite on Stalwart no longer opens the browser's login dialog when the access token expired, uploads included (#1396, thanks @robinbohnen), and the account security docs open on bulwarkmail.org (#1387, thanks @DodoLeDev). Every app asks for a fresh two-factor code, not only Mail
+- **Calendar**: Default alerts get account-wide unique ids (#1435, thanks @rich0), a shared calendar shows the colour the server gives it (#1414, thanks @chodid), and one account's tasks stay out of another's task list (#1380, thanks @HOLOEYE-JZ)
+- **Calendar**: Week and day view fill with the visible hours and mark events that run past them, a saved event comes into view, short events open on click, and events you can't change offer no Edit, Delete, drag or resize
+- **Contacts**: Exports are valid vCard 4.0 (#1407, thanks @motofix), escaped colons in imported vCard notes are decoded (#1438, thanks @tacky6775), and a new or duplicated contact shows after saving
+- **Files**: Files list on Stalwart 1.0 when the account holds more nodes than one request returns (#1385, thanks @IchiganCS), and Back closes a preview or the document editor instead of leaving Files
+- **Plugins**: Full-height app pages fill the page (#1357, thanks @yontani), and search stops waiting for plugin results when it fails
+- **Right-to-left**: In Arabic, Hebrew and Persian, arrows, panels, drawers and the phone sidebar are mirrored, events sit on the right day, and senders, subjects and event titles keep their own text direction
+- **Phone**: Tour steps open the screen they point at, toasts sit above the bottom bars and can be swiped away, and calendar, contact and settings rows put their actions behind a ⋮ menu
+- **Build**: The production build's type check stays within 2 GB of memory (#1431, thanks @bagasme)
+- **Demo**: Switching demo accounts no longer crashes, and forwarding as attachment, export, view source and file previews work in the demo
 
 ## 1.18.0 (2026-10-26)
 
