@@ -320,6 +320,11 @@ export const CONFIG_ENV_MAP: Record<string, { envVar: string; fileEnvVar?: strin
   // through its end_session_endpoint (#905). Off keeps the provider signed in,
   // for providers shared with other apps that should stay signed in.
   oauthEndSession: { envVar: 'OAUTH_END_SESSION', type: 'boolean', defaultValue: true },
+  // Signing out revokes the refresh token at the provider's revocation
+  // endpoint. Off only drops it from the browser, so the provider keeps the
+  // grant: Stalwart 1.0 then skips the consent screen on the next sign-in
+  // (#1388), and the token stays valid at the provider until it expires.
+  oauthRevokeOnSignOut: { envVar: 'OAUTH_REVOKE_ON_SIGN_OUT', type: 'boolean', defaultValue: true },
   // The provider's logout URL, for providers whose discovery document has no
   // end_session_endpoint (#1279). Used instead of the discovered one when set.
   // Applies to the global provider only; JMAP_SERVERS entries set their own

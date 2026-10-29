@@ -74,6 +74,11 @@ export function isEndSessionEnabled(): boolean {
   return configManager.get<boolean>('oauthEndSession', true) !== false;
 }
 
+/** Whether signing out revokes the refresh token at the provider (OAUTH_REVOKE_ON_SIGN_OUT). */
+export function isRevokeOnSignOutEnabled(): boolean {
+  return configManager.get<boolean>('oauthRevokeOnSignOut', true) !== false;
+}
+
 function isLoopbackHost(hostname: string): boolean {
   return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]';
 }

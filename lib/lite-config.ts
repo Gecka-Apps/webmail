@@ -104,6 +104,7 @@ export function applyLiteConfig(raw: unknown, defaults?: { jmapServerUrl?: strin
     signLanguageUrl: httpUrlOrEmpty(input.signLanguageUrl),
     // Same browser-side switches as the server build (lib/outgoing-hosts.ts).
     noThirdPartyTraffic: parseNoThirdPartyValue(input.noThirdPartyTraffic),
+    oauthRevokeOnSignOut: bool(input.oauthRevokeOnSignOut, true),
     ...LITE_FORCED_FLAGS,
   };
 }

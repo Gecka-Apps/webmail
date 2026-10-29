@@ -297,15 +297,17 @@ async function revokeRefreshToken(entry: StoredRefreshToken): Promise<void> {
 /**
  * Sign a slot out: forget its credentials at once, then revoke its refresh
  * token so a copy taken from this browser's storage stops working too.
+ * `revoke: false` (config.json `oauthRevokeOnSignOut`) only forgets it, so
+ * Stalwart 1.0 keeps the consent for the next sign-in (#1388).
  */
-export async function revokeLiteSlot(slot: number): Promise<void> {
+export async function revokeLiteSlot(slot: number, revoke = true): Promise<void> {
   const entry = readLiteRefreshToken(slot);
   clearLiteSlot(slot);
-  if (entry) await revokeRefreshToken(entry);
+  if (entry && revoke) await revokeRefreshToken(entry);
 }
 
 /** {@link revokeLiteSlot} for every slot. */
-export async function revokeAllLiteSessions(): Promise<void> {
+export async function revokeAllLiteSessions(revoke = true): Promise<void> {
   const entries: StoredRefreshToken[] = [];
   for (const kind of ['local', 'session'] as const) {
     const store = storage(kind);
@@ -322,7 +324,7 @@ export async function revokeAllLiteSessions(): Promise<void> {
     }
   }
   clearAllLiteSessions();
-  await Promise.all(entries.map(revokeRefreshToken));
+  if (revoke) await Promise.all(entries.map(revokeRefreshToken));
 }
 
 export function clearAllLiteSessions(): void {

@@ -14,6 +14,12 @@ describe('applyLiteConfig (config.json for the static build)', () => {
     expect(config.loginLogoLightUrl).toBe('/branding/Bulwark_Logo_Color.svg');
     expect(config.jmapServers).toEqual([]);
     expect(config.demoMode).toBe(false);
+    expect(config.oauthRevokeOnSignOut).toBe(true);
+  });
+
+  it('lets config.json keep refresh tokens valid on sign-out (#1388)', () => {
+    expect(applyLiteConfig({ oauthRevokeOnSignOut: false }).oauthRevokeOnSignOut).toBe(false);
+    expect(applyLiteConfig({ oauthRevokeOnSignOut: 'no' }).oauthRevokeOnSignOut).toBe(true);
   });
 
   it('allows a custom endpoint by default only when no server is configured', () => {

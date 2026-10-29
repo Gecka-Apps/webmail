@@ -11,7 +11,7 @@ import { useFilterStore } from './filter-store';
 import { useSettingsStore } from './settings-store';
 import { useAccountStore, type AccountEntry } from './account-store';
 import { fetchPrincipalDisplayName } from '@/lib/stalwart/principal';
-import { fetchConfig } from '@/hooks/use-config';
+import { fetchConfig, getCachedConfig } from '@/hooks/use-config';
 import { debug } from '@/lib/debug';
 import { setServerAuthIssue } from '@/lib/server-auth-status';
 import { generateAccountId, MAX_ACCOUNT_SLOTS } from '@/lib/account-utils';
@@ -691,7 +691,7 @@ function clearSlotCredentials(slot: number, includeToken: boolean, endSession = 
   closingSlots.add(slot);
   return clearClosingSlots(new Set([slot]), async () => {
     if (IS_LITE) {
-      await revokeLiteSlot(slot);
+      await revokeLiteSlot(slot, getCachedConfig()?.oauthRevokeOnSignOut !== false);
       return null;
     }
     const [, token] = await Promise.all([
@@ -711,7 +711,7 @@ function clearAllCredentials(endSessionSlot: number | null): Promise<string | nu
   for (const slot of slots) closingSlots.add(slot);
   return clearClosingSlots(slots, async () => {
     if (IS_LITE) {
-      await revokeAllLiteSessions();
+      await revokeAllLiteSessions(getCachedConfig()?.oauthRevokeOnSignOut !== false);
       return null;
     }
     const endSession = endSessionSlot === null ? '' : `&end_session_slot=${endSessionSlot}`;

@@ -8,6 +8,8 @@ import {
   liteTokenLogin,
   probeLiteTokenLogin,
   readLiteAccessToken,
+  revokeAllLiteSessions,
+  revokeLiteSlot,
   readLiteBasicSession,
   readLiteRefreshToken,
   resetLiteProbeCache,
@@ -380,5 +382,39 @@ describe('probeLiteTokenLogin', () => {
     const err = new LiteLoginError('endpoint_missing', 404, 'nope');
     expect(err.message).toBe('endpoint_missing: nope');
     expect(err.status).toBe(404);
+  });
+});
+
+describe('lite sign-out revocation (#1388)', () => {
+  const REVOKE = `${SERVER}/auth/revoke`;
+  const fetchMock = vi.fn(async () => new Response(null, { status: 200 }));
+
+  beforeEach(() => {
+    localStorage.clear();
+    sessionStorage.clear();
+    fetchMock.mockClear();
+    vi.stubGlobal('fetch', fetchMock);
+    saveLiteRefreshToken(0, { serverUrl: SERVER, username: 'a', refreshToken: 'r0', revocationEndpoint: REVOKE }, true);
+    saveLiteRefreshToken(1, { serverUrl: SERVER, username: 'b', refreshToken: 'r1', revocationEndpoint: REVOKE }, false);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('revokes the refresh token by default', async () => {
+    await revokeLiteSlot(0);
+
+    expect(fetchMock).toHaveBeenCalledWith(REVOKE, expect.objectContaining({ method: 'POST' }));
+    expect(readLiteRefreshToken(0)).toBeNull();
+  });
+
+  it('only forgets the tokens when revocation is turned off', async () => {
+    await revokeLiteSlot(0, false);
+    await revokeAllLiteSessions(false);
+
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(readLiteRefreshToken(0)).toBeNull();
+    expect(readLiteRefreshToken(1)).toBeNull();
   });
 });

@@ -56,6 +56,8 @@ export interface ConfigData {
   signLanguageUrl: string;
   /** Stay off every built-in outside host (#903; lib/outgoing-hosts.ts). */
   noThirdPartyTraffic: boolean;
+  /** Lite only: whether sign-out revokes the refresh token (#1388). The server build decides in its token route. */
+  oauthRevokeOnSignOut?: boolean;
 }
 
 interface AppConfig extends ConfigData {

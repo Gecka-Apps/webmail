@@ -71,6 +71,8 @@ const configValidators = {
   easyReadUrl: isString,
   signLanguageUrl: isString,
   noThirdPartyTraffic: isBoolean,
+  // Lite only (lib/lite-config.ts); the server's response leaves it out.
+  oauthRevokeOnSignOut: (value): value is boolean | undefined => value === undefined || typeof value === 'boolean',
 } satisfies Validators<ConfigData>;
 
 /**

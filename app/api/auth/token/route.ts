@@ -26,6 +26,7 @@ import {
   getPostLogoutRedirectUri,
   idTokenCookieName,
   isEndSessionEnabled,
+  isRevokeOnSignOutEnabled,
   storeIdToken,
 } from '@/lib/oauth/end-session';
 import { MAX_ACCOUNT_SLOTS } from '@/lib/account-utils';
@@ -341,15 +342,17 @@ async function signOutSlot(
   const serverId = cookieStore.get(refreshTokenServerCookieName(slot))?.value || null;
   const idToken = cookieStore.get(idTokenCookieName(slot))?.value;
 
+  // With revocation off (#1388) the token is only dropped from the browser.
+  const tokenToRevoke = refreshToken && isRevokeOnSignOutEnabled() ? refreshToken : undefined;
   let endSessionUrl: string | null = null;
-  if (refreshToken || endSession) {
+  if (tokenToRevoke || endSession) {
     const metadata = await getMetadata(serverId, { fallbackClientId: DEFAULT_CLIENT_ID }).catch((err) => {
       logger.warn('Failed to discover OAuth metadata during logout', {
         error: err instanceof Error ? err.message : 'Unknown error',
       });
       return null;
     });
-    if (refreshToken) await revokeRefreshToken(refreshToken, serverId, metadata);
+    if (tokenToRevoke) await revokeRefreshToken(tokenToRevoke, serverId, metadata);
     if (endSession) endSessionUrl = endSessionUrlFor(metadata, serverId, idToken);
   }
 

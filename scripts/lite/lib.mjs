@@ -811,6 +811,8 @@ ${demoMode ? "Demo mode is ON: the login page offers a built-in demo account and
      Sign-ins are otherwise remembered; \`loginShowRememberMe: true\` lets people choose.
    - \`noThirdPartyTraffic\`: \`true\` keeps the browser off every built-in outside host
      (no Google Maps links on event addresses; see the third-party traffic docs).
+   - \`oauthRevokeOnSignOut\`: \`false\` keeps the refresh token valid at the server on
+     sign-out, so Stalwart 1.0 does not ask for consent again on the next sign-in.
    Optional keys: \`demoMode\`, \`jmapServers\`, \`jmapServerAutoPickByDomain\`, the login logo/company/link keys and \`loginShow*\` toggles (same names as the Docker env vars, camelCased).
 3. Allow the browser to talk to the mail server (CORS). In Stalwart, turn on
    the \`usePermissiveCors\` setting of the \`Http\` object: in the web admin
