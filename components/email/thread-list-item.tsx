@@ -565,7 +565,9 @@ const SingleEmailItem = React.forwardRef<HTMLDivElement, SingleEmailItemProps>(
         {...touchHandlers}
         data-testid="email-list-item"
         onPointerOver={armHoverActions}
-        onFocus={armHoverActions}
+        // The row itself takes focus on click and from the keyboard; its actions
+        // come from Shift+F10 there, so only a control inside it arms them.
+        onFocus={(e) => { if (e.target !== e.currentTarget) armHoverActions(); }}
         onPointerDown={(e) => { if (onPrefetch && isMousePressOnRow(e)) onPrefetch(); }}
         data-email-id={email.id}
         data-subject={email.subject || ''}
@@ -1266,7 +1268,9 @@ export const ThreadListItem = React.forwardRef<HTMLDivElement, ThreadListItemPro
           {...dragHandlers}
           {...threadTouchHandlers}
           onPointerOver={armHoverActions}
-          onFocus={armHoverActions}
+          // The row itself takes focus on click and from the keyboard; its actions
+          // come from Shift+F10 there, so only a control inside it arms them.
+          onFocus={(e) => { if (e.target !== e.currentTarget) armHoverActions(); }}
           onPointerDown={(e) => { if (onPrefetch && isMousePressOnRow(e)) onPrefetch(latestEmail); }}
           {...rowA11yProps({
             rowKey: emailKeyFor(latestEmail),
