@@ -33,7 +33,7 @@ vi.mock('@/components/layout/share-notification-toaster', () => ({ ShareNotifica
 vi.mock('@/components/layout/mv-top-bar', () => ({ MvTopBar: () => null }));
 vi.mock('@/components/layout/mv-side-panel', () => ({ MvSidePanel: () => null }));
 vi.mock('@/components/layout/mobile-header', () => ({ MobileHeader: () => null }));
-vi.mock('@/components/email/message-list-tabs', () => ({ MessageListTabs: () => null }));
+vi.mock('@/components/email/message-list-tabs', () => ({ useMessageListPanelProps: (id: string) => ({ id }), MessageListTabs: () => null }));
 vi.mock('@/components/search/search-box', () => ({ SearchBox: () => null }));
 vi.mock('@/components/tour/tour-provider', () => ({ useTour: () => ({ activeTour: null, registerStep: vi.fn() }) }));
 vi.mock('@/components/plugins/plugin-slot', () => ({ PluginSlot: () => null }));
