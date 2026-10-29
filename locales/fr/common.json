@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Paramètres d'absence enregistrés, mais le transfert et les destinataires de la réponse n'ont pas pu être enregistrés",
     "nothing_to_undo": "Rien à annuler",
     "undo_hint": "Appuyez sur {keys} pour annuler.",
-    "undone": "Annulé"
+    "undone": "Annulé",
+    "emails_marked_read": "{count, plural, one {# e-mail marqué comme lu} other {# e-mails marqués comme lus}}",
+    "emails_marked_unread": "{count, plural, one {# e-mail marqué comme non lu} other {# e-mails marqués comme non lus}}",
+    "tag_removed": "Étiquette retirée",
+    "tag_removed_count": "{count, plural, one {Étiquette retirée de # e-mail} other {Étiquette retirée de # e-mails}}"
   },
   "third_party": {
     "push_needs_relay": "Les notifications push nécessitent un relais push géré par votre organisation, et aucun n'est configuré. Les nouveaux messages s'affichent toujours tant que l'application est ouverte.",

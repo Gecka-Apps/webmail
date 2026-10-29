@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Fraværsinnstillinger er lagret, men videresending og svarmottakere kunne ikke lagres",
     "nothing_to_undo": "Ingenting å angre",
     "undo_hint": "Trykk {keys} for å angre.",
-    "undone": "Angret"
+    "undone": "Angret",
+    "emails_marked_read": "{count, plural, one {# e-post merket som lest} other {# e-poster merket som lest}}",
+    "emails_marked_unread": "{count, plural, one {# e-post merket som ulest} other {# e-poster merket som ulest}}",
+    "tag_removed": "Etikett fjernet",
+    "tag_removed_count": "{count, plural, one {Etikett fjernet fra # e-post} other {Etikett fjernet fra # e-poster}}"
   },
   "third_party": {
     "push_needs_relay": "Push-varsler trenger et push-relé som organisasjonen din driver, og det er ikke satt opp noe. Ny e-post vises fortsatt mens appen er åpen.",

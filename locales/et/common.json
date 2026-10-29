@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Äraolekuteate seaded salvestati, kuid edastus- ja vastuse adressaate ei õnnestunud salvestada",
     "nothing_to_undo": "Pole midagi tagasi võtta",
     "undo_hint": "Tagasivõtmiseks vajuta {keys}.",
-    "undone": "Tagasi võetud"
+    "undone": "Tagasi võetud",
+    "emails_marked_read": "{count, plural, one {# kiri märgiti loetuks} other {# kirja märgiti loetuks}}",
+    "emails_marked_unread": "{count, plural, one {# kiri märgiti lugemata} other {# kirja märgiti lugemata}}",
+    "tag_removed": "Silt eemaldati",
+    "tag_removed_count": "{count, plural, one {Silt eemaldati # kirjalt} other {Silt eemaldati # kirjalt}}"
   },
   "third_party": {
     "push_needs_relay": "Tõuketeavitused vajavad sinu organisatsiooni hallatavat push-releed, kuid ühtegi pole seadistatud. Uued kirjad kuvatakse endiselt, kuni rakendus on avatud.",

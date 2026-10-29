@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Fraværsindstillinger gemt, men videresendelse og svarmodtagere kunne ikke gemmes",
     "nothing_to_undo": "Intet at fortryde",
     "undo_hint": "Tryk på {keys} for at fortryde.",
-    "undone": "Fortrudt"
+    "undone": "Fortrudt",
+    "emails_marked_read": "{count, plural, one {# e-mail markeret som læst} other {# e-mails markeret som læst}}",
+    "emails_marked_unread": "{count, plural, one {# e-mail markeret som ulæst} other {# e-mails markeret som ulæst}}",
+    "tag_removed": "Tag fjernet",
+    "tag_removed_count": "{count, plural, one {Tag fjernet fra # e-mail} other {Tag fjernet fra # e-mails}}"
   },
   "third_party": {
     "push_needs_relay": "Push-notifikationer kræver et push-relæ, som din organisation driver, og der er ikke sat noget op. Ny mail vises stadig, mens appen er åben.",

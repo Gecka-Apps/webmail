@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Setările de absență au fost salvate, dar redirecționarea și destinatarii răspunsului nu au putut fi salvați",
     "nothing_to_undo": "Nu e nimic de anulat",
     "undo_hint": "Apasă {keys} pentru a anula.",
-    "undone": "Anulat"
+    "undone": "Anulat",
+    "emails_marked_read": "{count, plural, one {# e-mail marcat ca citit} few {# e-mailuri marcate ca citite} other {# de e-mailuri marcate ca citite}}",
+    "emails_marked_unread": "{count, plural, one {# e-mail marcat ca necitit} few {# e-mailuri marcate ca necitite} other {# de e-mailuri marcate ca necitite}}",
+    "tag_removed": "Etichetă eliminată",
+    "tag_removed_count": "{count, plural, one {Eticheta a fost eliminată de pe # e-mail} few {Eticheta a fost eliminată de pe # e-mailuri} other {Eticheta a fost eliminată de pe # de e-mailuri}}"
   },
   "third_party": {
     "push_needs_relay": "Notificările push au nevoie de un releu push administrat de organizația dvs., iar niciunul nu este configurat. E-mailurile noi apar în continuare cât timp aplicația este deschisă.",

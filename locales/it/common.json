@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Impostazioni di assenza salvate, ma non è stato possibile salvare l'inoltro e i destinatari della risposta",
     "nothing_to_undo": "Niente da annullare",
     "undo_hint": "Premi {keys} per annullare.",
-    "undone": "Annullato"
+    "undone": "Annullato",
+    "emails_marked_read": "{count, plural, one {# email segnata come letta} other {# email segnate come lette}}",
+    "emails_marked_unread": "{count, plural, one {# email segnata come non letta} other {# email segnate come non lette}}",
+    "tag_removed": "Etichetta rimossa",
+    "tag_removed_count": "{count, plural, one {Etichetta rimossa da # email} other {Etichetta rimossa da # email}}"
   },
   "third_party": {
     "push_needs_relay": "Le notifiche push richiedono un relay push gestito dalla tua organizzazione, e non ne è configurato nessuno. La nuova posta compare comunque finché l'app è aperta.",

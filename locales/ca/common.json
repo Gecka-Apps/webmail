@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "S'ha desat la configuració d'absència, però no s'han pogut desar el reenviament ni els destinataris de la resposta",
     "nothing_to_undo": "No hi ha res per desfer",
     "undo_hint": "Premeu {keys} per desfer-ho.",
-    "undone": "S'ha desfet"
+    "undone": "S'ha desfet",
+    "emails_marked_read": "{count, plural, one {# correu marcat com a llegit} other {# correus marcats com a llegits}}",
+    "emails_marked_unread": "{count, plural, one {# correu marcat com a no llegit} other {# correus marcats com a no llegits}}",
+    "tag_removed": "S'ha tret l'etiqueta",
+    "tag_removed_count": "{count, plural, one {S'ha tret l'etiqueta de # correu} other {S'ha tret l'etiqueta de # correus}}"
   },
   "third_party": {
     "push_needs_relay": "Les notificacions push necessiten un repetidor push gestionat per la vostra organització, i no n'hi ha cap de configurat. El correu nou es continua mostrant mentre l'aplicació està oberta.",

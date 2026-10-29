@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Távolléti beállítások elmentve, de a továbbítást és a válasz címzettjeit nem sikerült menteni",
     "nothing_to_undo": "Nincs mit visszavonni",
     "undo_hint": "Visszavonáshoz nyomd meg: {keys}.",
-    "undone": "Visszavonva"
+    "undone": "Visszavonva",
+    "emails_marked_read": "{count, plural, other {# e-mail olvasottnak jelölve}}",
+    "emails_marked_unread": "{count, plural, other {# e-mail olvasatlannak jelölve}}",
+    "tag_removed": "Címke eltávolítva",
+    "tag_removed_count": "{count, plural, other {Címke eltávolítva # e-mailről}}"
   },
   "third_party": {
     "push_needs_relay": "A push-értesítésekhez a szervezeted által üzemeltetett push relé kell, és nincs beállítva egy sem. Az új levelek továbbra is megjelennek, amíg az alkalmazás nyitva van.",

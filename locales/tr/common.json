@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Ofis dışında ayarları kaydedildi, ancak iletme ve yanıt alıcıları kaydedilemedi",
     "nothing_to_undo": "Geri alınacak bir şey yok",
     "undo_hint": "Geri almak için {keys} tuşlarına basın.",
-    "undone": "Geri alındı"
+    "undone": "Geri alındı",
+    "emails_marked_read": "{count, plural, other {# e-posta okundu olarak işaretlendi}}",
+    "emails_marked_unread": "{count, plural, other {# e-posta okunmadı olarak işaretlendi}}",
+    "tag_removed": "Etiket kaldırıldı",
+    "tag_removed_count": "{count, plural, other {# e-postadan etiket kaldırıldı}}"
   },
   "third_party": {
     "push_needs_relay": "Anlık bildirimler için kuruluşunuzun işlettiği bir push rölesi gerekir ve hiçbiri ayarlanmamış. Uygulama açıkken yeni postalar yine de görünür.",

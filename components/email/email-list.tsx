@@ -34,7 +34,7 @@ import { useContextMenu } from "@/hooks/use-context-menu";
 import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
 import { useTranslations } from "next-intl";
 import { toast } from "@/stores/toast-store";
-import { runBatchEmailAction, toastWithUndo, undoLabels, undoMoveAction } from "@/lib/email-action-toast";
+import { markSelectionReadWithUndo, runBatchEmailAction, setSelectionTagWithUndo, toastWithUndo, undoLabels, undoMoveAction } from "@/lib/email-action-toast";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { TagDisplayContext, useMeasuredTagDisplay } from "@/hooks/use-tag-display";
 import { SearchChips } from "@/components/search/search-chips";
@@ -193,8 +193,6 @@ export function EmailList({
     selectedEmailKeys,
     selectAllEmails: _selectAllEmails,
     clearSelection,
-    batchMarkAsRead,
-    batchSetTag,
     batchDelete,
     batchMoveToMailbox,
     batchArchive,
@@ -225,8 +223,6 @@ export function EmailList({
     selectedEmailKeys: state.selectedEmailKeys,
     selectAllEmails: state.selectAllEmails,
     clearSelection: state.clearSelection,
-    batchMarkAsRead: state.batchMarkAsRead,
-    batchSetTag: state.batchSetTag,
     batchDelete: state.batchDelete,
     batchMoveToMailbox: state.batchMoveToMailbox,
     batchArchive: state.batchArchive,
@@ -564,8 +560,13 @@ export function EmailList({
 
   // The store reports a refused message (a read-only shared folder) through
   // its error; the rest of the selection is marked.
+  // A toast with Undo (and Ctrl+Z) puts the messages back as they were.
   const markSelectionRead = (read: boolean) => client
-    ? runBatchEmailAction(() => batchMarkAsRead(client, read), { error: tNotifications('error_updating') })
+    ? markSelectionReadWithUndo(client, read, {
+        success: tNotifications(read ? 'emails_marked_read' : 'emails_marked_unread', { count: selectedEmailKeys.size }),
+        error: tNotifications('error_updating'),
+        labels: undo,
+      })
     : Promise.resolve();
 
   const handleBatchMarkAsRead = async (read: boolean) => {
@@ -598,7 +599,11 @@ export function EmailList({
   const handleBatchToggleTag = async (tagId: string) => {
     if (!client) return;
     try {
-      await batchSetTag(client, tagId, !selectionTags.all.includes(tagId));
+      const add = !selectionTags.all.includes(tagId);
+      await setSelectionTagWithUndo(client, tagId, add, {
+        describe: (count) => tNotifications(add ? 'emails_tagged' : 'tag_removed_count', { count }),
+        labels: undo,
+      });
     } catch (error) {
       console.error("Failed to tag emails:", error);
       toast.error(tNotifications('error_updating'));

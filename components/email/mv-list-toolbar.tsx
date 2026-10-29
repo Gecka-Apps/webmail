@@ -24,7 +24,7 @@ import { useAuthStore } from "@/stores/auth-store";
 import { useShallow } from "zustand/react/shallow";
 import { useEmailStore, ArchiveMailboxNotFoundError, resolveSelectedEmails, bulkDeleteIsPermanent, shouldConfirmBulkDelete, removalFolder, canRemoveFromFolder, restoreBatchesForSelection , type CrossAccountMoveReceipt } from "@/stores/email-store";
 import { useRemoveFromFolder } from "@/hooks/use-remove-from-folder";
-import { runBatchEmailAction, toastWithUndo, undoLabels, undoMoveAction } from "@/lib/email-action-toast";
+import { markSelectionReadWithUndo, runBatchEmailAction, setSelectionTagWithUndo, toastWithUndo, undoLabels, undoMoveAction } from "@/lib/email-action-toast";
 import { toast } from "@/stores/toast-store";
 import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
 import { useContextMenu } from "@/hooks/use-context-menu";
@@ -130,11 +130,9 @@ export function MvListToolbar({
     clearSelection,
     batchArchive,
     batchDelete,
-    batchMarkAsRead,
     batchMarkAsSpam,
     batchUndoSpam,
     batchMoveToMailbox,
-    batchSetTag,
     isUnifiedView,
     unifiedRole,
   } = useEmailStore(useShallow((state) => ({
@@ -148,11 +146,9 @@ export function MvListToolbar({
     clearSelection: state.clearSelection,
     batchArchive: state.batchArchive,
     batchDelete: state.batchDelete,
-    batchMarkAsRead: state.batchMarkAsRead,
     batchMarkAsSpam: state.batchMarkAsSpam,
     batchUndoSpam: state.batchUndoSpam,
     batchMoveToMailbox: state.batchMoveToMailbox,
-    batchSetTag: state.batchSetTag,
     isUnifiedView: state.isUnifiedView,
     unifiedRole: state.unifiedRole,
   })));
@@ -222,6 +218,14 @@ export function MvListToolbar({
       setTimeout(() => setIsProcessing(false), 400);
     }
   };
+
+  // With a toast that offers Undo (and Ctrl+Z), as in the default toolbar.
+  const markSelectionRead = (activeClient: NonNullable<typeof client>, read: boolean) =>
+    markSelectionReadWithUndo(activeClient, read, {
+      success: tNotifications(read ? "emails_marked_read" : "emails_marked_unread", { count: selectionCount }),
+      error: tNotifications("error_updating"),
+      labels: undo,
+    });
 
   const handleSelectAllToggle = () => {
     if (disabled) return;
@@ -347,7 +351,12 @@ export function MvListToolbar({
   const handleToggleTag = (tagId: string) => {
     const add = !appliedTags.includes(tagId);
     void run(async () => {
-      if (client) await batchSetTag(client, tagId, add);
+      if (client) {
+        await setSelectionTagWithUndo(client, tagId, add, {
+          describe: (count) => tNotifications(add ? "emails_tagged" : "tag_removed_count", { count }),
+          labels: undo,
+        });
+      }
     });
   };
 
@@ -509,13 +518,13 @@ export function MvListToolbar({
           <ToolbarButton
             icon={MailOpen}
             label={tBatch("mark_read")}
-            onClick={() => run(async () => { if (client) await batchMarkAsRead(client, true); })}
+            onClick={() => run(async () => { if (client) await markSelectionRead(client, true); })}
             disabled={isProcessing}
           />
           <ToolbarButton
             icon={Mail}
             label={tBatch("mark_unread")}
-            onClick={() => run(async () => { if (client) await batchMarkAsRead(client, false); })}
+            onClick={() => run(async () => { if (client) await markSelectionRead(client, false); })}
             disabled={isProcessing}
           />
           <div className="w-px h-6 bg-border mx-1 shrink-0" />

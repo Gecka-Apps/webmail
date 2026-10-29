@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Configurações de ausência salvas, mas não foi possível salvar o encaminhamento e os destinatários da resposta",
     "nothing_to_undo": "Nada para desfazer",
     "undo_hint": "Pressione {keys} para desfazer.",
-    "undone": "Desfeito"
+    "undone": "Desfeito",
+    "emails_marked_read": "{count, plural, one {# e-mail marcado como lido} other {# e-mails marcados como lidos}}",
+    "emails_marked_unread": "{count, plural, one {# e-mail marcado como não lido} other {# e-mails marcados como não lidos}}",
+    "tag_removed": "Etiqueta removida",
+    "tag_removed_count": "{count, plural, one {Etiqueta removida de # e-mail} other {Etiqueta removida de # e-mails}}"
   },
   "third_party": {
     "push_needs_relay": "As notificações push precisam de um relay push mantido pela sua organização, e nenhum está configurado. Os novos e-mails continuam aparecendo enquanto o app estiver aberto.",

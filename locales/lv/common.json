@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Prombūtnes iestatījumi saglabāti, taču pārsūtīšanu un atbildes saņēmējus neizdevās saglabāt",
     "nothing_to_undo": "Nav ko atsaukt",
     "undo_hint": "Nospiediet {keys}, lai atsauktu.",
-    "undone": "Atsaukts"
+    "undone": "Atsaukts",
+    "emails_marked_read": "{count, plural, zero {# vēstules atzīmētas kā izlasītas} one {# vēstule atzīmēta kā izlasīta} other {# vēstules atzīmētas kā izlasītas}}",
+    "emails_marked_unread": "{count, plural, zero {# vēstules atzīmētas kā neizlasītas} one {# vēstule atzīmēta kā neizlasīta} other {# vēstules atzīmētas kā neizlasītas}}",
+    "tag_removed": "Tags noņemts",
+    "tag_removed_count": "{count, plural, zero {Tags noņemts # vēstulēm} one {Tags noņemts # vēstulei} other {Tags noņemts # vēstulēm}}"
   },
   "third_party": {
     "push_needs_relay": "Push paziņojumiem vajadzīgs jūsu organizācijas uzturēts push relejs, un neviens nav iestatīts. Jauns pasts joprojām tiek rādīts, kamēr lietotne ir atvērta.",

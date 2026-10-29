@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "外出设置已保存，但转发和回复对象设置未能保存",
     "nothing_to_undo": "没有可撤销的操作",
     "undo_hint": "按 {keys} 撤销。",
-    "undone": "已撤销"
+    "undone": "已撤销",
+    "emails_marked_read": "{count, plural, other {已将 # 封邮件标记为已读}}",
+    "emails_marked_unread": "{count, plural, other {已将 # 封邮件标记为未读}}",
+    "tag_removed": "已移除标签",
+    "tag_removed_count": "{count, plural, other {已从 # 封邮件移除标签}}"
   },
   "third_party": {
     "push_needs_relay": "推送通知需要由您的组织运行的推送中继，但尚未设置。应用打开时，新邮件仍会显示。",

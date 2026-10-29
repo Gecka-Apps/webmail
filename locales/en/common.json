@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Out of office settings saved, but the forwarding and reply recipients could not be saved",
     "nothing_to_undo": "Nothing to undo",
     "undo_hint": "Press {keys} to undo.",
-    "undone": "Undone"
+    "undone": "Undone",
+    "emails_marked_read": "{count, plural, one {# email marked as read} other {# emails marked as read}}",
+    "emails_marked_unread": "{count, plural, one {# email marked as unread} other {# emails marked as unread}}",
+    "tag_removed": "Tag removed",
+    "tag_removed_count": "{count, plural, one {Tag removed from # email} other {Tag removed from # emails}}"
   },
   "third_party": {
     "push_needs_relay": "Push notifications need a push relay run by your organisation, and none is set up. New mail still shows while the app is open.",

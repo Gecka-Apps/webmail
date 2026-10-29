@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Ustawienia nieobecności zapisane, ale nie udało się zapisać przekazywania ani odbiorców odpowiedzi",
     "nothing_to_undo": "Nie ma czego cofnąć",
     "undo_hint": "Naciśnij {keys}, aby cofnąć.",
-    "undone": "Cofnięto"
+    "undone": "Cofnięto",
+    "emails_marked_read": "{count, plural, one {# wiadomość oznaczona jako przeczytana} few {# wiadomości oznaczone jako przeczytane} many {# wiadomości oznaczonych jako przeczytane} other {# wiadomości oznaczonych jako przeczytane}}",
+    "emails_marked_unread": "{count, plural, one {# wiadomość oznaczona jako nieprzeczytana} few {# wiadomości oznaczone jako nieprzeczytane} many {# wiadomości oznaczonych jako nieprzeczytane} other {# wiadomości oznaczonych jako nieprzeczytane}}",
+    "tag_removed": "Etykieta usunięta",
+    "tag_removed_count": "{count, plural, one {Usunięto etykietę z # wiadomości} few {Usunięto etykietę z # wiadomości} many {Usunięto etykietę z # wiadomości} other {Usunięto etykietę z # wiadomości}}"
   },
   "third_party": {
     "push_needs_relay": "Powiadomienia push wymagają przekaźnika push prowadzonego przez Twoją organizację, a żaden nie jest skonfigurowany. Nowe wiadomości nadal pojawiają się, gdy aplikacja jest otwarta.",

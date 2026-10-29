@@ -1119,7 +1119,11 @@
     "vacation_filters_save_failed": "הגדרות ההיעדרות נשמרו, אך שמירת ההעברה ונמעני המענה נכשלה",
     "nothing_to_undo": "אין מה לבטל",
     "undo_hint": "הקישו {keys} כדי לבטל.",
-    "undone": "בוטל"
+    "undone": "בוטל",
+    "emails_marked_read": "{count, plural, one {הודעה אחת סומנה כנקראה} other {# הודעות סומנו כנקראו}}",
+    "emails_marked_unread": "{count, plural, one {הודעה אחת סומנה כלא נקראה} other {# הודעות סומנו כלא נקראו}}",
+    "tag_removed": "התגית הוסרה",
+    "tag_removed_count": "{count, plural, one {התגית הוסרה מהודעה אחת} other {התגית הוסרה מ-# הודעות}}"
   },
   "third_party": {
     "push_needs_relay": "התראות Push דורשות ממסר Push שהארגון שלך מפעיל, ולא הוגדר אף אחד. דואר חדש עדיין מוצג כל עוד האפליקציה פתוחה.",

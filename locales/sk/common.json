@@ -1154,7 +1154,11 @@
     "vacation_filters_save_failed": "Nastavenia neprítomnosti boli uložené, ale preposielanie a príjemcov odpovede sa nepodarilo uložiť",
     "nothing_to_undo": "Nie je čo vrátiť",
     "undo_hint": "Stlačením {keys} akciu vrátite.",
-    "undone": "Vrátené"
+    "undone": "Vrátené",
+    "emails_marked_read": "{count, plural, one {# e-mail označený ako prečítaný} few {# e-maily označené ako prečítané} other {# e-mailov označených ako prečítané}}",
+    "emails_marked_unread": "{count, plural, one {# e-mail označený ako neprečítaný} few {# e-maily označené ako neprečítané} other {# e-mailov označených ako neprečítané}}",
+    "tag_removed": "Štítok odstránený",
+    "tag_removed_count": "{count, plural, one {Štítok odstránený z # e-mailu} few {Štítok odstránený z # e-mailov} other {Štítok odstránený z # e-mailov}}"
   },
   "third_party": {
     "push_needs_relay": "Push oznámenia potrebujú push relay prevádzkovaný vašou organizáciou a žiadny nie je nastavený. Nová pošta sa naďalej zobrazuje, kým je aplikácia otvorená.",

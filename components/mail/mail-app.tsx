@@ -47,7 +47,7 @@ import { formatScheduledSendAt } from "@/lib/scheduled-send-label";
 import { formatRejectedRecipients, RescheduleRestoredError } from "@/lib/jmap/client";
 import { subscribePushStateChanges } from "@/lib/push-events";
 import { createMailPushListener } from "@/lib/mail-push-listener";
-import { runBatchEmailAction, toastWithUndo, undoLabels, undoMoveAction } from "@/lib/email-action-toast";
+import { keywordRestorePoints, markSelectionReadWithUndo, recordQuietUndo, runBatchEmailAction, toastWithUndo, undoKeywordAction, undoLabels, undoMoveAction } from "@/lib/email-action-toast";
 import { MailboxShareDialog } from "@/components/layout/mailbox-share-dialog";
 import { ShareNotificationToaster } from "@/components/layout/share-notification-toaster";
 import { CalendarEventNotificationToaster } from "@/components/layout/calendar-event-notification-toaster";
@@ -492,7 +492,6 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     deleteMailbox,
     batchDelete,
     batchArchive,
-    batchMarkAsRead,
     batchMarkAsSpam,
     batchUndoSpam,
     accountMailboxes,
@@ -582,7 +581,6 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     deleteMailbox: state.deleteMailbox,
     batchDelete: state.batchDelete,
     batchArchive: state.batchArchive,
-    batchMarkAsRead: state.batchMarkAsRead,
     batchMarkAsSpam: state.batchMarkAsSpam,
     batchUndoSpam: state.batchUndoSpam,
     accountMailboxes: state.accountMailboxes,
@@ -871,6 +869,29 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     toast.error(t('notifications.error_updating'));
   };
 
+  // A message the user marks read or unread, or stars: no toast, but Ctrl+Z
+  // puts it back and a screen reader hears what happened. Not for the
+  // automatic mark-as-read on opening a message.
+  const markReadWithUndo = async (email: Email, read: boolean): Promise<void> => {
+    if (!client) return;
+    const points = keywordRestorePoints([email], ['$seen'], { $seen: read });
+    if (!(await markAsRead(client, email.id, read, emailKeyFor(email)))) return;
+    recordQuietUndo(
+      t(read ? 'notifications.email_marked_read' : 'notifications.email_marked_unread'),
+      undoKeywordAction(client, points, undo),
+    );
+  };
+  const toggleStarWithUndo = async (email: Email): Promise<void> => {
+    if (!client) return;
+    const wasStarred = email.keywords?.$flagged === true;
+    const points = keywordRestorePoints([email], ['$flagged']);
+    if (!(await toggleStar(client, email.id, emailKeyFor(email)))) return;
+    recordQuietUndo(
+      t(wasStarred ? 'notifications.email_unstarred' : 'notifications.email_starred'),
+      undoKeywordAction(client, points, undo),
+    );
+  };
+
   // Keyboard shortcuts handlers
   const keyboardHandlers = useMemo(() => ({
     onNextEmail: () => {
@@ -989,18 +1010,26 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
       if (isScheduledView) return;
       if (!client) return;
       if (shortcutsTargetSelection) {
-        await runBatchEmailAction(() => batchMarkAsRead(client, false), { error: t('notifications.error_updating') });
+        await markSelectionReadWithUndo(client, false, {
+          success: t('notifications.emails_marked_unread', { count: selectedEmailKeys.size }),
+          error: t('notifications.error_updating'),
+          labels: undo,
+        });
       } else if (selectedEmail) {
-        await markAsRead(client, selectedEmail.id, false, emailKeyFor(selectedEmail)).catch(toastUpdateFailure);
+        await markReadWithUndo(selectedEmail, false).catch(toastUpdateFailure);
       }
     },
     onMarkAsRead: async () => {
       if (isScheduledView) return;
       if (!client) return;
       if (shortcutsTargetSelection) {
-        await runBatchEmailAction(() => batchMarkAsRead(client, true), { error: t('notifications.error_updating') });
+        await markSelectionReadWithUndo(client, true, {
+          success: t('notifications.emails_marked_read', { count: selectedEmailKeys.size }),
+          error: t('notifications.error_updating'),
+          labels: undo,
+        });
       } else if (selectedEmail) {
-        await markAsRead(client, selectedEmail.id, true, emailKeyFor(selectedEmail)).catch(toastUpdateFailure);
+        await markReadWithUndo(selectedEmail, true).catch(toastUpdateFailure);
       }
     },
     onToggleSpam: async () => {
@@ -3089,7 +3118,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     if (!client || !selectedEmail) return;
 
     try {
-      await toggleStar(client, selectedEmail.id, emailKeyFor(selectedEmail));
+      await toggleStarWithUndo(selectedEmail);
     } catch (error) {
       console.error("Failed to toggle star:", error);
       toast.error(t('notifications.error_updating'));
@@ -3190,7 +3219,13 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
       // call site covered only the unified view, so a tag set on a directly
       // selected shared folder was written to the reaching account and silently
       // dropped by the server. (#281)
-      await patchEmailKeywords(client, emailId, changes, emailKeyFor(email));
+      const names = Object.keys(changes);
+      const points = keywordRestorePoints([email], names);
+      if (await patchEmailKeywords(client, emailId, changes, emailKeyFor(email)) && names.length > 0) {
+        // Ctrl+Z puts the tags back as they were.
+        const added = Object.values(changes).some(Boolean);
+        recordQuietUndo(t(added ? 'notifications.email_tagged' : 'notifications.tag_removed'), undoKeywordAction(client, points, undo));
+      }
 
       // Refresh tag counts
       fetchTagCounts(client);
@@ -4280,12 +4315,12 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
     {
       id: 'mark-unread', label: t('context_menu.mark_unread'), icon: Mail, shortcut: 'u',
       when: () => !!paletteEmail?.keywords?.$seen,
-      run: () => { if (client && paletteEmail) void markAsRead(client, paletteEmail.id, false, emailKeyFor(paletteEmail)).catch(toastUpdateFailure); },
+      run: () => { if (client && paletteEmail) void markReadWithUndo(paletteEmail, false).catch(toastUpdateFailure); },
     },
     {
       id: 'mark-read', label: t('context_menu.mark_read'), icon: MailOpen, shortcut: 'Shift + I',
       when: () => !!paletteEmail && !paletteEmail.keywords?.$seen,
-      run: () => { if (client && paletteEmail) void markAsRead(client, paletteEmail.id, true, emailKeyFor(paletteEmail)).catch(toastUpdateFailure); },
+      run: () => { if (client && paletteEmail) void markReadWithUndo(paletteEmail, true).catch(toastUpdateFailure); },
     },
     {
       id: 'spam', label: conversationInJunk ? t('context_menu.not_spam') : t('context_menu.mark_as_spam'),
@@ -5245,14 +5280,10 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
                   });
                 }}
                 onMarkAsRead={async (email, read) => {
-                  if (client) {
-                    await markAsRead(client, email.id, read, emailKeyFor(email)).catch(toastUpdateFailure);
-                  }
+                  await markReadWithUndo(email, read).catch(toastUpdateFailure);
                 }}
                 onToggleStar={async (email) => {
-                  if (client) {
-                    await toggleStar(client, email.id, emailKeyFor(email)).catch(toastUpdateFailure);
-                  }
+                  await toggleStarWithUndo(email).catch(toastUpdateFailure);
                 }}
                 onTogglePinned={async (email) => {
                   await handleTogglePinned(email);
@@ -5427,11 +5458,11 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
                     onMoveToMailbox: (mailboxId: string) => leaving(() => handleMoveToMailbox(target.id, mailboxId, emailKeyFor(target)))(),
                     onForwardAsAttachment: () => void handleForwardAsAttachment(target),
                     onMarkAsRead: client ? (read: boolean) => {
-                      const run = () => markAsRead(client, target.id, read, emailKeyFor(target)).catch(toastUpdateFailure);
+                      const run = () => markReadWithUndo(target, read).catch(toastUpdateFailure);
                       // Marked unread, the conversation is done with for now.
                       if (read) void run(); else leaving(run)();
                     } : undefined,
-                    onToggleStar: client ? () => void toggleStar(client, target.id, emailKeyFor(target)).catch(toastUpdateFailure) : undefined,
+                    onToggleStar: client ? () => void toggleStarWithUndo(target).catch(toastUpdateFailure) : undefined,
                     onTogglePinned: () => void handleTogglePinned(target),
                     onSetTag: (tagId: string | null) => void handleSetTag(target.id, tagId, emailKeyFor(target)),
                     onMarkAsSpam: conversationSpamApplicable && !conversationInJunk ? leaving(() => handleMarkAsSpam(target)) : undefined,
@@ -5470,6 +5501,10 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
                     onMarkAsRead={async (emailId, read, opts) => {
                       if (client) {
                         const emailKey = selectedEmail?.id === emailId ? emailKeyFor(selectedEmail) : undefined;
+                        // Asked for (not on opening): Ctrl+Z can put it back.
+                        const points = !opts?.automatic && selectedEmail?.id === emailId
+                          ? keywordRestorePoints([selectedEmail], ['$seen'], { $seen: read })
+                          : [];
                         try {
                           await markAsRead(client, emailId, read, emailKey);
                         } catch (error) {
@@ -5482,6 +5517,12 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
                         const nowRead = !!useEmailStore.getState().emails
                           .find((e) => (emailKey ? emailKeyFor(e) === emailKey : e.id === emailId))?.keywords?.$seen;
                         if (nowRead !== read) return; // a plugin stopped it
+                        if (!opts?.automatic) {
+                          recordQuietUndo(
+                            t(read ? 'notifications.email_marked_read' : 'notifications.email_marked_unread'),
+                            undoKeywordAction(client, points, undo),
+                          );
+                        }
                         // Marking the open message unread returns to the list
                         // (Gmail-style, gated on returnToListAfterAction). Staying
                         // in the reading pane would just re-mark it read on view.
