@@ -371,6 +371,10 @@
       "archive_message": "{count, plural, one {See viiakse sinu arhiivi.} other {Need viiakse sinu arhiivi.}}",
       "delete": "Kustuta",
       "archive": "Arhiveeri"
+    },
+    "status": {
+      "folder_loaded": "{folder}: {count, plural, =0 {kirju pole} one {# kiri} other {# kirja}}",
+      "search_results": "{count, plural, =0 {Tulemusi pole} one {# tulemus} other {# tulemust}}"
     }
   },
   "shared_tags": {

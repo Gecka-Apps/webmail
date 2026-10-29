@@ -371,6 +371,10 @@
       "archive_message": "{count, plural, one {Оно будет перемещено в архив.} other {Они будут перемещены в архив.}}",
       "delete": "Удалить",
       "archive": "Архивировать"
+    },
+    "status": {
+      "folder_loaded": "{folder}: {count, plural, =0 {нет сообщений} one {# сообщение} few {# сообщения} many {# сообщений} other {# сообщения}}",
+      "search_results": "{count, plural, =0 {Ничего не найдено} one {# результат} few {# результата} many {# результатов} other {# результата}}"
     }
   },
   "shared_tags": {

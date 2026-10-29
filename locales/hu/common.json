@@ -371,6 +371,10 @@
       "archive_message": "{count, plural, one {Az archívumodba kerül.} other {Az archívumodba kerülnek.}}",
       "delete": "Törlés",
       "archive": "Archiválás"
+    },
+    "status": {
+      "folder_loaded": "{folder}: {count, plural, =0 {nincs üzenet} other {# üzenet}}",
+      "search_results": "{count, plural, =0 {Nincs találat} other {# találat}}"
     }
   },
   "shared_tags": {

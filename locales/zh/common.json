@@ -371,6 +371,10 @@
       "archive_message": "{count, plural, other {邮件将移到归档。}}",
       "delete": "删除",
       "archive": "归档"
+    },
+    "status": {
+      "folder_loaded": "{folder}：{count, plural, =0 {没有邮件} other {# 封邮件}}",
+      "search_results": "{count, plural, =0 {没有结果} other {# 个结果}}"
     }
   },
   "shared_tags": {

@@ -371,6 +371,10 @@
       "archive_message": "{count, plural, other {Arşivinize taşınır.}}",
       "delete": "Sil",
       "archive": "Arşivle"
+    },
+    "status": {
+      "folder_loaded": "{folder}: {count, plural, =0 {ileti yok} other {# ileti}}",
+      "search_results": "{count, plural, =0 {Sonuç yok} other {# sonuç}}"
     }
   },
   "shared_tags": {

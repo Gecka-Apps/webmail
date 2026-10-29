@@ -71,6 +71,7 @@ import { usePromptDialog } from "@/hooks/use-prompt-dialog";
 import { useBrowserNavigation, type NavSnapshot } from "@/hooks/use-browser-navigation";
 import { debug } from "@/lib/debug";
 import { useNewMailAlerts } from "@/hooks/use-new-mail-alerts";
+import { useMailStatusAnnouncements } from "@/hooks/use-mail-status-announcements";
 import { cn, formatDateTime, getMailboxPath } from "@/lib/utils";
 import { localizeMailboxName } from "@/lib/mailbox-label";
 import { KEYWORD_PREFIX, KEYWORD_PREFIX_LEGACY, emailKeyFor, groupEmailsByThread, threadKeyFor } from "@/lib/thread-utils";
@@ -2067,6 +2068,8 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
   // New mail: the sound, the screen reader count and the visual alert, all
   // silenced by Do not disturb.
   useNewMailAlerts();
+  // Folder loaded, search results, the reconnecting and rate-limit banners.
+  useMailStatusAnnouncements();
 
   // Lock body scroll when sidebar is open on mobile/tablet
   useEffect(() => {

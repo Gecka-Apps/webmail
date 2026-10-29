@@ -371,6 +371,10 @@
       "archive_message": "{count, plural, one {Se moverá a tu archivo.} other {Se moverán a tu archivo.}}",
       "delete": "Eliminar",
       "archive": "Archivar"
+    },
+    "status": {
+      "folder_loaded": "{folder}: {count, plural, =0 {ningún mensaje} one {# mensaje} other {# mensajes}}",
+      "search_results": "{count, plural, =0 {Sin resultados} one {# resultado} other {# resultados}}"
     }
   },
   "shared_tags": {

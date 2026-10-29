@@ -371,6 +371,10 @@
       "archive_message": "{count, plural, one {به بایگانی شما منتقل می‌شود.} other {به بایگانی شما منتقل می‌شوند.}}",
       "delete": "حذف",
       "archive": "بایگانی"
+    },
+    "status": {
+      "folder_loaded": "{folder}: {count, plural, =0 {بدون پیام} other {# پیام}}",
+      "search_results": "{count, plural, =0 {نتیجه‌ای نیست} other {# نتیجه}}"
     }
   },
   "shared_tags": {

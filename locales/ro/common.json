@@ -371,6 +371,10 @@
       "archive_message": "{count, plural, one {Va fi mutat în arhiva ta.} other {Vor fi mutate în arhiva ta.}}",
       "delete": "Șterge",
       "archive": "Arhivează"
+    },
+    "status": {
+      "folder_loaded": "{folder}: {count, plural, =0 {niciun mesaj} one {# mesaj} few {# mesaje} other {# de mesaje}}",
+      "search_results": "{count, plural, =0 {Niciun rezultat} one {# rezultat} few {# rezultate} other {# de rezultate}}"
     }
   },
   "shared_tags": {

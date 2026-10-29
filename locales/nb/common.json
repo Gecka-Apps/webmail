@@ -371,6 +371,10 @@
       "archive_message": "{count, plural, one {Den flyttes til arkivet ditt.} other {De flyttes til arkivet ditt.}}",
       "delete": "Slett",
       "archive": "Arkiver"
+    },
+    "status": {
+      "folder_loaded": "{folder}: {count, plural, =0 {ingen meldinger} one {# melding} other {# meldinger}}",
+      "search_results": "{count, plural, =0 {Ingen treff} one {# treff} other {# treff}}"
     }
   },
   "shared_tags": {

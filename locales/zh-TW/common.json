@@ -371,6 +371,10 @@
       "archive_message": "{count, plural, other {郵件將移到封存。}}",
       "delete": "刪除",
       "archive": "封存"
+    },
+    "status": {
+      "folder_loaded": "{folder}：{count, plural, =0 {沒有郵件} other {# 封郵件}}",
+      "search_results": "{count, plural, =0 {沒有結果} other {# 個結果}}"
     }
   },
   "shared_tags": {

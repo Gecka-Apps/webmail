@@ -336,6 +336,10 @@
       "archive_message": "{count, plural, one {היא תועבר לארכיון שלך.} other {הן יועברו לארכיון שלך.}}",
       "delete": "מחק",
       "archive": "העבר לארכיון"
+    },
+    "status": {
+      "folder_loaded": "{folder}: {count, plural, =0 {אין הודעות} one {הודעה אחת} other {# הודעות}}",
+      "search_results": "{count, plural, =0 {אין תוצאות} one {תוצאה אחת} other {# תוצאות}}"
     }
   },
   "shared_tags": {
