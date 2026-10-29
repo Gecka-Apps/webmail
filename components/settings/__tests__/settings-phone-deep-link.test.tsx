@@ -13,7 +13,8 @@ vi.mock('next-intl', () => ({
   useLocale: () => 'en',
   useFormatter: () => ({ dateTime: String, relativeTime: String, number: String }),
 }));
-vi.mock('@/hooks/use-media-query', () => ({
+vi.mock('@/hooks/use-media-query', async (importOriginal) => ({
+  atLeast: (await importOriginal<typeof import('@/hooks/use-media-query')>()).atLeast,
   useIsDesktop: () => false,
   useIsMobile: () => true,
   useMediaQuery: () => false,
