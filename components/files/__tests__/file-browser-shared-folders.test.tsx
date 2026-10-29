@@ -518,6 +518,19 @@ describe('FileBrowser keyboard focus (SR-15)', () => {
     expect(document.activeElement).toBe(tile);
   });
 
+  it('lists the sidebar folders as lists of buttons, not a tree without tree keys', async () => {
+    renderBrowser();
+    await screen.findAllByText('Team');
+    const nav = tree();
+    expect(within(nav).queryByRole('tree')).toBeNull();
+    expect(within(nav).queryByRole('treeitem')).toBeNull();
+    for (const list of within(nav).getAllByRole('list')) {
+      for (const child of Array.from(list.children)) expect(child).toHaveAttribute('role', 'listitem');
+    }
+    // The folder open now is marked as the current page.
+    expect(within(nav).getByRole('button', { name: 'my_files' })).toHaveAttribute('aria-current', 'page');
+  });
+
   it('shows an item\'s select box while the keyboard is in the item, not only on hover', () => {
     renderBrowser();
     const box = within(rowOf('notes.txt')).getByRole('checkbox');
