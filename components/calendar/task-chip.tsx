@@ -45,7 +45,8 @@ export function CalendarTaskChip({ task, calendar, onToggleComplete, onSelect, t
         onClick={(e) => { e.stopPropagation(); onToggleComplete?.(task); }}
         className={cn(
           "group flex items-center flex-shrink-0",
-          touch ? "self-stretch w-11 justify-center" : "h-full ps-1 pe-0.5",
+          // 24px wide, so the circle keeps a 24px target next to the title.
+          touch ? "self-stretch w-11 justify-center" : "h-full w-6 justify-center",
         )}
         aria-label={isCompleted ? t("tasks.mark_incomplete") : t("tasks.mark_complete")}
       >

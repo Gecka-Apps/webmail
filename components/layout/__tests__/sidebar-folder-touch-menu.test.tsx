@@ -82,4 +82,14 @@ describe('folder list on touch', () => {
     expect(toggle.className).toContain('pointer-coarse:after:min-h-11');
     expect(toggle.getAttribute('aria-label')).toBeTruthy();
   });
+
+  it('gives the chevron a 24px target with a mouse too, in its 20px slot', () => {
+    useSettingsStore.setState({ hideAccountSwitcher: true } as never);
+    const withChild = [...mailboxes, { ...box('trips', 'Trips', null), parentId: 'travel' } as Mailbox];
+    render(<Sidebar mailboxes={withChild} selectedMailbox="inbox" />);
+    const toggle = row('travel').querySelector<HTMLElement>('[data-testid="folder-expand-toggle"]')!;
+    expect(toggle.style.width).toBe('24px');
+    expect(toggle.style.height).toBe('24px');
+    expect(toggle.style.margin).toBe('-2px');
+  });
 });

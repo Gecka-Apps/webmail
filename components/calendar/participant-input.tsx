@@ -225,7 +225,7 @@ export const ParticipantInput = forwardRef<ParticipantInputHandle, ParticipantIn
                 <button
                   type="button"
                   onClick={() => onRemove(p.email)}
-                  className="flex-shrink-0 p-0.5 rounded-full hover:bg-muted-foreground/20 transition-colors min-w-[20px] min-h-[20px] flex items-center justify-center"
+                  className="flex-shrink-0 p-0.5 rounded-full hover:bg-muted-foreground/20 transition-colors min-w-6 min-h-6 -m-0.5 flex items-center justify-center"
                   aria-label={`${t("remove")} ${p.name || p.email}`}
                 >
                   <X className="w-3 h-3" />

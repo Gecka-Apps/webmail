@@ -104,7 +104,8 @@ describe('CalendarMonthView tasks', () => {
     // its day's cell, below the 30px date header.
     const thu = chipSlot('thu');
     expect(dayColumn(thu)).toBe(3);
-    expect(thu.style.top).toBe('52px');
+    // Rows are 26px apart: 24px chips, big enough to hit (WCAG 2.5.8).
+    expect(thu.style.top).toBe('56px');
     const fri = chipSlot('fri');
     expect(dayColumn(fri)).toBe(4);
     expect(fri.style.top).toBe('30px');
@@ -118,15 +119,15 @@ describe('CalendarMonthView tasks', () => {
       onOpenDay,
     });
     const row = document.querySelector<HTMLElement>('[data-week="2026-09-07"]');
-    // jsdom measures no viewport, so rows keep the 130px minimum: room for
-    // four 22px rows under the 30 + 4 offset, the last taken by the link -
+    // jsdom measures no viewport, so rows keep the 146px minimum: room for
+    // four 26px rows under the 30 + 4 offset, the last taken by the link -
     // three entries, not one, on a short desktop window.
-    expect(row?.style.minHeight).toBe('130px');
+    expect(row?.style.minHeight).toBe('146px');
     expect(screen.getByText('Event e1')).toBeInTheDocument();
     expect(document.querySelector('[data-calendar-task="b"]')).not.toBeNull();
     expect(document.querySelector('[data-calendar-task="c"]')).toBeNull();
     const more = screen.getByRole('button', { name: 'events.more' });
-    expect(more.parentElement?.style.top).toBe(`${30 + 66}px`);
+    expect(more.parentElement?.style.top).toBe(`${30 + 78}px`);
     fireEvent.click(more);
     expect(onOpenDay).toHaveBeenCalledWith(new Date(2026, 8, 10));
   });

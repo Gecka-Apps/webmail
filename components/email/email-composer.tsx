@@ -4603,7 +4603,7 @@ export function EmailComposer({
                     )}
                     <button
                       onClick={() => removeAttachment(index)}
-                      className={cn("ms-1 hover:text-destructive min-w-[20px] min-h-[20px] flex items-center justify-center", TOUCH_HIT_AREA)}
+                      className={cn("ms-0.5 -my-0.5 hover:text-destructive min-w-6 min-h-6 flex items-center justify-center", TOUCH_HIT_AREA)}
                       title={att.uploading ? t('upload_cancel') : t('recipient_remove')}
                       aria-label={att.uploading ? t('upload_cancel') : `${t('recipient_remove')} ${att.name}`}
                     >
@@ -5722,7 +5722,7 @@ export function RecipientChipInput({
               )}
               <button
                 type="button"
-                className={cn("flex items-center justify-center w-4 h-4 rounded-full hover:bg-muted-foreground/20 transition-colors", TOUCH_HIT_AREA)}
+                className={cn("flex items-center justify-center w-6 h-6 -m-1 rounded-full hover:bg-muted-foreground/20 transition-colors", TOUCH_HIT_AREA)}
                 aria-label={isEditing ? t('recipient_remove') : t('recipient_remove_named', { name: recipientDisplayName(chip) })}
                 onClick={(e) => {
                   e.stopPropagation();

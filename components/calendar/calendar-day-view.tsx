@@ -462,7 +462,7 @@ export function CalendarDayView({
                               <div className="space-y-0.5">
                                 {/* The same chip as the month and week grids. */}
                                 {dayTasks.map((task) => (
-                                  <div key={task.id} className={isMobile ? undefined : "h-5"}>
+                                  <div key={task.id} className={isMobile ? undefined : "h-6"}>
                                     <CalendarTaskChip
                                       task={task}
                                       calendar={calendars.find((c) => task.calendarIds[c.id])}

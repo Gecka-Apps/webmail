@@ -102,7 +102,8 @@ export function CalendarMonthView({
   // into full entries via "Show time in month view" (#666).
   const showChips = !isMobile || showTimeInMonthView;
   const overlayTop = isMobile ? 34 : 30;
-  const rowHeight = isMobile ? 18 : 22;
+  // 24px chips with a mouse (WCAG 2.5.8); touch screens show dots.
+  const rowHeight = isMobile ? 18 : 26;
   const chipHeight = rowHeight - 2;
   // A wide-screen week row fits at least three entries and the "N more"
   // link, so a short window (1280x720) does not cut every day to one.

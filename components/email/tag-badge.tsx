@@ -108,7 +108,8 @@ export function TagBadge({
         <button
           type="button"
           onClick={onRemove}
-          className="ms-0.5 shrink-0 rounded-full p-0.5 hover:bg-black/10 dark:hover:bg-white/10"
+          // 24px to hit, drawn as before: the margins give the padding back.
+          className="-my-1 -me-1 shrink-0 rounded-full p-1.5 hover:bg-black/10 dark:hover:bg-white/10"
           title={t("remove_tag")}
           aria-label={t("remove_tag")}
         >

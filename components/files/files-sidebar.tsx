@@ -216,7 +216,7 @@ export function FilesSidebar({
               type="button"
               onClick={() => toggleExpanded(folder.id)}
               aria-expanded={isOpen}
-              className="p-0.5 -ms-1 rounded hover:bg-foreground/10 text-muted-foreground shrink-0"
+              className="flex items-center justify-center size-6 -ms-[7px] -me-[3px] -my-[3px] rounded hover:bg-foreground/10 text-muted-foreground shrink-0"
               aria-label={isOpen ? t("collapse_folder", { name: folder.name }) : t("expand_folder", { name: folder.name })}
             >
               {isOpen ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
@@ -316,7 +316,7 @@ export function FilesSidebar({
                 type="button"
                 onClick={() => toggleSection("tree")}
                 aria-expanded={!collapsed.tree}
-                className="p-0.5 -ms-1 rounded hover:bg-foreground/10 text-muted-foreground shrink-0"
+                className="flex items-center justify-center size-6 -ms-[7px] -me-[3px] -my-[3px] rounded hover:bg-foreground/10 text-muted-foreground shrink-0"
                 aria-label={collapsed.tree ? t("expand_folder", { name: t("my_files") }) : t("collapse_folder", { name: t("my_files") })}
               >
                 {collapsed.tree ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}

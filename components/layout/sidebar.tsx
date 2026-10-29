@@ -286,7 +286,7 @@ function SidebarRowCounts({
           e.stopPropagation();
           onUnreadClick();
         }}
-        className={cn(unreadClass, "cursor-pointer hover:underline rounded-sm focus-visible:outline-hidden")}
+        className={cn(unreadClass, "inline-flex items-center justify-center min-w-6 min-h-6 -my-1 cursor-pointer hover:underline rounded-sm focus-visible:outline-hidden")}
         title={t('unread_filter', { count: unreadCount })}
         aria-label={t('unread_filter', { count: unreadCount })}
       >
@@ -467,7 +467,9 @@ function SidebarRow({
               aria-label={isExpanded ? tShell('collapse_folder', { name: label }) : tShell('expand_folder', { name: label })}
               aria-expanded={isExpanded}
               className={cn("flex items-center justify-center rounded hover:bg-muted active:bg-accent transition-colors", TOUCH_HIT_AREA)}
-              style={{ width: CHEVRON_SLOT, height: CHEVRON_SLOT }}
+              // 24px to hit (WCAG 2.5.8) in the 20px slot: the negative
+              // margin gives the extra 2px on each side back.
+              style={{ width: 24, height: 24, margin: (CHEVRON_SLOT - 24) / 2 }}
               title={isExpanded ? t('collapse_tooltip') : t('expand_tooltip')}
             >
               {isExpanded ? (

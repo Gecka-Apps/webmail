@@ -33,6 +33,13 @@ describe('TagBadge', () => {
     expect(onRemove).toHaveBeenCalledOnce();
   });
 
+  it('gives the remove button a 24px target: a 12px icon and 6px padding all round', () => {
+    render(<TagBadge tagId="work" variant="badge" onRemove={() => {}} />);
+    const remove = screen.getByRole('button', { name: 'remove_tag' });
+    expect(remove).toHaveClass('p-1.5');
+    expect(remove.querySelector('svg')).toHaveClass('w-3', 'h-3');
+  });
+
   it('leaves the dot alone, having nowhere to put the control', () => {
     render(<TagBadge tagId="work" variant="dot" onRemove={() => {}} />);
     expect(screen.queryByRole('button')).not.toBeInTheDocument();
