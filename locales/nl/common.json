@@ -86,7 +86,10 @@
       "token_exchange_failed": "Authenticatie kon niet worden voltooid. Probeer het opnieuw.",
       "access_denied": "Toegang geweigerd. Neem contact op met uw beheerder.",
       "back_to_login": "Terug naar inloggen"
-    }
+    },
+    "recent_accounts": "Recente accounts",
+    "recent_accounts_hint": "Kies met de pijltjes omhoog en omlaag een recent account. Druk op Delete om het gemarkeerde account uit deze lijst te halen.",
+    "remove_account_from_list": "{username} uit deze lijst halen"
   },
   "session_limits": {
     "idle_title": "Ben je er nog?",

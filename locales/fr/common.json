@@ -86,7 +86,10 @@
       "token_exchange_failed": "Impossible de finaliser l'authentification. Veuillez réessayer.",
       "access_denied": "L'accès a été refusé. Veuillez contacter votre administrateur.",
       "back_to_login": "Retour à la connexion"
-    }
+    },
+    "recent_accounts": "Comptes récents",
+    "recent_accounts_hint": "Utilisez les flèches haut et bas pour choisir un compte récent. Appuyez sur Suppr pour retirer le compte en surbrillance de cette liste.",
+    "remove_account_from_list": "Retirer {username} de cette liste"
   },
   "session_limits": {
     "idle_title": "Êtes-vous toujours là ?",

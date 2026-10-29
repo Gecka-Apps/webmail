@@ -86,7 +86,10 @@
       "token_exchange_failed": "无法完成身份验证。请再试一次。",
       "access_denied": "访问被拒绝。请联系您的管理员。",
       "back_to_login": "返回登录"
-    }
+    },
+    "recent_accounts": "最近使用的账户",
+    "recent_accounts_hint": "用上下方向键选择最近使用的账户。按 Delete 键可将高亮的账户从此列表中移除。",
+    "remove_account_from_list": "从此列表中移除 {username}"
   },
   "session_limits": {
     "idle_title": "您还在吗？",

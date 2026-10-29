@@ -86,7 +86,10 @@
       "token_exchange_failed": "Autentificarea nu a reușit. Vă rugăm să încercați din nou.",
       "access_denied": "Accesul a fost refuzat. Vă rugăm să contactați administratorul.",
       "back_to_login": "Înapoi la autentificare"
-    }
+    },
+    "recent_accounts": "Conturi recente",
+    "recent_accounts_hint": "Folosiți săgețile sus și jos pentru a alege un cont recent. Apăsați Delete pentru a scoate contul evidențiat din această listă.",
+    "remove_account_from_list": "Scoate {username} din această listă"
   },
   "session_limits": {
     "idle_title": "Mai sunteți aici?",

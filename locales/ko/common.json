@@ -86,7 +86,10 @@
       "token_exchange_failed": "인증을 완료하지 못했어요. 다시 시도해 주세요.",
       "access_denied": "접근이 거부되었어요. 관리자에게 문의해 주세요.",
       "back_to_login": "로그인 화면으로 돌아가기"
-    }
+    },
+    "recent_accounts": "최근 계정",
+    "recent_accounts_hint": "위아래 화살표 키로 최근 계정을 고르세요. Delete 키를 누르면 선택한 계정이 이 목록에서 삭제됩니다.",
+    "remove_account_from_list": "이 목록에서 {username} 삭제"
   },
   "session_limits": {
     "idle_title": "아직 계신가요?",

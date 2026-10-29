@@ -86,7 +86,10 @@
       "token_exchange_failed": "Kunne ikke fullføre autentiseringen. Prøv igjen.",
       "access_denied": "Du fikk ikke tilgang. Kontakt administratoren din.",
       "back_to_login": "Tilbake til pålogging"
-    }
+    },
+    "recent_accounts": "Nylige kontoer",
+    "recent_accounts_hint": "Bruk pil opp og pil ned for å velge en nylig konto. Trykk Delete for å fjerne den markerte fra listen.",
+    "remove_account_from_list": "Fjern {username} fra listen"
   },
   "session_limits": {
     "idle_title": "Er du der fortsatt?",

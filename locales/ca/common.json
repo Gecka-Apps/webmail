@@ -86,7 +86,10 @@
       "token_exchange_failed": "No s'ha pogut completar l'autenticació. Torneu-ho a provar.",
       "access_denied": "S'ha denegat l'accés. Contacteu amb l'administrador.",
       "back_to_login": "Torna a l'inici de sessió"
-    }
+    },
+    "recent_accounts": "Comptes recents",
+    "recent_accounts_hint": "Feu servir les fletxes amunt i avall per triar un compte recent. Premeu Supr per treure el compte marcat d'aquesta llista.",
+    "remove_account_from_list": "Treu {username} d'aquesta llista"
   },
   "session_limits": {
     "idle_title": "Encara hi sou?",

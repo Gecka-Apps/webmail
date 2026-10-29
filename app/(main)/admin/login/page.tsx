@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { Shield } from '@/components/icons';
+import { AlertCircle, Shield } from '@/components/icons';
 import { useConfig } from '@/hooks/use-config';
 import { useThemeStore } from '@/stores/theme-store';
 import { apiFetch, withBasePath } from '@/lib/browser-navigation';
@@ -13,9 +13,13 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { loginLogoLightUrl, loginLogoDarkUrl } = useConfig();
+  const { loginLogoLightUrl, loginLogoDarkUrl, appName } = useConfig();
   const resolvedTheme = useThemeStore((s) => s.resolvedTheme);
   const logoUrl = withBasePath(resolvedTheme === 'dark' ? loginLogoDarkUrl : loginLogoLightUrl);
+
+  useEffect(() => {
+    document.title = `Sign in - Admin - ${appName}`;
+  }, [appName]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -79,12 +83,15 @@ export default function AdminLoginPage() {
               required
               autoFocus
               autoComplete="current-password"
+              aria-invalid={error ? true : undefined}
+              aria-describedby={error ? 'admin-login-error' : undefined}
             />
           </div>
 
           {error && (
-            <div className="text-sm text-destructive bg-destructive/10 rounded-md px-3 py-2">
-              {error}
+            <div role="alert" className="flex items-start gap-2 text-sm text-destructive bg-destructive/10 rounded-md px-3 py-2">
+              <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" aria-hidden="true" />
+              <span id="admin-login-error">{error}</span>
             </div>
           )}
 

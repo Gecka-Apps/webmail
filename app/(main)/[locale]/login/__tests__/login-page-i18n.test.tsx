@@ -84,7 +84,8 @@ describe('login page notices', () => {
     // The page clears the error as it mounts; a sign-in attempt sets it after.
     act(() => { useAuthStore.setState({ error: 'invalid_credentials' }); });
     const notice = await screen.findByTestId('login-error', {}, { timeout: 10000 });
-    expect(notice).not.toHaveAttribute('role');
+    // A failure interrupts the screen reader; the code prompt above is only a status.
+    expect(notice).toHaveAttribute('role', 'alert');
     expect(notice.className).toContain('bg-destructive/5');
   }, 30_000);
 });

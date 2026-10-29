@@ -86,7 +86,10 @@
       "token_exchange_failed": "認証を完了できませんでした。再度お試しください。",
       "access_denied": "アクセスが拒否されました。管理者にお問い合わせください。",
       "back_to_login": "ログインに戻る"
-    }
+    },
+    "recent_accounts": "最近のアカウント",
+    "recent_accounts_hint": "上下の矢印キーで最近のアカウントを選びます。Delete キーで選択中のアカウントをこの一覧から削除します。",
+    "remove_account_from_list": "{username} をこの一覧から削除"
   },
   "session_limits": {
     "idle_title": "まだ使用中ですか？",

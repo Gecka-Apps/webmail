@@ -264,9 +264,26 @@ function LoginPageContent() {
   const [oauthLoading, setOauthLoading] = useState(false);
   const [demoLoading, setDemoLoading] = useState(false);
 
-  const suggestionsRef = useRef<HTMLDivElement>(null);
+  // The error box and the recent-accounts list, tied to the fields they
+  // belong to so a screen reader reads them with the field.
+  const formId = useId();
+  const errorId = `${formId}-error`;
+  const suggestionsId = `${formId}-suggestions`;
+  const suggestionsHintId = `${formId}-suggestions-hint`;
+  const suggestionId = (index: number) => `${formId}-suggestion-${index}`;
+  // Which field the error is about. A wrong code with a code typed blames
+  // the code; the server and network errors blame no field.
+  const totpBlamed = error === "totp_required" || (error === "invalid_credentials" && showTotpField && !!totpCode);
+  const credentialsBlamed = error === "invalid_credentials" && !totpBlamed;
+  const tokenBlamed = error === "invalid_token";
+  const errorProps = (blamed: boolean) =>
+    blamed ? { "aria-invalid": true as const, "aria-describedby": errorId } : {};
+  const suggestionsOpen = showSuggestions && filteredSuggestions.length > 0;
+  const suggestionsRef = useRef<HTMLUListElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const justSelectedSuggestion = useRef(false);
+  // A removal updated the list itself; the filter effect leaves it open.
+  const justRemovedSuggestion = useRef(false);
   const totpInputRef = useRef<HTMLInputElement>(null);
   const tokenInputRef = useRef<HTMLInputElement>(null);
   const prevError = useRef<string | null>(null);
@@ -336,11 +353,13 @@ function LoginPageContent() {
   // The admin gave the Application an OAuth client: offer SSO next to the form.
   const liteSsoOffered = LITE_OAUTH_AVAILABLE && !liteSsoRequired && getLiteInjectedClientId() !== "";
 
+  // The tab says what the page is for, not only whose it is (WCAG 2.4.2).
+  const pageTitle = `${isAddAccountMode ? t("add_account_title") : t("sign_in")} - ${appName}`;
   useEffect(() => {
     if (serverUrl) {
-      document.title = appName;
+      document.title = pageTitle;
     }
-  }, [appName, serverUrl]);
+  }, [pageTitle, serverUrl]);
 
   useEffect(() => {
     if (serverUrl && !jmapEndpoint) {
@@ -466,6 +485,10 @@ function LoginPageContent() {
     if (!serverUrl) return;
     if (justSelectedSuggestion.current) {
       justSelectedSuggestion.current = false;
+      return;
+    }
+    if (justRemovedSuggestion.current) {
+      justRemovedSuggestion.current = false;
       return;
     }
 
@@ -682,14 +705,18 @@ function LoginPageContent() {
     }
   };
 
-  const removeUsername = (username: string, e: React.MouseEvent) => {
-    e.stopPropagation();
+  const removeUsername = (username: string, e?: React.SyntheticEvent) => {
+    e?.stopPropagation();
+    justRemovedSuggestion.current = true;
     const updated = savedUsernames.filter(u => u !== username);
     localStorage.setItem("webmail_usernames", JSON.stringify(updated));
     setSavedUsernames(updated);
-    setFilteredSuggestions(updated.filter(u =>
+    const remaining = updated.filter(u =>
       u.toLowerCase().includes(formData.username.toLowerCase())
-    ));
+    );
+    setFilteredSuggestions(remaining);
+    if (remaining.length === 0) setShowSuggestions(false);
+    setSelectedSuggestionIndex(prev => Math.min(prev, remaining.length - 1));
   };
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -713,7 +740,28 @@ function LoginPageContent() {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Down arrow opens the recent accounts, as in any combobox.
+    if (!showSuggestions && e.key === "ArrowDown") {
+      const candidates = formData.username === ""
+        ? savedUsernames
+        : savedUsernames.filter(u => u.toLowerCase().includes(formData.username.toLowerCase()));
+      if (candidates.length > 0) {
+        e.preventDefault();
+        setFilteredSuggestions(candidates);
+        setShowSuggestions(true);
+        setSelectedSuggestionIndex(0);
+      }
+      return;
+    }
     if (!showSuggestions || filteredSuggestions.length === 0) return;
+
+    // Delete on a highlighted account takes it off the list, like the
+    // browser's own autofill. Without a highlight it edits the text.
+    if ((e.key === "Delete" || (e.key === "Backspace" && e.shiftKey)) && selectedSuggestionIndex >= 0) {
+      e.preventDefault();
+      removeUsername(filteredSuggestions[selectedSuggestionIndex]);
+      return;
+    }
 
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -1102,12 +1150,12 @@ function LoginPageContent() {
             {/* Large demo button */}
             <div className="px-8 pb-10 pt-4">
               {error && (
-                <div className={cn(
+                <div role="alert" className={cn(
                   "mb-5 p-3 rounded-xl border border-destructive/20 bg-destructive/5 flex items-start gap-3",
                   shakeError && "animate-shake"
                 )}>
                   <div className="w-10 h-10 rounded-full bg-destructive/15 text-destructive flex items-center justify-center flex-shrink-0 shadow-sm">
-                    <AlertCircle className="w-5 h-5" />
+                    <AlertCircle className="w-5 h-5" aria-hidden="true" />
                   </div>
                   <div className="flex-1 min-w-0 self-center">
                     <p className="text-sm text-destructive leading-relaxed">
@@ -1310,16 +1358,16 @@ function LoginPageContent() {
                   shakeError && "animate-shake"
                 )}
                 data-testid="login-error"
-                role={error === 'totp_required' ? "status" : undefined}
+                role={error === 'totp_required' ? "status" : "alert"}
               >
                 <div className={cn(
                   "w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-sm",
                   error === 'totp_required' ? "bg-info/15 text-info" : "bg-destructive/15 text-destructive"
                 )}>
-                  {error === 'totp_required' ? <Info className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
+                  {error === 'totp_required' ? <Info className="w-5 h-5" aria-hidden="true" /> : <AlertCircle className="w-5 h-5" aria-hidden="true" />}
                 </div>
                 <div className="flex-1 min-w-0 self-center">
-                  <p className={cn("text-sm leading-relaxed", error === 'totp_required' ? "text-info" : "text-destructive")}>
+                  <p id={errorId} className={cn("text-sm leading-relaxed", error === 'totp_required' ? "text-info" : "text-destructive")}>
                     {error === 'invalid_credentials' && showTotpField && totpCode
                       ? t('error.totp_invalid')
                       : t(`error.${error}`) || t("error.generic")}
@@ -1437,39 +1485,64 @@ function LoginPageContent() {
                         className="h-11 px-3.5 bg-muted/40 border-border/60 rounded-xl focus:bg-background focus:border-primary/50 transition-all duration-200"
                         placeholder={t("username_placeholder")}
                         required={!signInWithToken}
-                        autoComplete="off"
-                        data-form-type="other"
-                        data-lpignore="true"
+                        // Password managers fill and save the pair by this (WCAG 3.3.8).
+                        autoComplete="username"
                         autoFocus
+                        // The recent accounts are a combobox's list: the arrow
+                        // keys move through them while the focus stays here.
+                        role={savedUsernames.length > 0 ? "combobox" : undefined}
+                        aria-autocomplete={savedUsernames.length > 0 ? "list" : undefined}
+                        aria-expanded={savedUsernames.length > 0 ? suggestionsOpen : undefined}
+                        aria-controls={suggestionsOpen ? suggestionsId : undefined}
+                        aria-activedescendant={suggestionsOpen && selectedSuggestionIndex >= 0 ? suggestionId(selectedSuggestionIndex) : undefined}
+                        aria-invalid={credentialsBlamed || undefined}
+                        aria-describedby={[credentialsBlamed ? errorId : null, suggestionsOpen ? suggestionsHintId : null].filter(Boolean).join(" ") || undefined}
                       />
 
-                      {/* Custom autocomplete dropdown */}
-                      {showSuggestions && filteredSuggestions.length > 0 && (
-                        <div
-                          ref={suggestionsRef}
-                          className="absolute top-full mt-1.5 w-full bg-background border border-border rounded-xl shadow-lg z-50 overflow-hidden"
-                        >
-                          {filteredSuggestions.map((username, index) => (
-                            <div
-                              key={username}
-                              className={cn(
-                                "px-3.5 py-2.5 flex items-center justify-between hover:bg-muted cursor-pointer transition-colors",
-                                index === selectedSuggestionIndex && "bg-muted"
-                              )}
-                              onClick={() => selectSuggestion(username)}
-                            >
-                              <span className="text-sm text-foreground">{username}</span>
-                              <button
-                                type="button"
-                                onClick={(e) => removeUsername(username, e)}
-                                className="p-1 hover:bg-secondary rounded-md transition-colors"
-                                title={t("remove_from_history")}
+                      {/* Recent accounts on this device */}
+                      {suggestionsOpen && (
+                        <>
+                          <span id={suggestionsHintId} className="sr-only">{t("recent_accounts_hint")}</span>
+                          <ul
+                            ref={suggestionsRef}
+                            id={suggestionsId}
+                            role="listbox"
+                            aria-label={t("recent_accounts")}
+                            className="absolute top-full mt-1.5 w-full bg-background border border-border rounded-xl shadow-lg z-50 overflow-hidden"
+                          >
+                            {filteredSuggestions.map((username, index) => (
+                              <li
+                                key={username}
+                                id={suggestionId(index)}
+                                role="option"
+                                aria-selected={index === selectedSuggestionIndex}
+                                aria-label={username}
+                                className={cn(
+                                  "px-3.5 py-2.5 flex items-center justify-between hover:bg-muted cursor-pointer transition-colors",
+                                  index === selectedSuggestionIndex && "bg-muted"
+                                )}
+                                // Keep the focus (and the caret) in the field.
+                                onMouseDown={(e) => e.preventDefault()}
+                                onClick={() => selectSuggestion(username)}
                               >
-                                <X className="w-3 h-3 text-muted-foreground" />
-                              </button>
-                            </div>
-                          ))}
-                        </div>
+                                <span className="text-sm text-foreground">{username}</span>
+                                {/* Out of the tab order: from the keyboard, Delete
+                                    removes the highlighted account. Named, so
+                                    voice control can still press it. */}
+                                <button
+                                  type="button"
+                                  tabIndex={-1}
+                                  onClick={(e) => removeUsername(username, e)}
+                                  className="p-1 hover:bg-secondary rounded-md transition-colors"
+                                  aria-label={t("remove_account_from_list", { username })}
+                                  title={t("remove_from_history")}
+                                >
+                                  <X className="w-3 h-3 text-muted-foreground" aria-hidden="true" />
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        </>
                       )}
                     </div>
                   </div>
@@ -1491,18 +1564,23 @@ function LoginPageContent() {
                         placeholder={t("password_placeholder")}
                         required={!liteSsoRequired && !signInWithToken}
                         autoComplete="current-password"
+                        {...errorProps(credentialsBlamed)}
                       />
+                      {/* In the tab order, so keyboard users can check what
+                          they typed. One name, the state in aria-pressed. */}
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
                         className="absolute end-3 top-1/2 -translate-y-1/2 p-1 rounded-md text-muted-foreground hover:text-foreground transition-colors"
-                        aria-label={showPassword ? t("hide_password") : t("show_password")}
-                        tabIndex={-1}
+                        aria-label={t("show_password")}
+                        aria-pressed={showPassword}
+                        aria-controls="password"
+                        title={showPassword ? t("hide_password") : t("show_password")}
                       >
                         {showPassword ? (
-                          <EyeOff className="w-4 h-4" />
+                          <EyeOff className="w-4 h-4" aria-hidden="true" />
                         ) : (
-                          <Eye className="w-4 h-4" />
+                          <Eye className="w-4 h-4" aria-hidden="true" />
                         )}
                       </button>
                     </div>
@@ -1525,6 +1603,7 @@ function LoginPageContent() {
                         autoComplete="off"
                         spellCheck={false}
                         data-lpignore="true"
+                        {...errorProps(tokenBlamed)}
                       />
                       <p className="text-[11px] text-muted-foreground leading-snug">
                         {t("token_hint")}
@@ -1569,7 +1648,7 @@ function LoginPageContent() {
                         )}
                         placeholder={t("totp_placeholder")}
                         autoComplete="one-time-code"
-                        aria-label={t("totp_label")}
+                        {...errorProps(totpBlamed)}
                       />
                     </div>
                   )}

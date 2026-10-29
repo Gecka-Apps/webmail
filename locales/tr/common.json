@@ -86,7 +86,10 @@
       "token_exchange_failed": "Kimlik doğrulama tamamlanamadı. Lütfen tekrar deneyin.",
       "access_denied": "Erişim reddedildi. Lütfen yöneticinizle iletişime geçin.",
       "back_to_login": "Giriş sayfasına dön"
-    }
+    },
+    "recent_accounts": "Son hesaplar",
+    "recent_accounts_hint": "Son kullanılan bir hesabı seçmek için yukarı ve aşağı ok tuşlarını kullanın. Vurgulanan hesabı bu listeden kaldırmak için Delete tuşuna basın.",
+    "remove_account_from_list": "{username} hesabını bu listeden kaldır"
   },
   "session_limits": {
     "idle_title": "Hâlâ orada mısınız?",

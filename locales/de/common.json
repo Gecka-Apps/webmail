@@ -86,7 +86,10 @@
       "token_exchange_failed": "Authentifizierung konnte nicht abgeschlossen werden. Bitte erneut versuchen.",
       "access_denied": "Zugriff verweigert. Bitte kontaktieren Sie Ihren Administrator.",
       "back_to_login": "Zurück zur Anmeldung"
-    }
+    },
+    "recent_accounts": "Zuletzt verwendete Konten",
+    "recent_accounts_hint": "Wählen Sie mit den Pfeiltasten nach oben und unten ein zuletzt verwendetes Konto. Mit Entf entfernen Sie das markierte Konto aus dieser Liste.",
+    "remove_account_from_list": "{username} aus dieser Liste entfernen"
   },
   "session_limits": {
     "idle_title": "Sind Sie noch da?",

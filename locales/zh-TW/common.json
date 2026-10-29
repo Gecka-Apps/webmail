@@ -86,7 +86,10 @@
       "token_exchange_failed": "無法完成身分驗證。請再試一次。",
       "access_denied": "存取遭拒。請聯絡管理員。",
       "back_to_login": "返回登入頁面"
-    }
+    },
+    "recent_accounts": "最近使用的帳號",
+    "recent_accounts_hint": "用上下方向鍵選擇最近使用的帳號。按 Delete 鍵可將反白的帳號從此清單中移除。",
+    "remove_account_from_list": "從此清單中移除 {username}"
   },
   "session_limits": {
     "idle_title": "您還在嗎？",

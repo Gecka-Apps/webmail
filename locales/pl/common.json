@@ -86,7 +86,10 @@
       "token_exchange_failed": "Nie udało się dokończyć uwierzytelniania. Spróbuj ponownie.",
       "access_denied": "Odmowa dostępu. Skontaktuj się z administratorem.",
       "back_to_login": "Powrót do logowania"
-    }
+    },
+    "recent_accounts": "Ostatnie konta",
+    "recent_accounts_hint": "Strzałkami w górę i w dół wybierz ostatnie konto. Naciśnij Delete, aby usunąć zaznaczone konto z tej listy.",
+    "remove_account_from_list": "Usuń {username} z tej listy"
   },
   "session_limits": {
     "idle_title": "Jesteś tam jeszcze?",

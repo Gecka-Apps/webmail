@@ -86,7 +86,10 @@
       "token_exchange_failed": "Kunne ikke fuldføre godkendelse. Prøv igen.",
       "access_denied": "Adgang blev nægtet. Kontakt din administrator.",
       "back_to_login": "Tilbage til login"
-    }
+    },
+    "recent_accounts": "Seneste konti",
+    "recent_accounts_hint": "Brug pil op og pil ned til at vælge en nylig konto. Tryk på Delete for at fjerne den markerede fra listen.",
+    "remove_account_from_list": "Fjern {username} fra listen"
   },
   "session_limits": {
     "idle_title": "Er du der stadig?",

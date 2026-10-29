@@ -86,7 +86,10 @@
       "token_exchange_failed": "فشل إتمام المصادقة. يرجى المحاولة مرة أخرى.",
       "access_denied": "تم رفض الوصول. يرجى التواصل مع المسؤول.",
       "back_to_login": "العودة إلى تسجيل الدخول"
-    }
+    },
+    "recent_accounts": "الحسابات الأخيرة",
+    "recent_accounts_hint": "استخدم مفتاحي السهم لأعلى ولأسفل لاختيار حساب حديث. اضغط Delete لإزالة الحساب المحدد من هذه القائمة.",
+    "remove_account_from_list": "إزالة {username} من هذه القائمة"
   },
   "session_limits": {
     "idle_title": "هل ما زلت هنا؟",

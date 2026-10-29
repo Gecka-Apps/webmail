@@ -86,7 +86,10 @@
       "token_exchange_failed": "تکمیل احراز هویت ناموفق بود.",
       "access_denied": "دسترسی رد شد. با مدیر سیستم تماس بگیرید.",
       "back_to_login": "بازگشت به صفحه ورود"
-    }
+    },
+    "recent_accounts": "حساب‌های اخیر",
+    "recent_accounts_hint": "با کلیدهای جهت‌نمای بالا و پایین یک حساب اخیر را انتخاب کنید. برای حذف حساب انتخاب‌شده از این فهرست، Delete را بزنید.",
+    "remove_account_from_list": "حذف {username} از این فهرست"
   },
   "session_limits": {
     "idle_title": "هنوز اینجا هستید؟",

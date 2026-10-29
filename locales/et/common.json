@@ -86,7 +86,10 @@
       "token_exchange_failed": "Autentimist ei õnnestunud lõpetada. Palun proovi uuesti.",
       "access_denied": "Juurdepääs keelati. Palun võta ühendust administraatoriga.",
       "back_to_login": "Tagasi"
-    }
+    },
+    "recent_accounts": "Hiljutised kontod",
+    "recent_accounts_hint": "Valige üles- ja allanooleklahviga hiljutine konto. Vajutage Delete, et esiletõstetud konto sellest loendist eemaldada.",
+    "remove_account_from_list": "Eemalda {username} sellest loendist"
   },
   "session_limits": {
     "idle_title": "Kas oled veel siin?",

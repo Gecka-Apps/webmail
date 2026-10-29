@@ -86,7 +86,10 @@
       "token_exchange_failed": "Neizdevās pabeigt autentifikāciju. Mēģiniet vēlreiz.",
       "access_denied": "Piekļuve liegta. Sazinieties ar administratoru.",
       "back_to_login": "Atgriezties pie pierakstīšanās"
-    }
+    },
+    "recent_accounts": "Nesenie konti",
+    "recent_accounts_hint": "Ar augšup un lejup bulttaustiņiem izvēlieties nesenu kontu. Nospiediet Delete, lai noņemtu iezīmēto kontu no šī saraksta.",
+    "remove_account_from_list": "Noņemt {username} no šī saraksta"
   },
   "session_limits": {
     "idle_title": "Vai jūs vēl esat šeit?",

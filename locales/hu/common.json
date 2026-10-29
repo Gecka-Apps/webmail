@@ -86,7 +86,10 @@
       "token_exchange_failed": "Nem sikerült befejezni a hitelesítést. Kérjük, próbáld újra.",
       "access_denied": "A hozzáférés megtagadva. Kérjük, vedd fel a kapcsolatot a rendszergazdával.",
       "back_to_login": "Vissza a bejelentkezéshez"
-    }
+    },
+    "recent_accounts": "Legutóbbi fiókok",
+    "recent_accounts_hint": "A fel és le nyíllal válasszon egy legutóbbi fiókot. A Delete billentyűvel eltávolítja a kijelölt fiókot a listából.",
+    "remove_account_from_list": "{username} eltávolítása a listából"
   },
   "session_limits": {
     "idle_title": "Itt vagy még?",

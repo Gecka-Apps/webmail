@@ -86,7 +86,10 @@
       "token_exchange_failed": "No se pudo completar la autenticación. Inténtalo de nuevo.",
       "access_denied": "Acceso denegado. Contacta a tu administrador.",
       "back_to_login": "Volver al inicio de sesión"
-    }
+    },
+    "recent_accounts": "Cuentas recientes",
+    "recent_accounts_hint": "Usa las flechas arriba y abajo para elegir una cuenta reciente. Pulsa Supr para quitar la cuenta resaltada de esta lista.",
+    "remove_account_from_list": "Quitar {username} de esta lista"
   },
   "session_limits": {
     "idle_title": "¿Sigues ahí?",

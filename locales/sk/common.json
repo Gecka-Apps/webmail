@@ -86,7 +86,10 @@
       "token_exchange_failed": "Overenie sa nepodarilo dokončiť. Skúste to znova.",
       "access_denied": "Prístup bol zamietnutý. Kontaktujte správcu.",
       "back_to_login": "Späť na prihlásenie"
-    }
+    },
+    "recent_accounts": "Nedávne účty",
+    "recent_accounts_hint": "Šípkami nahor a nadol vyberte nedávny účet. Klávesom Delete odstránite označený účet z tohto zoznamu.",
+    "remove_account_from_list": "Odstrániť {username} z tohto zoznamu"
   },
   "session_limits": {
     "idle_title": "Ste tu ešte?",
