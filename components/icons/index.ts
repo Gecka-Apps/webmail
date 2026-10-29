@@ -111,6 +111,7 @@ export {
   IconWorld as Globe,
   IconGridDots as Grid3x3,
   IconGripVertical as GripVertical,
+  IconHandStop as Hand,
   IconServer2 as HardDrive,
   IconH1 as Heading1,
   IconH2 as Heading2,

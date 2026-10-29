@@ -568,7 +568,8 @@ export function AccountSwitcher({
               <HelpMenuItems
                 onSelect={() => setOpen(false)}
                 className="mt-2 rounded-3xl bg-background py-1"
-                itemClassName="w-full flex items-center px-5 py-3 text-sm text-start hover:bg-muted transition-colors"
+                itemClassName="w-full flex items-center gap-4 px-5 py-3 text-sm text-start hover:bg-muted transition-colors"
+                iconClassName="w-5 h-5 shrink-0 text-muted-foreground"
               />
             </>
           )}
@@ -593,7 +594,7 @@ export function AccountSwitcher({
             <HelpMenuItems
               onSelect={() => setOpen(false)}
               className="border-t border-border py-1"
-              itemClassName="w-full flex items-center px-3 py-2 pointer-coarse:min-h-11 text-sm text-start text-foreground hover:bg-muted transition-colors"
+              itemClassName="w-full flex items-center gap-2 px-3 py-2 pointer-coarse:min-h-11 text-sm text-start text-foreground hover:bg-muted transition-colors"
             />
           )}
 

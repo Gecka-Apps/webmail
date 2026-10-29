@@ -1,9 +1,18 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { Accessibility, BookOpen, Flag, Hand, HelpCircle } from '@/components/icons';
 import { useConfig } from '@/hooks/use-config';
-import { helpLinksFrom, type HelpLink } from '@/lib/help-links';
+import { helpLinksFrom, type HelpLink, type HelpLinkId } from '@/lib/help-links';
 import { cn } from '@/lib/utils';
+
+const ICONS: Record<HelpLinkId, typeof Accessibility> = {
+  statement: Accessibility,
+  feedback: Flag,
+  help: HelpCircle,
+  easy_read: BookOpen,
+  sign_language: Hand,
+};
 
 /** The configured accessibility and help links, in their fixed order. */
 export function useHelpLinks(): HelpLink[] {
@@ -53,29 +62,34 @@ export function HelpLinks({ className, listClassName, linkClassName }: { classNa
  * The links as menu items, for the account menu. `onSelect` closes the
  * menu. Renders nothing when the operator set none.
  */
-export function HelpMenuItems({ onSelect, className, itemClassName }: {
+export function HelpMenuItems({ onSelect, className, itemClassName, iconClassName = 'w-4 h-4 shrink-0' }: {
   onSelect?: () => void;
   className?: string;
   itemClassName?: string;
+  iconClassName?: string;
 }) {
   const t = useTranslations('help_links');
   const links = useHelpLinks();
   if (links.length === 0) return null;
   return (
     <div role="group" aria-label={t('label')} className={className} data-testid="help-menu-items">
-      {links.map((link) => (
-        <a
-          key={link.id}
-          role="menuitem"
-          href={link.href}
-          target={link.external ? '_blank' : undefined}
-          rel={link.external ? 'noopener noreferrer' : undefined}
-          onClick={() => onSelect?.()}
-          className={itemClassName}
-        >
-          <LinkText link={link} />
-        </a>
-      ))}
+      {links.map((link) => {
+        const Icon = ICONS[link.id];
+        return (
+          <a
+            key={link.id}
+            role="menuitem"
+            href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener noreferrer' : undefined}
+            onClick={() => onSelect?.()}
+            className={itemClassName}
+          >
+            <Icon className={iconClassName} aria-hidden="true" />
+            <span><LinkText link={link} /></span>
+          </a>
+        );
+      })}
     </div>
   );
 }
