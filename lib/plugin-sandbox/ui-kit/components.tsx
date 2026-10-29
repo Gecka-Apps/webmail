@@ -28,6 +28,7 @@ import {
   closeFloatingDropdown,
   registerFloatingDropdownListener,
 } from './floating-dropdown-bridge';
+import { kitString } from './kit-strings';
 
 type Children = { children?: React.ReactNode };
 type Tone = 'neutral' | 'info' | 'success' | 'warning' | 'danger' | 'primary';
@@ -523,7 +524,7 @@ export function Combobox({
                     e.stopPropagation();
                     toggleMultipleOption(opt);
                   }}
-                  aria-label={`Remove ${opt.label}`}
+                  aria-label={kitString('remove_named', { name: String(opt.label) })}
                   className="text-muted-foreground hover:text-foreground p-0.5 rounded focus:outline-none"
                 >
                   <X className="w-3 h-3" aria-hidden="true" />
@@ -583,7 +584,7 @@ export function Combobox({
                 e.stopPropagation();
               }}
               onClick={handleClear}
-              aria-label="Clear"
+              aria-label={kitString('clear')}
               className="p-1 rounded hover:text-foreground focus:outline-none"
             >
               <X className="w-3.5 h-3.5" aria-hidden="true" />
@@ -598,7 +599,7 @@ export function Combobox({
               e.stopPropagation();
             }}
             onClick={handleToggle}
-            aria-label={isOpen ? 'Close' : 'Open'}
+            aria-label={isOpen ? kitString('close') : kitString('open')}
             className="p-1 rounded hover:text-foreground focus:outline-none disabled:opacity-50"
           >
             {isOpen ? <ChevronUp className="w-3.5 h-3.5" aria-hidden="true" /> : <ChevronDown className="w-3.5 h-3.5" aria-hidden="true" />}
@@ -753,17 +754,30 @@ export function Segmented({ value, options, onChange, label }: { value: string; 
  */
 export function Field({ label, hint, error, required = false, children }: { label: React.ReactNode; hint?: React.ReactNode; error?: React.ReactNode; required?: boolean } & Children) {
   const autoId = React.useId();
-  const only = React.Children.count(children) === 1 && React.isValidElement(children) ? children as React.ReactElement<{ id?: string }> : null;
+  type ControlProps = { id?: string; 'aria-describedby'?: string; 'aria-invalid'?: boolean; 'aria-required'?: boolean };
+  const only = React.Children.count(children) === 1 && React.isValidElement(children) ? children as React.ReactElement<ControlProps> : null;
   const controlId = only?.props.id ?? autoId;
+  // The hint or error is read with the field, an error marks it invalid,
+  // and the asterisk is said as "required".
+  const noteId = `${autoId}-note`;
+  const note = error || hint;
+  const control = only
+    ? React.cloneElement(only, {
+        id: controlId,
+        'aria-describedby': [only.props['aria-describedby'], note ? noteId : null].filter(Boolean).join(' ') || undefined,
+        ...(error ? { 'aria-invalid': true } : {}),
+        ...(required ? { 'aria-required': true } : {}),
+      })
+    : children;
   return (
     <div className="bk">
       <label htmlFor={only ? controlId : undefined} className="text-sm font-medium mb-1 block text-foreground">
         {label}
-        {required && <span className="text-destructive"> *</span>}
+        {required && <span className="text-destructive" aria-hidden="true"> *</span>}
       </label>
-      {only && !only.props.id ? React.cloneElement(only, { id: controlId }) : children}
-      {hint && !error && <p className="text-xs text-muted-foreground mt-1">{hint}</p>}
-      {error && <p className="text-sm text-destructive mt-1" role="alert">{error}</p>}
+      {control}
+      {hint && !error && <p id={noteId} className="text-xs text-muted-foreground mt-1">{hint}</p>}
+      {error && <p id={noteId} className="text-sm text-destructive mt-1" role="alert">{error}</p>}
     </div>
   );
 }
@@ -782,7 +796,7 @@ export function SearchInput({ value, onChange, placeholder, label, className }: 
         className="w-full h-8 rounded-md border border-input bg-background ps-8 pe-8 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-search-cancel-button]:hidden"
       />
       {value && (
-        <button type="button" onClick={() => onChange('')} aria-label="×" className="absolute end-1.5 top-1/2 -translate-y-1/2 p-1 rounded text-muted-foreground hover:text-foreground">
+        <button type="button" onClick={() => onChange('')} aria-label={kitString('clear_search')} className="absolute end-1.5 top-1/2 -translate-y-1/2 p-1 rounded text-muted-foreground hover:text-foreground">
           <X className="w-3.5 h-3.5" aria-hidden="true" />
         </button>
       )}
@@ -1144,7 +1158,7 @@ export function Chip({ icon, label, detail, onClick, onRemove, removeLabel, titl
     <span className={box} title={title}>
       {body}
       {onRemove && (
-        <button type="button" onClick={onRemove} aria-label={removeLabel ?? '×'} className="p-0.5 -me-1 rounded hover:bg-accent transition-colors">
+        <button type="button" onClick={onRemove} aria-label={removeLabel ?? (typeof label === 'string' ? kitString('remove_named', { name: label }) : kitString('remove'))} className="p-0.5 -me-1 rounded hover:bg-accent transition-colors">
           <X className="w-3.5 h-3.5" aria-hidden="true" />
         </button>
       )}
