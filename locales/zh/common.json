@@ -3638,6 +3638,20 @@
       "year": "年",
       "day_of_week": "星期几",
       "sender_name": "你的名字"
+    },
+    "section_examples": "示例",
+    "builtin": {
+      "accessible": {
+        "name": "无障碍邮件",
+        "heading": "这封邮件讲什么",
+        "intro": "先用一两句简短的话说出要点。",
+        "details_heading": "详细信息",
+        "tip_structure": "使用工具栏中的标题和列表，不要用粗体或空行代替。",
+        "tip_links": "链接文字要说明链接去往哪里，不要写“点击这里”。",
+        "tip_images": "为每张图片写描述，或将其标记为装饰性图片。",
+        "next_heading": "后续步骤",
+        "next": "说明你需要读者做什么，以及截止时间。"
+      }
     }
   },
   "org_templates": {

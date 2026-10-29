@@ -3638,6 +3638,20 @@
       "year": "Jaar",
       "day_of_week": "Dag van de week",
       "sender_name": "Uw naam"
+    },
+    "section_examples": "Voorbeelden",
+    "builtin": {
+      "accessible": {
+        "name": "Toegankelijk bericht",
+        "heading": "Waar dit bericht over gaat",
+        "intro": "Begin met de hoofdzaak in een of twee korte zinnen.",
+        "details_heading": "Details",
+        "tip_structure": "Gebruik de koppen en lijsten uit de werkbalk, niet vetgedrukte tekst of lege regels.",
+        "tip_links": "Schrijf linkteksten die zeggen waar de link heen gaat, niet 'klik hier'.",
+        "tip_images": "Beschrijf elke afbeelding, of markeer hem als decoratief.",
+        "next_heading": "Volgende stappen",
+        "next": "Zeg wat je van de lezer nodig hebt en wanneer."
+      }
     }
   },
   "org_templates": {

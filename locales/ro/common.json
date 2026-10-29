@@ -3638,6 +3638,20 @@
       "year": "Anul",
       "day_of_week": "Ziua săptămânii",
       "sender_name": "Numele dvs."
+    },
+    "section_examples": "Exemple",
+    "builtin": {
+      "accessible": {
+        "name": "Mesaj accesibil",
+        "heading": "Despre ce este acest mesaj",
+        "intro": "Începeți cu ideea principală în una sau două propoziții scurte.",
+        "details_heading": "Detalii",
+        "tip_structure": "Folosiți titlurile și listele din bara de instrumente, nu text îngroșat sau rânduri goale.",
+        "tip_links": "Scrieți texte de link care spun unde duce linkul, nu „faceți clic aici”.",
+        "tip_images": "Descrieți fiecare imagine sau marcați-o ca decorativă.",
+        "next_heading": "Pașii următori",
+        "next": "Spuneți de ce aveți nevoie de la cititor și până când."
+      }
     }
   },
   "org_templates": {

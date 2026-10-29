@@ -3638,6 +3638,20 @@
       "year": "År",
       "day_of_week": "Ugedag",
       "sender_name": "Dit navn"
+    },
+    "section_examples": "Eksempler",
+    "builtin": {
+      "accessible": {
+        "name": "Tilgængelig besked",
+        "heading": "Hvad denne besked handler om",
+        "intro": "Start med hovedpointen i en eller to korte sætninger.",
+        "details_heading": "Detaljer",
+        "tip_structure": "Brug overskrifterne og listerne fra værktøjslinjen, ikke fed skrift eller tomme linjer.",
+        "tip_links": "Skriv linktekst, der siger, hvor linket fører hen, ikke \"klik her\".",
+        "tip_images": "Beskriv hvert billede, eller marker det som dekorativt.",
+        "next_heading": "Næste skridt",
+        "next": "Skriv, hvad du har brug for fra læseren, og hvornår."
+      }
     }
   },
   "org_templates": {

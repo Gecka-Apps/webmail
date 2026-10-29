@@ -3638,6 +3638,20 @@
       "year": "Rok",
       "day_of_week": "Den v týdnu",
       "sender_name": "Vaše jméno"
+    },
+    "section_examples": "Příklady",
+    "builtin": {
+      "accessible": {
+        "name": "Přístupná zpráva",
+        "heading": "O čem tato zpráva je",
+        "intro": "Začněte tím hlavním v jedné nebo dvou krátkých větách.",
+        "details_heading": "Podrobnosti",
+        "tip_structure": "Používejte nadpisy a seznamy z panelu nástrojů, ne tučné písmo nebo prázdné řádky.",
+        "tip_links": "Pište text odkazu, který říká, kam odkaz vede, ne „klikněte sem“.",
+        "tip_images": "Popište každý obrázek, nebo ho označte jako dekorativní.",
+        "next_heading": "Další kroky",
+        "next": "Napište, co od čtenáře potřebujete a do kdy."
+      }
     }
   },
   "org_templates": {

@@ -3638,6 +3638,20 @@
       "year": "År",
       "day_of_week": "Ukedag",
       "sender_name": "Navnet ditt"
+    },
+    "section_examples": "Eksempler",
+    "builtin": {
+      "accessible": {
+        "name": "Tilgjengelig melding",
+        "heading": "Hva denne meldingen handler om",
+        "intro": "Start med hovedpoenget i én eller to korte setninger.",
+        "details_heading": "Detaljer",
+        "tip_structure": "Bruk overskriftene og listene fra verktøylinjen, ikke fet skrift eller tomme linjer.",
+        "tip_links": "Skriv lenketekst som sier hvor lenken går, ikke «klikk her».",
+        "tip_images": "Beskriv hvert bilde, eller merk det som dekorativt.",
+        "next_heading": "Neste steg",
+        "next": "Si hva du trenger fra leseren, og innen når."
+      }
     }
   },
   "org_templates": {

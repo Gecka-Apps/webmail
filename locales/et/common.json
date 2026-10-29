@@ -3638,6 +3638,20 @@
       "year": "Aasta",
       "day_of_week": "Nädalapäev",
       "sender_name": "Sinu nimi"
+    },
+    "section_examples": "Näited",
+    "builtin": {
+      "accessible": {
+        "name": "Ligipääsetav sõnum",
+        "heading": "Millest see sõnum räägib",
+        "intro": "Alusta peamisest ühe või kahe lühikese lausega.",
+        "details_heading": "Üksikasjad",
+        "tip_structure": "Kasuta tööriistariba pealkirju ja loendeid, mitte paksu kirja või tühje ridu.",
+        "tip_links": "Kirjuta lingi tekst, mis ütleb, kuhu link viib, mitte „klõpsa siia“.",
+        "tip_images": "Kirjelda iga pilti või märgi see dekoratiivseks.",
+        "next_heading": "Järgmised sammud",
+        "next": "Ütle, mida lugejalt vajad ja mis ajaks."
+      }
     }
   },
   "org_templates": {

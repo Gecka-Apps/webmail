@@ -3638,6 +3638,20 @@
       "year": "Yıl",
       "day_of_week": "Haftanın günü",
       "sender_name": "Adınız"
+    },
+    "section_examples": "Örnekler",
+    "builtin": {
+      "accessible": {
+        "name": "Erişilebilir ileti",
+        "heading": "Bu ileti ne hakkında",
+        "intro": "Ana noktayla, bir iki kısa cümleyle başlayın.",
+        "details_heading": "Ayrıntılar",
+        "tip_structure": "Kalın yazı ya da boş satır yerine araç çubuğundaki başlıkları ve listeleri kullanın.",
+        "tip_links": "Bağlantı metni \"buraya tıklayın\" değil, bağlantının nereye gittiğini söylesin.",
+        "tip_images": "Her görseli açıklayın ya da süs görseli olarak işaretleyin.",
+        "next_heading": "Sonraki adımlar",
+        "next": "Okuyucudan ne istediğinizi ve ne zamana kadar istediğinizi yazın."
+      }
     }
   },
   "org_templates": {

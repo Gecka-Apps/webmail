@@ -3638,6 +3638,20 @@
       "year": "Év",
       "day_of_week": "A hét napja",
       "sender_name": "A te neved"
+    },
+    "section_examples": "Példák",
+    "builtin": {
+      "accessible": {
+        "name": "Akadálymentes üzenet",
+        "heading": "Miről szól ez az üzenet",
+        "intro": "Kezdje a lényeggel egy-két rövid mondatban.",
+        "details_heading": "Részletek",
+        "tip_structure": "Az eszköztár címsorait és listáit használja, ne félkövér szöveget vagy üres sorokat.",
+        "tip_links": "Olyan linkszöveget írjon, amely megmondja, hová vezet a link, ne azt, hogy „kattintson ide”.",
+        "tip_images": "Írjon le minden képet, vagy jelölje díszítőként.",
+        "next_heading": "Következő lépések",
+        "next": "Írja meg, mire van szüksége az olvasótól, és mikorra."
+      }
     }
   },
   "org_templates": {

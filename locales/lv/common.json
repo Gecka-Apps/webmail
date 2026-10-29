@@ -3638,6 +3638,20 @@
       "year": "Gads",
       "day_of_week": "Nedēļas diena",
       "sender_name": "Jūsu vārds"
+    },
+    "section_examples": "Piemēri",
+    "builtin": {
+      "accessible": {
+        "name": "Piekļūstams ziņojums",
+        "heading": "Par ko ir šis ziņojums",
+        "intro": "Sāciet ar galveno domu vienā vai divos īsos teikumos.",
+        "details_heading": "Sīkāka informācija",
+        "tip_structure": "Izmantojiet rīkjoslas virsrakstus un sarakstus, nevis treknrakstu vai tukšas rindas.",
+        "tip_links": "Rakstiet saites tekstu, kas pasaka, kurp saite ved, nevis “noklikšķiniet šeit”.",
+        "tip_images": "Aprakstiet katru attēlu vai atzīmējiet to kā dekoratīvu.",
+        "next_heading": "Nākamās darbības",
+        "next": "Uzrakstiet, ko jums vajag no lasītāja un līdz kuram laikam."
+      }
     }
   },
   "org_templates": {

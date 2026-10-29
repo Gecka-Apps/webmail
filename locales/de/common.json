@@ -3638,6 +3638,20 @@
       "year": "Jahr",
       "day_of_week": "Wochentag",
       "sender_name": "Ihr Name"
+    },
+    "section_examples": "Beispiele",
+    "builtin": {
+      "accessible": {
+        "name": "Barrierefreie Nachricht",
+        "heading": "Worum es in dieser Nachricht geht",
+        "intro": "Beginnen Sie mit dem Wichtigsten in ein oder zwei kurzen Sätzen.",
+        "details_heading": "Details",
+        "tip_structure": "Verwenden Sie die Überschriften und Listen aus der Symbolleiste, nicht Fettschrift oder Leerzeilen.",
+        "tip_links": "Schreiben Sie Linktexte, die sagen, wohin der Link führt, nicht „hier klicken“.",
+        "tip_images": "Beschreiben Sie jedes Bild oder markieren Sie es als dekorativ.",
+        "next_heading": "Nächste Schritte",
+        "next": "Sagen Sie, was Sie vom Leser brauchen und bis wann."
+      }
     }
   },
   "org_templates": {

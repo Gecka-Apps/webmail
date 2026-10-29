@@ -3638,6 +3638,20 @@
       "year": "年",
       "day_of_week": "曜日",
       "sender_name": "あなたの名前"
+    },
+    "section_examples": "例",
+    "builtin": {
+      "accessible": {
+        "name": "アクセシブルなメッセージ",
+        "heading": "このメッセージの内容",
+        "intro": "要点を短い 1〜2 文で最初に書きます。",
+        "details_heading": "詳細",
+        "tip_structure": "太字や空行ではなく、ツールバーの見出しと箇条書きを使います。",
+        "tip_links": "「ここをクリック」ではなく、リンク先がわかるリンク文字列にします。",
+        "tip_images": "画像にはすべて説明を付けるか、装飾用として指定します。",
+        "next_heading": "次のステップ",
+        "next": "読み手に何をいつまでにしてほしいかを書きます。"
+      }
     }
   },
   "org_templates": {

@@ -3638,6 +3638,20 @@
       "year": "Any",
       "day_of_week": "Dia de la setmana",
       "sender_name": "El vostre nom"
+    },
+    "section_examples": "Exemples",
+    "builtin": {
+      "accessible": {
+        "name": "Missatge accessible",
+        "heading": "De què tracta aquest missatge",
+        "intro": "Comenceu amb la idea principal en una o dues frases curtes.",
+        "details_heading": "Detalls",
+        "tip_structure": "Feu servir els títols i les llistes de la barra d'eines, no negreta ni línies en blanc.",
+        "tip_links": "Escriviu textos d'enllaç que diguin on porta l'enllaç, no «feu clic aquí».",
+        "tip_images": "Descriviu cada imatge o marqueu-la com a decorativa.",
+        "next_heading": "Passos següents",
+        "next": "Digueu què necessiteu del lector i per a quan."
+      }
     }
   },
   "org_templates": {

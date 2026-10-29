@@ -3638,6 +3638,20 @@
       "year": "Rok",
       "day_of_week": "Dzień tygodnia",
       "sender_name": "Twoje imię"
+    },
+    "section_examples": "Przykłady",
+    "builtin": {
+      "accessible": {
+        "name": "Dostępna wiadomość",
+        "heading": "O czym jest ta wiadomość",
+        "intro": "Zacznij od najważniejszego w jednym lub dwóch krótkich zdaniach.",
+        "details_heading": "Szczegóły",
+        "tip_structure": "Używaj nagłówków i list z paska narzędzi, a nie pogrubienia czy pustych wierszy.",
+        "tip_links": "Pisz tekst linku, który mówi, dokąd prowadzi, a nie „kliknij tutaj”.",
+        "tip_images": "Opisz każdy obraz albo oznacz go jako dekoracyjny.",
+        "next_heading": "Następne kroki",
+        "next": "Napisz, czego potrzebujesz od czytelnika i na kiedy."
+      }
     }
   },
   "org_templates": {

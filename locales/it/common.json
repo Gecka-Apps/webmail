@@ -3638,6 +3638,20 @@
       "year": "Anno",
       "day_of_week": "Giorno della settimana",
       "sender_name": "Il tuo nome"
+    },
+    "section_examples": "Esempi",
+    "builtin": {
+      "accessible": {
+        "name": "Messaggio accessibile",
+        "heading": "Di cosa parla questo messaggio",
+        "intro": "Inizia dal punto principale in una o due frasi brevi.",
+        "details_heading": "Dettagli",
+        "tip_structure": "Usa i titoli e gli elenchi della barra degli strumenti, non il grassetto o le righe vuote.",
+        "tip_links": "Scrivi testi dei link che dicano dove porta il link, non «clicca qui».",
+        "tip_images": "Descrivi ogni immagine o segnala che è decorativa.",
+        "next_heading": "Prossimi passi",
+        "next": "Di' cosa ti serve dal lettore ed entro quando."
+      }
     }
   },
   "org_templates": {

@@ -3638,6 +3638,20 @@
       "year": "年",
       "day_of_week": "星期幾",
       "sender_name": "您的姓名"
+    },
+    "section_examples": "範例",
+    "builtin": {
+      "accessible": {
+        "name": "無障礙郵件",
+        "heading": "這封郵件在講什麼",
+        "intro": "先用一兩句簡短的話說出重點。",
+        "details_heading": "詳細資訊",
+        "tip_structure": "使用工具列中的標題和清單，不要用粗體或空行代替。",
+        "tip_links": "連結文字要說明連結通往哪裡，不要寫「按這裡」。",
+        "tip_images": "為每張圖片寫描述，或將其標示為裝飾性圖片。",
+        "next_heading": "後續步驟",
+        "next": "說明你需要讀者做什麼，以及期限。"
+      }
     }
   },
   "org_templates": {

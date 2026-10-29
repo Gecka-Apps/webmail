@@ -3638,6 +3638,20 @@
       "year": "연도",
       "day_of_week": "요일",
       "sender_name": "내 이름"
+    },
+    "section_examples": "예시",
+    "builtin": {
+      "accessible": {
+        "name": "접근성을 고려한 메시지",
+        "heading": "이 메시지의 주제",
+        "intro": "핵심 내용을 짧은 한두 문장으로 먼저 쓰세요.",
+        "details_heading": "세부 내용",
+        "tip_structure": "굵은 글씨나 빈 줄 대신 도구 모음의 제목과 목록을 사용하세요.",
+        "tip_links": "'여기를 클릭' 대신 링크가 어디로 가는지 알려 주는 링크 텍스트를 쓰세요.",
+        "tip_images": "모든 이미지에 설명을 달거나 장식용으로 표시하세요.",
+        "next_heading": "다음 단계",
+        "next": "읽는 사람에게 무엇을 언제까지 바라는지 적으세요."
+      }
     }
   },
   "org_templates": {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Search, Star, FileText, Settings } from '@/components/icons';
 import { Input } from '@/components/ui/input';
@@ -15,6 +15,7 @@ import {
   getAutoFilledPlaceholders,
 } from '@/lib/template-utils';
 import type { TemplateSource } from '@/lib/templates/template-sources';
+import { builtInTemplates } from '@/lib/templates/built-in-templates';
 import { refreshAccountTemplates, resolveAccountId } from '@/lib/templates/personal-templates';
 import { refreshTeamTemplates } from '@/lib/templates/team-templates';
 import { PlaceholderFillModal } from './placeholder-fill-modal';
@@ -42,6 +43,12 @@ export function TemplatePicker({ isOpen, onClose, onSelect, accountId }: Templat
   const recentTemplateIds = useTemplateStore((s) => s.recentTemplateIds);
   const { primaryIdentity } = useAuthStore();
   const { sources } = useTemplateSources(accountId);
+  // The examples that come with the app (an accessible layout), read-only.
+  const examples = useMemo(() => builtInTemplates((key) => t(`builtin.${key}`)), [t]);
+  const examplesSource: TemplateSource = useMemo(
+    () => ({ key: 'examples', kind: 'personal', templates: examples, editable: false, locked: false }),
+    [examples],
+  );
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState<EmailTemplate | null>(null);
@@ -62,7 +69,7 @@ export function TemplatePicker({ isOpen, onClose, onSelect, accountId }: Templat
   const handleSelectTemplate = (template: EmailTemplate, source: TemplateSource) => {
     const placeholders = getPlaceholdersFromTemplate(template);
     // Recently used lists the user's own templates only.
-    if (source.kind === 'personal') recordUsage(template.id);
+    if (source.kind === 'personal' && source !== examplesSource) recordUsage(template.id);
 
     if (placeholders.length > 0) {
       setSelectedTemplate(template);
@@ -95,7 +102,7 @@ export function TemplatePicker({ isOpen, onClose, onSelect, accountId }: Templat
       className="w-full text-start p-3 rounded-md hover:bg-muted transition-colors group"
     >
       <div className="flex items-center gap-2 min-w-0">
-        {source.kind === 'personal' && template.isFavorite && (
+        {source.kind === 'personal' && template.isFavorite && source !== examplesSource && (
           <Star className="w-3 h-3 fill-amber-400 text-amber-400 flex-shrink-0" />
         )}
         <span className="text-sm font-medium text-foreground truncate">
@@ -187,6 +194,17 @@ export function TemplatePicker({ isOpen, onClose, onSelect, accountId }: Templat
     );
   };
 
+  // Under a heading of the same level as the categories, after everything else.
+  const renderExamples = (items: EmailTemplate[]) => {
+    if (items.length === 0) return null;
+    return (
+      <section key="examples" data-testid="template-source-examples" aria-label={t('section_examples')} className="mb-2">
+        <h3 className="text-xs font-semibold text-muted-foreground mb-1 px-3">{t('section_examples')}</h3>
+        <div className="space-y-0.5">{items.map((item) => renderTemplateItem(item, examplesSource))}</div>
+      </section>
+    );
+  };
+
   const total = sources.reduce((n, source) => n + source.templates.length, 0);
   // Only the user's own templates: the picker looks as it always did.
   const onlyPersonal = sources.every((source) => source.kind === 'personal' || source.templates.length === 0);
@@ -194,7 +212,8 @@ export function TemplatePicker({ isOpen, onClose, onSelect, accountId }: Templat
   const results = searchQuery
     ? sources.map((source) => ({ source, items: filterTemplates(source.templates, searchQuery) }))
     : null;
-  const resultCount = results?.reduce((n, r) => n + r.items.length, 0) ?? 0;
+  const exampleResults = searchQuery ? filterTemplates(examples, searchQuery) : examples;
+  const resultCount = (results?.reduce((n, r) => n + r.items.length, 0) ?? 0) + exampleResults.length;
 
   return (
     <>
@@ -254,6 +273,7 @@ export function TemplatePicker({ isOpen, onClose, onSelect, accountId }: Templat
                 ? renderPersonal(source, !onlyPersonal)
                 : renderShared(source, source.templates))
             )}
+            {(!results || resultCount > 0) && renderExamples(exampleResults)}
           </div>
         </div>
       </Dialog>
