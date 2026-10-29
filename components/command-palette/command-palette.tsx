@@ -37,7 +37,7 @@ import { COMMAND_PALETTE_OPEN_EVENT, KEYBOARD_SHORTCUTS_OPEN_EVENT, parkAppComma
 import { commandMatches, useRegisteredCommandGroups } from "@/lib/command-registry";
 import { shortcutAlternatives } from "@/lib/shortcut-keys";
 import { toUnicodeEmail } from "@/lib/idn";
-import { isEditableEventTarget } from "@/lib/keyboard";
+import { isEditableEventTarget, isKeyboardLayerOpen } from "@/lib/keyboard";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { IconButton } from "@/components/ui/icon-button";
@@ -108,8 +108,8 @@ export function CommandPaletteHost() {
       if (event.ctrlKey || event.metaKey || event.altKey) return;
       const question = event.key === "?" || (event.code === "Slash" && event.shiftKey);
       if (!question || isEditableEventTarget(event) || isContextMenuOpen()) return;
-      // Another dialog is open: the key belongs to it.
-      if (document.querySelector('[aria-modal="true"]')) return;
+      // Another dialog, a menu or a popup is open: the key belongs to it.
+      if (event.defaultPrevented || isKeyboardLayerOpen()) return;
       event.preventDefault();
       event.stopImmediatePropagation();
       setShowShortcuts(true);

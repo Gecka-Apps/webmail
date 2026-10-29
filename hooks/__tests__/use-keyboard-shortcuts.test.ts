@@ -45,8 +45,16 @@ describe('useKeyboardShortcuts: x toggles thread expansion', () => {
 // #992: Shift + arrow (or j/k) extends the selection instead of moving to the
 // next message; plain arrows still move.
 describe('useKeyboardShortcuts: Shift + arrow extends the selection', () => {
+  // From inside the message list: the arrows only move the selection there.
   function press(key: string, code: string, shiftKey: boolean) {
-    document.dispatchEvent(new KeyboardEvent('keydown', { key, code, shiftKey, bubbles: true }));
+    const list = document.createElement('div');
+    list.id = 'message-list';
+    document.body.appendChild(list);
+    try {
+      list.dispatchEvent(new KeyboardEvent('keydown', { key, code, shiftKey, bubbles: true }));
+    } finally {
+      list.remove();
+    }
   }
 
   it.each([

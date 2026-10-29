@@ -2,7 +2,7 @@
 
 import { useEffect, useCallback, useRef } from "react";
 import { Email } from "@/lib/jmap/types";
-import { isActivatableEventTarget, isEditableEventTarget } from "@/lib/keyboard";
+import { isActivatableEventTarget, isAppShortcutBlocked, isEventInside } from "@/lib/keyboard";
 import { keyboardHooks } from "@/lib/plugin-hooks";
 
 export interface KeyboardShortcutHandlers {
@@ -67,6 +67,12 @@ export interface UseKeyboardShortcutsOptions {
    * and enables the `g` sequences.
    */
   mountainViewKeys?: boolean;
+  /**
+   * Where the arrow keys move the selection: only while the focus is in the
+   * message list, so they still scroll the reading pane or move a resize
+   * handle elsewhere on the page.
+   */
+  listSelector?: string;
   emails: Email[];
   selectedEmailId?: string;
   selectionCount?: number;
@@ -99,6 +105,7 @@ function physicalShortcutKey(event: KeyboardEvent): string {
 export function useKeyboardShortcuts({
   enabled = true,
   mountainViewKeys = false,
+  listSelector = "#message-list",
   emails,
   selectedEmailId,
   selectionCount = 0,
@@ -120,7 +127,10 @@ export function useKeyboardShortcuts({
       // Don't trigger shortcuts when typing in inputs. Must be event-based
       // (composedPath), not document.activeElement: the QuotedHtml island's
       // shadow root retargets activeElement to its plain-div host (#654).
-      if (isEditableEventTarget(event)) return;
+      // Nor while a dialog, menu or popup is open: Delete in the shortcuts
+      // help deleted the message behind it.
+      if (isAppShortcutBlocked(event)) return;
+      if ((event.key === "ArrowDown" || event.key === "ArrowUp") && !isEventInside(event, listSelector)) return;
 
       const h = handlersRef.current;
       const key = physicalShortcutKey(event);
@@ -332,7 +342,7 @@ export function useKeyboardShortcuts({
           break;
       }
     },
-    [selectedEmailId, selectionCount, mountainViewKeys]
+    [selectedEmailId, selectionCount, mountainViewKeys, listSelector]
   );
 
   // A pending sequence must not outlive the hook.

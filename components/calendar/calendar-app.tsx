@@ -106,7 +106,7 @@ import { useMountainViewShell } from "@/hooks/use-mountain-view-shell";
 import { calendarHooks } from "@/lib/plugin-hooks";
 import { eventToView } from "@/lib/plugin-projection";
 import { calendarShortcutAction } from "@/lib/calendar-shortcuts";
-import { isEditableEventTarget } from "@/lib/keyboard";
+import { isAppShortcutBlocked, isArrowKeyWidgetTarget } from "@/lib/keyboard";
 import { isContextMenuOpen } from "@/components/ui/context-menu";
 import { useRegisterCommands } from "@/lib/command-registry";
 import { useConfig } from "@/hooks/use-config";
@@ -1580,16 +1580,16 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.defaultPrevented) return;
-      if (isEditableEventTarget(e)) return;
-      // An open menu or dialog owns the keyboard; a hover preview doesn't,
-      // only a card the user opened.
+      // An open menu, popup or dialog owns the keyboard; a hover preview
+      // doesn't, only a card the user opened.
+      if (isAppShortcutBlocked(e)) return;
       if (isContextMenuOpen()) return;
-      if (document.querySelector('[aria-modal="true"]')) return;
       if (showEventModal || showTaskModal || detailPinned) return;
 
       const action = calendarShortcutAction(e);
       if (!action) return;
+      // A slider, tabs or a menu keeps its own arrows.
+      if ((action === "prev" || action === "next") && isArrowKeyWidgetTarget(e)) return;
       if (action !== "new" && action !== "search") leaveSearch();
       switch (action) {
         case "prev": e.preventDefault(); navigatePrev(); break;

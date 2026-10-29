@@ -54,7 +54,7 @@ import {
 import { useShortenedText } from "@/hooks/use-shortened-text";
 import { useKeywordFormat } from "@/hooks/use-keyword-format";
 import { TagScopeContext, useAccountTags } from "@/hooks/use-account-tags";
-import { isEditableEventTarget } from "@/lib/keyboard";
+import { isAppShortcutBlocked, isEventInside } from "@/lib/keyboard";
 import { Mailbox } from "@/lib/jmap/types";
 import { useContextMenu } from "@/hooks/use-context-menu";
 import { useLongPress } from "@/hooks/use-long-press";
@@ -1504,7 +1504,10 @@ function SidebarImpl({
       // contentEditable composer, the subject field, search, etc.) toggled the
       // selected mailbox's subfolders open/closed on ArrowLeft/ArrowRight.
       // composedPath-based so it also sees the QuotedHtml shadow island (#654).
-      if (isEditableEventTarget(e)) return;
+      if (isAppShortcutBlocked(e)) return;
+      // Only in the folder list: elsewhere the arrows belong to the message
+      // list, the reading pane or whatever has the focus.
+      if (!isEventInside(e, "[data-folder-nav]")) return;
       if (!selectedMailbox || isCollapsed) return;
 
       const findNode = (nodes: MailboxNode[]): MailboxNode | null => {
@@ -1730,7 +1733,7 @@ function SidebarImpl({
       {!isCollapsed && <VacationBanner />}
 
       {/* Mailbox List */}
-      <div className="flex-1 overflow-y-auto" data-tour="sidebar">
+      <div className="flex-1 overflow-y-auto" data-tour="sidebar" data-folder-nav="">
         {(showUnified || showCrossUnread || showCrossStarred || showCrossAll) && (
           <div>
             <SidebarSectionHeader

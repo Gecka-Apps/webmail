@@ -41,3 +41,66 @@ export function isActivatableEventTarget(event: Event): boolean {
       node.matches('a[href], button, summary, [role="button"], [role="link"], [role="checkbox"], [role="menuitem"], [role="option"], [role="tab"], [role="switch"]'),
   );
 }
+
+// Open layers that own the keyboard while they're up: a modal dialog, a menu,
+// and the popup of a menu button, listbox button or combobox. A permanent
+// listbox or grid (a list on the page) is not one of them.
+const KEYBOARD_LAYER_SELECTOR = [
+  '[aria-modal="true"]',
+  '[role="menu"]',
+  '[role="combobox"][aria-expanded="true"]',
+  '[aria-haspopup="menu"][aria-expanded="true"]',
+  '[aria-haspopup="listbox"][aria-expanded="true"]',
+  '[aria-haspopup="true"][aria-expanded="true"]',
+].join(", ");
+
+/** Whether a modal dialog, a menu or a listbox popup is open on the page. */
+export function isKeyboardLayerOpen(root: ParentNode = document): boolean {
+  for (const el of Array.from(root.querySelectorAll<HTMLElement>(KEYBOARD_LAYER_SELECTOR))) {
+    // Kept mounted but hidden (a closed drawer, an inert pane) doesn't count.
+    if (!el.closest('[hidden], [inert], [aria-hidden="true"]')) return true;
+  }
+  return false;
+}
+
+/**
+ * Whether a page-wide app shortcut (Mail's j/k/Delete, the calendar's
+ * letters, Files' arrows) must leave this key press alone: someone already
+ * handled it, the user is typing, or a dialog, menu or popup is open and the
+ * key belongs to that. Without the last check Delete in the shortcuts help
+ * deleted the message behind it.
+ */
+export function isAppShortcutBlocked(event: KeyboardEvent): boolean {
+  return event.defaultPrevented || isEditableEventTarget(event) || isKeyboardLayerOpen();
+}
+
+/**
+ * A shortcut that is one printable character with no Ctrl, Alt or ⌘
+ * (j, #, ?, /). WCAG 2.1.4 asks that these can be turned off, since speech
+ * input types them by accident; Delete, the arrows, Enter and Escape are not
+ * character keys and stay.
+ */
+export function isSingleCharacterKey(event: Pick<KeyboardEvent, "key" | "ctrlKey" | "metaKey" | "altKey">): boolean {
+  if (event.ctrlKey || event.metaKey || event.altKey) return false;
+  return [...event.key].length === 1;
+}
+
+/** Whether the key press started inside an element that matches `selector`. */
+export function isEventInside(event: Event, selector: string): boolean {
+  const path =
+    typeof event.composedPath === "function"
+      ? event.composedPath()
+      : [event.target];
+  return path.some((node) => node instanceof Element && node.matches(selector));
+}
+
+/**
+ * Controls that use the arrow keys themselves: a page-wide arrow shortcut
+ * must not take them from a slider, a resize handle, tabs, a grid or a menu.
+ */
+export function isArrowKeyWidgetTarget(event: Event): boolean {
+  return isEventInside(
+    event,
+    'select, [role="slider"], [role="separator"], [role="scrollbar"], [role="spinbutton"], [role="tablist"], [role="radiogroup"], [role="grid"], [role="treegrid"], [role="tree"], [role="listbox"], [role="menu"], [role="menubar"], [role="toolbar"]',
+  );
+}

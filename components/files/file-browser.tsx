@@ -38,6 +38,7 @@ import { ShareCollectionDialog } from "@/components/settings/share-collection-di
 import type { IJMAPClient } from "@/lib/jmap/client-interface";
 import type { FileNodeRights } from "@/lib/jmap/types";
 import type { FileResourceView } from "@/lib/plugin-types";
+import { isAppShortcutBlocked, isArrowKeyWidgetTarget } from "@/lib/keyboard";
 
 const NO_FORMATS: string[] = [];
 
@@ -716,7 +717,7 @@ export function FileBrowser({
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (isTypingTarget(e.target)) return;
+      if (isTypingTarget(e.target) || isAppShortcutBlocked(e)) return;
       if (showNewFolder || showNewTextFile || renameTarget || renameFolder || shareTargetId || moveTarget) return;
       // A preview, editor or confirmation is open on top of the list.
       if (document.querySelector('[role="dialog"], [role="alertdialog"]')) return;
@@ -785,6 +786,8 @@ export function FileBrowser({
         navigateUp();
         return;
       }
+      // A slider, tabs or a menu keeps its own arrows.
+      if (e.key.startsWith("Arrow") && isArrowKeyWidgetTarget(e)) return;
       if (e.key === "ArrowDown" || e.key === "ArrowUp") {
         e.preventDefault();
         const step = viewMode === "grid" ? gridColumns() : 1;

@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import type { AnniversaryDate, ContactCard } from "@/lib/jmap/types";
 import { getContactDisplayName, getContactSortName, hasContactPhoto } from "@/stores/contact-store";
 import { useSettingsStore } from "@/stores/settings-store";
+import { isAppShortcutBlocked } from "@/lib/keyboard";
 
 type TriState = boolean | null;
 
@@ -375,9 +376,8 @@ export function ContactList({
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
-      const target = e.target as HTMLElement | null;
-      if (target?.closest("input, textarea, select, [contenteditable=true]")) return;
-      if (document.querySelector('[role="dialog"], [role="alertdialog"], [role="menu"]')) return;
+      if (isAppShortcutBlocked(e)) return;
+      if (document.querySelector('[role="dialog"], [role="alertdialog"]')) return;
       e.preventDefault();
       searchRef.current?.focus();
     };
