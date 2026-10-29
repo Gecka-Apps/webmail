@@ -69,6 +69,12 @@ describe('plain-language mode', () => {
     expect(text('normal')).toBe(deCommon.login.sign_in);
   });
 
+  it('works without server messages, as in the Lite export', async () => {
+    useSettingsStore.setState({ plainLanguage: true });
+    render(<IntlProvider locale="de"><Strings /></IntlProvider>);
+    expect(await screen.findByText(dePlain.login.error.invalid_credentials)).toBeTruthy();
+  });
+
   it('leaves other locales on their normal strings', async () => {
     useSettingsStore.setState({ plainLanguage: true });
     render(<IntlProvider locale="fr" messages={frCommon}><Strings /></IntlProvider>);
