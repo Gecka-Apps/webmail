@@ -30,11 +30,97 @@
       "access_denied": "Sie dürfen sich hier nicht anmelden. Bitten Sie Ihre Administration um Zugang."
     }
   },
+  "session_limits": {
+    "idle_message": "Sie haben eine Weile nichts getan. In {seconds, plural, one {# Sekunde} other {# Sekunden}} werden Sie abgemeldet. E-Mails, die Sie gerade schreiben, werden als Entwurf gespeichert.",
+    "max_message": "Ihre Organisation meldet Sie {hours, plural, one {# Stunde} other {# Stunden}} nach der Anmeldung ab. In {seconds, plural, one {# Sekunde} other {# Sekunden}} werden Sie abgemeldet. E-Mails, die Sie gerade schreiben, werden als Entwurf gespeichert.",
+    "reason_max": "Sie wurden abgemeldet, weil Sie {hours, plural, one {# Stunde} other {# Stunden}} angemeldet waren. Länger erlaubt es Ihre Organisation nicht.",
+    "drafts_not_saved": "Einige E-Mails, die Sie geschrieben haben, konnten nicht als Entwurf gespeichert werden."
+  },
   "totp_reauth": {
     "title": "Neuen Code eingeben",
     "description": "Ihr letzter Code gilt nicht mehr. Öffnen Sie Ihre Authenticator-App und geben Sie den neuen Code ein, um weiterzumachen.",
     "oauth_hint": "Diese Abfrage kommt immer wieder. Ihre Administration kann das abstellen, indem sie eine andere Anmeldeart (OAuth) einschaltet.",
     "code_label": "Code aus Ihrer Authenticator-App"
+  },
+  "email_list": {
+    "permanent_delete_confirm_message": "Diese E-Mail wird endgültig gelöscht. Sie können sie nicht zurückholen.",
+    "permanent_delete_confirm_batch_message": "{count, plural, one {Diese E-Mail wird} other {Diese # E-Mails werden}} endgültig gelöscht. Sie können sie nicht zurückholen.",
+    "empty_folder": {
+      "confirm_message": "Alle E-Mails in diesem Ordner werden endgültig gelöscht. Sie können sie nicht zurückholen."
+    }
+  },
+  "email_viewer": {
+    "read_receipt": {
+      "send_failed": "Die Lesebestätigung konnte nicht gesendet werden"
+    },
+    "archive_mailbox_not_found": "Es gibt keinen Archiv-Ordner, deshalb kann die E-Mail nicht archiviert werden",
+    "source_load_failed": "Die Rohdaten der E-Mail konnten nicht geladen werden. Versuchen Sie es noch einmal oder speichern Sie die E-Mail als Datei (.eml).",
+    "spam": {
+      "error": "Die E-Mail konnte nicht als Spam markiert werden. Versuchen Sie es noch einmal.",
+      "error_not_spam": "Die E-Mail konnte nicht zurückgeholt werden. Versuchen Sie es noch einmal."
+    },
+    "unsubscribe_banner": {
+      "error": "Das Abbestellen hat nicht geklappt. Versuchen Sie es später noch einmal."
+    },
+    "calendar_invitation": {
+      "parse_error": "Diese Einladung kann nicht gelesen werden",
+      "action_failed": "Das hat in Ihrem Kalender nicht geklappt. Versuchen Sie es noch einmal."
+    },
+    "undo_send_failed": "Das Senden konnte nicht gestoppt werden. Die E-Mail ist vielleicht schon gesendet.",
+    "undo_send_signed_out": "Das Senden konnte nicht gestoppt werden, weil Sie bei dem Konto, das sie sendet, nicht mehr angemeldet sind.",
+    "send_cancelled_restore_failed": "Das Senden wurde gestoppt. Die E-Mail konnte aber nicht zurück in „Entwürfe“ gelegt werden. Sie liegt noch in „Gesendet“.",
+    "send_cancelled_remove_failed": "Das Senden wurde gestoppt. Die E-Mail konnte aber nicht aus „Gesendet“ entfernt werden.",
+    "cancel_scheduled_failed": "Das geplante Senden konnte nicht gestoppt werden. Versuchen Sie es noch einmal.",
+    "save_to_files": {
+      "failed": "Die Datei konnte nicht in „Dateien“ gespeichert werden. Versuchen Sie es noch einmal."
+    }
+  },
+  "email_composer": {
+    "files_picker": {
+      "load_failed": "Ihre Dateien konnten nicht geladen werden. Versuchen Sie es noch einmal."
+    },
+    "save_failed": "Der Entwurf konnte nicht gespeichert werden. Versuchen Sie es noch einmal.",
+    "validation": {
+      "invalid_recipients": "Nicht gesendet. Diese Adressen sind nicht richtig: {addresses}",
+      "attachment_upload_failed": "Nicht gesendet. Ein Anhang konnte nicht hochgeladen werden. Entfernen Sie ihn und versuchen Sie es noch einmal."
+    },
+    "upload_failed": "{filename} konnte nicht hochgeladen werden. Versuchen Sie es noch einmal.",
+    "send_failed": "Ihre E-Mail wurde nicht gesendet. Versuchen Sie es noch einmal.",
+    "send_offline": "Sie sind nicht mit dem Internet verbunden. Ihre E-Mail ist noch da. Senden Sie sie noch einmal, wenn Sie wieder online sind.",
+    "send_timeout": "Der Server hat nicht mehr geantwortet. Vielleicht wurde Ihre E-Mail trotzdem gesendet. Schauen Sie in Ihren Ordner „Gesendet“, bevor Sie sie noch einmal senden.",
+    "submission_limit": "Der Server hat die E-Mail nicht gesendet, weil Sie eine Grenze erreicht haben: {reason}",
+    "send_plugin_failed": "Nicht gesendet. Eine Erweiterung, die die E-Mail sendet, hat nicht funktioniert oder zu lange gebraucht. Schauen Sie in Ihren Ordner „Gesendet“, bevor Sie sie noch einmal senden.",
+    "schedule_send_invalid": "Geben Sie ein Datum und eine Uhrzeit ein.",
+    "schedule_send_cleanup_warning": "Die E-Mail wird zur gewählten Zeit gesendet. Der Entwurf konnte aber nicht entfernt werden und liegt noch in „Entwürfe“.",
+    "invalid_recipient": "Das ist keine richtige E-Mail-Adresse",
+    "send_filing_warning": "Gesendet. Ein alter Entwurf dieser E-Mail liegt aber vielleicht noch in „Entwürfe“.",
+    "send_guard_failed": "Nicht gesendet. Eine Erweiterung, die E-Mails vor dem Senden prüft, hat nicht funktioniert oder nicht geantwortet."
+  },
+  "common": {
+    "reconnecting": "Die Verbindung ist weg. Wir versuchen, wieder zu verbinden…"
+  },
+  "notifications": {
+    "error_archiving": "Die E-Mail konnte nicht archiviert werden. Versuchen Sie es noch einmal.",
+    "error_updating": "Die E-Mail konnte nicht geändert werden. Versuchen Sie es noch einmal.",
+    "error_sending": "Ihre E-Mail wurde nicht gesendet. Versuchen Sie es noch einmal.",
+    "error_deleting": "Die E-Mail konnte nicht gelöscht werden. Versuchen Sie es noch einmal.",
+    "error_loading": "Ihre E-Mails konnten nicht geladen werden. Versuchen Sie es noch einmal.",
+    "move_failed": "Verschieben hat nicht geklappt. Versuchen Sie es noch einmal.",
+    "undo_failed": "Rückgängig machen hat nicht geklappt. Versuchen Sie es noch einmal.",
+    "copy_failed": "Kopieren hat nicht geklappt. Versuchen Sie es noch einmal.",
+    "move_error": "Die E-Mails konnten nicht in diesen Ordner verschoben werden. Versuchen Sie es noch einmal.",
+    "tag_failed": "Das Label konnte nicht hinzugefügt werden. Versuchen Sie es noch einmal.",
+    "identity_create_failed": "Die Absenderadresse konnte nicht hinzugefügt werden: {error}",
+    "identity_update_failed": "Die Absenderadresse konnte nicht geändert werden: {error}",
+    "identity_delete_failed": "Die Absenderadresse konnte nicht gelöscht werden: {error}",
+    "identity_unauthorized": "Sie dürfen von dieser E-Mail-Adresse nicht senden. Fragen Sie Ihre Administration, wenn Sie sie brauchen.",
+    "vacation_save_failed": "Ihre automatische Antwort konnte nicht gespeichert werden. Versuchen Sie es noch einmal.",
+    "filters_save_failed": "Ihre Filterregeln konnten nicht gespeichert werden. Versuchen Sie es noch einmal.",
+    "export_email_error": "Die E-Mail konnte nicht als Datei gespeichert werden. Versuchen Sie es noch einmal.",
+    "import_email_error": "Die E-Mail konnte nicht aus der Datei hinzugefügt werden. Prüfen Sie die Datei und versuchen Sie es noch einmal.",
+    "rule_apply_failed": "Die Regel konnte nicht auf die E-Mails angewendet werden, die schon da sind",
+    "rule_folder_failed": "Der Ordner konnte nicht erstellt werden. Versuchen Sie es noch einmal.",
+    "vacation_filters_save_failed": "Ihre automatische Antwort ist gespeichert. Die Weiterleitung und die Antwortliste konnten aber nicht gespeichert werden. Versuchen Sie es noch einmal."
   },
   "settings": {
     "reset_confirm": "Alle Einstellungen auf den Anfangszustand zurücksetzen?",
@@ -617,5 +703,38 @@
     "composer_error": "Das Fenster für neue E-Mails konnte nicht geöffnet werden",
     "settings_error_title": "Die Einstellungen konnten nicht geöffnet werden",
     "settings_error_description": "Ihre Einstellungen konnten nicht geladen werden. Was Sie jetzt ändern, wird vielleicht nicht gespeichert."
+  },
+  "identities": {
+    "delete_confirm": "Diese Absenderadresse löschen? Das können Sie nicht rückgängig machen.",
+    "cannot_delete": "Diese Absenderadresse können Sie nicht löschen",
+    "validation_errors": {
+      "invalid_emails": "Diese E-Mail-Adressen sind nicht richtig: {emails}"
+    },
+    "form": {
+      "email_invalid": "Geben Sie eine richtige E-Mail-Adresse ein",
+      "email_immutable": "Die E-Mail-Adresse können Sie nach dem Hinzufügen nicht mehr ändern",
+      "signature_byte_limit_reached": "Die Signatur ist zu lang für den Server"
+    },
+    "sub_address": {
+      "invalid_tag": "Verwenden Sie im Stichwort nur Buchstaben, Ziffern und Bindestriche (-)"
+    }
+  },
+  "sharing": {
+    "directory_failed": "Die Liste der Personen und Gruppen konnte nicht geladen werden. Versuchen Sie es noch einmal.",
+    "share_failed": "Die Freigabe konnte nicht geändert werden. Versuchen Sie es noch einmal."
+  },
+  "delegates": {
+    "read_failed": "Ein Teil Ihrer Freigaben konnte nicht geladen werden. Sie können Zugriffe ändern oder entfernen, sobald alles geladen ist.",
+    "lookup_failed": "Diese Adresse wurde nicht gefunden. Prüfen Sie sie und versuchen Sie es noch einmal.",
+    "directory_failed": "Die Liste der Personen und Gruppen konnte nicht geladen werden. Versuchen Sie es noch einmal."
+  },
+  "smime": {
+    "cert_expired": "Dieses Zertifikat ist nicht mehr gültig",
+    "status_encrypted_failed": "Diese E-Mail ist verschlüsselt und konnte nicht entschlüsselt werden. Vielleicht fehlt Ihnen der passende Schlüssel.",
+    "status_signed_invalid": "Die Signatur ist ungültig. Die E-Mail wurde vielleicht verändert.",
+    "status_signed_expired_cert": "Mit einem Zertifikat signiert, das nicht mehr gültig ist"
+  },
+  "recover_deleted": {
+    "load_failed": "Gelöschte E-Mails konnten nicht geladen werden. Versuchen Sie es noch einmal."
   }
 }

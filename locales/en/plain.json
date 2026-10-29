@@ -30,11 +30,98 @@
       "access_denied": "You are not allowed to sign in here. Ask your administrator for access."
     }
   },
+  "session_limits": {
+    "idle_message": "You haven't done anything for a while. You will be signed out in {seconds, plural, one {# second} other {# seconds}}. Messages you are writing are saved as drafts.",
+    "max_message": "Your organisation signs you out {hours, plural, one {# hour} other {# hours}} after you sign in. You will be signed out in {seconds, plural, one {# second} other {# seconds}}. Messages you are writing are saved as drafts.",
+    "reason_max": "You were signed out because you were signed in for {hours, plural, one {# hour} other {# hours}}. That is the longest time your organisation allows.",
+    "drafts_not_saved": "Some messages you were writing could not be saved as drafts."
+  },
   "totp_reauth": {
     "title": "Enter a new code",
     "description": "Your last code is no longer valid. Open your authenticator app and type the new code to continue.",
     "oauth_hint": "This question comes back from time to time. Your administrator can stop it by turning on a different way to sign in (OAuth).",
     "code_label": "Code from your authenticator app"
+  },
+  "email_list": {
+    "permanent_delete_confirm_message": "This message will be deleted for good. You can't get it back.",
+    "permanent_delete_confirm_batch_message": "{count, plural, one {This message} other {These # messages}} will be deleted for good. You can't get {count, plural, one {it} other {them}} back.",
+    "empty_folder": {
+      "confirm_message": "All messages in this folder will be deleted for good. You can't get them back."
+    }
+  },
+  "email_viewer": {
+    "read_receipt": {
+      "send_failed": "The read receipt could not be sent"
+    },
+    "archive_mailbox_not_found": "There is no Archive folder, so the message can't be archived",
+    "source_load_failed": "The raw message could not be loaded. Try again, or save the message as a file (.eml).",
+    "spam": {
+      "error": "The message could not be marked as spam. Try again.",
+      "error_not_spam": "The message could not be moved back. Try again."
+    },
+    "unsubscribe_banner": {
+      "error": "Unsubscribing did not work. Try again later."
+    },
+    "calendar_invitation": {
+      "parse_error": "This invitation can't be read",
+      "action_failed": "That did not work in your calendar. Try again."
+    },
+    "undo_send_failed": "Sending could not be stopped. The message may already be sent.",
+    "undo_send_signed_out": "Sending could not be stopped, because you are no longer signed in to the account that sends it.",
+    "send_cancelled_restore_failed": "Sending was stopped. But the message could not be put back into Drafts. It is still in Sent.",
+    "send_cancelled_remove_failed": "Sending was stopped. But the message could not be removed from Sent.",
+    "cancel_scheduled_failed": "The planned sending could not be stopped. Try again.",
+    "save_to_files": {
+      "failed": "The file could not be saved in Files. Try again."
+    }
+  },
+  "email_composer": {
+    "files_picker": {
+      "load_failed": "Your files could not be loaded. Try again."
+    },
+    "save_failed": "The draft could not be saved. Try again.",
+    "validation": {
+      "invalid_recipients": "Not sent. These addresses are not correct: {addresses}",
+      "attachment_upload_failed": "Not sent. An attachment could not be uploaded. Remove it and try again."
+    },
+    "upload_failed": "{filename} could not be uploaded. Try again.",
+    "send_failed": "Your message was not sent. Try again.",
+    "send_offline": "You are not connected to the internet. Your message is still here. Send it again when you are back online.",
+    "send_timeout": "The server stopped answering. Your message may have been sent anyway. Look in your Sent folder before you send it again.",
+    "submission_limit": "The server did not send the message because you reached a limit: {reason}",
+    "send_plugin_failed": "Not sent. An add-on that sends the message did not work or took too long. Look in your Sent folder before you send it again.",
+    "schedule_send_invalid": "Enter a date and a time.",
+    "schedule_send_cleanup_warning": "The message will be sent at the chosen time. But the draft could not be removed, so it is still in Drafts.",
+    "invalid_recipient": "This is not a correct email address",
+    "send_filing_warning": "Sent. But an old draft of this message may still be in Drafts.",
+    "send_guard_failed": "Not sent. An add-on that checks messages before sending did not work or did not answer.",
+    "attachment_upload_failed": "Could not upload"
+  },
+  "common": {
+    "reconnecting": "The connection is lost. We are trying to connect again…"
+  },
+  "notifications": {
+    "error_archiving": "The message could not be archived. Try again.",
+    "error_updating": "The message could not be changed. Try again.",
+    "error_sending": "Your message was not sent. Try again.",
+    "error_deleting": "The message could not be deleted. Try again.",
+    "error_loading": "Your messages could not be loaded. Try again.",
+    "move_failed": "Could not move. Try again.",
+    "undo_failed": "Could not undo. Try again.",
+    "copy_failed": "Could not copy. Try again.",
+    "move_error": "The messages could not be moved to this folder. Try again.",
+    "tag_failed": "The label could not be added. Try again.",
+    "identity_create_failed": "The sender address could not be added: {error}",
+    "identity_update_failed": "The sender address could not be changed: {error}",
+    "identity_delete_failed": "The sender address could not be deleted: {error}",
+    "identity_unauthorized": "You are not allowed to send from this email address. Ask your administrator if you need it.",
+    "vacation_save_failed": "Your automatic reply could not be saved. Try again.",
+    "filters_save_failed": "Your filter rules could not be saved. Try again.",
+    "export_email_error": "The message could not be saved as a file. Try again.",
+    "import_email_error": "The message could not be added from the file. Check the file and try again.",
+    "rule_apply_failed": "The rule could not be used for the messages that are already here",
+    "rule_folder_failed": "The folder could not be created. Try again.",
+    "vacation_filters_save_failed": "Your automatic reply is saved. But the forwarding and the reply list could not be saved. Try again."
   },
   "settings": {
     "reset_confirm": "Put all settings back to how they were at the start?",
@@ -621,5 +708,41 @@
     "composer_error": "The editor for new messages could not be opened",
     "settings_error_title": "Settings could not be opened",
     "settings_error_description": "Your settings could not be loaded. Changes you make now may not be saved."
+  },
+  "identities": {
+    "delete_confirm": "Delete this sender address? You can't undo this.",
+    "cannot_delete": "You can't delete this sender address",
+    "validation_errors": {
+      "invalid_emails": "These email addresses are not correct: {emails}"
+    },
+    "form": {
+      "email_invalid": "Enter a correct email address",
+      "email_immutable": "You can't change the email address after you add it",
+      "signature_byte_limit_reached": "The signature is too long for the server"
+    },
+    "sub_address": {
+      "invalid_tag": "Use only letters, numbers and dashes (-) in the tag"
+    }
+  },
+  "sharing": {
+    "directory_failed": "The list of people and groups could not be loaded. Try again.",
+    "share_failed": "Sharing could not be changed. Try again."
+  },
+  "delegates": {
+    "read_failed": "Some of your sharing could not be loaded. You can change or remove access when it has loaded.",
+    "lookup_failed": "This address could not be found. Check it and try again.",
+    "directory_failed": "The list of people and groups could not be loaded. Try again."
+  },
+  "smime": {
+    "cert_expired": "This certificate is no longer valid",
+    "status_encrypted_failed": "This message is locked, and it could not be unlocked. You may not have the right key.",
+    "status_signed_invalid": "The signature is not valid. The message may have been changed.",
+    "status_signed_expired_cert": "Signed with a certificate that is no longer valid"
+  },
+  "recover_deleted": {
+    "load_failed": "Deleted mail could not be loaded. Try again."
+  },
+  "global_search": {
+    "account_error": "{account} could not be searched"
   }
 }
