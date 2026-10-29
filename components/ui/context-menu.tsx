@@ -1,5 +1,6 @@
 "use client";
 
+import { hoverOpens } from "@/lib/open-on-hover";
 import {
   createContext,
   forwardRef,
@@ -561,6 +562,8 @@ export function ContextMenuItem({
       // Hovering another entry closes an open submenu of this level, after
       // a moment, so a diagonal move into the submenu doesn't.
       onMouseEnter={() => {
+        // With hover opening off, a submenu stays until a click or a key.
+        if (!hoverOpens()) return;
         if (level && level.openId !== null && !level.recentTouch()) level.request(null, HOVER_CLOSE_DELAY);
       }}
       onFocus={() => {
@@ -670,7 +673,9 @@ export function ContextMenuSubMenu({
     <div
       className="relative"
       onMouseEnter={() => {
-        if (!disabled) setOpen(true);
+        // Settings > Accessibility can make submenus open on click or
+        // Enter only.
+        if (!disabled && hoverOpens()) setOpen(true);
       }}
     >
       <div

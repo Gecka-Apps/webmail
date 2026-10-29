@@ -1,5 +1,6 @@
 "use client";
 
+import { hoverOpens } from "@/lib/open-on-hover";
 import { memo, useState, useEffect, useMemo, useCallback, useRef, useId, Fragment, ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
@@ -1682,7 +1683,8 @@ function SidebarImpl({
 
   return (
     <div
-      onMouseEnter={mvShell && sidebarCollapsed ? () => setRailHovered(true) : undefined}
+      // The peek of the collapsed rail; not with hover opening turned off.
+      onMouseEnter={mvShell && sidebarCollapsed ? () => { if (hoverOpens()) setRailHovered(true); } : undefined}
       onMouseLeave={mvShell && sidebarCollapsed ? () => setRailHovered(false) : undefined}
       data-mv-rail-peek={hoverExpanded ? "" : undefined}
       className={cn(

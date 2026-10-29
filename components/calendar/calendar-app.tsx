@@ -1,5 +1,6 @@
 "use client";
 
+import { hoverOpens } from "@/lib/open-on-hover";
 import { useState, useEffect, useCallback, useRef, useMemo, type TouchEvent as ReactTouchEvent } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
@@ -861,6 +862,8 @@ export function CalendarApp({ linkSegments: routeSegments }: CalendarAppProps = 
     if (isMobile) return;
     if (detailPinnedRef.current) return;
     if (calendarHoverPreview === 'off') return;
+    // Settings > Accessibility: previews open on click only.
+    if (!hoverOpens()) return;
     if (hoverTimerRef.current) { clearTimeout(hoverTimerRef.current); hoverTimerRef.current = null; }
     if (!canHoverPreview()) return;
     if (calendarHoverPreview === 'delay-500ms' || calendarHoverPreview === 'delay-1s' || calendarHoverPreview === 'delay-2s') {
