@@ -30,6 +30,7 @@ import { shareRecipientNames, useShareRecipientLabels } from '@/hooks/use-share-
 import { calendarAccountKey, moveCalendar } from '@/lib/calendar-sort';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
 import { TOUCH_HIT_AREA } from '@/components/ui/button';
+import { TermInfo } from '@/components/ui/term';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { useConfig } from '@/hooks/use-config';
 
@@ -866,6 +867,7 @@ export function CalendarManagementSettings() {
           <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
             <Globe className="w-4 h-4 text-muted-foreground" />
             {tSub('section_title')}
+            <TermInfo id="icalendar" />
           </h4>
           {icalSubscriptions.map((sub) => {
             return (

@@ -3,6 +3,7 @@
 import { useId, type ReactNode } from 'react';
 import { RotateCcw } from '@/components/icons';
 import { SettingItem, ToggleSwitch } from '@/components/settings/settings-section';
+import type { GlossaryId } from '@/components/ui/term';
 import { cn } from '@/lib/utils';
 import { Badge } from './badge';
 
@@ -52,6 +53,8 @@ interface ConfigItemBase {
   /** Rows that only matter in unusual setups, hidden behind the Advanced switch. */
   advanced?: boolean;
   disabled?: boolean;
+  /** A technical term in the label that gets an info button with its explanation. */
+  term?: GlossaryId;
 }
 
 interface ConfigTextItemProps extends ConfigItemBase {
@@ -63,10 +66,10 @@ interface ConfigTextItemProps extends ConfigItemBase {
   wide?: boolean;
 }
 
-export function ConfigTextItem({ label, description, configKey, value, source, onChange, onRevert, placeholder, type = 'text', mono, wide, advanced, disabled }: ConfigTextItemProps) {
+export function ConfigTextItem({ label, description, configKey, value, source, onChange, onRevert, placeholder, type = 'text', mono, wide, advanced, disabled, term }: ConfigTextItemProps) {
   const id = useId();
   return (
-    <SettingItem label={label} description={description} advanced={advanced}>
+    <SettingItem label={label} description={description} advanced={advanced} term={term}>
       <div className="flex w-full items-center gap-1.5 sm:w-auto">
         <SourceBadge source={source} />
         <input
@@ -91,9 +94,9 @@ interface ConfigToggleItemProps extends ConfigItemBase {
   value: boolean | undefined | null;
 }
 
-export function ConfigToggleItem({ label, description, configKey, value, source, onChange, onRevert, advanced, disabled }: ConfigToggleItemProps) {
+export function ConfigToggleItem({ label, description, configKey, value, source, onChange, onRevert, advanced, disabled, term }: ConfigToggleItemProps) {
   return (
-    <SettingItem label={label} description={description} advanced={advanced}>
+    <SettingItem label={label} description={description} advanced={advanced} term={term}>
       <div className="flex items-center gap-1.5">
         <SourceBadge source={source} />
         <ToggleSwitch checked={!!value} disabled={disabled} onChange={(checked) => onChange(configKey, checked)} />
@@ -108,10 +111,10 @@ interface ConfigSelectItemProps extends ConfigItemBase {
   options: ReadonlyArray<string | { value: string; label: string }>;
 }
 
-export function ConfigSelectItem({ label, description, configKey, value, source, options, onChange, onRevert, advanced, disabled }: ConfigSelectItemProps) {
+export function ConfigSelectItem({ label, description, configKey, value, source, options, onChange, onRevert, advanced, disabled, term }: ConfigSelectItemProps) {
   const normalized = options.map((o) => (typeof o === 'string' ? { value: o, label: o } : o));
   return (
-    <SettingItem label={label} description={description} advanced={advanced}>
+    <SettingItem label={label} description={description} advanced={advanced} term={term}>
       <div className="flex items-center gap-1.5">
         <SourceBadge source={source} />
         <select

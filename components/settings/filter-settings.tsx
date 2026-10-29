@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { SettingsSection, ToggleSwitch } from "./settings-section";
 import { Button } from "@/components/ui/button";
+import { TermInfo } from "@/components/ui/term";
 import { IconButton } from "@/components/ui/icon-button";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { useConfirmDialog } from "@/hooks/use-confirm-dialog";
@@ -757,6 +758,7 @@ export function FilterSettings() {
             <Code className="w-4 h-4 me-1" />
             {t("raw_editor")}
           </Button>
+          <TermInfo id="sieve" />
         </div>
 
         <div className="flex items-center gap-3">

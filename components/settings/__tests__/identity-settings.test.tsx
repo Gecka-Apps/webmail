@@ -15,7 +15,8 @@ describe('Email addresses section', () => {
     render(<EmailAddressesSection />);
     const row = screen.getByText('sub_addressing.label').closest('[data-search-label]') as HTMLElement;
     expect(within(row).getByText('sub_addressing.description')).toBeTruthy();
-    expect(within(row).queryByRole('button')).toBeNull();
+    // Only the glossary info button that explains the term.
+    expect(within(row).queryAllByRole('button').map((b) => b.getAttribute('data-glossary-term'))).toEqual(['sub_addressing']);
 
     fireEvent.click(screen.getByRole('button', { name: 'manage' }));
     expect(screen.getByRole('dialog')).toBeTruthy();

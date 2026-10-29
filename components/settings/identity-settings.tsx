@@ -38,6 +38,7 @@ export function EmailAddressesSection() {
         <SettingItem
           label={t('identities_count.label')}
           description={t('identities_count.description')}
+          term="identity"
         >
           <div className="flex items-center gap-2">
             <span className="text-sm text-foreground">
@@ -58,6 +59,7 @@ export function EmailAddressesSection() {
         <SettingItem
           label={t('sub_addressing.label')}
           description={t('sub_addressing.description')}
+          term="sub_addressing"
         >
           {null}
         </SettingItem>

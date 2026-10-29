@@ -183,7 +183,7 @@ export function AboutDataSettings() {
     <div className="space-y-8">
       <SettingsSection id="backup" title={t('sections.backup')} description={t('sections.backup_description')}>
         {settingsSyncEnabled && (
-          <SettingItem label={t('settings_sync.label')} description={t('settings_sync.description')}>
+          <SettingItem label={t('settings_sync.label')} description={t('settings_sync.description')} term="sync">
             <ToggleSwitch checked={!settingsSyncDisabled} onChange={(checked) => updateSetting('settingsSyncDisabled', !checked)} />
           </SettingItem>
         )}
@@ -215,7 +215,7 @@ export function AboutDataSettings() {
       </SettingsSection>
 
       <SettingsSection id="fix" title={t('sections.fix')} description={t('sections.fix_description')}>
-        <SettingItem label={t('refresh_cache.label')} description={t('refresh_cache.description')}>
+        <SettingItem label={t('refresh_cache.label')} description={t('refresh_cache.description')} term="cache">
           <Button variant="outline" size="sm" onClick={() => setShowRefreshConfirm(true)}>
             {t('refresh_cache.button')}
           </Button>

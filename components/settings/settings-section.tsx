@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { OrgLockedNote } from './org-locked-note';
 import { cn } from '@/lib/utils';
 import { Button, TOUCH_HIT_AREA } from '@/components/ui/button';
+import { TermInfo, type GlossaryId } from '@/components/ui/term';
 import { useSettingsStore } from '@/stores/settings-store';
 
 /**
@@ -189,9 +190,11 @@ interface SettingsSectionProps {
   advanced?: boolean;
   /** Anchor for section deep links and the in-page jump row. */
   id?: string;
+  /** A technical term in the title that gets an info button with its explanation. */
+  term?: GlossaryId;
 }
 
-export function SettingsSection({ title, description, children, advanced, id }: SettingsSectionProps) {
+export function SettingsSection({ title, description, children, advanced, id, term }: SettingsSectionProps) {
   const visible = useAdvancedVisible(advanced);
   if (!visible) return null;
   return (
@@ -199,6 +202,7 @@ export function SettingsSection({ title, description, children, advanced, id }: 
       <div>
         <h3 className="text-lg font-medium text-foreground flex items-center gap-2">
           {title}
+          {term && <TermInfo id={term} />}
           {advanced && <AdvancedBadge />}
         </h3>
         {description && (
@@ -219,6 +223,12 @@ interface SettingItemProps {
   advanced?: boolean;
   /** Indented under the row above it, for a sub-option of a toggle. */
   nested?: boolean;
+  /**
+   * A technical term in the label that gets an info button with its
+   * explanation. The button sits beside the label, not inside it, so the
+   * row's control keeps the label alone as its name.
+   */
+  term?: GlossaryId;
 }
 
 /** A field that has a name of its own: aria-label, aria-labelledby or a <label>. */
@@ -228,7 +238,7 @@ function hasOwnName(el: HTMLElement): boolean {
   return !!el.id && !!el.ownerDocument.querySelector(`label[for="${CSS.escape(el.id)}"]`);
 }
 
-export function SettingItem({ label, description, children, locked, advanced, nested }: SettingItemProps) {
+export function SettingItem({ label, description, children, locked, advanced, nested, term }: SettingItemProps) {
   const labelId = useId();
   const visible = useAdvancedVisible(advanced);
   // A row with one text field, select or textarea and nothing naming it
@@ -256,6 +266,7 @@ export function SettingItem({ label, description, children, locked, advanced, ne
       <div className="flex-1 min-w-0 sm:pe-4">
         <div className="flex items-center gap-1.5">
           <label id={labelId} className="text-sm font-medium text-foreground">{label}</label>
+          {term && <TermInfo id={term} />}
           {advanced && <AdvancedBadge />}
         </div>
         {description && (

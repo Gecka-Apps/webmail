@@ -18,6 +18,7 @@ import { useConfig } from '@/hooks/use-config';
 import { cn } from '@/lib/utils';
 import { InheritNote, RestrictionRow } from '../org-page';
 import type { OrgPolicyDraft } from '../use-org-policy-draft';
+import { Term } from '@/components/ui/term';
 
 const textareaClass =
   'block w-full rounded-md border border-input bg-background px-3 py-2 font-mono text-xs text-foreground ' +
@@ -302,7 +303,7 @@ export function SignatureSection({ draft }: { draft: OrgPolicyDraft }) {
           />
           {sampleDisclaimer && <TemplatePreview html={sampleDisclaimer.html} text={sampleDisclaimer.text} testId="org-disclaimer-sample" />}
           <p className="text-xs text-muted-foreground">
-            Bulwark adds the signature and the disclaimer in the browser. Mail sent from other apps over IMAP and SMTP gets neither.
+            Bulwark adds the signature and the disclaimer in the browser. Mail sent from other apps over <Term id="imap">IMAP</Term> and <Term id="smtp">SMTP</Term> gets neither.
           </p>
         </div>
       </SettingsSection>

@@ -178,7 +178,7 @@ export function AccountSettings() {
         </SettingItem>
 
         {/* Server */}
-        <SettingItem label={t('server.label')} advanced>
+        <SettingItem label={t('server.label')} advanced term="jmap">
           <span className="text-sm text-foreground truncate max-w-xs">
             {serverUrl || tCommon('unknown')}
           </span>

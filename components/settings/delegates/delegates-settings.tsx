@@ -155,7 +155,7 @@ export function DelegatesSettings() {
   };
 
   return (
-    <SettingsSection id="delegates" title={t("title")} description={t("description")}>
+    <SettingsSection id="delegates" title={t("title")} description={t("description")} term="delegation">
       <div>
         <Button onClick={() => setDialog({ mode: "add" })} disabled={!targets} data-testid="delegates-give-access">
           <UserPlus className="me-2 h-4 w-4" />

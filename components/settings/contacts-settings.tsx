@@ -83,6 +83,7 @@ export function ContactsSettings() {
       <SettingItem
         label={tSettings("import_label")}
         description={tSettings("import_description")}
+        term="vcard"
       >
         <Button variant="outline" size="sm" onClick={() => setShowImport(true)}>
           <Upload className="w-4 h-4 me-2" />

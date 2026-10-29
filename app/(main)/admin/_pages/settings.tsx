@@ -12,6 +12,7 @@ import { withEdit } from '@/lib/admin/edits';
 import { useAdminFeedback } from '@/components/admin/feedback';
 import { ConfigTextItem, ConfigToggleItem, ConfigSelectItem, ConfigNote } from '@/components/admin/config-items';
 import { JmapServersSection } from './_jmap-servers-section';
+import { Term } from '@/components/ui/term';
 import type { JmapServerEntry } from '@/lib/admin/jmap-servers';
 
 interface ConfigEntry {
@@ -118,11 +119,11 @@ export function SettingsPage() {
 
         <SettingsSection id="general" title="General">
           <ConfigTextItem label="Application name" configKey="appName" value={currentValue('appName') as string} source={config.appName?.source} onChange={handleChange} onRevert={handleRevert} />
-          <ConfigTextItem label="JMAP server URL" configKey="jmapServerUrl" value={currentValue('jmapServerUrl') as string} source={config.jmapServerUrl?.source} onChange={handleChange} onRevert={handleRevert} placeholder="https://mail.example.com" wide />
+          <ConfigTextItem label="JMAP server URL" term="jmap" configKey="jmapServerUrl" value={currentValue('jmapServerUrl') as string} source={config.jmapServerUrl?.source} onChange={handleChange} onRevert={handleRevert} placeholder="https://mail.example.com" wide />
           <ConfigToggleItem label="Allow custom JMAP endpoint" description="Show a JMAP server URL field on the login form, allowing users to connect to any JMAP server" configKey="allowCustomJmapEndpoint" value={currentValue('allowCustomJmapEndpoint') as boolean} source={config.allowCustomJmapEndpoint?.source} onChange={handleChange} onRevert={handleRevert} />
           {!!currentValue('allowCustomJmapEndpoint') && (
             <ConfigNote tone="warning">
-              <strong>CORS warning:</strong> External JMAP servers must include this domain in their CORS <code className="text-[11px] bg-amber-100 dark:bg-amber-900/50 px-1 py-0.5 rounded">Access-Control-Allow-Origin</code> header, or requests from the browser will be blocked.
+              <strong><Term id="cors">CORS</Term> warning:</strong> External JMAP servers must include this domain in their CORS <code className="text-[11px] bg-amber-100 dark:bg-amber-900/50 px-1 py-0.5 rounded">Access-Control-Allow-Origin</code> header, or requests from the browser will be blocked.
             </ConfigNote>
           )}
           <ConfigToggleItem label="Stalwart features" description="Enable Stalwart Mail Server-specific features" configKey="stalwartFeaturesEnabled" value={currentValue('stalwartFeaturesEnabled') as boolean} source={config.stalwartFeaturesEnabled?.source} onChange={handleChange} onRevert={handleRevert} />
@@ -132,8 +133,8 @@ export function SettingsPage() {
 
         <SettingsSection id="login" title="Login page">
           <ConfigToggleItem label="Show version" description="Show the webmail version in the login page footer. Turn off to keep the exact version hidden from visitors who are not signed in." configKey="loginShowVersion" value={currentValue('loginShowVersion') as boolean} source={config.loginShowVersion?.source} onChange={handleChange} onRevert={handleRevert} />
-          <ConfigToggleItem label="Show 2FA code option" description="Show the &quot;I have a 2FA code&quot; toggle on the login form. Turn off when two-factor authentication is handled by an external identity provider. Accounts that require a code still get the field." configKey="loginShowTotp" value={currentValue('loginShowTotp') as boolean} source={config.loginShowTotp?.source} onChange={handleChange} onRevert={handleRevert} />
-          <ConfigToggleItem label="Show access token sign-in" description="Offer signing in with an access token instead of a password. For JMAP servers that authenticate API tokens as Bearer tokens, such as Fastmail, which accepts no passwords over JMAP." configKey="loginShowTokenLogin" value={currentValue('loginShowTokenLogin') as boolean} source={config.loginShowTokenLogin?.source} onChange={handleChange} onRevert={handleRevert} />
+          <ConfigToggleItem label="Show 2FA code option" term="two_factor" description="Show the &quot;I have a 2FA code&quot; toggle on the login form. Turn off when two-factor authentication is handled by an external identity provider. Accounts that require a code still get the field." configKey="loginShowTotp" value={currentValue('loginShowTotp') as boolean} source={config.loginShowTotp?.source} onChange={handleChange} onRevert={handleRevert} />
+          <ConfigToggleItem label="Show access token sign-in" term="access_token" description="Offer signing in with an access token instead of a password. For JMAP servers that authenticate API tokens as Bearer tokens, such as Fastmail, which accepts no passwords over JMAP." configKey="loginShowTokenLogin" value={currentValue('loginShowTokenLogin') as boolean} source={config.loginShowTokenLogin?.source} onChange={handleChange} onRevert={handleRevert} />
           <ConfigToggleItem label="Show remember me" description="Let people choose whether to stay signed in. Off (the default) remembers every sign-in. Either way this needs SESSION_SECRET to be set." configKey="loginShowRememberMe" value={currentValue('loginShowRememberMe') as boolean} source={config.loginShowRememberMe?.source} onChange={handleChange} onRevert={handleRevert} />
           <ConfigToggleItem label="Show heading" description="Show the application name below the login logo" configKey="loginShowHeading" value={currentValue('loginShowHeading') as boolean} source={config.loginShowHeading?.source} onChange={handleChange} onRevert={handleRevert} />
           <ConfigToggleItem label="Show subtitle" description="Show the subtitle below the login heading" configKey="loginShowSubtitle" value={currentValue('loginShowSubtitle') as boolean} source={config.loginShowSubtitle?.source} onChange={handleChange} onRevert={handleRevert} />

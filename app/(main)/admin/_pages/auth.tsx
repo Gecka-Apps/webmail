@@ -262,7 +262,7 @@ export function AuthPage() {
       <div className="space-y-10">
         <SectionNav />
 
-        <SettingsSection id="oauth" title="OAuth / OpenID Connect">
+        <SettingsSection id="oauth" title="OAuth / OpenID Connect" term="oauth">
           <SettingItem
             label="Set up with Stalwart"
             description="Registers an OAuth client on the connected Stalwart server, generates a client secret, and saves the settings here. Requires your Stalwart account to have admin permissions."

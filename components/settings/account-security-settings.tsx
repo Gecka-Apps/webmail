@@ -21,6 +21,7 @@ import { isPasswordSession } from '@/lib/auth/password-session';
 import { useConfig } from '@/hooks/use-config';
 import { totpIssuer } from '@/lib/totp-issuer';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
+import { TermInfo } from '@/components/ui/term';
 import { IconButton } from '@/components/ui/icon-button';
 import { useConfirmDialog } from '@/hooks/use-confirm-dialog';
 
@@ -332,7 +333,7 @@ function TotpSection() {
 
   return (
     <div className="space-y-3">
-      <SettingItem label={t('totp.label')} description={t('totp.description')}>
+      <SettingItem label={t('totp.label')} description={t('totp.description')} term="totp">
         <div className="flex items-center gap-2">
           <ToggleSwitch
             checked={otpEnabled || !!setupUrl}
@@ -542,6 +543,7 @@ function CredentialSection({ icon: Icon, i18nNamespace, entries, onCreate, onRem
         <div className="flex items-center gap-2">
           <Icon className="w-4 h-4 text-muted-foreground" />
           <h4 data-search-label={tk('title')} className="text-sm font-medium text-foreground">{tk('title')}</h4>
+          {i18nNamespace === 'app_passwords' && <TermInfo id="app_password" />}
         </div>
         <Button variant="outline" size="sm" onClick={() => setShowAdd(!showAdd)}>
           <Plus className="w-3 h-3 me-1" />
@@ -773,6 +775,7 @@ function PublicKeysSection() {
         <div className="flex items-center gap-2">
           <Lock className="w-4 h-4 text-muted-foreground" />
           <h4 data-search-label={t('encryption.section_title')} className="text-sm font-medium text-foreground">{t('encryption.section_title')}</h4>
+          <TermInfo id="encryption_at_rest" />
         </div>
         <Button variant="outline" size="sm" onClick={() => setShowAdd(!showAdd)}>
           <Plus className="w-3 h-3 me-1" />
@@ -794,7 +797,10 @@ function PublicKeysSection() {
             />
           </div>
           <div>
-            <label htmlFor={labelFor("field10")} className="text-xs text-muted-foreground mb-1 block">{tk('key_label')}</label>
+            <div className="mb-1 flex items-center gap-1">
+              <label htmlFor={labelFor("field10")} className="text-xs text-muted-foreground block">{tk('key_label')}</label>
+              <TermInfo id="public_key" />
+            </div>
             <textarea
               id={labelFor("field10")}
               value={publicKey}
@@ -959,9 +965,12 @@ function EmailClientSection() {
       <p className="text-xs text-muted-foreground">{t('email_client.description')}</p>
       <div className="p-3 bg-muted/70 dark:bg-muted/40 rounded-md space-y-2">
         <div>
-          <label htmlFor={labelFor('jmap-username')} className="text-xs text-muted-foreground mb-1 block">
-            {t('email_client.jmap_username_label')}
-          </label>
+          <div className="mb-1 flex items-center gap-1">
+            <label htmlFor={labelFor('jmap-username')} className="text-xs text-muted-foreground block">
+              {t('email_client.jmap_username_label')}
+            </label>
+            <TermInfo id="jmap" />
+          </div>
           <div className="flex rounded-lg">
             <input
               id={labelFor('jmap-username')}
@@ -1585,6 +1594,7 @@ export function AccountSecuritySettings() {
               <div className="flex items-center gap-2 mb-3">
                 <Shield className="w-4 h-4 text-muted-foreground" />
                 <h4 data-search-label={t('totp.section_title')} className="text-sm font-medium text-foreground">{t('totp.section_title')}</h4>
+                <TermInfo id="two_factor" />
               </div>
               <TotpSection />
             </div>

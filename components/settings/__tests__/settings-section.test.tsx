@@ -16,6 +16,29 @@ describe('SettingItem controls', () => {
     expect(toggle).toHaveAttribute('aria-checked', 'true');
   });
 
+  it('puts a glossary info button beside the label without changing the toggle name', () => {
+    render(
+      <SettingItem label="App passwords" term="app_password">
+        <ToggleSwitch checked onChange={() => {}} />
+      </SettingItem>
+    );
+
+    // The mocked translator returns keys: the button is named by glossary.what_is.
+    const info = screen.getByRole('button', { name: 'what_is' });
+    expect(info).toHaveAttribute('data-glossary-term', 'app_password');
+    expect(info.closest('label')).toBeNull();
+    expect(screen.getByRole('switch', { name: 'App passwords' })).toBeInTheDocument();
+  });
+
+  it('adds a glossary info button to a section title', () => {
+    render(
+      <SettingsSection title="Delegates" term="delegation">
+        <p>rows</p>
+      </SettingsSection>
+    );
+    expect(screen.getByRole('heading', { name: /Delegates/ }).querySelector('[data-glossary-term="delegation"]')).not.toBeNull();
+  });
+
   it('lets an explicit ariaLabel win over the row label', () => {
     render(
       <SettingItem label="Conversation view">

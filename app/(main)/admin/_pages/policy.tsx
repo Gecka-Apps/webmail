@@ -18,6 +18,7 @@ import {
   resolveDefaultRelayUrl,
 } from '@/lib/push-relays';
 import { SettingsSection, SettingItem, ToggleSwitch, SectionNav } from '@/components/settings/settings-section';
+import type { GlossaryId } from '@/components/ui/term';
 import { Button } from '@/components/ui/button';
 import { AdminPageHeader } from '@/components/admin/page-header';
 import { AdminSaveBar } from '@/components/admin/save-bar';
@@ -29,7 +30,7 @@ import { inputClass } from '@/components/admin/config-items';
 // forward on policy load), so it is hidden from the admin UI.
 const EXCLUDED_FEATURE_GATES: (keyof FeatureGates)[] = ['pluginsEnabled', 'pluginsUploadEnabled', 'themesEnabled', 'userThemesEnabled', 'allMailViewEnabled'];
 
-const FEATURE_GATE_LABELS: Partial<Record<keyof FeatureGates, { label: string; description: string }>> = {
+const FEATURE_GATE_LABELS: Partial<Record<keyof FeatureGates, { label: string; description: string; term?: GlossaryId }>> = {
   sidebarAppsEnabled: { label: 'Sidebar Apps', description: 'Allow custom web apps in navigation rail' },
   settingsExportEnabled: { label: 'Settings Export/Import', description: 'Allow users to export and import settings JSON' },
   customKeywordsEnabled: { label: 'Custom Keywords', description: 'Allow user-created labels and tags' },
@@ -37,13 +38,13 @@ const FEATURE_GATE_LABELS: Partial<Record<keyof FeatureGates, { label: string; d
   calendarEnabled: { label: 'Calendar', description: 'Enable calendar features and views' },
   calendarTasksEnabled: { label: 'Calendar Tasks', description: 'Show task panel in calendar view' },
   contactsEnabled: { label: 'Contacts', description: 'Enable contacts/address book features' },
-  smimeEnabled: { label: 'S/MIME', description: 'Enable certificate management and email signing' },
+  smimeEnabled: { label: 'S/MIME', description: 'Enable certificate management and email signing', term: 'smime' },
   externalContentEnabled: { label: 'External Content', description: 'Allow users to choose external content loading policy' },
   debugModeEnabled: { label: 'Debug Mode', description: 'Allow users to enable debug/diagnostic mode' },
   folderIconsEnabled: { label: 'Folder Icons', description: 'Allow custom folder icon picker' },
   hoverActionsConfigEnabled: { label: 'Hover Actions Config', description: 'Allow users to customize email hover actions' },
   tabTitleSubjectEnabled: { label: 'Subject in Tab Title', description: 'Show the open message\'s subject in the browser tab title. Browsers also keep the title in history and screen shares show it; turn this off when mailboxes hold confidential correspondence, and the tab shows the folder instead.' },
-  filesEnabled: { label: 'Files (WebDAV)', description: 'Enable file storage via WebDAV. WARNING: Large uploads can cause Stalwart/RocksDB instability. Not recommended for production.' },
+  filesEnabled: { label: 'Files (WebDAV)', description: 'Enable file storage via WebDAV. WARNING: Large uploads can cause Stalwart/RocksDB instability. Not recommended for production.', term: 'webdav' },
   crossUnreadViewEnabled: { label: 'Unified Mailbox: Unread', description: 'Allow an "Unread" entry in the Unified Mailbox section that lists unread mail across the account and its shared folders (or every account when the cross-account sub-option is on). Honors the user\'s folder selection. Requires the matching per-user toggle in Settings → Appearance.' },
   crossStarredViewEnabled: { label: 'Unified Mailbox: Starred', description: 'Allow a "Starred" entry in the Unified Mailbox section that lists flagged/starred mail across the account and its shared folders (or every account when the cross-account sub-option is on). Honors the user\'s folder selection. Requires the matching per-user toggle in Settings → Appearance.' },
   crossAllViewEnabled: { label: 'Unified Mailbox: All Mail', description: 'Allow an "All mail" entry in the Unified Mailbox section that lists all mail across the account and its shared folders (or every account when the cross-account sub-option is on). Honors the user\'s folder selection. Requires the matching per-user toggle in Settings → Appearance.' },
@@ -290,9 +291,9 @@ export function PolicyPage() {
               .map(key => {
                 const meta = FEATURE_GATE_LABELS[key];
                 if (!meta) return null;
-                const { label, description } = meta;
+                const { label, description, term } = meta;
                 return (
-                  <SettingItem key={key} label={label} description={description}>
+                  <SettingItem key={key} label={label} description={description} term={term}>
                     <ToggleSwitch checked={!!policy.features[key]} onChange={() => toggleFeature(key)} />
                   </SettingItem>
                 );

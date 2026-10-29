@@ -417,7 +417,7 @@ export function NotificationSettings() {
         </SettingItem>
       </SettingsSection>
 
-      <SettingsSection id="push" title={t('push.title')} description={t('push.description')}>
+      <SettingsSection id="push" title={t('push.title')} description={t('push.description')} term="push">
         <SettingItem label={t('push.enable')} description={statusDescription}>
           <div className="flex items-center gap-2">
             {pushEnabled && (
