@@ -339,6 +339,11 @@ describe('alertsToRows / rowsToAlerts', () => {
     expect(saved.alert1).toBe(kept);
     expect(saved.alert2).toMatchObject({ trigger: { offset: '-PT5M' } });
   });
+
+  it('names new alerts with the prefix and skips taken ids', () => {
+    const saved = rowsToAlerts([newAlertRow(5, 'minutes'), newAlertRow(1, 'hours')], {}, { prefix: 'c-timed-', taken: ['c-timed-1'] });
+    expect(Object.keys(saved)).toEqual(['c-timed-2', 'c-timed-3']);
+  });
 });
 
 describe('buildAlertKey', () => {

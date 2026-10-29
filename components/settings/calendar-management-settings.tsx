@@ -185,11 +185,14 @@ type DefaultAlertsUpdate = Pick<Calendar, 'defaultAlertsWithTime' | 'defaultAler
 
 export function CalendarDefaultAlertsForm({
   calendar,
+  otherAlertIds = [],
   onSave,
   onCancel,
   isLoading,
 }: {
   calendar: Calendar;
+  /** Default alert ids of the account's other calendars. */
+  otherAlertIds?: string[];
   onSave: (updates: DefaultAlertsUpdate) => void;
   onCancel: () => void;
   isLoading: boolean;
@@ -202,10 +205,16 @@ export function CalendarDefaultAlertsForm({
   const [allDayRows, setAllDayRows] = useState<AlertRow[]>(allDay.rows);
 
   // An emptied list is sent as {}: Stalwart refuses null for these maps.
-  const submit = () => onSave({
-    defaultAlertsWithTime: rowsToAlerts(timedRows, timed.preserved),
-    defaultAlertsWithoutTime: rowsToAlerts(allDayRows, allDay.preserved),
-  });
+  // Stalwart 1.0 wants every default alert id in the account to be unique,
+  // across both lists and all calendars (#1435), so the ids carry the
+  // calendar and the list and skip any id another calendar already uses.
+  const submit = () => {
+    const taken = [...otherAlertIds, ...Object.keys(timed.preserved), ...Object.keys(allDay.preserved)];
+    onSave({
+      defaultAlertsWithTime: rowsToAlerts(timedRows, timed.preserved, { prefix: `${calendar.id}-timed-`, taken }),
+      defaultAlertsWithoutTime: rowsToAlerts(allDayRows, allDay.preserved, { prefix: `${calendar.id}-allday-`, taken }),
+    });
+  };
 
   return (
     <div className="space-y-3 p-3 rounded-md border border-primary/30 bg-accent/30">
@@ -658,6 +667,10 @@ export function CalendarManagementSettings() {
               <CalendarDefaultAlertsForm
                 key={cal.id}
                 calendar={cal}
+                otherAlertIds={calendars.filter((c) => c.id !== cal.id).flatMap((c) => [
+                  ...Object.keys(c.defaultAlertsWithTime ?? {}),
+                  ...Object.keys(c.defaultAlertsWithoutTime ?? {}),
+                ])}
                 onSave={(updates) => handleDefaultAlertsSave(cal.id, updates)}
                 onCancel={() => setAlertsEditingId(null)}
                 isLoading={isLoading}

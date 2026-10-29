@@ -193,18 +193,24 @@ export function alertsToRows(alerts: Record<string, CalendarEventAlert> | null |
   return { rows, preserved };
 }
 
-/** Builds the alert map to save from the rows plus the preserved alerts. */
+/**
+ * Builds the alert map to save from the rows plus the preserved alerts.
+ * New alerts get the ids `${prefix}1`, `${prefix}2`, ..., skipping the ids in
+ * `taken` and those of the preserved alerts.
+ */
 export function rowsToAlerts(
   rows: AlertRow[],
-  preserved: Record<string, CalendarEventAlert> = {}
+  preserved: Record<string, CalendarEventAlert> = {},
+  { prefix = 'alert', taken = [] }: { prefix?: string; taken?: Iterable<string> } = {}
 ): Record<string, CalendarEventAlert> {
   const built: Record<string, CalendarEventAlert> = { ...preserved };
+  const used = new Set(taken);
   let idx = 0;
   for (const row of rows) {
     const offset = alertRowToOffset(row);
     if (offset === null) continue;
-    let key = `alert${++idx}`;
-    while (key in built) key = `alert${++idx}`;
+    let key = `${prefix}${++idx}`;
+    while (key in built || used.has(key)) key = `${prefix}${++idx}`;
     built[key] = {
       '@type': 'Alert',
       trigger: { '@type': 'OffsetTrigger', offset, relativeTo: 'start' },

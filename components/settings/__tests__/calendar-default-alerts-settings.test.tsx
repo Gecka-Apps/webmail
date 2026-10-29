@@ -78,6 +78,34 @@ describe('Calendar default reminders settings', () => {
     );
   });
 
+  // #1435: Stalwart 1.0 refuses a default alert id that the other list or
+  // another calendar of the account already uses.
+  it('gives new default alerts ids no other list or calendar uses', async () => {
+    const offset = { ...absolute, trigger: { '@type': 'OffsetTrigger' as const, offset: '-PT5M', relativeTo: 'start' as const } };
+    useCalendarStore.setState({
+      calendars: [
+        makeCalendar({}),
+        makeCalendar({ id: 'cal-2', isDefault: false, defaultAlertsWithTime: { alert1: offset, 'cal-1-timed-1': offset } }),
+      ],
+    } as never);
+    render(<CalendarManagementSettings />);
+    fireEvent.click(screen.getAllByLabelText('default_alerts')[0]);
+
+    const [addTimed, addAllDay] = screen.getAllByText('alerts.add');
+    fireEvent.click(addTimed);
+    fireEvent.click(addAllDay);
+    fireEvent.click(screen.getByText('save'));
+
+    await waitFor(() => expect(updateCalendar).toHaveBeenCalledTimes(1));
+    const [, calendarId, updates] = updateCalendar.mock.calls[0];
+    expect(calendarId).toBe('cal-1');
+    const ids = [...Object.keys(updates.defaultAlertsWithTime), ...Object.keys(updates.defaultAlertsWithoutTime)];
+    expect(ids).toHaveLength(2);
+    expect(new Set(ids).size).toBe(2);
+    expect(ids).not.toContain('alert1');
+    expect(ids).not.toContain('cal-1-timed-1');
+  });
+
   it('clears a list by sending an empty map, which Stalwart accepts where it refuses null', async () => {
     useCalendarStore.setState({
       calendars: [makeCalendar({
