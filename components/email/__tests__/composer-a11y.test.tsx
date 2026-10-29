@@ -471,3 +471,17 @@ describe('default compose font (CO-16)', () => {
     expect((onSend.mock.calls[0][0] as { htmlBody?: string }).htmlBody).toMatch(/^<div>/);
   });
 });
+
+describe('alt text in the plain-text part (MA-02)', () => {
+  it('keeps image descriptions in the text part and skips decorative images', async () => {
+    const onSend = vi.fn();
+    render(<EmailComposer
+      initialData={{ ...DRAFT, to: 'bob@example.com', body: '<p>Results <img src="data:image/png;base64,AA" alt="Sales chart"> <img src="data:image/png;base64,BB" alt=""></p>' }}
+      onSend={onSend}
+    />);
+    fireEvent.click(screen.getAllByTestId('composer-send')[0]);
+    await waitFor(() => expect(onSend).toHaveBeenCalledTimes(1));
+    const sent = onSend.mock.calls[0][0] as { body: string };
+    expect(sent.body).toBe('Results image_alt.plain_text:Sales chart');
+  });
+});

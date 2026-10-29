@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Dit bericht versturen?",
       "message": "Het gaat naar {count, plural, one {# ontvanger} other {# ontvangers}}."
+    },
+    "image_alt": {
+      "title": "Beschrijf deze afbeelding",
+      "hint": "Zeg wat de afbeelding laat zien, voor mensen die hem niet kunnen zien.",
+      "label": "Beschrijving van de afbeelding",
+      "decorative": "Decoratieve afbeelding (geen beschrijving)",
+      "skip": "Overslaan",
+      "edit": "Beschrijving van de afbeelding bewerken",
+      "plain_text": "[Afbeelding: {alt}]"
     }
   },
   "confirm_dialog": {

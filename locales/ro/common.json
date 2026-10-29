@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Trimiteți acest mesaj?",
       "message": "Va fi trimis către {count, plural, one {# destinatar} few {# destinatari} other {# de destinatari}}."
+    },
+    "image_alt": {
+      "title": "Descrieți această imagine",
+      "hint": "Spuneți ce arată imaginea pentru cei care nu o pot vedea.",
+      "label": "Descrierea imaginii",
+      "decorative": "Imagine decorativă (fără descriere)",
+      "skip": "Omiteți",
+      "edit": "Editați descrierea imaginii",
+      "plain_text": "[Imagine: {alt}]"
     }
   },
   "confirm_dialog": {

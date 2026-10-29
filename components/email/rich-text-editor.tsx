@@ -2,7 +2,7 @@
 
 import React, { useEffect, useCallback, useLayoutEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useEditor, EditorContent, type Editor } from "@tiptap/react";
+import { useEditor, useEditorState, EditorContent, type Editor } from "@tiptap/react";
 import type { SuggestionProps } from "@tiptap/suggestion";
 import StarterKit from "@tiptap/starter-kit";
 import Paragraph from "@tiptap/extension-paragraph";
@@ -32,6 +32,7 @@ import { MentionChipCard, setMentionRecipients } from "@/components/email/mentio
 import { mentionSuggestions, type MentionCandidate, type MentionContact } from "@/lib/recipient-mentions";
 import { cn } from "@/lib/utils";
 import { PromptDialog } from "@/components/ui/prompt-dialog";
+import { ImageAltDialog } from "@/components/email/image-alt-dialog";
 
 /** A typed address without a scheme ("example.com") becomes a web link. */
 export function withLinkScheme(value: string): string {
@@ -66,6 +67,7 @@ import {
   Trash2,
   Rows3,
   Columns3,
+  ImageIcon,
 } from "@/components/icons";
 
 export interface InlineImageUpload {
@@ -349,6 +351,27 @@ function TableSizePicker({ onPick }: { onPick: (rows: number, cols: number) => v
   );
 }
 
+type AltRequest = { src: string } | { pos: number };
+
+/** The image an alt-text request is about: a new one by its src (no alt yet), an existing one by position. */
+function findAltTarget(editor: Editor, request: AltRequest | undefined): { pos: number; alt: string | null; src: string } | null {
+  if (!request) return null;
+  const { doc } = editor.state;
+  if ("pos" in request) {
+    const node = doc.nodeAt(request.pos);
+    return node?.type.name === "image" ? { pos: request.pos, alt: node.attrs.alt, src: node.attrs.src } : null;
+  }
+  let found: { pos: number; alt: string | null; src: string } | null = null;
+  doc.descendants((node, pos) => {
+    if (found) return false;
+    if (node.type.name === "image" && node.attrs.src === request.src && node.attrs.alt == null) {
+      found = { pos, alt: null, src: node.attrs.src };
+    }
+    return !found;
+  });
+  return found;
+}
+
 export function RichTextEditor({
   content,
   onChange,
@@ -384,6 +407,9 @@ export function RichTextEditor({
   const mentionListRef = useRef<RecipientMentionListHandle>(null);
   // Alt+F10 in the text moves to the toolbar, as in other editors.
   const focusToolbarRef = useRef<(() => boolean) | null>(null);
+  // Images waiting for a description, one dialog at a time: a new image is
+  // found by its src (it has no alt yet), an existing one by its position.
+  const [altQueue, setAltQueue] = useState<AltRequest[]>([]);
 
   const editor = useEditor({
     extensions: [
@@ -407,7 +433,10 @@ export function RichTextEditor({
       Color,
       BackgroundColor,
       FontSize,
-      ResizableImage,
+      ResizableImage.configure({
+        onEditAlt: (pos: number) => setAltQueue((queue) => [...queue, { pos }]),
+        editAltLabel: tComposer("image_alt.edit"),
+      }),
       Placeholder.configure({
         placeholder,
       }),
@@ -500,9 +529,11 @@ export function RichTextEditor({
             if (result) {
               const { state } = view;
               const pos = view.posAtCoords({ left: event.clientX, top: event.clientY });
-              const node = state.schema.nodes.image.create({ src: result.src, alt: file.name, cid: result.cid });
+              // No alt yet (never the file name): the user is asked next.
+              const node = state.schema.nodes.image.create({ src: result.src, alt: null, cid: result.cid });
               const tr = state.tr.insert(pos?.pos ?? state.selection.anchor, node);
               view.dispatch(tr);
+              setAltQueue((queue) => [...queue, { src: result.src }]);
             }
           });
         }
@@ -518,9 +549,10 @@ export function RichTextEditor({
           upload(file).then((result) => {
             if (result) {
               const { state } = view;
-              const node = state.schema.nodes.image.create({ src: result.src, alt: file.name, cid: result.cid });
+              const node = state.schema.nodes.image.create({ src: result.src, alt: null, cid: result.cid });
               const tr = state.tr.replaceSelectionWith(node);
               view.dispatch(tr);
+              setAltQueue((queue) => [...queue, { src: result.src }]);
             }
           });
         }
@@ -559,6 +591,28 @@ export function RichTextEditor({
       },
     });
   }, [editor, ariaLabel, ariaInvalid, ariaDescribedBy, defaultTextStyle]);
+
+  // Re-render the toolbar when what it shows changes, also on a caret move
+  // or an image selection that changes no text (the parent re-renders only
+  // on text changes), so aria-pressed and the image button stay true.
+  useEditorState({
+    editor,
+    selector: ({ editor: ed }) => {
+      if (!ed) return "";
+      const style = ed.getAttributes("textStyle");
+      return [
+        "bold", "italic", "underline", "strike", "bulletList", "orderedList", "blockquote", "codeBlock", "link", "table", "image",
+      ].map((name) => ed.isActive(name)).concat(
+        ed.isActive("heading", { level: 1 }), ed.isActive("heading", { level: 2 }),
+        ed.isActive({ textAlign: "left" }), ed.isActive({ textAlign: "center" }), ed.isActive({ textAlign: "right" }),
+      ).join() + `|${style.fontSize ?? ""}|${style.color ?? ""}|${style.backgroundColor ?? ""}|${ed.getAttributes("paragraph").dir ?? ""}`;
+    },
+  });
+
+  // A request whose image is gone (deleted meanwhile) gives way to the next.
+  useEffect(() => {
+    if (editor && altQueue.length > 0 && !findAltTarget(editor, altQueue[0])) setAltQueue((queue) => queue.slice(1));
+  }, [editor, altQueue]);
 
   // Expose the editor instance once it's ready so parents can target
   // specific nodes (e.g. swap the embedded signature on identity change).
@@ -699,6 +753,11 @@ export function RichTextEditor({
   const currentFontSize: string | null = editor.getAttributes("textStyle").fontSize ?? null;
   const currentColor: string | null = editor.getAttributes("textStyle").color ?? null;
   const currentBgColor: string | null = editor.getAttributes("textStyle").backgroundColor ?? null;
+
+  // The image the alt dialog is about, and where it is now.
+  const altRequest = altQueue[0];
+  const altTarget = findAltTarget(editor, altRequest);
+  const imageSelected = editor.isActive("image");
 
   const onToolbarKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
@@ -1094,6 +1153,18 @@ export function RichTextEditor({
           <LinkIcon className="w-4 h-4" />
         </ToolbarButton>
 
+        {imageSelected && (
+          <ToolbarButton
+            item="image-alt"
+            popup="dialog"
+            expanded={!!altRequest}
+            onClick={() => setAltQueue((queue) => [...queue, { pos: editor.state.selection.from }])}
+            title={tComposer("image_alt.edit")}
+          >
+            <ImageIcon className="w-4 h-4" />
+          </ToolbarButton>
+        )}
+
         <div ref={tableWrapperRef} className="relative">
           <ToolbarButton
             ref={tableButtonRef}
@@ -1210,6 +1281,23 @@ export function RichTextEditor({
         validate={(value) => (/\s/.test(value) ? tToolbar("link_invalid") : null)}
         onSubmit={(value) => applyLink(withLinkScheme(value))}
         extraAction={linkDialog?.href ? { label: tToolbar("remove_link"), onClick: removeLink } : undefined}
+      />
+
+      <ImageAltDialog
+        isOpen={!!altTarget}
+        currentAlt={altTarget?.alt ?? null}
+        src={altTarget?.src}
+        onSave={(alt) => {
+          const target = findAltTarget(editor, altRequest);
+          if (!target) return;
+          editor.chain().command(({ tr }) => {
+            const node = tr.doc.nodeAt(target.pos);
+            if (!node) return false;
+            tr.setNodeMarkup(target.pos, undefined, { ...node.attrs, alt });
+            return true;
+          }).run();
+        }}
+        onClose={() => setAltQueue((queue) => queue.slice(1))}
       />
     </div>
   );

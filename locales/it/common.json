@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Inviare questo messaggio?",
       "message": "Verrà inviato a {count, plural, one {# destinatario} other {# destinatari}}."
+    },
+    "image_alt": {
+      "title": "Descrivi questa immagine",
+      "hint": "Di' cosa mostra l'immagine per chi non può vederla.",
+      "label": "Descrizione dell'immagine",
+      "decorative": "Immagine decorativa (nessuna descrizione)",
+      "skip": "Salta",
+      "edit": "Modifica descrizione dell'immagine",
+      "plain_text": "[Immagine: {alt}]"
     }
   },
   "confirm_dialog": {

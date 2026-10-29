@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "要傳送這封郵件嗎？",
       "message": "將傳送給 {count, plural, other {# 位收件者}}。"
+    },
+    "image_alt": {
+      "title": "描述這張圖片",
+      "hint": "為看不到圖片的人寫下圖片的內容。",
+      "label": "圖片描述",
+      "decorative": "裝飾性圖片（無描述）",
+      "skip": "略過",
+      "edit": "編輯圖片描述",
+      "plain_text": "[圖片：{alt}]"
     }
   },
   "confirm_dialog": {

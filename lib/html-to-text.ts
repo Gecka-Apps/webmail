@@ -61,6 +61,12 @@ export interface HtmlToPlainTextOptions {
    * the text part of a reply could not tell the reply from the quote.
    */
   mailMarkup?: boolean;
+  /**
+   * Write an image as this text ("[Image: a red bicycle]"), from its alt
+   * text. Images without alt text, and decorative ones (alt=""), are left
+   * out. Without it, images are left out.
+   */
+  imageAlt?: (alt: string) => string;
 }
 
 function normalizeLineBreaks(value: string): string {
@@ -137,6 +143,12 @@ function nodesToPlainText(nodes: NodeListOf<ChildNode>, options: HtmlToPlainText
 
     const element = node as HTMLElement;
     const tagName = element.tagName.toLowerCase();
+
+    if (tagName === 'img') {
+      const alt = element.getAttribute('alt')?.replace(/\s+/g, ' ').trim();
+      if (alt && options.imageAlt) appendText(options.imageAlt(alt));
+      return;
+    }
 
     if (tagName === 'br') {
       // Additive so consecutive <br> can form a blank line (capped by normalize).

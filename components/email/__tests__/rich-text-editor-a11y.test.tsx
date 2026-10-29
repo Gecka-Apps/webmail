@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import React from 'react';
 import type { Editor } from '@tiptap/core';
 
@@ -65,10 +65,11 @@ describe('RichTextEditor formatting toolbar (SR-08)', () => {
     expect(tabStops()).toEqual([item('bold')]);
     fireEvent.keyDown(item('bold'), { key: 'ArrowLeft' });
     expect(document.activeElement).toBe(item('font-size'));
-    // End skips undo and redo while they are disabled.
+    // End goes to the last button that can be used (disabled ones are skipped).
+    const enabled = Array.from(toolbar().querySelectorAll<HTMLButtonElement>('[data-toolbar-item]')).filter((b) => !b.disabled);
     fireEvent.keyDown(item('font-size'), { key: 'End' });
-    expect(document.activeElement).toBe(item('clear-formatting'));
-    fireEvent.keyDown(item('clear-formatting'), { key: 'Home' });
+    expect(document.activeElement).toBe(enabled[enabled.length - 1]);
+    fireEvent.keyDown(enabled[enabled.length - 1], { key: 'Home' });
     expect(document.activeElement).toBe(item('font-size'));
   });
 
@@ -85,6 +86,14 @@ describe('RichTextEditor formatting toolbar (SR-08)', () => {
     act(() => { editor!.chain().selectAll().toggleBold().run(); });
     await waitFor(() => expect(item('bold')).toHaveAttribute('aria-pressed', 'true'));
     expect(item('italic')).toHaveAttribute('aria-pressed', 'false');
+  });
+
+  it('follows the caret into and out of bold text without a text change', async () => {
+    const { editor } = await setup({ content: '<p><strong>Bold</strong> plain</p>' });
+    act(() => { editor.commands.setTextSelection(3); });
+    await waitFor(() => expect(item('bold')).toHaveAttribute('aria-pressed', 'true'));
+    act(() => { editor.commands.setTextSelection(9); });
+    await waitFor(() => expect(item('bold')).toHaveAttribute('aria-pressed', 'false'));
   });
 
   it('opens the font size menu by keyboard, moves inside it and gives the focus back on Escape', async () => {
@@ -132,5 +141,69 @@ describe('RichTextEditor default text style (CO-16)', () => {
     const { editor } = await setup({ defaultTextStyle: { fontFamily: 'monospace', fontSize: '20px' } });
     expect(editor.view.dom.style.fontFamily).toBe('monospace');
     expect(editor.view.dom.style.fontSize).toBe('20px');
+  });
+});
+
+describe('RichTextEditor image descriptions (MA-02)', () => {
+  function imageDrop(file: File) {
+    const event = new Event('drop', { bubbles: true, cancelable: true }) as DragEvent;
+    Object.defineProperty(event, 'dataTransfer', {
+      value: { files: [file], types: ['Files'], getData: () => '' },
+    });
+    return event;
+  }
+
+  async function dropImage() {
+    const onChange = vi.fn();
+    const { editor } = await setup({ onChange, onImageUpload: async () => ({ src: 'data:image/png;base64,AAAA' }) });
+    editor.view.posAtCoords = () => ({ pos: 1, inside: -1 });
+    await act(async () => { editor.view.dom.dispatchEvent(imageDrop(new File(['png'], 'IMG_2041.png', { type: 'image/png' }))); });
+    return { editor, onChange };
+  }
+
+  const altDialog = () => screen.getByRole('dialog', { name: 'title' });
+  const html = (editor: Editor) => editor.getHTML();
+
+  it('asks for a description when an image is dropped in, and never uses the file name', async () => {
+    const { editor } = await dropImage();
+    const dialog = await waitFor(() => altDialog());
+    expect(html(editor)).not.toContain('IMG_2041');
+    expect(html(editor)).not.toMatch(/alt=/);
+
+    fireEvent.change(within(dialog).getByLabelText('label'), { target: { value: 'A red bicycle' } });
+    fireEvent.click(within(dialog).getByRole('button', { name: 'save' }));
+    await waitFor(() => expect(html(editor)).toContain('alt="A red bicycle"'));
+    expect(screen.queryByRole('dialog', { name: 'title' })).toBeNull();
+  });
+
+  it('marks an image decorative with an empty alt', async () => {
+    const { editor } = await dropImage();
+    const dialog = await waitFor(() => altDialog());
+    fireEvent.click(within(dialog).getByLabelText('decorative'));
+    expect(within(dialog).getByLabelText('label')).toBeDisabled();
+    fireEvent.click(within(dialog).getByRole('button', { name: 'save' }));
+    await waitFor(() => expect(html(editor)).toContain('alt=""'));
+  });
+
+  it('edits the description of an image already in the text from the toolbar', async () => {
+    const { editor } = await setup({ content: '<p>See <img src="data:image/png;base64,BBBB" alt="Old chart"></p>' });
+    let imagePos = -1;
+    editor.state.doc.descendants((node, pos) => { if (node.type.name === 'image') imagePos = pos; });
+    act(() => { editor.commands.setNodeSelection(imagePos); });
+
+    const button = await waitFor(() => {
+      const el = screen.getByRole('toolbar', { name: 'formatting' }).querySelector<HTMLButtonElement>('[data-toolbar-item="image-alt"]');
+      expect(el).not.toBeNull();
+      return el!;
+    });
+    expect(button).toHaveAccessibleName('image_alt.edit');
+    fireEvent.click(button);
+
+    const dialog = altDialog();
+    const input = within(dialog).getByLabelText('label') as HTMLInputElement;
+    expect(input.value).toBe('Old chart');
+    fireEvent.change(input, { target: { value: 'Sales by month, rising from March' } });
+    fireEvent.click(within(dialog).getByRole('button', { name: 'save' }));
+    await waitFor(() => expect(html(editor)).toContain('alt="Sales by month, rising from March"'));
   });
 });

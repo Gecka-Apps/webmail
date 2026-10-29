@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Send denne besked?",
       "message": "Den sendes til {count, plural, one {# modtager} other {# modtagere}}."
+    },
+    "image_alt": {
+      "title": "Beskriv dette billede",
+      "hint": "Skriv, hvad billedet viser, for dem, der ikke kan se det.",
+      "label": "Billedbeskrivelse",
+      "decorative": "Dekorativt billede (ingen beskrivelse)",
+      "skip": "Spring over",
+      "edit": "Rediger billedbeskrivelse",
+      "plain_text": "[Billede: {alt}]"
     }
   },
   "confirm_dialog": {

@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Wysłać tę wiadomość?",
       "message": "Trafi do {count, plural, one {# odbiorcy} few {# odbiorców} many {# odbiorców} other {# odbiorcy}}."
+    },
+    "image_alt": {
+      "title": "Opisz ten obraz",
+      "hint": "Napisz, co przedstawia obraz, dla osób, które go nie widzą.",
+      "label": "Opis obrazu",
+      "decorative": "Obraz dekoracyjny (bez opisu)",
+      "skip": "Pomiń",
+      "edit": "Edytuj opis obrazu",
+      "plain_text": "[Obraz: {alt}]"
     }
   },
   "confirm_dialog": {

@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Send this message?",
       "message": "It goes to {count, plural, one {# recipient} other {# recipients}}."
+    },
+    "image_alt": {
+      "title": "Describe this image",
+      "hint": "Say what the image shows for people who can't see it.",
+      "label": "Image description",
+      "decorative": "Decorative image (no description)",
+      "skip": "Skip",
+      "edit": "Edit image description",
+      "plain_text": "[Image: {alt}]"
     }
   },
   "confirm_dialog": {

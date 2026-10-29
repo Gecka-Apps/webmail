@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "이 메시지를 보낼까요?",
       "message": "{count, plural, other {받는 사람 #명}}에게 보내져요."
+    },
+    "image_alt": {
+      "title": "이 이미지 설명하기",
+      "hint": "이미지를 볼 수 없는 분을 위해 무엇이 보이는지 적어 주세요.",
+      "label": "이미지 설명",
+      "decorative": "장식용 이미지(설명 없음)",
+      "skip": "건너뛰기",
+      "edit": "이미지 설명 편집",
+      "plain_text": "[이미지: {alt}]"
     }
   },
   "confirm_dialog": {

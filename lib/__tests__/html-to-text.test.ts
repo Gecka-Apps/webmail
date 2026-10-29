@@ -105,3 +105,16 @@ describe('htmlToPlainText', () => {
     });
   });
 });
+
+describe('htmlToPlainText images (MA-02)', () => {
+  const imageAlt = (alt: string) => `[Image: ${alt}]`;
+
+  it('writes an image as its alt text and leaves decorative ones out', () => {
+    const html = '<p>Our plan <img src="cid:a" alt="A red bicycle"> and<img src="cid:b" alt=""> more<img src="cid:c"></p>';
+    expect(htmlToPlainText(html, { imageAlt })).toBe('Our plan [Image: A red bicycle] and more');
+  });
+
+  it('leaves images out without the option, as before', () => {
+    expect(htmlToPlainText('<p>Hi <img src="cid:a" alt="Logo"></p>')).toBe('Hi');
+  });
+});

@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Bu ileti gönderilsin mi?",
       "message": "{count, plural, one {# alıcıya} other {# alıcıya}} gidecek."
+    },
+    "image_alt": {
+      "title": "Bu görseli açıklayın",
+      "hint": "Göremeyenler için görselin neyi gösterdiğini yazın.",
+      "label": "Görsel açıklaması",
+      "decorative": "Süs görseli (açıklama yok)",
+      "skip": "Atla",
+      "edit": "Görsel açıklamasını düzenle",
+      "plain_text": "[Görsel: {alt}]"
     }
   },
   "confirm_dialog": {

@@ -160,8 +160,8 @@ import { toUnicodeEmail } from "@/lib/idn";
 /** How often an automatic sign-out looks whether a send in flight has finished. */
 const SEND_WAIT_POLL_MS = 100;
 
-function htmlToPlainText(html: string): string {
-  return htmlToPlainTextShared(html, { paragraphSpacing: true, mailMarkup: true });
+function htmlToPlainText(html: string, imageAlt?: (alt: string) => string): string {
+  return htmlToPlainTextShared(html, { paragraphSpacing: true, mailMarkup: true, imageAlt });
 }
 
 /**
@@ -846,6 +846,8 @@ export function EmailComposer({
     setLiveMessage((prev) => ({ text, n: (prev?.n ?? 0) + 1 }));
   }, []);
   const fieldIdBase = React.useId();
+  // How an image reads in the plain-text part: its alt text, never a file name.
+  const imageAltText = useCallback((alt: string) => t('image_alt.plain_text', { alt }), [t]);
   const fieldLabelId = (field: 'to' | 'cc' | 'bcc') => `${fieldIdBase}-${field}-label`;
   const recipientFieldsRef = useRef<RecipientFields>({ to, cc, bcc });
   useEffect(() => {
@@ -2565,7 +2567,7 @@ export function EmailComposer({
       ? (signatureAlreadyInBody
           ? body
           : appendPlainTextSignature(body, signatureIdentity, { separator: signatureSeparatorEnabled }))
-      : htmlToPlainText(draftHtmlBody!);
+      : htmlToPlainText(draftHtmlBody!, imageAltText);
 
     // Create a hash of current data to compare with last saved. Hashing the
     // composed bodies (not the raw editor body) means a signature that changed
@@ -3463,7 +3465,7 @@ export function EmailComposer({
     const signatureOpts = { separator: signatureSeparatorEnabled };
     const builtTextBody = plainTextMode
       ? (signatureAlreadyInBody ? body : appendPlainTextSignature(body, signatureIdentity, signatureOpts))
-      : (signatureAlreadyInBody ? htmlToPlainText(body) : appendPlainTextSignature(htmlToPlainText(body), signatureIdentity, signatureOpts));
+      : (signatureAlreadyInBody ? htmlToPlainText(body, imageAltText) : appendPlainTextSignature(htmlToPlainText(body, imageAltText), signatureIdentity, signatureOpts));
 
     // Before any blobId is read: forwarded parts may still sit on the account
     // that holds the original message.

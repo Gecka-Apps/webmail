@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "このメッセージを送信しますか？",
       "message": "{count, plural, other {# 件の宛先}}に送信されます。"
+    },
+    "image_alt": {
+      "title": "この画像を説明",
+      "hint": "画像が見えない人のために、何が写っているかを書いてください。",
+      "label": "画像の説明",
+      "decorative": "装飾用の画像（説明なし）",
+      "skip": "スキップ",
+      "edit": "画像の説明を編集",
+      "plain_text": "[画像: {alt}]"
     }
   },
   "confirm_dialog": {

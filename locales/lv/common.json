@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Vai sūtīt šo ziņojumu?",
       "message": "Tas tiks nosūtīts {count, plural, zero {# adresātiem} one {# adresātam} other {# adresātiem}}."
+    },
+    "image_alt": {
+      "title": "Aprakstiet šo attēlu",
+      "hint": "Uzrakstiet, ko attēls rāda, tiem, kuri to neredz.",
+      "label": "Attēla apraksts",
+      "decorative": "Dekoratīvs attēls (bez apraksta)",
+      "skip": "Izlaist",
+      "edit": "Rediģēt attēla aprakstu",
+      "plain_text": "[Attēls: {alt}]"
     }
   },
   "confirm_dialog": {

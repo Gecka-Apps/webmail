@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Elküldi ezt az üzenetet?",
       "message": "{count, plural, one {# címzett} other {# címzett}} kapja meg."
+    },
+    "image_alt": {
+      "title": "Írja le ezt a képet",
+      "hint": "Írja le, mit ábrázol a kép azoknak, akik nem látják.",
+      "label": "Képleírás",
+      "decorative": "Díszítő kép (leírás nélkül)",
+      "skip": "Kihagyás",
+      "edit": "Képleírás szerkesztése",
+      "plain_text": "[Kép: {alt}]"
     }
   },
   "confirm_dialog": {

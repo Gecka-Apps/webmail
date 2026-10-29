@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Odoslať túto správu?",
       "message": "Pôjde {count, plural, one {# príjemcovi} few {# príjemcom} many {# príjemcom} other {# príjemcom}}."
+    },
+    "image_alt": {
+      "title": "Opíšte tento obrázok",
+      "hint": "Napíšte, čo obrázok zobrazuje, pre ľudí, ktorí ho nevidia.",
+      "label": "Popis obrázka",
+      "decorative": "Dekoratívny obrázok (bez popisu)",
+      "skip": "Preskočiť",
+      "edit": "Upraviť popis obrázka",
+      "plain_text": "[Obrázok: {alt}]"
     }
   },
   "confirm_dialog": {

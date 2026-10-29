@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "发送这封邮件？",
       "message": "将发送给 {count, plural, other {# 位收件人}}。"
+    },
+    "image_alt": {
+      "title": "描述这张图片",
+      "hint": "为看不到图片的人写下图片的内容。",
+      "label": "图片描述",
+      "decorative": "装饰性图片（无描述）",
+      "skip": "跳过",
+      "edit": "编辑图片描述",
+      "plain_text": "[图片：{alt}]"
     }
   },
   "confirm_dialog": {

@@ -1036,6 +1036,15 @@
     "send_confirm": {
       "title": "Kas saata see sõnum?",
       "message": "See läheb {count, plural, one {# saajale} other {# saajale}}."
+    },
+    "image_alt": {
+      "title": "Kirjelda seda pilti",
+      "hint": "Kirjuta, mida pilt näitab, neile, kes seda ei näe.",
+      "label": "Pildi kirjeldus",
+      "decorative": "Dekoratiivne pilt (kirjelduseta)",
+      "skip": "Jäta vahele",
+      "edit": "Muuda pildi kirjeldust",
+      "plain_text": "[Pilt: {alt}]"
     }
   },
   "confirm_dialog": {
