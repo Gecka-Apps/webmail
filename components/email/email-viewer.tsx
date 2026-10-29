@@ -3161,6 +3161,10 @@ export function EmailViewer({
   const isDark = emailViewDarkOverride !== null
     ? emailViewDarkOverride
     : (emailAlwaysLightMode ? false : resolvedTheme === 'dark');
+  // Our dark recolouring stays out of a forced-colours mode (Windows contrast
+  // themes): the browser maps the mail to the user's colours itself, and
+  // inline colours written by our pass would only fight it.
+  const recolorDark = isDark && !reading.forcedColors;
 
   // The body's language (Content-Language or the HTML's own lang), so a
   // screen reader switches voice for it; none when the mail doesn't say.
@@ -3177,8 +3181,8 @@ export function EmailViewer({
     // handleIframeLoad); this only sets the fallback colours and keeps the
     // body hidden until that pass ran. A mail with its own dark styles gets
     // them pinned to the app theme rather than the OS.
-    const darkModeCSS = isDark ? emailDarkModeCss() : '';
-    const colorScheme = emailColorScheme(isDark, emailHasNativeDarkMode);
+    const darkModeCSS = recolorDark ? emailDarkModeCss() : '';
+    const colorScheme = emailColorScheme(recolorDark, emailHasNativeDarkMode);
 
     // Bare HTML emails (no <style>) tend to be plain prose without their own
     // layout - give them the same padding as plain-text mails (.email-content-text).
@@ -3212,7 +3216,7 @@ export function EmailViewer({
     const iframeCsp = emailIframeCsp(effectiveEmailContent.externalBlocked);
 
     return `<!DOCTYPE html>
-<html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} data-reading="${reading.frameKey}" class="${isDark ? DARK_PENDING_CLASS : ''}" style="color-scheme: ${colorScheme};"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html${bodyLanguage ? ` lang="${bodyLanguage}"` : ''} data-reading="${reading.frameKey}" class="${recolorDark ? DARK_PENDING_CLASS : ''}" style="color-scheme: ${colorScheme};"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="${iframeCsp}">
 <meta name="referrer" content="no-referrer">
 <meta http-equiv="x-dns-prefetch-control" content="off">
@@ -3263,8 +3267,8 @@ export function EmailViewer({
   pre { white-space: pre-wrap; word-wrap: break-word; }
   ${wordHtmlCSS}
   ${darkModeCSS}
-</style></head><body dir="auto">${resolveColorSchemeMedia(effectiveEmailContent.html, isDark)}<style>html,body{height:auto!important;min-height:0!important;max-height:none!important}</style></body></html>`;
-  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, isDark, emailHasNativeDarkMode, messageSpacing, bodyLanguage, reading.frameKey]);
+</style></head><body dir="auto">${resolveColorSchemeMedia(effectiveEmailContent.html, recolorDark)}<style>html,body{height:auto!important;min-height:0!important;max-height:none!important}</style></body></html>`;
+  }, [effectiveEmailContent.html, effectiveEmailContent.isHtml, effectiveEmailContent.hasStyleTag, effectiveEmailContent.externalBlocked, recolorDark, emailHasNativeDarkMode, messageSpacing, bodyLanguage, reading.frameKey]);
 
   // Unblocking external content is handled by rebuilding the iframe srcDoc:
   // toggling allowExternalContent (both "Load images" and "Trust sender" set
@@ -3404,7 +3408,7 @@ export function EmailViewer({
         // Before the height wiring and after the quote toggle exists, so the
         // toggle is converted too. Reads the mail's computed colours and
         // un-hides the body when done.
-        if (isDark) {
+        if (recolorDark) {
           applyEmailDarkMode(doc, { remoteContentAllowed: !effectiveEmailContent.externalBlocked });
         }
 
@@ -3564,7 +3568,7 @@ export function EmailViewer({
     } catch {
       // Cross-origin restrictions - iframe will still display content
     }
-  }, [isDark, effectiveEmailContent.externalBlocked, email?.id, t, openCidPartLink, onBodySelection, selectionMenu.openRef]);
+  }, [recolorDark, effectiveEmailContent.externalBlocked, email?.id, t, openCidPartLink, onBodySelection, selectionMenu.openRef]);
 
   // Wire up the iframe as soon as its sandboxed document has parsed, rather than
   // waiting for the iframe 'load' event. 'load' also waits on every subresource,
@@ -6186,7 +6190,7 @@ export function EmailViewer({
                 title={frameTitle}
                 className="w-full border-0 block"
                 scrolling="no"
-                style={{ minHeight: '100px', colorScheme: emailColorScheme(isDark, emailHasNativeDarkMode) }}
+                style={{ minHeight: '100px', colorScheme: emailColorScheme(recolorDark, emailHasNativeDarkMode) }}
                 onLoad={handleIframeLoad}
               />
             ) : (

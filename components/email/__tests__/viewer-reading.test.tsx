@@ -15,9 +15,10 @@ vi.mock('next-intl', () => ({
   useLocale: () => 'en',
   useFormatter: () => ({ dateTime: (d: Date | string) => String(d), relativeTime: (d: Date | string) => String(d), number: (n: number) => String(n) }),
 }));
+const media = vi.hoisted(() => ({ matches: new Set<string>() }));
 vi.mock('@/hooks/use-media-query', () => ({
   useDeviceDetection: () => ({ isMobile: false, isTablet: false, isDesktop: true }),
-  useMediaQuery: () => false,
+  useMediaQuery: (query: string) => media.matches.has(query),
   useIsMobile: () => false,
   useIsDesktop: () => true,
 }));
@@ -37,6 +38,8 @@ vi.stubGlobal('ResizeObserver', NoopResizeObserver);
 const { EmailViewer } = await import('../email-viewer');
 const { useSettingsStore } = await import('@/stores/settings-store');
 const { ACCESSIBILITY_DEFAULTS } = await import('@/lib/accessibility-settings');
+const { useThemeStore } = await import('@/stores/theme-store');
+const { DARK_PENDING_CLASS } = await import('@/lib/email-dark-mode');
 
 const mailboxes = [
   { id: 'inbox', name: 'Inbox', role: 'inbox', parentId: null, myRights: { mayAddItems: true } },
@@ -69,7 +72,9 @@ async function show(email: Email) {
 
 beforeEach(() => {
   clearAllHooks();
-  useSettingsStore.setState({ ...ACCESSIBILITY_DEFAULTS, fontSize: 'medium' } as never);
+  media.matches.clear();
+  useSettingsStore.setState({ ...ACCESSIBILITY_DEFAULTS, fontSize: 'medium', emailAlwaysLightMode: false } as never);
+  useThemeStore.setState({ resolvedTheme: 'light' });
 });
 
 describe('message body frame', () => {
@@ -126,5 +131,22 @@ describe('message text size', () => {
     useSettingsStore.setState({ fontSize: 'xx-large' } as never);
     const { container } = await show(message({ html: '<p>Some <b>formatted</b> text</p>' }));
     expect(container.querySelector('iframe')!.getAttribute('srcdoc')).toContain('data-reading="1.5/0"');
+  });
+});
+
+describe('forced colours', () => {
+  it('dark theme recolours the mail normally', async () => {
+    useThemeStore.setState({ resolvedTheme: 'dark' });
+    const { container } = await show(message({ html: '<p>Some <b>formatted</b> text</p>' }));
+    expect(container.querySelector('iframe')!.getAttribute('srcdoc')).toContain(DARK_PENDING_CLASS);
+  });
+
+  it('skips our dark recolouring when the browser forces colours', async () => {
+    useThemeStore.setState({ resolvedTheme: 'dark' });
+    media.matches.add('(forced-colors: active)');
+    const { container } = await show(message({ html: '<p>Some <b>formatted</b> text</p>' }));
+    const srcdoc = container.querySelector('iframe')!.getAttribute('srcdoc')!;
+    expect(srcdoc).not.toContain(DARK_PENDING_CLASS);
+    expect(srcdoc).not.toContain('forced-color-adjust');
   });
 });

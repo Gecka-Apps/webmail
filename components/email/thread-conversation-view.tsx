@@ -566,9 +566,11 @@ export function ConversationEmailBody({
   const wopiStatus = useWopiStatus(true);
   const hideInlineImageAttachments = useSettingsStore((state) => state.hideInlineImageAttachments);
   const emailAlwaysLightMode = useSettingsStore((state) => state.emailAlwaysLightMode);
-  const isDark = resolvedTheme === 'dark' && !emailAlwaysLightMode;
   const plainTextFont = useSettingsStore((state) => state.plainTextFont);
   const reading = useMailReading();
+  // No dark recolouring in a forced-colours mode: the browser maps the mail
+  // to the user's colours itself.
+  const isDark = resolvedTheme === 'dark' && !emailAlwaysLightMode && !reading.forcedColors;
   const showVerificationCodes = useSettingsStore((state) => state.showVerificationCodes);
   const verificationCode = useMemo(
     () => (showVerificationCodes ? findVerificationCode(email.subject, verificationCodeBodyText(email)) : null),

@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { useSettingsStore } from "@/stores/settings-store";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { mailTextFactor, plainBodyFontSize } from "@/lib/mail-reading";
 
 /**
@@ -16,6 +17,8 @@ export interface MailReading {
   textFactor: number;
   /** Smallest text size in the body, CSS px; 0 = none. */
   minFontSize: number;
+  /** Windows contrast themes and the like: the browser picks the colours. */
+  forcedColors: boolean;
   /** Font size for a plain-text body of `basePx` at 100 %. */
   plainFontSize: (basePx: number) => string;
   /** Changes whenever the body frame has to be built again. */
@@ -28,6 +31,7 @@ export function useMailReading(): MailReading {
     mailTextScale: state.mailTextScale,
     mailMinFontSize: state.mailMinFontSize,
   })));
+  const forcedColors = useMediaQuery("(forced-colors: active)");
 
   return useMemo(() => {
     const textFactor = mailTextFactor(s.mailTextScale, s.fontSize);
@@ -35,8 +39,9 @@ export function useMailReading(): MailReading {
     return {
       textFactor,
       minFontSize,
+      forcedColors,
       plainFontSize: (basePx: number) => plainBodyFontSize(basePx, s.mailTextScale, s.fontSize, minFontSize),
       frameKey: `${textFactor}/${minFontSize}`,
     };
-  }, [s.mailTextScale, s.fontSize, s.mailMinFontSize]);
+  }, [s.mailTextScale, s.fontSize, s.mailMinFontSize, forcedColors]);
 }
