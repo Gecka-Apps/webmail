@@ -219,11 +219,11 @@ export function AuthPage() {
               placeholder="https://webmail.example.com"
               className={cn(inputClass, 'w-full')}
             />
-            <p className="text-[11px] text-muted-foreground mt-1">
+            <p className="text-[0.6875rem] text-muted-foreground mt-1">
               Used to register redirect URIs (one per locale: <code>{setupOrigin.trim().replace(/\/+$/, '') || 'https://…'}/&lt;locale&gt;/auth/callback</code>) on Stalwart.
             </p>
             {!setupOriginValid && setupOrigin.length > 0 && (
-              <p className="text-[11px] text-destructive mt-1">Must be like https://host with no path.</p>
+              <p className="text-[0.6875rem] text-destructive mt-1">Must be like https://host with no path.</p>
             )}
           </div>
           <div>
@@ -239,11 +239,11 @@ export function AuthPage() {
               placeholder="https://mail.example.com"
               className={cn(inputClass, 'w-full')}
             />
-            <p className="text-[11px] text-muted-foreground mt-1">
+            <p className="text-[0.6875rem] text-muted-foreground mt-1">
               Where Stalwart serves <code>/.well-known/oauth-authorization-server</code>. Saved as <code>OAUTH_ISSUER_URL</code>. Pre-filled from your JMAP server URL.
             </p>
             {!setupIssuerValid && setupIssuer.length > 0 && (
-              <p className="text-[11px] text-destructive mt-1">Must be like https://host with no path.</p>
+              <p className="text-[0.6875rem] text-destructive mt-1">Must be like https://host with no path.</p>
             )}
           </div>
           <label className="inline-flex items-center gap-2 text-xs text-foreground select-none cursor-pointer">

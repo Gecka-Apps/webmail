@@ -1136,7 +1136,7 @@ const BADGE_TONE: Record<Tone, string> = {
 
 /** The status pills (calendar invitation, identity "Default"). */
 export function Badge({ tone = 'neutral', children }: { tone?: Tone } & Children) {
-  return <span className={cn('bk inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium whitespace-nowrap', BADGE_TONE[tone])}>{children}</span>;
+  return <span className={cn('bk inline-flex items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium whitespace-nowrap', BADGE_TONE[tone])}>{children}</span>;
 }
 
 /** The reader's attachment chip: icon, label, muted detail. Clickable when onClick is set. */
@@ -1187,7 +1187,7 @@ export function InfoBar({ tone = 'neutral', icon, eyebrow, title, children, comp
     return (
       <div className="bk flex flex-wrap items-center gap-x-3 gap-y-1.5 px-6 py-1.5 border-b border-border bg-muted/30 text-sm">
         {icon && <span className={cn('w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0', INFO_TONE[tone])}><Icon name={icon} size="sm" /></span>}
-        {eyebrow && <span className="text-[11px] font-semibold text-muted-foreground">{eyebrow}</span>}
+        {eyebrow && <span className="text-[0.6875rem] font-semibold text-muted-foreground">{eyebrow}</span>}
         {title && <span className="min-w-0 flex-1 text-foreground break-words">{title}</span>}
         {children}
       </div>
@@ -1205,7 +1205,7 @@ export function InfoBar({ tone = 'neutral', icon, eyebrow, title, children, comp
           <div className="flex-1 min-w-0 space-y-2">
             {(eyebrow || title) && (
               <div>
-                {eyebrow && <div className="text-[11px] font-semibold text-muted-foreground">{eyebrow}</div>}
+                {eyebrow && <div className="text-[0.6875rem] font-semibold text-muted-foreground">{eyebrow}</div>}
                 {title && <div className="text-sm font-medium text-foreground break-words">{title}</div>}
               </div>
             )}
@@ -1346,7 +1346,7 @@ export function Panel({ children }: Children) {
 
 /** The small caps heading of the message details' sections. */
 export function DetailHeading({ children }: Children) {
-  return <div className="bk text-[11px] font-semibold text-muted-foreground mb-1.5">{children}</div>;
+  return <div className="bk text-[0.6875rem] font-semibold text-muted-foreground mb-1.5">{children}</div>;
 }
 
 /** Label and value rows like the message details (From, Date, Size...). Children are DetailRows. */

@@ -12,7 +12,7 @@ import { EVERYONE, useOrgPolicyDraft, type OrgPolicyDraft } from '@/components/a
 import { resolvePolicy, type PolicyScope } from '@/lib/admin/policy-scopes';
 import { cn } from '@/lib/utils';
 
-const fieldLabelClass = 'mb-1 block text-[11px] font-medium text-muted-foreground';
+const fieldLabelClass = 'mb-1 block text-[0.6875rem] font-medium text-muted-foreground';
 const DOMAIN_RE = /^(\*\.)?[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/;
 const GROUP_RE = /^[^\s@]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/;
 

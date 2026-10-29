@@ -573,7 +573,7 @@ export function CalendarSidebarPanel({
                   <div className="mt-1">
                     {owned.length > 0 && (
                       <div>
-                        <div className="ps-5 pe-3 py-0.5 text-[11px] font-medium text-muted-foreground">
+                        <div className="ps-5 pe-3 py-0.5 text-[0.6875rem] font-medium text-muted-foreground">
                           {t('my_calendars')}
                         </div>
                         <div>
@@ -583,7 +583,7 @@ export function CalendarSidebarPanel({
                     )}
                     {sharedGroups.map((sg) => (
                       <div key={`${group.key}-shared-${sg.label}`} className="mt-2">
-                        <div className="ps-5 pe-3 py-0.5 text-[11px] font-medium text-muted-foreground flex items-center gap-1">
+                        <div className="ps-5 pe-3 py-0.5 text-[0.6875rem] font-medium text-muted-foreground flex items-center gap-1">
                           <Share2 className="w-3 h-3" />
                           {sg.label}
                         </div>
@@ -612,7 +612,7 @@ export function CalendarSidebarPanel({
               {renderSectionHeader('__others__', t('other_calendars'))}
               {!collapsedAccountGroups.has('__others__') && sharedAccountGroups.map((group) => (
                 <div key={group.accountName} className="mt-2">
-                  <div className="ps-5 pe-3 py-0.5 text-[11px] font-medium text-muted-foreground flex items-center gap-1">
+                  <div className="ps-5 pe-3 py-0.5 text-[0.6875rem] font-medium text-muted-foreground flex items-center gap-1">
                     <Share2 className="w-3 h-3" />
                     {group.accountName}
                   </div>

@@ -215,7 +215,7 @@ export function ToastItem({ toast, onClose, held = false, onFocusLost }: ToastPr
         }
       }}
       className={cn(
-        "text-[13px] font-semibold text-foreground px-1.5 py-0.5 rounded-md transition-colors",
+        "text-[0.8125rem] font-semibold text-foreground px-1.5 py-0.5 rounded-md transition-colors",
         TOUCH_HIT_AREA,
         "underline underline-offset-[3px] hover:bg-foreground/5"
       )}
@@ -282,9 +282,9 @@ export function ToastItem({ toast, onClose, held = false, onFocusLost }: ToastPr
 
       {/* Content */}
       <div className="flex-1 min-w-0 pt-px">
-        <p id={titleId} className="text-[13.5px] font-medium text-foreground leading-snug">{toast.title}</p>
+        <p id={titleId} className="text-[0.84375rem] font-medium text-foreground leading-snug">{toast.title}</p>
         {toast.message && (
-          <p className="text-[12.5px] mt-0.5 text-muted-foreground leading-snug">{toast.message}</p>
+          <p className="text-[0.78125rem] mt-0.5 text-muted-foreground leading-snug">{toast.message}</p>
         )}
         {toast.tertiaryAction && (
           <div className="flex flex-wrap items-center gap-1 mt-1.5 -ms-1.5">

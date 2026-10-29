@@ -20,7 +20,7 @@ export type TagBadgeVariant = "badge" | "dot";
  * it rather than approximating its padding and text size.
  */
 export const TAG_LOZENGE_CLASS =
-  "inline-flex min-w-0 shrink-0 items-center rounded-full px-2 py-0.5 text-[11px] font-medium";
+  "inline-flex min-w-0 shrink-0 items-center rounded-full px-2 py-0.5 text-[0.6875rem] font-medium";
 
 /**
  * The row a group of tags sits in. Using it for neighbouring lozenges too keeps
@@ -74,7 +74,7 @@ export function TagBadge({
     return (
       <span
         className={cn(
-          "inline-flex h-4 min-w-4 shrink-0 items-center justify-center rounded-full border px-0.5 text-[9px] font-bold leading-none",
+          "inline-flex h-4 min-w-4 shrink-0 items-center justify-center rounded-full border px-0.5 text-[0.5625rem] font-bold leading-none",
           color.fill,
           color.border,
           color.text,

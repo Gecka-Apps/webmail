@@ -48,7 +48,7 @@ function DensityPreview({ density }: { density: Density }) {
               <span className={cn("truncate", row.unread ? "font-semibold text-foreground" : "text-muted-foreground")}>
                 {row.sender}
               </span>
-              <span className="text-[10px] text-muted-foreground flex-shrink-0 tabular-nums">12:00</span>
+              <span className="text-[0.625rem] text-muted-foreground flex-shrink-0 tabular-nums">12:00</span>
             </div>
             <div className={cn("truncate", row.unread ? "font-medium text-foreground" : "text-foreground")}>
               {row.subject}

@@ -183,7 +183,7 @@ export const ParticipantInput = forwardRef<ParticipantInputHandle, ParticipantIn
                   i === activeIndex ? "bg-accent text-accent-foreground" : "hover:bg-muted"
                 }`}
               >
-                <Avatar name={s.name} email={s.email} size="sm" className="shrink-0 w-7 h-7 text-[10px]" />
+                <Avatar name={s.name} email={s.email} size="sm" className="shrink-0 w-7 h-7 text-[0.625rem]" />
                 <div className="min-w-0">
                   <div className="font-medium truncate" title={s.name || s.email}>{s.name || s.email}</div>
                   {s.name && (

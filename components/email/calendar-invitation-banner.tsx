@@ -893,7 +893,7 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
         {/* Eyebrow + title + collapse */}
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0 flex-1">
-            <div className="text-[11px] font-semibold text-muted-foreground">
+            <div className="text-[0.6875rem] font-semibold text-muted-foreground">
               {bannerTitle}
             </div>
             {summary?.title && (
@@ -908,7 +908,7 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
 
           <div className="flex items-center gap-1.5 flex-shrink-0">
             {parsedEvent?.sequence != null && parsedEvent.sequence > 0 && (
-              <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground whitespace-nowrap">
+              <span className="rounded-full bg-muted px-2 py-0.5 text-[0.625rem] font-medium text-muted-foreground whitespace-nowrap">
                 {t('event_updated', { sequence: parsedEvent.sequence })}
               </span>
             )}
@@ -972,7 +972,7 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
           <div className="flex flex-wrap items-center gap-1.5">
             {parsedEvent?.status && parsedEvent.status !== 'confirmed' && (
               <span className={cn(
-                "rounded-full px-2 py-0.5 text-[11px] font-medium",
+                "rounded-full px-2 py-0.5 text-[0.6875rem] font-medium",
                 parsedEvent.status === 'cancelled'
                   ? "bg-destructive/15 text-destructive"
                   : "bg-warning/15 text-warning",
@@ -981,25 +981,25 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
               </span>
             )}
             {existingEvent && (
-              <span className="rounded-full bg-success/15 px-2 py-0.5 text-[11px] font-medium text-success">
+              <span className="rounded-full bg-success/15 px-2 py-0.5 text-[0.6875rem] font-medium text-success">
                 {t('already_in_calendar')}
               </span>
             )}
             {userIsOrganizer && (
-              <span className="rounded-full bg-info/15 px-2 py-0.5 text-[11px] font-medium text-info">
+              <span className="rounded-full bg-info/15 px-2 py-0.5 text-[0.6875rem] font-medium text-info">
                 {t('organizer_role')}
               </span>
             )}
             {participationLabel && myParticipant && (
               <span className={cn(
-                'rounded-full px-2 py-0.5 text-[11px] font-medium',
+                'rounded-full px-2 py-0.5 text-[0.6875rem] font-medium',
                 getParticipationTone(currentRsvp),
               )}>
                 {t('your_response', { status: participationLabel })}
               </span>
             )}
             {actionNotice && (
-              <span className="rounded-full bg-success/15 px-2 py-0.5 text-[11px] font-medium text-success">
+              <span className="rounded-full bg-success/15 px-2 py-0.5 text-[0.6875rem] font-medium text-success">
                 {actionNotice}
               </span>
             )}

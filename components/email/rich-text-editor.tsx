@@ -876,7 +876,7 @@ export function RichTextEditor({
             ) : (
               <span className="flex items-baseline justify-center leading-none" aria-hidden>
                 <span className="text-sm font-semibold">A</span>
-                <span className="text-[9px] font-semibold">A</span>
+                <span className="text-[0.5625rem] font-semibold">A</span>
               </span>
             )}
           </ToolbarButton>

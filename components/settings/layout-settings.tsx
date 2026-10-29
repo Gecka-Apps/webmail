@@ -48,7 +48,7 @@ function MailLayoutPreview({
                   <div
                     key={row.subject}
                     className={cn(
-                      'border-b border-border px-2 py-1.5 text-[10px] last:border-b-0',
+                      'border-b border-border px-2 py-1.5 text-[0.625rem] last:border-b-0',
                       row.selected && 'bg-primary/10'
                     )}
                   >
@@ -72,7 +72,7 @@ function MailLayoutPreview({
                 <div
                   key={row.subject}
                   className={cn(
-                    'border-b border-border px-2 py-1 text-[10px] last:border-b-0',
+                    'border-b border-border px-2 py-1 text-[0.625rem] last:border-b-0',
                     row.selected && 'bg-primary/10'
                   )}
                 >
@@ -92,7 +92,7 @@ function MailLayoutPreview({
                   <div
                     key={row.subject}
                     className={cn(
-                      'border-b border-border px-2 py-1 text-[10px] last:border-b-0',
+                      'border-b border-border px-2 py-1 text-[0.625rem] last:border-b-0',
                       row.selected && 'bg-primary/10'
                     )}
                   >

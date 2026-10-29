@@ -425,7 +425,7 @@ function AccountRow({
               account.isConnected ? 'bg-green-500' : 'bg-muted-foreground/40'
             )} />
           )}
-          <span className="text-[10px] text-muted-foreground truncate">
+          <span className="text-[0.625rem] text-muted-foreground truncate">
             {hostnameOf(account.serverUrl)}
           </span>
         </div>

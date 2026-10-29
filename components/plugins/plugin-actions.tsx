@@ -183,7 +183,7 @@ export function PluginActions({ surface, context, variant = 'buttons', mailboxRo
             {action.badge ? (
               <span
                 data-plugin-action-badge=""
-                className="absolute -top-1 -end-1 flex items-center justify-center min-w-4 h-4 px-1 text-[10px] font-bold rounded-full bg-primary text-primary-foreground"
+                className="absolute -top-1 -end-1 flex items-center justify-center min-w-4 h-4 px-1 text-[0.625rem] font-bold rounded-full bg-primary text-primary-foreground"
               >
                 {badgeText(action.badge)}
               </span>

@@ -435,7 +435,7 @@ function CredentialRow({ entry, onRemove, isSaving, deleteLabel }: { entry: AppP
             {entry.allowedIps.map((ip) => (
               <span
                 key={ip}
-                className="text-[10px] font-mono bg-background border border-border rounded px-1.5 py-0.5 text-muted-foreground"
+                className="text-[0.625rem] font-mono bg-background border border-border rounded px-1.5 py-0.5 text-muted-foreground"
               >
                 {ip}
               </span>
@@ -595,7 +595,7 @@ function CredentialSection({ icon: Icon, i18nNamespace, entries, onCreate, onRem
               rows={2}
               className="w-full text-xs font-mono px-3 py-2 rounded-md border border-border bg-background focus:outline-hidden"
             />
-            <p className="text-[10px] text-muted-foreground mt-1">{t('app_passwords.allowed_ips_hint')}</p>
+            <p className="text-[0.625rem] text-muted-foreground mt-1">{t('app_passwords.allowed_ips_hint')}</p>
           </div>
           <div className="flex gap-2">
             <Button type="submit" size="sm" disabled={isSaving || !newDescription.trim()}>
@@ -891,7 +891,7 @@ function PublicKeysSection() {
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium text-foreground truncate">{key.description || key.id}</span>
                     {isEncryptedWithThisKey && (
-                      <span className="text-[10px] bg-green-500/10 text-green-600 dark:text-green-400 font-medium px-1.5 py-0.5 rounded border border-green-500/20">
+                      <span className="text-[0.625rem] bg-green-500/10 text-green-600 dark:text-green-400 font-medium px-1.5 py-0.5 rounded border border-green-500/20">
                         {encryptionConfig.type}
                       </span>
                     )}
@@ -901,7 +901,7 @@ function PublicKeysSection() {
                       {new Date(key.createdAt).toLocaleDateString()}
                     </span>
                   )}
-                  <code className="text-[10px] font-mono bg-background border border-border rounded px-1.5 py-0.5 text-muted-foreground truncate mt-1">
+                  <code className="text-[0.625rem] font-mono bg-background border border-border rounded px-1.5 py-0.5 text-muted-foreground truncate mt-1">
                     {key.key}
                   </code>
                 </div>
@@ -1462,9 +1462,9 @@ export function LinkDeviceSection() {
               {copied ? <Check className="w-3 h-3 me-1" /> : <Copy className="w-3 h-3 me-1" />}
               <span aria-live="polite">{copied ? t('link_device.copied') : t('link_device.copy_link')}</span>
             </Button>
-            <p className="text-[11px] text-muted-foreground">{t('link_device.copy_hint')}</p>
+            <p className="text-[0.6875rem] text-muted-foreground">{t('link_device.copy_hint')}</p>
           </div>
-          <p className="text-[11px] text-muted-foreground text-center">
+          <p className="text-[0.6875rem] text-muted-foreground text-center">
             {t('link_device.expires_in', { seconds: remaining })}
           </p>
         </div>

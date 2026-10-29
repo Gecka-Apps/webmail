@@ -320,22 +320,22 @@ export function EventCard({ event, calendar, variant, onClick, onMouseEnter, onM
         <div className="flex items-baseline gap-1 min-w-0">
           <span dir="auto" className={cn("font-medium truncate", isInactive && "line-through")}>{event.title || t("events.no_title")}</span>
           {!event.showWithoutTime && durationMinutes < 45 && (
-            <span className="hidden @min-[120px]:inline flex-shrink-0 opacity-85 text-[10.5px]">{safeFormat(startDate, timeFmt)}</span>
+            <span className="hidden @min-[120px]:inline flex-shrink-0 opacity-85 text-[0.65625rem]">{safeFormat(startDate, timeFmt)}</span>
           )}
         </div>
       </div>
       {!event.showWithoutTime && durationMinutes >= 45 && (
-        <div className="opacity-85 text-[10.5px]">
+        <div className="opacity-85 text-[0.65625rem]">
           {/* Start before end in a right-to-left layout too. */}
           <bdi dir="ltr">{timeString}</bdi>
         </div>
       )}
       {visibleCalendarName && (
-        <div data-calendar-name dir="auto" className="opacity-85 text-[10.5px] truncate">{visibleCalendarName}</div>
+        <div data-calendar-name dir="auto" className="opacity-85 text-[0.65625rem] truncate">{visibleCalendarName}</div>
       )}
       {getParticipantCount(event) > 0 && (
         <div
-          className="flex items-center gap-0.5 opacity-85 text-[10.5px]"
+          className="flex items-center gap-0.5 opacity-85 text-[0.65625rem]"
           title={t("participants.count", { count: getParticipantCount(event) })}
         >
           <Users className="w-3 h-3" />

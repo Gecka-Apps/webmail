@@ -98,7 +98,7 @@ export const ToolbarSearch = React.forwardRef<HTMLInputElement, ToolbarSearchPro
             {showKey && (
               <kbd
                 aria-hidden="true"
-                className="pointer-events-none mx-1 rounded border border-border px-1.5 font-sans text-[11px] leading-4 text-muted-foreground group-focus-within/search:invisible"
+                className="pointer-events-none mx-1 rounded border border-border px-1.5 font-sans text-[0.6875rem] leading-4 text-muted-foreground group-focus-within/search:invisible"
               >
                 {shortcut}
               </kbd>

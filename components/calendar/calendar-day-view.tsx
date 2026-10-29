@@ -383,7 +383,7 @@ export function CalendarDayView({
                       aria-label={intlFormatter.dateTime(day, { weekday: "long", month: "long", day: "numeric", year: "numeric" })}
                     >
                       <div className={cn(
-                        "w-10 text-center text-[11px] font-medium first-letter:uppercase",
+                        "w-10 text-center text-[0.6875rem] font-medium first-letter:uppercase",
                         today ? "text-primary" : "text-muted-foreground",
                       )}>
                         {intlFormatter.dateTime(day, { weekday: "short" })}
@@ -433,7 +433,7 @@ export function CalendarDayView({
                         >
                           {allDayEvents.length > 0 && (
                             <>
-                              <div className="text-[10px] text-muted-foreground mb-1">{t("events.all_day")}</div>
+                              <div className="text-[0.625rem] text-muted-foreground mb-1">{t("events.all_day")}</div>
                               <div className="space-y-1">
                                 {allDayEvents.map((ev) => {
                                   const calId = getPrimaryCalendarId(ev);
@@ -458,7 +458,7 @@ export function CalendarDayView({
                           )}
                           {dayTasks.length > 0 && (
                             <>
-                              <div className={cn("text-[10px] text-muted-foreground mb-1", allDayEvents.length > 0 && "mt-2")}>{t("tasks.label")}</div>
+                              <div className={cn("text-[0.625rem] text-muted-foreground mb-1", allDayEvents.length > 0 && "mt-2")}>{t("tasks.label")}</div>
                               <div className="space-y-0.5">
                                 {/* The same chip as the month and week grids. */}
                                 {dayTasks.map((task) => (
@@ -501,7 +501,7 @@ export function CalendarDayView({
                     <span aria-hidden="true" className={cn(
                       "absolute end-2 leading-none",
                       h > firstHour ? "top-0 -translate-y-1/2" : "top-1",
-                      isMobile ? "text-[10px]" : "text-xs",
+                      isMobile ? "text-[0.625rem]" : "text-xs",
                     )}>
                       {formatHour(h)}
                     </span>
@@ -657,7 +657,7 @@ export function CalendarDayView({
                           height: ((dragCreate.endMinutes - dragCreate.startMinutes) / 60) * hourHeight,
                         }}
                       >
-                        <div className="text-[10px] font-medium text-primary px-1.5 py-0.5">
+                        <div className="text-[0.625rem] font-medium text-primary px-1.5 py-0.5">
                           <bdi dir="ltr">{formatSnapTime(dragCreate.startMinutes, timeFormat)} – {formatSnapTime(dragCreate.endMinutes, timeFormat)}</bdi>
                         </div>
                       </div>
@@ -672,7 +672,7 @@ export function CalendarDayView({
                           <div className="w-2.5 h-2.5 rounded-full bg-primary -ms-1" />
                           <div className="flex-1 h-0.5 bg-primary rounded-full" />
                         </div>
-                        <div className="absolute -top-4 start-2 text-[10px] font-medium text-primary bg-background/90 px-1 rounded shadow-sm">
+                        <div className="absolute -top-4 start-2 text-[0.625rem] font-medium text-primary bg-background/90 px-1 rounded shadow-sm">
                           {formatSnapTime(dropTarget.minutes, timeFormat)}
                         </div>
                       </div>
@@ -702,7 +702,7 @@ export function CalendarDayView({
                             <div className="font-medium truncate">
                               {pendingPreview.title}
                             </div>
-                            <div className="text-[10.5px] opacity-85 truncate">
+                            <div className="text-[0.65625rem] opacity-85 truncate">
                               <bdi dir="ltr">{formatSnapTime(startMin, timeFormat)} – {formatSnapTime(startMin + durationMin, timeFormat)}</bdi>
                             </div>
                           </div>

@@ -77,7 +77,7 @@ export function PluginDayLabel({ surface, date, className, compact }: PluginDayL
     <div
       data-plugin-surface="calendar-day-header"
       title={tooltip(withText)}
-      className={cn("max-w-full truncate text-[10px] leading-tight text-muted-foreground", className)}
+      className={cn("max-w-full truncate text-[0.625rem] leading-tight text-muted-foreground", className)}
     >
       {withText.map((l) => l.text).join(" · ")}
     </div>

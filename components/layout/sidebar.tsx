@@ -1040,7 +1040,7 @@ function DemoBanner() {
       <div className="flex items-center gap-1.5">
         <button
           onClick={handleStartTour}
-          className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-primary/10 hover:bg-primary/20 transition-colors"
+          className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[0.625rem] font-medium bg-primary/10 hover:bg-primary/20 transition-colors"
           title={t("demo_tour")}
         >
           <PlayCircle className="w-3 h-3" />
@@ -1049,7 +1049,7 @@ function DemoBanner() {
         <button
           onClick={handleReset}
           disabled={isResetting}
-          className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-primary/10 hover:bg-primary/20 transition-colors disabled:opacity-50"
+          className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[0.625rem] font-medium bg-primary/10 hover:bg-primary/20 transition-colors disabled:opacity-50"
           title={t("demo_reset")}
         >
           {isResetting ? (

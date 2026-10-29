@@ -472,7 +472,7 @@ export function CalendarWeekView({
                 className="flex flex-col items-center gap-0.5 pt-2 pb-1.5 border-e border-border last:border-e-0"
               >
                 <div className={cn(
-                  "text-[11px] font-medium first-letter:uppercase",
+                  "text-[0.6875rem] font-medium first-letter:uppercase",
                   todayCol ? "text-primary" : "text-muted-foreground",
                 )}>
                   {intlFormatter.dateTime(day, { weekday: "short" })}
@@ -507,7 +507,7 @@ export function CalendarWeekView({
         <div className="flex border-b border-border" role="row">
           <div
             role="rowheader"
-            className={cn(gutterClass, "text-[10px] text-muted-foreground p-1 text-end flex flex-col justify-between")}
+            className={cn(gutterClass, "text-[0.625rem] text-muted-foreground p-1 text-end flex flex-col justify-between")}
             style={{ height: allDayHeight }}
           >
             <span>{t("events.all_day")}</span>
@@ -517,7 +517,7 @@ export function CalendarWeekView({
                 aria-label={isAllDayExpanded ? t("events.show_less") : t("events.show_more")}
                 aria-expanded={isAllDayExpanded}
                 onClick={() => setIsAllDayExpanded((prev) => !prev)}
-                className="self-end mt-auto text-[10px] text-muted-foreground hover:text-foreground flex items-center gap-0.5 rounded px-1 py-0.5 hover:bg-muted transition-colors cursor-pointer"
+                className="self-end mt-auto text-[0.625rem] text-muted-foreground hover:text-foreground flex items-center gap-0.5 rounded px-1 py-0.5 hover:bg-muted transition-colors cursor-pointer"
                 title={isAllDayExpanded ? t("events.show_less") : t("events.show_more")}
               >
                 {isAllDayExpanded ? (
@@ -593,7 +593,7 @@ export function CalendarWeekView({
                       style={{ insetInlineStart: 1, width: "calc(100% - 2px)", top: baseRow * 24 + 2, height: 20 }}
                     >
                       <div
-                        className="h-full rounded-xs px-1.5 text-xs leading-[16px] font-medium truncate border-2 border-dashed"
+                        className="h-full rounded-xs px-1.5 text-xs leading-[1rem] font-medium truncate border-2 border-dashed"
                         style={{ borderColor: previewColor, color: previewColor, backgroundColor: `${previewColor}10` }}
                       >
                         {pendingPreview!.title}
@@ -644,7 +644,7 @@ export function CalendarWeekView({
                   <span aria-hidden="true" className={cn(
                     "absolute end-2 leading-none",
                     h > firstHour ? "top-0 -translate-y-1/2" : "top-1",
-                    isMobile ? "text-[9px]" : "text-[10px]",
+                    isMobile ? "text-[0.5625rem]" : "text-[0.625rem]",
                   )}>
                     {formatHour(h)}
                   </span>
@@ -800,7 +800,7 @@ export function CalendarWeekView({
                         height: ((dragCreate.endMinutes - dragCreate.startMinutes) / 60) * hourHeight,
                       }}
                     >
-                      <div className="text-[10px] font-medium text-primary px-1.5 py-0.5">
+                      <div className="text-[0.625rem] font-medium text-primary px-1.5 py-0.5">
                         <bdi dir="ltr">{formatSnapTime(dragCreate.startMinutes, timeFormat)} – {formatSnapTime(dragCreate.endMinutes, timeFormat)}</bdi>
                       </div>
                     </div>
@@ -815,7 +815,7 @@ export function CalendarWeekView({
                         <div className="w-2 h-2 rounded-full bg-primary -ms-1" />
                         <div className="flex-1 h-0.5 bg-primary rounded-full" />
                       </div>
-                      <div className="absolute -top-4 start-2 text-[10px] font-medium text-primary bg-background/90 px-1 rounded shadow-sm">
+                      <div className="absolute -top-4 start-2 text-[0.625rem] font-medium text-primary bg-background/90 px-1 rounded shadow-sm">
                         {formatSnapTime(dropTarget.minutes, timeFormat)}
                       </div>
                     </div>
@@ -846,7 +846,7 @@ export function CalendarWeekView({
                           <div className="font-medium truncate">
                             {pendingPreview.title}
                           </div>
-                          <div className="text-[10.5px] opacity-85 truncate">
+                          <div className="text-[0.65625rem] opacity-85 truncate">
                             <bdi dir="ltr">{formatSnapTime(startMin, timeFormat)} – {formatSnapTime(startMin + durationMin, timeFormat)}</bdi>
                           </div>
                         </div>

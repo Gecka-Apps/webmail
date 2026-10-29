@@ -209,12 +209,12 @@ function ManagedAppsList() {
                 <p className="font-medium text-sm truncate">{app.name}</p>
                 <p className="text-xs text-muted-foreground truncate">{app.url}</p>
               </div>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full font-medium bg-muted text-muted-foreground inline-flex items-center gap-1">
+              <span className="text-[0.625rem] px-1.5 py-0.5 rounded-full font-medium bg-muted text-muted-foreground inline-flex items-center gap-1">
                 <Lock className="w-2.5 h-2.5" />
                 {t('managed_badge')}
               </span>
               <span className={cn(
-                'text-[10px] px-1.5 py-0.5 rounded-full font-medium',
+                'text-[0.625rem] px-1.5 py-0.5 rounded-full font-medium',
                 app.openMode === 'inline'
                   ? 'bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400'
                   : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400'
@@ -341,7 +341,7 @@ export function SidebarAppsModal({ isOpen, onClose }: SidebarAppsModalProps) {
                     <p className="text-xs text-muted-foreground truncate">{app.url}</p>
                   </div>
                   <span className={cn(
-                    'text-[10px] px-1.5 py-0.5 rounded-full font-medium',
+                    'text-[0.625rem] px-1.5 py-0.5 rounded-full font-medium',
                     app.openMode === 'inline'
                       ? 'bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400'
                       : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400'

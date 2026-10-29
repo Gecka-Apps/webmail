@@ -89,14 +89,14 @@ export function LogsPage() {
               <div key={i} className="rounded-lg border border-border p-3 space-y-1.5">
                 <div className="flex items-center justify-between gap-2">
                   <Badge className="font-mono text-xs truncate">{entry.action}</Badge>
-                  <span className="text-[11px] text-muted-foreground whitespace-nowrap">
+                  <span className="text-[0.6875rem] text-muted-foreground whitespace-nowrap">
                     {new Date(entry.ts).toLocaleString()}
                   </span>
                 </div>
                 <div className="text-xs text-foreground break-words">
                   {formatDetail(entry.detail)}
                 </div>
-                <div className="text-[11px] text-muted-foreground font-mono">
+                <div className="text-[0.6875rem] text-muted-foreground font-mono">
                   {entry.ip}
                 </div>
               </div>

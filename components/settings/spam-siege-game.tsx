@@ -720,7 +720,7 @@ function MailCard({
     >
       {kind === "legit" ? (
         <span
-          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[10px] font-semibold text-white"
+          className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[0.625rem] font-semibold text-white"
           style={{ backgroundColor: tone }}
         >
           {initials(sender.name)}
@@ -737,7 +737,7 @@ function MailCard({
       )}
       <div className="min-w-0 flex-1 leading-tight">
         <p className="truncate text-xs font-semibold text-foreground">{sender.name}</p>
-        <p className="truncate text-[11px] text-muted-foreground">{sender.address}</p>
+        <p className="truncate text-[0.6875rem] text-muted-foreground">{sender.address}</p>
       </div>
     </div>
   );

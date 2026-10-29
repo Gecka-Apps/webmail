@@ -224,7 +224,7 @@ export const RecipientMentionList = forwardRef<RecipientMentionListHandle, Recip
               command(item);
             }}
           >
-            <Avatar name={item.name} email={item.email} size="sm" className="shrink-0 w-6 h-6 text-[10px]" />
+            <Avatar name={item.name} email={item.email} size="sm" className="shrink-0 w-6 h-6 text-[0.625rem]" />
             {/* What will be inserted comes first: for "Nagy János" that may be
                 the surname, which the full name alone would not show. */}
             <span className="font-medium shrink-0">@{item.label}</span>
@@ -234,7 +234,7 @@ export const RecipientMentionList = forwardRef<RecipientMentionListHandle, Recip
             {/* Picking a contact also adds them as a recipient; say so
                 before it happens. */}
             {item.addsTo && (
-              <span className="ms-auto shrink-0 rounded px-1.5 py-0.5 text-[11px] bg-muted text-muted-foreground">
+              <span className="ms-auto shrink-0 rounded px-1.5 py-0.5 text-[0.6875rem] bg-muted text-muted-foreground">
                 + {t(item.addsTo)}
               </span>
             )}

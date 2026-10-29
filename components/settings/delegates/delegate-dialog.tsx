@@ -253,7 +253,7 @@ export function DelegateDialog({
                           >
                             <Avatar name={p.name} email={p.email ?? undefined} size="sm" className="shrink-0" />
                             <PrincipalText principal={p} />
-                            {existingIds.has(p.id) && <span className="shrink-0 text-[10px] text-muted-foreground">{t("has_access")}</span>}
+                            {existingIds.has(p.id) && <span className="shrink-0 text-[0.625rem] text-muted-foreground">{t("has_access")}</span>}
                           </button>
                         </li>
                       ))}
@@ -389,7 +389,7 @@ function PrincipalText({ principal }: { principal: Principal }) {
       <div className="flex items-center gap-2 truncate text-sm font-medium">
         <span className="truncate">{name}</span>
         {principal.type === "group" && (
-          <span className="rounded bg-muted px-1 py-0.5 text-[11px] font-normal text-muted-foreground">{t("group")}</span>
+          <span className="rounded bg-muted px-1 py-0.5 text-[0.6875rem] font-normal text-muted-foreground">{t("group")}</span>
         )}
       </div>
       {detail && <div className="truncate text-xs text-muted-foreground">{detail}</div>}

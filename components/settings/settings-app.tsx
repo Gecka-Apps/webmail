@@ -1146,7 +1146,7 @@ export function SettingsApp({ linkSegments: routeSegments }: SettingsAppProps = 
                 {groupIndex > 0 && <div className="mx-1 my-2 border-t border-border" />}
                 {group.label && (
                   <div className="px-3 pt-2.5 pb-1">
-                    <span className="text-[11px] font-semibold text-muted-foreground">
+                    <span className="text-[0.6875rem] font-semibold text-muted-foreground">
                       {group.label}
                     </span>
                   </div>

@@ -170,7 +170,7 @@ export function SectionNav() {
 function AdvancedBadge() {
   const t = useTranslations('settings.advanced_switch');
   return (
-    <span className="text-[10px] px-1.5 py-0.5 rounded bg-accent text-accent-foreground font-medium">
+    <span className="text-[0.625rem] px-1.5 py-0.5 rounded bg-accent text-accent-foreground font-medium">
       {t('badge')}
     </span>
   );

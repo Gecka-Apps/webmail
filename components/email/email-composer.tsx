@@ -5142,7 +5142,7 @@ const AutocompleteDropdown = React.forwardRef<HTMLDivElement, {
               <Users className="w-3.5 h-3.5 text-primary" aria-hidden />
             </span>
           ) : (
-            <Avatar name={r.name} email={r.email} size="sm" className="shrink-0 w-6 h-6 text-[10px]" />
+            <Avatar name={r.name} email={r.email} size="sm" className="shrink-0 w-6 h-6 text-[0.625rem]" />
           )}
           {/* Name above address on a phone: side by side, both were cut to
               a few letters in the narrow field ("Use… <userb@exa…"). */}

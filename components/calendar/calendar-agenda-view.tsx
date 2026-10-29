@@ -220,13 +220,13 @@ export function CalendarAgendaView({
             </span>
             <span className="min-w-0 leading-tight">
               <span className={cn(
-                "block text-[11px] font-medium truncate first-letter:uppercase",
+                "block text-[0.6875rem] font-medium truncate first-letter:uppercase",
                 today ? "text-primary" : "text-muted-foreground",
               )}>
                 {intlFormatter.dateTime(group.date, { month: "short", weekday: "short" })}
               </span>
               {relativeLabel && (
-                <span className={cn("block text-[11px] truncate", today ? "text-primary" : "text-muted-foreground")}>
+                <span className={cn("block text-[0.6875rem] truncate", today ? "text-primary" : "text-muted-foreground")}>
                   {relativeLabel}
                 </span>
               )}

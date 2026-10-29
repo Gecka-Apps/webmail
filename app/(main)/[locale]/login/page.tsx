@@ -1048,7 +1048,7 @@ function LoginPageContent() {
         ))}
       </select>
       {domainAutoLocked && (
-        <p className="text-[11px] text-muted-foreground leading-snug">
+        <p className="text-[0.6875rem] text-muted-foreground leading-snug">
           {t("jmap_server_auto_picked")}
         </p>
       )}
@@ -1067,7 +1067,7 @@ function LoginPageContent() {
       key={s.id}
       type="button"
       variant="outline"
-      className="w-full h-11 font-medium text-[15px] rounded-xl border-border/60 hover:bg-muted/50"
+      className="w-full h-11 font-medium text-[0.9375rem] rounded-xl border-border/60 hover:bg-muted/50"
       onClick={() => handleOAuthLogin(s)}
       disabled={oauthLoading || isLoading}
     >
@@ -1416,7 +1416,7 @@ function LoginPageContent() {
                 {oauthMetadata ? (
                   <Button
                     type="button"
-                    className="w-full h-11 font-medium text-[15px] bg-primary hover:bg-primary/90 transition-all duration-200 rounded-xl shadow-md shadow-primary/15 hover:shadow-lg hover:shadow-primary/20"
+                    className="w-full h-11 font-medium text-[0.9375rem] bg-primary hover:bg-primary/90 transition-all duration-200 rounded-xl shadow-md shadow-primary/15 hover:shadow-lg hover:shadow-primary/20"
                     onClick={() => handleOAuthLogin()}
                     disabled={oauthLoading}
                   >
@@ -1469,7 +1469,7 @@ function LoginPageContent() {
                         placeholder={t("jmap_endpoint_placeholder")}
                         required
                       />
-                      <p className="text-[11px] text-muted-foreground leading-snug">
+                      <p className="text-[0.6875rem] text-muted-foreground leading-snug">
                         {t("jmap_endpoint_cors_hint")}
                       </p>
                     </div>
@@ -1613,7 +1613,7 @@ function LoginPageContent() {
                         data-lpignore="true"
                         {...errorProps(tokenBlamed)}
                       />
-                      <p className="text-[11px] text-muted-foreground leading-snug">
+                      <p className="text-[0.6875rem] text-muted-foreground leading-snug">
                         {t("token_hint")}
                       </p>
                     </div>
@@ -1701,7 +1701,7 @@ function LoginPageContent() {
 
                 <Button
                   type="submit"
-                  className="w-full h-11 font-medium text-[15px] bg-primary hover:bg-primary/90 transition-all duration-200 rounded-xl shadow-md shadow-primary/15 hover:shadow-lg hover:shadow-primary/20"
+                  className="w-full h-11 font-medium text-[0.9375rem] bg-primary hover:bg-primary/90 transition-all duration-200 rounded-xl shadow-md shadow-primary/15 hover:shadow-lg hover:shadow-primary/20"
                   disabled={isLoading || (liteSsoRequired && oauthLoading)}
                 >
                   {isLoading || (liteSsoRequired && oauthLoading) ? (
@@ -1732,7 +1732,7 @@ function LoginPageContent() {
                       <Button
                         type="button"
                         variant="outline"
-                        className="w-full h-11 font-medium text-[15px] rounded-xl border-border/60 hover:bg-muted/50"
+                        className="w-full h-11 font-medium text-[0.9375rem] rounded-xl border-border/60 hover:bg-muted/50"
                         onClick={() => handleOAuthLogin()}
                         disabled={oauthLoading || isLoading}
                       >
@@ -1782,7 +1782,7 @@ function LoginPageContent() {
                 <Button
                   type="button"
                   variant="outline"
-                  className="w-full h-11 font-medium text-[15px] rounded-xl border-border/60 hover:bg-muted/50"
+                  className="w-full h-11 font-medium text-[0.9375rem] rounded-xl border-border/60 hover:bg-muted/50"
                   onClick={handleDemoLogin}
                   disabled={demoLoading || isLoading}
                 >

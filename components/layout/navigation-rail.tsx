@@ -163,7 +163,7 @@ function StorageQuotaCircle({ quota, usagePercent }: { quota: StorageQuota; usag
             style={{ transition: "stroke-dasharray 0.3s" }}
           />
         </svg>
-        <span className="absolute text-[7px] font-bold text-muted-foreground tabular-nums">
+        <span className="absolute text-[0.4375rem] font-bold text-muted-foreground tabular-nums">
           {Math.round(usagePercent)}%
         </span>
       </button>
@@ -198,7 +198,7 @@ function StorageQuotaCircle({ quota, usagePercent }: { quota: StorageQuota; usag
               style={{ width: `${usagePercent}%` }}
             />
           </div>
-          <p className="text-[10px] text-muted-foreground mt-1 tabular-nums">
+          <p className="text-[0.625rem] text-muted-foreground mt-1 tabular-nums">
             {Math.round(usagePercent)}% {t("storage_used").toLowerCase()}
           </p>
         </div>,
@@ -415,7 +415,7 @@ export function NavigationRail({
                 {badgeShown(item) && (unreadCountStyle === 'dot' ? (
                   <span aria-hidden="true" data-testid="rail-unread-dot" className="absolute -top-0.5 -end-1 w-2.5 h-2.5 rounded-full bg-red-500" />
                 ) : (
-                  <span aria-hidden="true" className="absolute -top-1.5 -end-2.5 flex items-center justify-center min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-red-600 text-white px-1">
+                  <span aria-hidden="true" className="absolute -top-1.5 -end-2.5 flex items-center justify-center min-w-[16px] h-4 text-[0.625rem] font-bold rounded-full bg-red-600 text-white px-1">
                     {item.badge! > 99 ? "99+" : item.badge}
                   </span>
                 ))}
@@ -423,7 +423,7 @@ export function NavigationRail({
                   <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-primary" />
                 )}
               </div>
-              <span className="text-[10px] font-medium leading-tight truncate max-w-full">{t(item.labelKey)}</span>
+              <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{t(item.labelKey)}</span>
             </Link>
           );
         })}
@@ -457,7 +457,7 @@ export function NavigationRail({
                   <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-primary" />
                 )}
               </div>
-              <span className="text-[10px] font-medium leading-tight truncate max-w-full">{page.title}</span>
+              <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{page.title}</span>
             </Link>
           );
         })}
@@ -492,7 +492,7 @@ export function NavigationRail({
                   <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-primary" />
                 )}
               </div>
-              <span className="text-[10px] font-medium leading-tight truncate max-w-full">{app.name}</span>
+              <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{app.name}</span>
             </button>
           );
         })}
@@ -523,7 +523,7 @@ export function NavigationRail({
                 />
               )}
             </span>
-            <span className="text-[10px] font-medium leading-tight truncate max-w-full">{t("admin") || "Admin"}</span>
+            <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{t("admin") || "Admin"}</span>
             {updateLabel && <span className="sr-only">{`, ${updateLabel}`}</span>}
           </a>
         )}
@@ -548,7 +548,7 @@ export function NavigationRail({
               <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-primary" />
             )}
           </div>
-          <span className="text-[10px] font-medium leading-tight truncate max-w-full">{t("settings")}</span>
+          <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{t("settings")}</span>
         </Link>
       </nav>
     );
@@ -636,7 +636,7 @@ export function NavigationRail({
                 )} />
               ) : (
                 <span aria-hidden="true" className={cn(
-                  "absolute flex items-center justify-center min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-red-600 text-white px-1",
+                  "absolute flex items-center justify-center min-w-[16px] h-4 text-[0.625rem] font-bold rounded-full bg-red-600 text-white px-1",
                   collapsed ? "-top-0.5 -end-0.5" : "end-1.5"
                 )}>
                   {item.badge! > 99 ? "99+" : item.badge}

@@ -116,7 +116,7 @@ export const ReplyQuoteCollapse = Extension.create<{ show: string; hide: string 
               const button = document.createElement('button');
               button.type = 'button';
               button.textContent = '•••';
-              button.className = 'my-1 inline-block cursor-pointer rounded-full bg-foreground/10 px-3 py-[3px] text-[11px] leading-none tracking-[2px] text-muted-foreground hover:bg-foreground/20 hover:text-foreground';
+              button.className = 'my-1 inline-block cursor-pointer rounded-full bg-foreground/10 px-3 py-[3px] text-[0.6875rem] leading-none tracking-[2px] text-muted-foreground hover:bg-foreground/20 hover:text-foreground';
               button.title = open ? labels.hide : labels.show;
               button.setAttribute('aria-label', button.title);
               button.setAttribute('aria-expanded', String(open));

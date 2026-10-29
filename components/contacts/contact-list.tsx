@@ -435,7 +435,7 @@ export function ContactList({
                 >
                   <Filter className="w-4 h-4" />
                   {!filtersOpen && activeFilters > 0 && (
-                    <span className="absolute -top-1 -end-1 flex items-center justify-center w-4 h-4 text-[10px] font-bold rounded-full bg-primary text-primary-foreground">
+                    <span className="absolute -top-1 -end-1 flex items-center justify-center w-4 h-4 text-[0.625rem] font-bold rounded-full bg-primary text-primary-foreground">
                       {activeFilters}
                     </span>
                   )}
@@ -752,7 +752,7 @@ export function ContactList({
               <div>
                 {groupedSections.map(({ letter, items }) => (
                   <section key={letter} role="group" aria-label={letter}>
-                    <div aria-hidden className="sticky top-0 z-10 px-4 py-0.5 bg-background/90 backdrop-blur-sm text-[11px] font-medium text-muted-foreground">
+                    <div aria-hidden className="sticky top-0 z-10 px-4 py-0.5 bg-background/90 backdrop-blur-sm text-[0.6875rem] font-medium text-muted-foreground">
                       {letter}
                     </div>
                     {items.map(renderItem)}

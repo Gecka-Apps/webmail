@@ -146,7 +146,7 @@ export function NewFileDialog({ isOpen, onClose, onSubmit, formats, validate }: 
             >
               {getFileIconByName(`file.${ext}`, "md")}
               <span className="text-xs font-medium leading-tight">{label(ext)}</span>
-              <span className="text-[11px] text-muted-foreground">.{ext}</span>
+              <span className="text-[0.6875rem] text-muted-foreground">.{ext}</span>
             </button>
           ))}
         </div>

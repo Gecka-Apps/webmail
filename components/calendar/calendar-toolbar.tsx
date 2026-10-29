@@ -281,7 +281,7 @@ export function CalendarToolbar({
                     key={v}
                     onClick={() => onViewModeChange(v)}
                     className={cn(
-                      "flex-auto min-h-11 px-1.5 text-[11px] font-medium transition-colors touch-manipulation",
+                      "flex-auto min-h-11 px-1.5 text-[0.6875rem] font-medium transition-colors touch-manipulation",
                       v === viewMode
                         ? "bg-primary text-primary-foreground"
                         : "text-muted-foreground active:bg-muted"

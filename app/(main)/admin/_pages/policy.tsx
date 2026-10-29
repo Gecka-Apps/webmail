@@ -58,7 +58,7 @@ const FEATURE_GATE_LABELS: Partial<Record<keyof FeatureGates, { label: string; d
 
 const PAGE = adminPageDef('policy');
 
-const fieldLabelClass = 'mb-1 block text-[11px] font-medium text-muted-foreground';
+const fieldLabelClass = 'mb-1 block text-[0.6875rem] font-medium text-muted-foreground';
 const cardClass = 'rounded-md border border-border bg-muted/30 p-3';
 
 /** Mirrors the sanitizer's URL rule so the admin sees the drop before saving. */
@@ -442,7 +442,7 @@ export function PolicyPage() {
                         className={cn(inputClass, 'w-full', urlInvalid && 'border-destructive')}
                       />
                       {urlInvalid && (
-                        <p className="mt-1 text-[11px] text-destructive">Enter a valid http or https URL</p>
+                        <p className="mt-1 text-[0.6875rem] text-destructive">Enter a valid http or https URL</p>
                       )}
                     </div>
                     <div className="sm:col-span-3">
@@ -467,7 +467,7 @@ export function PolicyPage() {
                           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-background text-muted-foreground"
                           title={AppIcon ? app.icon : 'Unknown icon - falls back to Globe'}
                         >
-                          {AppIcon ? <AppIcon className="h-4 w-4" /> : <span className="text-[10px]">?</span>}
+                          {AppIcon ? <AppIcon className="h-4 w-4" /> : <span className="text-[0.625rem]">?</span>}
                         </span>
                       </div>
                     </div>

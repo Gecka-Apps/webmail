@@ -33,7 +33,7 @@ export function HiddenEventsIndicator({ count, direction, onReveal, tabbable = t
       onClick={(e) => { e.stopPropagation(); onReveal(); }}
       className={cn(
         "absolute inset-x-0 mx-auto w-fit z-20 flex items-center gap-0.5 rounded-full",
-        "bg-muted/90 px-1.5 py-0.5 text-[10px] leading-none text-muted-foreground",
+        "bg-muted/90 px-1.5 py-0.5 text-[0.625rem] leading-none text-muted-foreground",
         "hover:bg-accent hover:text-foreground transition-colors cursor-pointer",
         direction === "before" ? "top-0.5" : "bottom-0.5",
       )}

@@ -239,7 +239,7 @@ export function MiniCalendar({
                   key={d}
                   scope="col"
                   abbr={weeks[0]?.[index] ? intlFormatter.dateTime(weeks[0][index], { weekday: "long" }) : undefined}
-                  className="text-center text-[10px] font-medium text-muted-foreground py-1"
+                  className="text-center text-[0.625rem] font-medium text-muted-foreground py-1"
                 >
                   {t(`days.${d}`)}
                 </th>
@@ -252,7 +252,7 @@ export function MiniCalendar({
                 {showWeekNumbers && (
                   <th
                     scope="row"
-                    className="w-5 p-0 text-center text-[9px] text-muted-foreground font-medium"
+                    className="w-5 p-0 text-center text-[0.5625rem] text-muted-foreground font-medium"
                   >
                     <span aria-hidden="true">{weekNumberOf(week[0])}</span>
                     <span className="sr-only">{t("mini_week_number", { week: weekNumberOf(week[0]) })}</span>

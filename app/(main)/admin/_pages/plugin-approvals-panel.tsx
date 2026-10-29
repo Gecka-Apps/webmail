@@ -203,7 +203,7 @@ export function PluginApprovalsPanel() {
           </div>
         )}
         {/* Focusable, so the keyboard can scroll the code. */}
-        <pre tabIndex={0} aria-label="Plugin code" className="min-h-0 flex-1 overflow-auto whitespace-pre-wrap break-all rounded-md border border-border p-4 font-mono text-[11px] leading-relaxed">
+        <pre tabIndex={0} aria-label="Plugin code" className="min-h-0 flex-1 overflow-auto whitespace-pre-wrap break-all rounded-md border border-border p-4 font-mono text-[0.6875rem] leading-relaxed">
           {source?.error ?? source?.code ?? (<span className="inline-flex items-center gap-2"><Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden="true" /> Loading</span>)}
         </pre>
       </Dialog>

@@ -233,12 +233,12 @@ function ThemeCard({ name, author, preview, css, isDark, isDefaultTheme, isActiv
             <span className="text-sm font-medium text-foreground truncate">{name}</span>
             <div className="flex items-center gap-1 flex-shrink-0">
               {isForceEnabled && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 font-medium flex items-center gap-0.5" title={t('admin_enforced')}>
+                <span className="text-[0.625rem] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 font-medium flex items-center gap-0.5" title={t('admin_enforced')}>
                   <Lock className="w-2.5 h-2.5" />
                 </span>
               )}
               {isDefault && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">{t('default_badge')}</span>
+                <span className="text-[0.625rem] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">{t('default_badge')}</span>
               )}
               {isActive && <Check className="w-4 h-4 text-primary" />}
             </div>
@@ -247,7 +247,7 @@ function ThemeCard({ name, author, preview, css, isDark, isDefaultTheme, isActiv
           {variants && (
             <div className="flex gap-1 mt-1">
               {variants.map(v => (
-                <span key={v} className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
+                <span key={v} className="text-[0.625rem] px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
                   {tVariant(v)}
                 </span>
               ))}

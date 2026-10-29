@@ -48,7 +48,7 @@ describe('day view on a phone', () => {
   it('keeps the small shared chip on a wide screen', () => {
     renderDay(false);
     const chip = document.querySelector<HTMLElement>('[data-calendar-task="t1"]')!;
-    expect(chip).toHaveClass('h-full', 'text-[10px]');
+    expect(chip).toHaveClass('h-full', 'text-[0.625rem]');
   });
 
   it('sizes the all-day row by the day in view, not by a busy neighbour', () => {

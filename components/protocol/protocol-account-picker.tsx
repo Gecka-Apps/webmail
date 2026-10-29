@@ -145,13 +145,13 @@ export function ProtocolAccountPicker({
                       {account.displayName || account.label}
                     </span>
                     {isActive && (
-                      <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
+                      <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[0.625rem] font-medium text-primary">
                         {t("active_account")}
                       </span>
                     )}
                   </div>
                   <p className="truncate text-xs text-muted-foreground">{account.email || account.username}</p>
-                  <p className="truncate text-[10px] text-muted-foreground">{host}</p>
+                  <p className="truncate text-[0.625rem] text-muted-foreground">{host}</p>
                 </div>
               </button>
             );

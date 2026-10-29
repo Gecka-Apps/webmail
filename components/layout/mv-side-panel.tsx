@@ -114,7 +114,7 @@ function PanelHeader({ title, subtitle, href, onClose, children }: {
   return (
     <div className="flex items-start gap-1 px-4 pt-4 pb-2">
       <div className="min-w-0 flex-1">
-        <div className={cn(subtitle ? "text-[11px] font-medium text-muted-foreground" : "text-[22px] leading-7")}>{title}</div>
+        <div className={cn(subtitle ? "text-[0.6875rem] font-medium text-muted-foreground" : "text-[1.375rem] leading-7")}>{title}</div>
         {subtitle && <div className="text-sm font-medium text-primary">{subtitle}</div>}
       </div>
       {children}
@@ -224,7 +224,7 @@ function CalendarPanel({ onClose }: { onClose: () => void }) {
         <div className="relative" style={{ height: 24 * HOUR_PX }}>
           {Array.from({ length: 24 }, (_, h) => (
             <div key={h} className="absolute inset-x-0 flex" style={{ top: h * HOUR_PX }}>
-              <span className="w-14 shrink-0 -translate-y-2 pe-2 text-end text-[10px] text-muted-foreground">
+              <span className="w-14 shrink-0 -translate-y-2 pe-2 text-end text-[0.625rem] text-muted-foreground">
                 {h === 0 ? "" : new Date(2000, 0, 1, h).toLocaleTimeString(undefined, { hour: "numeric", hour12: timeFormat === "12h" })}
               </span>
               <span className="flex-1 border-t border-border" />

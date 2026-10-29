@@ -51,7 +51,7 @@ export function ComposerToolbarMenu({ icon: Icon, label, activeCount = 0, testId
             screen has no room for the labels either (#1375). */}
         <span className="hidden @[40rem]/composer-bar:inline text-sm">{label}</span>
         {activeCount > 0 && (
-          <span className="min-w-4 h-4 rounded-full bg-primary px-1 text-[10px] font-semibold leading-4 text-primary-foreground">
+          <span className="min-w-4 h-4 rounded-full bg-primary px-1 text-[0.625rem] font-semibold leading-4 text-primary-foreground">
             {activeCount}
           </span>
         )}

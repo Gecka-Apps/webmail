@@ -88,12 +88,12 @@ export function NotificationPanel({ onClose, className, sheet = false }: { onClo
                 <span className="flex-1 min-w-0">
                   <span className="flex items-baseline gap-2">
                     <span className={cn("flex-1 min-w-0 truncate text-sm", !entry.read && "font-semibold")}>{entry.title}</span>
-                    <time dateTime={new Date(entry.time).toISOString()} className="flex-shrink-0 text-[11px] text-muted-foreground tabular-nums">
+                    <time dateTime={new Date(entry.time).toISOString()} className="flex-shrink-0 text-[0.6875rem] text-muted-foreground tabular-nums">
                       {format.relativeTime(new Date(entry.time), now)}
                     </time>
                   </span>
                   {entry.body && <span className="block text-xs text-muted-foreground line-clamp-2 break-words">{entry.body}</span>}
-                  <span className="block text-[11px] text-muted-foreground truncate">
+                  <span className="block text-[0.6875rem] text-muted-foreground truncate">
                     {entry.level !== "info" && <span className="sr-only">{t(entry.level === "error" ? "level_error" : "level_warning")}: </span>}
                     {source}
                   </span>
@@ -269,7 +269,7 @@ export function NotificationBell({ placement, className }: { placement: "side" |
         {unread > 0 && (
           <span
             className={cn(
-              "absolute flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-red-600 text-white text-[10px] font-bold",
+              "absolute flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-red-600 text-white text-[0.625rem] font-bold",
               placement === "side" ? "-top-0.5 -end-0.5" : "top-1.5 end-1.5",
             )}
             aria-hidden="true"

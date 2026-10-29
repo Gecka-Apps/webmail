@@ -744,7 +744,7 @@ export function ContactForm({ contact, addressBooks, allKeywords, defaultAddress
                 className="absolute inset-0 rounded-full bg-black/55 text-white flex flex-col items-center justify-center gap-0.5 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity"
               >
                 <Camera className="w-5 h-5" />
-                <span className="text-[10px] font-medium leading-none">{t("change_photo")}</span>
+                <span className="text-[0.625rem] font-medium leading-none">{t("change_photo")}</span>
               </span>
               <input
                 ref={photoInputRef}

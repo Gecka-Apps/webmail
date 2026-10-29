@@ -46,7 +46,7 @@ export function PluginPermissionList({ permissions, httpOrigins, apiPostPaths, c
                 {targets && targets.length > 0 && (
                   <ul className="mt-1 space-y-0.5">
                     {targets.map((target) => (
-                      <li key={target} className="break-all font-mono text-[11px] text-foreground">{target}</li>
+                      <li key={target} className="break-all font-mono text-[0.6875rem] text-foreground">{target}</li>
                     ))}
                   </ul>
                 )}

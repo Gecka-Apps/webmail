@@ -5109,7 +5109,7 @@ export function MailApp({ linkSegments: routeSegments }: MailAppProps = {}) {
                       >
                         <Filter className="w-4 h-4" />
                         {!isAdvancedSearchOpen && activeFilterCount(searchFilters) > 0 && (
-                          <span className="absolute -top-1 -end-1 flex items-center justify-center w-4 h-4 text-[10px] font-bold rounded-full bg-primary text-primary-foreground">
+                          <span className="absolute -top-1 -end-1 flex items-center justify-center w-4 h-4 text-[0.625rem] font-bold rounded-full bg-primary text-primary-foreground">
                             {activeFilterCount(searchFilters)}
                           </span>
                         )}

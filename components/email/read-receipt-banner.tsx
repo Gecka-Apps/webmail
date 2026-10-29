@@ -37,7 +37,7 @@ export function ReadReceiptBanner({ requestedBy, onSend, onIgnore }: ReadReceipt
       </div>
       <div className="flex-1 min-w-0 space-y-2">
         <div>
-          <div className="text-[11px] font-semibold text-muted-foreground">
+          <div className="text-[0.6875rem] font-semibold text-muted-foreground">
             Read receipt
           </div>
           <div className="text-sm font-medium text-foreground break-words">

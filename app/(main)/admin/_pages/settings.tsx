@@ -123,7 +123,7 @@ export function SettingsPage() {
           <ConfigToggleItem label="Allow custom JMAP endpoint" description="Show a JMAP server URL field on the login form, allowing users to connect to any JMAP server" configKey="allowCustomJmapEndpoint" value={currentValue('allowCustomJmapEndpoint') as boolean} source={config.allowCustomJmapEndpoint?.source} onChange={handleChange} onRevert={handleRevert} />
           {!!currentValue('allowCustomJmapEndpoint') && (
             <ConfigNote tone="warning">
-              <strong><Term id="cors">CORS</Term> warning:</strong> External JMAP servers must include this domain in their CORS <code className="text-[11px] bg-amber-100 dark:bg-amber-900/50 px-1 py-0.5 rounded">Access-Control-Allow-Origin</code> header, or requests from the browser will be blocked.
+              <strong><Term id="cors">CORS</Term> warning:</strong> External JMAP servers must include this domain in their CORS <code className="text-[0.6875rem] bg-amber-100 dark:bg-amber-900/50 px-1 py-0.5 rounded">Access-Control-Allow-Origin</code> header, or requests from the browser will be blocked.
             </ConfigNote>
           )}
           <ConfigToggleItem label="Stalwart features" description="Enable Stalwart Mail Server-specific features" configKey="stalwartFeaturesEnabled" value={currentValue('stalwartFeaturesEnabled') as boolean} source={config.stalwartFeaturesEnabled?.source} onChange={handleChange} onRevert={handleRevert} />
@@ -158,7 +158,7 @@ export function SettingsPage() {
           />
           {Array.isArray(jmapServers) && (jmapServers as JmapServerEntry[]).length > 0 && (
             <ConfigNote tone="warning">
-              <strong>CORS warning:</strong> Each JMAP server must allow this webmail&apos;s origin in its <code className="text-[11px] bg-amber-100 dark:bg-amber-900/50 px-1 py-0.5 rounded">Access-Control-Allow-Origin</code> header, or browser requests will be blocked.
+              <strong>CORS warning:</strong> Each JMAP server must allow this webmail&apos;s origin in its <code className="text-[0.6875rem] bg-amber-100 dark:bg-amber-900/50 px-1 py-0.5 rounded">Access-Control-Allow-Origin</code> header, or browser requests will be blocked.
             </ConfigNote>
           )}
         </SettingsSection>
@@ -172,7 +172,7 @@ export function SettingsPage() {
             Point the client URL at a WOPI-compatible office suite (Collabora Online, OnlyOffice, EuroOffice, …) to let users edit documents in Files. The client URL may be an internal address: the browser loads the editor from the address its discovery advertises. The host override is only needed when the editor reaches this webmail under a different address than the browser does (e.g. Docker networks); give the address alone, the webmail&apos;s base path is added to it. The editor must also allow this webmail as a WOPI host.
           </ConfigNote>
           <ConfigNote>
-            &quot;New file&quot; in Files offers .txt plus every format the editor can edit that a blank template exists for: .docx, .xlsx, .pptx, .odt, .ods, .odp and .pdf are built in. List extensions separated by commas (e.g. <code className="text-[11px] bg-muted px-1 py-0.5 rounded">docx,xlsx,pptx</code>) to offer only those. A file named <code className="text-[11px] bg-muted px-1 py-0.5 rounded">new.&lt;ext&gt;</code> in the template directory on this server replaces the built-in blank file for that format or adds a format, so ONLYOFFICE&apos;s <code className="text-[11px] bg-muted px-1 py-0.5 rounded">document-templates/new/&lt;locale&gt;</code> folder works as one.
+            &quot;New file&quot; in Files offers .txt plus every format the editor can edit that a blank template exists for: .docx, .xlsx, .pptx, .odt, .ods, .odp and .pdf are built in. List extensions separated by commas (e.g. <code className="text-[0.6875rem] bg-muted px-1 py-0.5 rounded">docx,xlsx,pptx</code>) to offer only those. A file named <code className="text-[0.6875rem] bg-muted px-1 py-0.5 rounded">new.&lt;ext&gt;</code> in the template directory on this server replaces the built-in blank file for that format or adds a format, so ONLYOFFICE&apos;s <code className="text-[0.6875rem] bg-muted px-1 py-0.5 rounded">document-templates/new/&lt;locale&gt;</code> folder works as one.
           </ConfigNote>
         </SettingsSection>
 

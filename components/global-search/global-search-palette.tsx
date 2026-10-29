@@ -139,7 +139,7 @@ export function GlobalSearchPalette({ proShell = true }: { proShell?: boolean })
       <div key={kind} role="group" aria-label={label} className="py-1">
         <div aria-hidden="true" className="flex items-center gap-2 px-3 pt-2 pb-1 text-xs font-semibold text-muted-foreground">
           {label}
-          <span className="inline-flex min-w-[18px] h-[18px] items-center justify-center rounded-full bg-muted px-1.5 text-[10px] font-semibold tabular-nums normal-case">
+          <span className="inline-flex min-w-[18px] h-[18px] items-center justify-center rounded-full bg-muted px-1.5 text-[0.625rem] font-semibold tabular-nums normal-case">
             {hits.length}
           </span>
           {status.status === 'loading' && <Loader2 className="w-3 h-3 animate-spin" />}

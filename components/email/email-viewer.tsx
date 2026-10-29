@@ -784,7 +784,7 @@ function MvConversationCard({ email, onOpen, timeFormat, compact }: { email: Ema
             {sender?.name || sender?.email || ''}
           </span>
           {email.isScheduled && (
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-medium bg-primary/10 text-primary shrink-0">
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[0.6875rem] font-medium bg-primary/10 text-primary shrink-0">
               <CalendarClock className="w-3 h-3" />
               {email.scheduledSendAt ? formatScheduledSendAt(email.scheduledSendAt, timeFormat) : tSidebar('scheduled')}
             </span>
@@ -905,7 +905,7 @@ export function MvExpandedConversationCard({
           <span className="flex items-baseline gap-2">
             <span dir="auto" className="text-sm font-semibold truncate">{sender?.name || sender?.email || ''}</span>
             {email.isScheduled && (
-              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-medium bg-primary/10 text-primary shrink-0">
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[0.6875rem] font-medium bg-primary/10 text-primary shrink-0">
                 <CalendarClock className="w-3 h-3" />
                 {email.scheduledSendAt ? formatScheduledSendAt(email.scheduledSendAt, timeFormat) : tSidebar('scheduled')}
               </span>
@@ -4382,7 +4382,7 @@ export function EmailViewer({
             title={t('tooltips.archive')}
           >
             <Archive className="w-4 h-4" />
-            {showToolbarLabels && <span className="text-[10px] leading-tight sm:text-sm">{t('archive')}</span>}
+            {showToolbarLabels && <span className="text-[0.625rem] leading-tight sm:text-sm">{t('archive')}</span>}
           </Button>
         )}
         {/* Delete */}
@@ -4394,7 +4394,7 @@ export function EmailViewer({
           title={t('tooltips.delete')}
         >
           <Trash2 className="w-4 h-4" />
-          {showToolbarLabels && <span className="text-[10px] leading-tight sm:text-sm">{t('delete')}</span>}
+          {showToolbarLabels && <span className="text-[0.625rem] leading-tight sm:text-sm">{t('delete')}</span>}
         </Button>
         {/* Move to folder */}
         {moveTree.length > 0 && onMoveToMailbox && (
@@ -4414,7 +4414,7 @@ export function EmailViewer({
               aria-expanded={moveMenuOpen}
             >
               <FolderInput className="w-4 h-4" />
-              {showToolbarLabels && <span className="text-[10px] leading-tight sm:text-sm">{t('move')}</span>}
+              {showToolbarLabels && <span className="text-[0.625rem] leading-tight sm:text-sm">{t('move')}</span>}
             </Button>
             <ContextMenu ref={moveMenu.menuRef} isOpen={moveMenuOpen} position={moveMenu.contextMenu.position} onClose={closeMoveMenu} label={t('move_to')}>
               <div className="w-56 max-h-72 overflow-y-auto">
@@ -4446,7 +4446,7 @@ export function EmailViewer({
             aria-expanded={tagMenuOpen}
           >
             <Tag className="w-4 h-4" />
-            {showToolbarLabels && <span className="text-[10px] leading-tight sm:text-sm">{t('tag')}</span>}
+            {showToolbarLabels && <span className="text-[0.625rem] leading-tight sm:text-sm">{t('tag')}</span>}
           </Button>
           <ContextMenu ref={tagMenu.menuRef} isOpen={tagMenuOpen} position={tagMenu.contextMenu.position} onClose={closeTagMenu} label={t('tag')}>
             <div className="w-56">
@@ -4481,7 +4481,7 @@ export function EmailViewer({
             ) : (
               <ShieldAlert className={cn("h-4 w-4", !mvViewer && "text-red-600 dark:text-red-400")} />
             )}
-            {showToolbarLabels && <span className="text-[10px] leading-tight sm:text-sm">{isInJunkFolder ? t('spam.not_spam_title') : t('spam.button_title')}</span>}
+            {showToolbarLabels && <span className="text-[0.625rem] leading-tight sm:text-sm">{isInJunkFolder ? t('spam.not_spam_title') : t('spam.button_title')}</span>}
           </Button>
         )}
 
@@ -4503,7 +4503,7 @@ export function EmailViewer({
         >
           {isUnread ? <MailOpen className="w-4 h-4" /> : <Mail className="w-4 h-4" />}
           {showToolbarLabels && (
-            <span className="grid text-center text-[10px] leading-tight sm:text-sm">
+            <span className="grid text-center text-[0.625rem] leading-tight sm:text-sm">
               <span className={cn("col-start-1 row-start-1", !isUnread && "invisible")} aria-hidden={!isUnread}>{t('read')}</span>
               <span className={cn("col-start-1 row-start-1", isUnread && "invisible")} aria-hidden={isUnread}>{t('unread')}</span>
             </span>
@@ -4594,7 +4594,7 @@ export function EmailViewer({
             }}
           >
             <MoreVertical className="w-4 h-4 text-muted-foreground" />
-            {interfaceLayout !== 'mountain-view' && <span className="text-[10px] leading-tight sm:hidden">{t('more_actions')}</span>}
+            {interfaceLayout !== 'mountain-view' && <span className="text-[0.625rem] leading-tight sm:hidden">{t('more_actions')}</span>}
           </Button>
           {readerMenu.contextMenu.isOpen && !isMobile && (
             <ReaderMoreMenu
@@ -4791,7 +4791,7 @@ export function EmailViewer({
                     blocks below are h3 and h4, so no level is skipped. */}
                 <h2 dir="auto" className={cn(
                   "text-foreground break-words min-w-0",
-                  mvViewer ? "text-[22px] leading-7 font-normal" : "text-lg lg:text-xl font-bold tracking-tight"
+                  mvViewer ? "text-[1.375rem] leading-7 font-normal" : "text-lg lg:text-xl font-bold tracking-tight"
                 )}>
                   {email.subject || t('no_subject')}
                 </h2>
@@ -5129,7 +5129,7 @@ export function EmailViewer({
                           )}>
                             {getAttachmentDisplayName(attachment.name, attachment.type)}
                           </span>
-                          <span className="text-[10px] text-muted-foreground flex-shrink-0">
+                          <span className="text-[0.625rem] text-muted-foreground flex-shrink-0">
                             <bdi>{formatFileSize(attachment.size)}</bdi>
                           </span>
                         </div>
@@ -5198,7 +5198,7 @@ export function EmailViewer({
                               <span className="text-xs text-foreground truncate max-w-[180px]">
                                 {getAttachmentDisplayName(attachment.name, attachment.type)}
                               </span>
-                              <span className="text-[10px] text-muted-foreground ms-auto flex-shrink-0">
+                              <span className="text-[0.625rem] text-muted-foreground ms-auto flex-shrink-0">
                                 <bdi>{formatFileSize(attachment.size)}</bdi>
                               </span>
                               <div className="absolute inset-y-0 end-0 rounded-e-md bg-background/95 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:opacity-100 group-focus-within:pointer-events-auto transition-opacity flex items-center justify-center gap-1 px-1.5">
@@ -5393,7 +5393,7 @@ export function EmailViewer({
           const totalAttachmentSize = effectiveAttachments.reduce((s, a) => s + (a.size || 0), 0);
           const topMimeType = email.bodyStructure?.type;
           const SectionHeader = ({ children }: { children: React.ReactNode }) => (
-            <div className="text-[11px] font-semibold text-muted-foreground mb-1.5">
+            <div className="text-[0.6875rem] font-semibold text-muted-foreground mb-1.5">
               {children}
             </div>
           );
@@ -5427,7 +5427,7 @@ export function EmailViewer({
               >
                 <Icon className={cn("w-3.5 h-3.5 flex-shrink-0", status.color)} />
                 <span className="font-medium text-foreground">{name}</span>
-                <span className={cn("text-[11px]", status.color)}>
+                <span className={cn("text-[0.6875rem]", status.color)}>
                   {translateAuthResult(result)}
                 </span>
                 {extra && (
@@ -5577,7 +5577,7 @@ export function EmailViewer({
                           )} />
                           <span className="font-medium text-foreground">{t('authentication.spam_score')}</span>
                           <span className={cn(
-                            "text-[11px]",
+                            "text-[0.6875rem]",
                             email.spamScore > 5 ? "text-red-700 dark:text-red-400" :
                             email.spamScore > 2 ? "text-amber-700 dark:text-amber-400" :
                             "text-green-700 dark:text-green-400",
@@ -5788,7 +5788,7 @@ export function EmailViewer({
                       <ShieldAlert className="w-5 h-5" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="text-[11px] font-semibold text-muted-foreground">
+                      <div className="text-[0.6875rem] font-semibold text-muted-foreground">
                         {senderVerificationLabel}
                       </div>
                       <div className="text-sm font-medium text-foreground break-words">
@@ -5809,7 +5809,7 @@ export function EmailViewer({
                     </div>
                     <div className="flex-1 min-w-0 space-y-2">
                       <div>
-                        <div className="text-[11px] font-semibold text-muted-foreground">
+                        <div className="text-[0.6875rem] font-semibold text-muted-foreground">
                           External Content
                         </div>
                         <div className="text-sm font-medium text-foreground break-words">
@@ -6200,7 +6200,7 @@ export function EmailViewer({
                           <span className="text-xs text-foreground truncate max-w-[180px]">
                             {getAttachmentDisplayName(attachment.name, attachment.type)}
                           </span>
-                          <span className="text-[10px] text-muted-foreground ms-auto flex-shrink-0">
+                          <span className="text-[0.625rem] text-muted-foreground ms-auto flex-shrink-0">
                             <bdi>{formatFileSize(attachment.size)}</bdi>
                           </span>
                           {canSaveToFiles && attachment.blobId && (
@@ -6510,7 +6510,7 @@ export function EmailViewer({
             aria-label={t('tooltips.previous')}
           >
             <ChevronLeft className="w-5 h-5" />
-            <span className="text-[10px] font-medium leading-tight truncate max-w-full">{t('previous')}</span>
+            <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{t('previous')}</span>
           </button>
           {isDraft && onEditDraft ? (
             <button
@@ -6519,7 +6519,7 @@ export function EmailViewer({
               aria-label={t('tooltips.edit_draft')}
             >
               <Pencil className="w-5 h-5" />
-              <span className="text-[10px] font-medium leading-tight truncate max-w-full">{t('edit_draft')}</span>
+              <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{t('edit_draft')}</span>
             </button>
           ) : (
           <>
@@ -6528,21 +6528,21 @@ export function EmailViewer({
             className="flex flex-col items-center justify-center gap-1 py-2 px-1 min-h-[44px] grow shrink-0 basis-[64px] text-muted-foreground active:text-foreground transition-colors duration-150"
           >
             <Reply className="w-5 h-5" />
-            <span className="text-[10px] font-medium leading-tight truncate max-w-full">{t('reply')}</span>
+            <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{t('reply')}</span>
           </button>
           <button
             onClick={onReplyAll}
             className="flex flex-col items-center justify-center gap-1 py-2 px-1 min-h-[44px] grow shrink-0 basis-[64px] text-muted-foreground active:text-foreground transition-colors duration-150"
           >
             <ReplyAll className="w-5 h-5" />
-            <span className="text-[10px] font-medium leading-tight truncate max-w-full">{t('reply_all')}</span>
+            <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{t('reply_all')}</span>
           </button>
           <button
             onClick={onForward}
             className="flex flex-col items-center justify-center gap-1 py-2 px-1 min-h-[44px] grow shrink-0 basis-[64px] text-muted-foreground active:text-foreground transition-colors duration-150"
           >
             <Forward className="w-5 h-5" />
-            <span className="text-[10px] font-medium leading-tight truncate max-w-full">{t('forward')}</span>
+            <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{t('forward')}</span>
           </button>
           </>)}
           <button
@@ -6555,7 +6555,7 @@ export function EmailViewer({
             aria-label={t('tooltips.next')}
           >
             <ChevronRight className="w-5 h-5" />
-            <span className="text-[10px] font-medium leading-tight truncate max-w-full">{t('next')}</span>
+            <span className="text-[0.625rem] font-medium leading-tight truncate max-w-full">{t('next')}</span>
           </button>
         </div>
       </nav>

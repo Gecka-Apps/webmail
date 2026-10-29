@@ -218,7 +218,7 @@ export function MvTopBar({
         )}
         <Link href="/" onClick={(e) => { interceptLeave(e); }} className="flex items-center gap-2 pe-4 min-w-0" aria-label={appName}>
           {logoUrl ? <img src={logoUrl} alt="" className="w-8 h-8 object-contain" /> : null}
-          <span className="text-[22px] leading-none text-foreground truncate">{appName}</span>
+          <span className="text-[1.375rem] leading-none text-foreground truncate">{appName}</span>
         </Link>
       </div>
 
@@ -251,7 +251,7 @@ export function MvTopBar({
           >
             <SlidersHorizontal className="w-5 h-5" />
             {!search.filtersOpen && search.activeFilterCount > 0 && (
-              <span className="absolute top-1.5 end-1.5 grid place-items-center w-4 h-4 text-[10px] font-bold rounded-full bg-primary text-primary-foreground">
+              <span className="absolute top-1.5 end-1.5 grid place-items-center w-4 h-4 text-[0.625rem] font-bold rounded-full bg-primary text-primary-foreground">
                 {search.activeFilterCount}
               </span>
             )}

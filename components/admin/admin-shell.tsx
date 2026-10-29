@@ -195,7 +195,7 @@ export function AdminShell({ authenticated, isStalwartAutoLogin, configReadOnly,
   const badgeFor = (id: AdminPageId): ReactNode => {
     if (id === 'plugins' && pendingApprovals > 0) {
       return (
-        <span className="ms-auto inline-flex min-w-[18px] items-center justify-center rounded-full bg-amber-500 px-1.5 text-[10px] font-semibold leading-[18px] text-white" title={`${pendingApprovals} plugin${pendingApprovals === 1 ? '' : 's'} waiting for approval`}>
+        <span className="ms-auto inline-flex min-w-[18px] items-center justify-center rounded-full bg-amber-500 px-1.5 text-[0.625rem] font-semibold leading-[1.125rem] text-white" title={`${pendingApprovals} plugin${pendingApprovals === 1 ? '' : 's'} waiting for approval`}>
           {pendingApprovals}
         </span>
       );
@@ -420,7 +420,7 @@ export function AdminShell({ authenticated, isStalwartAutoLogin, configReadOnly,
                   {groupIndex > 0 && <div className="mx-1 my-2 border-t border-border" />}
                   {group.label && (
                     <div className="px-3 pb-1 pt-2.5">
-                      <span className="text-[11px] font-semibold text-muted-foreground">{group.label}</span>
+                      <span className="text-[0.6875rem] font-semibold text-muted-foreground">{group.label}</span>
                     </div>
                   )}
                   {group.items.map(({ page, sections }) => {

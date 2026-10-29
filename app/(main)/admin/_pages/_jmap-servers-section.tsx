@@ -96,7 +96,7 @@ function emptyDraft(): RowDraft {
   };
 }
 
-const fieldLabelClass = 'block text-[11px] font-medium text-muted-foreground mb-1';
+const fieldLabelClass = 'block text-[0.6875rem] font-medium text-muted-foreground mb-1';
 const fieldClass = cn(inputClass, 'w-full');
 
 export function JmapServersSection({ value, source, onChange, onRevert }: Props) {
@@ -146,7 +146,7 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
         <div className="min-w-0 sm:pe-4">
           <span className="text-sm font-medium text-foreground">Servers</span>
           <p className="text-xs text-muted-foreground mt-1">
-            Each entry appears as an option on the login dropdown. Leave the list empty to fall back to the single <code className="text-[11px]">JMAP server URL</code> above.
+            Each entry appears as an option on the login dropdown. Leave the list empty to fall back to the single <code className="text-[0.6875rem]">JMAP server URL</code> above.
           </p>
         </div>
         <div className="flex items-center gap-1.5 shrink-0">
@@ -178,7 +178,7 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
                   placeholder="main"
                   className={cn(fieldClass, isDuplicate && 'border-destructive')}
                 />
-                {isDuplicate && <p className="text-[10px] text-destructive mt-0.5">Duplicate id</p>}
+                {isDuplicate && <p className="text-[0.625rem] text-destructive mt-0.5">Duplicate id</p>}
               </div>
               <div className="sm:col-span-4">
                 <label htmlFor={labelFor(i)("label")} className={fieldLabelClass}>Label</label>
@@ -280,7 +280,7 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
                     maxLength={64}
                     className={fieldClass}
                   />
-                  <p className="mt-1 text-[11px] text-muted-foreground">
+                  <p className="mt-1 text-[0.6875rem] text-muted-foreground">
                     With a client ID, this label gives the server its own sign-in button on the login page, whichever server is selected and even while OAuth is off globally.
                   </p>
                 </div>
@@ -294,7 +294,7 @@ export function JmapServersSection({ value, source, onChange, onRevert }: Props)
                     placeholder="https://auth.example.com/logout"
                     className={fieldClass}
                   />
-                  <p className="mt-1 text-[11px] text-muted-foreground">
+                  <p className="mt-1 text-[0.6875rem] text-muted-foreground">
                     Where signing out sends the browser to end the provider&apos;s session, instead of the end_session_endpoint from discovery. Set it for providers that advertise none, such as Stalwart. Must be https.
                   </p>
                 </div>

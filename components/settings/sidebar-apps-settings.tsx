@@ -211,12 +211,12 @@ function ManagedAppsSection() {
                 <div className="text-sm font-medium truncate">{app.name}</div>
                 <div dir="ltr" className="text-xs text-muted-foreground truncate rtl:text-right">{app.url}</div>
               </div>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0 bg-muted text-muted-foreground inline-flex items-center gap-1">
+              <span className="text-[0.625rem] px-1.5 py-0.5 rounded-full flex-shrink-0 bg-muted text-muted-foreground inline-flex items-center gap-1">
                 <Lock className="w-2.5 h-2.5" />
                 {tApps("managed_badge")}
               </span>
               <span className={cn(
-                "text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0",
+                "text-[0.625rem] px-1.5 py-0.5 rounded-full flex-shrink-0",
                 app.openMode === "inline"
                   ? "bg-blue-500/10 text-blue-600 dark:text-blue-400"
                   : "bg-muted text-muted-foreground"
@@ -344,7 +344,7 @@ export function SidebarAppsSettings() {
                   <div dir="ltr" className="text-xs text-muted-foreground truncate rtl:text-right">{app.url}</div>
                 </div>
                 <span className={cn(
-                  "text-[10px] px-1.5 py-0.5 rounded-full flex-shrink-0",
+                  "text-[0.625rem] px-1.5 py-0.5 rounded-full flex-shrink-0",
                   app.openMode === "inline"
                     ? "bg-blue-500/10 text-blue-600 dark:text-blue-400"
                     : "bg-muted text-muted-foreground"

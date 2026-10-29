@@ -1343,7 +1343,7 @@ function BrandingAsset({
           {value ? (
             <img src={withBasePath(value)} alt="" className="max-w-full max-h-full object-contain" />
           ) : (
-            <span className="text-[10px] text-muted-foreground text-center px-1">{t('branding.drop')}</span>
+            <span className="text-[0.625rem] text-muted-foreground text-center px-1">{t('branding.drop')}</span>
           )}
         </label>
         <div className="flex-1 min-w-0">

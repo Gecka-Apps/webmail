@@ -370,7 +370,7 @@ export function CalendarMonthView({
           {dayHeaderKeys.map((d, index) => (
             <div key={d} role="columnheader" aria-label={isMobile ? t(`days.${d}`) : undefined} className={cn(
               "text-center text-xs font-medium text-muted-foreground py-2 border-e border-border last:border-e-0",
-              isMobile && "py-1.5 text-[11px]"
+              isMobile && "py-1.5 text-[0.6875rem]"
             )}>
               {isMobile ? narrowDayNames[index] ?? t(`days.${d}`) : t(`days.${d}`)}
             </div>
@@ -434,7 +434,7 @@ export function CalendarMonthView({
                 >
                   <div className="flex items-center justify-center gap-1 mb-0.5">
                     {firstOfMonth && (
-                      <span className="text-[10px] font-medium text-muted-foreground">
+                      <span className="text-[0.625rem] font-medium text-muted-foreground">
                         {t(`months.${monthLabelKeys[getMonth(day)]}`)}
                       </span>
                     )}
@@ -645,7 +645,7 @@ function MonthCellEntries({
               currentUserEmails={currentUserEmails}
               draggable={canEditEvent(segment.event)}
               tabbable={spanDays.some(inView)}
-              className={isMobile ? "text-[10px] px-1" : undefined}
+              className={isMobile ? "text-[0.625rem] px-1" : undefined}
             />
           </div>
         );
@@ -689,8 +689,8 @@ function MonthCellEntries({
             <div
               data-pending-preview
               className={cn(
-                "h-full rounded text-[10px] font-medium truncate border-2 border-dashed",
-                isMobile ? "leading-[16px] px-1" : "leading-[20px] px-1.5"
+                "h-full rounded text-[0.625rem] font-medium truncate border-2 border-dashed",
+                isMobile ? "leading-[1rem] px-1" : "leading-[1.25rem] px-1.5"
               )}
               style={{ borderColor: color, color, backgroundColor: `${color}10` }}
             >

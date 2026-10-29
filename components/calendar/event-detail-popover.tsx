@@ -448,12 +448,12 @@ export function EventDetailPopover({
             <bdi>{event.title || t("events.no_title")}</bdi>
           </h3>
           {event.status === "tentative" && (
-            <span className="mt-1 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-warning/15 text-amber-600 dark:text-amber-400">
+            <span className="mt-1 inline-flex items-center px-1.5 py-0.5 rounded text-[0.625rem] font-medium bg-warning/15 text-amber-600 dark:text-amber-400">
               {t("detail.tentative")}
             </span>
           )}
           {event.status === "cancelled" && (
-            <span className="mt-1 inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-destructive/10 text-red-600 dark:text-red-400 line-through">
+            <span className="mt-1 inline-flex items-center px-1.5 py-0.5 rounded text-[0.625rem] font-medium bg-destructive/10 text-red-600 dark:text-red-400 line-through">
               {t("detail.cancelled")}
             </span>
           )}
@@ -588,7 +588,7 @@ export function EventDetailPopover({
                         </span>
                       )}
                     </span>
-                    <ParticipantStatusBadge status={p.status} className="text-[10px]" />
+                    <ParticipantStatusBadge status={p.status} className="text-[0.625rem]" />
                   </div>
                 ))}
                 {participants.length > 5 && (

@@ -41,7 +41,7 @@ function VersionUpdateTag() {
   return (
     <span
       className={cn(
-        "ms-2 inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-medium align-middle",
+        "ms-2 inline-flex items-center rounded-full px-1.5 py-0.5 text-[0.625rem] font-medium align-middle",
         important
           ? "bg-red-500/15 text-red-700 dark:text-red-300"
           : "bg-amber-500/15 text-amber-700 dark:text-amber-300",
@@ -104,7 +104,7 @@ export function AboutFooter() {
           />
           <div className="min-w-0">
             <p className="text-xs font-medium text-foreground truncate">{branded ? appName : t('about.title')}</p>
-            <p className="text-[11px] text-muted-foreground truncate">
+            <p className="text-[0.6875rem] text-muted-foreground truncate">
               v{APP_VERSION} <span className="text-muted-foreground">({GIT_COMMIT})</span>
               <VersionUpdateTag />
             </p>
@@ -114,7 +114,7 @@ export function AboutFooter() {
           href={sourceCodeUrl || UPSTREAM_SOURCE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="shrink-0 inline-flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition-colors"
+          className="shrink-0 inline-flex items-center gap-1 text-[0.6875rem] text-muted-foreground hover:text-foreground transition-colors"
         >
           {sourceCodeUrl ? t('about.source_code') : 'GitHub'} <ExternalLink className="w-3 h-3" />
         </a>

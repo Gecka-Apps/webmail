@@ -373,7 +373,7 @@ export function ContactsSidebar({
                   <div className="ps-2">
                     {owned.length > 0 && (
                       <div className="mt-1">
-                        <div className="px-3 py-0.5 text-[11px] font-medium text-muted-foreground">
+                        <div className="px-3 py-0.5 text-[0.6875rem] font-medium text-muted-foreground">
                           {t("address_books.title")}
                         </div>
                         {owned.map((book) => (
@@ -391,7 +391,7 @@ export function ContactsSidebar({
                     )}
                     {sharedGroups.map((sg) => (
                       <div key={`${group.key}-shared-${sg.label}`} className="mt-1">
-                        <div className="px-3 py-0.5 text-[11px] font-medium text-muted-foreground flex items-center gap-1">
+                        <div className="px-3 py-0.5 text-[0.6875rem] font-medium text-muted-foreground flex items-center gap-1">
                           <Share2 className="w-3 h-3" />
                           {sg.label}
                         </div>

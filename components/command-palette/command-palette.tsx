@@ -349,7 +349,7 @@ function CommandPalette({ onClose, onShowShortcuts }: { onClose: () => void; onS
             spellCheck={false}
             className="h-12 flex-1 min-w-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
-          <kbd className="hidden sm:inline-flex items-center rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">Esc</kbd>
+          <kbd className="hidden sm:inline-flex items-center rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.625rem] text-muted-foreground">Esc</kbd>
           {/* Full screen on a phone: no backdrop to tap and no Escape key (R4). */}
           <IconButton label={tCommon("close")} size="icon-lg" className="sm:hidden -me-2" onClick={onClose}>
             <X />
@@ -371,7 +371,7 @@ function CommandPalette({ onClose, onShowShortcuts }: { onClose: () => void; onS
             return (
               <li key={command.id} role="presentation">
                 {showGroup && (
-                  <div aria-hidden="true" className="px-3 pt-2 pb-1 text-[11px] font-semibold text-muted-foreground">
+                  <div aria-hidden="true" className="px-3 pt-2 pb-1 text-[0.6875rem] font-semibold text-muted-foreground">
                     {command.group}
                   </div>
                 )}
@@ -398,7 +398,7 @@ function CommandPalette({ onClose, onShowShortcuts }: { onClose: () => void; onS
                     // Key hints only where there is a keyboard (R8).
                     <span className="flex-shrink-0 flex items-center gap-1 pointer-coarse:hidden" aria-hidden="true">
                       {shortcutAlternatives(command.shortcut).map((key) => (
-                        <kbd key={key} className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">{key}</kbd>
+                        <kbd key={key} className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.625rem] text-muted-foreground">{key}</kbd>
                       ))}
                     </span>
                   )}
