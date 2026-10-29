@@ -24,6 +24,7 @@ import { useTaskStore } from "@/stores/task-store";
 import { getTimedEventBoundsForDay } from "@/lib/calendar-utils";
 import { requestInternalMailto } from "@/lib/protocol-handlers/mailto";
 import { formatDateTime, cn } from "@/lib/utils";
+import { readableTextOn } from "@/lib/color-transform";
 import { Avatar } from "@/components/ui/avatar";
 import type { CalendarEvent } from "@/lib/jmap/types";
 import { useCvdColor } from "@/hooks/use-cvd-color";
@@ -213,7 +214,7 @@ function CalendarPanel({ onClose }: { onClose: () => void }) {
       {allDay.length > 0 && (
         <div className="space-y-1 border-b border-border px-3 pb-2">
           {allDay.map((e) => (
-            <div key={e.id} className="truncate rounded px-2 py-0.5 text-xs font-medium text-white" style={{ backgroundColor: colorOf(e) }}>
+            <div key={e.id} className="truncate rounded px-2 py-0.5 text-xs font-medium" style={{ backgroundColor: colorOf(e), color: readableTextOn(colorOf(e)) }}>
               {e.title || tCal("tasks.no_title")}
             </div>
           ))}
@@ -233,12 +234,13 @@ function CalendarPanel({ onClose }: { onClose: () => void }) {
             <div
               key={e.id}
               data-mv-panel-event=""
-              className="absolute end-2 overflow-hidden rounded px-1.5 py-0.5 text-xs leading-tight text-white"
+              className="absolute end-2 overflow-hidden rounded px-1.5 py-0.5 text-xs leading-tight"
               style={{
                 top: (b.startMinutes / 60) * HOUR_PX,
                 height: Math.max(18, ((b.endMinutes - b.startMinutes) / 60) * HOUR_PX - 2),
                 insetInlineStart: 56,
                 backgroundColor: colorOf(e),
+                color: readableTextOn(colorOf(e)),
               }}
               title={e.title}
             >

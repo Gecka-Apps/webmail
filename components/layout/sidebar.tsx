@@ -308,7 +308,7 @@ function SidebarRowCounts({
     >
       {unreadNode}
       {unreadCount > 0 && totalCount > 0 && (
-        <span className="text-xs text-muted-foreground/60" aria-hidden="true">/</span>
+        <span className="text-xs text-muted-foreground" aria-hidden="true">/</span>
       )}
       {totalCount > 0 && <span className={totalClass}>{totalCount}</span>}
     </span>

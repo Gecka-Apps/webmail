@@ -127,10 +127,18 @@ describe('getLuminance', () => {
 });
 
 describe('readableTextOn', () => {
-  it('keeps white text while white holds 3:1 on the fill', () => {
-    expect(readableTextOn('#3b82f6')).toBe('#ffffff');
+  it('keeps white text while white holds 4.5:1 on the fill', () => {
+    expect(readableTextOn('#2563eb')).toBe('#ffffff');
+    expect(readableTextOn('#7c3aed')).toBe('#ffffff');
+    expect(readableTextOn('#b91c1c')).toBe('#ffffff');
+  });
+
+  it('picks the text colour that contrasts more on a mid-tone fill', () => {
+    // White holds only 3.7:1 on these; near-black reaches 4.7:1 and more.
+    expect(readableTextOn('#3b82f6')).toBe('#111827');
+    expect(readableTextOn('rgb(236, 72, 153)')).toBe('#111827');
+    // Neither reaches 4.5:1 on this one, and white is the closer.
     expect(readableTextOn('#8b5cf6')).toBe('#ffffff');
-    expect(readableTextOn('rgb(236, 72, 153)')).toBe('#ffffff');
   });
 
   it('switches to dark text on light fills', () => {

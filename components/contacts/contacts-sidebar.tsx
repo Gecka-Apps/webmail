@@ -310,7 +310,7 @@ export function ContactsSidebar({
             "w-full flex items-center gap-2 px-3 text-sm transition-colors min-h-8 pointer-coarse:min-h-11",
             isAllActive
               ? "bg-accent text-accent-foreground font-medium"
-              : "text-foreground/80 hover:bg-muted"
+              : "text-foreground hover:bg-muted"
           )}
           style={{ paddingBlock: 'var(--density-sidebar-py, 4px)' }}
         >
@@ -329,7 +329,7 @@ export function ContactsSidebar({
               "w-full flex items-center gap-2 px-3 text-sm transition-colors min-h-8 pointer-coarse:min-h-11",
               activeCategory === "directory"
                 ? "bg-accent text-accent-foreground font-medium"
-                : "text-foreground/80 hover:bg-muted"
+                : "text-foreground hover:bg-muted"
             )}
             style={{ paddingBlock: 'var(--density-sidebar-py, 4px)' }}
             data-testid="contacts-directory-entry"
@@ -373,7 +373,7 @@ export function ContactsSidebar({
                   <div className="ps-2">
                     {owned.length > 0 && (
                       <div className="mt-1">
-                        <div className="px-3 py-0.5 text-[11px] font-medium text-muted-foreground/80">
+                        <div className="px-3 py-0.5 text-[11px] font-medium text-muted-foreground">
                           {t("address_books.title")}
                         </div>
                         {owned.map((book) => (
@@ -391,7 +391,7 @@ export function ContactsSidebar({
                     )}
                     {sharedGroups.map((sg) => (
                       <div key={`${group.key}-shared-${sg.label}`} className="mt-1">
-                        <div className="px-3 py-0.5 text-[11px] font-medium text-muted-foreground/80 flex items-center gap-1">
+                        <div className="px-3 py-0.5 text-[11px] font-medium text-muted-foreground flex items-center gap-1">
                           <Share2 className="w-3 h-3" />
                           {sg.label}
                         </div>
@@ -520,7 +520,7 @@ export function ContactsSidebar({
                   "w-full flex items-center gap-2 ps-5 pe-3 text-sm transition-colors min-h-8 pointer-coarse:min-h-11",
                   activeCategory === "uncategorized"
                     ? "bg-accent text-accent-foreground font-medium"
-                    : "text-foreground/80 hover:bg-muted"
+                    : "text-foreground hover:bg-muted"
                 )}
                 style={{ paddingBlock: 'var(--density-sidebar-py, 4px)' }}
               >
@@ -793,7 +793,7 @@ function SidebarRow({
       className={cn(
         // 32px rows, 44px on touch (R1).
         "group w-full flex items-center ps-5 pe-1 text-sm transition-colors select-none min-h-8 pointer-coarse:min-h-11",
-        isActive ? "bg-accent text-accent-foreground font-medium" : "text-foreground/80 hover:bg-muted",
+        isActive ? "bg-accent text-accent-foreground font-medium" : "text-foreground hover:bg-muted",
         isDragOver && "bg-primary/20 ring-2 ring-primary/50",
       )}
       style={ROW_STYLE}

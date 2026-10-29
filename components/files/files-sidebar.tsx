@@ -37,7 +37,7 @@ function rowClass(active: boolean, dropTarget: boolean) {
       ? "bg-accent text-accent-foreground font-medium"
       : dropTarget
         ? "bg-primary/10 text-foreground ring-1 ring-inset ring-primary/40"
-        : "text-foreground/80 hover:bg-muted",
+        : "text-foreground hover:bg-muted",
   );
 }
 

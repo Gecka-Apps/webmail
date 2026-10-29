@@ -300,7 +300,7 @@ export function CalendarSidebarPanel({
           data-account={cal.accountName ?? ''}
           data-visible={isVisible}
           className={cn(
-            "flex items-center gap-2 w-full ps-5 pe-3 min-h-8 pointer-coarse:min-h-11 text-sm text-foreground/80 transition-colors duration-150",
+            "flex items-center gap-2 w-full ps-5 pe-3 min-h-8 pointer-coarse:min-h-11 text-sm text-foreground transition-colors duration-150",
             "hover:bg-muted",
             hasMenu && "pe-11"
           )}
@@ -516,7 +516,7 @@ export function CalendarSidebarPanel({
       {enableCalendarTasks && (
         <button
           onClick={() => setViewMode('tasks')}
-          className="flex items-center gap-2 w-full px-3 mb-2 min-h-8 pointer-coarse:min-h-11 text-sm text-foreground/80 hover:bg-muted transition-colors"
+          className="flex items-center gap-2 w-full px-3 mb-2 min-h-8 pointer-coarse:min-h-11 text-sm text-foreground hover:bg-muted transition-colors"
           style={{ paddingBlock: 'var(--density-sidebar-py, 4px)' }}
         >
           <ListTodo className="w-4 h-4 text-muted-foreground" />
@@ -573,7 +573,7 @@ export function CalendarSidebarPanel({
                   <div className="mt-1">
                     {owned.length > 0 && (
                       <div>
-                        <div className="ps-5 pe-3 py-0.5 text-[11px] font-medium text-muted-foreground/80">
+                        <div className="ps-5 pe-3 py-0.5 text-[11px] font-medium text-muted-foreground">
                           {t('my_calendars')}
                         </div>
                         <div>
@@ -583,7 +583,7 @@ export function CalendarSidebarPanel({
                     )}
                     {sharedGroups.map((sg) => (
                       <div key={`${group.key}-shared-${sg.label}`} className="mt-2">
-                        <div className="ps-5 pe-3 py-0.5 text-[11px] font-medium text-muted-foreground/80 flex items-center gap-1">
+                        <div className="ps-5 pe-3 py-0.5 text-[11px] font-medium text-muted-foreground flex items-center gap-1">
                           <Share2 className="w-3 h-3" />
                           {sg.label}
                         </div>
@@ -612,7 +612,7 @@ export function CalendarSidebarPanel({
               {renderSectionHeader('__others__', t('other_calendars'))}
               {!collapsedAccountGroups.has('__others__') && sharedAccountGroups.map((group) => (
                 <div key={group.accountName} className="mt-2">
-                  <div className="ps-5 pe-3 py-0.5 text-[11px] font-medium text-muted-foreground/80 flex items-center gap-1">
+                  <div className="ps-5 pe-3 py-0.5 text-[11px] font-medium text-muted-foreground flex items-center gap-1">
                     <Share2 className="w-3 h-3" />
                     {group.accountName}
                   </div>

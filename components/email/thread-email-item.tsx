@@ -196,7 +196,7 @@ export function ThreadEmailItem({
                 {tagIds.map((id) => (
                   <TagBadge key={id} tagId={id} variant={tagVariant} scope={tagScope} />
                 ))}
-                <span className={cn("min-w-0 truncate", isUnread ? "text-muted-foreground" : "text-muted-foreground/70")}>
+                <span className={cn("min-w-0 truncate", isUnread ? "text-muted-foreground" : "text-muted-foreground")}>
                   {cleanPreview(email.preview) || t('no_preview_available')}
                 </span>
               </div>
@@ -342,7 +342,7 @@ export function ThreadEmailItem({
               "text-sm truncate flex-1 min-w-0",
               isUnread
                 ? "text-muted-foreground"
-                : "text-muted-foreground/70"
+                : "text-muted-foreground"
             )}>
               {cleanPreview(email.preview) || t('no_preview_available')}
             </span>

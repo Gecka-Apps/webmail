@@ -269,7 +269,7 @@ export function NotificationBell({ placement, className }: { placement: "side" |
         {unread > 0 && (
           <span
             className={cn(
-              "absolute flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-red-500 text-white text-[10px] font-bold",
+              "absolute flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-red-600 text-white text-[10px] font-bold",
               placement === "side" ? "-top-0.5 -end-0.5" : "top-1.5 end-1.5",
             )}
             aria-hidden="true"

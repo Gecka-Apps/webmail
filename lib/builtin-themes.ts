@@ -8,15 +8,15 @@ const quiCSS = `
   --color-ring: #3b82f6;
   --color-background: #ffffff;
   --color-foreground: #09090b;
-  --color-primary: #3b82f6;
+  --color-primary: #185aea;
   --color-primary-foreground: #ffffff;
   --color-secondary: #f4f4f5;
   --color-secondary-foreground: #18181b;
   --color-muted: #f4f4f5;
-  --color-muted-foreground: #71717a;
+  --color-muted-foreground: #66666e;
   --color-accent: #dbeafe;
   --color-accent-foreground: #1d4ed8;
-  --color-destructive: #ef4444;
+  --color-destructive: #dc2626;
   --color-destructive-foreground: #ffffff;
   --color-popover: #ffffff;
   --color-popover-foreground: #09090b;
@@ -48,8 +48,8 @@ const quiCSS = `
   --color-ring: #3b82f6;
   --color-background: #09090b;
   --color-foreground: #fafafa;
-  --color-primary: #3b82f6;
-  --color-primary-foreground: #ffffff;
+  --color-primary: #4f8ff7;
+  --color-primary-foreground: #09090b;
   --color-secondary: #18181b;
   --color-secondary-foreground: #fafafa;
   --color-muted: #18181b;
@@ -57,7 +57,7 @@ const quiCSS = `
   --color-accent: #172554;
   --color-accent-foreground: #93c5fd;
   --color-destructive: #ef4444;
-  --color-destructive-foreground: #fafafa;
+  --color-destructive-foreground: #09090b;
   --color-popover: #18181b;
   --color-popover-foreground: #fafafa;
   --color-sidebar: #09090b;
@@ -90,15 +90,15 @@ const nordCSS = `
   --color-ring: #5e81ac;
   --color-background: #eceff4;
   --color-foreground: #2e3440;
-  --color-primary: #5e81ac;
+  --color-primary: #476489;
   --color-primary-foreground: #eceff4;
   --color-secondary: #e5e9f0;
   --color-secondary-foreground: #2e3440;
   --color-muted: #d8dee9;
   --color-muted-foreground: #4c566a;
-  --color-accent: #81a1c1;
+  --color-accent: #d3deeb;
   --color-accent-foreground: #2e3440;
-  --color-destructive: #bf616a;
+  --color-destructive: #b24852;
   --color-destructive-foreground: #eceff4;
   --color-popover: #eceff4;
   --color-popover-foreground: #2e3440;
@@ -116,7 +116,7 @@ const nordCSS = `
   --color-info: #81a1c1;
   --color-info-foreground: #eceff4;
   --color-selection: #d8dee9;
-  --color-selection-foreground: #5e81ac;
+  --color-selection-foreground: #456285;
   --color-unread: #5e81ac;
   --color-chart-1: #5e81ac;
   --color-chart-2: #a3be8c;
@@ -130,16 +130,16 @@ const nordCSS = `
   --color-ring: #88c0d0;
   --color-background: #2e3440;
   --color-foreground: #eceff4;
-  --color-primary: #88c0d0;
+  --color-primary: #a6d1dd;
   --color-primary-foreground: #2e3440;
   --color-secondary: #3b4252;
   --color-secondary-foreground: #eceff4;
   --color-muted: #3b4252;
   --color-muted-foreground: #d8dee9;
   --color-accent: #434c5e;
-  --color-accent-foreground: #88c0d0;
-  --color-destructive: #bf616a;
-  --color-destructive-foreground: #eceff4;
+  --color-accent-foreground: #93c6d4;
+  --color-destructive: #d08b91;
+  --color-destructive-foreground: #2e3440;
   --color-popover: #3b4252;
   --color-popover-foreground: #eceff4;
   --color-sidebar: #2e3440;
@@ -156,7 +156,7 @@ const nordCSS = `
   --color-info: #88c0d0;
   --color-info-foreground: #2e3440;
   --color-selection: rgba(136, 192, 208, 0.2);
-  --color-selection-foreground: #88c0d0;
+  --color-selection-foreground: #98c9d6;
   --color-unread: #88c0d0;
   --color-chart-1: #88c0d0;
   --color-chart-2: #a3be8c;
@@ -172,14 +172,14 @@ const catppuccinCSS = `
   --color-ring: #8839ef;
   --color-background: #eff1f5;
   --color-foreground: #4c4f69;
-  --color-primary: #8839ef;
+  --color-primary: #7e28ee;
   --color-primary-foreground: #eff1f5;
   --color-secondary: #e6e9ef;
   --color-secondary-foreground: #4c4f69;
   --color-muted: #dce0e8;
-  --color-muted-foreground: #6c6f85;
-  --color-accent: #8839ef;
-  --color-accent-foreground: #eff1f5;
+  --color-muted-foreground: #5c5f77;
+  --color-accent: #ecdffc;
+  --color-accent-foreground: #6a1fd0;
   --color-destructive: #d20f39;
   --color-destructive-foreground: #eff1f5;
   --color-popover: #eff1f5;
@@ -198,7 +198,7 @@ const catppuccinCSS = `
   --color-info: #1e66f5;
   --color-info-foreground: #eff1f5;
   --color-selection: #dce0e8;
-  --color-selection-foreground: #8839ef;
+  --color-selection-foreground: #7e28ee;
   --color-unread: #8839ef;
   --color-chart-1: #8839ef;
   --color-chart-2: #40a02b;
@@ -217,9 +217,9 @@ const catppuccinCSS = `
   --color-secondary: #313244;
   --color-secondary-foreground: #cdd6f4;
   --color-muted: #313244;
-  --color-muted-foreground: #a6adc8;
+  --color-muted-foreground: #b3b9d0;
   --color-accent: #45475a;
-  --color-accent-foreground: #cba6f7;
+  --color-accent-foreground: #ceabf7;
   --color-destructive: #f38ba8;
   --color-destructive-foreground: #1e1e2e;
   --color-popover: #313244;
@@ -253,26 +253,26 @@ const solarizedCSS = `
   --color-input: #eee8d5;
   --color-ring: #268bd2;
   --color-background: #fdf6e3;
-  --color-foreground: #657b83;
-  --color-primary: #268bd2;
+  --color-foreground: #073642;
+  --color-primary: #1d6ca2;
   --color-primary-foreground: #fdf6e3;
   --color-secondary: #eee8d5;
   --color-secondary-foreground: #586e75;
   --color-muted: #eee8d5;
-  --color-muted-foreground: #93a1a1;
-  --color-accent: #268bd2;
-  --color-accent-foreground: #fdf6e3;
-  --color-destructive: #dc322f;
+  --color-muted-foreground: #4f6369;
+  --color-accent: #e0e9e6;
+  --color-accent-foreground: #1d6ca2;
+  --color-destructive: #c9302c;
   --color-destructive-foreground: #fdf6e3;
   --color-popover: #fdf6e3;
-  --color-popover-foreground: #657b83;
+  --color-popover-foreground: #073642;
   --color-sidebar: #eee8d5;
-  --color-sidebar-foreground: #657b83;
+  --color-sidebar-foreground: #073642;
   --color-sidebar-border: #eee8d5;
   --color-sidebar-accent: #eee8d5;
   --color-sidebar-accent-foreground: #586e75;
   --color-card: #fdf6e3;
-  --color-card-foreground: #657b83;
+  --color-card-foreground: #073642;
   --color-success: #859900;
   --color-success-foreground: #fdf6e3;
   --color-warning: #b58900;
@@ -280,7 +280,7 @@ const solarizedCSS = `
   --color-info: #268bd2;
   --color-info-foreground: #fdf6e3;
   --color-selection: #eee8d5;
-  --color-selection-foreground: #268bd2;
+  --color-selection-foreground: #1d6ca2;
   --color-unread: #268bd2;
   --color-chart-1: #268bd2;
   --color-chart-2: #859900;
@@ -293,26 +293,26 @@ const solarizedCSS = `
   --color-input: #073642;
   --color-ring: #268bd2;
   --color-background: #002b36;
-  --color-foreground: #839496;
-  --color-primary: #268bd2;
+  --color-foreground: #aab7b7;
+  --color-primary: #6ab5e8;
   --color-primary-foreground: #002b36;
   --color-secondary: #073642;
   --color-secondary-foreground: #93a1a1;
   --color-muted: #073642;
-  --color-muted-foreground: #586e75;
+  --color-muted-foreground: #9aa7a7;
   --color-accent: #073642;
-  --color-accent-foreground: #268bd2;
-  --color-destructive: #dc322f;
-  --color-destructive-foreground: #fdf6e3;
+  --color-accent-foreground: #4aa1de;
+  --color-destructive: #e56866;
+  --color-destructive-foreground: #002b36;
   --color-popover: #073642;
-  --color-popover-foreground: #93a1a1;
+  --color-popover-foreground: #aab7b7;
   --color-sidebar: #002b36;
-  --color-sidebar-foreground: #839496;
+  --color-sidebar-foreground: #aab7b7;
   --color-sidebar-border: #073642;
   --color-sidebar-accent: #073642;
   --color-sidebar-accent-foreground: #93a1a1;
   --color-card: #073642;
-  --color-card-foreground: #93a1a1;
+  --color-card-foreground: #aab7b7;
   --color-success: #859900;
   --color-success-foreground: #002b36;
   --color-warning: #b58900;
@@ -320,7 +320,7 @@ const solarizedCSS = `
   --color-info: #268bd2;
   --color-info-foreground: #002b36;
   --color-selection: rgba(38, 139, 210, 0.2);
-  --color-selection-foreground: #268bd2;
+  --color-selection-foreground: #60ace2;
   --color-unread: #268bd2;
   --color-chart-1: #268bd2;
   --color-chart-2: #859900;
@@ -344,15 +344,15 @@ const elasticCSS = `
   --color-ring: #0b7dc1;
   --color-background: #ffffff;
   --color-foreground: #27353a;
-  --color-primary: #37beff;
+  --color-primary: #006ca0;
   --color-primary-foreground: #ffffff;
   --color-secondary: #f4f4f4;
   --color-secondary-foreground: #27353a;
   --color-muted: #f4f4f4;
-  --color-muted-foreground: #737677;
+  --color-muted-foreground: #646768;
   --color-accent: #e6f6ff;
   --color-accent-foreground: #0070a8;
-  --color-destructive: #ff5552;
+  --color-destructive: #e0201c;
   --color-destructive-foreground: #ffffff;
   --color-popover: #ffffff;
   --color-popover-foreground: #27353a;
@@ -371,7 +371,7 @@ const elasticCSS = `
   --color-info-foreground: #ffffff;
   --color-selection: #ebf8ff;
   --color-selection-foreground: #27353a;
-  --color-unread: #ffd452;
+  --color-unread: #a37a00;
   --color-chart-1: #37beff;
   --color-chart-2: #41b849;
   --color-chart-3: #ffd452;
@@ -388,7 +388,7 @@ const elasticCSS = `
   --color-background: #21292c;
   --color-foreground: #ffffff;
   --color-primary: #37beff;
-  --color-primary-foreground: #ffffff;
+  --color-primary-foreground: #10181b;
   --color-secondary: #2c373a;
   --color-secondary-foreground: #ffffff;
   --color-muted: #2c373a;
@@ -399,7 +399,7 @@ const elasticCSS = `
   --color-accent: #374549;
   --color-accent-foreground: #37beff;
   --color-destructive: #ff5552;
-  --color-destructive-foreground: #ffffff;
+  --color-destructive-foreground: #10181b;
   --color-popover: #161b1d;
   --color-popover-foreground: #ffffff;
   --color-sidebar: #21292c;
@@ -509,13 +509,15 @@ body[data-theme-skin="builtin-roundcube-elastic"] .bg-muted\\/30 {
    = @color-main (#37beff); dark = @color-dark-main (darken 30% -> #006a9d)
    with the bright #37beff outline, exactly like the on-switch. */
 body[data-theme-skin="builtin-roundcube-elastic"] .bg-primary.text-primary-foreground {
-  background-color: #37beff !important;
-  border: 1px solid #37beff !important;
+  /* Elastic's #37beff holds only 2.1:1 with the white label; the darker
+     main colour (--color-primary) reaches 4.5:1. */
+  background-color: var(--color-primary) !important;
+  border: 1px solid var(--color-primary) !important;
   color: #ffffff !important;
 }
 body[data-theme-skin="builtin-roundcube-elastic"] .bg-primary.text-primary-foreground:hover {
-  background-color: #19b6fe !important;
-  border-color: #0bb0ff !important;
+  background-color: #006a9d !important;
+  border-color: #006a9d !important;
 }
 body[data-theme-skin="builtin-roundcube-elastic"] .bg-primary.text-primary-foreground:focus-visible {
   box-shadow: 0 0 0 0.2rem rgba(55, 190, 255, 0.3) !important;
@@ -540,8 +542,8 @@ body[data-theme-skin="builtin-roundcube-elastic"] [role="switch"] > span {
   background-color: #ffffff !important;
 }
 body[data-theme-skin="builtin-roundcube-elastic"] [role="switch"][aria-checked="true"] {
-  background-color: #37beff !important;
-  border-color: #37beff !important;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
 }
 .dark body[data-theme-skin="builtin-roundcube-elastic"] [role="switch"] {
   background-color: #4d6066 !important;
@@ -558,10 +560,11 @@ body[data-theme-skin="builtin-roundcube-elastic"] [role="switch"][aria-checked="
 /* ── Recipient name/email rendered as links (like Roundcube) ──── */
 /* Sender + recipient triggers (RecipientPopover) sit at \`text-foreground\`
    and only turn blue on hover; Elastic shows them link-blue at rest
-   (@color-link #00acff, brighter in dark). The three-class combo is unique
+   (@color-link #00acff, brighter in dark; light mode takes --color-primary,
+   since #00acff is 2.5:1 on white). The three-class combo is unique
    to these recipient buttons. */
 body[data-theme-skin="builtin-roundcube-elastic"] button.hover\\:text-primary.hover\\:underline.cursor-pointer {
-  color: #00acff !important;
+  color: var(--color-primary) !important;
 }
 .dark body[data-theme-skin="builtin-roundcube-elastic"] button.hover\\:text-primary.hover\\:underline.cursor-pointer {
   color: #37beff !important;
@@ -571,7 +574,7 @@ body[data-theme-skin="builtin-roundcube-elastic"] button.hover\\:text-primary.ho
    (.flex.items-center.flex-wrap), which the contact-card org line is not, so
    this sibling selector scopes it to the sender email only. */
 body[data-theme-skin="builtin-roundcube-elastic"] .flex.items-center.flex-wrap + div.text-muted-foreground.truncate {
-  color: #00acff !important;
+  color: var(--color-primary) !important;
 }
 .dark body[data-theme-skin="builtin-roundcube-elastic"] .flex.items-center.flex-wrap + div.text-muted-foreground.truncate {
   color: #37beff !important;
@@ -652,7 +655,7 @@ const auroraCSS = `
   --color-ring: #6d5cff;
   --color-background: #eef1fb;
   --color-foreground: #14162e;
-  --color-primary: #6d5cff;
+  --color-primary: #503dff;
   --color-primary-foreground: #ffffff;
   --color-secondary: #e3e7f7;
   --color-secondary-foreground: #14162e;
@@ -660,7 +663,7 @@ const auroraCSS = `
   --color-muted-foreground: #5b6080;
   --color-accent: #e0e7ff;
   --color-accent-foreground: #4338ca;
-  --color-destructive: #f43f5e;
+  --color-destructive: #d80c2f;
   --color-destructive-foreground: #ffffff;
   --color-popover: #ffffff;
   --color-popover-foreground: #14162e;
@@ -693,7 +696,7 @@ const auroraCSS = `
   --color-background: #06070f;
   --color-foreground: #eef0ff;
   --color-primary: #8b7bff;
-  --color-primary-foreground: #ffffff;
+  --color-primary-foreground: #06070f;
   --color-secondary: rgba(255, 255, 255, 0.06);
   --color-secondary-foreground: #eef0ff;
   --color-muted: rgba(255, 255, 255, 0.05);

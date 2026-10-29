@@ -218,7 +218,7 @@ export function MvTopBar({
         )}
         <Link href="/" onClick={(e) => { interceptLeave(e); }} className="flex items-center gap-2 pe-4 min-w-0" aria-label={appName}>
           {logoUrl ? <img src={logoUrl} alt="" className="w-8 h-8 object-contain" /> : null}
-          <span className="text-[22px] leading-none text-foreground/80 truncate">{appName}</span>
+          <span className="text-[22px] leading-none text-foreground truncate">{appName}</span>
         </Link>
       </div>
 

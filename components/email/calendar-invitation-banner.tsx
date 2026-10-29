@@ -945,7 +945,7 @@ export function CalendarInvitationBanner({ email }: CalendarInvitationBannerProp
               </span>
             )}
             {summary.attendeeCount > 0 && (
-              <span className="text-muted-foreground/80">{t('attendees', { count: summary.attendeeCount })}</span>
+              <span className="text-muted-foreground">{t('attendees', { count: summary.attendeeCount })}</span>
             )}
           </div>
         )}

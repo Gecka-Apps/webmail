@@ -50,11 +50,11 @@ function DensityPreview({ density }: { density: Density }) {
               </span>
               <span className="text-[10px] text-muted-foreground flex-shrink-0 tabular-nums">12:00</span>
             </div>
-            <div className={cn("truncate", row.unread ? "font-medium text-foreground" : "text-foreground/80")}>
+            <div className={cn("truncate", row.unread ? "font-medium text-foreground" : "text-foreground")}>
               {row.subject}
             </div>
             {cfg.showPreview && (
-              <div className="truncate text-muted-foreground/70">{row.preview}</div>
+              <div className="truncate text-muted-foreground">{row.preview}</div>
             )}
           </div>
         </div>

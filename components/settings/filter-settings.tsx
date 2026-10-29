@@ -139,7 +139,7 @@ export function VisualRuleSummary({ rule }: { rule: FilterRule }) {
           return (
             <span key={i} className="contents">
               {i > 0 && (
-                <span className="text-[10px] text-muted-foreground/70 italic">{joiner}</span>
+                <span className="text-[10px] text-muted-foreground italic">{joiner}</span>
               )}
               <span className="inline-flex min-w-0 max-w-full items-baseline gap-1 px-1.5 py-px rounded-sm bg-muted/60 text-foreground">
                 <span className="shrink-0 font-medium text-blue-600 dark:text-blue-400">{field}</span>
@@ -154,7 +154,7 @@ export function VisualRuleSummary({ rule }: { rule: FilterRule }) {
                     {(Array.isArray(c.value) ? c.value : [c.value]).map((v, k) => (
                       <span key={k} className="min-w-0 wrap-anywhere">
                         {k > 0 && (
-                          <span className="text-muted-foreground/70 italic">{t("or")} </span>
+                          <span className="text-muted-foreground italic">{t("or")} </span>
                         )}
                         “{v}”
                       </span>
@@ -165,7 +165,7 @@ export function VisualRuleSummary({ rule }: { rule: FilterRule }) {
             </span>
           );
         })}
-        <span className="text-[10px] text-muted-foreground/60 italic">({matchLabel})</span>
+        <span className="text-[10px] text-muted-foreground italic">({matchLabel})</span>
       </div>
 
       <div className="flex items-baseline gap-1.5 flex-wrap">
@@ -177,7 +177,7 @@ export function VisualRuleSummary({ rule }: { rule: FilterRule }) {
           return (
             <span key={i} className="contents">
               {i > 0 && (
-                <span className="text-muted-foreground/50">›</span>
+                <span className="text-muted-foreground">›</span>
               )}
               <span className="inline-flex min-w-0 max-w-full items-baseline gap-1 px-1.5 py-px rounded-sm bg-muted/60 text-foreground">
                 <span className="shrink-0 font-medium text-emerald-600 dark:text-emerald-400">{action}</span>
@@ -197,7 +197,7 @@ export function VisualRuleSummary({ rule }: { rule: FilterRule }) {
             {period.range}
           </span>
           {period.status && (
-            <span className="text-[10px] text-muted-foreground/60 italic">({period.status})</span>
+            <span className="text-[10px] text-muted-foreground italic">({period.status})</span>
           )}
         </div>
       )}

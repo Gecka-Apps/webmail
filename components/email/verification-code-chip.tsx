@@ -58,7 +58,7 @@ export function VerificationCodeChip({ code, variant = "default", className }: V
       aria-label={t("copy", { code })}
       data-testid="verification-code-chip"
       className={variant === "mountain-view"
-        ? cn(MV_CHIP_BOX_CLASS, "flex-shrink-0 bg-transparent font-medium text-foreground/80 hover:bg-muted", className)
+        ? cn(MV_CHIP_BOX_CLASS, "flex-shrink-0 bg-transparent font-medium text-foreground hover:bg-muted", className)
         : cn(CHIP_BOX_CLASS, "flex-shrink-0 bg-background/60 font-medium text-foreground hover:bg-muted", className)}
     >
       {variant === "mountain-view" ? (

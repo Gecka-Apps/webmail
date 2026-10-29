@@ -415,7 +415,7 @@ export function NavigationRail({
                 {badgeShown(item) && (unreadCountStyle === 'dot' ? (
                   <span aria-hidden="true" data-testid="rail-unread-dot" className="absolute -top-0.5 -end-1 w-2.5 h-2.5 rounded-full bg-red-500" />
                 ) : (
-                  <span aria-hidden="true" className="absolute -top-1.5 -end-2.5 flex items-center justify-center min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-red-500 text-white px-1">
+                  <span aria-hidden="true" className="absolute -top-1.5 -end-2.5 flex items-center justify-center min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-red-600 text-white px-1">
                     {item.badge! > 99 ? "99+" : item.badge}
                   </span>
                 ))}
@@ -636,7 +636,7 @@ export function NavigationRail({
                 )} />
               ) : (
                 <span aria-hidden="true" className={cn(
-                  "absolute flex items-center justify-center min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-red-500 text-white px-1",
+                  "absolute flex items-center justify-center min-w-[16px] h-4 text-[10px] font-bold rounded-full bg-red-600 text-white px-1",
                   collapsed ? "-top-0.5 -end-0.5" : "end-1.5"
                 )}>
                   {item.badge! > 99 ? "99+" : item.badge}

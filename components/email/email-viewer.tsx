@@ -4117,7 +4117,7 @@ export function EmailViewer({
                 <PlayCircle className="w-4 h-4" />
                 {tWelcome('start_tour')}
               </button>
-              <p className="text-xs text-muted-foreground/60 mt-2">{tDemoWelcome('hint')}</p>
+              <p className="text-xs text-muted-foreground mt-2">{tDemoWelcome('hint')}</p>
             </div>
           </div>
         </div>
@@ -4875,7 +4875,7 @@ export function EmailViewer({
                 {formatDateTime(emailDisplayDate(email), timeFormat, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
               </span>
               {email.size > 0 && (
-                <div className="text-xs text-muted-foreground/60">
+                <div className="text-xs text-muted-foreground">
                   <bdi>{formatFileSize(email.size)}</bdi>
                 </div>
               )}
@@ -5043,7 +5043,7 @@ export function EmailViewer({
                 )}
                 {email.cc && email.cc.length > 0 && (
                   <>
-                    <span className="text-muted-foreground/50">|</span>
+                    <span className="text-muted-foreground">|</span>
                     <span>{t('cc')}:</span>
                     {renderClickableRecipients(email.cc, currentUserEmail, t, handleViewContactSidebar)}
                     {email.cc.length > 2 && (
@@ -5058,7 +5058,7 @@ export function EmailViewer({
                 )}
                 {email.bcc && email.bcc.length > 0 && (
                   <>
-                    <span className="text-muted-foreground/50">|</span>
+                    <span className="text-muted-foreground">|</span>
                     <span>{t('bcc')}:</span>
                     {renderClickableRecipients(email.bcc, currentUserEmail, t, handleViewContactSidebar)}
                     {email.bcc.length > 2 && (
@@ -5305,7 +5305,7 @@ export function EmailViewer({
                 )}
                 {email.cc && email.cc.length > 0 && (
                   <>
-                    <span className="text-muted-foreground/50">|</span>
+                    <span className="text-muted-foreground">|</span>
                     <span>{t('cc')}:</span>
                     {renderClickableRecipients(email.cc, currentUserEmail, t, handleViewContactSidebar)}
                     {email.cc.length > 2 && (
@@ -5344,7 +5344,7 @@ export function EmailViewer({
                   : formatDateTime(emailDisplayDate(email), timeFormat, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
               </span>
               {email.size > 0 && !mvMobileViewer && (
-                <div className="text-xs text-muted-foreground/60">
+                <div className="text-xs text-muted-foreground">
                   <bdi>{formatFileSize(email.size)}</bdi>
                 </div>
               )}
@@ -5432,7 +5432,7 @@ export function EmailViewer({
                 </span>
                 {extra && (
                   <>
-                    <span className="text-muted-foreground/50">·</span>
+                    <span className="text-muted-foreground">·</span>
                     <span className="text-muted-foreground">{extra}</span>
                   </>
                 )}
@@ -5586,7 +5586,7 @@ export function EmailViewer({
                           </span>
                           {email.spamStatus && (
                             <>
-                              <span className="text-muted-foreground/50">·</span>
+                              <span className="text-muted-foreground">·</span>
                               <span className="text-muted-foreground">{email.spamStatus}</span>
                             </>
                           )}

@@ -154,7 +154,7 @@ export function PluginsSettings() {
         <div className="flex flex-col items-center justify-center py-12 text-center">
           <Puzzle className="mb-3 h-12 w-12 text-muted-foreground/30" />
           <p className="mb-1 text-sm text-muted-foreground">{t('empty_title')}</p>
-          <p className="text-xs text-muted-foreground/70">
+          <p className="text-xs text-muted-foreground">
             {demoMode ? t('empty_demo') : uploadsAllowed ? t('empty_uploads') : t('empty_admin')}
           </p>
         </div>
@@ -265,7 +265,7 @@ function PluginCard({ plugin, isExpanded, isForceEnabled, controlsDisabled, onTo
           </div>
           <div className="mt-0.5 flex items-center gap-2">
             <span className="truncate text-xs text-muted-foreground">{plugin.author}</span>
-            <span className="text-xs text-muted-foreground/70">v{plugin.version}</span>
+            <span className="text-xs text-muted-foreground">v{plugin.version}</span>
           </div>
         </button>
 

@@ -44,7 +44,7 @@ export function ReadReceiptBanner({ requestedBy, onSend, onIgnore }: ReadReceipt
             {t('prompt')}
           </div>
           <div className="text-xs text-muted-foreground break-all">
-            Requested by <span className="text-foreground/80">{requestedBy}</span>
+            Requested by <span className="text-foreground">{requestedBy}</span>
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-1.5 pt-0.5">

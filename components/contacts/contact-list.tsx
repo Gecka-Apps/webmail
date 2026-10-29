@@ -752,7 +752,7 @@ export function ContactList({
               <div>
                 {groupedSections.map(({ letter, items }) => (
                   <section key={letter} role="group" aria-label={letter}>
-                    <div aria-hidden className="sticky top-0 z-10 px-4 py-0.5 bg-background/90 backdrop-blur-sm text-[11px] font-medium text-muted-foreground/70">
+                    <div aria-hidden className="sticky top-0 z-10 px-4 py-0.5 bg-background/90 backdrop-blur-sm text-[11px] font-medium text-muted-foreground">
                       {letter}
                     </div>
                     {items.map(renderItem)}

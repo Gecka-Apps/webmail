@@ -91,8 +91,8 @@ export function AttachmentChips({ attachments, onOpen, max = 2, leading, variant
             onDoubleClick={(e) => e.stopPropagation()}
             title={stripBidiControls(a.name ?? "")}
             className={mv
-              ? cn(MV_CHIP_BOX_CLASS, "max-w-[14rem] bg-transparent text-foreground/80 hover:bg-muted")
-              : cn(CHIP_BOX_CLASS, "max-w-[12rem] bg-background/60 text-foreground/80 hover:bg-muted hover:text-foreground")}
+              ? cn(MV_CHIP_BOX_CLASS, "max-w-[14rem] bg-transparent text-foreground hover:bg-muted")
+              : cn(CHIP_BOX_CLASS, "max-w-[12rem] bg-background/60 text-foreground hover:bg-muted hover:text-foreground")}
           >
             {mv ? (
               <span className={cn(MV_CHIP_BADGE_CLASS, badge)}>
