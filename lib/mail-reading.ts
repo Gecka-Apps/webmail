@@ -9,7 +9,7 @@
  * only need their own font size.
  */
 
-import { FONT_SIZE_SCALE, type FontSize } from '@/lib/accessibility-settings';
+import { FONT_SIZE_SCALE, type FontSize, type SystemToggle } from '@/lib/accessibility-settings';
 
 /** Size of body text in a message, in CSS px at 100 %: what mail used to be fixed at. */
 export const MAIL_BASE_FONT_PX = 14;
@@ -123,4 +123,27 @@ export function applyMailTextSize(doc: Document, options: MailTextSizeOptions): 
   }
   for (const write of writes) write();
   return writes.length > 0;
+}
+
+/** A "system / on / off" setting resolved against the OS preference. */
+export function resolveSystemToggle(value: SystemToggle, systemOn: boolean): boolean {
+  return value === 'on' || (value === 'system' && systemOn);
+}
+
+export interface MailFrameCssOptions {
+  reduceMotion: boolean;
+}
+
+/** Stops CSS animations and transitions in a mail (reduce motion). */
+export const MAIL_REDUCED_MOTION_CSS = '*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:0.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}';
+
+/**
+ * CSS for the reading settings, appended to the mail document after the
+ * mail's own content so it outranks the sender's <style> at equal weight.
+ * Empty when no setting asks for anything.
+ */
+export function mailFrameCss(options: MailFrameCssOptions): string {
+  const parts: string[] = [];
+  if (options.reduceMotion) parts.push(MAIL_REDUCED_MOTION_CSS);
+  return parts.join('\n');
 }

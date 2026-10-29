@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyMailTextSize, mailTextFactor, plainBodyFontSize, scaledTextSize } from '@/lib/mail-reading';
+import { applyMailTextSize, mailFrameCss, mailTextFactor, plainBodyFontSize, resolveSystemToggle, scaledTextSize } from '@/lib/mail-reading';
 
 describe('mailTextFactor', () => {
   it('follows the app text size when the mail size is 0', () => {
@@ -74,5 +74,23 @@ describe('applyMailTextSize', () => {
     expect(doc.body.style.getPropertyValue('font-size')).toBe('21px');
     expect(applyMailTextSize(doc, { factor: 1.5, minPx: 0 })).toBe(false);
     expect(p.style.getPropertyValue('font-size')).toBe('24px');
+  });
+});
+
+describe('resolveSystemToggle', () => {
+  it('follows the OS only for system', () => {
+    expect(resolveSystemToggle('system', true)).toBe(true);
+    expect(resolveSystemToggle('system', false)).toBe(false);
+    expect(resolveSystemToggle('on', false)).toBe(true);
+    expect(resolveSystemToggle('off', true)).toBe(false);
+  });
+});
+
+describe('mailFrameCss', () => {
+  it('is empty when nothing is asked for', () => {
+    expect(mailFrameCss({ reduceMotion: false })).toBe('');
+  });
+  it('stops animations and transitions for reduce motion', () => {
+    expect(mailFrameCss({ reduceMotion: true })).toMatch(/animation-duration:0\.01ms!important.*transition-duration:0\.01ms!important/);
   });
 });

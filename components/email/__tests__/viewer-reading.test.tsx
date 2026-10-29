@@ -150,3 +150,24 @@ describe('forced colours', () => {
     expect(srcdoc).not.toContain('forced-color-adjust');
   });
 });
+
+describe('reduce motion inside the mail', () => {
+  const html = '<style>@keyframes spin{to{transform:rotate(1turn)}} .s{animation:spin 1s infinite}</style><p class="s">Spinning <b>text</b></p>';
+  const srcdoc = async () => (await show(message({ html }))).container.querySelector('iframe')!.getAttribute('srcdoc')!;
+
+  it('stops animations and transitions when reduce motion is on', async () => {
+    useSettingsStore.setState({ reduceMotion: 'on' } as never);
+    expect(await srcdoc()).toContain('animation-duration:0.01ms!important');
+  });
+
+  it('follows the system preference', async () => {
+    media.matches.add('(prefers-reduced-motion: reduce)');
+    expect(await srcdoc()).toContain('animation-duration:0.01ms!important');
+  });
+
+  it('leaves the mail alone when reduce motion is off', async () => {
+    media.matches.add('(prefers-reduced-motion: reduce)');
+    useSettingsStore.setState({ reduceMotion: 'off' } as never);
+    expect(await srcdoc()).not.toContain('animation-duration:0.01ms');
+  });
+});
