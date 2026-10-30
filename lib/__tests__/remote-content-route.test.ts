@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // /api/remote-content/[b64]: images a message references, fetched by the
-// server for a logged-in user. The switch, the session check and the
+// server for a logged-in user. The switches, the session check and the
 // budget answer before anything is fetched; what comes back is decided by
 // the bytes, never by the origin's Content-Type; and every response carries
 // the headers that keep served content from running in the app's origin.
@@ -91,6 +91,14 @@ describe('GET /api/remote-content/[b64]', () => {
     configValues.remoteContentProxyEnabled = false;
     const res = await call('https://cdn.example/a.png');
     expect(res.status).toBe(404);
+    expect(getStalwartCredentials).not.toHaveBeenCalled();
+    expect(fetchPublicUrl).not.toHaveBeenCalled();
+  });
+
+  it('answers 403 with no third-party traffic, before any credential lookup', async () => {
+    configValues.noThirdPartyTraffic = true;
+    const res = await call('https://cdn.example/a.png');
+    expect(res.status).toBe(403);
     expect(getStalwartCredentials).not.toHaveBeenCalled();
     expect(fetchPublicUrl).not.toHaveBeenCalled();
   });
