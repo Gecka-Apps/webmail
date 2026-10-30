@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { configManager } from '@/lib/admin/config-manager';
+import { isNoThirdPartyTrafficOn, thirdPartyRefusal } from '@/lib/admin/third-party-mode';
 import { getStalwartCredentials } from '@/lib/stalwart/credentials';
 import { decodeRemoteContentUrl } from '@/lib/remote-content-url';
 import {
@@ -49,6 +50,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   if (!configManager.get<boolean>('remoteContentProxyEnabled', false)) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
+  // Remote pictures in mail are off while the server must not contact
+  // outside services (#903); the reader never asks for them then.
+  if (await isNoThirdPartyTrafficOn()) return thirdPartyRefusal('Remote content');
 
   const creds = await getStalwartCredentials(request);
   if (!creds) {
